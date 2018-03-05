@@ -330,8 +330,6 @@ gridExtra::grid.arrange(plot_orig, plot_bees, plot_quasi, ncol = 1)
 
 ```
 
-## 7.5 Covariattion
-
 ### 7.5.2.1.
 
 *1. How could you rescale the count dataset above to more clearly show the distribution of cut within colour, or colour within cut?*  

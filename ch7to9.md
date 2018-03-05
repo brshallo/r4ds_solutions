@@ -10,7 +10,6 @@ Last updated: 2018-03-05
         -   [7.4.1.](#section-1)
     -   [7.5. Covariation](#covariation)
         -   [7.5.1.1.](#section-2)
-    -   [7.5 Covariattion](#covariattion)
         -   [7.5.2.1.](#section-3)
     -   [7.5.3 Two continuous variables](#two-continuous-variables)
         -   [7.5.3.1.](#section-4)
@@ -199,6 +198,7 @@ mutate(diamonds, carattest=ifelse(carat<1.5 & carat>.7, NA, color)) %>%
 ![](ch7to9_files/figure-markdown_github/unnamed-chunk-11-1.png)
 
 *2. What does na.rm = TRUE do in mean() and sum()?*
+
 Filters it out of the vector of values.
 
 7.5. Covariation
@@ -412,9 +412,6 @@ gridExtra::grid.arrange(plot_orig, plot_bees, plot_quasi, ncol = 1)
 ```
 
 ![](ch7to9_files/figure-markdown_github/unnamed-chunk-21-1.png)
-
-7.5 Covariattion
-----------------
 
 ### 7.5.2.1.
 
