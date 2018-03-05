@@ -1,2 +1,2 @@
 # R4DS_Solutions
-Solutions to exercises on http://r4ds.had.co.nz/ 
+Solutions to exercises in http://r4ds.had.co.nz/ as well as notes and extensions on problems
