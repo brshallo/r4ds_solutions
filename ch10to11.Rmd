@@ -1,27 +1,19 @@
 ---
-title: "chapters 10 - 11"
+title: "Chapters 10 - 11"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
   html_document:
-    code_folding: show
+    keep_md: true
     toc: true
-    toc_depth: 5
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
+    toc_depth: 3
 ---
 
-<script>
-    $(document).ready(function() {
-      $items = $('div#TOC li');
-      $items.each(function(idx) {
-        num_ul = $(this).parentsUntil('#TOC').length;
-        $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
-      });
 
-    });
-</script>
+```{r, include = FALSE, eval = FALSE}
+# Execute chunk to render both the markdown and html document specified in the YAML header.
+rmarkdown::render("ch10to11.Rmd", output_format = "all")
+```
 
 *Make sure the following packages are installed:*  
 
@@ -270,19 +262,12 @@ parse_time(t3, "%I%*%M:%OS %p")
 ```
 
 
-```{sql}
-
-DBI::
-
-```
-
-
 *Thing i've found useful is increasing max guess which expands number it checks, especially when data is ordered someway... I usually use guess, where you want to get more explicit is likely if you have functions or processes that depend on consistency...*
 
 `write_excel_csv` for parsing into excel
 
 *DBI package*
 
-rio, explore
+*rio* -- explore
 
 

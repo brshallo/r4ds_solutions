@@ -1,33 +1,24 @@
 ---
-title: "Week 2, chapters 4 to 6"
+title: "Chapters 4 to 6"
 author: "Bryan Shalloway"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-output:
+params: 
+  output_type:  !r knitr::is_html_output(excludes = c("markdown"))
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
   html_document:
-    code_folding: show
-    toc: yes
-    toc_depth: 5
-    toc_float:
-      collapsed: no
-      smooth_scroll: no
-  pdf_document:
-    toc: yes
-    toc_depth: '5'
-  word_document:
-    toc: yes
-    toc_depth: '5'
+    toc: true
+    toc_depth: 3
 ---
 
-<script>
-    $(document).ready(function() {
-      $items = $('div#TOC li');
-      $items.each(function(idx) {
-        num_ul = $(this).parentsUntil('#TOC').length;
-        $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
-      });
 
-    });
-</script>
+```{r, include = FALSE, eval = FALSE}
+# Execute chunk to render both the markdown and html document specified in the YAML header.
+rmarkdown::render("ch4to6.Rmd", output_format = "all")
+```
+
 
 *Make sure the following packages are installed:*  
 
@@ -1513,9 +1504,11 @@ flights %>%
 ```
 
 ##plotly
-the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.
+the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
 
-```{r}
+Note that this will not render in a markdown format, but only in html.
+
+```{r, eval = params$output_type}
 p <- flights %>% 
   group_by(hour, month) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -1523,6 +1516,12 @@ p <- flights %>%
   geom_point()+
   geom_smooth()
 
+plotly::ggplotly(p)
+```
+
+This is the base from which this is built.
+
+```{r}
 flights %>% 
   group_by(hour, month) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -1530,6 +1529,5 @@ flights %>%
   geom_point()+
   geom_smooth()
 
-ggplotly(p)
 ```
 

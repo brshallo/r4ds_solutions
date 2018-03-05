@@ -1,0 +1,11 @@
+base
+ggplot2
+maps
+mapproj
+dplyr
+bindrcpp
+nycflights13
+Lahman
+gapminder
+tidyr
+plotly

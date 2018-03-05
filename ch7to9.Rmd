@@ -1,27 +1,24 @@
 ---
-title: "Week 3, chapters 7"
+title: "Chapter 7"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
+params: 
+  output_type:  !r knitr::is_html_output(excludes = c("markdown"))
 output: 
-  html_document:
-    code_folding: show
+  github_document:
     toc: true
-    toc_depth: 5
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
+    toc_depth: 3
+  html_document:
+    toc: true
+    toc_depth: 3
+    keep_md: true
+
 ---
 
-<script>
-    $(document).ready(function() {
-      $items = $('div#TOC li');
-      $items.each(function(idx) {
-        num_ul = $(this).parentsUntil('#TOC').length;
-        $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
-      });
-
-    });
-</script>
+```{r, include = FALSE, eval = FALSE}
+# Execute chunk to render both the markdown and html document specified in the YAML header.
+rmarkdown::render("ch7to9.Rmd", output_format = "all")
+```
 
 *Make sure the following packages are installed:*  
 
@@ -470,6 +467,10 @@ For the visualization below i wrapped it in the funciton `ggplotly`. This funcit
 ggplot(smaller, aes(x=price))+
   geom_freqpoly(aes(colour = cut_number(carat, 10)))
 
+```
+
+However, I set the code chunks such that it will only execute for html, not markdown docs.
+```{r, eval = params$output_type}
 p <- ggplot(smaller, aes(x=price))+
   geom_freqpoly(aes(colour = cut_width(carat, 0.25)))
 
@@ -614,8 +615,5 @@ diamonds %>%
 
 contrasts(diamonds$cut)
 count(diamonds, cut)
-coefplot::coefplot(mod)
-
-mod %>% summary()
 ```
 

@@ -1,14 +1,12 @@
 ---
-title: "Week 1, chapters 1 to 3"
+title: "Chapters 1 to 3"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
-  github_document:
-    toc: true
-    toc_depth: 3
   html_document:
     toc: true
     toc_depth: 3
+    keep_md: true
 ---
 
 
@@ -189,14 +187,17 @@ ggplot(data = mpg) +
 ```
 
 **What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?**  
+  
 Faceting prevents overlapping points in the data. A disadvantage is that you have to move your eye to look at different graphs. Some groups you don't have much data on as well so those don't present much information. If there is more data, you may be more comfortable using facetting as each group should have points that you can view.
 
 
-**5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol argument?**  
+**5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn't facet_grid() have nrow and ncol argument?**  
+  
 `nrow` and `ncol` specify the number of columns or rows to facet by, `facet_grid` does not have this option because the splits are defined by the number of unique values in each variable. Other important options are `scales` which let you define if the scales are able to change between each plot.
 
 
 **6. When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?**  
+  
 I'm not sure why exactly, if I compare these, it's not completely unclear.
 ```{r}
 #more unique levels on columns
