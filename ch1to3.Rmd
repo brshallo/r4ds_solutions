@@ -3,10 +3,9 @@ title: "Chapters 1 to 3"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
-  html_document:
+  github_document:
     toc: true
     toc_depth: 3
-    keep_md: true
 ---
 
 
