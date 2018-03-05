@@ -1,0 +1,288 @@
+---
+title: "chapters 10 - 11"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  html_document:
+    code_folding: show
+    toc: true
+    toc_depth: 5
+    toc_float:
+      collapsed: false
+      smooth_scroll: false
+---
+
+<script>
+    $(document).ready(function() {
+      $items = $('div#TOC li');
+      $items.each(function(idx) {
+        num_ul = $(this).parentsUntil('#TOC').length;
+        $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
+      });
+
+    });
+</script>
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+
+library(ggplot2)
+library(dplyr)
+library(nycflights13)
+library(readr)
+```
+
+#ch. 10: Tibbles
+
+```{r}
+vignette("tibble")
+```
+
+
+##10.5
+
+*1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).*  
+  
+Only prints first 15 rows and enough variables where you can see them all. .
+
+
+*2. Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?*  
+  
+Dataframes can't do list-cols. Never changes type of input e.g. from strings to factors, never changes names of variables, never creates row names. Also, you can do list-cols with tibbles.  
+  
+
+*3. If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?*  
+  
+```{r, eval = FALSE}
+# Will extract the vector
+df_tibble[[var]]
+
+# Will select the var and return a tibble
+df_tibble[var]
+```
+
+*4. Practice referring to non-syntactic names in the following data frame by:*  
+  
+```{r}
+df <- tibble(`1` = 1:10, `2` = 11:20)
+
+```
+
+*a. Extracting the variable called 1.*  
+```{r}
+df %>% 
+  select(1)
+```
+  
+
+*b. Plotting a scatterplot of 1 vs 2.*  
+```{r}
+df %>% 
+  ggplot(aes(x = `2`, y = `1`))+
+  geom_col()
+```
+ 
+*c. Creating a new column called 3 which is 2 divided by 1.*  
+  
+```{r}
+df %>% 
+  mutate(`3` = `1` / `2`) 
+```
+
+*d. Renaming the columns to one, two and three.*  
+```{r}
+df %>% 
+  rename(one = `1`,
+         two = `2`)
+
+```
+  
+
+*5. What does tibble::enframe() do? When might you use it?*  
+
+Let's you encode "name" and "value"
+```{r}
+tibble::enframe(1:3)
+tibble::enframe(c(a=5,b=8))
+tibble::enframe(c(a=5:8, b=7:10))
+tibble::enframe(c(a=5:8, b=7:10, d=9:12))
+```
+
+
+*6. What option controls how many additional column names are printed at the footer of a tibble?*  
+```{r, eval = FALSE}
+options(tibble.print_max = n, tibble.print_min = m)
+options(tibble.width = Inf)
+
+package?tibble
+
+options(dplyr.print_min = Inf) #to always show all rows
+```
+
+
+#ch. 11: Data import
+
+##11.2.2.  
+
+`read_log` reads apache style log files
+
+```{r}
+# read_log()
+
+read_log(readr_example("example.log"))
+```
+
+  
+*1. What function would you use to read a file where fields were separated with "|"?*  
+`read_delim`  for example:
+```{r}
+read_delim("a|b|c\n1|2|3", delim="|")
+```
+  
+  
+  
+*2. Apart from file, skip, and comment, what other arguments do read_csv() and read_tsv() have in common?*  
+col_names, col_types, locale, na, quoted_na, quote, trim_ws, skip, n_max, guess_max, progress  
+  
+```{r, eval = FALSE}
+read_csv()
+read_tsv()
+```
+
+  
+*3. What are the most important arguments to read_fwf()?*  
+
+widths
+```{r, eval = FALSE}
+read_fwf()
+```
+
+  
+*4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '.* By convention, `read_csv()` assumes that the quoting character will be ", and if you want to change it you'll need to use read_delim() instead. *What arguments do you need to specify to read the following text into a data frame?*
+  
+```{r}
+"x,y\n1,'a,b'"
+
+read_delim("x,y\n1,'a,b'", delim=",", quote="'")
+```
+
+
+
+*5. Identify what is wrong with each of the following inline CSV files. What happens when you run the code?*  
+  
+```{r}
+#needs 3rd column header, skips 3rd argument on each line
+read_csv("a,b\n1,2,3\n4,5,6")
+##corrected
+read_csv("a,b\n1,2\n3,4\n5,6")
+
+#missing 3rd value on 2nd line, fills with NA
+read_csv("a,b,c\n1,2\n1,2,3,4")
+##corrected
+read_csv("a,b,c\n1,2, 1\n2,3,4")
+
+#2nd row missing value
+read_csv("a,b\n\"1")
+
+#Have character and numeric types...
+read_csv("a,b\n1,2\na,b")
+
+#need to make read_csv2() because is seperated by semicolons
+read_csv("a;b\n1;3")
+##corrected
+read_csv2("a;b\n1;3")
+```
+  
+
+##11.3.5.
+
+`parse_number` can be helpful for dealing with parsing currencies or percentages for example...
+
+*1. What are the most important arguments to locale()?*  
+  
+```{r}
+#most important arguments in locale() are decimal_mark grouping_mark probably
+parse_double("1.23")
+parse_double("1,23", locale = locale(decimal_mark=","))
+parse_number("the cost is $125.34, it's a good deal") #Slightly different than book, captures decimal
+parse_number("$123,456,789")
+parse_number("$123.456.789")
+parse_number("$123.456.789", locale=locale(grouping_mark = "."))#used in europe
+parse_number("$123'456'789", locale=locale(grouping_mark = "'"))#used in Switzerland
+
+```
+  
+
+
+```{r}
+paste0(getwd(), "/file.csv")
+```
+
+
+*2. What happens if you try and set decimal_mark and grouping_mark to the same character? What happens to the default value of grouping_mark when you set decimal_mark to ","? What happens to the default value of decimal_mark when you set the grouping_mark to "."?*  
+`date_names`  and `decimal_mark`
+```{r}
+#can't set both to be same--if you change one, other automatically changes
+parse_number("$135.435,45", locale=locale(grouping_mark = ".", decimal_mark = ","))
+parse_number("$135.435,45", locale=locale(grouping_mark = "."))
+
+```
+  
+
+*3. I didn't discuss the date_format and time_format options to locale(). What do they do? Construct an example that shows when they might be useful.*    
+```{r}
+#date_format and time_format in locale() let you set the default date and time formats
+parse_date("31 january 2015", format="%d %B %Y")
+parse_date("31 january 2015", locale=locale(date_format="%d %B %Y")) 
+#let's you change it in locale()
+```
+  
+
+*4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.*  
+  
+
+*5. What's the difference between read_csv() and read_csv2()?*  
+Second expects semicolons  
+
+*6. What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out.*  
+  
+*7. Generate the correct format string to parse each of the following dates and times:*  
+```{r}
+d1 <- "January 1, 2010"
+d2 <- "2015-Mar-07"
+d3 <- "06-Jun-2017"
+d4 <- c("August 19 (2015)", "July 1 (2015)")
+d5 <- "12/30/14" # Dec 30, 2014
+t1 <- "1705"
+t2 <- "11:15:10.12 PM"
+t3 <- "11:::15:10.12 PM"
+parse_date(d1, "%B %d, %Y")
+parse_date(d2, "%Y-%b-%d")
+parse_date(d3, "%d-%b-%Y")
+parse_date(d3, "%d%.%b-%Y")#could use this alternatively
+parse_date(d4, "%B %d (%Y)")
+parse_date(d5, "%m/%d/%y")
+parse_time(t1, "%H%M")
+parse_time(t2, "%I:%M:%OS %p")
+parse_time(t3, "%I%*%M:%OS %p")
+```
+
+
+```{sql}
+
+DBI::
+
+```
+
+
+*Thing i've found useful is increasing max guess which expands number it checks, especially when data is ordered someway... I usually use guess, where you want to get more explicit is likely if you have functions or processes that depend on consistency...*
+
+`write_excel_csv` for parsing into excel
+
+*DBI package*
+
+rio, explore
+
+
