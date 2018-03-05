@@ -17,10 +17,10 @@ output:
 
 
 
-#Chapter 3
+# Chapter 3
 
-##3.2: First steps
-###3.2.4
+## 3.2: First steps
+### 3.2.4
 **1. Run ggplot(data = mpg). What do you see?**
 
 
@@ -83,8 +83,8 @@ The points stack-up on top of one another so you don't get a sense of how many a
 
 *Any ideas for what methods could you use to improve the view of this data?*
 
-##3.3: Aesthetic mappings
-###3.3.1.
+## 3.3: Aesthetic mappings
+### 3.3.1.
 **1. What’s gone wrong with this code? Why are the points not blue?**
 
 ```r
@@ -178,9 +178,9 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = displ < 5)) +
 
 The field becomes a logical operator in this case.
 
-##3.5: Facets
+## 3.5: Facets
 
-###3.5.1.
+### 3.5.1.
 
 **1. What happens if you facet on a continuous variable?**
 
@@ -283,9 +283,9 @@ ggplot(data = mpg) +
 
 My guess though would be that it's because our computer screens are generally wider than they are tall. Hence there will be more space for viewing a higher number of attributes going across columns than by rows.  
 
-##3.6: Geometric Objects
+## 3.6: Geometric Objects
 
-###3.6.1
+### 3.6.1
 
 **1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?**  
 `geom_line`  
@@ -472,9 +472,9 @@ ggplot(mpg, aes(displ, hwy)) +
 
 ![](ch1to3_files/figure-html/unnamed-chunk-26-1.png)<!-- -->
 
-##3.7: statistical transformations
+## 3.7: statistical transformations
 
-###3.7.1.
+### 3.7.1.
 
 **1. What is the default `geom` associated with `stat_summary()`? How could you rewrite the previous plot to use that geom function instead of the stat function?**  
 
@@ -606,9 +606,9 @@ diamonds %>%
   geom_col()
 ```
 
-##3.8: Position Adjjustment
+## 3.8: Position Adjjustment
 
-###3.8.1.
+### 3.8.1.
 
 **1.What is the problem with this plot? How could you improve it?**
 (key question)
@@ -693,9 +693,9 @@ ggplot(data=mpg, mapping=aes(x=class, y=hwy))+
 
 ![](ch1to3_files/figure-html/unnamed-chunk-43-1.png)<!-- -->
 
-##3.9: Coordinate systems
+## 3.9: Coordinate systems
 
-###3.9.1.
+### 3.9.1.
 
 **1.Turn a stacked bar chart into a pie chart using `coord_polar()`.**  
 These are more illustrative than anything, here is a note from the documetantion:  
@@ -765,8 +765,8 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
 
 ![](ch1to3_files/figure-html/unnamed-chunk-48-1.png)<!-- -->
 
-#Appendix
-##3.7.1.1 extension
+# Appendix
+## 3.7.1.1 extension
 
 ```r
 ggplot(mpg, aes(x = cyl, y = cty, group = cyl))+
@@ -838,7 +838,7 @@ ggplot(mpg) +
 ![](ch1to3_files/figure-html/unnamed-chunk-53-1.png)<!-- -->
 
 
-##3.8: Position adustments
+## 3.8: Position adustments
 
 Some "dodge"" examples
 
@@ -867,10 +867,10 @@ ggplot(data = mpg, mapping = aes(x = drv, y = hwy))+
 
 ![](ch1to3_files/figure-html/unnamed-chunk-55-1.png)<!-- -->
 
-##3.9: Coordinate systems  
+## 3.9: Coordinate systems  
 `coord_flip` is helpful, especially for quickly tackling issues with axis labels
 `coord_quickmap` is important to remember if plotting spatial data.
 `coord_polar` is important to remember if plotting spatial coordinates.
 `map_data` for extracting data on maps of locations
 
-##add in table of contents and other details...
+## add in table of contents and other details...

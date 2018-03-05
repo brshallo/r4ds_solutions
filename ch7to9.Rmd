@@ -11,7 +11,6 @@ output:
   html_document:
     toc: true
     toc_depth: 3
-    keep_md: true
 
 ---
 
@@ -40,11 +39,11 @@ library(hexbin)
 library(maps)
 ```
 
-#ch. 7, data exploration
+# ch. 7, data exploration
 
-##7.3. Variation
+## 7.3. Variation
 
-###7.3.4.
+### 7.3.4.
 
 *1. Explore the distribution of each of the x, y, and z variables in diamonds. What do you learn? Think about a diamond and how you might decide which dimension is the length, width, and depth.*  
 
@@ -147,9 +146,9 @@ The difference may be caused by jewlers rounding-up because people want to buy '
 `coord_cartesian` does not change data ust window view where as `xlim` and `ylim` will get rid of data outside of domain^[This is especially important when building things like boxplots whose graphs depend on all points in the graph.].
 
 
-##7.4. Missing values
+## 7.4. Missing values
 
-###7.4.1.
+### 7.4.1.
 
 *1. What happens to missing values in a histogram? What happens to missing values in a bar chart? Why is there a difference?*  
 With numeric data they both filter out NAs, though for categorical / character variables the `barplot` will create a seperate olumn with the category. This is because `NA` can just be thought of as another category though it is difficulty to place it within a distribution of values.
@@ -176,9 +175,9 @@ mutate(diamonds, carattest=ifelse(carat<1.5 & carat>.7, NA, color)) %>%
 *2. What does na.rm = TRUE do in mean() and sum()?*  
 Filters it out of the vector of values.  
 
-##7.5. Covariation
+## 7.5. Covariation
 
-###7.5.1.1.
+### 7.5.1.1.
 
 *1. Use what you've learned to improve the visualisation of the departure times of cancelled vs. non-cancelled flights.*  
 Looks like while non-cancelled flights happen at similar frequency in mornings and evenings, cancelled flights happen at a greater frequency in the evenings.
@@ -329,9 +328,9 @@ gridExtra::grid.arrange(plot_orig, plot_bees, plot_quasi, ncol = 1)
 
 ```
 
-##7.5 Covariattion
+## 7.5 Covariattion
 
-###7.5.2.1.
+### 7.5.2.1.
 
 *1. How could you rescale the count dataset above to more clearly show the distribution of cut within colour, or colour within cut?*  
   
@@ -394,7 +393,7 @@ cut_in_color_graph+
 ```
 
 
-##7.5.3 Two continuous variables
+## 7.5.3 Two continuous variables
 
 Two-d histograms
 ```{r}
@@ -455,7 +454,7 @@ ggplot(smaller, aes(x = carat, y = price))+
 ```
 
 
-###7.5.3.1.
+### 7.5.3.1.
 
 *1. Instead of summarising the conditional distribution with a boxplot, you could use a frequency polygon. What do you need to consider when using cut_width() vs cut_number()? How does that impact a visualisation of the 2d distribution of carat and price?*  
   
@@ -544,9 +543,9 @@ ggplot(data = diamonds) +
 ```
   
   
-#Appendix
+# Appendix
 
-##7.5.2.1.2.
+## 7.5.2.1.2.
 
 Plot below shows four regions I'll split the country into. Seems like for a few destinations the lat and long points were likely misentered (probably backwards).
 
@@ -585,7 +584,7 @@ flights %>%
 
 I think changing the color from light-->dark to instead blue-->red may make for a more effective visualization as well.  
   
-##7.5.3.1.4.
+## 7.5.3.1.4.
 
 To get the `fill` value to vary need to iterate through and make each graph seperate, can't ust use facet.
 ```{r}

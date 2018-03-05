@@ -1,5 +1,5 @@
 ---
-title: "chapters 10 - 11"
+title: "chapter 12"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
@@ -25,12 +25,12 @@ library(dplyr)
 library(tidyr)
 ```
 
-#ch. 12: Tidy data
+# ch. 12: Tidy data
 
 
-##12.2: Tidy data
+## 12.2: Tidy data
 
-###12.2.1.
+### 12.2.1.
 
 *1. Using prose, describe how the variables and observations are organised in each of the sample tables.*  
 
@@ -51,9 +51,9 @@ e. Which representation is easiest to work with? Which is hardest? Why?
 
 ```
 
-##12.3: Spreading and gathering
+## 12.3: Spreading and gathering
 
-###12.3.3.
+### 12.3.3.
 
 *1. Why are gather() and spread() not perfectly symmetrical?*  
 Carefully consider the following example:  
@@ -142,9 +142,9 @@ preg %>%
 
 ```
 
-##12.4: Separating and uniting
+## 12.4: Separating and uniting
 
-###12.4.3.
+### 12.4.3.
 
 *1. What do the extra and fill arguments do in separate()? Experiment with the various options for the following two toy datasets.*  
 
@@ -211,7 +211,7 @@ tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>%
 Because there are many ways to split something up, but only one way to bring multiple things together...  
 
 
-##12.5: missing values
+## 12.5: missing values
 
 `complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit NAs where necessary
 
@@ -237,7 +237,7 @@ treatment %>%
 ```
 
 
-###12.5.1. 
+### 12.5.1. 
 
 *1. Compare and contrast the fill arguments to spread() and complete().*  
 
@@ -278,9 +278,9 @@ treatment %>%
 ```
 
 
-##12.6 Case Study
+## 12.6 Case Study
 
-###12.6.1. 
+### 12.6.1. 
 
 *1. In this case study I set na.rm = TRUE just to make it easier to check that we had the correct values. Is this reasonable? Think about how missing values are represented in this dataset. Are there implicit missing values? What's the difference between an NA and zero?*  
   

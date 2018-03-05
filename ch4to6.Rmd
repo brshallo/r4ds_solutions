@@ -34,7 +34,7 @@ library(tidyr)
 library(plotly)
 ```
 
-#ch. 5
+# ch. 5
 
 **Key functions from chapter:**  
   
@@ -52,9 +52,9 @@ library(plotly)
   
 `%>%`: pass the previous output into the first position of the next argument, think of as saying, "then you do..."  
 
-##5.2: Filter rows
+## 5.2: Filter rows
 
-##5.2.4.
+## 5.2.4.
 
 **1.Find all flights that...**  
 (key question)  
@@ -154,7 +154,7 @@ See this article for more details: https://math.stackexchange.com/questions/2894
 
 ##5.3: Arrange rows
 
-###5.3.1.
+### 5.3.1.
 
 **1. Sort out all missing values to start**
 ```{r}
@@ -357,7 +357,7 @@ This is returned because `1:3` is being recycled as each element is added to an 
 ```
 
 
-##5.6: Grouped summaries
+## 5.6: Grouped summaries
 Learn the PIPE!!  
 
 *Useful functions:*  
@@ -407,7 +407,7 @@ not_cancelled %>%
 
 `n()` for rows, `sum(!is.na(x))` for non-missing rows, for distinct count, use `n_distinct(x)`  
 
-###5.6.7.
+### 5.6.7.
 
 **1. Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. (key question)**  
   
@@ -674,7 +674,7 @@ To get at the question of 'best carrier', you may consider doing a grouped compa
 
 ##Grouped mutates (and filters)
 
-###5.7.1.
+### 5.7.1.
 
 **1. Refer back to the lists of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.**  
 
@@ -840,10 +840,10 @@ tail_nums_counts %>%
 
 
 
-#Appendix
+# Appendix
 The appendix is either extensions upon solutions. Solving the problems using functions we haven'te learned yet, or other random notes / tidbits.  
 
-##5.4.1.3.
+## 5.4.1.3.
 You actually don't need `one_of` for selecting by character vector, more useful is when using it to negate fields by name.  
 
 ```{r}
@@ -851,7 +851,7 @@ select(flights, -one_of(vars))
 ```
 
 
-##5.5.2.1.
+## 5.5.2.1.
 Other, more sophisticated method^[This method is helpful for if you have more than ust a couple variables you are applying a transformation to.]
 ```{r, eval = FALSE}
 
@@ -860,9 +860,9 @@ mutate_at(.tbl = flights,
           .funs = funs(new = time_to_mins)) 
 ```
 
-##5.5.2.2
+## 5.5.2.2
 
-###Closer look at `air_time`
+### Closer look at `air_time`
 
 Wanted to look at original `air_time` variable a little more. Histogram below shows that most differences are now between 20 - 40 minutes from the actual time.
 ```{r}
@@ -930,7 +930,7 @@ flights_preds_mod %>%
 
 I'm going to stop there though for now. Below are just some other plots I was messing aroun with.
 
-###Other plots with `air_time`
+### Other plots with `air_time`
 These are mostly just me messing around. This section will be very tough to follow.  
   
 Produce 3-d plot with actuals in black and predictions in red and green (not evaluated in html document).
@@ -1076,7 +1076,7 @@ flights %>%
 ```
 
 
-##5.6.7.1.
+## 5.6.7.1.
 
 Below is an extension on using the `quantile` method, but it is far beyond where we are right now.
 
@@ -1158,7 +1158,7 @@ flights_quantiles2 %>%
 ```
 
 
-##5.6.7.4.
+## 5.6.7.4.
 
 To measure the difference in speed you can use the `microbenchmark` function
 ```{r}
@@ -1169,7 +1169,7 @@ microbenchmark::microbenchmark(sub_optimal = filter(flights, is.na(dep_delay) | 
 
 
 
-##5.6.7.5.
+## 5.6.7.5.
 
 Explore the percentage delayed vs. percentage cancelled.
 ```{r}
@@ -1229,7 +1229,7 @@ flights %>%
   geom_smooth()
 ```
 
-###Modeling approach
+### Modeling approach
 
 We also could approach this using a model and regressing the average proportion of cancelled flights on average delay.
 ```{r}
@@ -1305,7 +1305,7 @@ cancelled_preds2 %>%
 ^[Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix...]
   
 
-##5.6.7.6.
+## 5.6.7.6.
 
 
 As an example, let's look at just Atl flights from LGA and compare DL, FL, MQ.
@@ -1353,7 +1353,7 @@ carriers_lga_atl %>%
 This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)^[Repeated t-test methods could be used for comparing MQ and FL, see function `pairwise.t.test`]. The carrier accouts for ~1.6% of the variation in arrival... etc....  
 
 
-##5.7.1.6.
+## 5.7.1.6.
 
 Let's look at the fastest 20 `air_time`s for each destination.
 ```{r}
@@ -1410,7 +1410,7 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-##5.7.1.5
+## 5.7.1.5
 
 Let's run this for every 3 lags (1, 4, 7, ...) and plot.
 
@@ -1425,7 +1425,7 @@ lags_cors %>%
 ```
 
 
-##5.7.1.8.
+## 5.7.1.8.
 
 ```{r, eval = FALSE}
 tail_nums_counts %>% 
@@ -1436,9 +1436,9 @@ tail_nums_counts %>%
 
 ```
 
-##Other
+## Other
 
-###On piping dots
+### On piping dots
 
 The `.` let's you explicitly state where to pipe the output from the prior steps. The default is to have it go into the first argument of the function.
 
@@ -1503,7 +1503,7 @@ flights %>%
 
 ```
 
-##plotly
+## plotly
 the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
 
 Note that this will not render in a markdown format, but only in html.
