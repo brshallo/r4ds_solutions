@@ -6,7 +6,7 @@ output:
   github_document:
     toc: true
     toc_depth: 3
-    keep_html: true
+
 ---
  
 ```{r, include = FALSE, eval = FALSE}
