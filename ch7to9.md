@@ -105,7 +105,9 @@ ggplot(diamonds)+
   geom_histogram(aes(x = price), binwidth=10)
 ```
 
-![](ch7to9_files/figure-markdown_github/unnamed-chunk-6-1.png) Price is right skewed.
+![](ch7to9_files/figure-markdown_github/unnamed-chunk-6-1.png)
+
+Price is right skewed.
 
 Also notice that from 1400 to 1600 there are diamonds.
 
