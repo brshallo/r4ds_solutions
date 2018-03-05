@@ -8,7 +8,7 @@ output:
     toc_depth: 3
     keep_html: true
 ---
-
+ 
 ```{r, include = FALSE, eval = FALSE}
 # Execute chunk to render both the markdown and html document specified in the YAML header.
 rmarkdown::render("ch12.Rmd", output_format = "all")

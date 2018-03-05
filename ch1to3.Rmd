@@ -7,7 +7,7 @@ output:
     toc: true
     toc_depth: 3
 ---
-
+ 
 
 ```{r, include = FALSE, eval = FALSE}
 rmarkdown::render("ch1to3.Rmd", output_format = "all")
