@@ -1,27 +1,42 @@
----
-title: "Chapters 4 to 6"
-author: "Bryan Shalloway"
-date: "Last updated:  2018-03-05"
-params: 
-  output_type:  !r knitr::is_html_output(excludes = c("markdown"))
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
-  html_document:
-    toc: true
-    toc_depth: 3
-    keep_md: true
----
+Chapters 4 to 6
+================
+Bryan Shalloway
+Last updated: 2018-03-05
 
+-   [ch. 5](#ch.-5)
+    -   [5.2: Filter rows](#filter-rows)
+    -   [5.2.4.](#section)
+    -   [5.3: Arrange rows](#arrange-rows)
+        -   [5.3.1.](#section-1)
+-   [5.4: Select columns](#select-columns)
+-   [5.4.1.](#section-2)
+    -   [5.5: Add new vars](#add-new-vars)
+        -   [5.5.2.](#section-3)
+    -   [5.6: Grouped summaries](#grouped-summaries)
+        -   [5.6.7.](#section-4)
+    -   [Grouped mutates (and filters)](#grouped-mutates-and-filters)
+        -   [5.7.1.](#section-5)
+-   [Appendix](#appendix)
+    -   [5.4.1.3.](#section-6)
+    -   [5.5.2.1.](#section-7)
+    -   [5.5.2.2](#section-8)
+        -   [Closer look at `air_time`](#closer-look-at-air_time)
+        -   [Other plots with `air_time`](#other-plots-with-air_time)
+    -   [5.6.7.1.](#section-9)
+    -   [5.6.7.4.](#section-10)
+    -   [5.6.7.5.](#section-11)
+        -   [Modeling approach](#modeling-approach)
+    -   [5.6.7.6.](#section-12)
+    -   [5.7.1.6.](#section-13)
+    -   [5.7.1.5](#section-14)
+    -   [5.7.1.8.](#section-15)
+    -   [Other](#other)
+        -   [On piping dots](#on-piping-dots)
+    -   [plotly](#plotly)
 
+*Make sure the following packages are installed:*
 
-
-
-*Make sure the following packages are installed:*  
-
-
-```r
+``` r
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
@@ -33,552 +48,506 @@ library(tidyr)
 library(plotly)
 ```
 
-# ch. 5
+ch. 5
+=====
 
-**Key functions from chapter:**  
-  
-`filter()`: for filtering rows by some condition(s)  
-  
-`arrange()`: for ordering rows by some condition(s)  
-  
-`select()`: for selecting columns by name, position, or criteria  
-  
-`mutate()`: for changing columns and adding new columns  
-  
-`group_by()`: for performing operations grouped by the values of some fields  
-  
-`summarise()`: for collapsing dataframes into individual rows or aggregates -- typically used in conjunction with group_by(), typically used to aggregate
-  
-`%>%`: pass the previous output into the first position of the next argument, think of as saying, "then you do..."  
+**Key functions from chapter:**
 
-## 5.2: Filter rows
+`filter()`: for filtering rows by some condition(s)
 
-## 5.2.4.
+`arrange()`: for ordering rows by some condition(s)
 
-**1.Find all flights that...**  
-(key question)  
+`select()`: for selecting columns by name, position, or criteria
+
+`mutate()`: for changing columns and adding new columns
+
+`group_by()`: for performing operations grouped by the values of some fields
+
+`summarise()`: for collapsing dataframes into individual rows or aggregates -- typically used in conjunction with group\_by(), typically used to aggregate
+
+`%>%`: pass the previous output into the first position of the next argument, think of as saying, "then you do..."
+
+5.2: Filter rows
+----------------
+
+5.2.4.
+------
+
+**1.Find all flights that...**
+(key question)
 *1.1.Find flights that had an arrival delay of 2 + hrs*
 
-```r
+``` r
 filter(flights, arr_delay >= 120) %>% 
   glimpse()
 ```
 
-```
-## Observations: 10,200
-## Variables: 19
-## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ day            <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ dep_time       <int> 811, 848, 957, 1114, 1505, 1525, 1549, 1558, 17...
-## $ sched_dep_time <int> 630, 1835, 733, 900, 1310, 1340, 1445, 1359, 16...
-## $ dep_delay      <dbl> 101, 853, 144, 134, 115, 105, 64, 119, 62, 103,...
-## $ arr_time       <int> 1047, 1001, 1056, 1447, 1638, 1831, 1912, 1718,...
-## $ sched_arr_time <int> 830, 1950, 853, 1222, 1431, 1626, 1656, 1515, 1...
-## $ arr_delay      <dbl> 137, 851, 123, 145, 127, 125, 136, 123, 123, 13...
-## $ carrier        <chr> "MQ", "MQ", "UA", "UA", "EV", "B6", "EV", "EV",...
-## $ flight         <int> 4576, 3944, 856, 1086, 4497, 525, 4181, 5712, 4...
-## $ tailnum        <chr> "N531MQ", "N942MQ", "N534UA", "N76502", "N17984...
-## $ origin         <chr> "LGA", "JFK", "EWR", "LGA", "EWR", "EWR", "EWR"...
-## $ dest           <chr> "CLT", "BWI", "BOS", "IAH", "RIC", "MCO", "MCI"...
-## $ air_time       <dbl> 118, 41, 37, 248, 63, 152, 234, 53, 119, 154, 2...
-## $ distance       <dbl> 544, 184, 200, 1416, 277, 937, 1092, 228, 533, ...
-## $ hour           <dbl> 6, 18, 7, 9, 13, 13, 14, 13, 16, 16, 13, 14, 16...
-## $ minute         <dbl> 30, 35, 33, 0, 10, 40, 45, 59, 30, 20, 25, 22, ...
-## $ time_hour      <dttm> 2013-01-01 06:00:00, 2013-01-01 18:00:00, 2013...
-```
-
+    ## Observations: 10,200
+    ## Variables: 19
+    ## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
+    ## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+    ## $ day            <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+    ## $ dep_time       <int> 811, 848, 957, 1114, 1505, 1525, 1549, 1558, 17...
+    ## $ sched_dep_time <int> 630, 1835, 733, 900, 1310, 1340, 1445, 1359, 16...
+    ## $ dep_delay      <dbl> 101, 853, 144, 134, 115, 105, 64, 119, 62, 103,...
+    ## $ arr_time       <int> 1047, 1001, 1056, 1447, 1638, 1831, 1912, 1718,...
+    ## $ sched_arr_time <int> 830, 1950, 853, 1222, 1431, 1626, 1656, 1515, 1...
+    ## $ arr_delay      <dbl> 137, 851, 123, 145, 127, 125, 136, 123, 123, 13...
+    ## $ carrier        <chr> "MQ", "MQ", "UA", "UA", "EV", "B6", "EV", "EV",...
+    ## $ flight         <int> 4576, 3944, 856, 1086, 4497, 525, 4181, 5712, 4...
+    ## $ tailnum        <chr> "N531MQ", "N942MQ", "N534UA", "N76502", "N17984...
+    ## $ origin         <chr> "LGA", "JFK", "EWR", "LGA", "EWR", "EWR", "EWR"...
+    ## $ dest           <chr> "CLT", "BWI", "BOS", "IAH", "RIC", "MCO", "MCI"...
+    ## $ air_time       <dbl> 118, 41, 37, 248, 63, 152, 234, 53, 119, 154, 2...
+    ## $ distance       <dbl> 544, 184, 200, 1416, 277, 937, 1092, 228, 533, ...
+    ## $ hour           <dbl> 6, 18, 7, 9, 13, 13, 14, 13, 16, 16, 13, 14, 16...
+    ## $ minute         <dbl> 30, 35, 33, 0, 10, 40, 45, 59, 30, 20, 25, 22, ...
+    ## $ time_hour      <dttm> 2013-01-01 06:00:00, 2013-01-01 18:00:00, 2013...
 
 *1.2.flew to Houston IAH or HOU*
 
-```r
+``` r
 filter(flights, dest %in% c("IAH","HOU"))
 ```
 
-```
-## # A tibble: 9,313 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1      517            515         2      830
-##  2  2013     1     1      533            529         4      850
-##  3  2013     1     1      623            627        -4      933
-##  4  2013     1     1      728            732        -4     1041
-##  5  2013     1     1      739            739         0     1104
-##  6  2013     1     1      908            908         0     1228
-##  7  2013     1     1     1028           1026         2     1350
-##  8  2013     1     1     1044           1045        -1     1352
-##  9  2013     1     1     1114            900       134     1447
-## 10  2013     1     1     1205           1200         5     1503
-## # ... with 9,303 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 9,313 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      517            515         2      830
+    ##  2  2013     1     1      533            529         4      850
+    ##  3  2013     1     1      623            627        -4      933
+    ##  4  2013     1     1      728            732        -4     1041
+    ##  5  2013     1     1      739            739         0     1104
+    ##  6  2013     1     1      908            908         0     1228
+    ##  7  2013     1     1     1028           1026         2     1350
+    ##  8  2013     1     1     1044           1045        -1     1352
+    ##  9  2013     1     1     1114            900       134     1447
+    ## 10  2013     1     1     1205           1200         5     1503
+    ## # ... with 9,303 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
+*1.3.flew through American, United or Delta*
 
-*1.3.flew through American, United or Delta*  
-
-```r
+``` r
 filter(flights, carrier %in% c("UA", "AA","DL"))
 ```
 
-```
-## # A tibble: 139,504 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1      517            515         2      830
-##  2  2013     1     1      533            529         4      850
-##  3  2013     1     1      542            540         2      923
-##  4  2013     1     1      554            600        -6      812
-##  5  2013     1     1      554            558        -4      740
-##  6  2013     1     1      558            600        -2      753
-##  7  2013     1     1      558            600        -2      924
-##  8  2013     1     1      558            600        -2      923
-##  9  2013     1     1      559            600        -1      941
-## 10  2013     1     1      559            600        -1      854
-## # ... with 139,494 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 139,504 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      517            515         2      830
+    ##  2  2013     1     1      533            529         4      850
+    ##  3  2013     1     1      542            540         2      923
+    ##  4  2013     1     1      554            600        -6      812
+    ##  5  2013     1     1      554            558        -4      740
+    ##  6  2013     1     1      558            600        -2      753
+    ##  7  2013     1     1      558            600        -2      924
+    ##  8  2013     1     1      558            600        -2      923
+    ##  9  2013     1     1      559            600        -1      941
+    ## 10  2013     1     1      559            600        -1      854
+    ## # ... with 139,494 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-*1.4. Departed in Summer*  
+*1.4. Departed in Summer*
 
-```r
+``` r
 filter(flights, month <= 8 & month >= 6)
 ```
 
-```
-## # A tibble: 86,995 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     6     1        2           2359         3      341
-##  2  2013     6     1      451            500        -9      624
-##  3  2013     6     1      506            515        -9      715
-##  4  2013     6     1      534            545       -11      800
-##  5  2013     6     1      538            545        -7      925
-##  6  2013     6     1      539            540        -1      832
-##  7  2013     6     1      546            600       -14      850
-##  8  2013     6     1      551            600        -9      828
-##  9  2013     6     1      552            600        -8      647
-## 10  2013     6     1      553            600        -7      700
-## # ... with 86,985 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 86,995 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     6     1        2           2359         3      341
+    ##  2  2013     6     1      451            500        -9      624
+    ##  3  2013     6     1      506            515        -9      715
+    ##  4  2013     6     1      534            545       -11      800
+    ##  5  2013     6     1      538            545        -7      925
+    ##  6  2013     6     1      539            540        -1      832
+    ##  7  2013     6     1      546            600       -14      850
+    ##  8  2013     6     1      551            600        -9      828
+    ##  9  2013     6     1      552            600        -8      647
+    ## 10  2013     6     1      553            600        -7      700
+    ## # ... with 86,985 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-*1.5. Arrived more than 2 hurs late, but didn't leave late*  
+*1.5. Arrived more than 2 hurs late, but didn't leave late*
 
-```r
+``` r
 filter(flights, arr_delay > 120, dep_delay >= 0)
 ```
 
-```
-## # A tibble: 10,008 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1      811            630       101     1047
-##  2  2013     1     1      848           1835       853     1001
-##  3  2013     1     1      957            733       144     1056
-##  4  2013     1     1     1114            900       134     1447
-##  5  2013     1     1     1505           1310       115     1638
-##  6  2013     1     1     1525           1340       105     1831
-##  7  2013     1     1     1549           1445        64     1912
-##  8  2013     1     1     1558           1359       119     1718
-##  9  2013     1     1     1732           1630        62     2028
-## 10  2013     1     1     1803           1620       103     2008
-## # ... with 9,998 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 10,008 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      811            630       101     1047
+    ##  2  2013     1     1      848           1835       853     1001
+    ##  3  2013     1     1      957            733       144     1056
+    ##  4  2013     1     1     1114            900       134     1447
+    ##  5  2013     1     1     1505           1310       115     1638
+    ##  6  2013     1     1     1525           1340       105     1831
+    ##  7  2013     1     1     1549           1445        64     1912
+    ##  8  2013     1     1     1558           1359       119     1718
+    ##  9  2013     1     1     1732           1630        62     2028
+    ## 10  2013     1     1     1803           1620       103     2008
+    ## # ... with 9,998 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-*1.6. were delayed at least an hour, but made up over 30 mins in flight*  
+*1.6. were delayed at least an hour, but made up over 30 mins in flight*
 
-
-```r
+``` r
 filter(flights, (arr_delay-dep_delay)<=-30, dep_delay>=60)
 ```
 
-```
-## # A tibble: 2,074 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1     1716           1545        91     2140
-##  2  2013     1     1     2205           1720       285       46
-##  3  2013     1     1     2326           2130       116      131
-##  4  2013     1     3     1503           1221       162     1803
-##  5  2013     1     3     1821           1530       171     2131
-##  6  2013     1     3     1839           1700        99     2056
-##  7  2013     1     3     1850           1745        65     2148
-##  8  2013     1     3     1923           1815        68     2036
-##  9  2013     1     3     1941           1759       102     2246
-## 10  2013     1     3     1950           1845        65     2228
-## # ... with 2,064 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 2,074 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1     1716           1545        91     2140
+    ##  2  2013     1     1     2205           1720       285       46
+    ##  3  2013     1     1     2326           2130       116      131
+    ##  4  2013     1     3     1503           1221       162     1803
+    ##  5  2013     1     3     1821           1530       171     2131
+    ##  6  2013     1     3     1839           1700        99     2056
+    ##  7  2013     1     3     1850           1745        65     2148
+    ##  8  2013     1     3     1923           1815        68     2036
+    ##  9  2013     1     3     1941           1759       102     2246
+    ## 10  2013     1     3     1950           1845        65     2228
+    ## # ... with 2,064 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-*Equivalent solution:*  
-`filter(flights, (arr_delay-dep_delay)<=-30 & dep_delay>=60)`  
-  
-*1.7. departed between midnight and 6am (inclusive)*  
+*Equivalent solution:*
+`filter(flights, (arr_delay-dep_delay)<=-30 & dep_delay>=60)`
 
-```r
+*1.7. departed between midnight and 6am (inclusive)*
+
+``` r
 filter(flights, dep_time>=0 & dep_time<=600)
 ```
 
-```
-## # A tibble: 9,344 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1      517            515         2      830
-##  2  2013     1     1      533            529         4      850
-##  3  2013     1     1      542            540         2      923
-##  4  2013     1     1      544            545        -1     1004
-##  5  2013     1     1      554            600        -6      812
-##  6  2013     1     1      554            558        -4      740
-##  7  2013     1     1      555            600        -5      913
-##  8  2013     1     1      557            600        -3      709
-##  9  2013     1     1      557            600        -3      838
-## 10  2013     1     1      558            600        -2      753
-## # ... with 9,334 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 9,344 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      517            515         2      830
+    ##  2  2013     1     1      533            529         4      850
+    ##  3  2013     1     1      542            540         2      923
+    ##  4  2013     1     1      544            545        -1     1004
+    ##  5  2013     1     1      554            600        -6      812
+    ##  6  2013     1     1      554            558        -4      740
+    ##  7  2013     1     1      555            600        -5      913
+    ##  8  2013     1     1      557            600        -3      709
+    ##  9  2013     1     1      557            600        -3      838
+    ## 10  2013     1     1      558            600        -2      753
+    ## # ... with 9,334 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-```r
+``` r
 filter(flights, dep_time>=0, dep_time<=600)
 ```
 
-```
-## # A tibble: 9,344 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1      517            515         2      830
-##  2  2013     1     1      533            529         4      850
-##  3  2013     1     1      542            540         2      923
-##  4  2013     1     1      544            545        -1     1004
-##  5  2013     1     1      554            600        -6      812
-##  6  2013     1     1      554            558        -4      740
-##  7  2013     1     1      555            600        -5      913
-##  8  2013     1     1      557            600        -3      709
-##  9  2013     1     1      557            600        -3      838
-## 10  2013     1     1      558            600        -2      753
-## # ... with 9,334 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 9,344 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1      517            515         2      830
+    ##  2  2013     1     1      533            529         4      850
+    ##  3  2013     1     1      542            540         2      923
+    ##  4  2013     1     1      544            545        -1     1004
+    ##  5  2013     1     1      554            600        -6      812
+    ##  6  2013     1     1      554            558        -4      740
+    ##  7  2013     1     1      555            600        -5      913
+    ##  8  2013     1     1      557            600        -3      709
+    ##  9  2013     1     1      557            600        -3      838
+    ## 10  2013     1     1      558            600        -2      753
+    ## # ... with 9,334 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-**2. Another useful dplyr filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?**  
-  
-This is a shortcut for `x >= left & x <= right`  
-  
-solving 1.7. using `between`:  
+**2. Another useful dplyr filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?**
 
-```r
+This is a shortcut for `x >= left & x <= right`
+
+solving 1.7. using `between`:
+
+``` r
 filter(flights, between(dep_time, 0, 600))
 ```
 
-
-**3. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?**  
+**3. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?**
 (key question)
 
-```r
+``` r
 filter(flights,is.na(dep_time))
 ```
 
-```
-## # A tibble: 8,255 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1       NA           1630        NA       NA
-##  2  2013     1     1       NA           1935        NA       NA
-##  3  2013     1     1       NA           1500        NA       NA
-##  4  2013     1     1       NA            600        NA       NA
-##  5  2013     1     2       NA           1540        NA       NA
-##  6  2013     1     2       NA           1620        NA       NA
-##  7  2013     1     2       NA           1355        NA       NA
-##  8  2013     1     2       NA           1420        NA       NA
-##  9  2013     1     2       NA           1321        NA       NA
-## 10  2013     1     2       NA           1545        NA       NA
-## # ... with 8,245 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 8,255 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1       NA           1630        NA       NA
+    ##  2  2013     1     1       NA           1935        NA       NA
+    ##  3  2013     1     1       NA           1500        NA       NA
+    ##  4  2013     1     1       NA            600        NA       NA
+    ##  5  2013     1     2       NA           1540        NA       NA
+    ##  6  2013     1     2       NA           1620        NA       NA
+    ##  7  2013     1     2       NA           1355        NA       NA
+    ##  8  2013     1     2       NA           1420        NA       NA
+    ##  9  2013     1     2       NA           1321        NA       NA
+    ## 10  2013     1     2       NA           1545        NA       NA
+    ## # ... with 8,245 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-8255, perhaps these are canceled flights.  
-  
+8255, perhaps these are canceled flights.
+
 **4. Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA `*` 0 is a tricky counterexample!)**
 
-
-```r
+``` r
 NA^0
 ```
 
-```
-## [1] 1
-```
+    ## [1] 1
 
 Anything raised to the 0 is 1.
 
-
-```r
+``` r
 FALSE & NA
 ```
 
-```
-## [1] FALSE
-```
+    ## [1] FALSE
 
 For the "AND" operator `&` for it to be `TRUE` both values would need to be `TRUE` so if one is `FALSE` the entire statment must be.
 
-
-```r
+``` r
 TRUE | NA
 ```
 
-```
-## [1] TRUE
-```
+    ## [1] TRUE
 
-The "OR" operator `|` specifies that if at least one of the values is `TRUE` the whole statement is, so because one is already `TRUE` the whole statement must be. 
+The "OR" operator `|` specifies that if at least one of the values is `TRUE` the whole statement is, so because one is already `TRUE` the whole statement must be.
 
-```r
+``` r
 NA*0
 ```
 
-```
-## [1] NA
-```
+    ## [1] NA
 
 This does not come-out to 0 as expected because the laws of addition and multiplication here only hold for natural numbers, but it is possible that `NA` could represent `Inf` or `-Inf` in which case the outut is `NaN` rather than 0.
 
-
-```r
+``` r
 Inf*0
 ```
 
-```
-## [1] NaN
-```
+    ## [1] NaN
 
-See this article for more details: https://math.stackexchange.com/questions/28940/why-is-infinity-multiplied-by-zero-not-an-easy-zero-answer .
+See this article for more details: <https://math.stackexchange.com/questions/28940/why-is-infinity-multiplied-by-zero-not-an-easy-zero-answer> .
 
-##5.3: Arrange rows
+5.3: Arrange rows
+-----------------
 
 ### 5.3.1.
 
 **1. Sort out all missing values to start**
 
-```r
+``` r
 arrange(flights, desc(is.na(dep_time)))
 ```
 
-```
-## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1       NA           1630        NA       NA
-##  2  2013     1     1       NA           1935        NA       NA
-##  3  2013     1     1       NA           1500        NA       NA
-##  4  2013     1     1       NA            600        NA       NA
-##  5  2013     1     2       NA           1540        NA       NA
-##  6  2013     1     2       NA           1620        NA       NA
-##  7  2013     1     2       NA           1355        NA       NA
-##  8  2013     1     2       NA           1420        NA       NA
-##  9  2013     1     2       NA           1321        NA       NA
-## 10  2013     1     2       NA           1545        NA       NA
-## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 336,776 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1       NA           1630        NA       NA
+    ##  2  2013     1     1       NA           1935        NA       NA
+    ##  3  2013     1     1       NA           1500        NA       NA
+    ##  4  2013     1     1       NA            600        NA       NA
+    ##  5  2013     1     2       NA           1540        NA       NA
+    ##  6  2013     1     2       NA           1620        NA       NA
+    ##  7  2013     1     2       NA           1355        NA       NA
+    ##  8  2013     1     2       NA           1420        NA       NA
+    ##  9  2013     1     2       NA           1321        NA       NA
+    ## 10  2013     1     2       NA           1545        NA       NA
+    ## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-```r
+``` r
 arrange(flights, desc(is.na(arr_delay)))
 ```
 
-```
-## # A tibble: 336,776 x 19
-##     year month   day dep_time sched_dep_time dep_delay arr_time
-##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
-##  1  2013     1     1     1525           1530        -5     1934
-##  2  2013     1     1     1528           1459        29     2002
-##  3  2013     1     1     1740           1745        -5     2158
-##  4  2013     1     1     1807           1738        29     2251
-##  5  2013     1     1     1939           1840        59       29
-##  6  2013     1     1     1952           1930        22     2358
-##  7  2013     1     1     2016           1930        46       NA
-##  8  2013     1     1       NA           1630        NA       NA
-##  9  2013     1     1       NA           1935        NA       NA
-## 10  2013     1     1       NA           1500        NA       NA
-## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
-## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
-## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
-## #   minute <dbl>, time_hour <dttm>
-```
+    ## # A tibble: 336,776 x 19
+    ##     year month   day dep_time sched_dep_time dep_delay arr_time
+    ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
+    ##  1  2013     1     1     1525           1530        -5     1934
+    ##  2  2013     1     1     1528           1459        29     2002
+    ##  3  2013     1     1     1740           1745        -5     2158
+    ##  4  2013     1     1     1807           1738        29     2251
+    ##  5  2013     1     1     1939           1840        59       29
+    ##  6  2013     1     1     1952           1930        22     2358
+    ##  7  2013     1     1     2016           1930        46       NA
+    ##  8  2013     1     1       NA           1630        NA       NA
+    ##  9  2013     1     1       NA           1935        NA       NA
+    ## 10  2013     1     1       NA           1500        NA       NA
+    ## # ... with 336,766 more rows, and 12 more variables: sched_arr_time <int>,
+    ## #   arr_delay <dbl>, carrier <chr>, flight <int>, tailnum <chr>,
+    ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
+    ## #   minute <dbl>, time_hour <dttm>
 
-```r
+``` r
 count(flights, is.na(arr_delay))
 ```
 
-```
-## # A tibble: 2 x 2
-##   `is.na(arr_delay)`      n
-##                <lgl>  <int>
-## 1              FALSE 327346
-## 2               TRUE   9430
-```
+    ## # A tibble: 2 x 2
+    ##   `is.na(arr_delay)`      n
+    ##                <lgl>  <int>
+    ## 1              FALSE 327346
+    ## 2               TRUE   9430
 
-```r
+``` r
 count(flights, is.na(dep_delay), is.na(arr_delay))
 ```
 
-```
-## # A tibble: 3 x 3
-##   `is.na(dep_delay)` `is.na(arr_delay)`      n
-##                <lgl>              <lgl>  <int>
-## 1              FALSE              FALSE 327346
-## 2              FALSE               TRUE   1175
-## 3               TRUE               TRUE   8255
-```
+    ## # A tibble: 3 x 3
+    ##   `is.na(dep_delay)` `is.na(arr_delay)`      n
+    ##                <lgl>              <lgl>  <int>
+    ## 1              FALSE              FALSE 327346
+    ## 2              FALSE               TRUE   1175
+    ## 3               TRUE               TRUE   8255
 
-**2. Find most delayed departures**  
+**2. Find most delayed departures**
 
-```r
+``` r
 arrange(flights, desc(dep_delay)) %>% 
   select(dep_delay)
 ```
 
-```
-## # A tibble: 336,776 x 1
-##    dep_delay
-##        <dbl>
-##  1      1301
-##  2      1137
-##  3      1126
-##  4      1014
-##  5      1005
-##  6       960
-##  7       911
-##  8       899
-##  9       898
-## 10       896
-## # ... with 336,766 more rows
-```
+    ## # A tibble: 336,776 x 1
+    ##    dep_delay
+    ##        <dbl>
+    ##  1      1301
+    ##  2      1137
+    ##  3      1126
+    ##  4      1014
+    ##  5      1005
+    ##  6       960
+    ##  7       911
+    ##  8       899
+    ##  9       898
+    ## 10       896
+    ## # ... with 336,766 more rows
 
 **3. Find the fastest flights**
 
-```r
+``` r
 arrange(flights,air_time) %>% 
   glimpse()
 ```
 
-```
-## Observations: 336,776
-## Variables: 19
-## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ month          <int> 1, 4, 12, 2, 2, 2, 3, 3, 3, 3, 5, 5, 6, 8, 9, 9...
-## $ day            <int> 16, 13, 6, 3, 5, 12, 2, 8, 18, 19, 8, 19, 12, 1...
-## $ dep_time       <int> 1355, 537, 922, 2153, 1303, 2123, 1450, 2026, 1...
-## $ sched_dep_time <int> 1315, 527, 851, 2129, 1315, 2130, 1500, 1935, 1...
-## $ dep_delay      <dbl> 40, 10, 31, 24, -12, -7, -10, 51, 87, 41, 137, ...
-## $ arr_time       <int> 1442, 622, 1021, 2247, 1342, 2211, 1547, 2131, ...
-## $ sched_arr_time <int> 1411, 628, 954, 2224, 1411, 2225, 1608, 2056, 1...
-## $ arr_delay      <dbl> 31, -6, 27, 23, -29, -14, -21, 35, 67, 19, 109,...
-## $ carrier        <chr> "EV", "EV", "EV", "EV", "EV", "EV", "US", "9E",...
-## $ flight         <int> 4368, 4631, 4276, 4619, 4368, 4619, 2132, 3650,...
-## $ tailnum        <chr> "N16911", "N12167", "N27200", "N13913", "N13955...
-## $ origin         <chr> "EWR", "EWR", "EWR", "EWR", "EWR", "EWR", "LGA"...
-## $ dest           <chr> "BDL", "BDL", "BDL", "PHL", "BDL", "PHL", "BOS"...
-## $ air_time       <dbl> 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,...
-## $ distance       <dbl> 116, 116, 116, 80, 116, 80, 184, 94, 116, 116, ...
-## $ hour           <dbl> 13, 5, 8, 21, 13, 21, 15, 19, 13, 21, 21, 21, 2...
-## $ minute         <dbl> 15, 27, 51, 29, 15, 30, 0, 35, 29, 45, 59, 59, ...
-## $ time_hour      <dttm> 2013-01-16 13:00:00, 2013-04-13 05:00:00, 2013...
-```
+    ## Observations: 336,776
+    ## Variables: 19
+    ## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
+    ## $ month          <int> 1, 4, 12, 2, 2, 2, 3, 3, 3, 3, 5, 5, 6, 8, 9, 9...
+    ## $ day            <int> 16, 13, 6, 3, 5, 12, 2, 8, 18, 19, 8, 19, 12, 1...
+    ## $ dep_time       <int> 1355, 537, 922, 2153, 1303, 2123, 1450, 2026, 1...
+    ## $ sched_dep_time <int> 1315, 527, 851, 2129, 1315, 2130, 1500, 1935, 1...
+    ## $ dep_delay      <dbl> 40, 10, 31, 24, -12, -7, -10, 51, 87, 41, 137, ...
+    ## $ arr_time       <int> 1442, 622, 1021, 2247, 1342, 2211, 1547, 2131, ...
+    ## $ sched_arr_time <int> 1411, 628, 954, 2224, 1411, 2225, 1608, 2056, 1...
+    ## $ arr_delay      <dbl> 31, -6, 27, 23, -29, -14, -21, 35, 67, 19, 109,...
+    ## $ carrier        <chr> "EV", "EV", "EV", "EV", "EV", "EV", "US", "9E",...
+    ## $ flight         <int> 4368, 4631, 4276, 4619, 4368, 4619, 2132, 3650,...
+    ## $ tailnum        <chr> "N16911", "N12167", "N27200", "N13913", "N13955...
+    ## $ origin         <chr> "EWR", "EWR", "EWR", "EWR", "EWR", "EWR", "LGA"...
+    ## $ dest           <chr> "BDL", "BDL", "BDL", "PHL", "BDL", "PHL", "BOS"...
+    ## $ air_time       <dbl> 20, 20, 21, 21, 21, 21, 21, 21, 21, 21, 21, 21,...
+    ## $ distance       <dbl> 116, 116, 116, 80, 116, 80, 184, 94, 116, 116, ...
+    ## $ hour           <dbl> 13, 5, 8, 21, 13, 21, 15, 19, 13, 21, 21, 21, 2...
+    ## $ minute         <dbl> 15, 27, 51, 29, 15, 30, 0, 35, 29, 45, 59, 59, ...
+    ## $ time_hour      <dttm> 2013-01-16 13:00:00, 2013-04-13 05:00:00, 2013...
 
 **4. Flights traveling the longest distance**
 
-```r
+``` r
 arrange(flights, desc(distance)) %>% 
   glimpse()
 ```
 
-```
-## Observations: 336,776
-## Variables: 19
-## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ day            <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, ...
-## $ dep_time       <int> 857, 909, 914, 900, 858, 1019, 1042, 901, 641, ...
-## $ sched_dep_time <int> 900, 900, 900, 900, 900, 900, 900, 900, 900, 90...
-## $ dep_delay      <dbl> -3, 9, 14, 0, -2, 79, 102, 1, 1301, -1, -5, 1, ...
-## $ arr_time       <int> 1516, 1525, 1504, 1516, 1519, 1558, 1620, 1504,...
-## $ sched_arr_time <int> 1530, 1530, 1530, 1530, 1530, 1530, 1530, 1530,...
-## $ arr_delay      <dbl> -14, -5, -26, -14, -11, 28, 50, -26, 1272, -41,...
-## $ carrier        <chr> "HA", "HA", "HA", "HA", "HA", "HA", "HA", "HA",...
-## $ flight         <int> 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51,...
-## $ tailnum        <chr> "N380HA", "N380HA", "N380HA", "N384HA", "N381HA...
-## $ origin         <chr> "JFK", "JFK", "JFK", "JFK", "JFK", "JFK", "JFK"...
-## $ dest           <chr> "HNL", "HNL", "HNL", "HNL", "HNL", "HNL", "HNL"...
-## $ air_time       <dbl> 659, 638, 616, 639, 635, 611, 612, 645, 640, 63...
-## $ distance       <dbl> 4983, 4983, 4983, 4983, 4983, 4983, 4983, 4983,...
-## $ hour           <dbl> 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,...
-## $ minute         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
-## $ time_hour      <dttm> 2013-01-01 09:00:00, 2013-01-02 09:00:00, 2013...
-```
+    ## Observations: 336,776
+    ## Variables: 19
+    ## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
+    ## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+    ## $ day            <int> 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, ...
+    ## $ dep_time       <int> 857, 909, 914, 900, 858, 1019, 1042, 901, 641, ...
+    ## $ sched_dep_time <int> 900, 900, 900, 900, 900, 900, 900, 900, 900, 90...
+    ## $ dep_delay      <dbl> -3, 9, 14, 0, -2, 79, 102, 1, 1301, -1, -5, 1, ...
+    ## $ arr_time       <int> 1516, 1525, 1504, 1516, 1519, 1558, 1620, 1504,...
+    ## $ sched_arr_time <int> 1530, 1530, 1530, 1530, 1530, 1530, 1530, 1530,...
+    ## $ arr_delay      <dbl> -14, -5, -26, -14, -11, 28, 50, -26, 1272, -41,...
+    ## $ carrier        <chr> "HA", "HA", "HA", "HA", "HA", "HA", "HA", "HA",...
+    ## $ flight         <int> 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51, 51,...
+    ## $ tailnum        <chr> "N380HA", "N380HA", "N380HA", "N384HA", "N381HA...
+    ## $ origin         <chr> "JFK", "JFK", "JFK", "JFK", "JFK", "JFK", "JFK"...
+    ## $ dest           <chr> "HNL", "HNL", "HNL", "HNL", "HNL", "HNL", "HNL"...
+    ## $ air_time       <dbl> 659, 638, 616, 639, 635, 611, 612, 645, 640, 63...
+    ## $ distance       <dbl> 4983, 4983, 4983, 4983, 4983, 4983, 4983, 4983,...
+    ## $ hour           <dbl> 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9,...
+    ## $ minute         <dbl> 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,...
+    ## $ time_hour      <dttm> 2013-01-01 09:00:00, 2013-01-02 09:00:00, 2013...
 
 **and the shortest distance.**
 
-```r
+``` r
 arrange(flights, distance) %>% 
   glimpse()
 ```
 
-```
-## Observations: 336,776
-## Variables: 19
-## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ month          <int> 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ day            <int> 27, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
-## $ dep_time       <int> NA, 2127, 1240, 1829, 2128, 1155, 2125, 2124, 2...
-## $ sched_dep_time <int> 106, 2129, 1200, 1615, 2129, 1200, 2129, 2129, ...
-## $ dep_delay      <dbl> NA, -2, 40, 134, -1, -5, -4, -5, -3, -3, 4, 6, ...
-## $ arr_time       <int> NA, 2222, 1333, 1937, 2218, 1241, 2224, 2212, 2...
-## $ sched_arr_time <int> 245, 2224, 1306, 1721, 2224, 1306, 2224, 2224, ...
-## $ arr_delay      <dbl> NA, -2, 27, 136, -6, -25, 0, -12, 39, -7, -1, 9...
-## $ carrier        <chr> "US", "EV", "EV", "EV", "EV", "EV", "EV", "EV",...
-## $ flight         <int> 1632, 3833, 4193, 4502, 4645, 4193, 4619, 4619,...
-## $ tailnum        <chr> NA, "N13989", "N14972", "N15983", "N27962", "N1...
-## $ origin         <chr> "EWR", "EWR", "EWR", "EWR", "EWR", "EWR", "EWR"...
-## $ dest           <chr> "LGA", "PHL", "PHL", "PHL", "PHL", "PHL", "PHL"...
-## $ air_time       <dbl> NA, 30, 30, 28, 32, 29, 22, 25, 30, 27, 30, 30,...
-## $ distance       <dbl> 17, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80,...
-## $ hour           <dbl> 1, 21, 12, 16, 21, 12, 21, 21, 21, 21, 21, 21, ...
-## $ minute         <dbl> 6, 29, 0, 15, 29, 0, 29, 29, 30, 29, 29, 29, 17...
-## $ time_hour      <dttm> 2013-07-27 01:00:00, 2013-01-03 21:00:00, 2013...
-```
+    ## Observations: 336,776
+    ## Variables: 19
+    ## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
+    ## $ month          <int> 7, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+    ## $ day            <int> 27, 3, 4, 4, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, ...
+    ## $ dep_time       <int> NA, 2127, 1240, 1829, 2128, 1155, 2125, 2124, 2...
+    ## $ sched_dep_time <int> 106, 2129, 1200, 1615, 2129, 1200, 2129, 2129, ...
+    ## $ dep_delay      <dbl> NA, -2, 40, 134, -1, -5, -4, -5, -3, -3, 4, 6, ...
+    ## $ arr_time       <int> NA, 2222, 1333, 1937, 2218, 1241, 2224, 2212, 2...
+    ## $ sched_arr_time <int> 245, 2224, 1306, 1721, 2224, 1306, 2224, 2224, ...
+    ## $ arr_delay      <dbl> NA, -2, 27, 136, -6, -25, 0, -12, 39, -7, -1, 9...
+    ## $ carrier        <chr> "US", "EV", "EV", "EV", "EV", "EV", "EV", "EV",...
+    ## $ flight         <int> 1632, 3833, 4193, 4502, 4645, 4193, 4619, 4619,...
+    ## $ tailnum        <chr> NA, "N13989", "N14972", "N15983", "N27962", "N1...
+    ## $ origin         <chr> "EWR", "EWR", "EWR", "EWR", "EWR", "EWR", "EWR"...
+    ## $ dest           <chr> "LGA", "PHL", "PHL", "PHL", "PHL", "PHL", "PHL"...
+    ## $ air_time       <dbl> NA, 30, 30, 28, 32, 29, 22, 25, 30, 27, 30, 30,...
+    ## $ distance       <dbl> 17, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80,...
+    ## $ hour           <dbl> 1, 21, 12, 16, 21, 12, 21, 21, 21, 21, 21, 21, ...
+    ## $ minute         <dbl> 6, 29, 0, 15, 29, 0, 29, 29, 30, 29, 29, 29, 17...
+    ## $ time_hour      <dttm> 2013-07-27 01:00:00, 2013-01-03 21:00:00, 2013...
 
-#5.4: Select columns
+5.4: Select columns
+===================
+
 `starts_with` , `ends_with`, `contains`, `matches`, `num_range`, `one_of`, `everything`
 
-#5.4.1.
+5.4.1.
+======
+
 **1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.**
 
-
-```r
+``` r
 vars <- c("dep_time", "dep_delay", "arr_time", "arr_delay")
 ```
 
-
-```r
+``` r
 #method 1
 select(flights, vars)
 
@@ -590,89 +559,79 @@ select(flights, indexes)
 select(flights, contains("_time"), contains("_delay"), -contains("sched"), -contains("air"))
 ```
 
-
-```r
+``` r
 #method 4
 select(flights, starts_with("dep"), starts_with("arr")) %>% 
   select(ends_with("time"), ends_with("delay"))
 ```
 
-```
-## # A tibble: 336,776 x 4
-##    dep_time arr_time dep_delay arr_delay
-##       <int>    <int>     <dbl>     <dbl>
-##  1      517      830         2        11
-##  2      533      850         4        20
-##  3      542      923         2        33
-##  4      544     1004        -1       -18
-##  5      554      812        -6       -25
-##  6      554      740        -4        12
-##  7      555      913        -5        19
-##  8      557      709        -3       -14
-##  9      557      838        -3        -8
-## 10      558      753        -2         8
-## # ... with 336,766 more rows
-```
+    ## # A tibble: 336,776 x 4
+    ##    dep_time arr_time dep_delay arr_delay
+    ##       <int>    <int>     <dbl>     <dbl>
+    ##  1      517      830         2        11
+    ##  2      533      850         4        20
+    ##  3      542      923         2        33
+    ##  4      544     1004        -1       -18
+    ##  5      554      812        -6       -25
+    ##  6      554      740        -4        12
+    ##  7      555      913        -5        19
+    ##  8      557      709        -3       -14
+    ##  9      557      838        -3        -8
+    ## 10      558      753        -2         8
+    ## # ... with 336,766 more rows
 
-**2. What happens if you include the name of a variable multiple times in a `select()` call?**  
-  
-It only shows-up once.  
-  
-**3. What does the `one_of()` function do? Why might it be helpful in conjunction with this vector?**  
-`vars <- c("year", "month", "day", "dep_delay", "arr_delay")`  
-  
-Can be used to select multiple variables with a character vector or to negate selecting certain variables.  
+**2. What happens if you include the name of a variable multiple times in a `select()` call?**
 
-**4. Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?**  
+It only shows-up once.
 
+**3. What does the `one_of()` function do? Why might it be helpful in conjunction with this vector?**
+`vars <- c("year", "month", "day", "dep_delay", "arr_delay")`
 
-```r
+Can be used to select multiple variables with a character vector or to negate selecting certain variables.
+
+**4. Does the result of running the following code surprise you? How do the select helpers deal with case by default? How can you change that default?**
+
+``` r
 select(flights, contains("TIME"))
 ```
 
-```
-## # A tibble: 336,776 x 6
-##    dep_time sched_dep_time arr_time sched_arr_time air_time
-##       <int>          <int>    <int>          <int>    <dbl>
-##  1      517            515      830            819      227
-##  2      533            529      850            830      227
-##  3      542            540      923            850      160
-##  4      544            545     1004           1022      183
-##  5      554            600      812            837      116
-##  6      554            558      740            728      150
-##  7      555            600      913            854      158
-##  8      557            600      709            723       53
-##  9      557            600      838            846      140
-## 10      558            600      753            745      138
-## # ... with 336,766 more rows, and 1 more variables: time_hour <dttm>
-```
+    ## # A tibble: 336,776 x 6
+    ##    dep_time sched_dep_time arr_time sched_arr_time air_time
+    ##       <int>          <int>    <int>          <int>    <dbl>
+    ##  1      517            515      830            819      227
+    ##  2      533            529      850            830      227
+    ##  3      542            540      923            850      160
+    ##  4      544            545     1004           1022      183
+    ##  5      554            600      812            837      116
+    ##  6      554            558      740            728      150
+    ##  7      555            600      913            854      158
+    ##  8      557            600      709            723       53
+    ##  9      557            600      838            846      140
+    ## 10      558            600      753            745      138
+    ## # ... with 336,766 more rows, and 1 more variables: time_hour <dttm>
 
 Default is case insensitive, to change this specify `ignore.case = FALSE`
 
-
-```r
+``` r
 select(flights, contains("TIME", ignore.case = FALSE))
 ```
 
-```
-## # A tibble: 336,776 x 0
-```
+    ## # A tibble: 336,776 x 0
 
-##5.5: Add new vars
-`cumsum`, `cummean`, `cumprod`, `cummin`, `cummax`, `min_rank` (use in conunction with `desc`), `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`  
+5.5: Add new vars
+-----------------
 
+`cumsum`, `cummean`, `cumprod`, `cummin`, `cummax`, `min_rank` (use in conunction with `desc`), `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`
 
-###5.5.2.
+### 5.5.2.
 
-**1. Currently `dep_time` and `sched_dep_time` are convenient to look at, but hard to compute with because they’re not really continuous numbers. Convert them to a more convenient representation of number of minutes since midnight.**  
+**1. Currently `dep_time` and `sched_dep_time` are convenient to look at, but hard to compute with because theyâ€™re not really continuous numbers. Convert them to a more convenient representation of number of minutes since midnight.**
 
-
-```r
+``` r
 time_to_mins <- function(x) (60*(x %/% 100) + (x %% 100))
 ```
 
-
-```r
+``` r
 flights_new <- mutate(flights,
        DepTime_MinsToMid = time_to_mins(dep_time),
        #same thing as above, but without calling custom function
@@ -680,16 +639,16 @@ flights_new <- mutate(flights,
        SchedDepTime_MinsToMid = time_to_mins(sched_dep_time))
 ```
 
-**2. Compare `air_time` with `arr_time` - `dep_time`. What do you expect to see? What do you see? What do you need to do to fix it?**  
-  
-You would expect that: $air\_time = dep\_time - arr\_time$  
-However this does not seem to be the case when you look at `air_time` generally...  
+**2. Compare `air_time` with `arr_time` - `dep_time`. What do you expect to see? What do you see? What do you need to do to fix it?**
 
-Let's create this variable.  I'll name it `air_calc`.
+You would expect that: *a**i**r*\_*t**i**m**e* = *d**e**p*\_*t**i**m**e* − *a**r**r*\_*t**i**m**e*
+However this does not seem to be the case when you look at `air_time` generally...
+
+Let's create this variable. I'll name it `air_calc`.
 
 First method:
 
-```r
+``` r
 flights_new2 <- mutate(flights, 
        # This air_time_clac step is necessary because you need to take into account red-eye flights in calculation
        air_time_calc = ifelse(dep_time > arr_time, arr_time + 2400, arr_time), 
@@ -698,7 +657,7 @@ flights_new2 <- mutate(flights,
 
 The above method is the simple approach, though it doesn't take into account the timezone of the arrivals locations. To hanle this, I do a `left_join` on the `airports` dataframe and change `arr_time` to take into account the timezone and output the value in EST (as opposed to locatl time). We have not learned about 'joins' yet, so don't worry if this loses you.
 
-```r
+``` r
 flights_new2 <- flights %>% 
   left_join(select(nycflights13::airports, dest = faa, tz)) %>% 
   mutate(arr_time_old = arr_time) %>% 
@@ -710,20 +669,16 @@ flights_new2 <- flights %>%
   select(-arr_time_calc)
 ```
 
-```
-## Joining, by = "dest"
-```
+    ## Joining, by = "dest"
 
+Curiouis if anyone explored the `air_time` variable and figured out the details of how exactly it was off if there was something systematic? I checked this briefly in the appendix, but did not go deep.
 
-Curiouis if anyone explored the `air_time` variable and figured out the details of how exactly it was off if there was something systematic? I checked this briefly in the appendix, but did not go deep.  
-  
-
-**3. Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?**  
-You would expect that: $dep\_delay = dep\_time - sched\_dep\_time$ .  
+**3. Compare `dep_time`, `sched_dep_time`, and `dep_delay`. How would you expect those three numbers to be related?**
+You would expect that: *d**e**p*\_*d**e**l**a**y* = *d**e**p*\_*t**i**m**e* − *s**c**h**e**d*\_*d**e**p*\_*t**i**m**e* .
 
 Let's see if this is the case by creating a var `dep_delay2` that uses this definition, then see if it is equal to the original `dep_delay`
 
-```r
+``` r
 ##maybe a couple off, but for the most part seems consistent
 mutate(flights,
        dep_delay2 = time_to_mins(dep_time) - time_to_mins(sched_dep_time),
@@ -731,19 +686,16 @@ mutate(flights,
   count(dep_same)
 ```
 
-```
-## # A tibble: 3 x 2
-##   dep_same      n
-##      <lgl>  <int>
-## 1    FALSE   1207
-## 2     TRUE 327314
-## 3       NA   8255
-```
+    ## # A tibble: 3 x 2
+    ##   dep_same      n
+    ##      <lgl>  <int>
+    ## 1    FALSE   1207
+    ## 2     TRUE 327314
+    ## 3       NA   8255
 
 Seems generally to align (with `dep_delay`). Those that are inconsistent are when the delay bleeds into the next day, indicating a problem with my equation, not the `dep_delay` value as you can see below.
 
-
-```r
+``` r
 mutate(flights,
        dep_delay2 = time_to_mins(dep_time) - time_to_mins(sched_dep_time),
        dep_same = dep_delay == dep_delay2) %>% 
@@ -751,37 +703,34 @@ mutate(flights,
   glimpse()
 ```
 
-```
-## Observations: 1,207
-## Variables: 21
-## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
-## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
-## $ day            <int> 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 9, 9, 9, 10...
-## $ dep_time       <int> 848, 42, 126, 32, 50, 235, 25, 106, 14, 37, 16,...
-## $ sched_dep_time <int> 1835, 2359, 2250, 2359, 2145, 2359, 2359, 2245,...
-## $ dep_delay      <dbl> 853, 43, 156, 33, 185, 156, 26, 141, 15, 127, 1...
-## $ arr_time       <int> 1001, 518, 233, 504, 203, 700, 505, 201, 503, 3...
-## $ sched_arr_time <int> 1950, 442, 2359, 442, 2311, 437, 442, 2356, 445...
-## $ arr_delay      <dbl> 851, 36, 154, 22, 172, 143, 23, 125, 18, 130, 9...
-## $ carrier        <chr> "MQ", "B6", "B6", "B6", "B6", "B6", "B6", "B6",...
-## $ flight         <int> 3944, 707, 22, 707, 104, 727, 707, 608, 739, 11...
-## $ tailnum        <chr> "N942MQ", "N580JB", "N636JB", "N763JB", "N329JB...
-## $ origin         <chr> "JFK", "JFK", "JFK", "JFK", "JFK", "JFK", "JFK"...
-## $ dest           <chr> "BWI", "SJU", "SYR", "SJU", "BUF", "BQN", "SJU"...
-## $ air_time       <dbl> 41, 189, 49, 193, 58, 186, 194, 44, 201, 163, 1...
-## $ distance       <dbl> 184, 1598, 209, 1598, 301, 1576, 1598, 273, 161...
-## $ hour           <dbl> 18, 23, 22, 23, 21, 23, 23, 22, 23, 22, 23, 23,...
-## $ minute         <dbl> 35, 59, 50, 59, 45, 59, 59, 45, 59, 30, 59, 59,...
-## $ time_hour      <dttm> 2013-01-01 18:00:00, 2013-01-02 23:00:00, 2013...
-## $ dep_delay2     <dbl> -587, -1397, -1284, -1407, -1255, -1284, -1414,...
-## $ dep_same       <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE...
-```
+    ## Observations: 1,207
+    ## Variables: 21
+    ## $ year           <int> 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
+    ## $ month          <int> 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+    ## $ day            <int> 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 7, 9, 9, 9, 10...
+    ## $ dep_time       <int> 848, 42, 126, 32, 50, 235, 25, 106, 14, 37, 16,...
+    ## $ sched_dep_time <int> 1835, 2359, 2250, 2359, 2145, 2359, 2359, 2245,...
+    ## $ dep_delay      <dbl> 853, 43, 156, 33, 185, 156, 26, 141, 15, 127, 1...
+    ## $ arr_time       <int> 1001, 518, 233, 504, 203, 700, 505, 201, 503, 3...
+    ## $ sched_arr_time <int> 1950, 442, 2359, 442, 2311, 437, 442, 2356, 445...
+    ## $ arr_delay      <dbl> 851, 36, 154, 22, 172, 143, 23, 125, 18, 130, 9...
+    ## $ carrier        <chr> "MQ", "B6", "B6", "B6", "B6", "B6", "B6", "B6",...
+    ## $ flight         <int> 3944, 707, 22, 707, 104, 727, 707, 608, 739, 11...
+    ## $ tailnum        <chr> "N942MQ", "N580JB", "N636JB", "N763JB", "N329JB...
+    ## $ origin         <chr> "JFK", "JFK", "JFK", "JFK", "JFK", "JFK", "JFK"...
+    ## $ dest           <chr> "BWI", "SJU", "SYR", "SJU", "BUF", "BQN", "SJU"...
+    ## $ air_time       <dbl> 41, 189, 49, 193, 58, 186, 194, 44, 201, 163, 1...
+    ## $ distance       <dbl> 184, 1598, 209, 1598, 301, 1576, 1598, 273, 161...
+    ## $ hour           <dbl> 18, 23, 22, 23, 21, 23, 23, 22, 23, 22, 23, 23,...
+    ## $ minute         <dbl> 35, 59, 50, 59, 45, 59, 59, 45, 59, 30, 59, 59,...
+    ## $ time_hour      <dttm> 2013-01-01 18:00:00, 2013-01-02 23:00:00, 2013...
+    ## $ dep_delay2     <dbl> -587, -1397, -1284, -1407, -1255, -1284, -1414,...
+    ## $ dep_same       <lgl> FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE...
 
-**4. Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for `min_rank()`.**  
+**4. Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for `min_rank()`.**
 (key question)
 
-
-```r
+``` r
 mutate(flights, 
        rank_delay = min_rank(-dep_delay)) %>%
   arrange(rank_delay) %>% 
@@ -789,109 +738,92 @@ mutate(flights,
   select(flight, sched_dep_time, dep_time, dep_delay, rank_delay)
 ```
 
-```
-## # A tibble: 10 x 5
-##    flight sched_dep_time dep_time dep_delay rank_delay
-##     <int>          <int>    <int>     <dbl>      <int>
-##  1     51            900      641      1301          1
-##  2   3535           1935     1432      1137          2
-##  3   3695           1635     1121      1126          3
-##  4    177           1845     1139      1014          4
-##  5   3075           1600      845      1005          5
-##  6   2391           1900     1100       960          6
-##  7   2119            810     2321       911          7
-##  8   2007           1900      959       899          8
-##  9   2047            759     2257       898          9
-## 10    172           1700      756       896         10
-```
+    ## # A tibble: 10 x 5
+    ##    flight sched_dep_time dep_time dep_delay rank_delay
+    ##     <int>          <int>    <int>     <dbl>      <int>
+    ##  1     51            900      641      1301          1
+    ##  2   3535           1935     1432      1137          2
+    ##  3   3695           1635     1121      1126          3
+    ##  4    177           1845     1139      1014          4
+    ##  5   3075           1600      845      1005          5
+    ##  6   2391           1900     1100       960          6
+    ##  7   2119            810     2321       911          7
+    ##  8   2007           1900      959       899          8
+    ##  9   2047            759     2257       898          9
+    ## 10    172           1700      756       896         10
 
 Check-out different rank functions
 
-```r
+``` r
 x <- c(1, 2, 3, 4, 4, 6, 7, 8, 8, 10)
 
 min_rank(x)
 ```
 
-```
-##  [1]  1  2  3  4  4  6  7  8  8 10
-```
+    ##  [1]  1  2  3  4  4  6  7  8  8 10
 
-```r
+``` r
 dense_rank(x)
 ```
 
-```
-##  [1] 1 2 3 4 4 5 6 7 7 8
-```
+    ##  [1] 1 2 3 4 4 5 6 7 7 8
 
-```r
+``` r
 percent_rank(x)
 ```
 
-```
-##  [1] 0.0000000 0.1111111 0.2222222 0.3333333 0.3333333 0.5555556 0.6666667
-##  [8] 0.7777778 0.7777778 1.0000000
-```
+    ##  [1] 0.0000000 0.1111111 0.2222222 0.3333333 0.3333333 0.5555556 0.6666667
+    ##  [8] 0.7777778 0.7777778 1.0000000
 
-```r
+``` r
 cume_dist(x)
 ```
 
-```
-##  [1] 0.1 0.2 0.3 0.5 0.5 0.6 0.7 0.9 0.9 1.0
-```
+    ##  [1] 0.1 0.2 0.3 0.5 0.5 0.6 0.7 0.9 0.9 1.0
 
-
-**5. What does `1:3 + 1:10` return? Why?**  
+**5. What does `1:3 + 1:10` return? Why?**
 (key question)
 
-
-```r
+``` r
 1:3 + 1:10
 ```
 
-```
-## Warning in 1:3 + 1:10: longer object length is not a multiple of shorter
-## object length
-```
+    ## Warning in 1:3 + 1:10: longer object length is not a multiple of shorter
+    ## object length
 
-```
-##  [1]  2  4  6  5  7  9  8 10 12 11
-```
+    ##  [1]  2  4  6  5  7  9  8 10 12 11
+
 This is returned because `1:3` is being recycled as each element is added to an element in 1:10.
 
+**6. What trigonometric functions does R provide?**
 
-**6. What trigonometric functions does R provide?**  
-
-```r
+``` r
 ?sin
 ```
 
+5.6: Grouped summaries
+----------------------
 
-## 5.6: Grouped summaries
-Learn the PIPE!!  
+Learn the PIPE!!
 
-*Useful functions:*  
-`IQR()` : Interquartile range  
+*Useful functions:*
+`IQR()` : Interquartile range
 `mad()` : median absolute deviaiton
 
-
-```r
+``` r
 x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
 IQR(x)
 mad(x)
 sd(x)
 ```
 
-*measures of rank:*  
-`quantile(x, 0.25)` is just 0.25 value (generalization of median, but allows you to specify)  
+*measures of rank:*
+`quantile(x, 0.25)` is just 0.25 value (generalization of median, but allows you to specify)
 
-*measures of postion:*  
+*measures of postion:*
 `first(x)`, `nth(x, 2)`, `last(x)`. These work similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default value if that position does not exist
 
-
-```r
+``` r
 first(x)
 nth(x, 5)
 last(x)
@@ -903,10 +835,9 @@ x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
 range(x)
 ```
 
-`range()` returns vector containing min and max of values in a vector (so returns two values).  
+`range()` returns vector containing min and max of values in a vector (so returns two values).
 
-
-```r
+``` r
 not_cancelled %>% 
   select(year, month, day, dep_time) %>% 
   group_by(year, month, day) %>% 
@@ -917,43 +848,41 @@ not_cancelled %>%
   filter(r %in% range(r)) 
 ```
 
-*counts:*  
+*counts:*
 
-`n()` for rows, `sum(!is.na(x))` for non-missing rows, for distinct count, use `n_distinct(x)`  
+`n()` for rows, `sum(!is.na(x))` for non-missing rows, for distinct count, use `n_distinct(x)`
 
 ### 5.6.7.
 
-**1. Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. (key question)**  
-  
-*90th percentile for delays for flights by destination*  
+**1. Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. (key question)**
 
-```r
+*90th percentile for delays for flights by destination*
+
+``` r
 flights %>% 
   group_by(dest) %>% 
   summarise(delay.90 = quantile(arr_delay, 0.90, na.rm = TRUE)) %>% 
   arrange(desc(delay.90))
 ```
 
-```
-## # A tibble: 105 x 2
-##     dest delay.90
-##    <chr>    <dbl>
-##  1   TUL    126.0
-##  2   TYS    109.3
-##  3   CAE    107.0
-##  4   DSM    103.0
-##  5   OKC     99.6
-##  6   BHM     99.2
-##  7   RIC     90.0
-##  8   PVD     81.3
-##  9   CRW     80.8
-## 10   CVG     80.0
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 2
+    ##     dest delay.90
+    ##    <chr>    <dbl>
+    ##  1   TUL    126.0
+    ##  2   TYS    109.3
+    ##  3   CAE    107.0
+    ##  4   DSM    103.0
+    ##  5   OKC     99.6
+    ##  6   BHM     99.2
+    ##  7   RIC     90.0
+    ##  8   PVD     81.3
+    ##  9   CRW     80.8
+    ## 10   CVG     80.0
+    ## # ... with 95 more rows
 
-*average `dep_delay` by hour of day*  
+*average `dep_delay` by hour of day*
 
-```r
+``` r
 flights %>% 
   group_by(hour) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -962,41 +891,33 @@ flights %>%
   geom_smooth()
 ```
 
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-```
-## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-```
+    ## Warning: Removed 1 rows containing non-finite values (stat_smooth).
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-40-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-40-1.png)
 
-*Percentage of flights delayed or canceled by `origin`*  
+*Percentage of flights delayed or canceled by `origin`*
 
-```r
+``` r
 flights %>% 
   group_by(origin) %>% 
   summarise(num_delayed = sum(arr_delay > 0, na.rm = TRUE)/n())
 ```
 
-```
-## # A tibble: 3 x 2
-##   origin num_delayed
-##    <chr>       <dbl>
-## 1    EWR   0.4146067
-## 2    JFK   0.3853827
-## 3    LGA   0.3823737
-```
+    ## # A tibble: 3 x 2
+    ##   origin num_delayed
+    ##    <chr>       <dbl>
+    ## 1    EWR   0.4146067
+    ## 2    JFK   0.3853827
+    ## 3    LGA   0.3823737
 
-*Percentage of flights canceled by airline*  
-(technically not delays...)  
+*Percentage of flights canceled by airline*
+(technically not delays...)
 
-```r
+``` r
 flights %>% 
   group_by(carrier) %>% 
   summarise(perc_canceled = sum(is.na(arr_delay))/n(),
@@ -1007,26 +928,24 @@ flights %>%
   arrange(most_rank)
 ```
 
-```
-## # A tibble: 11 x 4
-##    carrier perc_canceled     n most_rank
-##      <chr>         <dbl> <int>     <int>
-##  1      9E   0.063163597 18460         1
-##  2      EV   0.056578000 54173         2
-##  3      MQ   0.051521006 26397         3
-##  4      US   0.034329957 20536         4
-##  5      FL   0.026073620  3260         5
-##  6      AA   0.023893183 32729         6
-##  7      WN   0.018818737 12275         7
-##  8      UA   0.015051564 58665         8
-##  9      B6   0.010725725 54635         9
-## 10      DL   0.009395136 48110        10
-## 11      VX   0.008911275  5162        11
-```
+    ## # A tibble: 11 x 4
+    ##    carrier perc_canceled     n most_rank
+    ##      <chr>         <dbl> <int>     <int>
+    ##  1      9E   0.063163597 18460         1
+    ##  2      EV   0.056578000 54173         2
+    ##  3      MQ   0.051521006 26397         3
+    ##  4      US   0.034329957 20536         4
+    ##  5      FL   0.026073620  3260         5
+    ##  6      AA   0.023893183 32729         6
+    ##  7      WN   0.018818737 12275         7
+    ##  8      UA   0.015051564 58665         8
+    ##  9      B6   0.010725725 54635         9
+    ## 10      DL   0.009395136 48110        10
+    ## 11      VX   0.008911275  5162        11
 
 *Percentage of flights delayed by airline*
 
-```r
+``` r
 flights %>% 
   group_by(carrier) %>% 
   summarise(perc_delayed = sum(arr_delay > 0, na.rm = TRUE)/sum(!is.na(arr_delay)),
@@ -1037,29 +956,26 @@ flights %>%
   arrange(most_rank)
 ```
 
-```
-## # A tibble: 11 x 4
-##    carrier perc_delayed     n most_rank
-##      <chr>        <dbl> <int>     <int>
-##  1      FL    0.5968504  3260         1
-##  2      EV    0.4790639 54173         2
-##  3      MQ    0.4670288 26397         3
-##  4      WN    0.4403853 12275         4
-##  5      B6    0.4368073 54635         5
-##  6      UA    0.3845834 58665         6
-##  7      9E    0.3837747 18460         7
-##  8      US    0.3705814 20536         8
-##  9      DL    0.3443913 48110         9
-## 10      VX    0.3412823  5162        10
-## 11      AA    0.3351175 32729        11
-```
+    ## # A tibble: 11 x 4
+    ##    carrier perc_delayed     n most_rank
+    ##      <chr>        <dbl> <int>     <int>
+    ##  1      FL    0.5968504  3260         1
+    ##  2      EV    0.4790639 54173         2
+    ##  3      MQ    0.4670288 26397         3
+    ##  4      WN    0.4403853 12275         4
+    ##  5      B6    0.4368073 54635         5
+    ##  6      UA    0.3845834 58665         6
+    ##  7      9E    0.3837747 18460         7
+    ##  8      US    0.3705814 20536         8
+    ##  9      DL    0.3443913 48110         9
+    ## 10      VX    0.3412823  5162        10
+    ## 11      AA    0.3351175 32729        11
 
-**Consider the following scenarios:**  
+**Consider the following scenarios:**
 
-*1.1 A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of the time.*  
+*1.1 A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of the time.*
 
-
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   # filter(!is.na(arr_delay)) %>%  ##Keeping this in would exclude the possibility of canceled
@@ -1070,34 +986,31 @@ flights %>%
   filter(early.15 == .5, late.15 == .5)
 ```
 
-```
-## # A tibble: 18 x 4
-##    flight early.15 late.15     n
-##     <int>    <dbl>   <dbl> <int>
-##  1    107      0.5     0.5     2
-##  2   2072      0.5     0.5     2
-##  3   2366      0.5     0.5     2
-##  4   2500      0.5     0.5     2
-##  5   2552      0.5     0.5     2
-##  6   3495      0.5     0.5     2
-##  7   3518      0.5     0.5     2
-##  8   3544      0.5     0.5     2
-##  9   3651      0.5     0.5     2
-## 10   3705      0.5     0.5     2
-## 11   3916      0.5     0.5     2
-## 12   3951      0.5     0.5     2
-## 13   4273      0.5     0.5     2
-## 14   4313      0.5     0.5     2
-## 15   5297      0.5     0.5     2
-## 16   5322      0.5     0.5     2
-## 17   5388      0.5     0.5     2
-## 18   5505      0.5     0.5     4
-```
+    ## # A tibble: 18 x 4
+    ##    flight early.15 late.15     n
+    ##     <int>    <dbl>   <dbl> <int>
+    ##  1    107      0.5     0.5     2
+    ##  2   2072      0.5     0.5     2
+    ##  3   2366      0.5     0.5     2
+    ##  4   2500      0.5     0.5     2
+    ##  5   2552      0.5     0.5     2
+    ##  6   3495      0.5     0.5     2
+    ##  7   3518      0.5     0.5     2
+    ##  8   3544      0.5     0.5     2
+    ##  9   3651      0.5     0.5     2
+    ## 10   3705      0.5     0.5     2
+    ## 11   3916      0.5     0.5     2
+    ## 12   3951      0.5     0.5     2
+    ## 13   4273      0.5     0.5     2
+    ## 14   4313      0.5     0.5     2
+    ## 15   5297      0.5     0.5     2
+    ## 16   5322      0.5     0.5     2
+    ## 17   5388      0.5     0.5     2
+    ## 18   5505      0.5     0.5     4
 
 *1.2 A flight is always 10 minutes late.*
 
-
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   summarise(late.10 = sum(arr_delay >= 10)/n()) %>% 
@@ -1105,27 +1018,24 @@ flights %>%
   filter(late.10 == 1)
 ```
 
-```
-## # A tibble: 93 x 2
-##    flight late.10
-##     <int>   <dbl>
-##  1     94       1
-##  2    730       1
-##  3    974       1
-##  4   1084       1
-##  5   1226       1
-##  6   1510       1
-##  7   1514       1
-##  8   1859       1
-##  9   1868       1
-## 10   2101       1
-## # ... with 83 more rows
-```
-
+    ## # A tibble: 93 x 2
+    ##    flight late.10
+    ##     <int>   <dbl>
+    ##  1     94       1
+    ##  2    730       1
+    ##  3    974       1
+    ##  4   1084       1
+    ##  5   1226       1
+    ##  6   1510       1
+    ##  7   1514       1
+    ##  8   1859       1
+    ##  9   1868       1
+    ## 10   2101       1
+    ## # ... with 83 more rows
 
 *1.3 A flight is 30 minutes early 50% of the time, and 30 minutes late 50% of the time.*
 
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   # filter(!is.na(arr_delay)) %>%  ##Keeping this in would exclude the possibility of canceled
@@ -1136,19 +1046,16 @@ flights %>%
   filter(early.30 == .5, late.30 == .5)
 ```
 
-```
-## # A tibble: 3 x 4
-##   flight early.30 late.30     n
-##    <int>    <dbl>   <dbl> <int>
-## 1   3651      0.5     0.5     2
-## 2   3916      0.5     0.5     2
-## 3   3951      0.5     0.5     2
-```
+    ## # A tibble: 3 x 4
+    ##   flight early.30 late.30     n
+    ##    <int>    <dbl>   <dbl> <int>
+    ## 1   3651      0.5     0.5     2
+    ## 2   3916      0.5     0.5     2
+    ## 3   3951      0.5     0.5     2
 
+*1.4 99% of the time a flight is on time. 1% of the time itâ€™s 2 hours late.*
 
-*1.4 99% of the time a flight is on time. 1% of the time it’s 2 hours late.*
-
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   # filter(!is.na(arr_delay)) %>%  ##Keeping this in would exclude the possibility of canceled
@@ -1159,16 +1066,13 @@ flights %>%
   filter(ontime == .99, late.120 == .01)
 ```
 
-```
-## # A tibble: 0 x 4
-## # ... with 4 variables: flight <int>, ontime <dbl>, late.120 <dbl>,
-## #   n <int>
-```
+    ## # A tibble: 0 x 4
+    ## # ... with 4 variables: flight <int>, ontime <dbl>, late.120 <dbl>,
+    ## #   n <int>
 
-Looks like this exact proportion doesn't happen. But let's look at those flights that have the greatest differences in proportion on-time vs. 2 hours late while still having values in both categories^[The output below is actually just maximizing difference in proportion 2 hrs late vs on time, it does not matter whether the higher proportion is on-time or late. It just happens in practice that the higher proprotion is generally the on-time].  
+Looks like this exact proportion doesn't happen. But let's look at those flights that have the greatest differences in proportion on-time vs. 2 hours late while still having values in both categories[1].
 
-
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   summarise(ontime = sum(arr_delay <= 0, na.rm = TRUE)/n(),
@@ -1180,32 +1084,28 @@ flights %>%
   arrange(desc(max_dist))
 ```
 
-```
-## # A tibble: 2,098 x 5
-##    flight    ontime    late.120     n  max_dist
-##     <int>     <dbl>       <dbl> <int>     <dbl>
-##  1   5288 0.9268293 0.024390244    41 0.9024390
-##  2   2085 0.9013158 0.006578947   152 0.8947368
-##  3   2174 0.9142857 0.028571429    35 0.8857143
-##  4   2243 0.9000000 0.016666667   120 0.8833333
-##  5   2180 0.8888889 0.013071895   153 0.8758170
-##  6   2118 0.8671329 0.006993007   143 0.8601399
-##  7   1167 0.8642384 0.006622517   302 0.8576159
-##  8   3613 0.8857143 0.028571429    35 0.8571429
-##  9   1772 0.8909091 0.036363636    55 0.8545455
-## 10   1157 0.8466667 0.006666667   150 0.8400000
-## # ... with 2,088 more rows
-```
+    ## # A tibble: 2,098 x 5
+    ##    flight    ontime    late.120     n  max_dist
+    ##     <int>     <dbl>       <dbl> <int>     <dbl>
+    ##  1   5288 0.9268293 0.024390244    41 0.9024390
+    ##  2   2085 0.9013158 0.006578947   152 0.8947368
+    ##  3   2174 0.9142857 0.028571429    35 0.8857143
+    ##  4   2243 0.9000000 0.016666667   120 0.8833333
+    ##  5   2180 0.8888889 0.013071895   153 0.8758170
+    ##  6   2118 0.8671329 0.006993007   143 0.8601399
+    ##  7   1167 0.8642384 0.006622517   302 0.8576159
+    ##  8   3613 0.8857143 0.028571429    35 0.8571429
+    ##  9   1772 0.8909091 0.036363636    55 0.8545455
+    ## 10   1157 0.8466667 0.006666667   150 0.8400000
+    ## # ... with 2,088 more rows
 
-
-**2. Which is more important: arrival delay or departure delay?**  
+**2. Which is more important: arrival delay or departure delay?**
 Arrival delay.
 
-**3. Come up with another approach that will give you the same output as `not_cancelled %>% count(dest)` and `not_cancelled %>% count(tailnum, wt = distance)` (without using `count()`).**  
+**3. Come up with another approach that will give you the same output as `not_cancelled %>% count(dest)` and `not_cancelled %>% count(tailnum, wt = distance)` (without using `count()`).**
 (key question)
 
-
-```r
+``` r
 not_cancelled <- flights %>% 
   filter(!is.na(dep_delay), !is.na(arr_delay))
 
@@ -1214,82 +1114,71 @@ not_cancelled %>%
   summarise(n = n())
 ```
 
-```
-## # A tibble: 104 x 2
-##     dest     n
-##    <chr> <int>
-##  1   ABQ   254
-##  2   ACK   264
-##  3   ALB   418
-##  4   ANC     8
-##  5   ATL 16837
-##  6   AUS  2411
-##  7   AVL   261
-##  8   BDL   412
-##  9   BGR   358
-## 10   BHM   269
-## # ... with 94 more rows
-```
+    ## # A tibble: 104 x 2
+    ##     dest     n
+    ##    <chr> <int>
+    ##  1   ABQ   254
+    ##  2   ACK   264
+    ##  3   ALB   418
+    ##  4   ANC     8
+    ##  5   ATL 16837
+    ##  6   AUS  2411
+    ##  7   AVL   261
+    ##  8   BDL   412
+    ##  9   BGR   358
+    ## 10   BHM   269
+    ## # ... with 94 more rows
 
-```r
+``` r
 not_cancelled %>% 
   group_by(tailnum) %>% 
   summarise(n = sum(distance))
 ```
 
-```
-## # A tibble: 4,037 x 2
-##    tailnum      n
-##      <chr>  <dbl>
-##  1  D942DN   3418
-##  2  N0EGMQ 239143
-##  3  N10156 109664
-##  4  N102UW  25722
-##  5  N103US  24619
-##  6  N104UW  24616
-##  7  N10575 139903
-##  8  N105UW  23618
-##  9  N107US  21677
-## 10  N108UW  32070
-## # ... with 4,027 more rows
-```
+    ## # A tibble: 4,037 x 2
+    ##    tailnum      n
+    ##      <chr>  <dbl>
+    ##  1  D942DN   3418
+    ##  2  N0EGMQ 239143
+    ##  3  N10156 109664
+    ##  4  N102UW  25722
+    ##  5  N103US  24619
+    ##  6  N104UW  24616
+    ##  7  N10575 139903
+    ##  8  N105UW  23618
+    ##  9  N107US  21677
+    ## 10  N108UW  32070
+    ## # ... with 4,027 more rows
 
+**4. Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`) is slightly suboptimal. Why? Which is the most important column?**
 
-**4. Our definition of cancelled flights (`is.na(dep_delay) | is.na(arr_delay)`) is slightly suboptimal. Why? Which is the most important column?**  
+You only need the `is.na(arr_delay)` column. By having both, it is doing more checks then is necessary.
 
-You only need the `is.na(arr_delay)` column. By having both, it is doing more checks then is necessary. 
+While not precise, you can see that the number of rows with just is.na(arr\_delay) would be the same in either case.
 
-While not precise, you can see that the number of rows with just is.na(arr_delay) would be the same in either case.
-
-
-```r
+``` r
 filter(flights, is.na(dep_delay) | is.na(arr_delay)) %>% 
   count()
 ```
 
-```
-## # A tibble: 1 x 1
-##       n
-##   <int>
-## 1  9430
-```
+    ## # A tibble: 1 x 1
+    ##       n
+    ##   <int>
+    ## 1  9430
 
-```r
+``` r
 filter(flights, is.na(arr_delay)) %>% 
   count()
 ```
 
-```
-## # A tibble: 1 x 1
-##       n
-##   <int>
-## 1  9430
-```
+    ## # A tibble: 1 x 1
+    ##       n
+    ##   <int>
+    ## 1  9430
 
-To be more precise, you could check these with the `identical` function.  
+To be more precise, you could check these with the `identical` function.
 
-
-```r
+``` r
 check_1 <- filter(flights, is.na(dep_delay) | is.na(arr_delay))
 
 check_2 <- filter(flights, is.na(arr_delay))
@@ -1297,17 +1186,14 @@ check_2 <- filter(flights, is.na(arr_delay))
 identical(check_1, check_2)
 ```
 
-```
-## [1] TRUE
-```
+    ## [1] TRUE
 
-
-**5. Look at the number of cancelled flights per day. Is there a pattern?**   
-(key question)  
+**5. Look at the number of cancelled flights per day. Is there a pattern?**
+(key question)
 
 Number of canceled flights:
 
-```r
+``` r
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -1318,13 +1204,13 @@ flights %>%
   geom_line()
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-52-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-52-1.png)
 
-**Is the proportion of cancelled flights related to the average delay?**  
+**Is the proportion of cancelled flights related to the average delay?**
 
 Proporton of canceled flights and then average delay of flights by day:
 
-```r
+``` r
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -1335,9 +1221,9 @@ flights %>%
   geom_line()
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-53-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-53-1.png)
 
-```r
+``` r
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -1348,18 +1234,16 @@ flights %>%
   geom_line()
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-53-2.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-53-2.png)
 
-Looks roughly like there is some overlap.  
-  
-I liked Vincent's appraoch to this problem better than my own and would recommend checking out his code.  
-  
+Looks roughly like there is some overlap.
 
-**6. Which carrier has the worst delays? Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights %>% group_by(carrier, dest) %>% summarise(n()))**  
-(key question)  
+I liked Vincent's appraoch to this problem better than my own and would recommend checking out his code.
 
+**6. Which carrier has the worst delays? Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights %&gt;% group\_by(carrier, dest) %&gt;% summarise(n()))**
+(key question)
 
-```r
+``` r
 flights %>% 
   group_by(carrier) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE),
@@ -1367,31 +1251,29 @@ flights %>%
   arrange(desc(avg_delay))
 ```
 
-```
-## # A tibble: 16 x 3
-##    carrier  avg_delay     n
-##      <chr>      <dbl> <int>
-##  1      F9 21.9207048   685
-##  2      FL 20.1159055  3260
-##  3      EV 15.7964311 54173
-##  4      YV 15.5569853   601
-##  5      OO 11.9310345    32
-##  6      MQ 10.7747334 26397
-##  7      WN  9.6491199 12275
-##  8      B6  9.4579733 54635
-##  9      9E  7.3796692 18460
-## 10      UA  3.5580111 58665
-## 11      US  2.1295951 20536
-## 12      VX  1.7644644  5162
-## 13      DL  1.6443409 48110
-## 14      AA  0.3642909 32729
-## 15      HA -6.9152047   342
-## 16      AS -9.9308886   714
-```
+    ## # A tibble: 16 x 3
+    ##    carrier  avg_delay     n
+    ##      <chr>      <dbl> <int>
+    ##  1      F9 21.9207048   685
+    ##  2      FL 20.1159055  3260
+    ##  3      EV 15.7964311 54173
+    ##  4      YV 15.5569853   601
+    ##  5      OO 11.9310345    32
+    ##  6      MQ 10.7747334 26397
+    ##  7      WN  9.6491199 12275
+    ##  8      B6  9.4579733 54635
+    ##  9      9E  7.3796692 18460
+    ## 10      UA  3.5580111 58665
+    ## 11      US  2.1295951 20536
+    ## 12      VX  1.7644644  5162
+    ## 13      DL  1.6443409 48110
+    ## 14      AA  0.3642909 32729
+    ## 15      HA -6.9152047   342
+    ## 16      AS -9.9308886   714
 
-Difficult to untangle in the `origin` airports because carriers may predominantly go through one of the three. The code below produces the origin name that the carrier that flies from the most along with the proportion of associated flights.     
+Difficult to untangle in the `origin` airports because carriers may predominantly go through one of the three. The code below produces the origin name that the carrier that flies from the most along with the proportion of associated flights.
 
-```r
+``` r
 flights %>% 
   group_by(carrier, origin) %>% 
   summarise(n = n()) %>% 
@@ -1404,32 +1286,30 @@ flights %>%
   arrange(desc(n_total))
 ```
 
-```
-## # A tibble: 16 x 4
-## # Groups:   carrier [16]
-##    carrier highest_origin highest_prop n_total
-##      <chr>          <chr>        <dbl>   <int>
-##  1      UA            EWR    0.7855962   46087
-##  2      EV            EWR    0.8110867   43939
-##  3      B6            JFK    0.7701290   42076
-##  4      DL            LGA    0.4794637   23067
-##  5      MQ            LGA    0.6412850   16928
-##  6      AA            LGA    0.4723334   15459
-##  7      9E            JFK    0.7936620   14651
-##  8      US            LGA    0.6396572   13136
-##  9      WN            EWR    0.5041141    6188
-## 10      VX            JFK    0.6966292    3596
-## 11      FL            LGA    1.0000000    3260
-## 12      AS            EWR    1.0000000     714
-## 13      F9            LGA    1.0000000     685
-## 14      YV            LGA    1.0000000     601
-## 15      HA            JFK    1.0000000     342
-## 16      OO            LGA    0.8125000      26
-```
+    ## # A tibble: 16 x 4
+    ## # Groups:   carrier [16]
+    ##    carrier highest_origin highest_prop n_total
+    ##      <chr>          <chr>        <dbl>   <int>
+    ##  1      UA            EWR    0.7855962   46087
+    ##  2      EV            EWR    0.8110867   43939
+    ##  3      B6            JFK    0.7701290   42076
+    ##  4      DL            LGA    0.4794637   23067
+    ##  5      MQ            LGA    0.6412850   16928
+    ##  6      AA            LGA    0.4723334   15459
+    ##  7      9E            JFK    0.7936620   14651
+    ##  8      US            LGA    0.6396572   13136
+    ##  9      WN            EWR    0.5041141    6188
+    ## 10      VX            JFK    0.6966292    3596
+    ## 11      FL            LGA    1.0000000    3260
+    ## 12      AS            EWR    1.0000000     714
+    ## 13      F9            LGA    1.0000000     685
+    ## 14      YV            LGA    1.0000000     601
+    ## 15      HA            JFK    1.0000000     342
+    ## 16      OO            LGA    0.8125000      26
 
 Below we look at destinations and the `carrier` that has the highest proportion of flights from one of the NYC destinations (ignoring for specific `origin` -- JFK, LGA, etc. are not seperated).
 
-```r
+``` r
 flights %>% 
   group_by(dest, carrier) %>% 
   summarise(n = n()) %>% 
@@ -1442,42 +1322,38 @@ flights %>%
   arrange(desc(n_total))
 ```
 
-```
-## # A tibble: 105 x 4
-## # Groups:   dest [105]
-##     dest highest_carrier highest_perc n_total
-##    <chr>           <chr>        <dbl>   <int>
-##  1   ATL              DL    0.6140575   10571
-##  2   CLT              US    0.6137656    8632
-##  3   DFW              AA    0.8305104    7257
-##  4   MIA              AA    0.6168145    7234
-##  5   ORD              UA    0.4040965    6984
-##  6   IAH              UA    0.9619339    6924
-##  7   SFO              UA    0.5115145    6819
-##  8   FLL              B6    0.5444214    6563
-##  9   MCO              B6    0.4595938    6472
-## 10   LAX              UA    0.3600223    5823
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 4
+    ## # Groups:   dest [105]
+    ##     dest highest_carrier highest_perc n_total
+    ##    <chr>           <chr>        <dbl>   <int>
+    ##  1   ATL              DL    0.6140575   10571
+    ##  2   CLT              US    0.6137656    8632
+    ##  3   DFW              AA    0.8305104    7257
+    ##  4   MIA              AA    0.6168145    7234
+    ##  5   ORD              UA    0.4040965    6984
+    ##  6   IAH              UA    0.9619339    6924
+    ##  7   SFO              UA    0.5115145    6819
+    ##  8   FLL              B6    0.5444214    6563
+    ##  9   MCO              B6    0.4595938    6472
+    ## 10   LAX              UA    0.3600223    5823
+    ## # ... with 95 more rows
 
 To get at the question of 'best carrier', you may consider doing a grouped comparison of average delays or cancellataions controlling for where they are flying to and from what origin...
 
+**7. What does the sort argument to count() do. When might you use it?**
 
-**7. What does the sort argument to count() do. When might you use it?**  
-  
-`sort` orders by `n`, you may want to use it when you 
+`sort` orders by `n`, you may want to use it when you
 
-
-##Grouped mutates (and filters)
+Grouped mutates (and filters)
+-----------------------------
 
 ### 5.7.1.
 
-**1. Refer back to the lists of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.**  
+**1. Refer back to the lists of useful mutate and filtering functions. Describe how each operation changes when you combine it with grouping.**
 
+**2. Which plane (tailnum) has the worst on-time record?**
 
-**2. Which plane (tailnum) has the worst on-time record?**  
-
-```r
+``` r
 flights %>% 
   group_by(tailnum) %>% 
   summarise(n = n(),
@@ -1488,30 +1364,28 @@ flights %>%
   arrange(ontime_rate)
 ```
 
-```
-## # A tibble: 1,200 x 5
-##    tailnum     n num_not_delayed ontime_rate sum_delayed_time_grt0
-##      <chr> <int>           <int>       <dbl>                 <dbl>
-##  1  N505MQ   242              83   0.3429752                  5911
-##  2  N15910   280             105   0.3750000                  8737
-##  3  N36915   228              86   0.3771930                  6392
-##  4  N16919   251              96   0.3824701                  7955
-##  5  N14998   230              88   0.3826087                  7166
-##  6  N14953   256             100   0.3906250                  6550
-##  7  N22971   230              90   0.3913043                  6547
-##  8  N503MQ   191              75   0.3926702                  4420
-##  9  N27152   109              43   0.3944954                  2058
-## 10  N31131   109              43   0.3944954                  2740
-## # ... with 1,190 more rows
-```
+    ## # A tibble: 1,200 x 5
+    ##    tailnum     n num_not_delayed ontime_rate sum_delayed_time_grt0
+    ##      <chr> <int>           <int>       <dbl>                 <dbl>
+    ##  1  N505MQ   242              83   0.3429752                  5911
+    ##  2  N15910   280             105   0.3750000                  8737
+    ##  3  N36915   228              86   0.3771930                  6392
+    ##  4  N16919   251              96   0.3824701                  7955
+    ##  5  N14998   230              88   0.3826087                  7166
+    ##  6  N14953   256             100   0.3906250                  6550
+    ##  7  N22971   230              90   0.3913043                  6547
+    ##  8  N503MQ   191              75   0.3926702                  4420
+    ##  9  N27152   109              43   0.3944954                  2058
+    ## 10  N31131   109              43   0.3944954                  2740
+    ## # ... with 1,190 more rows
 
-N505MQ  
+N505MQ
 
-**3. What time of day should you fly if you want to avoid delays as much as possible?**  
+**3. What time of day should you fly if you want to avoid delays as much as possible?**
 
 average `dep_delay` by hour of day
 
-```r
+``` r
 flights %>% 
   group_by(hour) %>% 
   summarise(med_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -1520,27 +1394,19 @@ flights %>%
   geom_smooth()
 ```
 
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-```
-## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-```
+    ## Warning: Removed 1 rows containing non-finite values (stat_smooth).
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-58-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-58-1.png)
 
 Fly in the morning.
 
+**4. For each destination, compute the total minutes of delay. For each, flight, compute the proportion of the total delay for its destination.**
 
-**4. For each destination, compute the total minutes of delay. For each, flight, compute the proportion of the total delay for its destination.**  
-
-
-```r
+``` r
 flights %>% 
   group_by(dest, flight) %>% 
   summarise(TotalDelay_DestFlight = sum(arr_delay, na.rm = TRUE)) %>% 
@@ -1548,32 +1414,29 @@ flights %>%
          PropOfDest = TotalDelay_DestFlight / TotalDelay_Dest)
 ```
 
-```
-## # A tibble: 11,467 x 5
-## # Groups:   dest [105]
-##     dest flight TotalDelay_DestFlight TotalDelay_Dest   PropOfDest
-##    <chr>  <int>                 <dbl>           <dbl>        <dbl>
-##  1   ABQ     65                   605            1113  0.543575921
-##  2   ABQ   1505                   508            1113  0.456424079
-##  3   ACK   1191                   652            1281  0.508977361
-##  4   ACK   1195                    20            1281  0.015612802
-##  5   ACK   1291                   234            1281  0.182669789
-##  6   ACK   1491                   375            1281  0.292740047
-##  7   ALB   3256                   -12            6018 -0.001994018
-##  8   ALB   3260                   111            6018  0.018444666
-##  9   ALB   3264                   -47            6018 -0.007809904
-## 10   ALB   3811                   570            6018  0.094715852
-## # ... with 11,457 more rows
-```
-I did this such that flights could have "negative" delays, this could have been approached differently though...  
+    ## # A tibble: 11,467 x 5
+    ## # Groups:   dest [105]
+    ##     dest flight TotalDelay_DestFlight TotalDelay_Dest   PropOfDest
+    ##    <chr>  <int>                 <dbl>           <dbl>        <dbl>
+    ##  1   ABQ     65                   605            1113  0.543575921
+    ##  2   ABQ   1505                   508            1113  0.456424079
+    ##  3   ACK   1191                   652            1281  0.508977361
+    ##  4   ACK   1195                    20            1281  0.015612802
+    ##  5   ACK   1291                   234            1281  0.182669789
+    ##  6   ACK   1491                   375            1281  0.292740047
+    ##  7   ALB   3256                   -12            6018 -0.001994018
+    ##  8   ALB   3260                   111            6018  0.018444666
+    ##  9   ALB   3264                   -47            6018 -0.007809904
+    ## 10   ALB   3811                   570            6018  0.094715852
+    ## # ... with 11,457 more rows
 
+I did this such that flights could have "negative" delays, this could have been approached differently though...
 
-**5. Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using lag() explore how the delay of a flight is related to the delay of the immediately preceding flight.**  
-  
+**5. Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using lag() explore how the delay of a flight is related to the delay of the immediately preceding flight.**
+
 `lead()` and `lag()` look like helpful function to remember.
 
-
-```r
+``` r
 flights %>% 
   group_by(origin) %>% 
   mutate(delay_lag = lag(dep_delay, 1),
@@ -1584,18 +1447,19 @@ flights %>%
   cor()
 ```
 
-```
-##           dep_delay delay_lag
-## dep_delay 1.0000000 0.3506866
-## delay_lag 0.3506866 1.0000000
-```
+    ##           dep_delay delay_lag
+    ## dep_delay 1.0000000 0.3506866
+    ## delay_lag 0.3506866 1.0000000
 
-Correlation of $$dep\_delay_{t-1}$$ with $$dep\_delay_{t}$$ is 0.35 .  
+Correlation of
+*d**e**p*\_*d**e**l**a**y*<sub>*t* − 1</sub>
+ with
+*d**e**p*\_*d**e**l**a**y*<sub>*t*</sub>
+ is 0.35 .
 
 Below is a function to get the correlation out for any lag level.
 
-
-```r
+``` r
 cor_by_lag <- function(lag){
 flights %>% 
   group_by(origin) %>% 
@@ -1612,45 +1476,35 @@ flights %>%
 
 Let's see the correlation pushing the lag time back.
 
-```r
+``` r
 cor_by_lag(1)
 ```
 
-```
-## [1] 0.3506866
-```
+    ## [1] 0.3506866
 
-```r
+``` r
 cor_by_lag(10)
 ```
 
-```
-## [1] 0.2622796
-```
+    ## [1] 0.2622796
 
-```r
+``` r
 cor_by_lag(100)
 ```
 
-```
-## [1] 0.04023232
-```
+    ## [1] 0.04023232
 
-```r
+``` r
 cor_by_lag(1000)
 ```
 
-```
-## [1] 0.03191625
-```
+    ## [1] 0.03191625
 
-It makes sense that these values get smaller as flights that are further apart have delay lengths that are less correlated. See [5.7.1.8.] for a sneak peak on iteration of this function.  
-  
+It makes sense that these values get smaller as flights that are further apart have delay lengths that are less correlated. See [5.7.1.8.](#section-15) for a sneak peak on iteration of this function.
 
-**6. Look at each destination. Can you find flights that are suspiciously fast? (i.e. flights that represent a potential data entry error). Compute the air time a flight relative to the shortest flight to that destination. Which flights were most delayed in the air?**  
+**6. Look at each destination. Can you find flights that are suspiciously fast? (i.e. flights that represent a potential data entry error). Compute the air time a flight relative to the shortest flight to that destination. Which flights were most delayed in the air?**
 
-
-```r
+``` r
 flights %>% 
   filter(!is.na(arr_delay)) %>%
   group_by(dest) %>%
@@ -1663,23 +1517,20 @@ flights %>%
   filter(suspect_flag) 
 ```
 
-```
-## # A tibble: 4 x 10
-##    dest flight  hour   day month air_time sd_air_time mean_air_time
-##   <chr>  <int> <dbl> <int> <int>    <dbl>       <dbl>         <dbl>
-## 1   BNA   3805    19    23     3       70   10.960876     114.38215
-## 2   GSP   4292    20    13     5       55    8.130337      93.39494
-## 3   ATL   1499    17    25     5       65    9.812387     112.93045
-## 4   MSP   4667    15     2     7       93   11.751595     150.57368
-## # ... with 2 more variables: supect_fast_cutoff <dbl>, suspect_flag <lgl>
-```
+    ## # A tibble: 4 x 10
+    ##    dest flight  hour   day month air_time sd_air_time mean_air_time
+    ##   <chr>  <int> <dbl> <int> <int>    <dbl>       <dbl>         <dbl>
+    ## 1   BNA   3805    19    23     3       70   10.960876     114.38215
+    ## 2   GSP   4292    20    13     5       55    8.130337      93.39494
+    ## 3   ATL   1499    17    25     5       65    9.812387     112.93045
+    ## 4   MSP   4667    15     2     7       93   11.751595     150.57368
+    ## # ... with 2 more variables: supect_fast_cutoff <dbl>, suspect_flag <lgl>
 
-**7. Find all destinations that are flown by at least two carriers. Use that information to rank the carriers.**  
+**7. Find all destinations that are flown by at least two carriers. Use that information to rank the carriers.**
 
 I found this quesiton ambiguous in terms of what it wants when it says "rank" the carriers using this. What I did was to say filter to just those destinations that have at least two carriers and then count the number of destinations with multiple carriers that each airline travels to. So it's almost which airlines have more routes to 'crowded' destinations.
 
-
-```r
+``` r
 flights %>% 
   group_by(dest) %>% 
   mutate(n_carrier = n_distinct(carrier)) %>% 
@@ -1690,34 +1541,31 @@ flights %>%
   arrange(rank)
 ```
 
-```
-## # A tibble: 16 x 3
-##    carrier n_dest  rank
-##      <chr>  <int> <int>
-##  1      EV     51     1
-##  2      9E     48     2
-##  3      UA     42     3
-##  4      DL     39     4
-##  5      B6     35     5
-##  6      AA     19     6
-##  7      MQ     19     6
-##  8      WN     10     8
-##  9      OO      5     9
-## 10      US      5     9
-## 11      VX      4    11
-## 12      YV      3    12
-## 13      FL      2    13
-## 14      AS      1    14
-## 15      F9      1    14
-## 16      HA      1    14
-```
+    ## # A tibble: 16 x 3
+    ##    carrier n_dest  rank
+    ##      <chr>  <int> <int>
+    ##  1      EV     51     1
+    ##  2      9E     48     2
+    ##  3      UA     42     3
+    ##  4      DL     39     4
+    ##  5      B6     35     5
+    ##  6      AA     19     6
+    ##  7      MQ     19     6
+    ##  8      WN     10     8
+    ##  9      OO      5     9
+    ## 10      US      5     9
+    ## 11      VX      4    11
+    ## 12      YV      3    12
+    ## 13      FL      2    13
+    ## 14      AS      1    14
+    ## 15      F9      1    14
+    ## 16      HA      1    14
 
 Another way to approach this may have been to say to evaluate the delays between carriers going to the same destination and used that as a way of comparing and 'ranking' the best carriers. This would have been a more ambitious problem to answer.
 
-**8. For each plane, count the number of flights before the first delay of greater than 1 hour.**  
+**8. For each plane, count the number of flights before the first delay of greater than 1 hour.**
 
-
-```r
+``` r
 tail_nums_counts <- flights %>% 
   arrange(tailnum, month, day, dep_time) %>% 
   group_by(tailnum) %>% 
@@ -1751,74 +1599,71 @@ tail_nums_counts %>%
   arrange(tailnum)
 ```
 
-```
-## # A tibble: 4,037 x 2
-##    tailnum total_before_hour
-##      <chr>             <dbl>
-##  1  D942DN                 0
-##  2  N0EGMQ                 0
-##  3  N10156                 9
-##  4  N102UW                25
-##  5  N103US                46
-##  6  N104UW                 3
-##  7  N10575                 0
-##  8  N105UW                22
-##  9  N107US                20
-## 10  N108UW                36
-## # ... with 4,027 more rows
-```
+    ## # A tibble: 4,037 x 2
+    ##    tailnum total_before_hour
+    ##      <chr>             <dbl>
+    ##  1  D942DN                 0
+    ##  2  N0EGMQ                 0
+    ##  3  N10156                 9
+    ##  4  N102UW                25
+    ##  5  N103US                46
+    ##  6  N104UW                 3
+    ##  7  N10575                 0
+    ##  8  N105UW                22
+    ##  9  N107US                20
+    ## 10  N108UW                36
+    ## # ... with 4,027 more rows
 
+Appendix
+========
 
+The appendix is either extensions upon solutions. Solving the problems using functions we haven'te learned yet, or other random notes / tidbits.
 
+5.4.1.3.
+--------
 
+You actually don't need `one_of` for selecting by character vector, more useful is when using it to negate fields by name.
 
-# Appendix
-The appendix is either extensions upon solutions. Solving the problems using functions we haven'te learned yet, or other random notes / tidbits.  
-
-## 5.4.1.3.
-You actually don't need `one_of` for selecting by character vector, more useful is when using it to negate fields by name.  
-
-
-```r
+``` r
 select(flights, -one_of(vars))
 ```
 
-```
-## # A tibble: 336,776 x 15
-##     year month   day sched_dep_time sched_arr_time carrier flight tailnum
-##    <int> <int> <int>          <int>          <int>   <chr>  <int>   <chr>
-##  1  2013     1     1            515            819      UA   1545  N14228
-##  2  2013     1     1            529            830      UA   1714  N24211
-##  3  2013     1     1            540            850      AA   1141  N619AA
-##  4  2013     1     1            545           1022      B6    725  N804JB
-##  5  2013     1     1            600            837      DL    461  N668DN
-##  6  2013     1     1            558            728      UA   1696  N39463
-##  7  2013     1     1            600            854      B6    507  N516JB
-##  8  2013     1     1            600            723      EV   5708  N829AS
-##  9  2013     1     1            600            846      B6     79  N593JB
-## 10  2013     1     1            600            745      AA    301  N3ALAA
-## # ... with 336,766 more rows, and 7 more variables: origin <chr>,
-## #   dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>,
-## #   time_hour <dttm>
-```
+    ## # A tibble: 336,776 x 15
+    ##     year month   day sched_dep_time sched_arr_time carrier flight tailnum
+    ##    <int> <int> <int>          <int>          <int>   <chr>  <int>   <chr>
+    ##  1  2013     1     1            515            819      UA   1545  N14228
+    ##  2  2013     1     1            529            830      UA   1714  N24211
+    ##  3  2013     1     1            540            850      AA   1141  N619AA
+    ##  4  2013     1     1            545           1022      B6    725  N804JB
+    ##  5  2013     1     1            600            837      DL    461  N668DN
+    ##  6  2013     1     1            558            728      UA   1696  N39463
+    ##  7  2013     1     1            600            854      B6    507  N516JB
+    ##  8  2013     1     1            600            723      EV   5708  N829AS
+    ##  9  2013     1     1            600            846      B6     79  N593JB
+    ## 10  2013     1     1            600            745      AA    301  N3ALAA
+    ## # ... with 336,766 more rows, and 7 more variables: origin <chr>,
+    ## #   dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>, minute <dbl>,
+    ## #   time_hour <dttm>
 
+5.5.2.1.
+--------
 
-## 5.5.2.1.
-Other, more sophisticated method^[This method is helpful for if you have more than ust a couple variables you are applying a transformation to.]
+Other, more sophisticated method[2]
 
-```r
+``` r
 mutate_at(.tbl = flights, 
           .vars = c("dep_time", "sched_dep_time"), 
           .funs = funs(new = time_to_mins)) 
 ```
 
-## 5.5.2.2
+5.5.2.2
+-------
 
 ### Closer look at `air_time`
 
 Wanted to look at original `air_time` variable a little more. Histogram below shows that most differences are now between 20 - 40 minutes from the actual time.
 
-```r
+``` r
 flights_new2 %>% 
   group_by(dest) %>% 
   summarise(distance_med = median(distance, na.rm = TRUE),
@@ -1831,19 +1676,15 @@ flights_new2 %>%
   geom_histogram()
 ```
 
-```
-## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-```
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-```
-## Warning: Removed 5 rows containing non-finite values (stat_bin).
-```
+    ## Warning: Removed 5 rows containing non-finite values (stat_bin).
 
-![](ch4to6_files/figure-html/unnamed-chunk-68-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-68-1.png)
 
 Regressing `diff` on `arr_delay` and `dep_delay` (remember `diff` is the difference between `air_time` and `air_calc`)
 
-```r
+``` r
 mod_air_time2 <- mutate(flights_new2, diff =  (air_time - air_calc)) %>% 
   select(-air_time, -air_calc, -flight, -tailnum, -dest) %>% 
   na.omit() %>% 
@@ -1852,32 +1693,31 @@ mod_air_time2 <- mutate(flights_new2, diff =  (air_time - air_calc)) %>%
 summary(mod_air_time2)
 ```
 
-```
-## 
-## Call:
-## lm(formula = diff ~ dep_delay + arr_delay, data = .)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -93.168  -6.684   0.688   6.878 101.169 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -33.511843   0.024118 -1389.5   <2e-16 ***
-## dep_delay     0.533376   0.001355   393.5   <2e-16 ***
-## arr_delay    -0.552852   0.001217  -454.2   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 12.43 on 319806 degrees of freedom
-## Multiple R-squared:  0.3956,	Adjusted R-squared:  0.3956 
-## F-statistic: 1.047e+05 on 2 and 319806 DF,  p-value: < 2.2e-16
-```
+    ## 
+    ## Call:
+    ## lm(formula = diff ~ dep_delay + arr_delay, data = .)
+    ## 
+    ## Residuals:
+    ##     Min      1Q  Median      3Q     Max 
+    ## -93.168  -6.684   0.688   6.878 101.169 
+    ## 
+    ## Coefficients:
+    ##               Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) -33.511843   0.024118 -1389.5   <2e-16 ***
+    ## dep_delay     0.533376   0.001355   393.5   <2e-16 ***
+    ## arr_delay    -0.552852   0.001217  -454.2   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 12.43 on 319806 degrees of freedom
+    ## Multiple R-squared:  0.3956, Adjusted R-squared:  0.3956 
+    ## F-statistic: 1.047e+05 on 2 and 319806 DF,  p-value: < 2.2e-16
+
 Doing such accounts for ~40% of the variation in the values.
 
 The `dep_delay` and `arr_delay` variables are highly colinear which is part of the reason for the coefficients being opposite in the model.
 
-```r
+``` r
 flights_new2 %>% 
   select(air_time, air_calc, arr_delay, dep_delay) %>% 
   mutate(diff = air_time - air_calc) %>% 
@@ -1886,16 +1726,14 @@ flights_new2 %>%
   cor()
 ```
 
-```
-##            arr_delay   dep_delay        diff
-## arr_delay  1.0000000  0.91531953 -0.32086698
-## dep_delay  0.9153195  1.00000000 -0.07582942
-## diff      -0.3208670 -0.07582942  1.00000000
-```
+    ##            arr_delay   dep_delay        diff
+    ## arr_delay  1.0000000  0.91531953 -0.32086698
+    ## dep_delay  0.9153195  1.00000000 -0.07582942
+    ## diff      -0.3208670 -0.07582942  1.00000000
 
 Typically, this suggests that you do not need to include both variables in the model as they will likely be providing the same information. Though here that is not the case as only including `arr_delay` associates with a steep decline in `R^2` to just account for ~10% of the variation.
 
-```r
+``` r
 mod_air_time <- mutate(flights_new2, diff =  (air_time - air_calc)) %>% 
   select(-air_time, -air_calc, -flight, -tailnum, -dest) %>% 
   na.omit() %>% 
@@ -1904,30 +1742,28 @@ lm(diff ~ arr_delay, data = .)
 summary(mod_air_time)
 ```
 
-```
-## 
-## Call:
-## lm(formula = diff ~ arr_delay, data = .)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -182.960   -6.385    2.013    7.983  154.382 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -2.984e+01  2.710e-02 -1101.3   <2e-16 ***
-## arr_delay   -1.144e-01  5.972e-04  -191.6   <2e-16 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 15.14 on 319807 degrees of freedom
-## Multiple R-squared:  0.103,	Adjusted R-squared:  0.103 
-## F-statistic: 3.67e+04 on 1 and 319807 DF,  p-value: < 2.2e-16
-```
+    ## 
+    ## Call:
+    ## lm(formula = diff ~ arr_delay, data = .)
+    ## 
+    ## Residuals:
+    ##      Min       1Q   Median       3Q      Max 
+    ## -182.960   -6.385    2.013    7.983  154.382 
+    ## 
+    ## Coefficients:
+    ##               Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) -2.984e+01  2.710e-02 -1101.3   <2e-16 ***
+    ## arr_delay   -1.144e-01  5.972e-04  -191.6   <2e-16 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 15.14 on 319807 degrees of freedom
+    ## Multiple R-squared:  0.103,  Adjusted R-squared:  0.103 
+    ## F-statistic: 3.67e+04 on 1 and 319807 DF,  p-value: < 2.2e-16
 
 Add predictions from models of `air_time` to dataframe and take sample of 500 from entire `flights` dataset to visualise.
 
-```r
+``` r
 flights_preds_mod <- flights_new2 %>% 
   mutate(diff =  (air_time - air_calc)) %>% 
   na.omit() %>% 
@@ -1938,23 +1774,24 @@ flights_preds_mod <- flights_new2 %>%
 
 Looking at `dep_delay` on `arr_delay` with `diff` overlaid in colour.
 
-```r
+``` r
 flights_preds_mod %>%
   mutate(diff_group = cut(diff, 4)) %>% 
   ggplot(aes(dep_delay, arr_delay))+
   geom_point(aes(colour = diff_group))
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-73-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-73-1.png)
 
 I'm going to stop there though for now. Below are just some other plots I was messing aroun with.
 
 ### Other plots with `air_time`
-These are mostly just me messing around. This section will be very tough to follow.  
-  
+
+These are mostly just me messing around. This section will be very tough to follow.
+
 Produce 3-d plot with actuals in black and predictions in red and green (not evaluated in html document).
 
-```r
+``` r
 a <- flights_preds_mod$arr_delay
 b <- flights_preds_mod$dep_delay
 c <- flights_preds_mod$diff
@@ -1969,7 +1806,7 @@ rgl::points3d(a, b, flights_preds_mod$mod_air_time2, color = "green")
 
 Plot of median `air_time` vs. median `dist`.
 
-```r
+``` r
 flights_new2 %>% 
   select(dest, dep_time, arr_time, air_time, distance) %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
@@ -1982,19 +1819,13 @@ flights_new2 %>%
   scale_y_continuous(breaks = seq(0, 660, 60))
 ```
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-75-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-75-1.png)
 
+Use linear regression to identify those points that were off from the relationship between `air_time` and `distance`. +First build model +Add residuals onto dataframe +Arrange df so that largest residuals are at the top.
 
-Use linear regression to identify those points that were off from the relationship between `air_time` and `distance`.
-+First build model
-+Add residuals onto dataframe
-+Arrange df so that largest residuals are at the top.
-
-```r
+``` r
 time_dist_mod <- lm(air_time ~ distance, data = flights)
 
 flights %>% 
@@ -2009,28 +1840,26 @@ flights %>%
   arrange(desc(abs(resid)))
 ```
 
-```
-## # A tibble: 105 x 5
-##     dest air_time distance      pred     resid
-##    <chr>    <dbl>    <dbl>     <dbl>     <dbl>
-##  1   ANC    414.5     3370 443.48870 -28.98870
-##  2   HNL    616.0     4963 644.39679 -28.39679
-##  3   BQN    194.0     1576 217.23063 -23.23063
-##  4   SJU    197.0     1598 220.00526 -23.00526
-##  5   PSE    201.0     1617 222.40153 -21.40153
-##  6   STT    203.0     1623 223.15824 -20.15824
-##  7   EGE    253.0     1726 236.14853  16.85147
-##  8   BGR     54.0      378  66.13968 -12.13968
-##  9   PSP    330.5     2378 318.37833  12.12167
-## 10   HDN    247.0     1728 236.40077  10.59923
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 5
+    ##     dest air_time distance      pred     resid
+    ##    <chr>    <dbl>    <dbl>     <dbl>     <dbl>
+    ##  1   ANC    414.5     3370 443.48870 -28.98870
+    ##  2   HNL    616.0     4963 644.39679 -28.39679
+    ##  3   BQN    194.0     1576 217.23063 -23.23063
+    ##  4   SJU    197.0     1598 220.00526 -23.00526
+    ##  5   PSE    201.0     1617 222.40153 -21.40153
+    ##  6   STT    203.0     1623 223.15824 -20.15824
+    ##  7   EGE    253.0     1726 236.14853  16.85147
+    ##  8   BGR     54.0      378  66.13968 -12.13968
+    ##  9   PSP    330.5     2378 318.37833  12.12167
+    ## 10   HDN    247.0     1728 236.40077  10.59923
+    ## # ... with 95 more rows
+
 Looks like BQN, SJU, PSE, and STT are the closer of dests with the greatest departures (in addition to the higher leverage points ANC and HNL). (note the columns here are median values despite the 'med' not being in the column names)
 
-Let's do the samthing as above but just plot this output in a gpplot with our preds representing the line from our model.
-(are using our own specified model rather than just using `geom_smooth`.)
+Let's do the samthing as above but just plot this output in a gpplot with our preds representing the line from our model. (are using our own specified model rather than just using `geom_smooth`.)
 
-```r
+``` r
 flights %>% 
   select(dest, dep_time, arr_time, air_time, distance) %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
@@ -2047,16 +1876,13 @@ flights %>%
   scale_y_continuous(breaks = seq(0, 660, 60))
 ```
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-77-1.png)<!-- -->
-
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-77-1.png)
 
 For fun, select 6 random `dest` and plot the `dep_time` vs `air_calc` (true `air_time`) with a median line cutting through the ponits.
 
-```r
+``` r
 set.seed(1234)
 flights_new2 %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
@@ -2073,19 +1899,15 @@ flights_new2 %>%
   facet_wrap(~dest)
 ```
 
-```
-## Warning: Removed 604 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 604 rows containing missing values (geom_point).
 
-```
-## Warning: Removed 101 rows containing missing values (geom_path).
-```
+    ## Warning: Removed 101 rows containing missing values (geom_path).
 
-![](ch4to6_files/figure-html/unnamed-chunk-78-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-78-1.png)
 
 Do the same with the original `air_calc` values (would want to standardize access between these and above)
 
-```r
+``` r
 set.seed(1234)
 flights %>% 
   # select(dest, dep_time, arr_time, air_time, distance) %>% 
@@ -2103,23 +1925,17 @@ flights %>%
   facet_wrap(~dest)
 ```
 
-```
-## Warning: Removed 289 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 289 rows containing missing values (geom_point).
 
-```
-## Warning: Removed 101 rows containing missing values (geom_path).
-```
+    ## Warning: Removed 101 rows containing missing values (geom_path).
 
-![](ch4to6_files/figure-html/unnamed-chunk-79-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-79-1.png)
 
-
-Explore the `air_time` var more.
-If you want to see how these may differ by different categories^[ Linear regression is used here which aren't learned until later in the book though.]. 
+Explore the `air_time` var more. If you want to see how these may differ by different categories[3].
 
 Select 6 random `dest`s and plot all points for `distance` and `air_time`
 
-```r
+``` r
 flights %>% 
   select(dest, dep_time, arr_time, air_time, distance) %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
@@ -2132,16 +1948,13 @@ flights %>%
   geom_point(aes(colour = dest))
 ```
 
-```
-## Warning: Removed 341 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 341 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-80-1.png)<!-- -->
-
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-80-1.png)
 
 Distribution of times each flight number runs in window.
 
-```r
+``` r
 flights %>% 
   group_by(flight) %>% 
   summarise(n = n()) %>%
@@ -2151,17 +1964,16 @@ flights %>%
   geom_histogram(bins = 100)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-81-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-81-1.png)
 
-
-## 5.6.7.1.
+5.6.7.1.
+--------
 
 Below is an extension on using the `quantile` method, but it is far beyond where we are right now.
 
-For the question *90th percentile for delays for flights by destination*  we used `quantile` to output only the 90th percentile of values for each destination. Here, I want to address what if you had wanted to output the delays at multiple values, say, arbitrarily the 25th, 50th, 75th percentiles. One option would be to create a new variable for each value and in each quantile function sepcify 0.25, 0.50, 0.75 respectively.  
+For the question *90th percentile for delays for flights by destination* we used `quantile` to output only the 90th percentile of values for each destination. Here, I want to address what if you had wanted to output the delays at multiple values, say, arbitrarily the 25th, 50th, 75th percentiles. One option would be to create a new variable for each value and in each quantile function sepcify 0.25, 0.50, 0.75 respectively.
 
-
-```r
+``` r
 flights %>% 
   group_by(dest) %>% 
   summarise(delay.25 = quantile(arr_delay, 0.25, na.rm = TRUE),
@@ -2169,50 +1981,43 @@ flights %>%
             delay.75 = quantile(arr_delay, 0.75, na.rm = TRUE))
 ```
 
-```
-## # A tibble: 105 x 4
-##     dest delay.25 delay.50 delay.75
-##    <chr>    <dbl>    <dbl>    <dbl>
-##  1   ABQ   -24.00     -5.5    22.75
-##  2   ACK   -13.00     -3.0    10.00
-##  3   ALB   -17.00     -4.0    28.00
-##  4   ANC   -10.75      1.5    10.00
-##  5   ATL   -12.00     -1.0    16.00
-##  6   AUS   -19.00     -5.0    15.00
-##  7   AVL   -11.00     -1.0    13.00
-##  8   BDL   -18.00    -10.0    14.00
-##  9   BGR   -21.75     -9.0    19.75
-## 10   BHM   -20.00     -2.0    34.00
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 4
+    ##     dest delay.25 delay.50 delay.75
+    ##    <chr>    <dbl>    <dbl>    <dbl>
+    ##  1   ABQ   -24.00     -5.5    22.75
+    ##  2   ACK   -13.00     -3.0    10.00
+    ##  3   ALB   -17.00     -4.0    28.00
+    ##  4   ANC   -10.75      1.5    10.00
+    ##  5   ATL   -12.00     -1.0    16.00
+    ##  6   AUS   -19.00     -5.0    15.00
+    ##  7   AVL   -11.00     -1.0    13.00
+    ##  8   BDL   -18.00    -10.0    14.00
+    ##  9   BGR   -21.75     -9.0    19.75
+    ## 10   BHM   -20.00     -2.0    34.00
+    ## # ... with 95 more rows
 
 But there is a lot of replication here and the `quantile` function is also able to output more than one value by specifying the `probs` argument.
 
-```r
+``` r
 quantile(c(1:100), probs = c(0.25, .50, 0.75))
 ```
 
-```
-##   25%   50%   75% 
-## 25.75 50.50 75.25
-```
+    ##   25%   50%   75% 
+    ## 25.75 50.50 75.25
 
 So, in theory, rather than calling `quantile` multiple times, you could just call it once. However for any variable you create `summarise` is expecting only a single value output for each row, so just passing it in as-is will cause it to fail.
 
-```r
+``` r
 flights %>% 
   group_by(dest) %>% 
   summarise(delays = quantile(arr_delay, probs = c(0.25, .50, 0.75), na.rm = TRUE))
 ```
 
-```
-## Error in summarise_impl(.data, dots): Column `delays` must be length 1 (a summary value), not 3
-```
+    ## Error in summarise_impl(.data, dots): Column `delays` must be length 1 (a summary value), not 3
 
-To make this work you need to make the value a list, so that it will output a single list in each row of the column^[This style is covered at the end of the book in the section 'list-columns' in iteration.]^[Also you need your dataframe to be in a tibble form rather than traditional dataframes for list-cols to work]. I am going to create another list-column field of the quantiles I specified.  
+To make this work you need to make the value a list, so that it will output a single list in each row of the column<sup>\[This\ style\ is\ covered\ at\ the\ end\ of\ the\ book\ in\ the\ section\ 'list-columns'\ in\ iteration.\]</sup>\[Also you need your dataframe to be in a tibble form rather than traditional dataframes for list-cols to work\]. I am going to create another list-column field of the quantiles I specified.
 
-
-```r
+``` r
 prob_vals <- seq(from = 0.25, to = 0.75, by = 0.25)
 
 flights_quantiles <- flights %>% 
@@ -2223,77 +2028,69 @@ flights_quantiles <- flights %>%
 flights_quantiles
 ```
 
-```
-## # A tibble: 105 x 3
-##     dest delays_val  delays_q
-##    <chr>     <list>    <list>
-##  1   ABQ  <dbl [3]> <chr [3]>
-##  2   ACK  <dbl [3]> <chr [3]>
-##  3   ALB  <dbl [3]> <chr [3]>
-##  4   ANC  <dbl [3]> <chr [3]>
-##  5   ATL  <dbl [3]> <chr [3]>
-##  6   AUS  <dbl [3]> <chr [3]>
-##  7   AVL  <dbl [3]> <chr [3]>
-##  8   BDL  <dbl [3]> <chr [3]>
-##  9   BGR  <dbl [3]> <chr [3]>
-## 10   BHM  <dbl [3]> <chr [3]>
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 3
+    ##     dest delays_val  delays_q
+    ##    <chr>     <list>    <list>
+    ##  1   ABQ  <dbl [3]> <chr [3]>
+    ##  2   ACK  <dbl [3]> <chr [3]>
+    ##  3   ALB  <dbl [3]> <chr [3]>
+    ##  4   ANC  <dbl [3]> <chr [3]>
+    ##  5   ATL  <dbl [3]> <chr [3]>
+    ##  6   AUS  <dbl [3]> <chr [3]>
+    ##  7   AVL  <dbl [3]> <chr [3]>
+    ##  8   BDL  <dbl [3]> <chr [3]>
+    ##  9   BGR  <dbl [3]> <chr [3]>
+    ## 10   BHM  <dbl [3]> <chr [3]>
+    ## # ... with 95 more rows
 
 To convert these outputs out of the list-col format, I can use the function `unnest`.
 
-
-```r
+``` r
 flights_quantiles %>% 
   unnest()
 ```
 
-```
-## # A tibble: 315 x 3
-##     dest delays_val delays_q
-##    <chr>      <dbl>    <chr>
-##  1   ABQ     -24.00     25th
-##  2   ABQ      -5.50     50th
-##  3   ABQ      22.75     75th
-##  4   ACK     -13.00     25th
-##  5   ACK      -3.00     50th
-##  6   ACK      10.00     75th
-##  7   ALB     -17.00     25th
-##  8   ALB      -4.00     50th
-##  9   ALB      28.00     75th
-## 10   ANC     -10.75     25th
-## # ... with 305 more rows
-```
+    ## # A tibble: 315 x 3
+    ##     dest delays_val delays_q
+    ##    <chr>      <dbl>    <chr>
+    ##  1   ABQ     -24.00     25th
+    ##  2   ABQ      -5.50     50th
+    ##  3   ABQ      22.75     75th
+    ##  4   ACK     -13.00     25th
+    ##  5   ACK      -3.00     50th
+    ##  6   ACK      10.00     75th
+    ##  7   ALB     -17.00     25th
+    ##  8   ALB      -4.00     50th
+    ##  9   ALB      28.00     75th
+    ## 10   ANC     -10.75     25th
+    ## # ... with 305 more rows
 
 This will output the values as individual rows, repeating the `dest` value for the length of the list. If I want to spread the `delays_quantile` values into seperate columns I can use the `spread` function that is in the tidying R chapter.
 
-
-```r
+``` r
 flights_quantiles %>% 
   unnest() %>% 
   spread(key = delays_q, value = delays_val, sep = "_")
 ```
 
-```
-## # A tibble: 105 x 4
-##     dest delays_q_25th delays_q_50th delays_q_75th
-##  * <chr>         <dbl>         <dbl>         <dbl>
-##  1   ABQ        -24.00          -5.5         22.75
-##  2   ACK        -13.00          -3.0         10.00
-##  3   ALB        -17.00          -4.0         28.00
-##  4   ANC        -10.75           1.5         10.00
-##  5   ATL        -12.00          -1.0         16.00
-##  6   AUS        -19.00          -5.0         15.00
-##  7   AVL        -11.00          -1.0         13.00
-##  8   BDL        -18.00         -10.0         14.00
-##  9   BGR        -21.75          -9.0         19.75
-## 10   BHM        -20.00          -2.0         34.00
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 4
+    ##     dest delays_q_25th delays_q_50th delays_q_75th
+    ##  * <chr>         <dbl>         <dbl>         <dbl>
+    ##  1   ABQ        -24.00          -5.5         22.75
+    ##  2   ACK        -13.00          -3.0         10.00
+    ##  3   ALB        -17.00          -4.0         28.00
+    ##  4   ANC        -10.75           1.5         10.00
+    ##  5   ATL        -12.00          -1.0         16.00
+    ##  6   AUS        -19.00          -5.0         15.00
+    ##  7   AVL        -11.00          -1.0         13.00
+    ##  8   BDL        -18.00         -10.0         14.00
+    ##  9   BGR        -21.75          -9.0         19.75
+    ## 10   BHM        -20.00          -2.0         34.00
+    ## # ... with 95 more rows
 
-Let's plot our unnested (but not unspread) data to see roughly the distribution of the delays for each destination at our quantiles of interest^[The mutate step that is commented-out would reorder the `delays_q` variable according to the mean value of the `delays_val`, but this is not necessary here so I commented it out. You will learn more about this in the factors chapter.lm].
+Let's plot our unnested (but not unspread) data to see roughly the distribution of the delays for each destination at our quantiles of interest[4].
 
-```r
+``` r
 flights_quantiles %>% 
   unnest() %>% 
   # mutate(delays_q = forcats::fct_reorder(f = delays_q, x = delays_val, fun = mean, na.rm = TRUE)) %>%
@@ -2301,16 +2098,13 @@ flights_quantiles %>%
   geom_boxplot()
 ```
 
-```
-## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
-```
+    ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
 
-![](ch4to6_files/figure-html/unnamed-chunk-88-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-88-1.png)
 
-It can be a hassle naming the values explicitly. `quantile`'s default `probs` argument value is 0, 0.25, 0.5, 0.75, 1. Rather than needing to type the `delays_q` values `list(c('0%', '25%', '50%', '75%', '100%'))` you could have generated the values of these names dynamically using the `map` function in the `purrr` package (see chapter on iteration) to pass the `names` function over each value in `delays_val`.    
+It can be a hassle naming the values explicitly. `quantile`'s default `probs` argument value is 0, 0.25, 0.5, 0.75, 1. Rather than needing to type the `delays_q` values `list(c('0%', '25%', '50%', '75%', '100%'))` you could have generated the values of these names dynamically using the `map` function in the `purrr` package (see chapter on iteration) to pass the `names` function over each value in `delays_val`.
 
-
-```r
+``` r
 flights_quantiles2 <- flights %>% 
   group_by(dest) %>% 
   summarise(delays_val = list(quantile(arr_delay, na.rm = TRUE)),
@@ -2320,75 +2114,68 @@ flights_quantiles2 <- flights %>%
 flights_quantiles2
 ```
 
-```
-## # A tibble: 105 x 4
-##     dest delays_val  delays_q delays_q2
-##    <chr>     <list>    <list>    <list>
-##  1   ABQ  <dbl [5]> <chr [5]> <chr [5]>
-##  2   ACK  <dbl [5]> <chr [5]> <chr [5]>
-##  3   ALB  <dbl [5]> <chr [5]> <chr [5]>
-##  4   ANC  <dbl [5]> <chr [5]> <chr [5]>
-##  5   ATL  <dbl [5]> <chr [5]> <chr [5]>
-##  6   AUS  <dbl [5]> <chr [5]> <chr [5]>
-##  7   AVL  <dbl [5]> <chr [5]> <chr [5]>
-##  8   BDL  <dbl [5]> <chr [5]> <chr [5]>
-##  9   BGR  <dbl [5]> <chr [5]> <chr [5]>
-## 10   BHM  <dbl [5]> <chr [5]> <chr [5]>
-## # ... with 95 more rows
-```
+    ## # A tibble: 105 x 4
+    ##     dest delays_val  delays_q delays_q2
+    ##    <chr>     <list>    <list>    <list>
+    ##  1   ABQ  <dbl [5]> <chr [5]> <chr [5]>
+    ##  2   ACK  <dbl [5]> <chr [5]> <chr [5]>
+    ##  3   ALB  <dbl [5]> <chr [5]> <chr [5]>
+    ##  4   ANC  <dbl [5]> <chr [5]> <chr [5]>
+    ##  5   ATL  <dbl [5]> <chr [5]> <chr [5]>
+    ##  6   AUS  <dbl [5]> <chr [5]> <chr [5]>
+    ##  7   AVL  <dbl [5]> <chr [5]> <chr [5]>
+    ##  8   BDL  <dbl [5]> <chr [5]> <chr [5]>
+    ##  9   BGR  <dbl [5]> <chr [5]> <chr [5]>
+    ## 10   BHM  <dbl [5]> <chr [5]> <chr [5]>
+    ## # ... with 95 more rows
 
-And then let's `unnest` the data^[The names assigned by the `quantile` function are a little different from those I supplied.].
+And then let's `unnest` the data[5].
 
-```r
+``` r
 flights_quantiles2 %>% 
   unnest()
 ```
 
-```
-## # A tibble: 525 x 4
-##     dest delays_val delays_q delays_q2
-##    <chr>      <dbl>    <chr>     <chr>
-##  1   ABQ     -61.00      0th        0%
-##  2   ABQ     -24.00     25th       25%
-##  3   ABQ      -5.50     50th       50%
-##  4   ABQ      22.75     75th       75%
-##  5   ABQ     153.00    100th      100%
-##  6   ACK     -25.00      0th        0%
-##  7   ACK     -13.00     25th       25%
-##  8   ACK      -3.00     50th       50%
-##  9   ACK      10.00     75th       75%
-## 10   ACK     221.00    100th      100%
-## # ... with 515 more rows
-```
+    ## # A tibble: 525 x 4
+    ##     dest delays_val delays_q delays_q2
+    ##    <chr>      <dbl>    <chr>     <chr>
+    ##  1   ABQ     -61.00      0th        0%
+    ##  2   ABQ     -24.00     25th       25%
+    ##  3   ABQ      -5.50     50th       50%
+    ##  4   ABQ      22.75     75th       75%
+    ##  5   ABQ     153.00    100th      100%
+    ##  6   ACK     -25.00      0th        0%
+    ##  7   ACK     -13.00     25th       25%
+    ##  8   ACK      -3.00     50th       50%
+    ##  9   ACK      10.00     75th       75%
+    ## 10   ACK     221.00    100th      100%
+    ## # ... with 515 more rows
 
-
-## 5.6.7.4.
+5.6.7.4.
+--------
 
 To measure the difference in speed you can use the `microbenchmark` function
 
-```r
+``` r
 microbenchmark::microbenchmark(sub_optimal = filter(flights, is.na(dep_delay) | is.na(arr_delay)),
                                optimal = filter(flights, is.na(arr_delay)),
                                times = 10)
 ```
 
-```
-## Unit: milliseconds
-##         expr      min       lq     mean   median       uq      max neval
-##  sub_optimal 5.301994 5.579139 6.091818 6.099256 6.323350 6.932766    10
-##      optimal 4.250430 4.345203 4.577000 4.617062 4.737133 5.025982    10
-##  cld
-##    b
-##   a
-```
+    ## Unit: milliseconds
+    ##         expr      min       lq       mean   median       uq         max
+    ##  sub_optimal 5.235917 5.298596   5.660884 5.483232 5.543268    7.692081
+    ##      optimal 4.220224 4.283658 244.905413 4.315940 4.540790 2409.787204
+    ##  neval cld
+    ##     10   a
+    ##     10   a
 
-
-
-## 5.6.7.5.
+5.6.7.5.
+--------
 
 Explore the percentage delayed vs. percentage cancelled.
 
-```r
+``` r
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2401,12 +2188,11 @@ flights %>%
     geom_line(aes(y = delayed_perc), colour = "dark red")
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-92-1.png)<!-- -->
-
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-92-1.png)
 
 Let's try faceting by origin and looking at both values next to each other.
 
-```r
+``` r
 flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2419,12 +2205,11 @@ flights %>%
   facet_grid(type ~ origin, scales = "free_y")
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-93-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-93-1.png)
 
-Look's like the relationship across origins with the delay overlaid with color (not actually crazy about how this look).  
+Look's like the relationship across origins with the delay overlaid with color (not actually crazy about how this look).
 
-
-```r
+``` r
 flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2436,11 +2221,11 @@ flights %>%
   facet_grid(origin ~ .)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-94-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-94-1.png)
 
 Let's look at values as individual points and overlay a `geom_smooth`
 
-```r
+``` r
 flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2452,17 +2237,15 @@ flights %>%
   geom_smooth()
 ```
 
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-![](ch4to6_files/figure-html/unnamed-chunk-95-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-95-1.png)
 
 ### Modeling approach
 
 We also could approach this using a model and regressing the average proportion of cancelled flights on average delay.
 
-```r
+``` r
 cancelled_mod1 <- flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2474,40 +2257,37 @@ cancelled_mod1 <- flights %>%
 summary(cancelled_mod1)
 ```
 
-```
-## 
-## Call:
-## lm(formula = cancelled_perc ~ avg_delayed, data = .)
-## 
-## Residuals:
-##       Min        1Q    Median        3Q       Max 
-## -0.026363 -0.009392 -0.002610  0.006196  0.048436 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) 0.0152588  0.0020945   7.285 1.12e-10 ***
-## avg_delayed 0.0018688  0.0002311   8.086 2.54e-12 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 0.01342 on 91 degrees of freedom
-## Multiple R-squared:  0.4181,	Adjusted R-squared:  0.4117 
-## F-statistic: 65.39 on 1 and 91 DF,  p-value: 2.537e-12
-```
+    ## 
+    ## Call:
+    ## lm(formula = cancelled_perc ~ avg_delayed, data = .)
+    ## 
+    ## Residuals:
+    ##       Min        1Q    Median        3Q       Max 
+    ## -0.026363 -0.009392 -0.002610  0.006196  0.048436 
+    ## 
+    ## Coefficients:
+    ##              Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept) 0.0152588  0.0020945   7.285 1.12e-10 ***
+    ## avg_delayed 0.0018688  0.0002311   8.086 2.54e-12 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 0.01342 on 91 degrees of freedom
+    ## Multiple R-squared:  0.4181, Adjusted R-squared:  0.4117 
+    ## F-statistic: 65.39 on 1 and 91 DF,  p-value: 2.537e-12
 
-```r
+``` r
   # ggplot(aes(x = day, y = cancelled_perc))+
   # geom_line()
 ```
 
-If you were confused by the `.` in `lm(cancelled_perc ~ avg_delayed, data = .)`, the dot specifies where the output from the prior steps should be piped into. The default is for it to go into the first argument, but for the `lm` function, data is not the first argument, so I have to explicitly tell it that the prior steps output should be inputted into the data argument of the `lm` function. See [On piping dots] for more details.   
-  
+If you were confused by the `.` in `lm(cancelled_perc ~ avg_delayed, data = .)`, the dot specifies where the output from the prior steps should be piped into. The default is for it to go into the first argument, but for the `lm` function, data is not the first argument, so I have to explicitly tell it that the prior steps output should be inputted into the data argument of the `lm` function. See [On piping dots](#on-piping-dots) for more details.
+
 The average delay accounts for 42% of the variation in the proportion of canceled flights.
-  
+
 Modeling the log-odds of the proportion of cancelled flights might be more successful as it produces a variable not constrained by 0 to 1, better aligning with the assumptions of linear regression.
 
-
-```r
+``` r
 cancelled_mod2 <- flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2520,14 +2300,13 @@ cancelled_mod2 <- flights %>%
 
 To convert logodds back to percentage, I built the following equation.
 
-
-```r
+``` r
 convert_logodds <- function(log_odds) exp(log_odds) / (1 + exp(log_odds))
 ```
 
 Let's calculate the MAE or mean absolute error on our percentages.
 
-```r
+``` r
 cancelled_preds2 <- flights %>% 
   group_by(origin, day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -2545,17 +2324,14 @@ cancelled_preds2 %>%
             mean_value = mean(cancelled_perc, na.rm = TRUE))
 ```
 
-```
-## # A tibble: 1 x 3
-##         MAE1        MAE2 mean_value
-##        <dbl>       <dbl>      <dbl>
-## 1 0.01014738 0.009543186 0.02791632
-```
+    ## # A tibble: 1 x 3
+    ##         MAE1        MAE2 mean_value
+    ##        <dbl>       <dbl>      <dbl>
+    ## 1 0.01014738 0.009543186 0.02791632
 
 Let's look at the differences in the outputs of the predictions from these models.
 
-
-```r
+``` r
 cancelled_preds2 %>% 
   ggplot(aes(avg_delayed, cancelled_perc))+
   geom_point()+
@@ -2564,38 +2340,33 @@ cancelled_preds2 %>%
   geom_line(aes(y = cancelled_mod2), colour = "red", size = 1)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-100-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-100-1.png)
 
-^[Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix...]
-  
+[6]
 
-## 5.6.7.6.
-
+5.6.7.6.
+--------
 
 As an example, let's look at just Atl flights from LGA and compare DL, FL, MQ.
 
-
-```r
+``` r
 flights %>% 
   filter(dest == 'ATL', origin == 'LGA') %>% 
   count(carrier)
 ```
 
-```
-## # A tibble: 5 x 2
-##   carrier     n
-##     <chr> <int>
-## 1      DL  5544
-## 2      EV     1
-## 3      FL  2337
-## 4      MQ  2322
-## 5      WN    59
-```
+    ## # A tibble: 5 x 2
+    ##   carrier     n
+    ##     <chr> <int>
+    ## 1      DL  5544
+    ## 2      EV     1
+    ## 3      FL  2337
+    ## 4      MQ  2322
+    ## 5      WN    59
 
 And compare the median delays between the three primary carriers DL, FL, MQ.
 
-
-```r
+``` r
 carriers_lga_atl <- flights %>% 
   filter(dest == 'ATL', origin == 'LGA') %>% 
   group_by(carrier) %>% 
@@ -2619,46 +2390,44 @@ carriers_lga_atl %>%
   geom_text(mapping = aes(x = carrier, group = carrier, y = arr_delay + 5, label = arr_delay), data = label)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-102-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-102-1.png)
 
 Or perhaps you want to use a statistical method to compare if the differences in the grouped are significant...
 
-```r
+``` r
 carriers_lga_atl %>% 
   lm(arr_delay ~ carrier, data = .) %>% 
   summary()
 ```
 
-```
-## 
-## Call:
-## lm(formula = arr_delay ~ carrier, data = .)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -64.74 -22.33 -11.33   4.67 888.67 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(>|t|)    
-## (Intercept)   6.3273     0.6149   10.29  < 2e-16 ***
-## carrierFL    14.4172     1.1340   12.71  < 2e-16 ***
-## carrierMQ     7.7067     1.1417    6.75 1.56e-11 ***
-## ---
-## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-## 
-## Residual standard error: 45.48 on 9979 degrees of freedom
-## Multiple R-squared:  0.01692,	Adjusted R-squared:  0.01672 
-## F-statistic: 85.86 on 2 and 9979 DF,  p-value: < 2.2e-16
-```
+    ## 
+    ## Call:
+    ## lm(formula = arr_delay ~ carrier, data = .)
+    ## 
+    ## Residuals:
+    ##    Min     1Q Median     3Q    Max 
+    ## -64.74 -22.33 -11.33   4.67 888.67 
+    ## 
+    ## Coefficients:
+    ##             Estimate Std. Error t value Pr(>|t|)    
+    ## (Intercept)   6.3273     0.6149   10.29  < 2e-16 ***
+    ## carrierFL    14.4172     1.1340   12.71  < 2e-16 ***
+    ## carrierMQ     7.7067     1.1417    6.75 1.56e-11 ***
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ## Residual standard error: 45.48 on 9979 degrees of freedom
+    ## Multiple R-squared:  0.01692,    Adjusted R-squared:  0.01672 
+    ## F-statistic: 85.86 on 2 and 9979 DF,  p-value: < 2.2e-16
 
-This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)^[Repeated t-test methods could be used for comparing MQ and FL, see function `pairwise.t.test`]. The carrier accouts for ~1.6% of the variation in arrival... etc....  
+This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)[7]. The carrier accouts for ~1.6% of the variation in arrival... etc....
 
-
-## 5.7.1.6.
+5.7.1.6.
+--------
 
 Let's look at the fastest 20 `air_time`s for each destination.
 
-```r
+``` r
 flights_new2 %>% 
   group_by(dest) %>% 
   mutate(min_rank = min_rank(air_time)) %>% 
@@ -2668,11 +2437,11 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-104-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-104-1.png)
 
-Let's do the same for my custom `air_time` calculation `air_calc`. 
+Let's do the same for my custom `air_time` calculation `air_calc`.
 
-```r
+``` r
 flights_new2 %>% 
   group_by(dest) %>% 
   mutate(min_rank = min_rank(air_calc)) %>% 
@@ -2682,13 +2451,13 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-105-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-105-1.png)
 
-*Rather than the fastest 20, let's look at the mean `dist` and `air_time` for each^[Each colour corresponds with a `dest` though I excluded the legend.].*  
-  
+*Rather than the fastest 20, let's look at the mean `dist` and `air_time` for each[8].*
+
 First using the `air_time` value.
 
-```r
+``` r
 flights_new2 %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
             .funs = funs(time_to_mins)) %>% 
@@ -2701,15 +2470,13 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-106-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-106-1.png)
 
 Then with the custom `air_calc`.
 
-```r
+``` r
 flights_new2 %>% 
   mutate_at(.vars = c("dep_time", "arr_time"), 
             .funs = funs(time_to_mins)) %>% 
@@ -2722,18 +2489,16 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-```
-## Warning: Removed 5 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 5 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-107-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-107-1.png)
 
-## 5.7.1.5
+5.7.1.5
+-------
 
 Let's run this for every 3 lags (1, 4, 7, ...) and plot.
 
-
-```r
+``` r
 lags_cors <- tibble(lag = seq(1,200, 3)) %>% 
   mutate(cor = purrr::map_dbl(lag, cor_by_lag))
 
@@ -2743,13 +2508,12 @@ lags_cors %>%
   coord_cartesian(ylim = c(0, 0.40))
 ```
 
-![](ch4to6_files/figure-html/unnamed-chunk-108-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-108-1.png)
 
+5.7.1.8.
+--------
 
-## 5.7.1.8.
-
-
-```r
+``` r
 tail_nums_counts %>% 
   nest() %>% 
   sample_n(10) %>% 
@@ -2757,7 +2521,8 @@ tail_nums_counts %>%
   View()
 ```
 
-## Other
+Other
+-----
 
 ### On piping dots
 
@@ -2765,63 +2530,55 @@ The `.` let's you explicitly state where to pipe the output from the prior steps
 
 *Let's look at an example:*
 
-```r
+``` r
 flights %>% 
   filter(!is.na(arr_delay)) %>% 
   count(origin)
 ```
 
-```
-## # A tibble: 3 x 2
-##   origin      n
-##    <chr>  <int>
-## 1    EWR 117127
-## 2    JFK 109079
-## 3    LGA 101140
-```
+    ## # A tibble: 3 x 2
+    ##   origin      n
+    ##    <chr>  <int>
+    ## 1    EWR 117127
+    ## 2    JFK 109079
+    ## 3    LGA 101140
 
 This is the exact same thing as the code below, I just added the dots to be explicit about where in the function the output from the prior steps will go:
 
-```r
+``` r
 flights %>% 
   filter(., !is.na(arr_delay)) %>% 
   count(., origin)
 ```
 
-```
-## # A tibble: 3 x 2
-##   origin      n
-##    <chr>  <int>
-## 1    EWR 117127
-## 2    JFK 109079
-## 3    LGA 101140
-```
+    ## # A tibble: 3 x 2
+    ##   origin      n
+    ##    <chr>  <int>
+    ## 1    EWR 117127
+    ## 2    JFK 109079
+    ## 3    LGA 101140
 
-Functions in dplyr, etc. expect dataframes in the first argument, so the default piping behavior works fine you don't end-up using the dot in this way.  However functions outside of the tidyverse are not always so consistent and may expect the dataframe (or w/e your output from the prior step is) in a different location of the function, hence the need to use the dot to specify where it should go. 
+Functions in dplyr, etc. expect dataframes in the first argument, so the default piping behavior works fine you don't end-up using the dot in this way. However functions outside of the tidyverse are not always so consistent and may expect the dataframe (or w/e your output from the prior step is) in a different location of the function, hence the need to use the dot to specify where it should go.
 
-The example below uses base R's `lm` (linear models) function to regress `arr_delay` on `dep_delay` and `distance`^[You may want to add a step to pipe this into `summary()` after the `lm` step as well.]. The first argument expects a function, the second argument the data, hence the need for the dot.
+The example below uses base R's `lm` (linear models) function to regress `arr_delay` on `dep_delay` and `distance`[9]. The first argument expects a function, the second argument the data, hence the need for the dot.
 
-
-```r
+``` r
 flights %>% 
   filter(., !is.na(arr_delay)) %>% 
   lm(arr_delay ~ dep_delay + distance, .) 
 ```
 
-```
-## 
-## Call:
-## lm(formula = arr_delay ~ dep_delay + distance, data = .)
-## 
-## Coefficients:
-## (Intercept)    dep_delay     distance  
-##   -3.212779     1.018077    -0.002551
-```
+    ## 
+    ## Call:
+    ## lm(formula = arr_delay ~ dep_delay + distance, data = .)
+    ## 
+    ## Coefficients:
+    ## (Intercept)    dep_delay     distance  
+    ##   -3.212779     1.018077    -0.002551
 
 When using the `.` in piping, I will usually make the argment name I am piping into explicit. This makes it more clear and also means if I have the position order wrong it doesn't matter.
 
-
-```r
+``` r
 flights %>% 
   filter(., !is.na(arr_delay)) %>% 
   lm(arr_delay ~ dep_delay + distance, data = .)
@@ -2829,63 +2586,56 @@ flights %>%
 
 You can also use the `.` in conjunction with R's subsetting to output vectors. In the example below I filter flights, then extract the `arr_delay` column as a vector and pipe it into the base R function `quantile`.
 
-
-```r
+``` r
 flights %>% 
   filter(!is.na(arr_delay)) %>% 
   .$arr_delay %>%
   quantile(probs = seq(from = 0, to = 1, by = 0.10))
 ```
 
-```
-##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
-##  -86  -26  -19  -14  -10   -5    1    9   21   52 1272
-```
+    ##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+    ##  -86  -26  -19  -14  -10   -5    1    9   21   52 1272
+
 `quantile` is expecting a numeric vector in it's first argument so the above works. If instead of `.$arr_delay`, you'd tried `select(arr_delay`) the function would have failed because the `select` statement outputs a dataframe rather than a vector (and `quantile` would have become very angry with you). One weakness with the above method is it only allows you to input a single vector into the base R function (while many funcitons can take in multiple vectors).
-  
+
 A better way of doing this is to use the `with` function. The `with` function allows you to pipe a dataframe into the first argument and then reference the column in that dataframe with just the field names. This makes using those base R funcitons easier and more similar in syntax to tidyverse functions. For example, the above example would look become.
 
-
-```r
+``` r
 flights %>% 
   filter(!is.na(arr_delay)) %>% 
   with(quantile(arr_delay, probs = seq(from = 0, to = 1, by = 0.10)))
 ```
 
-```
-##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
-##  -86  -26  -19  -14  -10   -5    1    9   21   52 1272
-```
+    ##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
+    ##  -86  -26  -19  -14  -10   -5    1    9   21   52 1272
 
-This method also makes it easy to input multiple field names in this style. Let's look at this with the `table` function^[`table` produces contingency tables.]
+This method also makes it easy to input multiple field names in this style. Let's look at this with the `table` function[10]
 
-
-```r
+``` r
 flights %>% 
   filter(!is.na(arr_delay)) %>% 
   with(table(origin, carrier))
 ```
 
-```
-##       carrier
-## origin    9E    AA    AS    B6    DL    EV    F9    FL    HA    MQ    OO
-##    EWR  1193  3363   709  6472  4295 41557     0     0     0  2097     6
-##    JFK 13742 13600     0 41666 20559  1326     0     0   342  6838     0
-##    LGA  2359 14984     0  5911 22804  8225   681  3175     0 16102    23
-##       carrier
-## origin    UA    US    VX    WN    YV
-##    EWR 45501  4326  1552  6056     0
-##    JFK  4478  2964  3564     0     0
-##    LGA  7803 12541     0  5988   544
-```
+    ##       carrier
+    ## origin    9E    AA    AS    B6    DL    EV    F9    FL    HA    MQ    OO
+    ##    EWR  1193  3363   709  6472  4295 41557     0     0     0  2097     6
+    ##    JFK 13742 13600     0 41666 20559  1326     0     0   342  6838     0
+    ##    LGA  2359 14984     0  5911 22804  8225   681  3175     0 16102    23
+    ##       carrier
+    ## origin    UA    US    VX    WN    YV
+    ##    EWR 45501  4326  1552  6056     0
+    ##    JFK  4478  2964  3564     0     0
+    ##    LGA  7803 12541     0  5988   544
 
-## plotly
-the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
+plotly
+------
+
+the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.
 
 Note that this will not render in a markdown format, but only in html.
 
-
-```r
+``` r
 p <- flights %>% 
   group_by(hour, month) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -2896,21 +2646,9 @@ p <- flights %>%
 plotly::ggplotly(p)
 ```
 
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
-
-```
-## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-```
-
-<!--html_preserve--><div id="35384aaf17a" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="35384aaf17a">{"x":{"data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-0.146496815286624,1.5973773676542,-0.629773104593249,2.5238954012624,1.32140653917335,0.153212520593081,-0.106449106449106,2.7710843373494,7.59973315543696,6.4510556621881,9.23966509680795,8.23645569620253,12.0081549439348,10.7683268047006,13.352103960396,12.8373590982287,12.9423558897243,9.71428571428571,-0.455882352941176],"text":["hour:  5<br />avg_delay:  -0.146496815<br />month: 1<br />month:  1","hour:  6<br />avg_delay:   1.597377368<br />month: 1<br />month:  1","hour:  7<br />avg_delay:  -0.629773105<br />month: 1<br />month:  1","hour:  8<br />avg_delay:   2.523895401<br />month: 1<br />month:  1","hour:  9<br />avg_delay:   1.321406539<br />month: 1<br />month:  1","hour: 10<br />avg_delay:   0.153212521<br />month: 1<br />month:  1","hour: 11<br />avg_delay:  -0.106449106<br />month: 1<br />month:  1","hour: 12<br />avg_delay:   2.771084337<br />month: 1<br />month:  1","hour: 13<br />avg_delay:   7.599733155<br />month: 1<br />month:  1","hour: 14<br />avg_delay:   6.451055662<br />month: 1<br />month:  1","hour: 15<br />avg_delay:   9.239665097<br />month: 1<br />month:  1","hour: 16<br />avg_delay:   8.236455696<br />month: 1<br />month:  1","hour: 17<br />avg_delay:  12.008154944<br />month: 1<br />month:  1","hour: 18<br />avg_delay:  10.768326805<br />month: 1<br />month:  1","hour: 19<br />avg_delay:  13.352103960<br />month: 1<br />month:  1","hour: 20<br />avg_delay:  12.837359098<br />month: 1<br />month:  1","hour: 21<br />avg_delay:  12.942355890<br />month: 1<br />month:  1","hour: 22<br />avg_delay:   9.714285714<br />month: 1<br />month:  1","hour: 23<br />avg_delay:  -0.455882353<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[0.878881447693702,0.761122238709718,0.657133451311965,0.565892979565238,0.486378717534335,0.417989045753258,0.362001726323973,0.319004260329885,0.289451086645904,0.273775227009057,0.271747121100105,0.283196310535406,0.308174046232718,0.346731579109796,0.398920160084397,0.464791040074278,0.544395469997195,0.637784700770905,0.744420731679001,0.86034292475482,0.985893864066836,1.12240256814873,1.27119805553419,1.43360934475689,1.61096545435052,1.80459540284876,2.01582820878529,2.2561859320213,2.54674142189209,2.86299882381618,3.17737868073969,3.46684517626394,3.79002227583741,4.16242996057331,4.57005233778106,4.9988735147701,5.43487759884983,5.86404869732969,6.27237091751909,6.64582836672746,6.98179740426435,7.33630179870065,7.71102695745665,8.09645338587035,8.48306158927977,8.86133207302292,9.22174534243781,9.55478190286246,9.85092225963486,10.129801547009,10.4450084213922,10.7609585567975,11.0373590639213,11.242238848039,11.4502277126694,11.6753804571255,11.9001495432291,12.1069874328018,12.2783465876653,12.3966794696412,12.4444385405511,12.4040762622168,12.2718742706336,12.1029399448151,11.9022968551448,11.666584979244,11.3924442947344,11.0765147792375,10.7154364103748,10.3058491657679,9.84439302303837,9.33042725182473,8.76873932703884,8.16014221594171,7.50525969120924,6.80471552551732,6.0591334915418,5.26913736195858,4.43535090944355,3.55839790667258],"text":["hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-2.63572571878919,-2.46323760502274,-2.30203079546721,-2.1556148312159,-2.02663232802248,-1.91609063241202,-1.8224374542183,-1.74510934138784,-1.68300216001286,-1.6340876329593,-1.59486264249358,-1.56135688646644,-1.52985914874213,-1.49692568653677,-1.45946908271921,-1.4147912904098,-1.36057753162781,-1.29487145511291,-1.21566234699479,-1.11960458379425,-1.00825904866688,-0.884491963182328,-0.750194860385402,-0.605236086911684,-0.447012100191245,-0.270607766539185,-0.0694851113408075,0.17603679786244,0.482074056110616,0.798903163154163,1.09809750539199,1.38186115155293,1.72374434659893,2.12634330274634,2.5607580586171,3.00154398845637,3.42981486328672,3.8346908137592,4.21235632386508,4.56322141863725,4.89919045617414,5.27628720504664,5.68166907388616,6.09139065030724,6.48573206296605,6.85203779385896,7.18565868461084,7.48850397362397,7.76593823492385,8.05052037166125,8.3809127607302,8.696291191016,8.9572099297624,9.1569255279129,9.37502454328141,9.61740290258374,9.86130411156054,10.0855945168822,10.2714520563342,10.4025265569075,10.4644910320021,10.443993183543,10.3392181147498,10.1979669431901,10.0227145246607,9.80819573644038,9.5487870290878,9.23848158426261,8.87088321337295,8.43923940217423,7.93653016307001,7.35810647184857,6.70500484030693,5.975963543275,5.17067035002998,4.28979255413064,3.33472229516407,2.30729824238286,1.20956981306362,0.0436299394080493,7.0731658739371,7.66113200582348,8.23097648153429,8.78354468791952,9.31963849690399,9.83984903238851,10.3443208886084,10.8324738137708,11.3027480318009,11.7522558830067,12.1724589293616,12.5599896073767,12.9145479742123,13.2361015603809,13.5249742220476,13.7818791856288,14.0079129464401,14.2045304265174,14.3641593408906,14.4243860491002,14.3908323823749,14.2852411189964,14.1283803487214,13.9389949748977,13.7333580116673,13.5254308820573,13.3275521681651,13.1175081980801,12.825625922579,12.5091040820542,12.2090827223567,11.9359062843459,11.6210598321009,11.2578320002648,10.8706263521869,10.4803911155935,10.1015161214335,9.74038484102715,9.39631639235467,9.06440435235456,8.72843531481768,8.3323855111731,7.89340658090018,7.43994033441294,6.99620304108383,6.57934661694503,6.19851661840028,5.85630020507589,5.55182920097494,5.2566598560874,4.92709448447821,4.61140878767357,4.33633506618016,4.10114152891139,3.87979857223671,3.66894300889229,3.47245477642547,3.29259097145378,3.12929709947979,2.98004677680055,2.84029043330389,2.70450381035279,2.57044085665472,2.44936847162221,2.34437337055835,2.25730940288801,2.19038884475636,2.14620724120757,2.12774950753726,2.13835688469379,2.18163808697742,2.26190433330467,2.38311786204761,2.54644090686624,2.75206872391853,2.99938976309115,3.28740079034637,3.61629769809114,3.98548208244218,4.39348861417659,-2.63572571878919],"text":["hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"layout":{"margin":{"t":26.2283105022831,"r":7.30593607305936,"b":40.1826484018265,"l":37.2602739726027},"plot_bgcolor":"rgba(235,235,235,1)","paper_bgcolor":"rgba(255,255,255,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"xaxis":{"domain":[0,1],"type":"linear","autorange":false,"range":[-0.1,24.1],"tickmode":"array","ticktext":["0","5","10","15","20"],"tickvals":[1.38777878078145e-017,5,10,15,20],"categoryorder":"array","categoryarray":["0","5","10","15","20"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":"hour","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"type":"linear","autorange":false,"range":[-18.526447742091,46.7345393321831],"tickmode":"array","ticktext":["0","20","40"],"tickvals":[0,20,40],"categoryorder":"array","categoryarray":["0","20","40"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"x","title":"avg_delay","titlefont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative","sliders":[{"currentvalue":{"prefix":"month: ","xanchor":"right","font":{"size":16,"color":"rgba(204,204,204,1)"}},"steps":[{"method":"animate","args":[["1"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"1","value":"1"},{"method":"animate","args":[["2"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"2","value":"2"},{"method":"animate","args":[["3"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"3","value":"3"},{"method":"animate","args":[["4"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"4","value":"4"},{"method":"animate","args":[["5"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"5","value":"5"},{"method":"animate","args":[["6"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"6","value":"6"},{"method":"animate","args":[["7"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"7","value":"7"},{"method":"animate","args":[["8"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"8","value":"8"},{"method":"animate","args":[["9"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"9","value":"9"},{"method":"animate","args":[["10"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"10","value":"10"},{"method":"animate","args":[["11"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"11","value":"11"},{"method":"animate","args":[["12"],{"transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false},"mode":"immediate"}],"label":"12","value":"12"}],"visible":true,"pad":{"t":40}}],"updatemenus":[{"type":"buttons","direction":"right","showactive":false,"y":0,"x":0,"yanchor":"top","xanchor":"right","pad":{"t":60,"r":5},"buttons":[{"label":"Play","method":"animate","args":[null,{"fromcurrent":true,"mode":"immediate","transition":{"duration":500,"easing":"linear"},"frame":{"duration":500,"redraw":false}}]}]}]},"config":{"doubleClick":"reset","modeBarButtonsToAdd":[{"name":"Collaborate","icon":{"width":1000,"ascent":500,"descent":-50,"path":"M487 375c7-10 9-23 5-36l-79-259c-3-12-11-23-22-31-11-8-22-12-35-12l-263 0c-15 0-29 5-43 15-13 10-23 23-28 37-5 13-5 25-1 37 0 0 0 3 1 7 1 5 1 8 1 11 0 2 0 4-1 6 0 3-1 5-1 6 1 2 2 4 3 6 1 2 2 4 4 6 2 3 4 5 5 7 5 7 9 16 13 26 4 10 7 19 9 26 0 2 0 5 0 9-1 4-1 6 0 8 0 2 2 5 4 8 3 3 5 5 5 7 4 6 8 15 12 26 4 11 7 19 7 26 1 1 0 4 0 9-1 4-1 7 0 8 1 2 3 5 6 8 4 4 6 6 6 7 4 5 8 13 13 24 4 11 7 20 7 28 1 1 0 4 0 7-1 3-1 6-1 7 0 2 1 4 3 6 1 1 3 4 5 6 2 3 3 5 5 6 1 2 3 5 4 9 2 3 3 7 5 10 1 3 2 6 4 10 2 4 4 7 6 9 2 3 4 5 7 7 3 2 7 3 11 3 3 0 8 0 13-1l0-1c7 2 12 2 14 2l218 0c14 0 25-5 32-16 8-10 10-23 6-37l-79-259c-7-22-13-37-20-43-7-7-19-10-37-10l-248 0c-5 0-9-2-11-5-2-3-2-7 0-12 4-13 18-20 41-20l264 0c5 0 10 2 16 5 5 3 8 6 10 11l85 282c2 5 2 10 2 17 7-3 13-7 17-13z m-304 0c-1-3-1-5 0-7 1-1 3-2 6-2l174 0c2 0 4 1 7 2 2 2 4 4 5 7l6 18c0 3 0 5-1 7-1 1-3 2-6 2l-173 0c-3 0-5-1-8-2-2-2-4-4-4-7z m-24-73c-1-3-1-5 0-7 2-2 3-2 6-2l174 0c2 0 5 0 7 2 3 2 4 4 5 7l6 18c1 2 0 5-1 6-1 2-3 3-5 3l-174 0c-3 0-5-1-7-3-3-1-4-4-5-6z"},"click":"function(gd) { \n        // is this being viewed in RStudio?\n        if (location.search == '?viewer_pane=1') {\n          alert('To learn about plotly for collaboration, visit:\\n https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html');\n        } else {\n          window.open('https://cpsievert.github.io/plotly_book/plot-ly-for-collaboration.html', '_blank');\n        }\n      }"}],"cloud":false},"source":"A","attrs":{"3538148348f7":{"x":{},"y":{},"frame":{},"type":"scatter"},"353864a220a4":{"x":{},"y":{},"frame":{}}},"cur_data":"3538148348f7","visdat":{"3538148348f7":["function (y) ","x"],"353864a220a4":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1}},"frames":[{"name":"1","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-0.146496815286624,1.5973773676542,-0.629773104593249,2.5238954012624,1.32140653917335,0.153212520593081,-0.106449106449106,2.7710843373494,7.59973315543696,6.4510556621881,9.23966509680795,8.23645569620253,12.0081549439348,10.7683268047006,13.352103960396,12.8373590982287,12.9423558897243,9.71428571428571,-0.455882352941176],"text":["hour:  5<br />avg_delay:  -0.146496815<br />month: 1<br />month:  1","hour:  6<br />avg_delay:   1.597377368<br />month: 1<br />month:  1","hour:  7<br />avg_delay:  -0.629773105<br />month: 1<br />month:  1","hour:  8<br />avg_delay:   2.523895401<br />month: 1<br />month:  1","hour:  9<br />avg_delay:   1.321406539<br />month: 1<br />month:  1","hour: 10<br />avg_delay:   0.153212521<br />month: 1<br />month:  1","hour: 11<br />avg_delay:  -0.106449106<br />month: 1<br />month:  1","hour: 12<br />avg_delay:   2.771084337<br />month: 1<br />month:  1","hour: 13<br />avg_delay:   7.599733155<br />month: 1<br />month:  1","hour: 14<br />avg_delay:   6.451055662<br />month: 1<br />month:  1","hour: 15<br />avg_delay:   9.239665097<br />month: 1<br />month:  1","hour: 16<br />avg_delay:   8.236455696<br />month: 1<br />month:  1","hour: 17<br />avg_delay:  12.008154944<br />month: 1<br />month:  1","hour: 18<br />avg_delay:  10.768326805<br />month: 1<br />month:  1","hour: 19<br />avg_delay:  13.352103960<br />month: 1<br />month:  1","hour: 20<br />avg_delay:  12.837359098<br />month: 1<br />month:  1","hour: 21<br />avg_delay:  12.942355890<br />month: 1<br />month:  1","hour: 22<br />avg_delay:   9.714285714<br />month: 1<br />month:  1","hour: 23<br />avg_delay:  -0.455882353<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[0.878881447693702,0.761122238709718,0.657133451311965,0.565892979565238,0.486378717534335,0.417989045753258,0.362001726323973,0.319004260329885,0.289451086645904,0.273775227009057,0.271747121100105,0.283196310535406,0.308174046232718,0.346731579109796,0.398920160084397,0.464791040074278,0.544395469997195,0.637784700770905,0.744420731679001,0.86034292475482,0.985893864066836,1.12240256814873,1.27119805553419,1.43360934475689,1.61096545435052,1.80459540284876,2.01582820878529,2.2561859320213,2.54674142189209,2.86299882381618,3.17737868073969,3.46684517626394,3.79002227583741,4.16242996057331,4.57005233778106,4.9988735147701,5.43487759884983,5.86404869732969,6.27237091751909,6.64582836672746,6.98179740426435,7.33630179870065,7.71102695745665,8.09645338587035,8.48306158927977,8.86133207302292,9.22174534243781,9.55478190286246,9.85092225963486,10.129801547009,10.4450084213922,10.7609585567975,11.0373590639213,11.242238848039,11.4502277126694,11.6753804571255,11.9001495432291,12.1069874328018,12.2783465876653,12.3966794696412,12.4444385405511,12.4040762622168,12.2718742706336,12.1029399448151,11.9022968551448,11.666584979244,11.3924442947344,11.0765147792375,10.7154364103748,10.3058491657679,9.84439302303837,9.33042725182473,8.76873932703884,8.16014221594171,7.50525969120924,6.80471552551732,6.0591334915418,5.26913736195858,4.43535090944355,3.55839790667258],"text":["hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-2.63572571878919,-2.46323760502274,-2.30203079546721,-2.1556148312159,-2.02663232802248,-1.91609063241202,-1.8224374542183,-1.74510934138784,-1.68300216001286,-1.6340876329593,-1.59486264249358,-1.56135688646644,-1.52985914874213,-1.49692568653677,-1.45946908271921,-1.4147912904098,-1.36057753162781,-1.29487145511291,-1.21566234699479,-1.11960458379425,-1.00825904866688,-0.884491963182328,-0.750194860385402,-0.605236086911684,-0.447012100191245,-0.270607766539185,-0.0694851113408075,0.17603679786244,0.482074056110616,0.798903163154163,1.09809750539199,1.38186115155293,1.72374434659893,2.12634330274634,2.5607580586171,3.00154398845637,3.42981486328672,3.8346908137592,4.21235632386508,4.56322141863725,4.89919045617414,5.27628720504664,5.68166907388616,6.09139065030724,6.48573206296605,6.85203779385896,7.18565868461084,7.48850397362397,7.76593823492385,8.05052037166125,8.3809127607302,8.696291191016,8.9572099297624,9.1569255279129,9.37502454328141,9.61740290258374,9.86130411156054,10.0855945168822,10.2714520563342,10.4025265569075,10.4644910320021,10.443993183543,10.3392181147498,10.1979669431901,10.0227145246607,9.80819573644038,9.5487870290878,9.23848158426261,8.87088321337295,8.43923940217423,7.93653016307001,7.35810647184857,6.70500484030693,5.975963543275,5.17067035002998,4.28979255413064,3.33472229516407,2.30729824238286,1.20956981306362,0.0436299394080493,7.0731658739371,7.66113200582348,8.23097648153429,8.78354468791952,9.31963849690399,9.83984903238851,10.3443208886084,10.8324738137708,11.3027480318009,11.7522558830067,12.1724589293616,12.5599896073767,12.9145479742123,13.2361015603809,13.5249742220476,13.7818791856288,14.0079129464401,14.2045304265174,14.3641593408906,14.4243860491002,14.3908323823749,14.2852411189964,14.1283803487214,13.9389949748977,13.7333580116673,13.5254308820573,13.3275521681651,13.1175081980801,12.825625922579,12.5091040820542,12.2090827223567,11.9359062843459,11.6210598321009,11.2578320002648,10.8706263521869,10.4803911155935,10.1015161214335,9.74038484102715,9.39631639235467,9.06440435235456,8.72843531481768,8.3323855111731,7.89340658090018,7.43994033441294,6.99620304108383,6.57934661694503,6.19851661840028,5.85630020507589,5.55182920097494,5.2566598560874,4.92709448447821,4.61140878767357,4.33633506618016,4.10114152891139,3.87979857223671,3.66894300889229,3.47245477642547,3.29259097145378,3.12929709947979,2.98004677680055,2.84029043330389,2.70450381035279,2.57044085665472,2.44936847162221,2.34437337055835,2.25730940288801,2.19038884475636,2.14620724120757,2.12774950753726,2.13835688469379,2.18163808697742,2.26190433330467,2.38311786204761,2.54644090686624,2.75206872391853,2.99938976309115,3.28740079034637,3.61629769809114,3.98548208244218,4.39348861417659,-2.63572571878919],"text":["hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1","hour: 23.000000<br />avg_delay:   3.55839791<br />month: 1<br />month:  1","hour: 22.772152<br />avg_delay:   4.43535091<br />month: 1<br />month:  1","hour: 22.544304<br />avg_delay:   5.26913736<br />month: 1<br />month:  1","hour: 22.316456<br />avg_delay:   6.05913349<br />month: 1<br />month:  1","hour: 22.088608<br />avg_delay:   6.80471553<br />month: 1<br />month:  1","hour: 21.860759<br />avg_delay:   7.50525969<br />month: 1<br />month:  1","hour: 21.632911<br />avg_delay:   8.16014222<br />month: 1<br />month:  1","hour: 21.405063<br />avg_delay:   8.76873933<br />month: 1<br />month:  1","hour: 21.177215<br />avg_delay:   9.33042725<br />month: 1<br />month:  1","hour: 20.949367<br />avg_delay:   9.84439302<br />month: 1<br />month:  1","hour: 20.721519<br />avg_delay:  10.30584917<br />month: 1<br />month:  1","hour: 20.493671<br />avg_delay:  10.71543641<br />month: 1<br />month:  1","hour: 20.265823<br />avg_delay:  11.07651478<br />month: 1<br />month:  1","hour: 20.037975<br />avg_delay:  11.39244429<br />month: 1<br />month:  1","hour: 19.810127<br />avg_delay:  11.66658498<br />month: 1<br />month:  1","hour: 19.582278<br />avg_delay:  11.90229686<br />month: 1<br />month:  1","hour: 19.354430<br />avg_delay:  12.10293994<br />month: 1<br />month:  1","hour: 19.126582<br />avg_delay:  12.27187427<br />month: 1<br />month:  1","hour: 18.898734<br />avg_delay:  12.40407626<br />month: 1<br />month:  1","hour: 18.670886<br />avg_delay:  12.44443854<br />month: 1<br />month:  1","hour: 18.443038<br />avg_delay:  12.39667947<br />month: 1<br />month:  1","hour: 18.215190<br />avg_delay:  12.27834659<br />month: 1<br />month:  1","hour: 17.987342<br />avg_delay:  12.10698743<br />month: 1<br />month:  1","hour: 17.759494<br />avg_delay:  11.90014954<br />month: 1<br />month:  1","hour: 17.531646<br />avg_delay:  11.67538046<br />month: 1<br />month:  1","hour: 17.303797<br />avg_delay:  11.45022771<br />month: 1<br />month:  1","hour: 17.075949<br />avg_delay:  11.24223885<br />month: 1<br />month:  1","hour: 16.848101<br />avg_delay:  11.03735906<br />month: 1<br />month:  1","hour: 16.620253<br />avg_delay:  10.76095856<br />month: 1<br />month:  1","hour: 16.392405<br />avg_delay:  10.44500842<br />month: 1<br />month:  1","hour: 16.164557<br />avg_delay:  10.12980155<br />month: 1<br />month:  1","hour: 15.936709<br />avg_delay:   9.85092226<br />month: 1<br />month:  1","hour: 15.708861<br />avg_delay:   9.55478190<br />month: 1<br />month:  1","hour: 15.481013<br />avg_delay:   9.22174534<br />month: 1<br />month:  1","hour: 15.253165<br />avg_delay:   8.86133207<br />month: 1<br />month:  1","hour: 15.025316<br />avg_delay:   8.48306159<br />month: 1<br />month:  1","hour: 14.797468<br />avg_delay:   8.09645339<br />month: 1<br />month:  1","hour: 14.569620<br />avg_delay:   7.71102696<br />month: 1<br />month:  1","hour: 14.341772<br />avg_delay:   7.33630180<br />month: 1<br />month:  1","hour: 14.113924<br />avg_delay:   6.98179740<br />month: 1<br />month:  1","hour: 13.886076<br />avg_delay:   6.64582837<br />month: 1<br />month:  1","hour: 13.658228<br />avg_delay:   6.27237092<br />month: 1<br />month:  1","hour: 13.430380<br />avg_delay:   5.86404870<br />month: 1<br />month:  1","hour: 13.202532<br />avg_delay:   5.43487760<br />month: 1<br />month:  1","hour: 12.974684<br />avg_delay:   4.99887351<br />month: 1<br />month:  1","hour: 12.746835<br />avg_delay:   4.57005234<br />month: 1<br />month:  1","hour: 12.518987<br />avg_delay:   4.16242996<br />month: 1<br />month:  1","hour: 12.291139<br />avg_delay:   3.79002228<br />month: 1<br />month:  1","hour: 12.063291<br />avg_delay:   3.46684518<br />month: 1<br />month:  1","hour: 11.835443<br />avg_delay:   3.17737868<br />month: 1<br />month:  1","hour: 11.607595<br />avg_delay:   2.86299882<br />month: 1<br />month:  1","hour: 11.379747<br />avg_delay:   2.54674142<br />month: 1<br />month:  1","hour: 11.151899<br />avg_delay:   2.25618593<br />month: 1<br />month:  1","hour: 10.924051<br />avg_delay:   2.01582821<br />month: 1<br />month:  1","hour: 10.696203<br />avg_delay:   1.80459540<br />month: 1<br />month:  1","hour: 10.468354<br />avg_delay:   1.61096545<br />month: 1<br />month:  1","hour: 10.240506<br />avg_delay:   1.43360934<br />month: 1<br />month:  1","hour: 10.012658<br />avg_delay:   1.27119806<br />month: 1<br />month:  1","hour:  9.784810<br />avg_delay:   1.12240257<br />month: 1<br />month:  1","hour:  9.556962<br />avg_delay:   0.98589386<br />month: 1<br />month:  1","hour:  9.329114<br />avg_delay:   0.86034292<br />month: 1<br />month:  1","hour:  9.101266<br />avg_delay:   0.74442073<br />month: 1<br />month:  1","hour:  8.873418<br />avg_delay:   0.63778470<br />month: 1<br />month:  1","hour:  8.645570<br />avg_delay:   0.54439547<br />month: 1<br />month:  1","hour:  8.417722<br />avg_delay:   0.46479104<br />month: 1<br />month:  1","hour:  8.189873<br />avg_delay:   0.39892016<br />month: 1<br />month:  1","hour:  7.962025<br />avg_delay:   0.34673158<br />month: 1<br />month:  1","hour:  7.734177<br />avg_delay:   0.30817405<br />month: 1<br />month:  1","hour:  7.506329<br />avg_delay:   0.28319631<br />month: 1<br />month:  1","hour:  7.278481<br />avg_delay:   0.27174712<br />month: 1<br />month:  1","hour:  7.050633<br />avg_delay:   0.27377523<br />month: 1<br />month:  1","hour:  6.822785<br />avg_delay:   0.28945109<br />month: 1<br />month:  1","hour:  6.594937<br />avg_delay:   0.31900426<br />month: 1<br />month:  1","hour:  6.367089<br />avg_delay:   0.36200173<br />month: 1<br />month:  1","hour:  6.139241<br />avg_delay:   0.41798905<br />month: 1<br />month:  1","hour:  5.911392<br />avg_delay:   0.48637872<br />month: 1<br />month:  1","hour:  5.683544<br />avg_delay:   0.56589298<br />month: 1<br />month:  1","hour:  5.455696<br />avg_delay:   0.65713345<br />month: 1<br />month:  1","hour:  5.227848<br />avg_delay:   0.76112224<br />month: 1<br />month:  1","hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1","hour:  5.000000<br />avg_delay:   0.87888145<br />month: 1<br />month:  1"],"frame":"1","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"2","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[0.0359712230215827,0.495811518324607,-3.77604166666667,3.99699248120301,2.86337625178827,2.77739130434783,0.649746192893401,3.53763440860215,6.66446402349486,9.53994293865906,8.36965436438196,7.76975169300226,8.00873616773442,5.96881220968812,10.9972677595628,10.5679653679654,16.1343873517787,17.2542372881356,4.31428571428571],"text":["hour:  5<br />avg_delay:   0.035971223<br />month: 2<br />month:  2","hour:  6<br />avg_delay:   0.495811518<br />month: 2<br />month:  2","hour:  7<br />avg_delay:  -3.776041667<br />month: 2<br />month:  2","hour:  8<br />avg_delay:   3.996992481<br />month: 2<br />month:  2","hour:  9<br />avg_delay:   2.863376252<br />month: 2<br />month:  2","hour: 10<br />avg_delay:   2.777391304<br />month: 2<br />month:  2","hour: 11<br />avg_delay:   0.649746193<br />month: 2<br />month:  2","hour: 12<br />avg_delay:   3.537634409<br />month: 2<br />month:  2","hour: 13<br />avg_delay:   6.664464023<br />month: 2<br />month:  2","hour: 14<br />avg_delay:   9.539942939<br />month: 2<br />month:  2","hour: 15<br />avg_delay:   8.369654364<br />month: 2<br />month:  2","hour: 16<br />avg_delay:   7.769751693<br />month: 2<br />month:  2","hour: 17<br />avg_delay:   8.008736168<br />month: 2<br />month:  2","hour: 18<br />avg_delay:   5.968812210<br />month: 2<br />month:  2","hour: 19<br />avg_delay:  10.997267760<br />month: 2<br />month:  2","hour: 20<br />avg_delay:  10.567965368<br />month: 2<br />month:  2","hour: 21<br />avg_delay:  16.134387352<br />month: 2<br />month:  2","hour: 22<br />avg_delay:  17.254237288<br />month: 2<br />month:  2","hour: 23<br />avg_delay:   4.314285714<br />month: 2<br />month:  2"],"frame":"2","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-0.380197908846829,-0.331134297329942,-0.274492803338359,-0.210628613040704,-0.139896912605599,-0.0625626650823489,0.0216453811857439,0.113017002854433,0.211821172336605,0.318331380792301,0.432847017299555,0.555357547038708,0.685759533094982,0.8239495385536,0.969824126499786,1.12327986001877,1.28421330219576,1.45252101611599,1.62946597287861,1.82413077755282,2.03541706500958,2.25992172111567,2.49424163173786,2.73497368274293,2.97871475999765,3.2220617493688,3.46161153672315,3.71199470021189,4.01257599580998,4.33087647724526,4.62927510998179,4.87451666307188,5.11662370374036,5.375541111489,5.64437190303979,5.9162190951147,6.18418570443572,6.44137474772482,6.68088924170398,6.89583220309518,7.07845748099937,7.22302190459213,7.3377485249893,7.4324038740588,7.5167544836686,7.60056688568662,7.69360761198082,7.80564319441914,7.94644016486951,8.0841694399558,8.14182582636882,8.17288539095603,8.23762699074512,8.39198242782127,8.61704009218646,8.88481951868411,9.1790587737348,9.48349592375905,9.7818690351774,10.0579161744104,10.2953754078786,10.4779848020026,10.6014584275742,10.7133423798497,10.8190534436024,10.9168208357201,11.004873773091,11.081441472603,11.1447531511441,11.1930380256023,11.2245253128657,11.2387279141925,11.237835754815,11.2222636617157,11.1923389395283,11.1483888928864,11.0907408264234,11.0197220447732,10.9356598525692,10.838881554445],"text":["hour:  5.000000<br />avg_delay:  -0.38019791<br />month: 2<br />month:  2","hour:  5.227848<br />avg_delay:  -0.33113430<br />month: 2<br />month:  2","hour:  5.455696<br />avg_delay:  -0.27449280<br />month: 2<br />month:  2","hour:  5.683544<br />avg_delay:  -0.21062861<br />month: 2<br />month:  2","hour:  5.911392<br />avg_delay:  -0.13989691<br />month: 2<br />month:  2","hour:  6.139241<br />avg_delay:  -0.06256267<br />month: 2<br />month:  2","hour:  6.367089<br />avg_delay:   0.02164538<br />month: 2<br />month:  2","hour:  6.594937<br />avg_delay:   0.11301700<br />month: 2<br />month:  2","hour:  6.822785<br />avg_delay:   0.21182117<br />month: 2<br />month:  2","hour:  7.050633<br />avg_delay:   0.31833138<br />month: 2<br />month:  2","hour:  7.278481<br />avg_delay:   0.43284702<br />month: 2<br />month:  2","hour:  7.506329<br />avg_delay:   0.55535755<br />month: 2<br />month:  2","hour:  7.734177<br />avg_delay:   0.68575953<br />month: 2<br />month:  2","hour:  7.962025<br />avg_delay:   0.82394954<br />month: 2<br />month:  2","hour:  8.189873<br />avg_delay:   0.96982413<br />month: 2<br />month:  2","hour:  8.417722<br />avg_delay:   1.12327986<br />month: 2<br />month:  2","hour:  8.645570<br />avg_delay:   1.28421330<br />month: 2<br />month:  2","hour:  8.873418<br />avg_delay:   1.45252102<br />month: 2<br />month:  2","hour:  9.101266<br />avg_delay:   1.62946597<br />month: 2<br />month:  2","hour:  9.329114<br />avg_delay:   1.82413078<br />month: 2<br />month:  2","hour:  9.556962<br />avg_delay:   2.03541707<br />month: 2<br />month:  2","hour:  9.784810<br />avg_delay:   2.25992172<br />month: 2<br />month:  2","hour: 10.012658<br />avg_delay:   2.49424163<br />month: 2<br />month:  2","hour: 10.240506<br />avg_delay:   2.73497368<br />month: 2<br />month:  2","hour: 10.468354<br />avg_delay:   2.97871476<br />month: 2<br />month:  2","hour: 10.696203<br />avg_delay:   3.22206175<br />month: 2<br />month:  2","hour: 10.924051<br />avg_delay:   3.46161154<br />month: 2<br />month:  2","hour: 11.151899<br />avg_delay:   3.71199470<br />month: 2<br />month:  2","hour: 11.379747<br />avg_delay:   4.01257600<br />month: 2<br />month:  2","hour: 11.607595<br />avg_delay:   4.33087648<br />month: 2<br />month:  2","hour: 11.835443<br />avg_delay:   4.62927511<br />month: 2<br />month:  2","hour: 12.063291<br />avg_delay:   4.87451666<br />month: 2<br />month:  2","hour: 12.291139<br />avg_delay:   5.11662370<br />month: 2<br />month:  2","hour: 12.518987<br />avg_delay:   5.37554111<br />month: 2<br />month:  2","hour: 12.746835<br />avg_delay:   5.64437190<br />month: 2<br />month:  2","hour: 12.974684<br />avg_delay:   5.91621910<br />month: 2<br />month:  2","hour: 13.202532<br />avg_delay:   6.18418570<br />month: 2<br />month:  2","hour: 13.430380<br />avg_delay:   6.44137475<br />month: 2<br />month:  2","hour: 13.658228<br />avg_delay:   6.68088924<br />month: 2<br />month:  2","hour: 13.886076<br />avg_delay:   6.89583220<br />month: 2<br />month:  2","hour: 14.113924<br />avg_delay:   7.07845748<br />month: 2<br />month:  2","hour: 14.341772<br />avg_delay:   7.22302190<br />month: 2<br />month:  2","hour: 14.569620<br />avg_delay:   7.33774852<br />month: 2<br />month:  2","hour: 14.797468<br />avg_delay:   7.43240387<br />month: 2<br />month:  2","hour: 15.025316<br />avg_delay:   7.51675448<br />month: 2<br />month:  2","hour: 15.253165<br />avg_delay:   7.60056689<br />month: 2<br />month:  2","hour: 15.481013<br />avg_delay:   7.69360761<br />month: 2<br />month:  2","hour: 15.708861<br />avg_delay:   7.80564319<br />month: 2<br />month:  2","hour: 15.936709<br />avg_delay:   7.94644016<br />month: 2<br />month:  2","hour: 16.164557<br />avg_delay:   8.08416944<br />month: 2<br />month:  2","hour: 16.392405<br />avg_delay:   8.14182583<br />month: 2<br />month:  2","hour: 16.620253<br />avg_delay:   8.17288539<br />month: 2<br />month:  2","hour: 16.848101<br />avg_delay:   8.23762699<br />month: 2<br />month:  2","hour: 17.075949<br />avg_delay:   8.39198243<br />month: 2<br />month:  2","hour: 17.303797<br />avg_delay:   8.61704009<br />month: 2<br />month:  2","hour: 17.531646<br />avg_delay:   8.88481952<br />month: 2<br />month:  2","hour: 17.759494<br />avg_delay:   9.17905877<br />month: 2<br />month:  2","hour: 17.987342<br />avg_delay:   9.48349592<br />month: 2<br />month:  2","hour: 18.215190<br />avg_delay:   9.78186904<br />month: 2<br />month:  2","hour: 18.443038<br />avg_delay:  10.05791617<br />month: 2<br />month:  2","hour: 18.670886<br />avg_delay:  10.29537541<br />month: 2<br />month:  2","hour: 18.898734<br />avg_delay:  10.47798480<br />month: 2<br />month:  2","hour: 19.126582<br />avg_delay:  10.60145843<br />month: 2<br />month:  2","hour: 19.354430<br />avg_delay:  10.71334238<br />month: 2<br />month:  2","hour: 19.582278<br />avg_delay:  10.81905344<br />month: 2<br />month:  2","hour: 19.810127<br />avg_delay:  10.91682084<br />month: 2<br />month:  2","hour: 20.037975<br />avg_delay:  11.00487377<br />month: 2<br />month:  2","hour: 20.265823<br />avg_delay:  11.08144147<br />month: 2<br />month:  2","hour: 20.493671<br />avg_delay:  11.14475315<br />month: 2<br />month:  2","hour: 20.721519<br />avg_delay:  11.19303803<br />month: 2<br />month:  2","hour: 20.949367<br />avg_delay:  11.22452531<br />month: 2<br />month:  2","hour: 21.177215<br />avg_delay:  11.23872791<br />month: 2<br />month:  2","hour: 21.405063<br />avg_delay:  11.23783575<br />month: 2<br />month:  2","hour: 21.632911<br />avg_delay:  11.22226366<br />month: 2<br />month:  2","hour: 21.860759<br />avg_delay:  11.19233894<br />month: 2<br />month:  2","hour: 22.088608<br />avg_delay:  11.14838889<br />month: 2<br />month:  2","hour: 22.316456<br />avg_delay:  11.09074083<br />month: 2<br />month:  2","hour: 22.544304<br />avg_delay:  11.01972204<br />month: 2<br />month:  2","hour: 22.772152<br />avg_delay:  10.93565985<br />month: 2<br />month:  2","hour: 23.000000<br />avg_delay:  10.83888155<br />month: 2<br />month:  2"],"frame":"2","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-6.0100572216683,-5.49606210696916,-5.01461811571278,-4.57006492204225,-4.16535351924231,-3.80139878261523,-3.47748970883197,-3.19337504407836,-2.94774510457375,-2.73777104573513,-2.55717430320199,-2.3993325512369,-2.25848652623329,-2.12930541569445,-2.00702918593316,-1.88752151442894,-1.76726001640115,-1.64329645146533,-1.51028520034234,-1.34744015253705,-1.15890873447337,-0.954814188721798,-0.743718456970868,-0.530942647920405,-0.317848284517198,-0.102094076804737,0.121260806370849,0.379916200320517,0.705296904145384,1.02451316912018,1.298586946411,1.53469341325196,1.80676473749866,2.11404391157583,2.425791966816,2.71680484998206,2.97238404926026,3.19065600771264,3.38106317430395,3.5598166638719,3.7424419417761,3.92319583719211,4.08702978497712,4.22060221888334,4.31734023853596,4.38198694946283,4.43211041206765,4.49578422817744,4.6066169150496,4.75348127638501,4.83546251824375,4.86560629929142,4.90554849085374,5.05163169746896,5.29288426601292,5.58825647416927,5.91314244307147,6.24553583505032,6.56713312533993,6.86359037492745,7.12380447778876,7.33823362878163,7.50564095999288,7.66186906125283,7.80825206915467,7.93996752328718,8.05161881884293,8.13719541327468,8.19006305286845,8.20301670510075,8.16842288633824,8.07937382850332,7.93205099169298,7.72354586518766,7.4526864203523,7.11986967557119,6.72665374091534,6.27531199819922,5.76845541510947,5.20876466354005,16.4689984453499,16.1028642900288,15.7641320913471,15.4548279119316,15.1769081102015,14.9319914587043,14.7209814582438,14.543620517937,14.3980819998816,14.2806277393931,14.1830593461039,14.0994432494197,14.0256875319312,13.958128727339,13.8936741481531,13.8298548180501,13.7648156984467,13.6972758951555,13.6177359752235,13.4669463379685,13.2522419738934,12.9966049450149,12.7214560124678,12.4449751043981,12.181382563199,11.94119591836,11.7323331581736,11.5697054906365,11.4801644826206,11.4481891344939,11.4148576035266,11.2862634146894,11.1155021606608,10.955104811894,10.8191468219104,10.7161687288012,10.6442055292343,10.5884672650015,10.5228479719922,10.4144730202226,10.2318477423184,9.980715309104,9.69209348773699,9.39598735961117,9.11563334024734,8.86295183926357,8.63703831140218,8.42648266998205,8.21433991289179,7.95996327355258,7.63723978537033,7.31985508747458,7.04407320010326,6.80196226707546,6.54621757554233,6.27527780451249,6.00089001340626,5.73220172044658,5.47465763095314,5.22974286449254,4.99570170764269,4.76921714609956,4.54833848369732,4.33568662079267,4.13408123446648,3.94667743893273,3.77720449280165,3.63000559242325,3.51004764531432,3.4228683378011,3.37443380731974,3.37138744924697,3.41940904978722,3.52078047120346,3.67627345245053,3.88555969403111,4.14880769596084,4.46563250903606,4.83379351230927,5.24966140397464,-6.0100572216683],"text":["hour:  5.000000<br />avg_delay:  -0.38019791<br />month: 2<br />month:  2","hour:  5.227848<br />avg_delay:  -0.33113430<br />month: 2<br />month:  2","hour:  5.455696<br />avg_delay:  -0.27449280<br />month: 2<br />month:  2","hour:  5.683544<br />avg_delay:  -0.21062861<br />month: 2<br />month:  2","hour:  5.911392<br />avg_delay:  -0.13989691<br />month: 2<br />month:  2","hour:  6.139241<br />avg_delay:  -0.06256267<br />month: 2<br />month:  2","hour:  6.367089<br />avg_delay:   0.02164538<br />month: 2<br />month:  2","hour:  6.594937<br />avg_delay:   0.11301700<br />month: 2<br />month:  2","hour:  6.822785<br />avg_delay:   0.21182117<br />month: 2<br />month:  2","hour:  7.050633<br />avg_delay:   0.31833138<br />month: 2<br />month:  2","hour:  7.278481<br />avg_delay:   0.43284702<br />month: 2<br />month:  2","hour:  7.506329<br />avg_delay:   0.55535755<br />month: 2<br />month:  2","hour:  7.734177<br />avg_delay:   0.68575953<br />month: 2<br />month:  2","hour:  7.962025<br />avg_delay:   0.82394954<br />month: 2<br />month:  2","hour:  8.189873<br />avg_delay:   0.96982413<br />month: 2<br />month:  2","hour:  8.417722<br />avg_delay:   1.12327986<br />month: 2<br />month:  2","hour:  8.645570<br />avg_delay:   1.28421330<br />month: 2<br />month:  2","hour:  8.873418<br />avg_delay:   1.45252102<br />month: 2<br />month:  2","hour:  9.101266<br />avg_delay:   1.62946597<br />month: 2<br />month:  2","hour:  9.329114<br />avg_delay:   1.82413078<br />month: 2<br />month:  2","hour:  9.556962<br />avg_delay:   2.03541707<br />month: 2<br />month:  2","hour:  9.784810<br />avg_delay:   2.25992172<br />month: 2<br />month:  2","hour: 10.012658<br />avg_delay:   2.49424163<br />month: 2<br />month:  2","hour: 10.240506<br />avg_delay:   2.73497368<br />month: 2<br />month:  2","hour: 10.468354<br />avg_delay:   2.97871476<br />month: 2<br />month:  2","hour: 10.696203<br />avg_delay:   3.22206175<br />month: 2<br />month:  2","hour: 10.924051<br />avg_delay:   3.46161154<br />month: 2<br />month:  2","hour: 11.151899<br />avg_delay:   3.71199470<br />month: 2<br />month:  2","hour: 11.379747<br />avg_delay:   4.01257600<br />month: 2<br />month:  2","hour: 11.607595<br />avg_delay:   4.33087648<br />month: 2<br />month:  2","hour: 11.835443<br />avg_delay:   4.62927511<br />month: 2<br />month:  2","hour: 12.063291<br />avg_delay:   4.87451666<br />month: 2<br />month:  2","hour: 12.291139<br />avg_delay:   5.11662370<br />month: 2<br />month:  2","hour: 12.518987<br />avg_delay:   5.37554111<br />month: 2<br />month:  2","hour: 12.746835<br />avg_delay:   5.64437190<br />month: 2<br />month:  2","hour: 12.974684<br />avg_delay:   5.91621910<br />month: 2<br />month:  2","hour: 13.202532<br />avg_delay:   6.18418570<br />month: 2<br />month:  2","hour: 13.430380<br />avg_delay:   6.44137475<br />month: 2<br />month:  2","hour: 13.658228<br />avg_delay:   6.68088924<br />month: 2<br />month:  2","hour: 13.886076<br />avg_delay:   6.89583220<br />month: 2<br />month:  2","hour: 14.113924<br />avg_delay:   7.07845748<br />month: 2<br />month:  2","hour: 14.341772<br />avg_delay:   7.22302190<br />month: 2<br />month:  2","hour: 14.569620<br />avg_delay:   7.33774852<br />month: 2<br />month:  2","hour: 14.797468<br />avg_delay:   7.43240387<br />month: 2<br />month:  2","hour: 15.025316<br />avg_delay:   7.51675448<br />month: 2<br />month:  2","hour: 15.253165<br />avg_delay:   7.60056689<br />month: 2<br />month:  2","hour: 15.481013<br />avg_delay:   7.69360761<br />month: 2<br />month:  2","hour: 15.708861<br />avg_delay:   7.80564319<br />month: 2<br />month:  2","hour: 15.936709<br />avg_delay:   7.94644016<br />month: 2<br />month:  2","hour: 16.164557<br />avg_delay:   8.08416944<br />month: 2<br />month:  2","hour: 16.392405<br />avg_delay:   8.14182583<br />month: 2<br />month:  2","hour: 16.620253<br />avg_delay:   8.17288539<br />month: 2<br />month:  2","hour: 16.848101<br />avg_delay:   8.23762699<br />month: 2<br />month:  2","hour: 17.075949<br />avg_delay:   8.39198243<br />month: 2<br />month:  2","hour: 17.303797<br />avg_delay:   8.61704009<br />month: 2<br />month:  2","hour: 17.531646<br />avg_delay:   8.88481952<br />month: 2<br />month:  2","hour: 17.759494<br />avg_delay:   9.17905877<br />month: 2<br />month:  2","hour: 17.987342<br />avg_delay:   9.48349592<br />month: 2<br />month:  2","hour: 18.215190<br />avg_delay:   9.78186904<br />month: 2<br />month:  2","hour: 18.443038<br />avg_delay:  10.05791617<br />month: 2<br />month:  2","hour: 18.670886<br />avg_delay:  10.29537541<br />month: 2<br />month:  2","hour: 18.898734<br />avg_delay:  10.47798480<br />month: 2<br />month:  2","hour: 19.126582<br />avg_delay:  10.60145843<br />month: 2<br />month:  2","hour: 19.354430<br />avg_delay:  10.71334238<br />month: 2<br />month:  2","hour: 19.582278<br />avg_delay:  10.81905344<br />month: 2<br />month:  2","hour: 19.810127<br />avg_delay:  10.91682084<br />month: 2<br />month:  2","hour: 20.037975<br />avg_delay:  11.00487377<br />month: 2<br />month:  2","hour: 20.265823<br />avg_delay:  11.08144147<br />month: 2<br />month:  2","hour: 20.493671<br />avg_delay:  11.14475315<br />month: 2<br />month:  2","hour: 20.721519<br />avg_delay:  11.19303803<br />month: 2<br />month:  2","hour: 20.949367<br />avg_delay:  11.22452531<br />month: 2<br />month:  2","hour: 21.177215<br />avg_delay:  11.23872791<br />month: 2<br />month:  2","hour: 21.405063<br />avg_delay:  11.23783575<br />month: 2<br />month:  2","hour: 21.632911<br />avg_delay:  11.22226366<br />month: 2<br />month:  2","hour: 21.860759<br />avg_delay:  11.19233894<br />month: 2<br />month:  2","hour: 22.088608<br />avg_delay:  11.14838889<br />month: 2<br />month:  2","hour: 22.316456<br />avg_delay:  11.09074083<br />month: 2<br />month:  2","hour: 22.544304<br />avg_delay:  11.01972204<br />month: 2<br />month:  2","hour: 22.772152<br />avg_delay:  10.93565985<br />month: 2<br />month:  2","hour: 23.000000<br />avg_delay:  10.83888155<br />month: 2<br />month:  2","hour: 23.000000<br />avg_delay:  10.83888155<br />month: 2<br />month:  2","hour: 22.772152<br />avg_delay:  10.93565985<br />month: 2<br />month:  2","hour: 22.544304<br />avg_delay:  11.01972204<br />month: 2<br />month:  2","hour: 22.316456<br />avg_delay:  11.09074083<br />month: 2<br />month:  2","hour: 22.088608<br />avg_delay:  11.14838889<br />month: 2<br />month:  2","hour: 21.860759<br />avg_delay:  11.19233894<br />month: 2<br />month:  2","hour: 21.632911<br />avg_delay:  11.22226366<br />month: 2<br />month:  2","hour: 21.405063<br />avg_delay:  11.23783575<br />month: 2<br />month:  2","hour: 21.177215<br />avg_delay:  11.23872791<br />month: 2<br />month:  2","hour: 20.949367<br />avg_delay:  11.22452531<br />month: 2<br />month:  2","hour: 20.721519<br />avg_delay:  11.19303803<br />month: 2<br />month:  2","hour: 20.493671<br />avg_delay:  11.14475315<br />month: 2<br />month:  2","hour: 20.265823<br />avg_delay:  11.08144147<br />month: 2<br />month:  2","hour: 20.037975<br />avg_delay:  11.00487377<br />month: 2<br />month:  2","hour: 19.810127<br />avg_delay:  10.91682084<br />month: 2<br />month:  2","hour: 19.582278<br />avg_delay:  10.81905344<br />month: 2<br />month:  2","hour: 19.354430<br />avg_delay:  10.71334238<br />month: 2<br />month:  2","hour: 19.126582<br />avg_delay:  10.60145843<br />month: 2<br />month:  2","hour: 18.898734<br />avg_delay:  10.47798480<br />month: 2<br />month:  2","hour: 18.670886<br />avg_delay:  10.29537541<br />month: 2<br />month:  2","hour: 18.443038<br />avg_delay:  10.05791617<br />month: 2<br />month:  2","hour: 18.215190<br />avg_delay:   9.78186904<br />month: 2<br />month:  2","hour: 17.987342<br />avg_delay:   9.48349592<br />month: 2<br />month:  2","hour: 17.759494<br />avg_delay:   9.17905877<br />month: 2<br />month:  2","hour: 17.531646<br />avg_delay:   8.88481952<br />month: 2<br />month:  2","hour: 17.303797<br />avg_delay:   8.61704009<br />month: 2<br />month:  2","hour: 17.075949<br />avg_delay:   8.39198243<br />month: 2<br />month:  2","hour: 16.848101<br />avg_delay:   8.23762699<br />month: 2<br />month:  2","hour: 16.620253<br />avg_delay:   8.17288539<br />month: 2<br />month:  2","hour: 16.392405<br />avg_delay:   8.14182583<br />month: 2<br />month:  2","hour: 16.164557<br />avg_delay:   8.08416944<br />month: 2<br />month:  2","hour: 15.936709<br />avg_delay:   7.94644016<br />month: 2<br />month:  2","hour: 15.708861<br />avg_delay:   7.80564319<br />month: 2<br />month:  2","hour: 15.481013<br />avg_delay:   7.69360761<br />month: 2<br />month:  2","hour: 15.253165<br />avg_delay:   7.60056689<br />month: 2<br />month:  2","hour: 15.025316<br />avg_delay:   7.51675448<br />month: 2<br />month:  2","hour: 14.797468<br />avg_delay:   7.43240387<br />month: 2<br />month:  2","hour: 14.569620<br />avg_delay:   7.33774852<br />month: 2<br />month:  2","hour: 14.341772<br />avg_delay:   7.22302190<br />month: 2<br />month:  2","hour: 14.113924<br />avg_delay:   7.07845748<br />month: 2<br />month:  2","hour: 13.886076<br />avg_delay:   6.89583220<br />month: 2<br />month:  2","hour: 13.658228<br />avg_delay:   6.68088924<br />month: 2<br />month:  2","hour: 13.430380<br />avg_delay:   6.44137475<br />month: 2<br />month:  2","hour: 13.202532<br />avg_delay:   6.18418570<br />month: 2<br />month:  2","hour: 12.974684<br />avg_delay:   5.91621910<br />month: 2<br />month:  2","hour: 12.746835<br />avg_delay:   5.64437190<br />month: 2<br />month:  2","hour: 12.518987<br />avg_delay:   5.37554111<br />month: 2<br />month:  2","hour: 12.291139<br />avg_delay:   5.11662370<br />month: 2<br />month:  2","hour: 12.063291<br />avg_delay:   4.87451666<br />month: 2<br />month:  2","hour: 11.835443<br />avg_delay:   4.62927511<br />month: 2<br />month:  2","hour: 11.607595<br />avg_delay:   4.33087648<br />month: 2<br />month:  2","hour: 11.379747<br />avg_delay:   4.01257600<br />month: 2<br />month:  2","hour: 11.151899<br />avg_delay:   3.71199470<br />month: 2<br />month:  2","hour: 10.924051<br />avg_delay:   3.46161154<br />month: 2<br />month:  2","hour: 10.696203<br />avg_delay:   3.22206175<br />month: 2<br />month:  2","hour: 10.468354<br />avg_delay:   2.97871476<br />month: 2<br />month:  2","hour: 10.240506<br />avg_delay:   2.73497368<br />month: 2<br />month:  2","hour: 10.012658<br />avg_delay:   2.49424163<br />month: 2<br />month:  2","hour:  9.784810<br />avg_delay:   2.25992172<br />month: 2<br />month:  2","hour:  9.556962<br />avg_delay:   2.03541707<br />month: 2<br />month:  2","hour:  9.329114<br />avg_delay:   1.82413078<br />month: 2<br />month:  2","hour:  9.101266<br />avg_delay:   1.62946597<br />month: 2<br />month:  2","hour:  8.873418<br />avg_delay:   1.45252102<br />month: 2<br />month:  2","hour:  8.645570<br />avg_delay:   1.28421330<br />month: 2<br />month:  2","hour:  8.417722<br />avg_delay:   1.12327986<br />month: 2<br />month:  2","hour:  8.189873<br />avg_delay:   0.96982413<br />month: 2<br />month:  2","hour:  7.962025<br />avg_delay:   0.82394954<br />month: 2<br />month:  2","hour:  7.734177<br />avg_delay:   0.68575953<br />month: 2<br />month:  2","hour:  7.506329<br />avg_delay:   0.55535755<br />month: 2<br />month:  2","hour:  7.278481<br />avg_delay:   0.43284702<br />month: 2<br />month:  2","hour:  7.050633<br />avg_delay:   0.31833138<br />month: 2<br />month:  2","hour:  6.822785<br />avg_delay:   0.21182117<br />month: 2<br />month:  2","hour:  6.594937<br />avg_delay:   0.11301700<br />month: 2<br />month:  2","hour:  6.367089<br />avg_delay:   0.02164538<br />month: 2<br />month:  2","hour:  6.139241<br />avg_delay:  -0.06256267<br />month: 2<br />month:  2","hour:  5.911392<br />avg_delay:  -0.13989691<br />month: 2<br />month:  2","hour:  5.683544<br />avg_delay:  -0.21062861<br />month: 2<br />month:  2","hour:  5.455696<br />avg_delay:  -0.27449280<br />month: 2<br />month:  2","hour:  5.227848<br />avg_delay:  -0.33113430<br />month: 2<br />month:  2","hour:  5.000000<br />avg_delay:  -0.38019791<br />month: 2<br />month:  2","hour:  5.000000<br />avg_delay:  -0.38019791<br />month: 2<br />month:  2"],"frame":"2","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"3","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-6.08805031446541,-4.60352014821677,-6.00218459858001,-1.78059836808704,-0.296945701357466,2.83098591549296,2.55981941309255,2.87921727395412,6.16666666666667,8.38356973995272,9.34349593495935,9.61571428571429,13.0009960159363,6.17966493356441,14.317215727949,15.2903225806452,23.8443298969072,19.8847736625514,11.9130434782609],"text":["hour:  5<br />avg_delay:  -6.088050314<br />month: 3<br />month:  3","hour:  6<br />avg_delay:  -4.603520148<br />month: 3<br />month:  3","hour:  7<br />avg_delay:  -6.002184599<br />month: 3<br />month:  3","hour:  8<br />avg_delay:  -1.780598368<br />month: 3<br />month:  3","hour:  9<br />avg_delay:  -0.296945701<br />month: 3<br />month:  3","hour: 10<br />avg_delay:   2.830985915<br />month: 3<br />month:  3","hour: 11<br />avg_delay:   2.559819413<br />month: 3<br />month:  3","hour: 12<br />avg_delay:   2.879217274<br />month: 3<br />month:  3","hour: 13<br />avg_delay:   6.166666667<br />month: 3<br />month:  3","hour: 14<br />avg_delay:   8.383569740<br />month: 3<br />month:  3","hour: 15<br />avg_delay:   9.343495935<br />month: 3<br />month:  3","hour: 16<br />avg_delay:   9.615714286<br />month: 3<br />month:  3","hour: 17<br />avg_delay:  13.000996016<br />month: 3<br />month:  3","hour: 18<br />avg_delay:   6.179664934<br />month: 3<br />month:  3","hour: 19<br />avg_delay:  14.317215728<br />month: 3<br />month:  3","hour: 20<br />avg_delay:  15.290322581<br />month: 3<br />month:  3","hour: 21<br />avg_delay:  23.844329897<br />month: 3<br />month:  3","hour: 22<br />avg_delay:  19.884773663<br />month: 3<br />month:  3","hour: 23<br />avg_delay:  11.913043478<br />month: 3<br />month:  3"],"frame":"3","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-6.63774491553523,-6.30115809429055,-5.96338925335805,-5.62389276252036,-5.28212299156014,-4.93773873861216,-4.59137607012964,-4.24341513473362,-3.89417509373892,-3.54395173283492,-3.19236544379143,-2.83922590015275,-2.48460410700865,-2.12857106944887,-1.77119779256319,-1.41255528144135,-1.05271454117313,-0.691746576848264,-0.32845419957131,0.0456496604668338,0.429658699120309,0.820532301432144,1.21522985244535,1.61071073720296,2.003934340748,2.39186004812349,2.77144724437245,3.14983628849864,3.54988215671883,3.95584122026508,4.34913690391133,4.71304716762237,5.06712210808041,5.4202476213605,5.77019405126225,6.11473174158525,6.4516310361291,6.77866227869339,7.09359581307771,7.39420198308167,7.67319835823262,7.90432973313688,8.09639092377984,8.26392853113473,8.42148915617477,8.58361939987317,8.76486586320314,8.97977514713791,9.24289385265069,9.54057022209172,9.81556769079925,10.0861863918383,10.3750010555036,10.7050314159499,11.0928489530962,11.5259699734412,11.9871836929052,12.4592793274084,12.9250460928709,13.3672732052129,13.7687498803547,14.1122653342162,14.3931866495751,14.6615054697746,14.923229260635,15.1768320247666,15.4207877647794,15.6535704832835,15.873654182889,16.079512866206,16.2696205358446,16.4435144798992,16.6029652801389,16.7482872228261,16.8797223471499,16.9975126922993,17.101900297463,17.1931272018302,17.2714354445896,17.3370670649303],"text":["hour:  5.000000<br />avg_delay:  -6.63774492<br />month: 3<br />month:  3","hour:  5.227848<br />avg_delay:  -6.30115809<br />month: 3<br />month:  3","hour:  5.455696<br />avg_delay:  -5.96338925<br />month: 3<br />month:  3","hour:  5.683544<br />avg_delay:  -5.62389276<br />month: 3<br />month:  3","hour:  5.911392<br />avg_delay:  -5.28212299<br />month: 3<br />month:  3","hour:  6.139241<br />avg_delay:  -4.93773874<br />month: 3<br />month:  3","hour:  6.367089<br />avg_delay:  -4.59137607<br />month: 3<br />month:  3","hour:  6.594937<br />avg_delay:  -4.24341513<br />month: 3<br />month:  3","hour:  6.822785<br />avg_delay:  -3.89417509<br />month: 3<br />month:  3","hour:  7.050633<br />avg_delay:  -3.54395173<br />month: 3<br />month:  3","hour:  7.278481<br />avg_delay:  -3.19236544<br />month: 3<br />month:  3","hour:  7.506329<br />avg_delay:  -2.83922590<br />month: 3<br />month:  3","hour:  7.734177<br />avg_delay:  -2.48460411<br />month: 3<br />month:  3","hour:  7.962025<br />avg_delay:  -2.12857107<br />month: 3<br />month:  3","hour:  8.189873<br />avg_delay:  -1.77119779<br />month: 3<br />month:  3","hour:  8.417722<br />avg_delay:  -1.41255528<br />month: 3<br />month:  3","hour:  8.645570<br />avg_delay:  -1.05271454<br />month: 3<br />month:  3","hour:  8.873418<br />avg_delay:  -0.69174658<br />month: 3<br />month:  3","hour:  9.101266<br />avg_delay:  -0.32845420<br />month: 3<br />month:  3","hour:  9.329114<br />avg_delay:   0.04564966<br />month: 3<br />month:  3","hour:  9.556962<br />avg_delay:   0.42965870<br />month: 3<br />month:  3","hour:  9.784810<br />avg_delay:   0.82053230<br />month: 3<br />month:  3","hour: 10.012658<br />avg_delay:   1.21522985<br />month: 3<br />month:  3","hour: 10.240506<br />avg_delay:   1.61071074<br />month: 3<br />month:  3","hour: 10.468354<br />avg_delay:   2.00393434<br />month: 3<br />month:  3","hour: 10.696203<br />avg_delay:   2.39186005<br />month: 3<br />month:  3","hour: 10.924051<br />avg_delay:   2.77144724<br />month: 3<br />month:  3","hour: 11.151899<br />avg_delay:   3.14983629<br />month: 3<br />month:  3","hour: 11.379747<br />avg_delay:   3.54988216<br />month: 3<br />month:  3","hour: 11.607595<br />avg_delay:   3.95584122<br />month: 3<br />month:  3","hour: 11.835443<br />avg_delay:   4.34913690<br />month: 3<br />month:  3","hour: 12.063291<br />avg_delay:   4.71304717<br />month: 3<br />month:  3","hour: 12.291139<br />avg_delay:   5.06712211<br />month: 3<br />month:  3","hour: 12.518987<br />avg_delay:   5.42024762<br />month: 3<br />month:  3","hour: 12.746835<br />avg_delay:   5.77019405<br />month: 3<br />month:  3","hour: 12.974684<br />avg_delay:   6.11473174<br />month: 3<br />month:  3","hour: 13.202532<br />avg_delay:   6.45163104<br />month: 3<br />month:  3","hour: 13.430380<br />avg_delay:   6.77866228<br />month: 3<br />month:  3","hour: 13.658228<br />avg_delay:   7.09359581<br />month: 3<br />month:  3","hour: 13.886076<br />avg_delay:   7.39420198<br />month: 3<br />month:  3","hour: 14.113924<br />avg_delay:   7.67319836<br />month: 3<br />month:  3","hour: 14.341772<br />avg_delay:   7.90432973<br />month: 3<br />month:  3","hour: 14.569620<br />avg_delay:   8.09639092<br />month: 3<br />month:  3","hour: 14.797468<br />avg_delay:   8.26392853<br />month: 3<br />month:  3","hour: 15.025316<br />avg_delay:   8.42148916<br />month: 3<br />month:  3","hour: 15.253165<br />avg_delay:   8.58361940<br />month: 3<br />month:  3","hour: 15.481013<br />avg_delay:   8.76486586<br />month: 3<br />month:  3","hour: 15.708861<br />avg_delay:   8.97977515<br />month: 3<br />month:  3","hour: 15.936709<br />avg_delay:   9.24289385<br />month: 3<br />month:  3","hour: 16.164557<br />avg_delay:   9.54057022<br />month: 3<br />month:  3","hour: 16.392405<br />avg_delay:   9.81556769<br />month: 3<br />month:  3","hour: 16.620253<br />avg_delay:  10.08618639<br />month: 3<br />month:  3","hour: 16.848101<br />avg_delay:  10.37500106<br />month: 3<br />month:  3","hour: 17.075949<br />avg_delay:  10.70503142<br />month: 3<br />month:  3","hour: 17.303797<br />avg_delay:  11.09284895<br />month: 3<br />month:  3","hour: 17.531646<br />avg_delay:  11.52596997<br />month: 3<br />month:  3","hour: 17.759494<br />avg_delay:  11.98718369<br />month: 3<br />month:  3","hour: 17.987342<br />avg_delay:  12.45927933<br />month: 3<br />month:  3","hour: 18.215190<br />avg_delay:  12.92504609<br />month: 3<br />month:  3","hour: 18.443038<br />avg_delay:  13.36727321<br />month: 3<br />month:  3","hour: 18.670886<br />avg_delay:  13.76874988<br />month: 3<br />month:  3","hour: 18.898734<br />avg_delay:  14.11226533<br />month: 3<br />month:  3","hour: 19.126582<br />avg_delay:  14.39318665<br />month: 3<br />month:  3","hour: 19.354430<br />avg_delay:  14.66150547<br />month: 3<br />month:  3","hour: 19.582278<br />avg_delay:  14.92322926<br />month: 3<br />month:  3","hour: 19.810127<br />avg_delay:  15.17683202<br />month: 3<br />month:  3","hour: 20.037975<br />avg_delay:  15.42078776<br />month: 3<br />month:  3","hour: 20.265823<br />avg_delay:  15.65357048<br />month: 3<br />month:  3","hour: 20.493671<br />avg_delay:  15.87365418<br />month: 3<br />month:  3","hour: 20.721519<br />avg_delay:  16.07951287<br />month: 3<br />month:  3","hour: 20.949367<br />avg_delay:  16.26962054<br />month: 3<br />month:  3","hour: 21.177215<br />avg_delay:  16.44351448<br />month: 3<br />month:  3","hour: 21.405063<br />avg_delay:  16.60296528<br />month: 3<br />month:  3","hour: 21.632911<br />avg_delay:  16.74828722<br />month: 3<br />month:  3","hour: 21.860759<br />avg_delay:  16.87972235<br />month: 3<br />month:  3","hour: 22.088608<br />avg_delay:  16.99751269<br />month: 3<br />month:  3","hour: 22.316456<br />avg_delay:  17.10190030<br />month: 3<br />month:  3","hour: 22.544304<br />avg_delay:  17.19312720<br />month: 3<br />month:  3","hour: 22.772152<br />avg_delay:  17.27143544<br />month: 3<br />month:  3","hour: 23.000000<br />avg_delay:  17.33706706<br />month: 3<br />month:  3"],"frame":"3","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-12.1100535909558,-11.3215462940881,-10.5708629801726,-9.86133100176059,-9.19492789253857,-8.57194417521249,-7.99258847093756,-7.45727837312135,-6.96532145583826,-6.51452966247744,-6.09871153571052,-5.71122950797816,-5.34645595050706,-4.99917969550368,-4.6647443808379,-4.33909990109742,-4.01879290766848,-3.70092812900207,-3.38033998022468,-3.03716540667279,-2.6752744463351,-2.30423978097591,-1.93211648421223,-1.56380949082201,-1.20037495815141,-0.839269853220815,-0.475424349563227,-0.0889945719122451,0.33515669739241,0.742005916434508,1.11165747149999,1.46668829276778,1.84988897151992,2.25002285547733,2.64168551688026,3.00485254975,3.32971109377475,3.61891433937844,3.88611480642319,4.15154426070243,4.43054063585338,4.69684872648235,4.93664298446489,5.14200858878038,5.31160996433952,5.45511086549117,5.59464109731997,5.76254201057742,5.9965349777961,6.30309078968038,6.60173238696867,6.87146093251189,7.13617019509275,7.45815982201426,7.86171905175185,8.32166067454176,8.81266346488022,9.31193299075081,9.80027401046285,10.2623400597575,10.685934813215,11.0603795535629,11.3840050974213,11.6954271032792,11.9966846409789,12.2832854364919,12.5501791387246,12.7917186397851,13.0016505750636,13.173166774287,13.2990426062021,13.3725743708865,13.3896923308297,13.3474804376218,13.244723355765,13.0817308872715,12.8599414328909,12.5814886483603,12.2488343280066,11.8645080197043,22.8096261101562,22.2940365611726,21.8047657553,21.3438591620351,20.913294497327,20.5147213385349,20.1490940080304,19.816238229448,19.5144545889119,19.2401984654872,18.9858589581251,18.7456577907144,18.5154223267819,18.2913963908342,18.0703786130413,17.8497738802911,17.6275838362699,17.4023682017289,17.1641511148696,16.8515649474943,16.4722063506683,16.049818175279,15.606625664066,15.1617039209302,14.7302792723406,14.3239788544405,13.9519030098856,13.6138319159145,13.3009118511647,13.0294029946298,12.7780496545031,12.4892527275053,12.1970082836984,11.9350906290863,11.7121279342552,11.53136834801,11.3858484734891,11.2561388630948,11.1118107397914,10.9158560806119,10.6368597054609,10.3010768197322,9.93841021800834,9.57355097848344,9.2246109334205,8.89870258564424,8.59047238724368,8.28435524464089,7.95940604247695,7.58661633632267,7.16967652409566,6.76460761604525,6.38866714890952,6.01831883830812,5.62298994946779,5.20824363964742,4.78523096522794,4.36257618910293,3.94530438384019,3.53459184457572,3.12846472760646,2.72343158108206,2.31743497530555,1.91336382532223,1.51398933821471,1.12234879571152,0.742037556605932,0.377247736489765,0.032777707672659,-0.286019351872341,-0.57337380319241,-0.823028731639587,-1.02955189634588,-1.19016366932172,-1.30353330201183,-1.3693180905817,-1.38645452328013,-1.35591552654352,-1.28076989449297,-1.16543624011469,-12.1100535909558],"text":["hour:  5.000000<br />avg_delay:  -6.63774492<br />month: 3<br />month:  3","hour:  5.227848<br />avg_delay:  -6.30115809<br />month: 3<br />month:  3","hour:  5.455696<br />avg_delay:  -5.96338925<br />month: 3<br />month:  3","hour:  5.683544<br />avg_delay:  -5.62389276<br />month: 3<br />month:  3","hour:  5.911392<br />avg_delay:  -5.28212299<br />month: 3<br />month:  3","hour:  6.139241<br />avg_delay:  -4.93773874<br />month: 3<br />month:  3","hour:  6.367089<br />avg_delay:  -4.59137607<br />month: 3<br />month:  3","hour:  6.594937<br />avg_delay:  -4.24341513<br />month: 3<br />month:  3","hour:  6.822785<br />avg_delay:  -3.89417509<br />month: 3<br />month:  3","hour:  7.050633<br />avg_delay:  -3.54395173<br />month: 3<br />month:  3","hour:  7.278481<br />avg_delay:  -3.19236544<br />month: 3<br />month:  3","hour:  7.506329<br />avg_delay:  -2.83922590<br />month: 3<br />month:  3","hour:  7.734177<br />avg_delay:  -2.48460411<br />month: 3<br />month:  3","hour:  7.962025<br />avg_delay:  -2.12857107<br />month: 3<br />month:  3","hour:  8.189873<br />avg_delay:  -1.77119779<br />month: 3<br />month:  3","hour:  8.417722<br />avg_delay:  -1.41255528<br />month: 3<br />month:  3","hour:  8.645570<br />avg_delay:  -1.05271454<br />month: 3<br />month:  3","hour:  8.873418<br />avg_delay:  -0.69174658<br />month: 3<br />month:  3","hour:  9.101266<br />avg_delay:  -0.32845420<br />month: 3<br />month:  3","hour:  9.329114<br />avg_delay:   0.04564966<br />month: 3<br />month:  3","hour:  9.556962<br />avg_delay:   0.42965870<br />month: 3<br />month:  3","hour:  9.784810<br />avg_delay:   0.82053230<br />month: 3<br />month:  3","hour: 10.012658<br />avg_delay:   1.21522985<br />month: 3<br />month:  3","hour: 10.240506<br />avg_delay:   1.61071074<br />month: 3<br />month:  3","hour: 10.468354<br />avg_delay:   2.00393434<br />month: 3<br />month:  3","hour: 10.696203<br />avg_delay:   2.39186005<br />month: 3<br />month:  3","hour: 10.924051<br />avg_delay:   2.77144724<br />month: 3<br />month:  3","hour: 11.151899<br />avg_delay:   3.14983629<br />month: 3<br />month:  3","hour: 11.379747<br />avg_delay:   3.54988216<br />month: 3<br />month:  3","hour: 11.607595<br />avg_delay:   3.95584122<br />month: 3<br />month:  3","hour: 11.835443<br />avg_delay:   4.34913690<br />month: 3<br />month:  3","hour: 12.063291<br />avg_delay:   4.71304717<br />month: 3<br />month:  3","hour: 12.291139<br />avg_delay:   5.06712211<br />month: 3<br />month:  3","hour: 12.518987<br />avg_delay:   5.42024762<br />month: 3<br />month:  3","hour: 12.746835<br />avg_delay:   5.77019405<br />month: 3<br />month:  3","hour: 12.974684<br />avg_delay:   6.11473174<br />month: 3<br />month:  3","hour: 13.202532<br />avg_delay:   6.45163104<br />month: 3<br />month:  3","hour: 13.430380<br />avg_delay:   6.77866228<br />month: 3<br />month:  3","hour: 13.658228<br />avg_delay:   7.09359581<br />month: 3<br />month:  3","hour: 13.886076<br />avg_delay:   7.39420198<br />month: 3<br />month:  3","hour: 14.113924<br />avg_delay:   7.67319836<br />month: 3<br />month:  3","hour: 14.341772<br />avg_delay:   7.90432973<br />month: 3<br />month:  3","hour: 14.569620<br />avg_delay:   8.09639092<br />month: 3<br />month:  3","hour: 14.797468<br />avg_delay:   8.26392853<br />month: 3<br />month:  3","hour: 15.025316<br />avg_delay:   8.42148916<br />month: 3<br />month:  3","hour: 15.253165<br />avg_delay:   8.58361940<br />month: 3<br />month:  3","hour: 15.481013<br />avg_delay:   8.76486586<br />month: 3<br />month:  3","hour: 15.708861<br />avg_delay:   8.97977515<br />month: 3<br />month:  3","hour: 15.936709<br />avg_delay:   9.24289385<br />month: 3<br />month:  3","hour: 16.164557<br />avg_delay:   9.54057022<br />month: 3<br />month:  3","hour: 16.392405<br />avg_delay:   9.81556769<br />month: 3<br />month:  3","hour: 16.620253<br />avg_delay:  10.08618639<br />month: 3<br />month:  3","hour: 16.848101<br />avg_delay:  10.37500106<br />month: 3<br />month:  3","hour: 17.075949<br />avg_delay:  10.70503142<br />month: 3<br />month:  3","hour: 17.303797<br />avg_delay:  11.09284895<br />month: 3<br />month:  3","hour: 17.531646<br />avg_delay:  11.52596997<br />month: 3<br />month:  3","hour: 17.759494<br />avg_delay:  11.98718369<br />month: 3<br />month:  3","hour: 17.987342<br />avg_delay:  12.45927933<br />month: 3<br />month:  3","hour: 18.215190<br />avg_delay:  12.92504609<br />month: 3<br />month:  3","hour: 18.443038<br />avg_delay:  13.36727321<br />month: 3<br />month:  3","hour: 18.670886<br />avg_delay:  13.76874988<br />month: 3<br />month:  3","hour: 18.898734<br />avg_delay:  14.11226533<br />month: 3<br />month:  3","hour: 19.126582<br />avg_delay:  14.39318665<br />month: 3<br />month:  3","hour: 19.354430<br />avg_delay:  14.66150547<br />month: 3<br />month:  3","hour: 19.582278<br />avg_delay:  14.92322926<br />month: 3<br />month:  3","hour: 19.810127<br />avg_delay:  15.17683202<br />month: 3<br />month:  3","hour: 20.037975<br />avg_delay:  15.42078776<br />month: 3<br />month:  3","hour: 20.265823<br />avg_delay:  15.65357048<br />month: 3<br />month:  3","hour: 20.493671<br />avg_delay:  15.87365418<br />month: 3<br />month:  3","hour: 20.721519<br />avg_delay:  16.07951287<br />month: 3<br />month:  3","hour: 20.949367<br />avg_delay:  16.26962054<br />month: 3<br />month:  3","hour: 21.177215<br />avg_delay:  16.44351448<br />month: 3<br />month:  3","hour: 21.405063<br />avg_delay:  16.60296528<br />month: 3<br />month:  3","hour: 21.632911<br />avg_delay:  16.74828722<br />month: 3<br />month:  3","hour: 21.860759<br />avg_delay:  16.87972235<br />month: 3<br />month:  3","hour: 22.088608<br />avg_delay:  16.99751269<br />month: 3<br />month:  3","hour: 22.316456<br />avg_delay:  17.10190030<br />month: 3<br />month:  3","hour: 22.544304<br />avg_delay:  17.19312720<br />month: 3<br />month:  3","hour: 22.772152<br />avg_delay:  17.27143544<br />month: 3<br />month:  3","hour: 23.000000<br />avg_delay:  17.33706706<br />month: 3<br />month:  3","hour: 23.000000<br />avg_delay:  17.33706706<br />month: 3<br />month:  3","hour: 22.772152<br />avg_delay:  17.27143544<br />month: 3<br />month:  3","hour: 22.544304<br />avg_delay:  17.19312720<br />month: 3<br />month:  3","hour: 22.316456<br />avg_delay:  17.10190030<br />month: 3<br />month:  3","hour: 22.088608<br />avg_delay:  16.99751269<br />month: 3<br />month:  3","hour: 21.860759<br />avg_delay:  16.87972235<br />month: 3<br />month:  3","hour: 21.632911<br />avg_delay:  16.74828722<br />month: 3<br />month:  3","hour: 21.405063<br />avg_delay:  16.60296528<br />month: 3<br />month:  3","hour: 21.177215<br />avg_delay:  16.44351448<br />month: 3<br />month:  3","hour: 20.949367<br />avg_delay:  16.26962054<br />month: 3<br />month:  3","hour: 20.721519<br />avg_delay:  16.07951287<br />month: 3<br />month:  3","hour: 20.493671<br />avg_delay:  15.87365418<br />month: 3<br />month:  3","hour: 20.265823<br />avg_delay:  15.65357048<br />month: 3<br />month:  3","hour: 20.037975<br />avg_delay:  15.42078776<br />month: 3<br />month:  3","hour: 19.810127<br />avg_delay:  15.17683202<br />month: 3<br />month:  3","hour: 19.582278<br />avg_delay:  14.92322926<br />month: 3<br />month:  3","hour: 19.354430<br />avg_delay:  14.66150547<br />month: 3<br />month:  3","hour: 19.126582<br />avg_delay:  14.39318665<br />month: 3<br />month:  3","hour: 18.898734<br />avg_delay:  14.11226533<br />month: 3<br />month:  3","hour: 18.670886<br />avg_delay:  13.76874988<br />month: 3<br />month:  3","hour: 18.443038<br />avg_delay:  13.36727321<br />month: 3<br />month:  3","hour: 18.215190<br />avg_delay:  12.92504609<br />month: 3<br />month:  3","hour: 17.987342<br />avg_delay:  12.45927933<br />month: 3<br />month:  3","hour: 17.759494<br />avg_delay:  11.98718369<br />month: 3<br />month:  3","hour: 17.531646<br />avg_delay:  11.52596997<br />month: 3<br />month:  3","hour: 17.303797<br />avg_delay:  11.09284895<br />month: 3<br />month:  3","hour: 17.075949<br />avg_delay:  10.70503142<br />month: 3<br />month:  3","hour: 16.848101<br />avg_delay:  10.37500106<br />month: 3<br />month:  3","hour: 16.620253<br />avg_delay:  10.08618639<br />month: 3<br />month:  3","hour: 16.392405<br />avg_delay:   9.81556769<br />month: 3<br />month:  3","hour: 16.164557<br />avg_delay:   9.54057022<br />month: 3<br />month:  3","hour: 15.936709<br />avg_delay:   9.24289385<br />month: 3<br />month:  3","hour: 15.708861<br />avg_delay:   8.97977515<br />month: 3<br />month:  3","hour: 15.481013<br />avg_delay:   8.76486586<br />month: 3<br />month:  3","hour: 15.253165<br />avg_delay:   8.58361940<br />month: 3<br />month:  3","hour: 15.025316<br />avg_delay:   8.42148916<br />month: 3<br />month:  3","hour: 14.797468<br />avg_delay:   8.26392853<br />month: 3<br />month:  3","hour: 14.569620<br />avg_delay:   8.09639092<br />month: 3<br />month:  3","hour: 14.341772<br />avg_delay:   7.90432973<br />month: 3<br />month:  3","hour: 14.113924<br />avg_delay:   7.67319836<br />month: 3<br />month:  3","hour: 13.886076<br />avg_delay:   7.39420198<br />month: 3<br />month:  3","hour: 13.658228<br />avg_delay:   7.09359581<br />month: 3<br />month:  3","hour: 13.430380<br />avg_delay:   6.77866228<br />month: 3<br />month:  3","hour: 13.202532<br />avg_delay:   6.45163104<br />month: 3<br />month:  3","hour: 12.974684<br />avg_delay:   6.11473174<br />month: 3<br />month:  3","hour: 12.746835<br />avg_delay:   5.77019405<br />month: 3<br />month:  3","hour: 12.518987<br />avg_delay:   5.42024762<br />month: 3<br />month:  3","hour: 12.291139<br />avg_delay:   5.06712211<br />month: 3<br />month:  3","hour: 12.063291<br />avg_delay:   4.71304717<br />month: 3<br />month:  3","hour: 11.835443<br />avg_delay:   4.34913690<br />month: 3<br />month:  3","hour: 11.607595<br />avg_delay:   3.95584122<br />month: 3<br />month:  3","hour: 11.379747<br />avg_delay:   3.54988216<br />month: 3<br />month:  3","hour: 11.151899<br />avg_delay:   3.14983629<br />month: 3<br />month:  3","hour: 10.924051<br />avg_delay:   2.77144724<br />month: 3<br />month:  3","hour: 10.696203<br />avg_delay:   2.39186005<br />month: 3<br />month:  3","hour: 10.468354<br />avg_delay:   2.00393434<br />month: 3<br />month:  3","hour: 10.240506<br />avg_delay:   1.61071074<br />month: 3<br />month:  3","hour: 10.012658<br />avg_delay:   1.21522985<br />month: 3<br />month:  3","hour:  9.784810<br />avg_delay:   0.82053230<br />month: 3<br />month:  3","hour:  9.556962<br />avg_delay:   0.42965870<br />month: 3<br />month:  3","hour:  9.329114<br />avg_delay:   0.04564966<br />month: 3<br />month:  3","hour:  9.101266<br />avg_delay:  -0.32845420<br />month: 3<br />month:  3","hour:  8.873418<br />avg_delay:  -0.69174658<br />month: 3<br />month:  3","hour:  8.645570<br />avg_delay:  -1.05271454<br />month: 3<br />month:  3","hour:  8.417722<br />avg_delay:  -1.41255528<br />month: 3<br />month:  3","hour:  8.189873<br />avg_delay:  -1.77119779<br />month: 3<br />month:  3","hour:  7.962025<br />avg_delay:  -2.12857107<br />month: 3<br />month:  3","hour:  7.734177<br />avg_delay:  -2.48460411<br />month: 3<br />month:  3","hour:  7.506329<br />avg_delay:  -2.83922590<br />month: 3<br />month:  3","hour:  7.278481<br />avg_delay:  -3.19236544<br />month: 3<br />month:  3","hour:  7.050633<br />avg_delay:  -3.54395173<br />month: 3<br />month:  3","hour:  6.822785<br />avg_delay:  -3.89417509<br />month: 3<br />month:  3","hour:  6.594937<br />avg_delay:  -4.24341513<br />month: 3<br />month:  3","hour:  6.367089<br />avg_delay:  -4.59137607<br />month: 3<br />month:  3","hour:  6.139241<br />avg_delay:  -4.93773874<br />month: 3<br />month:  3","hour:  5.911392<br />avg_delay:  -5.28212299<br />month: 3<br />month:  3","hour:  5.683544<br />avg_delay:  -5.62389276<br />month: 3<br />month:  3","hour:  5.455696<br />avg_delay:  -5.96338925<br />month: 3<br />month:  3","hour:  5.227848<br />avg_delay:  -6.30115809<br />month: 3<br />month:  3","hour:  5.000000<br />avg_delay:  -6.63774492<br />month: 3<br />month:  3","hour:  5.000000<br />avg_delay:  -6.63774492<br />month: 3<br />month:  3"],"frame":"3","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"4","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-0.0545454545454545,-1.49767225325885,-3.08110936682365,3.22683858643744,4.52256661228929,6.01485535574668,9.92927756653992,7.46620209059233,10.4542755344418,13.0177142857143,15.1380384016606,15.7579006772009,21.997002997003,17.8288682340077,20.8561346362649,22.6978939724038,24.8622950819672,17.4974093264249,8.13793103448276],"text":["hour:  5<br />avg_delay:  -0.054545455<br />month: 4<br />month:  4","hour:  6<br />avg_delay:  -1.497672253<br />month: 4<br />month:  4","hour:  7<br />avg_delay:  -3.081109367<br />month: 4<br />month:  4","hour:  8<br />avg_delay:   3.226838586<br />month: 4<br />month:  4","hour:  9<br />avg_delay:   4.522566612<br />month: 4<br />month:  4","hour: 10<br />avg_delay:   6.014855356<br />month: 4<br />month:  4","hour: 11<br />avg_delay:   9.929277567<br />month: 4<br />month:  4","hour: 12<br />avg_delay:   7.466202091<br />month: 4<br />month:  4","hour: 13<br />avg_delay:  10.454275534<br />month: 4<br />month:  4","hour: 14<br />avg_delay:  13.017714286<br />month: 4<br />month:  4","hour: 15<br />avg_delay:  15.138038402<br />month: 4<br />month:  4","hour: 16<br />avg_delay:  15.757900677<br />month: 4<br />month:  4","hour: 17<br />avg_delay:  21.997002997<br />month: 4<br />month:  4","hour: 18<br />avg_delay:  17.828868234<br />month: 4<br />month:  4","hour: 19<br />avg_delay:  20.856134636<br />month: 4<br />month:  4","hour: 20<br />avg_delay:  22.697893972<br />month: 4<br />month:  4","hour: 21<br />avg_delay:  24.862295082<br />month: 4<br />month:  4","hour: 22<br />avg_delay:  17.497409326<br />month: 4<br />month:  4","hour: 23<br />avg_delay:   8.137931034<br />month: 4<br />month:  4"],"frame":"4","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-2.06110117089705,-1.76535474008114,-1.46545369786049,-1.15986426630939,-0.847052667502091,-0.526194666532538,-0.199426107870442,0.132546689881728,0.469254250170246,0.810283230591773,1.15672121965848,1.50888537537769,1.86641631211639,2.22895464424156,2.59614098612017,2.96761595211922,3.34302015660568,3.72199421394654,4.10668527827424,4.51377061536107,4.94157248773177,5.38421280556735,5.83581347904882,6.29049641835721,6.74238353367353,7.18559673517879,7.61425793305403,8.01937803465409,8.39653364468227,8.7635876844726,9.13964344421393,9.54194855053605,9.95090926414737,10.3563137612896,10.7588977320439,11.1593968664913,11.5585468547129,11.9570833867899,12.3557421528033,12.7552588428341,13.1599714994144,13.5890034911172,14.0384475234868,14.5004354567042,14.9670991509506,15.4305704664068,15.882981263254,16.3164634016732,16.7231487418454,17.1514671959598,17.6999927549983,18.2797323902674,18.7921995992689,19.1551321051679,19.5036390198888,19.8750078710834,20.24729945395,20.5985745636867,20.9068939954919,21.1503185445637,21.3069090061003,21.3547261752999,21.288879740283,21.1773057827995,21.0266221194157,20.8331359809265,20.5931545981264,20.3029852018104,19.958935022773,19.557311291809,19.0944212397132,18.5695721203863,17.9880357059525,17.3506776891679,16.6581546601392,15.9111232089729,15.1102399257758,14.2561614006544,13.3495442237153,12.3910449850653],"text":["hour:  5.000000<br />avg_delay:  -2.06110117<br />month: 4<br />month:  4","hour:  5.227848<br />avg_delay:  -1.76535474<br />month: 4<br />month:  4","hour:  5.455696<br />avg_delay:  -1.46545370<br />month: 4<br />month:  4","hour:  5.683544<br />avg_delay:  -1.15986427<br />month: 4<br />month:  4","hour:  5.911392<br />avg_delay:  -0.84705267<br />month: 4<br />month:  4","hour:  6.139241<br />avg_delay:  -0.52619467<br />month: 4<br />month:  4","hour:  6.367089<br />avg_delay:  -0.19942611<br />month: 4<br />month:  4","hour:  6.594937<br />avg_delay:   0.13254669<br />month: 4<br />month:  4","hour:  6.822785<br />avg_delay:   0.46925425<br />month: 4<br />month:  4","hour:  7.050633<br />avg_delay:   0.81028323<br />month: 4<br />month:  4","hour:  7.278481<br />avg_delay:   1.15672122<br />month: 4<br />month:  4","hour:  7.506329<br />avg_delay:   1.50888538<br />month: 4<br />month:  4","hour:  7.734177<br />avg_delay:   1.86641631<br />month: 4<br />month:  4","hour:  7.962025<br />avg_delay:   2.22895464<br />month: 4<br />month:  4","hour:  8.189873<br />avg_delay:   2.59614099<br />month: 4<br />month:  4","hour:  8.417722<br />avg_delay:   2.96761595<br />month: 4<br />month:  4","hour:  8.645570<br />avg_delay:   3.34302016<br />month: 4<br />month:  4","hour:  8.873418<br />avg_delay:   3.72199421<br />month: 4<br />month:  4","hour:  9.101266<br />avg_delay:   4.10668528<br />month: 4<br />month:  4","hour:  9.329114<br />avg_delay:   4.51377062<br />month: 4<br />month:  4","hour:  9.556962<br />avg_delay:   4.94157249<br />month: 4<br />month:  4","hour:  9.784810<br />avg_delay:   5.38421281<br />month: 4<br />month:  4","hour: 10.012658<br />avg_delay:   5.83581348<br />month: 4<br />month:  4","hour: 10.240506<br />avg_delay:   6.29049642<br />month: 4<br />month:  4","hour: 10.468354<br />avg_delay:   6.74238353<br />month: 4<br />month:  4","hour: 10.696203<br />avg_delay:   7.18559674<br />month: 4<br />month:  4","hour: 10.924051<br />avg_delay:   7.61425793<br />month: 4<br />month:  4","hour: 11.151899<br />avg_delay:   8.01937803<br />month: 4<br />month:  4","hour: 11.379747<br />avg_delay:   8.39653364<br />month: 4<br />month:  4","hour: 11.607595<br />avg_delay:   8.76358768<br />month: 4<br />month:  4","hour: 11.835443<br />avg_delay:   9.13964344<br />month: 4<br />month:  4","hour: 12.063291<br />avg_delay:   9.54194855<br />month: 4<br />month:  4","hour: 12.291139<br />avg_delay:   9.95090926<br />month: 4<br />month:  4","hour: 12.518987<br />avg_delay:  10.35631376<br />month: 4<br />month:  4","hour: 12.746835<br />avg_delay:  10.75889773<br />month: 4<br />month:  4","hour: 12.974684<br />avg_delay:  11.15939687<br />month: 4<br />month:  4","hour: 13.202532<br />avg_delay:  11.55854685<br />month: 4<br />month:  4","hour: 13.430380<br />avg_delay:  11.95708339<br />month: 4<br />month:  4","hour: 13.658228<br />avg_delay:  12.35574215<br />month: 4<br />month:  4","hour: 13.886076<br />avg_delay:  12.75525884<br />month: 4<br />month:  4","hour: 14.113924<br />avg_delay:  13.15997150<br />month: 4<br />month:  4","hour: 14.341772<br />avg_delay:  13.58900349<br />month: 4<br />month:  4","hour: 14.569620<br />avg_delay:  14.03844752<br />month: 4<br />month:  4","hour: 14.797468<br />avg_delay:  14.50043546<br />month: 4<br />month:  4","hour: 15.025316<br />avg_delay:  14.96709915<br />month: 4<br />month:  4","hour: 15.253165<br />avg_delay:  15.43057047<br />month: 4<br />month:  4","hour: 15.481013<br />avg_delay:  15.88298126<br />month: 4<br />month:  4","hour: 15.708861<br />avg_delay:  16.31646340<br />month: 4<br />month:  4","hour: 15.936709<br />avg_delay:  16.72314874<br />month: 4<br />month:  4","hour: 16.164557<br />avg_delay:  17.15146720<br />month: 4<br />month:  4","hour: 16.392405<br />avg_delay:  17.69999275<br />month: 4<br />month:  4","hour: 16.620253<br />avg_delay:  18.27973239<br />month: 4<br />month:  4","hour: 16.848101<br />avg_delay:  18.79219960<br />month: 4<br />month:  4","hour: 17.075949<br />avg_delay:  19.15513211<br />month: 4<br />month:  4","hour: 17.303797<br />avg_delay:  19.50363902<br />month: 4<br />month:  4","hour: 17.531646<br />avg_delay:  19.87500787<br />month: 4<br />month:  4","hour: 17.759494<br />avg_delay:  20.24729945<br />month: 4<br />month:  4","hour: 17.987342<br />avg_delay:  20.59857456<br />month: 4<br />month:  4","hour: 18.215190<br />avg_delay:  20.90689400<br />month: 4<br />month:  4","hour: 18.443038<br />avg_delay:  21.15031854<br />month: 4<br />month:  4","hour: 18.670886<br />avg_delay:  21.30690901<br />month: 4<br />month:  4","hour: 18.898734<br />avg_delay:  21.35472618<br />month: 4<br />month:  4","hour: 19.126582<br />avg_delay:  21.28887974<br />month: 4<br />month:  4","hour: 19.354430<br />avg_delay:  21.17730578<br />month: 4<br />month:  4","hour: 19.582278<br />avg_delay:  21.02662212<br />month: 4<br />month:  4","hour: 19.810127<br />avg_delay:  20.83313598<br />month: 4<br />month:  4","hour: 20.037975<br />avg_delay:  20.59315460<br />month: 4<br />month:  4","hour: 20.265823<br />avg_delay:  20.30298520<br />month: 4<br />month:  4","hour: 20.493671<br />avg_delay:  19.95893502<br />month: 4<br />month:  4","hour: 20.721519<br />avg_delay:  19.55731129<br />month: 4<br />month:  4","hour: 20.949367<br />avg_delay:  19.09442124<br />month: 4<br />month:  4","hour: 21.177215<br />avg_delay:  18.56957212<br />month: 4<br />month:  4","hour: 21.405063<br />avg_delay:  17.98803571<br />month: 4<br />month:  4","hour: 21.632911<br />avg_delay:  17.35067769<br />month: 4<br />month:  4","hour: 21.860759<br />avg_delay:  16.65815466<br />month: 4<br />month:  4","hour: 22.088608<br />avg_delay:  15.91112321<br />month: 4<br />month:  4","hour: 22.316456<br />avg_delay:  15.11023993<br />month: 4<br />month:  4","hour: 22.544304<br />avg_delay:  14.25616140<br />month: 4<br />month:  4","hour: 22.772152<br />avg_delay:  13.34954422<br />month: 4<br />month:  4","hour: 23.000000<br />avg_delay:  12.39104499<br />month: 4<br />month:  4"],"frame":"4","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-6.59883979727882,-5.92835262723926,-5.28605533791669,-4.67362569966455,-4.09162218829969,-3.53974440650598,-3.01977375327967,-2.53244759712634,-2.07739658792398,-1.6529744205275,-1.25327421465818,-0.872632641848492,-0.50668367611237,-0.151406628539275,0.19675913475918,0.5408715284921,0.883493625696494,1.22672573168125,1.57600566723935,1.95744387323406,2.36690502978116,2.79309453757368,3.22597622578848,3.65812607644988,4.08531154835231,4.50628461485867,4.92189251279173,5.3336801379662,5.73082438827279,6.09861656131118,6.45506617638638,6.85000828633067,7.28312059582558,7.72750529529886,8.16468112960795,8.58062805625285,8.96979363351343,9.3369624973633,9.6960401292942,10.06638764208,10.4711002986602,10.9293014676081,11.4183266340602,11.9116822355047,12.3883303407121,12.8363538639709,13.2541727972632,13.6486747333514,14.03120847764,14.4668899281323,15.0350216318369,15.614023133858,16.106501702581,16.4627666849056,16.8243268995687,17.2179358857622,17.6149291120426,17.9887373104264,18.3157757274982,18.5756510866131,18.7505822639733,18.824046564265,18.7936112580177,18.7177792518903,18.5998776957886,18.4337541295655,18.2127933253456,17.9298852135816,17.5774170055468,17.1473158574923,16.631163588594,16.0230923111308,15.3235308974647,14.5306663876496,13.6439468899975,12.6640851847899,11.592729907061,10.4321062100207,9.18471134541004,7.85309874745322,16.9289912226774,17.5143771020206,18.080216591288,18.6277499444905,19.158161233156,19.6723624302809,20.1706889906863,20.6525405144404,21.1160519296417,21.5576788908325,21.9673067261257,22.3404530399992,22.6760851900391,22.9735158709073,23.2325178322875,23.4533665430429,23.6368323137087,23.7841482225483,23.8854057863348,23.8632357482273,23.7249860025143,23.4980122634856,23.2084118169471,22.8796697958573,22.5320798564046,22.1829511402089,21.8474975254302,21.4778974959568,20.9454416466769,20.3649638781598,19.8360444637874,19.4150890060508,18.984252069995,18.5117897292448,18.0247870688427,17.545867961189,17.0891886779037,16.6585684129134,16.2487055146262,15.8488427001686,15.4441300435883,15.0154441763123,14.5772042762165,14.1473000759124,13.7381656767297,13.3531143344798,12.9851222272804,12.6186979324692,12.2338888147414,11.8242207120415,11.428558807634,11.0622429010917,10.705075931342,10.3066233533163,9.86490885549891,9.39945551899475,8.92286676026454,8.44565073230916,7.97533107356102,7.51623994568238,7.07009735748809,6.63736488930913,6.21726269621184,5.80254668751487,5.39436037574634,4.99552283748116,4.60931591702239,4.23951630034515,3.89040339260388,3.56671665397515,3.27354088171105,3.01590508826447,2.7975409768898,2.62092153753878,2.4873550734409,2.39751685329551,2.35389716704577,2.3551479421957,2.39764314707699,2.47663745548472,-6.59883979727882],"text":["hour:  5.000000<br />avg_delay:  -2.06110117<br />month: 4<br />month:  4","hour:  5.227848<br />avg_delay:  -1.76535474<br />month: 4<br />month:  4","hour:  5.455696<br />avg_delay:  -1.46545370<br />month: 4<br />month:  4","hour:  5.683544<br />avg_delay:  -1.15986427<br />month: 4<br />month:  4","hour:  5.911392<br />avg_delay:  -0.84705267<br />month: 4<br />month:  4","hour:  6.139241<br />avg_delay:  -0.52619467<br />month: 4<br />month:  4","hour:  6.367089<br />avg_delay:  -0.19942611<br />month: 4<br />month:  4","hour:  6.594937<br />avg_delay:   0.13254669<br />month: 4<br />month:  4","hour:  6.822785<br />avg_delay:   0.46925425<br />month: 4<br />month:  4","hour:  7.050633<br />avg_delay:   0.81028323<br />month: 4<br />month:  4","hour:  7.278481<br />avg_delay:   1.15672122<br />month: 4<br />month:  4","hour:  7.506329<br />avg_delay:   1.50888538<br />month: 4<br />month:  4","hour:  7.734177<br />avg_delay:   1.86641631<br />month: 4<br />month:  4","hour:  7.962025<br />avg_delay:   2.22895464<br />month: 4<br />month:  4","hour:  8.189873<br />avg_delay:   2.59614099<br />month: 4<br />month:  4","hour:  8.417722<br />avg_delay:   2.96761595<br />month: 4<br />month:  4","hour:  8.645570<br />avg_delay:   3.34302016<br />month: 4<br />month:  4","hour:  8.873418<br />avg_delay:   3.72199421<br />month: 4<br />month:  4","hour:  9.101266<br />avg_delay:   4.10668528<br />month: 4<br />month:  4","hour:  9.329114<br />avg_delay:   4.51377062<br />month: 4<br />month:  4","hour:  9.556962<br />avg_delay:   4.94157249<br />month: 4<br />month:  4","hour:  9.784810<br />avg_delay:   5.38421281<br />month: 4<br />month:  4","hour: 10.012658<br />avg_delay:   5.83581348<br />month: 4<br />month:  4","hour: 10.240506<br />avg_delay:   6.29049642<br />month: 4<br />month:  4","hour: 10.468354<br />avg_delay:   6.74238353<br />month: 4<br />month:  4","hour: 10.696203<br />avg_delay:   7.18559674<br />month: 4<br />month:  4","hour: 10.924051<br />avg_delay:   7.61425793<br />month: 4<br />month:  4","hour: 11.151899<br />avg_delay:   8.01937803<br />month: 4<br />month:  4","hour: 11.379747<br />avg_delay:   8.39653364<br />month: 4<br />month:  4","hour: 11.607595<br />avg_delay:   8.76358768<br />month: 4<br />month:  4","hour: 11.835443<br />avg_delay:   9.13964344<br />month: 4<br />month:  4","hour: 12.063291<br />avg_delay:   9.54194855<br />month: 4<br />month:  4","hour: 12.291139<br />avg_delay:   9.95090926<br />month: 4<br />month:  4","hour: 12.518987<br />avg_delay:  10.35631376<br />month: 4<br />month:  4","hour: 12.746835<br />avg_delay:  10.75889773<br />month: 4<br />month:  4","hour: 12.974684<br />avg_delay:  11.15939687<br />month: 4<br />month:  4","hour: 13.202532<br />avg_delay:  11.55854685<br />month: 4<br />month:  4","hour: 13.430380<br />avg_delay:  11.95708339<br />month: 4<br />month:  4","hour: 13.658228<br />avg_delay:  12.35574215<br />month: 4<br />month:  4","hour: 13.886076<br />avg_delay:  12.75525884<br />month: 4<br />month:  4","hour: 14.113924<br />avg_delay:  13.15997150<br />month: 4<br />month:  4","hour: 14.341772<br />avg_delay:  13.58900349<br />month: 4<br />month:  4","hour: 14.569620<br />avg_delay:  14.03844752<br />month: 4<br />month:  4","hour: 14.797468<br />avg_delay:  14.50043546<br />month: 4<br />month:  4","hour: 15.025316<br />avg_delay:  14.96709915<br />month: 4<br />month:  4","hour: 15.253165<br />avg_delay:  15.43057047<br />month: 4<br />month:  4","hour: 15.481013<br />avg_delay:  15.88298126<br />month: 4<br />month:  4","hour: 15.708861<br />avg_delay:  16.31646340<br />month: 4<br />month:  4","hour: 15.936709<br />avg_delay:  16.72314874<br />month: 4<br />month:  4","hour: 16.164557<br />avg_delay:  17.15146720<br />month: 4<br />month:  4","hour: 16.392405<br />avg_delay:  17.69999275<br />month: 4<br />month:  4","hour: 16.620253<br />avg_delay:  18.27973239<br />month: 4<br />month:  4","hour: 16.848101<br />avg_delay:  18.79219960<br />month: 4<br />month:  4","hour: 17.075949<br />avg_delay:  19.15513211<br />month: 4<br />month:  4","hour: 17.303797<br />avg_delay:  19.50363902<br />month: 4<br />month:  4","hour: 17.531646<br />avg_delay:  19.87500787<br />month: 4<br />month:  4","hour: 17.759494<br />avg_delay:  20.24729945<br />month: 4<br />month:  4","hour: 17.987342<br />avg_delay:  20.59857456<br />month: 4<br />month:  4","hour: 18.215190<br />avg_delay:  20.90689400<br />month: 4<br />month:  4","hour: 18.443038<br />avg_delay:  21.15031854<br />month: 4<br />month:  4","hour: 18.670886<br />avg_delay:  21.30690901<br />month: 4<br />month:  4","hour: 18.898734<br />avg_delay:  21.35472618<br />month: 4<br />month:  4","hour: 19.126582<br />avg_delay:  21.28887974<br />month: 4<br />month:  4","hour: 19.354430<br />avg_delay:  21.17730578<br />month: 4<br />month:  4","hour: 19.582278<br />avg_delay:  21.02662212<br />month: 4<br />month:  4","hour: 19.810127<br />avg_delay:  20.83313598<br />month: 4<br />month:  4","hour: 20.037975<br />avg_delay:  20.59315460<br />month: 4<br />month:  4","hour: 20.265823<br />avg_delay:  20.30298520<br />month: 4<br />month:  4","hour: 20.493671<br />avg_delay:  19.95893502<br />month: 4<br />month:  4","hour: 20.721519<br />avg_delay:  19.55731129<br />month: 4<br />month:  4","hour: 20.949367<br />avg_delay:  19.09442124<br />month: 4<br />month:  4","hour: 21.177215<br />avg_delay:  18.56957212<br />month: 4<br />month:  4","hour: 21.405063<br />avg_delay:  17.98803571<br />month: 4<br />month:  4","hour: 21.632911<br />avg_delay:  17.35067769<br />month: 4<br />month:  4","hour: 21.860759<br />avg_delay:  16.65815466<br />month: 4<br />month:  4","hour: 22.088608<br />avg_delay:  15.91112321<br />month: 4<br />month:  4","hour: 22.316456<br />avg_delay:  15.11023993<br />month: 4<br />month:  4","hour: 22.544304<br />avg_delay:  14.25616140<br />month: 4<br />month:  4","hour: 22.772152<br />avg_delay:  13.34954422<br />month: 4<br />month:  4","hour: 23.000000<br />avg_delay:  12.39104499<br />month: 4<br />month:  4","hour: 23.000000<br />avg_delay:  12.39104499<br />month: 4<br />month:  4","hour: 22.772152<br />avg_delay:  13.34954422<br />month: 4<br />month:  4","hour: 22.544304<br />avg_delay:  14.25616140<br />month: 4<br />month:  4","hour: 22.316456<br />avg_delay:  15.11023993<br />month: 4<br />month:  4","hour: 22.088608<br />avg_delay:  15.91112321<br />month: 4<br />month:  4","hour: 21.860759<br />avg_delay:  16.65815466<br />month: 4<br />month:  4","hour: 21.632911<br />avg_delay:  17.35067769<br />month: 4<br />month:  4","hour: 21.405063<br />avg_delay:  17.98803571<br />month: 4<br />month:  4","hour: 21.177215<br />avg_delay:  18.56957212<br />month: 4<br />month:  4","hour: 20.949367<br />avg_delay:  19.09442124<br />month: 4<br />month:  4","hour: 20.721519<br />avg_delay:  19.55731129<br />month: 4<br />month:  4","hour: 20.493671<br />avg_delay:  19.95893502<br />month: 4<br />month:  4","hour: 20.265823<br />avg_delay:  20.30298520<br />month: 4<br />month:  4","hour: 20.037975<br />avg_delay:  20.59315460<br />month: 4<br />month:  4","hour: 19.810127<br />avg_delay:  20.83313598<br />month: 4<br />month:  4","hour: 19.582278<br />avg_delay:  21.02662212<br />month: 4<br />month:  4","hour: 19.354430<br />avg_delay:  21.17730578<br />month: 4<br />month:  4","hour: 19.126582<br />avg_delay:  21.28887974<br />month: 4<br />month:  4","hour: 18.898734<br />avg_delay:  21.35472618<br />month: 4<br />month:  4","hour: 18.670886<br />avg_delay:  21.30690901<br />month: 4<br />month:  4","hour: 18.443038<br />avg_delay:  21.15031854<br />month: 4<br />month:  4","hour: 18.215190<br />avg_delay:  20.90689400<br />month: 4<br />month:  4","hour: 17.987342<br />avg_delay:  20.59857456<br />month: 4<br />month:  4","hour: 17.759494<br />avg_delay:  20.24729945<br />month: 4<br />month:  4","hour: 17.531646<br />avg_delay:  19.87500787<br />month: 4<br />month:  4","hour: 17.303797<br />avg_delay:  19.50363902<br />month: 4<br />month:  4","hour: 17.075949<br />avg_delay:  19.15513211<br />month: 4<br />month:  4","hour: 16.848101<br />avg_delay:  18.79219960<br />month: 4<br />month:  4","hour: 16.620253<br />avg_delay:  18.27973239<br />month: 4<br />month:  4","hour: 16.392405<br />avg_delay:  17.69999275<br />month: 4<br />month:  4","hour: 16.164557<br />avg_delay:  17.15146720<br />month: 4<br />month:  4","hour: 15.936709<br />avg_delay:  16.72314874<br />month: 4<br />month:  4","hour: 15.708861<br />avg_delay:  16.31646340<br />month: 4<br />month:  4","hour: 15.481013<br />avg_delay:  15.88298126<br />month: 4<br />month:  4","hour: 15.253165<br />avg_delay:  15.43057047<br />month: 4<br />month:  4","hour: 15.025316<br />avg_delay:  14.96709915<br />month: 4<br />month:  4","hour: 14.797468<br />avg_delay:  14.50043546<br />month: 4<br />month:  4","hour: 14.569620<br />avg_delay:  14.03844752<br />month: 4<br />month:  4","hour: 14.341772<br />avg_delay:  13.58900349<br />month: 4<br />month:  4","hour: 14.113924<br />avg_delay:  13.15997150<br />month: 4<br />month:  4","hour: 13.886076<br />avg_delay:  12.75525884<br />month: 4<br />month:  4","hour: 13.658228<br />avg_delay:  12.35574215<br />month: 4<br />month:  4","hour: 13.430380<br />avg_delay:  11.95708339<br />month: 4<br />month:  4","hour: 13.202532<br />avg_delay:  11.55854685<br />month: 4<br />month:  4","hour: 12.974684<br />avg_delay:  11.15939687<br />month: 4<br />month:  4","hour: 12.746835<br />avg_delay:  10.75889773<br />month: 4<br />month:  4","hour: 12.518987<br />avg_delay:  10.35631376<br />month: 4<br />month:  4","hour: 12.291139<br />avg_delay:   9.95090926<br />month: 4<br />month:  4","hour: 12.063291<br />avg_delay:   9.54194855<br />month: 4<br />month:  4","hour: 11.835443<br />avg_delay:   9.13964344<br />month: 4<br />month:  4","hour: 11.607595<br />avg_delay:   8.76358768<br />month: 4<br />month:  4","hour: 11.379747<br />avg_delay:   8.39653364<br />month: 4<br />month:  4","hour: 11.151899<br />avg_delay:   8.01937803<br />month: 4<br />month:  4","hour: 10.924051<br />avg_delay:   7.61425793<br />month: 4<br />month:  4","hour: 10.696203<br />avg_delay:   7.18559674<br />month: 4<br />month:  4","hour: 10.468354<br />avg_delay:   6.74238353<br />month: 4<br />month:  4","hour: 10.240506<br />avg_delay:   6.29049642<br />month: 4<br />month:  4","hour: 10.012658<br />avg_delay:   5.83581348<br />month: 4<br />month:  4","hour:  9.784810<br />avg_delay:   5.38421281<br />month: 4<br />month:  4","hour:  9.556962<br />avg_delay:   4.94157249<br />month: 4<br />month:  4","hour:  9.329114<br />avg_delay:   4.51377062<br />month: 4<br />month:  4","hour:  9.101266<br />avg_delay:   4.10668528<br />month: 4<br />month:  4","hour:  8.873418<br />avg_delay:   3.72199421<br />month: 4<br />month:  4","hour:  8.645570<br />avg_delay:   3.34302016<br />month: 4<br />month:  4","hour:  8.417722<br />avg_delay:   2.96761595<br />month: 4<br />month:  4","hour:  8.189873<br />avg_delay:   2.59614099<br />month: 4<br />month:  4","hour:  7.962025<br />avg_delay:   2.22895464<br />month: 4<br />month:  4","hour:  7.734177<br />avg_delay:   1.86641631<br />month: 4<br />month:  4","hour:  7.506329<br />avg_delay:   1.50888538<br />month: 4<br />month:  4","hour:  7.278481<br />avg_delay:   1.15672122<br />month: 4<br />month:  4","hour:  7.050633<br />avg_delay:   0.81028323<br />month: 4<br />month:  4","hour:  6.822785<br />avg_delay:   0.46925425<br />month: 4<br />month:  4","hour:  6.594937<br />avg_delay:   0.13254669<br />month: 4<br />month:  4","hour:  6.367089<br />avg_delay:  -0.19942611<br />month: 4<br />month:  4","hour:  6.139241<br />avg_delay:  -0.52619467<br />month: 4<br />month:  4","hour:  5.911392<br />avg_delay:  -0.84705267<br />month: 4<br />month:  4","hour:  5.683544<br />avg_delay:  -1.15986427<br />month: 4<br />month:  4","hour:  5.455696<br />avg_delay:  -1.46545370<br />month: 4<br />month:  4","hour:  5.227848<br />avg_delay:  -1.76535474<br />month: 4<br />month:  4","hour:  5.000000<br />avg_delay:  -2.06110117<br />month: 4<br />month:  4","hour:  5.000000<br />avg_delay:  -2.06110117<br />month: 4<br />month:  4"],"frame":"4","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"5","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-9.47826086956522,-9.2215411558669,-10.9892703862661,-6.1123439667129,-7.73219215902816,-3.88166894664843,2.02056359482102,0.692767086927671,4.4757004002287,6.65274725274725,8.95030425963489,11.5059965733866,12.9209638554217,13.7547169811321,15.2707562136436,15.5697240865026,12.227602905569,7.52112676056338,-4.38709677419355],"text":["hour:  5<br />avg_delay:  -9.478260870<br />month: 5<br />month:  5","hour:  6<br />avg_delay:  -9.221541156<br />month: 5<br />month:  5","hour:  7<br />avg_delay: -10.989270386<br />month: 5<br />month:  5","hour:  8<br />avg_delay:  -6.112343967<br />month: 5<br />month:  5","hour:  9<br />avg_delay:  -7.732192159<br />month: 5<br />month:  5","hour: 10<br />avg_delay:  -3.881668947<br />month: 5<br />month:  5","hour: 11<br />avg_delay:   2.020563595<br />month: 5<br />month:  5","hour: 12<br />avg_delay:   0.692767087<br />month: 5<br />month:  5","hour: 13<br />avg_delay:   4.475700400<br />month: 5<br />month:  5","hour: 14<br />avg_delay:   6.652747253<br />month: 5<br />month:  5","hour: 15<br />avg_delay:   8.950304260<br />month: 5<br />month:  5","hour: 16<br />avg_delay:  11.505996573<br />month: 5<br />month:  5","hour: 17<br />avg_delay:  12.920963855<br />month: 5<br />month:  5","hour: 18<br />avg_delay:  13.754716981<br />month: 5<br />month:  5","hour: 19<br />avg_delay:  15.270756214<br />month: 5<br />month:  5","hour: 20<br />avg_delay:  15.569724087<br />month: 5<br />month:  5","hour: 21<br />avg_delay:  12.227602906<br />month: 5<br />month:  5","hour: 22<br />avg_delay:   7.521126761<br />month: 5<br />month:  5","hour: 23<br />avg_delay:  -4.387096774<br />month: 5<br />month:  5"],"frame":"5","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-10.432429929829,-10.2895824572223,-10.1333612393828,-9.95982487815093,-9.7650319753669,-9.54686473592746,-9.31062644366564,-9.0577124240324,-8.7888984176711,-8.50477335210083,-8.20124593090287,-7.8776110553635,-7.53554264463398,-7.17671461786556,-6.80280089420952,-6.41547539281711,-6.01641203283959,-5.60728473342824,-5.186237753279,-4.73012799129943,-4.24023174575204,-3.72361792961955,-3.18735545588472,-2.63851323753027,-2.08416018753895,-1.53136521889351,-0.98719724457667,-0.432831186002718,0.190034630915626,0.840980833769501,1.47236315683684,2.04174122503467,2.60674977296258,3.19108165359488,3.78669414607996,4.38554452956629,4.97959008320225,5.56078808613628,6.12109581751679,6.65247055649221,7.15573645677159,7.6751922750966,8.20946497576271,8.74821911853025,9.28111926315953,9.79782996941088,10.2880157970446,10.7413413058211,11.1474710555006,11.563714761987,12.1093527553334,12.6800078620795,13.1599407258256,13.4515808570977,13.7035111768517,13.960564694258,14.2019307026127,14.4067984952114,14.5543573653501,14.6237966063246,14.5943055114307,14.4450733739642,14.1718807263777,13.8408943934026,13.4579306784397,13.0187324660265,12.5190426407008,11.9546040870001,11.3211596894622,10.6144523326247,9.83022490102534,8.96770666196817,8.03305493053164,7.02730360677293,5.95124353506902,4.80566555979687,3.5913605253334,2.30911927605558,0.959732656340375,-0.456008489435293],"text":["hour:  5.000000<br />avg_delay: -10.43242993<br />month: 5<br />month:  5","hour:  5.227848<br />avg_delay: -10.28958246<br />month: 5<br />month:  5","hour:  5.455696<br />avg_delay: -10.13336124<br />month: 5<br />month:  5","hour:  5.683544<br />avg_delay:  -9.95982488<br />month: 5<br />month:  5","hour:  5.911392<br />avg_delay:  -9.76503198<br />month: 5<br />month:  5","hour:  6.139241<br />avg_delay:  -9.54686474<br />month: 5<br />month:  5","hour:  6.367089<br />avg_delay:  -9.31062644<br />month: 5<br />month:  5","hour:  6.594937<br />avg_delay:  -9.05771242<br />month: 5<br />month:  5","hour:  6.822785<br />avg_delay:  -8.78889842<br />month: 5<br />month:  5","hour:  7.050633<br />avg_delay:  -8.50477335<br />month: 5<br />month:  5","hour:  7.278481<br />avg_delay:  -8.20124593<br />month: 5<br />month:  5","hour:  7.506329<br />avg_delay:  -7.87761106<br />month: 5<br />month:  5","hour:  7.734177<br />avg_delay:  -7.53554264<br />month: 5<br />month:  5","hour:  7.962025<br />avg_delay:  -7.17671462<br />month: 5<br />month:  5","hour:  8.189873<br />avg_delay:  -6.80280089<br />month: 5<br />month:  5","hour:  8.417722<br />avg_delay:  -6.41547539<br />month: 5<br />month:  5","hour:  8.645570<br />avg_delay:  -6.01641203<br />month: 5<br />month:  5","hour:  8.873418<br />avg_delay:  -5.60728473<br />month: 5<br />month:  5","hour:  9.101266<br />avg_delay:  -5.18623775<br />month: 5<br />month:  5","hour:  9.329114<br />avg_delay:  -4.73012799<br />month: 5<br />month:  5","hour:  9.556962<br />avg_delay:  -4.24023175<br />month: 5<br />month:  5","hour:  9.784810<br />avg_delay:  -3.72361793<br />month: 5<br />month:  5","hour: 10.012658<br />avg_delay:  -3.18735546<br />month: 5<br />month:  5","hour: 10.240506<br />avg_delay:  -2.63851324<br />month: 5<br />month:  5","hour: 10.468354<br />avg_delay:  -2.08416019<br />month: 5<br />month:  5","hour: 10.696203<br />avg_delay:  -1.53136522<br />month: 5<br />month:  5","hour: 10.924051<br />avg_delay:  -0.98719724<br />month: 5<br />month:  5","hour: 11.151899<br />avg_delay:  -0.43283119<br />month: 5<br />month:  5","hour: 11.379747<br />avg_delay:   0.19003463<br />month: 5<br />month:  5","hour: 11.607595<br />avg_delay:   0.84098083<br />month: 5<br />month:  5","hour: 11.835443<br />avg_delay:   1.47236316<br />month: 5<br />month:  5","hour: 12.063291<br />avg_delay:   2.04174123<br />month: 5<br />month:  5","hour: 12.291139<br />avg_delay:   2.60674977<br />month: 5<br />month:  5","hour: 12.518987<br />avg_delay:   3.19108165<br />month: 5<br />month:  5","hour: 12.746835<br />avg_delay:   3.78669415<br />month: 5<br />month:  5","hour: 12.974684<br />avg_delay:   4.38554453<br />month: 5<br />month:  5","hour: 13.202532<br />avg_delay:   4.97959008<br />month: 5<br />month:  5","hour: 13.430380<br />avg_delay:   5.56078809<br />month: 5<br />month:  5","hour: 13.658228<br />avg_delay:   6.12109582<br />month: 5<br />month:  5","hour: 13.886076<br />avg_delay:   6.65247056<br />month: 5<br />month:  5","hour: 14.113924<br />avg_delay:   7.15573646<br />month: 5<br />month:  5","hour: 14.341772<br />avg_delay:   7.67519228<br />month: 5<br />month:  5","hour: 14.569620<br />avg_delay:   8.20946498<br />month: 5<br />month:  5","hour: 14.797468<br />avg_delay:   8.74821912<br />month: 5<br />month:  5","hour: 15.025316<br />avg_delay:   9.28111926<br />month: 5<br />month:  5","hour: 15.253165<br />avg_delay:   9.79782997<br />month: 5<br />month:  5","hour: 15.481013<br />avg_delay:  10.28801580<br />month: 5<br />month:  5","hour: 15.708861<br />avg_delay:  10.74134131<br />month: 5<br />month:  5","hour: 15.936709<br />avg_delay:  11.14747106<br />month: 5<br />month:  5","hour: 16.164557<br />avg_delay:  11.56371476<br />month: 5<br />month:  5","hour: 16.392405<br />avg_delay:  12.10935276<br />month: 5<br />month:  5","hour: 16.620253<br />avg_delay:  12.68000786<br />month: 5<br />month:  5","hour: 16.848101<br />avg_delay:  13.15994073<br />month: 5<br />month:  5","hour: 17.075949<br />avg_delay:  13.45158086<br />month: 5<br />month:  5","hour: 17.303797<br />avg_delay:  13.70351118<br />month: 5<br />month:  5","hour: 17.531646<br />avg_delay:  13.96056469<br />month: 5<br />month:  5","hour: 17.759494<br />avg_delay:  14.20193070<br />month: 5<br />month:  5","hour: 17.987342<br />avg_delay:  14.40679850<br />month: 5<br />month:  5","hour: 18.215190<br />avg_delay:  14.55435737<br />month: 5<br />month:  5","hour: 18.443038<br />avg_delay:  14.62379661<br />month: 5<br />month:  5","hour: 18.670886<br />avg_delay:  14.59430551<br />month: 5<br />month:  5","hour: 18.898734<br />avg_delay:  14.44507337<br />month: 5<br />month:  5","hour: 19.126582<br />avg_delay:  14.17188073<br />month: 5<br />month:  5","hour: 19.354430<br />avg_delay:  13.84089439<br />month: 5<br />month:  5","hour: 19.582278<br />avg_delay:  13.45793068<br />month: 5<br />month:  5","hour: 19.810127<br />avg_delay:  13.01873247<br />month: 5<br />month:  5","hour: 20.037975<br />avg_delay:  12.51904264<br />month: 5<br />month:  5","hour: 20.265823<br />avg_delay:  11.95460409<br />month: 5<br />month:  5","hour: 20.493671<br />avg_delay:  11.32115969<br />month: 5<br />month:  5","hour: 20.721519<br />avg_delay:  10.61445233<br />month: 5<br />month:  5","hour: 20.949367<br />avg_delay:   9.83022490<br />month: 5<br />month:  5","hour: 21.177215<br />avg_delay:   8.96770666<br />month: 5<br />month:  5","hour: 21.405063<br />avg_delay:   8.03305493<br />month: 5<br />month:  5","hour: 21.632911<br />avg_delay:   7.02730361<br />month: 5<br />month:  5","hour: 21.860759<br />avg_delay:   5.95124354<br />month: 5<br />month:  5","hour: 22.088608<br />avg_delay:   4.80566556<br />month: 5<br />month:  5","hour: 22.316456<br />avg_delay:   3.59136053<br />month: 5<br />month:  5","hour: 22.544304<br />avg_delay:   2.30911928<br />month: 5<br />month:  5","hour: 22.772152<br />avg_delay:   0.95973266<br />month: 5<br />month:  5","hour: 23.000000<br />avg_delay:  -0.45600849<br />month: 5<br />month:  5"],"frame":"5","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-13.8780175494554,-13.4506226055308,-13.0344136785796,-12.627887957567,-12.2286927307224,-11.8351079623691,-11.4521677994341,-11.0812911441254,-10.7226168007075,-10.3751697687878,-10.0311993758986,-9.68594107868499,-9.33748070515564,-8.98416630405304,-8.6246952522805,-8.25814665057402,-7.88397534196757,-7.50198755746303,-7.10782889260285,-6.67119346456932,-6.19522365872682,-5.69110124240472,-5.16905243525522,-4.63732000167829,-4.10172335961151,-3.56581573070077,-3.03155936486984,-2.47213053415912,-1.83408697847106,-1.18258029759265,-0.566085277407308,-0.00229806651784425,0.58104922822261,1.19497948673005,1.81685821149907,2.42743838506999,3.01390259354062,3.57128255445006,4.10153560952717,4.61076166073858,5.11402756101795,5.65563206710698,6.21995944407649,6.78253162886862,7.32301311866323,7.82799403482999,8.29191363017981,8.71564076108113,9.1034317639481,9.5252663277429,10.0857916239712,10.6558862526929,11.1206413776692,11.4072187368046,11.6690606650444,11.9430015221855,12.2031239384646,12.4251015158409,12.586874052565,12.6688046933498,12.6532400381608,12.5234822346403,12.2771779023429,11.9733310842747,11.6152594206828,11.1968381079555,10.7115909545133,10.1526660264784,9.51282966614073,8.78449888762897,7.95982848433834,7.03411814424532,6.00984788039767,4.88601764304925,3.66250065433085,2.34013042484307,0.920451076752109,-0.594555507020623,-2.20270083418091,-3.90175375205171,2.98973677318113,4.12216614686166,5.21279405913178,6.26226997391469,7.27120069475068,8.23998641580719,9.16858957049662,10.0562619806656,10.901295179691,11.7006213177123,12.4444057776205,13.1294897127837,13.7565421475218,14.3264943268882,14.8406268240975,15.3006019361966,15.7084577025306,16.0665835504125,16.366664513288,16.5353709847005,16.5787885192994,16.5218406781353,16.3884954745819,16.2007374667607,15.9781278663306,15.7379616886589,15.4959429773909,15.199240073982,14.7041294714662,14.1329138866955,13.6021631962312,13.1915103470531,12.7670418505611,12.2841179639095,11.7676659039918,11.2392254076558,10.7139066081919,10.1989705074489,9.69475248308622,9.19744535252522,8.69417945224584,8.14065602550641,7.5502936178225,6.94527757286387,6.34365067406258,5.75653008066086,5.1871838204597,4.63245031770256,4.08578051658719,3.51081159108098,2.86454196513166,2.21415624030231,1.60646816215368,1.0571648757165,0.503085292913757,-0.0665970154663995,-0.639706473382252,-1.20565847651421,-1.75613461683438,-2.28523983277726,-2.78906251802955,-3.26464661395515,-3.71258190939346,-4.14884872371162,-4.57280413506019,-4.98090653613854,-5.36926293167808,-5.73360458411231,-6.06928103204201,-6.37129248590711,-6.63437693541384,-6.85518003463472,-7.03413370393941,-7.16908508789718,-7.25862150948578,-7.30137122001143,-7.29176179873488,-7.23230880018612,-7.12854230891381,-6.98684231020257,-13.8780175494554],"text":["hour:  5.000000<br />avg_delay: -10.43242993<br />month: 5<br />month:  5","hour:  5.227848<br />avg_delay: -10.28958246<br />month: 5<br />month:  5","hour:  5.455696<br />avg_delay: -10.13336124<br />month: 5<br />month:  5","hour:  5.683544<br />avg_delay:  -9.95982488<br />month: 5<br />month:  5","hour:  5.911392<br />avg_delay:  -9.76503198<br />month: 5<br />month:  5","hour:  6.139241<br />avg_delay:  -9.54686474<br />month: 5<br />month:  5","hour:  6.367089<br />avg_delay:  -9.31062644<br />month: 5<br />month:  5","hour:  6.594937<br />avg_delay:  -9.05771242<br />month: 5<br />month:  5","hour:  6.822785<br />avg_delay:  -8.78889842<br />month: 5<br />month:  5","hour:  7.050633<br />avg_delay:  -8.50477335<br />month: 5<br />month:  5","hour:  7.278481<br />avg_delay:  -8.20124593<br />month: 5<br />month:  5","hour:  7.506329<br />avg_delay:  -7.87761106<br />month: 5<br />month:  5","hour:  7.734177<br />avg_delay:  -7.53554264<br />month: 5<br />month:  5","hour:  7.962025<br />avg_delay:  -7.17671462<br />month: 5<br />month:  5","hour:  8.189873<br />avg_delay:  -6.80280089<br />month: 5<br />month:  5","hour:  8.417722<br />avg_delay:  -6.41547539<br />month: 5<br />month:  5","hour:  8.645570<br />avg_delay:  -6.01641203<br />month: 5<br />month:  5","hour:  8.873418<br />avg_delay:  -5.60728473<br />month: 5<br />month:  5","hour:  9.101266<br />avg_delay:  -5.18623775<br />month: 5<br />month:  5","hour:  9.329114<br />avg_delay:  -4.73012799<br />month: 5<br />month:  5","hour:  9.556962<br />avg_delay:  -4.24023175<br />month: 5<br />month:  5","hour:  9.784810<br />avg_delay:  -3.72361793<br />month: 5<br />month:  5","hour: 10.012658<br />avg_delay:  -3.18735546<br />month: 5<br />month:  5","hour: 10.240506<br />avg_delay:  -2.63851324<br />month: 5<br />month:  5","hour: 10.468354<br />avg_delay:  -2.08416019<br />month: 5<br />month:  5","hour: 10.696203<br />avg_delay:  -1.53136522<br />month: 5<br />month:  5","hour: 10.924051<br />avg_delay:  -0.98719724<br />month: 5<br />month:  5","hour: 11.151899<br />avg_delay:  -0.43283119<br />month: 5<br />month:  5","hour: 11.379747<br />avg_delay:   0.19003463<br />month: 5<br />month:  5","hour: 11.607595<br />avg_delay:   0.84098083<br />month: 5<br />month:  5","hour: 11.835443<br />avg_delay:   1.47236316<br />month: 5<br />month:  5","hour: 12.063291<br />avg_delay:   2.04174123<br />month: 5<br />month:  5","hour: 12.291139<br />avg_delay:   2.60674977<br />month: 5<br />month:  5","hour: 12.518987<br />avg_delay:   3.19108165<br />month: 5<br />month:  5","hour: 12.746835<br />avg_delay:   3.78669415<br />month: 5<br />month:  5","hour: 12.974684<br />avg_delay:   4.38554453<br />month: 5<br />month:  5","hour: 13.202532<br />avg_delay:   4.97959008<br />month: 5<br />month:  5","hour: 13.430380<br />avg_delay:   5.56078809<br />month: 5<br />month:  5","hour: 13.658228<br />avg_delay:   6.12109582<br />month: 5<br />month:  5","hour: 13.886076<br />avg_delay:   6.65247056<br />month: 5<br />month:  5","hour: 14.113924<br />avg_delay:   7.15573646<br />month: 5<br />month:  5","hour: 14.341772<br />avg_delay:   7.67519228<br />month: 5<br />month:  5","hour: 14.569620<br />avg_delay:   8.20946498<br />month: 5<br />month:  5","hour: 14.797468<br />avg_delay:   8.74821912<br />month: 5<br />month:  5","hour: 15.025316<br />avg_delay:   9.28111926<br />month: 5<br />month:  5","hour: 15.253165<br />avg_delay:   9.79782997<br />month: 5<br />month:  5","hour: 15.481013<br />avg_delay:  10.28801580<br />month: 5<br />month:  5","hour: 15.708861<br />avg_delay:  10.74134131<br />month: 5<br />month:  5","hour: 15.936709<br />avg_delay:  11.14747106<br />month: 5<br />month:  5","hour: 16.164557<br />avg_delay:  11.56371476<br />month: 5<br />month:  5","hour: 16.392405<br />avg_delay:  12.10935276<br />month: 5<br />month:  5","hour: 16.620253<br />avg_delay:  12.68000786<br />month: 5<br />month:  5","hour: 16.848101<br />avg_delay:  13.15994073<br />month: 5<br />month:  5","hour: 17.075949<br />avg_delay:  13.45158086<br />month: 5<br />month:  5","hour: 17.303797<br />avg_delay:  13.70351118<br />month: 5<br />month:  5","hour: 17.531646<br />avg_delay:  13.96056469<br />month: 5<br />month:  5","hour: 17.759494<br />avg_delay:  14.20193070<br />month: 5<br />month:  5","hour: 17.987342<br />avg_delay:  14.40679850<br />month: 5<br />month:  5","hour: 18.215190<br />avg_delay:  14.55435737<br />month: 5<br />month:  5","hour: 18.443038<br />avg_delay:  14.62379661<br />month: 5<br />month:  5","hour: 18.670886<br />avg_delay:  14.59430551<br />month: 5<br />month:  5","hour: 18.898734<br />avg_delay:  14.44507337<br />month: 5<br />month:  5","hour: 19.126582<br />avg_delay:  14.17188073<br />month: 5<br />month:  5","hour: 19.354430<br />avg_delay:  13.84089439<br />month: 5<br />month:  5","hour: 19.582278<br />avg_delay:  13.45793068<br />month: 5<br />month:  5","hour: 19.810127<br />avg_delay:  13.01873247<br />month: 5<br />month:  5","hour: 20.037975<br />avg_delay:  12.51904264<br />month: 5<br />month:  5","hour: 20.265823<br />avg_delay:  11.95460409<br />month: 5<br />month:  5","hour: 20.493671<br />avg_delay:  11.32115969<br />month: 5<br />month:  5","hour: 20.721519<br />avg_delay:  10.61445233<br />month: 5<br />month:  5","hour: 20.949367<br />avg_delay:   9.83022490<br />month: 5<br />month:  5","hour: 21.177215<br />avg_delay:   8.96770666<br />month: 5<br />month:  5","hour: 21.405063<br />avg_delay:   8.03305493<br />month: 5<br />month:  5","hour: 21.632911<br />avg_delay:   7.02730361<br />month: 5<br />month:  5","hour: 21.860759<br />avg_delay:   5.95124354<br />month: 5<br />month:  5","hour: 22.088608<br />avg_delay:   4.80566556<br />month: 5<br />month:  5","hour: 22.316456<br />avg_delay:   3.59136053<br />month: 5<br />month:  5","hour: 22.544304<br />avg_delay:   2.30911928<br />month: 5<br />month:  5","hour: 22.772152<br />avg_delay:   0.95973266<br />month: 5<br />month:  5","hour: 23.000000<br />avg_delay:  -0.45600849<br />month: 5<br />month:  5","hour: 23.000000<br />avg_delay:  -0.45600849<br />month: 5<br />month:  5","hour: 22.772152<br />avg_delay:   0.95973266<br />month: 5<br />month:  5","hour: 22.544304<br />avg_delay:   2.30911928<br />month: 5<br />month:  5","hour: 22.316456<br />avg_delay:   3.59136053<br />month: 5<br />month:  5","hour: 22.088608<br />avg_delay:   4.80566556<br />month: 5<br />month:  5","hour: 21.860759<br />avg_delay:   5.95124354<br />month: 5<br />month:  5","hour: 21.632911<br />avg_delay:   7.02730361<br />month: 5<br />month:  5","hour: 21.405063<br />avg_delay:   8.03305493<br />month: 5<br />month:  5","hour: 21.177215<br />avg_delay:   8.96770666<br />month: 5<br />month:  5","hour: 20.949367<br />avg_delay:   9.83022490<br />month: 5<br />month:  5","hour: 20.721519<br />avg_delay:  10.61445233<br />month: 5<br />month:  5","hour: 20.493671<br />avg_delay:  11.32115969<br />month: 5<br />month:  5","hour: 20.265823<br />avg_delay:  11.95460409<br />month: 5<br />month:  5","hour: 20.037975<br />avg_delay:  12.51904264<br />month: 5<br />month:  5","hour: 19.810127<br />avg_delay:  13.01873247<br />month: 5<br />month:  5","hour: 19.582278<br />avg_delay:  13.45793068<br />month: 5<br />month:  5","hour: 19.354430<br />avg_delay:  13.84089439<br />month: 5<br />month:  5","hour: 19.126582<br />avg_delay:  14.17188073<br />month: 5<br />month:  5","hour: 18.898734<br />avg_delay:  14.44507337<br />month: 5<br />month:  5","hour: 18.670886<br />avg_delay:  14.59430551<br />month: 5<br />month:  5","hour: 18.443038<br />avg_delay:  14.62379661<br />month: 5<br />month:  5","hour: 18.215190<br />avg_delay:  14.55435737<br />month: 5<br />month:  5","hour: 17.987342<br />avg_delay:  14.40679850<br />month: 5<br />month:  5","hour: 17.759494<br />avg_delay:  14.20193070<br />month: 5<br />month:  5","hour: 17.531646<br />avg_delay:  13.96056469<br />month: 5<br />month:  5","hour: 17.303797<br />avg_delay:  13.70351118<br />month: 5<br />month:  5","hour: 17.075949<br />avg_delay:  13.45158086<br />month: 5<br />month:  5","hour: 16.848101<br />avg_delay:  13.15994073<br />month: 5<br />month:  5","hour: 16.620253<br />avg_delay:  12.68000786<br />month: 5<br />month:  5","hour: 16.392405<br />avg_delay:  12.10935276<br />month: 5<br />month:  5","hour: 16.164557<br />avg_delay:  11.56371476<br />month: 5<br />month:  5","hour: 15.936709<br />avg_delay:  11.14747106<br />month: 5<br />month:  5","hour: 15.708861<br />avg_delay:  10.74134131<br />month: 5<br />month:  5","hour: 15.481013<br />avg_delay:  10.28801580<br />month: 5<br />month:  5","hour: 15.253165<br />avg_delay:   9.79782997<br />month: 5<br />month:  5","hour: 15.025316<br />avg_delay:   9.28111926<br />month: 5<br />month:  5","hour: 14.797468<br />avg_delay:   8.74821912<br />month: 5<br />month:  5","hour: 14.569620<br />avg_delay:   8.20946498<br />month: 5<br />month:  5","hour: 14.341772<br />avg_delay:   7.67519228<br />month: 5<br />month:  5","hour: 14.113924<br />avg_delay:   7.15573646<br />month: 5<br />month:  5","hour: 13.886076<br />avg_delay:   6.65247056<br />month: 5<br />month:  5","hour: 13.658228<br />avg_delay:   6.12109582<br />month: 5<br />month:  5","hour: 13.430380<br />avg_delay:   5.56078809<br />month: 5<br />month:  5","hour: 13.202532<br />avg_delay:   4.97959008<br />month: 5<br />month:  5","hour: 12.974684<br />avg_delay:   4.38554453<br />month: 5<br />month:  5","hour: 12.746835<br />avg_delay:   3.78669415<br />month: 5<br />month:  5","hour: 12.518987<br />avg_delay:   3.19108165<br />month: 5<br />month:  5","hour: 12.291139<br />avg_delay:   2.60674977<br />month: 5<br />month:  5","hour: 12.063291<br />avg_delay:   2.04174123<br />month: 5<br />month:  5","hour: 11.835443<br />avg_delay:   1.47236316<br />month: 5<br />month:  5","hour: 11.607595<br />avg_delay:   0.84098083<br />month: 5<br />month:  5","hour: 11.379747<br />avg_delay:   0.19003463<br />month: 5<br />month:  5","hour: 11.151899<br />avg_delay:  -0.43283119<br />month: 5<br />month:  5","hour: 10.924051<br />avg_delay:  -0.98719724<br />month: 5<br />month:  5","hour: 10.696203<br />avg_delay:  -1.53136522<br />month: 5<br />month:  5","hour: 10.468354<br />avg_delay:  -2.08416019<br />month: 5<br />month:  5","hour: 10.240506<br />avg_delay:  -2.63851324<br />month: 5<br />month:  5","hour: 10.012658<br />avg_delay:  -3.18735546<br />month: 5<br />month:  5","hour:  9.784810<br />avg_delay:  -3.72361793<br />month: 5<br />month:  5","hour:  9.556962<br />avg_delay:  -4.24023175<br />month: 5<br />month:  5","hour:  9.329114<br />avg_delay:  -4.73012799<br />month: 5<br />month:  5","hour:  9.101266<br />avg_delay:  -5.18623775<br />month: 5<br />month:  5","hour:  8.873418<br />avg_delay:  -5.60728473<br />month: 5<br />month:  5","hour:  8.645570<br />avg_delay:  -6.01641203<br />month: 5<br />month:  5","hour:  8.417722<br />avg_delay:  -6.41547539<br />month: 5<br />month:  5","hour:  8.189873<br />avg_delay:  -6.80280089<br />month: 5<br />month:  5","hour:  7.962025<br />avg_delay:  -7.17671462<br />month: 5<br />month:  5","hour:  7.734177<br />avg_delay:  -7.53554264<br />month: 5<br />month:  5","hour:  7.506329<br />avg_delay:  -7.87761106<br />month: 5<br />month:  5","hour:  7.278481<br />avg_delay:  -8.20124593<br />month: 5<br />month:  5","hour:  7.050633<br />avg_delay:  -8.50477335<br />month: 5<br />month:  5","hour:  6.822785<br />avg_delay:  -8.78889842<br />month: 5<br />month:  5","hour:  6.594937<br />avg_delay:  -9.05771242<br />month: 5<br />month:  5","hour:  6.367089<br />avg_delay:  -9.31062644<br />month: 5<br />month:  5","hour:  6.139241<br />avg_delay:  -9.54686474<br />month: 5<br />month:  5","hour:  5.911392<br />avg_delay:  -9.76503198<br />month: 5<br />month:  5","hour:  5.683544<br />avg_delay:  -9.95982488<br />month: 5<br />month:  5","hour:  5.455696<br />avg_delay: -10.13336124<br />month: 5<br />month:  5","hour:  5.227848<br />avg_delay: -10.28958246<br />month: 5<br />month:  5","hour:  5.000000<br />avg_delay: -10.43242993<br />month: 5<br />month:  5","hour:  5.000000<br />avg_delay: -10.43242993<br />month: 5<br />month:  5"],"frame":"5","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"6","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-5.34502923976608,-2.8751665926255,-5.51431601272534,-0.632857142857143,-2.60280658938377,2.85463842220599,2.63691838291381,8.02555480833894,13.6380952380952,19.3012181616833,27.7975708502024,30.8636363636364,34.4055909759686,39.9596727060199,37.2407516147974,35.7097020626432,39.7512315270936,27.7105263157895,22.875],"text":["hour:  5<br />avg_delay:  -5.345029240<br />month: 6<br />month:  6","hour:  6<br />avg_delay:  -2.875166593<br />month: 6<br />month:  6","hour:  7<br />avg_delay:  -5.514316013<br />month: 6<br />month:  6","hour:  8<br />avg_delay:  -0.632857143<br />month: 6<br />month:  6","hour:  9<br />avg_delay:  -2.602806589<br />month: 6<br />month:  6","hour: 10<br />avg_delay:   2.854638422<br />month: 6<br />month:  6","hour: 11<br />avg_delay:   2.636918383<br />month: 6<br />month:  6","hour: 12<br />avg_delay:   8.025554808<br />month: 6<br />month:  6","hour: 13<br />avg_delay:  13.638095238<br />month: 6<br />month:  6","hour: 14<br />avg_delay:  19.301218162<br />month: 6<br />month:  6","hour: 15<br />avg_delay:  27.797570850<br />month: 6<br />month:  6","hour: 16<br />avg_delay:  30.863636364<br />month: 6<br />month:  6","hour: 17<br />avg_delay:  34.405590976<br />month: 6<br />month:  6","hour: 18<br />avg_delay:  39.959672706<br />month: 6<br />month:  6","hour: 19<br />avg_delay:  37.240751615<br />month: 6<br />month:  6","hour: 20<br />avg_delay:  35.709702063<br />month: 6<br />month:  6","hour: 21<br />avg_delay:  39.751231527<br />month: 6<br />month:  6","hour: 22<br />avg_delay:  27.710526316<br />month: 6<br />month:  6","hour: 23<br />avg_delay:  22.875000000<br />month: 6<br />month:  6"],"frame":"6","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-4.21263854009452,-4.3460973551043,-4.44152633944744,-4.5004736613151,-4.5244874888984,-4.51436083610557,-4.46788659490163,-4.38456736676639,-4.26416657356978,-4.10650112859111,-3.91272353883751,-3.6830049019677,-3.41683328362142,-3.11369674943845,-2.77308336505853,-2.39448119612143,-1.97737830826691,-1.52126276713473,-1.02666700040842,-0.500424910382621,0.0578497858101175,0.650256865917238,1.27889610768617,1.94586728886437,2.65327018719926,3.4032045804383,4.19777024632891,5.0624531744142,6.04603754689186,7.09430963262093,8.14603631615611,9.1507404128539,10.2491522966622,11.4750145780153,12.7914797143312,14.1617001630282,15.5488283815246,16.9160168272386,18.2264179575884,19.4431842299922,20.5686797102673,21.7987180143186,23.1289970619778,24.5157133322433,25.9150633041135,27.2832434565869,28.576450268662,29.7508802193372,30.7627297876109,31.6776428388418,32.7049313773309,33.7353042179376,34.6422156625441,35.3167751340723,35.8960630453638,36.4307464869807,36.9093994496892,37.3205959242554,37.6529099014455,37.8949153720257,38.0351863267621,38.062296756421,37.9739167824091,37.8063349615195,37.5627935839004,37.2410145829244,36.8387198919644,36.3536314443932,35.7834711735835,35.1259610129082,34.37882289574,33.5417474385986,32.6182381056334,31.6088176473611,30.5138700150829,29.3337791600998,28.068929033713,26.7197035872235,25.2864867719324,23.7696625391409],"text":["hour:  5.000000<br />avg_delay:  -4.21263854<br />month: 6<br />month:  6","hour:  5.227848<br />avg_delay:  -4.34609736<br />month: 6<br />month:  6","hour:  5.455696<br />avg_delay:  -4.44152634<br />month: 6<br />month:  6","hour:  5.683544<br />avg_delay:  -4.50047366<br />month: 6<br />month:  6","hour:  5.911392<br />avg_delay:  -4.52448749<br />month: 6<br />month:  6","hour:  6.139241<br />avg_delay:  -4.51436084<br />month: 6<br />month:  6","hour:  6.367089<br />avg_delay:  -4.46788659<br />month: 6<br />month:  6","hour:  6.594937<br />avg_delay:  -4.38456737<br />month: 6<br />month:  6","hour:  6.822785<br />avg_delay:  -4.26416657<br />month: 6<br />month:  6","hour:  7.050633<br />avg_delay:  -4.10650113<br />month: 6<br />month:  6","hour:  7.278481<br />avg_delay:  -3.91272354<br />month: 6<br />month:  6","hour:  7.506329<br />avg_delay:  -3.68300490<br />month: 6<br />month:  6","hour:  7.734177<br />avg_delay:  -3.41683328<br />month: 6<br />month:  6","hour:  7.962025<br />avg_delay:  -3.11369675<br />month: 6<br />month:  6","hour:  8.189873<br />avg_delay:  -2.77308337<br />month: 6<br />month:  6","hour:  8.417722<br />avg_delay:  -2.39448120<br />month: 6<br />month:  6","hour:  8.645570<br />avg_delay:  -1.97737831<br />month: 6<br />month:  6","hour:  8.873418<br />avg_delay:  -1.52126277<br />month: 6<br />month:  6","hour:  9.101266<br />avg_delay:  -1.02666700<br />month: 6<br />month:  6","hour:  9.329114<br />avg_delay:  -0.50042491<br />month: 6<br />month:  6","hour:  9.556962<br />avg_delay:   0.05784979<br />month: 6<br />month:  6","hour:  9.784810<br />avg_delay:   0.65025687<br />month: 6<br />month:  6","hour: 10.012658<br />avg_delay:   1.27889611<br />month: 6<br />month:  6","hour: 10.240506<br />avg_delay:   1.94586729<br />month: 6<br />month:  6","hour: 10.468354<br />avg_delay:   2.65327019<br />month: 6<br />month:  6","hour: 10.696203<br />avg_delay:   3.40320458<br />month: 6<br />month:  6","hour: 10.924051<br />avg_delay:   4.19777025<br />month: 6<br />month:  6","hour: 11.151899<br />avg_delay:   5.06245317<br />month: 6<br />month:  6","hour: 11.379747<br />avg_delay:   6.04603755<br />month: 6<br />month:  6","hour: 11.607595<br />avg_delay:   7.09430963<br />month: 6<br />month:  6","hour: 11.835443<br />avg_delay:   8.14603632<br />month: 6<br />month:  6","hour: 12.063291<br />avg_delay:   9.15074041<br />month: 6<br />month:  6","hour: 12.291139<br />avg_delay:  10.24915230<br />month: 6<br />month:  6","hour: 12.518987<br />avg_delay:  11.47501458<br />month: 6<br />month:  6","hour: 12.746835<br />avg_delay:  12.79147971<br />month: 6<br />month:  6","hour: 12.974684<br />avg_delay:  14.16170016<br />month: 6<br />month:  6","hour: 13.202532<br />avg_delay:  15.54882838<br />month: 6<br />month:  6","hour: 13.430380<br />avg_delay:  16.91601683<br />month: 6<br />month:  6","hour: 13.658228<br />avg_delay:  18.22641796<br />month: 6<br />month:  6","hour: 13.886076<br />avg_delay:  19.44318423<br />month: 6<br />month:  6","hour: 14.113924<br />avg_delay:  20.56867971<br />month: 6<br />month:  6","hour: 14.341772<br />avg_delay:  21.79871801<br />month: 6<br />month:  6","hour: 14.569620<br />avg_delay:  23.12899706<br />month: 6<br />month:  6","hour: 14.797468<br />avg_delay:  24.51571333<br />month: 6<br />month:  6","hour: 15.025316<br />avg_delay:  25.91506330<br />month: 6<br />month:  6","hour: 15.253165<br />avg_delay:  27.28324346<br />month: 6<br />month:  6","hour: 15.481013<br />avg_delay:  28.57645027<br />month: 6<br />month:  6","hour: 15.708861<br />avg_delay:  29.75088022<br />month: 6<br />month:  6","hour: 15.936709<br />avg_delay:  30.76272979<br />month: 6<br />month:  6","hour: 16.164557<br />avg_delay:  31.67764284<br />month: 6<br />month:  6","hour: 16.392405<br />avg_delay:  32.70493138<br />month: 6<br />month:  6","hour: 16.620253<br />avg_delay:  33.73530422<br />month: 6<br />month:  6","hour: 16.848101<br />avg_delay:  34.64221566<br />month: 6<br />month:  6","hour: 17.075949<br />avg_delay:  35.31677513<br />month: 6<br />month:  6","hour: 17.303797<br />avg_delay:  35.89606305<br />month: 6<br />month:  6","hour: 17.531646<br />avg_delay:  36.43074649<br />month: 6<br />month:  6","hour: 17.759494<br />avg_delay:  36.90939945<br />month: 6<br />month:  6","hour: 17.987342<br />avg_delay:  37.32059592<br />month: 6<br />month:  6","hour: 18.215190<br />avg_delay:  37.65290990<br />month: 6<br />month:  6","hour: 18.443038<br />avg_delay:  37.89491537<br />month: 6<br />month:  6","hour: 18.670886<br />avg_delay:  38.03518633<br />month: 6<br />month:  6","hour: 18.898734<br />avg_delay:  38.06229676<br />month: 6<br />month:  6","hour: 19.126582<br />avg_delay:  37.97391678<br />month: 6<br />month:  6","hour: 19.354430<br />avg_delay:  37.80633496<br />month: 6<br />month:  6","hour: 19.582278<br />avg_delay:  37.56279358<br />month: 6<br />month:  6","hour: 19.810127<br />avg_delay:  37.24101458<br />month: 6<br />month:  6","hour: 20.037975<br />avg_delay:  36.83871989<br />month: 6<br />month:  6","hour: 20.265823<br />avg_delay:  36.35363144<br />month: 6<br />month:  6","hour: 20.493671<br />avg_delay:  35.78347117<br />month: 6<br />month:  6","hour: 20.721519<br />avg_delay:  35.12596101<br />month: 6<br />month:  6","hour: 20.949367<br />avg_delay:  34.37882290<br />month: 6<br />month:  6","hour: 21.177215<br />avg_delay:  33.54174744<br />month: 6<br />month:  6","hour: 21.405063<br />avg_delay:  32.61823811<br />month: 6<br />month:  6","hour: 21.632911<br />avg_delay:  31.60881765<br />month: 6<br />month:  6","hour: 21.860759<br />avg_delay:  30.51387002<br />month: 6<br />month:  6","hour: 22.088608<br />avg_delay:  29.33377916<br />month: 6<br />month:  6","hour: 22.316456<br />avg_delay:  28.06892903<br />month: 6<br />month:  6","hour: 22.544304<br />avg_delay:  26.71970359<br />month: 6<br />month:  6","hour: 22.772152<br />avg_delay:  25.28648677<br />month: 6<br />month:  6","hour: 23.000000<br />avg_delay:  23.76966254<br />month: 6<br />month:  6"],"frame":"6","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-7.92090214989044,-7.74812088348787,-7.56374187362947,-7.37193778246588,-7.17596657883011,-6.97704935943377,-6.77268936155721,-6.56241456082261,-6.34530288557705,-6.11948809440946,-5.88218434402645,-5.62919381377705,-5.35614293834534,-5.05894036366992,-4.73387069504657,-4.37762936249943,-3.98731618324111,-3.5604091506789,-3.094751542584,-2.58946842149741,-2.04618185368007,-1.46721846111363,-0.853876471476657,-0.205319447552946,0.481897139291614,1.21365677852126,1.99755521979874,2.86768688283202,3.86760607612171,4.9164813681807,5.95218580830786,6.95087282606502,8.06902151966071,9.32673862512506,10.6714724122772,12.0543168771141,13.4332857830364,14.7748404071075,16.0528956287927,17.2458246978202,18.3713201780953,19.625195685523,20.9878206418467,22.400170733755,23.8076800181993,25.163236154533,26.4281743157718,27.5707494423356,28.562862200822,29.4837923309935,30.5271031128906,31.5568727471674,32.447449370962,33.1165601075421,33.7065152434468,34.2593734390731,34.7582127132719,35.1878233450925,35.5354345744146,35.7908837325355,35.9461428156473,35.9942122142454,35.9347703988649,35.7963970865453,35.5796454175224,35.2802272529364,34.8934762777329,34.4143217896693,33.8372822617741,33.1565002077192,32.3658359299217,31.4607508922481,30.4407909159701,29.3042897426828,28.0506437460783,26.6802827963609,25.1944015491071,23.5946657935449,21.8829636792382,20.0612292683676,27.4780958099142,28.6900098646267,29.8447413809021,30.9434565183189,31.9872755238387,32.9770962840875,33.9133455520395,34.7956852952967,35.6227439849492,36.3918098615584,37.0954218180971,37.7296600853929,38.2929410991171,38.7839635061959,39.2018019129125,39.5459417502784,39.8162728364937,40.0130631659533,40.1303812985965,40.1242298378769,39.9989470115158,39.7703852284763,39.4533685034182,39.0605861861065,38.6021195348884,38.0856108472809,37.5169901606025,36.8369819541263,35.9137356887077,34.8827596417711,33.87149334669,32.9625973743998,31.9310109963387,30.7247262215522,29.4032507586409,28.0224465900276,26.6312559307315,25.2701734821089,23.9722403431143,22.7660392424393,21.6405437621642,20.399940286384,19.0571932473697,17.6643709800128,16.2690834489423,14.9114870163851,13.6232905309055,12.4292830736638,11.3506079996428,10.3398868240044,9.27213789706116,8.22446901766202,7.25721946599637,6.39798527285909,5.59275238235533,4.82464323510692,4.09705402528168,3.411668686849,2.76773219294811,2.16188142530031,1.58861860073216,1.04141754176715,0.517883616409441,0.0325595667072882,-0.411333029743441,-0.812296035070496,-1.16845313520698,-1.4775236288975,-1.73681599015835,-1.94326273364857,-2.09351416277276,-2.18303026156251,-2.20672017271018,-2.16308382824604,-2.05167231277737,-1.87300839896669,-1.62900954016431,-1.31931080526541,-0.944073826720725,-0.504374930298604,-7.92090214989044],"text":["hour:  5.000000<br />avg_delay:  -4.21263854<br />month: 6<br />month:  6","hour:  5.227848<br />avg_delay:  -4.34609736<br />month: 6<br />month:  6","hour:  5.455696<br />avg_delay:  -4.44152634<br />month: 6<br />month:  6","hour:  5.683544<br />avg_delay:  -4.50047366<br />month: 6<br />month:  6","hour:  5.911392<br />avg_delay:  -4.52448749<br />month: 6<br />month:  6","hour:  6.139241<br />avg_delay:  -4.51436084<br />month: 6<br />month:  6","hour:  6.367089<br />avg_delay:  -4.46788659<br />month: 6<br />month:  6","hour:  6.594937<br />avg_delay:  -4.38456737<br />month: 6<br />month:  6","hour:  6.822785<br />avg_delay:  -4.26416657<br />month: 6<br />month:  6","hour:  7.050633<br />avg_delay:  -4.10650113<br />month: 6<br />month:  6","hour:  7.278481<br />avg_delay:  -3.91272354<br />month: 6<br />month:  6","hour:  7.506329<br />avg_delay:  -3.68300490<br />month: 6<br />month:  6","hour:  7.734177<br />avg_delay:  -3.41683328<br />month: 6<br />month:  6","hour:  7.962025<br />avg_delay:  -3.11369675<br />month: 6<br />month:  6","hour:  8.189873<br />avg_delay:  -2.77308337<br />month: 6<br />month:  6","hour:  8.417722<br />avg_delay:  -2.39448120<br />month: 6<br />month:  6","hour:  8.645570<br />avg_delay:  -1.97737831<br />month: 6<br />month:  6","hour:  8.873418<br />avg_delay:  -1.52126277<br />month: 6<br />month:  6","hour:  9.101266<br />avg_delay:  -1.02666700<br />month: 6<br />month:  6","hour:  9.329114<br />avg_delay:  -0.50042491<br />month: 6<br />month:  6","hour:  9.556962<br />avg_delay:   0.05784979<br />month: 6<br />month:  6","hour:  9.784810<br />avg_delay:   0.65025687<br />month: 6<br />month:  6","hour: 10.012658<br />avg_delay:   1.27889611<br />month: 6<br />month:  6","hour: 10.240506<br />avg_delay:   1.94586729<br />month: 6<br />month:  6","hour: 10.468354<br />avg_delay:   2.65327019<br />month: 6<br />month:  6","hour: 10.696203<br />avg_delay:   3.40320458<br />month: 6<br />month:  6","hour: 10.924051<br />avg_delay:   4.19777025<br />month: 6<br />month:  6","hour: 11.151899<br />avg_delay:   5.06245317<br />month: 6<br />month:  6","hour: 11.379747<br />avg_delay:   6.04603755<br />month: 6<br />month:  6","hour: 11.607595<br />avg_delay:   7.09430963<br />month: 6<br />month:  6","hour: 11.835443<br />avg_delay:   8.14603632<br />month: 6<br />month:  6","hour: 12.063291<br />avg_delay:   9.15074041<br />month: 6<br />month:  6","hour: 12.291139<br />avg_delay:  10.24915230<br />month: 6<br />month:  6","hour: 12.518987<br />avg_delay:  11.47501458<br />month: 6<br />month:  6","hour: 12.746835<br />avg_delay:  12.79147971<br />month: 6<br />month:  6","hour: 12.974684<br />avg_delay:  14.16170016<br />month: 6<br />month:  6","hour: 13.202532<br />avg_delay:  15.54882838<br />month: 6<br />month:  6","hour: 13.430380<br />avg_delay:  16.91601683<br />month: 6<br />month:  6","hour: 13.658228<br />avg_delay:  18.22641796<br />month: 6<br />month:  6","hour: 13.886076<br />avg_delay:  19.44318423<br />month: 6<br />month:  6","hour: 14.113924<br />avg_delay:  20.56867971<br />month: 6<br />month:  6","hour: 14.341772<br />avg_delay:  21.79871801<br />month: 6<br />month:  6","hour: 14.569620<br />avg_delay:  23.12899706<br />month: 6<br />month:  6","hour: 14.797468<br />avg_delay:  24.51571333<br />month: 6<br />month:  6","hour: 15.025316<br />avg_delay:  25.91506330<br />month: 6<br />month:  6","hour: 15.253165<br />avg_delay:  27.28324346<br />month: 6<br />month:  6","hour: 15.481013<br />avg_delay:  28.57645027<br />month: 6<br />month:  6","hour: 15.708861<br />avg_delay:  29.75088022<br />month: 6<br />month:  6","hour: 15.936709<br />avg_delay:  30.76272979<br />month: 6<br />month:  6","hour: 16.164557<br />avg_delay:  31.67764284<br />month: 6<br />month:  6","hour: 16.392405<br />avg_delay:  32.70493138<br />month: 6<br />month:  6","hour: 16.620253<br />avg_delay:  33.73530422<br />month: 6<br />month:  6","hour: 16.848101<br />avg_delay:  34.64221566<br />month: 6<br />month:  6","hour: 17.075949<br />avg_delay:  35.31677513<br />month: 6<br />month:  6","hour: 17.303797<br />avg_delay:  35.89606305<br />month: 6<br />month:  6","hour: 17.531646<br />avg_delay:  36.43074649<br />month: 6<br />month:  6","hour: 17.759494<br />avg_delay:  36.90939945<br />month: 6<br />month:  6","hour: 17.987342<br />avg_delay:  37.32059592<br />month: 6<br />month:  6","hour: 18.215190<br />avg_delay:  37.65290990<br />month: 6<br />month:  6","hour: 18.443038<br />avg_delay:  37.89491537<br />month: 6<br />month:  6","hour: 18.670886<br />avg_delay:  38.03518633<br />month: 6<br />month:  6","hour: 18.898734<br />avg_delay:  38.06229676<br />month: 6<br />month:  6","hour: 19.126582<br />avg_delay:  37.97391678<br />month: 6<br />month:  6","hour: 19.354430<br />avg_delay:  37.80633496<br />month: 6<br />month:  6","hour: 19.582278<br />avg_delay:  37.56279358<br />month: 6<br />month:  6","hour: 19.810127<br />avg_delay:  37.24101458<br />month: 6<br />month:  6","hour: 20.037975<br />avg_delay:  36.83871989<br />month: 6<br />month:  6","hour: 20.265823<br />avg_delay:  36.35363144<br />month: 6<br />month:  6","hour: 20.493671<br />avg_delay:  35.78347117<br />month: 6<br />month:  6","hour: 20.721519<br />avg_delay:  35.12596101<br />month: 6<br />month:  6","hour: 20.949367<br />avg_delay:  34.37882290<br />month: 6<br />month:  6","hour: 21.177215<br />avg_delay:  33.54174744<br />month: 6<br />month:  6","hour: 21.405063<br />avg_delay:  32.61823811<br />month: 6<br />month:  6","hour: 21.632911<br />avg_delay:  31.60881765<br />month: 6<br />month:  6","hour: 21.860759<br />avg_delay:  30.51387002<br />month: 6<br />month:  6","hour: 22.088608<br />avg_delay:  29.33377916<br />month: 6<br />month:  6","hour: 22.316456<br />avg_delay:  28.06892903<br />month: 6<br />month:  6","hour: 22.544304<br />avg_delay:  26.71970359<br />month: 6<br />month:  6","hour: 22.772152<br />avg_delay:  25.28648677<br />month: 6<br />month:  6","hour: 23.000000<br />avg_delay:  23.76966254<br />month: 6<br />month:  6","hour: 23.000000<br />avg_delay:  23.76966254<br />month: 6<br />month:  6","hour: 22.772152<br />avg_delay:  25.28648677<br />month: 6<br />month:  6","hour: 22.544304<br />avg_delay:  26.71970359<br />month: 6<br />month:  6","hour: 22.316456<br />avg_delay:  28.06892903<br />month: 6<br />month:  6","hour: 22.088608<br />avg_delay:  29.33377916<br />month: 6<br />month:  6","hour: 21.860759<br />avg_delay:  30.51387002<br />month: 6<br />month:  6","hour: 21.632911<br />avg_delay:  31.60881765<br />month: 6<br />month:  6","hour: 21.405063<br />avg_delay:  32.61823811<br />month: 6<br />month:  6","hour: 21.177215<br />avg_delay:  33.54174744<br />month: 6<br />month:  6","hour: 20.949367<br />avg_delay:  34.37882290<br />month: 6<br />month:  6","hour: 20.721519<br />avg_delay:  35.12596101<br />month: 6<br />month:  6","hour: 20.493671<br />avg_delay:  35.78347117<br />month: 6<br />month:  6","hour: 20.265823<br />avg_delay:  36.35363144<br />month: 6<br />month:  6","hour: 20.037975<br />avg_delay:  36.83871989<br />month: 6<br />month:  6","hour: 19.810127<br />avg_delay:  37.24101458<br />month: 6<br />month:  6","hour: 19.582278<br />avg_delay:  37.56279358<br />month: 6<br />month:  6","hour: 19.354430<br />avg_delay:  37.80633496<br />month: 6<br />month:  6","hour: 19.126582<br />avg_delay:  37.97391678<br />month: 6<br />month:  6","hour: 18.898734<br />avg_delay:  38.06229676<br />month: 6<br />month:  6","hour: 18.670886<br />avg_delay:  38.03518633<br />month: 6<br />month:  6","hour: 18.443038<br />avg_delay:  37.89491537<br />month: 6<br />month:  6","hour: 18.215190<br />avg_delay:  37.65290990<br />month: 6<br />month:  6","hour: 17.987342<br />avg_delay:  37.32059592<br />month: 6<br />month:  6","hour: 17.759494<br />avg_delay:  36.90939945<br />month: 6<br />month:  6","hour: 17.531646<br />avg_delay:  36.43074649<br />month: 6<br />month:  6","hour: 17.303797<br />avg_delay:  35.89606305<br />month: 6<br />month:  6","hour: 17.075949<br />avg_delay:  35.31677513<br />month: 6<br />month:  6","hour: 16.848101<br />avg_delay:  34.64221566<br />month: 6<br />month:  6","hour: 16.620253<br />avg_delay:  33.73530422<br />month: 6<br />month:  6","hour: 16.392405<br />avg_delay:  32.70493138<br />month: 6<br />month:  6","hour: 16.164557<br />avg_delay:  31.67764284<br />month: 6<br />month:  6","hour: 15.936709<br />avg_delay:  30.76272979<br />month: 6<br />month:  6","hour: 15.708861<br />avg_delay:  29.75088022<br />month: 6<br />month:  6","hour: 15.481013<br />avg_delay:  28.57645027<br />month: 6<br />month:  6","hour: 15.253165<br />avg_delay:  27.28324346<br />month: 6<br />month:  6","hour: 15.025316<br />avg_delay:  25.91506330<br />month: 6<br />month:  6","hour: 14.797468<br />avg_delay:  24.51571333<br />month: 6<br />month:  6","hour: 14.569620<br />avg_delay:  23.12899706<br />month: 6<br />month:  6","hour: 14.341772<br />avg_delay:  21.79871801<br />month: 6<br />month:  6","hour: 14.113924<br />avg_delay:  20.56867971<br />month: 6<br />month:  6","hour: 13.886076<br />avg_delay:  19.44318423<br />month: 6<br />month:  6","hour: 13.658228<br />avg_delay:  18.22641796<br />month: 6<br />month:  6","hour: 13.430380<br />avg_delay:  16.91601683<br />month: 6<br />month:  6","hour: 13.202532<br />avg_delay:  15.54882838<br />month: 6<br />month:  6","hour: 12.974684<br />avg_delay:  14.16170016<br />month: 6<br />month:  6","hour: 12.746835<br />avg_delay:  12.79147971<br />month: 6<br />month:  6","hour: 12.518987<br />avg_delay:  11.47501458<br />month: 6<br />month:  6","hour: 12.291139<br />avg_delay:  10.24915230<br />month: 6<br />month:  6","hour: 12.063291<br />avg_delay:   9.15074041<br />month: 6<br />month:  6","hour: 11.835443<br />avg_delay:   8.14603632<br />month: 6<br />month:  6","hour: 11.607595<br />avg_delay:   7.09430963<br />month: 6<br />month:  6","hour: 11.379747<br />avg_delay:   6.04603755<br />month: 6<br />month:  6","hour: 11.151899<br />avg_delay:   5.06245317<br />month: 6<br />month:  6","hour: 10.924051<br />avg_delay:   4.19777025<br />month: 6<br />month:  6","hour: 10.696203<br />avg_delay:   3.40320458<br />month: 6<br />month:  6","hour: 10.468354<br />avg_delay:   2.65327019<br />month: 6<br />month:  6","hour: 10.240506<br />avg_delay:   1.94586729<br />month: 6<br />month:  6","hour: 10.012658<br />avg_delay:   1.27889611<br />month: 6<br />month:  6","hour:  9.784810<br />avg_delay:   0.65025687<br />month: 6<br />month:  6","hour:  9.556962<br />avg_delay:   0.05784979<br />month: 6<br />month:  6","hour:  9.329114<br />avg_delay:  -0.50042491<br />month: 6<br />month:  6","hour:  9.101266<br />avg_delay:  -1.02666700<br />month: 6<br />month:  6","hour:  8.873418<br />avg_delay:  -1.52126277<br />month: 6<br />month:  6","hour:  8.645570<br />avg_delay:  -1.97737831<br />month: 6<br />month:  6","hour:  8.417722<br />avg_delay:  -2.39448120<br />month: 6<br />month:  6","hour:  8.189873<br />avg_delay:  -2.77308337<br />month: 6<br />month:  6","hour:  7.962025<br />avg_delay:  -3.11369675<br />month: 6<br />month:  6","hour:  7.734177<br />avg_delay:  -3.41683328<br />month: 6<br />month:  6","hour:  7.506329<br />avg_delay:  -3.68300490<br />month: 6<br />month:  6","hour:  7.278481<br />avg_delay:  -3.91272354<br />month: 6<br />month:  6","hour:  7.050633<br />avg_delay:  -4.10650113<br />month: 6<br />month:  6","hour:  6.822785<br />avg_delay:  -4.26416657<br />month: 6<br />month:  6","hour:  6.594937<br />avg_delay:  -4.38456737<br />month: 6<br />month:  6","hour:  6.367089<br />avg_delay:  -4.46788659<br />month: 6<br />month:  6","hour:  6.139241<br />avg_delay:  -4.51436084<br />month: 6<br />month:  6","hour:  5.911392<br />avg_delay:  -4.52448749<br />month: 6<br />month:  6","hour:  5.683544<br />avg_delay:  -4.50047366<br />month: 6<br />month:  6","hour:  5.455696<br />avg_delay:  -4.44152634<br />month: 6<br />month:  6","hour:  5.227848<br />avg_delay:  -4.34609736<br />month: 6<br />month:  6","hour:  5.000000<br />avg_delay:  -4.21263854<br />month: 6<br />month:  6","hour:  5.000000<br />avg_delay:  -4.21263854<br />month: 6<br />month:  6"],"frame":"6","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"7","data":[{"x":[1,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[null,-2.61928934010152,-2.35451358457493,-5.60858456821666,-0.324456280514869,-0.827544910179641,3.3812193412754,4.22095509622238,7.79213483146067,11.369375,17.6695278969957,26.4469437652812,33.5285215366705,34.5963085660199,35.9776601998824,40.1586287042417,38.1530172413793,34.5356415478615,41.75,42.0081967213115],"text":["hour:  1<br />avg_delay:           NaN<br />month: 7<br />month:  7","hour:  5<br />avg_delay:  -2.619289340<br />month: 7<br />month:  7","hour:  6<br />avg_delay:  -2.354513585<br />month: 7<br />month:  7","hour:  7<br />avg_delay:  -5.608584568<br />month: 7<br />month:  7","hour:  8<br />avg_delay:  -0.324456281<br />month: 7<br />month:  7","hour:  9<br />avg_delay:  -0.827544910<br />month: 7<br />month:  7","hour: 10<br />avg_delay:   3.381219341<br />month: 7<br />month:  7","hour: 11<br />avg_delay:   4.220955096<br />month: 7<br />month:  7","hour: 12<br />avg_delay:   7.792134831<br />month: 7<br />month:  7","hour: 13<br />avg_delay:  11.369375000<br />month: 7<br />month:  7","hour: 14<br />avg_delay:  17.669527897<br />month: 7<br />month:  7","hour: 15<br />avg_delay:  26.446943765<br />month: 7<br />month:  7","hour: 16<br />avg_delay:  33.528521537<br />month: 7<br />month:  7","hour: 17<br />avg_delay:  34.596308566<br />month: 7<br />month:  7","hour: 18<br />avg_delay:  35.977660200<br />month: 7<br />month:  7","hour: 19<br />avg_delay:  40.158628704<br />month: 7<br />month:  7","hour: 20<br />avg_delay:  38.153017241<br />month: 7<br />month:  7","hour: 21<br />avg_delay:  34.535641548<br />month: 7<br />month:  7","hour: 22<br />avg_delay:  41.750000000<br />month: 7<br />month:  7","hour: 23<br />avg_delay:  42.008196721<br />month: 7<br />month:  7"],"frame":"7","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-2.60302068984577,-2.79318702332482,-2.94486585928361,-3.06006044878014,-3.1407740428724,-3.18799332842369,-3.19882902878716,-3.17289733395831,-3.11017502162051,-3.01073756638399,-2.87698026535237,-2.70911029974039,-2.50601608101228,-2.26658602063228,-1.98970853006461,-1.67427202077351,-1.31916490422321,-0.923275591877941,-0.486639370320891,-0.0165832198586331,0.486852602575652,1.02545454754712,1.60100906562094,2.21530260736224,2.87012162333621,3.56725256410799,4.30848188024274,5.10859843768847,5.99420250872795,6.93334980782561,7.89014768446908,8.83654775650419,9.88000608579149,11.0406663840545,12.2859316099153,13.5832047219956,14.8998886789173,16.2033864393025,17.4611009617729,18.6404352049504,19.7473595504716,20.9755575258845,22.3179049249709,23.7281407885915,25.1600041576068,26.5672340728775,27.9035695752641,29.1227497056272,30.1785135048275,31.1052369329792,32.0667824225864,33.0158401110548,33.8930025322772,34.64352645286,35.2900607174507,35.8587963079061,36.3626225965966,36.8144289558926,37.2271047581643,37.6135393757823,37.9866221811169,38.3592425465383,38.7341727363575,39.0710313606989,39.3659121241958,39.6210323370284,39.838609309377,40.0208603514218,40.1700027733431,40.2882538853211,40.377830997536,40.4393186526395,40.4699387694929,40.469208501572,40.4367569876755,40.3722133666021,40.2752067771508,40.1453663581203,39.9823212483094,39.7857005865169],"text":["hour:  5.000000<br />avg_delay:  -2.60302069<br />month: 7<br />month:  7","hour:  5.227848<br />avg_delay:  -2.79318702<br />month: 7<br />month:  7","hour:  5.455696<br />avg_delay:  -2.94486586<br />month: 7<br />month:  7","hour:  5.683544<br />avg_delay:  -3.06006045<br />month: 7<br />month:  7","hour:  5.911392<br />avg_delay:  -3.14077404<br />month: 7<br />month:  7","hour:  6.139241<br />avg_delay:  -3.18799333<br />month: 7<br />month:  7","hour:  6.367089<br />avg_delay:  -3.19882903<br />month: 7<br />month:  7","hour:  6.594937<br />avg_delay:  -3.17289733<br />month: 7<br />month:  7","hour:  6.822785<br />avg_delay:  -3.11017502<br />month: 7<br />month:  7","hour:  7.050633<br />avg_delay:  -3.01073757<br />month: 7<br />month:  7","hour:  7.278481<br />avg_delay:  -2.87698027<br />month: 7<br />month:  7","hour:  7.506329<br />avg_delay:  -2.70911030<br />month: 7<br />month:  7","hour:  7.734177<br />avg_delay:  -2.50601608<br />month: 7<br />month:  7","hour:  7.962025<br />avg_delay:  -2.26658602<br />month: 7<br />month:  7","hour:  8.189873<br />avg_delay:  -1.98970853<br />month: 7<br />month:  7","hour:  8.417722<br />avg_delay:  -1.67427202<br />month: 7<br />month:  7","hour:  8.645570<br />avg_delay:  -1.31916490<br />month: 7<br />month:  7","hour:  8.873418<br />avg_delay:  -0.92327559<br />month: 7<br />month:  7","hour:  9.101266<br />avg_delay:  -0.48663937<br />month: 7<br />month:  7","hour:  9.329114<br />avg_delay:  -0.01658322<br />month: 7<br />month:  7","hour:  9.556962<br />avg_delay:   0.48685260<br />month: 7<br />month:  7","hour:  9.784810<br />avg_delay:   1.02545455<br />month: 7<br />month:  7","hour: 10.012658<br />avg_delay:   1.60100907<br />month: 7<br />month:  7","hour: 10.240506<br />avg_delay:   2.21530261<br />month: 7<br />month:  7","hour: 10.468354<br />avg_delay:   2.87012162<br />month: 7<br />month:  7","hour: 10.696203<br />avg_delay:   3.56725256<br />month: 7<br />month:  7","hour: 10.924051<br />avg_delay:   4.30848188<br />month: 7<br />month:  7","hour: 11.151899<br />avg_delay:   5.10859844<br />month: 7<br />month:  7","hour: 11.379747<br />avg_delay:   5.99420251<br />month: 7<br />month:  7","hour: 11.607595<br />avg_delay:   6.93334981<br />month: 7<br />month:  7","hour: 11.835443<br />avg_delay:   7.89014768<br />month: 7<br />month:  7","hour: 12.063291<br />avg_delay:   8.83654776<br />month: 7<br />month:  7","hour: 12.291139<br />avg_delay:   9.88000609<br />month: 7<br />month:  7","hour: 12.518987<br />avg_delay:  11.04066638<br />month: 7<br />month:  7","hour: 12.746835<br />avg_delay:  12.28593161<br />month: 7<br />month:  7","hour: 12.974684<br />avg_delay:  13.58320472<br />month: 7<br />month:  7","hour: 13.202532<br />avg_delay:  14.89988868<br />month: 7<br />month:  7","hour: 13.430380<br />avg_delay:  16.20338644<br />month: 7<br />month:  7","hour: 13.658228<br />avg_delay:  17.46110096<br />month: 7<br />month:  7","hour: 13.886076<br />avg_delay:  18.64043520<br />month: 7<br />month:  7","hour: 14.113924<br />avg_delay:  19.74735955<br />month: 7<br />month:  7","hour: 14.341772<br />avg_delay:  20.97555753<br />month: 7<br />month:  7","hour: 14.569620<br />avg_delay:  22.31790492<br />month: 7<br />month:  7","hour: 14.797468<br />avg_delay:  23.72814079<br />month: 7<br />month:  7","hour: 15.025316<br />avg_delay:  25.16000416<br />month: 7<br />month:  7","hour: 15.253165<br />avg_delay:  26.56723407<br />month: 7<br />month:  7","hour: 15.481013<br />avg_delay:  27.90356958<br />month: 7<br />month:  7","hour: 15.708861<br />avg_delay:  29.12274971<br />month: 7<br />month:  7","hour: 15.936709<br />avg_delay:  30.17851350<br />month: 7<br />month:  7","hour: 16.164557<br />avg_delay:  31.10523693<br />month: 7<br />month:  7","hour: 16.392405<br />avg_delay:  32.06678242<br />month: 7<br />month:  7","hour: 16.620253<br />avg_delay:  33.01584011<br />month: 7<br />month:  7","hour: 16.848101<br />avg_delay:  33.89300253<br />month: 7<br />month:  7","hour: 17.075949<br />avg_delay:  34.64352645<br />month: 7<br />month:  7","hour: 17.303797<br />avg_delay:  35.29006072<br />month: 7<br />month:  7","hour: 17.531646<br />avg_delay:  35.85879631<br />month: 7<br />month:  7","hour: 17.759494<br />avg_delay:  36.36262260<br />month: 7<br />month:  7","hour: 17.987342<br />avg_delay:  36.81442896<br />month: 7<br />month:  7","hour: 18.215190<br />avg_delay:  37.22710476<br />month: 7<br />month:  7","hour: 18.443038<br />avg_delay:  37.61353938<br />month: 7<br />month:  7","hour: 18.670886<br />avg_delay:  37.98662218<br />month: 7<br />month:  7","hour: 18.898734<br />avg_delay:  38.35924255<br />month: 7<br />month:  7","hour: 19.126582<br />avg_delay:  38.73417274<br />month: 7<br />month:  7","hour: 19.354430<br />avg_delay:  39.07103136<br />month: 7<br />month:  7","hour: 19.582278<br />avg_delay:  39.36591212<br />month: 7<br />month:  7","hour: 19.810127<br />avg_delay:  39.62103234<br />month: 7<br />month:  7","hour: 20.037975<br />avg_delay:  39.83860931<br />month: 7<br />month:  7","hour: 20.265823<br />avg_delay:  40.02086035<br />month: 7<br />month:  7","hour: 20.493671<br />avg_delay:  40.17000277<br />month: 7<br />month:  7","hour: 20.721519<br />avg_delay:  40.28825389<br />month: 7<br />month:  7","hour: 20.949367<br />avg_delay:  40.37783100<br />month: 7<br />month:  7","hour: 21.177215<br />avg_delay:  40.43931865<br />month: 7<br />month:  7","hour: 21.405063<br />avg_delay:  40.46993877<br />month: 7<br />month:  7","hour: 21.632911<br />avg_delay:  40.46920850<br />month: 7<br />month:  7","hour: 21.860759<br />avg_delay:  40.43675699<br />month: 7<br />month:  7","hour: 22.088608<br />avg_delay:  40.37221337<br />month: 7<br />month:  7","hour: 22.316456<br />avg_delay:  40.27520678<br />month: 7<br />month:  7","hour: 22.544304<br />avg_delay:  40.14536636<br />month: 7<br />month:  7","hour: 22.772152<br />avg_delay:  39.98232125<br />month: 7<br />month:  7","hour: 23.000000<br />avg_delay:  39.78570059<br />month: 7<br />month:  7"],"frame":"7","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-6.58526873578553,-6.44656849069364,-6.29776576563181,-6.14368221591447,-5.98815722157576,-5.83263718110862,-5.67392176209365,-5.51165440343295,-5.34507574171288,-5.17245373725069,-4.99195435249668,-4.79909305355786,-4.58861130498598,-4.35555363371855,-4.09536830374452,-3.80394475749743,-3.47760670267907,-3.11308396467073,-2.70752399275207,-2.25997536114112,-1.77263506243864,-1.24847008961167,-0.68934305858323,-0.0948242010231044,0.538317041214722,1.21593038931911,1.94570433473559,2.75167220599898,3.65481799335216,4.59461306657846,5.53420489904142,6.47414332126546,7.53879671122782,8.73366542195003,10.0092879231826,11.3201177747223,12.6280395696261,13.9040095577467,15.1269882995047,16.2807241315242,17.3876484770453,18.6414448636163,20.0185280434151,21.4562916793002,22.8969172103335,24.2905903861448,25.5965686131595,26.7815403310636,27.8161090695888,28.7492941475515,29.7280456813393,30.6764555956791,31.5360763005877,32.2807489073529,32.9387385426618,33.5269917257846,34.0524957882113,34.5240768316884,34.9531801210055,35.354051710768,35.7432300398344,36.1383579241072,36.5443643635647,36.912589562243,37.2362393874719,37.5153725633485,37.7496416962908,37.9382651274481,38.0800200195256,38.1732797981768,38.2161148266693,38.2045680247659,38.1316112586688,37.9944109383739,37.7915356580648,37.522663868154,37.1882953104652,36.7894356701051,36.3273294215718,35.8032703442269,43.768130828807,43.637313075047,43.5012970461356,43.3621182438365,43.2217628650503,43.0819783172861,42.94400606477,42.8082662803171,42.674069280513,42.5395471684027,42.4032279724654,42.2599855271606,42.1034555753955,41.9275769224633,41.7266921107083,41.4955848609197,41.2294731591548,40.9239811091503,40.5801271689695,40.2300143223994,39.8730270407966,39.5010293953231,39.1047810800967,38.6727494049819,38.1906008900276,37.6413828922396,37.0063039983672,36.2499287639667,35.3552246264306,34.4055191638336,33.4611797184069,32.5409179400663,31.4639590801909,30.2105705373686,28.8438777596101,27.4230911048801,25.9999898978827,24.6172818065267,23.3096701881526,22.1070706238978,21.0001462783767,19.795213624041,18.5027633208582,17.1717377882086,15.8462916692689,14.5625752966479,13.3476673461591,12.2212154603552,11.1989521917429,10.2460904698967,9.27208654907276,8.33358702410375,7.46552466937796,6.6712594257499,5.91857473889688,5.20192620545771,4.52542941574759,3.8913611898251,3.29937918470592,2.74634026758994,2.22680892142386,1.73424525211029,1.26653278091484,0.839276894232653,0.455400715950409,0.115951243615299,-0.177618407545998,-0.423420857038579,-0.619127545922909,-0.762006178208054,-0.849021395517295,-0.875274301528143,-0.834140264483671,-0.723736295480674,-0.543349475738764,-0.293390864169039,0.0235613183541954,0.408034047064581,0.860194444043989,1.37922735609399,-6.58526873578553],"text":["hour:  5.000000<br />avg_delay:  -2.60302069<br />month: 7<br />month:  7","hour:  5.227848<br />avg_delay:  -2.79318702<br />month: 7<br />month:  7","hour:  5.455696<br />avg_delay:  -2.94486586<br />month: 7<br />month:  7","hour:  5.683544<br />avg_delay:  -3.06006045<br />month: 7<br />month:  7","hour:  5.911392<br />avg_delay:  -3.14077404<br />month: 7<br />month:  7","hour:  6.139241<br />avg_delay:  -3.18799333<br />month: 7<br />month:  7","hour:  6.367089<br />avg_delay:  -3.19882903<br />month: 7<br />month:  7","hour:  6.594937<br />avg_delay:  -3.17289733<br />month: 7<br />month:  7","hour:  6.822785<br />avg_delay:  -3.11017502<br />month: 7<br />month:  7","hour:  7.050633<br />avg_delay:  -3.01073757<br />month: 7<br />month:  7","hour:  7.278481<br />avg_delay:  -2.87698027<br />month: 7<br />month:  7","hour:  7.506329<br />avg_delay:  -2.70911030<br />month: 7<br />month:  7","hour:  7.734177<br />avg_delay:  -2.50601608<br />month: 7<br />month:  7","hour:  7.962025<br />avg_delay:  -2.26658602<br />month: 7<br />month:  7","hour:  8.189873<br />avg_delay:  -1.98970853<br />month: 7<br />month:  7","hour:  8.417722<br />avg_delay:  -1.67427202<br />month: 7<br />month:  7","hour:  8.645570<br />avg_delay:  -1.31916490<br />month: 7<br />month:  7","hour:  8.873418<br />avg_delay:  -0.92327559<br />month: 7<br />month:  7","hour:  9.101266<br />avg_delay:  -0.48663937<br />month: 7<br />month:  7","hour:  9.329114<br />avg_delay:  -0.01658322<br />month: 7<br />month:  7","hour:  9.556962<br />avg_delay:   0.48685260<br />month: 7<br />month:  7","hour:  9.784810<br />avg_delay:   1.02545455<br />month: 7<br />month:  7","hour: 10.012658<br />avg_delay:   1.60100907<br />month: 7<br />month:  7","hour: 10.240506<br />avg_delay:   2.21530261<br />month: 7<br />month:  7","hour: 10.468354<br />avg_delay:   2.87012162<br />month: 7<br />month:  7","hour: 10.696203<br />avg_delay:   3.56725256<br />month: 7<br />month:  7","hour: 10.924051<br />avg_delay:   4.30848188<br />month: 7<br />month:  7","hour: 11.151899<br />avg_delay:   5.10859844<br />month: 7<br />month:  7","hour: 11.379747<br />avg_delay:   5.99420251<br />month: 7<br />month:  7","hour: 11.607595<br />avg_delay:   6.93334981<br />month: 7<br />month:  7","hour: 11.835443<br />avg_delay:   7.89014768<br />month: 7<br />month:  7","hour: 12.063291<br />avg_delay:   8.83654776<br />month: 7<br />month:  7","hour: 12.291139<br />avg_delay:   9.88000609<br />month: 7<br />month:  7","hour: 12.518987<br />avg_delay:  11.04066638<br />month: 7<br />month:  7","hour: 12.746835<br />avg_delay:  12.28593161<br />month: 7<br />month:  7","hour: 12.974684<br />avg_delay:  13.58320472<br />month: 7<br />month:  7","hour: 13.202532<br />avg_delay:  14.89988868<br />month: 7<br />month:  7","hour: 13.430380<br />avg_delay:  16.20338644<br />month: 7<br />month:  7","hour: 13.658228<br />avg_delay:  17.46110096<br />month: 7<br />month:  7","hour: 13.886076<br />avg_delay:  18.64043520<br />month: 7<br />month:  7","hour: 14.113924<br />avg_delay:  19.74735955<br />month: 7<br />month:  7","hour: 14.341772<br />avg_delay:  20.97555753<br />month: 7<br />month:  7","hour: 14.569620<br />avg_delay:  22.31790492<br />month: 7<br />month:  7","hour: 14.797468<br />avg_delay:  23.72814079<br />month: 7<br />month:  7","hour: 15.025316<br />avg_delay:  25.16000416<br />month: 7<br />month:  7","hour: 15.253165<br />avg_delay:  26.56723407<br />month: 7<br />month:  7","hour: 15.481013<br />avg_delay:  27.90356958<br />month: 7<br />month:  7","hour: 15.708861<br />avg_delay:  29.12274971<br />month: 7<br />month:  7","hour: 15.936709<br />avg_delay:  30.17851350<br />month: 7<br />month:  7","hour: 16.164557<br />avg_delay:  31.10523693<br />month: 7<br />month:  7","hour: 16.392405<br />avg_delay:  32.06678242<br />month: 7<br />month:  7","hour: 16.620253<br />avg_delay:  33.01584011<br />month: 7<br />month:  7","hour: 16.848101<br />avg_delay:  33.89300253<br />month: 7<br />month:  7","hour: 17.075949<br />avg_delay:  34.64352645<br />month: 7<br />month:  7","hour: 17.303797<br />avg_delay:  35.29006072<br />month: 7<br />month:  7","hour: 17.531646<br />avg_delay:  35.85879631<br />month: 7<br />month:  7","hour: 17.759494<br />avg_delay:  36.36262260<br />month: 7<br />month:  7","hour: 17.987342<br />avg_delay:  36.81442896<br />month: 7<br />month:  7","hour: 18.215190<br />avg_delay:  37.22710476<br />month: 7<br />month:  7","hour: 18.443038<br />avg_delay:  37.61353938<br />month: 7<br />month:  7","hour: 18.670886<br />avg_delay:  37.98662218<br />month: 7<br />month:  7","hour: 18.898734<br />avg_delay:  38.35924255<br />month: 7<br />month:  7","hour: 19.126582<br />avg_delay:  38.73417274<br />month: 7<br />month:  7","hour: 19.354430<br />avg_delay:  39.07103136<br />month: 7<br />month:  7","hour: 19.582278<br />avg_delay:  39.36591212<br />month: 7<br />month:  7","hour: 19.810127<br />avg_delay:  39.62103234<br />month: 7<br />month:  7","hour: 20.037975<br />avg_delay:  39.83860931<br />month: 7<br />month:  7","hour: 20.265823<br />avg_delay:  40.02086035<br />month: 7<br />month:  7","hour: 20.493671<br />avg_delay:  40.17000277<br />month: 7<br />month:  7","hour: 20.721519<br />avg_delay:  40.28825389<br />month: 7<br />month:  7","hour: 20.949367<br />avg_delay:  40.37783100<br />month: 7<br />month:  7","hour: 21.177215<br />avg_delay:  40.43931865<br />month: 7<br />month:  7","hour: 21.405063<br />avg_delay:  40.46993877<br />month: 7<br />month:  7","hour: 21.632911<br />avg_delay:  40.46920850<br />month: 7<br />month:  7","hour: 21.860759<br />avg_delay:  40.43675699<br />month: 7<br />month:  7","hour: 22.088608<br />avg_delay:  40.37221337<br />month: 7<br />month:  7","hour: 22.316456<br />avg_delay:  40.27520678<br />month: 7<br />month:  7","hour: 22.544304<br />avg_delay:  40.14536636<br />month: 7<br />month:  7","hour: 22.772152<br />avg_delay:  39.98232125<br />month: 7<br />month:  7","hour: 23.000000<br />avg_delay:  39.78570059<br />month: 7<br />month:  7","hour: 23.000000<br />avg_delay:  39.78570059<br />month: 7<br />month:  7","hour: 22.772152<br />avg_delay:  39.98232125<br />month: 7<br />month:  7","hour: 22.544304<br />avg_delay:  40.14536636<br />month: 7<br />month:  7","hour: 22.316456<br />avg_delay:  40.27520678<br />month: 7<br />month:  7","hour: 22.088608<br />avg_delay:  40.37221337<br />month: 7<br />month:  7","hour: 21.860759<br />avg_delay:  40.43675699<br />month: 7<br />month:  7","hour: 21.632911<br />avg_delay:  40.46920850<br />month: 7<br />month:  7","hour: 21.405063<br />avg_delay:  40.46993877<br />month: 7<br />month:  7","hour: 21.177215<br />avg_delay:  40.43931865<br />month: 7<br />month:  7","hour: 20.949367<br />avg_delay:  40.37783100<br />month: 7<br />month:  7","hour: 20.721519<br />avg_delay:  40.28825389<br />month: 7<br />month:  7","hour: 20.493671<br />avg_delay:  40.17000277<br />month: 7<br />month:  7","hour: 20.265823<br />avg_delay:  40.02086035<br />month: 7<br />month:  7","hour: 20.037975<br />avg_delay:  39.83860931<br />month: 7<br />month:  7","hour: 19.810127<br />avg_delay:  39.62103234<br />month: 7<br />month:  7","hour: 19.582278<br />avg_delay:  39.36591212<br />month: 7<br />month:  7","hour: 19.354430<br />avg_delay:  39.07103136<br />month: 7<br />month:  7","hour: 19.126582<br />avg_delay:  38.73417274<br />month: 7<br />month:  7","hour: 18.898734<br />avg_delay:  38.35924255<br />month: 7<br />month:  7","hour: 18.670886<br />avg_delay:  37.98662218<br />month: 7<br />month:  7","hour: 18.443038<br />avg_delay:  37.61353938<br />month: 7<br />month:  7","hour: 18.215190<br />avg_delay:  37.22710476<br />month: 7<br />month:  7","hour: 17.987342<br />avg_delay:  36.81442896<br />month: 7<br />month:  7","hour: 17.759494<br />avg_delay:  36.36262260<br />month: 7<br />month:  7","hour: 17.531646<br />avg_delay:  35.85879631<br />month: 7<br />month:  7","hour: 17.303797<br />avg_delay:  35.29006072<br />month: 7<br />month:  7","hour: 17.075949<br />avg_delay:  34.64352645<br />month: 7<br />month:  7","hour: 16.848101<br />avg_delay:  33.89300253<br />month: 7<br />month:  7","hour: 16.620253<br />avg_delay:  33.01584011<br />month: 7<br />month:  7","hour: 16.392405<br />avg_delay:  32.06678242<br />month: 7<br />month:  7","hour: 16.164557<br />avg_delay:  31.10523693<br />month: 7<br />month:  7","hour: 15.936709<br />avg_delay:  30.17851350<br />month: 7<br />month:  7","hour: 15.708861<br />avg_delay:  29.12274971<br />month: 7<br />month:  7","hour: 15.481013<br />avg_delay:  27.90356958<br />month: 7<br />month:  7","hour: 15.253165<br />avg_delay:  26.56723407<br />month: 7<br />month:  7","hour: 15.025316<br />avg_delay:  25.16000416<br />month: 7<br />month:  7","hour: 14.797468<br />avg_delay:  23.72814079<br />month: 7<br />month:  7","hour: 14.569620<br />avg_delay:  22.31790492<br />month: 7<br />month:  7","hour: 14.341772<br />avg_delay:  20.97555753<br />month: 7<br />month:  7","hour: 14.113924<br />avg_delay:  19.74735955<br />month: 7<br />month:  7","hour: 13.886076<br />avg_delay:  18.64043520<br />month: 7<br />month:  7","hour: 13.658228<br />avg_delay:  17.46110096<br />month: 7<br />month:  7","hour: 13.430380<br />avg_delay:  16.20338644<br />month: 7<br />month:  7","hour: 13.202532<br />avg_delay:  14.89988868<br />month: 7<br />month:  7","hour: 12.974684<br />avg_delay:  13.58320472<br />month: 7<br />month:  7","hour: 12.746835<br />avg_delay:  12.28593161<br />month: 7<br />month:  7","hour: 12.518987<br />avg_delay:  11.04066638<br />month: 7<br />month:  7","hour: 12.291139<br />avg_delay:   9.88000609<br />month: 7<br />month:  7","hour: 12.063291<br />avg_delay:   8.83654776<br />month: 7<br />month:  7","hour: 11.835443<br />avg_delay:   7.89014768<br />month: 7<br />month:  7","hour: 11.607595<br />avg_delay:   6.93334981<br />month: 7<br />month:  7","hour: 11.379747<br />avg_delay:   5.99420251<br />month: 7<br />month:  7","hour: 11.151899<br />avg_delay:   5.10859844<br />month: 7<br />month:  7","hour: 10.924051<br />avg_delay:   4.30848188<br />month: 7<br />month:  7","hour: 10.696203<br />avg_delay:   3.56725256<br />month: 7<br />month:  7","hour: 10.468354<br />avg_delay:   2.87012162<br />month: 7<br />month:  7","hour: 10.240506<br />avg_delay:   2.21530261<br />month: 7<br />month:  7","hour: 10.012658<br />avg_delay:   1.60100907<br />month: 7<br />month:  7","hour:  9.784810<br />avg_delay:   1.02545455<br />month: 7<br />month:  7","hour:  9.556962<br />avg_delay:   0.48685260<br />month: 7<br />month:  7","hour:  9.329114<br />avg_delay:  -0.01658322<br />month: 7<br />month:  7","hour:  9.101266<br />avg_delay:  -0.48663937<br />month: 7<br />month:  7","hour:  8.873418<br />avg_delay:  -0.92327559<br />month: 7<br />month:  7","hour:  8.645570<br />avg_delay:  -1.31916490<br />month: 7<br />month:  7","hour:  8.417722<br />avg_delay:  -1.67427202<br />month: 7<br />month:  7","hour:  8.189873<br />avg_delay:  -1.98970853<br />month: 7<br />month:  7","hour:  7.962025<br />avg_delay:  -2.26658602<br />month: 7<br />month:  7","hour:  7.734177<br />avg_delay:  -2.50601608<br />month: 7<br />month:  7","hour:  7.506329<br />avg_delay:  -2.70911030<br />month: 7<br />month:  7","hour:  7.278481<br />avg_delay:  -2.87698027<br />month: 7<br />month:  7","hour:  7.050633<br />avg_delay:  -3.01073757<br />month: 7<br />month:  7","hour:  6.822785<br />avg_delay:  -3.11017502<br />month: 7<br />month:  7","hour:  6.594937<br />avg_delay:  -3.17289733<br />month: 7<br />month:  7","hour:  6.367089<br />avg_delay:  -3.19882903<br />month: 7<br />month:  7","hour:  6.139241<br />avg_delay:  -3.18799333<br />month: 7<br />month:  7","hour:  5.911392<br />avg_delay:  -3.14077404<br />month: 7<br />month:  7","hour:  5.683544<br />avg_delay:  -3.06006045<br />month: 7<br />month:  7","hour:  5.455696<br />avg_delay:  -2.94486586<br />month: 7<br />month:  7","hour:  5.227848<br />avg_delay:  -2.79318702<br />month: 7<br />month:  7","hour:  5.000000<br />avg_delay:  -2.60302069<br />month: 7<br />month:  7","hour:  5.000000<br />avg_delay:  -2.60302069<br />month: 7<br />month:  7"],"frame":"7","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"8","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-5.70414201183432,-2.63519863306279,-4.31674876847291,-1.71037527593819,-1.06115107913669,2.05722070844687,0.00510576221735957,1.90356919223544,7.97788697788698,10.3951612903226,10.8354916067146,12.601461495222,13.4405367885238,13.2209567198178,12.7548571428571,12.3512747875354,13.5211665098777,13.1434782608696,19.7317073170732],"text":["hour:  5<br />avg_delay:  -5.704142012<br />month: 8<br />month:  8","hour:  6<br />avg_delay:  -2.635198633<br />month: 8<br />month:  8","hour:  7<br />avg_delay:  -4.316748768<br />month: 8<br />month:  8","hour:  8<br />avg_delay:  -1.710375276<br />month: 8<br />month:  8","hour:  9<br />avg_delay:  -1.061151079<br />month: 8<br />month:  8","hour: 10<br />avg_delay:   2.057220708<br />month: 8<br />month:  8","hour: 11<br />avg_delay:   0.005105762<br />month: 8<br />month:  8","hour: 12<br />avg_delay:   1.903569192<br />month: 8<br />month:  8","hour: 13<br />avg_delay:   7.977886978<br />month: 8<br />month:  8","hour: 14<br />avg_delay:  10.395161290<br />month: 8<br />month:  8","hour: 15<br />avg_delay:  10.835491607<br />month: 8<br />month:  8","hour: 16<br />avg_delay:  12.601461495<br />month: 8<br />month:  8","hour: 17<br />avg_delay:  13.440536789<br />month: 8<br />month:  8","hour: 18<br />avg_delay:  13.220956720<br />month: 8<br />month:  8","hour: 19<br />avg_delay:  12.754857143<br />month: 8<br />month:  8","hour: 20<br />avg_delay:  12.351274788<br />month: 8<br />month:  8","hour: 21<br />avg_delay:  13.521166510<br />month: 8<br />month:  8","hour: 22<br />avg_delay:  13.143478261<br />month: 8<br />month:  8","hour: 23<br />avg_delay:  19.731707317<br />month: 8<br />month:  8"],"frame":"8","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-4.78682969172458,-4.66527693291628,-4.53226071128786,-4.38853696502516,-4.234861632314,-4.07160497989104,-3.897631471445,-3.71271185708187,-3.51675163184072,-3.30967367913725,-3.09183523400014,-2.8632750076765,-2.6238097569379,-2.37325623855592,-2.11143120930213,-1.83815142594811,-1.55323364526543,-1.25649462402568,-0.947876619534499,-0.628155616502804,-0.297372099418489,0.0446280432721204,0.397998923122691,0.762894651686897,1.13946934051841,1.52787710117091,1.92827204519805,2.36029189318637,2.86531315310468,3.40151025292876,3.9213027450585,4.38390356945903,4.87313175164474,5.41427912316132,5.98928006208394,6.58006894648779,7.16858015444806,7.73674806403994,8.2665070533386,8.73979150041924,9.15326797753491,9.57972759856357,10.022132727638,10.4689872647949,10.9087951100709,11.3300601635027,11.7212863251268,12.0709774949801,12.3676375730991,12.5846046055723,12.7030245728283,12.7758206642581,12.8590279957655,12.9989497183331,13.1129286037183,13.180019407626,13.215160545407,13.2332904324122,13.2493474839924,13.2782701154985,13.3349967422814,13.4344657796918,13.5797052312614,13.7232413973158,13.8609620232354,13.9959884794492,14.1314421363863,14.2704443644756,14.4161165341462,14.5715800158269,14.7399561799468,14.9217658508902,15.1123906073249,15.3110588132329,15.5171805767003,15.7301660058131,15.9494252086572,16.1743682933188,16.4044053678838,16.6389465404383],"text":["hour:  5.000000<br />avg_delay:  -4.78682969<br />month: 8<br />month:  8","hour:  5.227848<br />avg_delay:  -4.66527693<br />month: 8<br />month:  8","hour:  5.455696<br />avg_delay:  -4.53226071<br />month: 8<br />month:  8","hour:  5.683544<br />avg_delay:  -4.38853697<br />month: 8<br />month:  8","hour:  5.911392<br />avg_delay:  -4.23486163<br />month: 8<br />month:  8","hour:  6.139241<br />avg_delay:  -4.07160498<br />month: 8<br />month:  8","hour:  6.367089<br />avg_delay:  -3.89763147<br />month: 8<br />month:  8","hour:  6.594937<br />avg_delay:  -3.71271186<br />month: 8<br />month:  8","hour:  6.822785<br />avg_delay:  -3.51675163<br />month: 8<br />month:  8","hour:  7.050633<br />avg_delay:  -3.30967368<br />month: 8<br />month:  8","hour:  7.278481<br />avg_delay:  -3.09183523<br />month: 8<br />month:  8","hour:  7.506329<br />avg_delay:  -2.86327501<br />month: 8<br />month:  8","hour:  7.734177<br />avg_delay:  -2.62380976<br />month: 8<br />month:  8","hour:  7.962025<br />avg_delay:  -2.37325624<br />month: 8<br />month:  8","hour:  8.189873<br />avg_delay:  -2.11143121<br />month: 8<br />month:  8","hour:  8.417722<br />avg_delay:  -1.83815143<br />month: 8<br />month:  8","hour:  8.645570<br />avg_delay:  -1.55323365<br />month: 8<br />month:  8","hour:  8.873418<br />avg_delay:  -1.25649462<br />month: 8<br />month:  8","hour:  9.101266<br />avg_delay:  -0.94787662<br />month: 8<br />month:  8","hour:  9.329114<br />avg_delay:  -0.62815562<br />month: 8<br />month:  8","hour:  9.556962<br />avg_delay:  -0.29737210<br />month: 8<br />month:  8","hour:  9.784810<br />avg_delay:   0.04462804<br />month: 8<br />month:  8","hour: 10.012658<br />avg_delay:   0.39799892<br />month: 8<br />month:  8","hour: 10.240506<br />avg_delay:   0.76289465<br />month: 8<br />month:  8","hour: 10.468354<br />avg_delay:   1.13946934<br />month: 8<br />month:  8","hour: 10.696203<br />avg_delay:   1.52787710<br />month: 8<br />month:  8","hour: 10.924051<br />avg_delay:   1.92827205<br />month: 8<br />month:  8","hour: 11.151899<br />avg_delay:   2.36029189<br />month: 8<br />month:  8","hour: 11.379747<br />avg_delay:   2.86531315<br />month: 8<br />month:  8","hour: 11.607595<br />avg_delay:   3.40151025<br />month: 8<br />month:  8","hour: 11.835443<br />avg_delay:   3.92130275<br />month: 8<br />month:  8","hour: 12.063291<br />avg_delay:   4.38390357<br />month: 8<br />month:  8","hour: 12.291139<br />avg_delay:   4.87313175<br />month: 8<br />month:  8","hour: 12.518987<br />avg_delay:   5.41427912<br />month: 8<br />month:  8","hour: 12.746835<br />avg_delay:   5.98928006<br />month: 8<br />month:  8","hour: 12.974684<br />avg_delay:   6.58006895<br />month: 8<br />month:  8","hour: 13.202532<br />avg_delay:   7.16858015<br />month: 8<br />month:  8","hour: 13.430380<br />avg_delay:   7.73674806<br />month: 8<br />month:  8","hour: 13.658228<br />avg_delay:   8.26650705<br />month: 8<br />month:  8","hour: 13.886076<br />avg_delay:   8.73979150<br />month: 8<br />month:  8","hour: 14.113924<br />avg_delay:   9.15326798<br />month: 8<br />month:  8","hour: 14.341772<br />avg_delay:   9.57972760<br />month: 8<br />month:  8","hour: 14.569620<br />avg_delay:  10.02213273<br />month: 8<br />month:  8","hour: 14.797468<br />avg_delay:  10.46898726<br />month: 8<br />month:  8","hour: 15.025316<br />avg_delay:  10.90879511<br />month: 8<br />month:  8","hour: 15.253165<br />avg_delay:  11.33006016<br />month: 8<br />month:  8","hour: 15.481013<br />avg_delay:  11.72128633<br />month: 8<br />month:  8","hour: 15.708861<br />avg_delay:  12.07097749<br />month: 8<br />month:  8","hour: 15.936709<br />avg_delay:  12.36763757<br />month: 8<br />month:  8","hour: 16.164557<br />avg_delay:  12.58460461<br />month: 8<br />month:  8","hour: 16.392405<br />avg_delay:  12.70302457<br />month: 8<br />month:  8","hour: 16.620253<br />avg_delay:  12.77582066<br />month: 8<br />month:  8","hour: 16.848101<br />avg_delay:  12.85902800<br />month: 8<br />month:  8","hour: 17.075949<br />avg_delay:  12.99894972<br />month: 8<br />month:  8","hour: 17.303797<br />avg_delay:  13.11292860<br />month: 8<br />month:  8","hour: 17.531646<br />avg_delay:  13.18001941<br />month: 8<br />month:  8","hour: 17.759494<br />avg_delay:  13.21516055<br />month: 8<br />month:  8","hour: 17.987342<br />avg_delay:  13.23329043<br />month: 8<br />month:  8","hour: 18.215190<br />avg_delay:  13.24934748<br />month: 8<br />month:  8","hour: 18.443038<br />avg_delay:  13.27827012<br />month: 8<br />month:  8","hour: 18.670886<br />avg_delay:  13.33499674<br />month: 8<br />month:  8","hour: 18.898734<br />avg_delay:  13.43446578<br />month: 8<br />month:  8","hour: 19.126582<br />avg_delay:  13.57970523<br />month: 8<br />month:  8","hour: 19.354430<br />avg_delay:  13.72324140<br />month: 8<br />month:  8","hour: 19.582278<br />avg_delay:  13.86096202<br />month: 8<br />month:  8","hour: 19.810127<br />avg_delay:  13.99598848<br />month: 8<br />month:  8","hour: 20.037975<br />avg_delay:  14.13144214<br />month: 8<br />month:  8","hour: 20.265823<br />avg_delay:  14.27044436<br />month: 8<br />month:  8","hour: 20.493671<br />avg_delay:  14.41611653<br />month: 8<br />month:  8","hour: 20.721519<br />avg_delay:  14.57158002<br />month: 8<br />month:  8","hour: 20.949367<br />avg_delay:  14.73995618<br />month: 8<br />month:  8","hour: 21.177215<br />avg_delay:  14.92176585<br />month: 8<br />month:  8","hour: 21.405063<br />avg_delay:  15.11239061<br />month: 8<br />month:  8","hour: 21.632911<br />avg_delay:  15.31105881<br />month: 8<br />month:  8","hour: 21.860759<br />avg_delay:  15.51718058<br />month: 8<br />month:  8","hour: 22.088608<br />avg_delay:  15.73016601<br />month: 8<br />month:  8","hour: 22.316456<br />avg_delay:  15.94942521<br />month: 8<br />month:  8","hour: 22.544304<br />avg_delay:  16.17436829<br />month: 8<br />month:  8","hour: 22.772152<br />avg_delay:  16.40440537<br />month: 8<br />month:  8","hour: 23.000000<br />avg_delay:  16.63894654<br />month: 8<br />month:  8"],"frame":"8","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-7.65276861147274,-7.29453759554486,-6.94527120806509,-6.60775373260533,-6.28406253018434,-5.97489871218637,-5.67890288209992,-5.39586540048746,-5.12516197735309,-4.86541466665623,-4.61393694154843,-4.36739098605585,-4.12260908777148,-3.87664164181865,-3.62682960425903,-3.37083143786417,-3.10661813685003,-2.83245296965811,-2.54619987872608,-2.24267705660094,-1.92347714439622,-1.59186698240871,-1.25031861434893,-0.899654303910061,-0.538680646136179,-0.164319280334026,0.227831477895825,0.664062391545607,1.18170805027651,1.71837133931459,2.22578100870125,2.68373152165315,3.18821333660969,3.75397977241319,4.35082819446143,4.95137357489297,5.53357884187249,6.08193560133089,6.58669599066718,7.04155780762149,7.45503428473716,7.89991653589214,8.36732026492896,8.83398595221933,9.28009973847608,9.69160829588015,10.0609869743787,10.3860590799451,10.6674655252932,10.8890828692151,11.0198856592142,11.0922155614299,11.1627984941248,11.2985091510309,11.4207322222134,11.5018694209714,11.55261158981,11.5849728949405,11.6128524583116,11.6521650705208,11.7204753021832,11.8361425205002,12.003746885629,12.1698569057312,12.3282820113193,12.4805900844923,12.6280567331236,12.7716450336421,12.9120005557668,13.0494783082786,13.1842151924278,13.3134635235441,13.4295462081113,13.5299998302048,13.6134712465875,13.6794060538613,13.7278409145268,13.7591766076662,13.7739857639898,13.7728764978657,19.5050165830108,19.0348249717779,18.5895599789715,18.1710095027877,17.7809259577648,17.4208899068131,17.092117796261,16.7952350065384,16.5300681782363,16.2956971674658,16.0936817233752,15.9202325125255,15.7692436953092,15.6348275396491,15.5113868744061,15.3936420351514,15.2766258889004,15.1556635768939,15.0327890388834,14.9495181823795,14.9043751604762,14.8858425096732,14.8816079698838,14.8777095010039,14.8581693942806,14.8051249852232,14.6993902856353,14.5552574974063,14.4594257670862,14.3861634864425,14.2801263419296,14.067809620905,13.7558959100152,13.381585675875,12.9685120311252,12.5374904816657,12.1039885773705,11.6769451903471,11.259538661235,10.8515016703327,10.438025193217,9.94631811601002,9.39156052674899,8.80358146702363,8.20876431808261,7.62773192970644,7.07457847390945,6.5580501666798,6.08407561726491,5.61682448141574,5.08464916654293,4.54891825593285,4.05652139482713,3.62871261250028,3.22007348267584,2.81761932717301,2.42544360728385,2.04631646059431,1.68112306895295,1.32873294555924,0.986365823595333,0.650446639657078,0.319463721606762,0.000150846319160847,-0.305471414032049,-0.596032814345232,-0.869870835293183,-1.12501042610431,-1.35915902929715,-1.56973352645186,-1.75393269161828,-1.90834128632836,-2.02955831367627,-2.11636006079008,-2.16831124759571,-2.18566073444365,-2.16932019744498,-2.11925021451063,-2.03601627028771,-1.92089077197642,-7.65276861147274],"text":["hour:  5.000000<br />avg_delay:  -4.78682969<br />month: 8<br />month:  8","hour:  5.227848<br />avg_delay:  -4.66527693<br />month: 8<br />month:  8","hour:  5.455696<br />avg_delay:  -4.53226071<br />month: 8<br />month:  8","hour:  5.683544<br />avg_delay:  -4.38853697<br />month: 8<br />month:  8","hour:  5.911392<br />avg_delay:  -4.23486163<br />month: 8<br />month:  8","hour:  6.139241<br />avg_delay:  -4.07160498<br />month: 8<br />month:  8","hour:  6.367089<br />avg_delay:  -3.89763147<br />month: 8<br />month:  8","hour:  6.594937<br />avg_delay:  -3.71271186<br />month: 8<br />month:  8","hour:  6.822785<br />avg_delay:  -3.51675163<br />month: 8<br />month:  8","hour:  7.050633<br />avg_delay:  -3.30967368<br />month: 8<br />month:  8","hour:  7.278481<br />avg_delay:  -3.09183523<br />month: 8<br />month:  8","hour:  7.506329<br />avg_delay:  -2.86327501<br />month: 8<br />month:  8","hour:  7.734177<br />avg_delay:  -2.62380976<br />month: 8<br />month:  8","hour:  7.962025<br />avg_delay:  -2.37325624<br />month: 8<br />month:  8","hour:  8.189873<br />avg_delay:  -2.11143121<br />month: 8<br />month:  8","hour:  8.417722<br />avg_delay:  -1.83815143<br />month: 8<br />month:  8","hour:  8.645570<br />avg_delay:  -1.55323365<br />month: 8<br />month:  8","hour:  8.873418<br />avg_delay:  -1.25649462<br />month: 8<br />month:  8","hour:  9.101266<br />avg_delay:  -0.94787662<br />month: 8<br />month:  8","hour:  9.329114<br />avg_delay:  -0.62815562<br />month: 8<br />month:  8","hour:  9.556962<br />avg_delay:  -0.29737210<br />month: 8<br />month:  8","hour:  9.784810<br />avg_delay:   0.04462804<br />month: 8<br />month:  8","hour: 10.012658<br />avg_delay:   0.39799892<br />month: 8<br />month:  8","hour: 10.240506<br />avg_delay:   0.76289465<br />month: 8<br />month:  8","hour: 10.468354<br />avg_delay:   1.13946934<br />month: 8<br />month:  8","hour: 10.696203<br />avg_delay:   1.52787710<br />month: 8<br />month:  8","hour: 10.924051<br />avg_delay:   1.92827205<br />month: 8<br />month:  8","hour: 11.151899<br />avg_delay:   2.36029189<br />month: 8<br />month:  8","hour: 11.379747<br />avg_delay:   2.86531315<br />month: 8<br />month:  8","hour: 11.607595<br />avg_delay:   3.40151025<br />month: 8<br />month:  8","hour: 11.835443<br />avg_delay:   3.92130275<br />month: 8<br />month:  8","hour: 12.063291<br />avg_delay:   4.38390357<br />month: 8<br />month:  8","hour: 12.291139<br />avg_delay:   4.87313175<br />month: 8<br />month:  8","hour: 12.518987<br />avg_delay:   5.41427912<br />month: 8<br />month:  8","hour: 12.746835<br />avg_delay:   5.98928006<br />month: 8<br />month:  8","hour: 12.974684<br />avg_delay:   6.58006895<br />month: 8<br />month:  8","hour: 13.202532<br />avg_delay:   7.16858015<br />month: 8<br />month:  8","hour: 13.430380<br />avg_delay:   7.73674806<br />month: 8<br />month:  8","hour: 13.658228<br />avg_delay:   8.26650705<br />month: 8<br />month:  8","hour: 13.886076<br />avg_delay:   8.73979150<br />month: 8<br />month:  8","hour: 14.113924<br />avg_delay:   9.15326798<br />month: 8<br />month:  8","hour: 14.341772<br />avg_delay:   9.57972760<br />month: 8<br />month:  8","hour: 14.569620<br />avg_delay:  10.02213273<br />month: 8<br />month:  8","hour: 14.797468<br />avg_delay:  10.46898726<br />month: 8<br />month:  8","hour: 15.025316<br />avg_delay:  10.90879511<br />month: 8<br />month:  8","hour: 15.253165<br />avg_delay:  11.33006016<br />month: 8<br />month:  8","hour: 15.481013<br />avg_delay:  11.72128633<br />month: 8<br />month:  8","hour: 15.708861<br />avg_delay:  12.07097749<br />month: 8<br />month:  8","hour: 15.936709<br />avg_delay:  12.36763757<br />month: 8<br />month:  8","hour: 16.164557<br />avg_delay:  12.58460461<br />month: 8<br />month:  8","hour: 16.392405<br />avg_delay:  12.70302457<br />month: 8<br />month:  8","hour: 16.620253<br />avg_delay:  12.77582066<br />month: 8<br />month:  8","hour: 16.848101<br />avg_delay:  12.85902800<br />month: 8<br />month:  8","hour: 17.075949<br />avg_delay:  12.99894972<br />month: 8<br />month:  8","hour: 17.303797<br />avg_delay:  13.11292860<br />month: 8<br />month:  8","hour: 17.531646<br />avg_delay:  13.18001941<br />month: 8<br />month:  8","hour: 17.759494<br />avg_delay:  13.21516055<br />month: 8<br />month:  8","hour: 17.987342<br />avg_delay:  13.23329043<br />month: 8<br />month:  8","hour: 18.215190<br />avg_delay:  13.24934748<br />month: 8<br />month:  8","hour: 18.443038<br />avg_delay:  13.27827012<br />month: 8<br />month:  8","hour: 18.670886<br />avg_delay:  13.33499674<br />month: 8<br />month:  8","hour: 18.898734<br />avg_delay:  13.43446578<br />month: 8<br />month:  8","hour: 19.126582<br />avg_delay:  13.57970523<br />month: 8<br />month:  8","hour: 19.354430<br />avg_delay:  13.72324140<br />month: 8<br />month:  8","hour: 19.582278<br />avg_delay:  13.86096202<br />month: 8<br />month:  8","hour: 19.810127<br />avg_delay:  13.99598848<br />month: 8<br />month:  8","hour: 20.037975<br />avg_delay:  14.13144214<br />month: 8<br />month:  8","hour: 20.265823<br />avg_delay:  14.27044436<br />month: 8<br />month:  8","hour: 20.493671<br />avg_delay:  14.41611653<br />month: 8<br />month:  8","hour: 20.721519<br />avg_delay:  14.57158002<br />month: 8<br />month:  8","hour: 20.949367<br />avg_delay:  14.73995618<br />month: 8<br />month:  8","hour: 21.177215<br />avg_delay:  14.92176585<br />month: 8<br />month:  8","hour: 21.405063<br />avg_delay:  15.11239061<br />month: 8<br />month:  8","hour: 21.632911<br />avg_delay:  15.31105881<br />month: 8<br />month:  8","hour: 21.860759<br />avg_delay:  15.51718058<br />month: 8<br />month:  8","hour: 22.088608<br />avg_delay:  15.73016601<br />month: 8<br />month:  8","hour: 22.316456<br />avg_delay:  15.94942521<br />month: 8<br />month:  8","hour: 22.544304<br />avg_delay:  16.17436829<br />month: 8<br />month:  8","hour: 22.772152<br />avg_delay:  16.40440537<br />month: 8<br />month:  8","hour: 23.000000<br />avg_delay:  16.63894654<br />month: 8<br />month:  8","hour: 23.000000<br />avg_delay:  16.63894654<br />month: 8<br />month:  8","hour: 22.772152<br />avg_delay:  16.40440537<br />month: 8<br />month:  8","hour: 22.544304<br />avg_delay:  16.17436829<br />month: 8<br />month:  8","hour: 22.316456<br />avg_delay:  15.94942521<br />month: 8<br />month:  8","hour: 22.088608<br />avg_delay:  15.73016601<br />month: 8<br />month:  8","hour: 21.860759<br />avg_delay:  15.51718058<br />month: 8<br />month:  8","hour: 21.632911<br />avg_delay:  15.31105881<br />month: 8<br />month:  8","hour: 21.405063<br />avg_delay:  15.11239061<br />month: 8<br />month:  8","hour: 21.177215<br />avg_delay:  14.92176585<br />month: 8<br />month:  8","hour: 20.949367<br />avg_delay:  14.73995618<br />month: 8<br />month:  8","hour: 20.721519<br />avg_delay:  14.57158002<br />month: 8<br />month:  8","hour: 20.493671<br />avg_delay:  14.41611653<br />month: 8<br />month:  8","hour: 20.265823<br />avg_delay:  14.27044436<br />month: 8<br />month:  8","hour: 20.037975<br />avg_delay:  14.13144214<br />month: 8<br />month:  8","hour: 19.810127<br />avg_delay:  13.99598848<br />month: 8<br />month:  8","hour: 19.582278<br />avg_delay:  13.86096202<br />month: 8<br />month:  8","hour: 19.354430<br />avg_delay:  13.72324140<br />month: 8<br />month:  8","hour: 19.126582<br />avg_delay:  13.57970523<br />month: 8<br />month:  8","hour: 18.898734<br />avg_delay:  13.43446578<br />month: 8<br />month:  8","hour: 18.670886<br />avg_delay:  13.33499674<br />month: 8<br />month:  8","hour: 18.443038<br />avg_delay:  13.27827012<br />month: 8<br />month:  8","hour: 18.215190<br />avg_delay:  13.24934748<br />month: 8<br />month:  8","hour: 17.987342<br />avg_delay:  13.23329043<br />month: 8<br />month:  8","hour: 17.759494<br />avg_delay:  13.21516055<br />month: 8<br />month:  8","hour: 17.531646<br />avg_delay:  13.18001941<br />month: 8<br />month:  8","hour: 17.303797<br />avg_delay:  13.11292860<br />month: 8<br />month:  8","hour: 17.075949<br />avg_delay:  12.99894972<br />month: 8<br />month:  8","hour: 16.848101<br />avg_delay:  12.85902800<br />month: 8<br />month:  8","hour: 16.620253<br />avg_delay:  12.77582066<br />month: 8<br />month:  8","hour: 16.392405<br />avg_delay:  12.70302457<br />month: 8<br />month:  8","hour: 16.164557<br />avg_delay:  12.58460461<br />month: 8<br />month:  8","hour: 15.936709<br />avg_delay:  12.36763757<br />month: 8<br />month:  8","hour: 15.708861<br />avg_delay:  12.07097749<br />month: 8<br />month:  8","hour: 15.481013<br />avg_delay:  11.72128633<br />month: 8<br />month:  8","hour: 15.253165<br />avg_delay:  11.33006016<br />month: 8<br />month:  8","hour: 15.025316<br />avg_delay:  10.90879511<br />month: 8<br />month:  8","hour: 14.797468<br />avg_delay:  10.46898726<br />month: 8<br />month:  8","hour: 14.569620<br />avg_delay:  10.02213273<br />month: 8<br />month:  8","hour: 14.341772<br />avg_delay:   9.57972760<br />month: 8<br />month:  8","hour: 14.113924<br />avg_delay:   9.15326798<br />month: 8<br />month:  8","hour: 13.886076<br />avg_delay:   8.73979150<br />month: 8<br />month:  8","hour: 13.658228<br />avg_delay:   8.26650705<br />month: 8<br />month:  8","hour: 13.430380<br />avg_delay:   7.73674806<br />month: 8<br />month:  8","hour: 13.202532<br />avg_delay:   7.16858015<br />month: 8<br />month:  8","hour: 12.974684<br />avg_delay:   6.58006895<br />month: 8<br />month:  8","hour: 12.746835<br />avg_delay:   5.98928006<br />month: 8<br />month:  8","hour: 12.518987<br />avg_delay:   5.41427912<br />month: 8<br />month:  8","hour: 12.291139<br />avg_delay:   4.87313175<br />month: 8<br />month:  8","hour: 12.063291<br />avg_delay:   4.38390357<br />month: 8<br />month:  8","hour: 11.835443<br />avg_delay:   3.92130275<br />month: 8<br />month:  8","hour: 11.607595<br />avg_delay:   3.40151025<br />month: 8<br />month:  8","hour: 11.379747<br />avg_delay:   2.86531315<br />month: 8<br />month:  8","hour: 11.151899<br />avg_delay:   2.36029189<br />month: 8<br />month:  8","hour: 10.924051<br />avg_delay:   1.92827205<br />month: 8<br />month:  8","hour: 10.696203<br />avg_delay:   1.52787710<br />month: 8<br />month:  8","hour: 10.468354<br />avg_delay:   1.13946934<br />month: 8<br />month:  8","hour: 10.240506<br />avg_delay:   0.76289465<br />month: 8<br />month:  8","hour: 10.012658<br />avg_delay:   0.39799892<br />month: 8<br />month:  8","hour:  9.784810<br />avg_delay:   0.04462804<br />month: 8<br />month:  8","hour:  9.556962<br />avg_delay:  -0.29737210<br />month: 8<br />month:  8","hour:  9.329114<br />avg_delay:  -0.62815562<br />month: 8<br />month:  8","hour:  9.101266<br />avg_delay:  -0.94787662<br />month: 8<br />month:  8","hour:  8.873418<br />avg_delay:  -1.25649462<br />month: 8<br />month:  8","hour:  8.645570<br />avg_delay:  -1.55323365<br />month: 8<br />month:  8","hour:  8.417722<br />avg_delay:  -1.83815143<br />month: 8<br />month:  8","hour:  8.189873<br />avg_delay:  -2.11143121<br />month: 8<br />month:  8","hour:  7.962025<br />avg_delay:  -2.37325624<br />month: 8<br />month:  8","hour:  7.734177<br />avg_delay:  -2.62380976<br />month: 8<br />month:  8","hour:  7.506329<br />avg_delay:  -2.86327501<br />month: 8<br />month:  8","hour:  7.278481<br />avg_delay:  -3.09183523<br />month: 8<br />month:  8","hour:  7.050633<br />avg_delay:  -3.30967368<br />month: 8<br />month:  8","hour:  6.822785<br />avg_delay:  -3.51675163<br />month: 8<br />month:  8","hour:  6.594937<br />avg_delay:  -3.71271186<br />month: 8<br />month:  8","hour:  6.367089<br />avg_delay:  -3.89763147<br />month: 8<br />month:  8","hour:  6.139241<br />avg_delay:  -4.07160498<br />month: 8<br />month:  8","hour:  5.911392<br />avg_delay:  -4.23486163<br />month: 8<br />month:  8","hour:  5.683544<br />avg_delay:  -4.38853697<br />month: 8<br />month:  8","hour:  5.455696<br />avg_delay:  -4.53226071<br />month: 8<br />month:  8","hour:  5.227848<br />avg_delay:  -4.66527693<br />month: 8<br />month:  8","hour:  5.000000<br />avg_delay:  -4.78682969<br />month: 8<br />month:  8","hour:  5.000000<br />avg_delay:  -4.78682969<br />month: 8<br />month:  8"],"frame":"8","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"9","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-13.5,-11.4367245657568,-12.5117021276596,-9.94844517184943,-12.955078125,-8.06076134699854,-8.59641255605381,-5.01474530831099,-2.19836639439907,-0.234602463605823,3.38868517548455,-0.209328151027207,2.87240663900415,3.08764705882353,0.0888888888888888,-0.875,2.76653171390014,2.97641509433962,2.72222222222222],"text":["hour:  5<br />avg_delay: -13.500000000<br />month: 9<br />month:  9","hour:  6<br />avg_delay: -11.436724566<br />month: 9<br />month:  9","hour:  7<br />avg_delay: -12.511702128<br />month: 9<br />month:  9","hour:  8<br />avg_delay:  -9.948445172<br />month: 9<br />month:  9","hour:  9<br />avg_delay: -12.955078125<br />month: 9<br />month:  9","hour: 10<br />avg_delay:  -8.060761347<br />month: 9<br />month:  9","hour: 11<br />avg_delay:  -8.596412556<br />month: 9<br />month:  9","hour: 12<br />avg_delay:  -5.014745308<br />month: 9<br />month:  9","hour: 13<br />avg_delay:  -2.198366394<br />month: 9<br />month:  9","hour: 14<br />avg_delay:  -0.234602464<br />month: 9<br />month:  9","hour: 15<br />avg_delay:   3.388685175<br />month: 9<br />month:  9","hour: 16<br />avg_delay:  -0.209328151<br />month: 9<br />month:  9","hour: 17<br />avg_delay:   2.872406639<br />month: 9<br />month:  9","hour: 18<br />avg_delay:   3.087647059<br />month: 9<br />month:  9","hour: 19<br />avg_delay:   0.088888889<br />month: 9<br />month:  9","hour: 20<br />avg_delay:  -0.875000000<br />month: 9<br />month:  9","hour: 21<br />avg_delay:   2.766531714<br />month: 9<br />month:  9","hour: 22<br />avg_delay:   2.976415094<br />month: 9<br />month:  9","hour: 23<br />avg_delay:   2.722222222<br />month: 9<br />month:  9"],"frame":"9","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-12.7809563044092,-12.773561457153,-12.7519633002041,-12.7145028865484,-12.6595212691717,-12.586160249202,-12.4966839068301,-12.3914694668437,-12.2706141496589,-12.1341128177303,-11.9795145635769,-11.8065335680545,-11.6162355433321,-11.4096862015786,-11.1879512549633,-10.9520964156551,-10.7031873958232,-10.4422899076365,-10.1690533909184,-9.87431734848957,-9.55825578279354,-9.22332727126153,-8.87199039132478,-8.50670372041454,-8.12992583596206,-7.74411531539861,-7.35173073615543,-6.92187604588528,-6.38229951149198,-5.79854859381776,-5.24585710059955,-4.78981178491166,-4.31576623641106,-3.78445051906964,-3.21711585591829,-2.63501346998791,-2.05939458430938,-1.5115104219136,-1.01261220583147,-0.583951159093872,-0.235052394198924,0.0903174301697418,0.400848948898785,0.694298675358822,0.968423122920468,1.22097880495433,1.44972223483103,1.65240992592118,1.82679839159538,1.938832623129,1.9366983986696,1.88510922670322,1.85441805834406,1.90474234203259,1.95489599001924,1.97654774239577,1.97768897392281,1.96631105936099,1.95040537347096,1.93796329101335,1.93697618674879,1.95543543543792,1.99457511567893,2.02733454032599,2.05175300752576,2.07000291366438,2.08425665512799,2.0966866283027,2.10946522957465,2.12476485532996,2.14475790195478,2.16986086898142,2.19698304312139,2.22559825142348,2.25530245422014,2.28569161184381,2.31636168462695,2.346908632902,2.37692841700141,2.40601699725763],"text":["hour:  5.000000<br />avg_delay: -12.78095630<br />month: 9<br />month:  9","hour:  5.227848<br />avg_delay: -12.77356146<br />month: 9<br />month:  9","hour:  5.455696<br />avg_delay: -12.75196330<br />month: 9<br />month:  9","hour:  5.683544<br />avg_delay: -12.71450289<br />month: 9<br />month:  9","hour:  5.911392<br />avg_delay: -12.65952127<br />month: 9<br />month:  9","hour:  6.139241<br />avg_delay: -12.58616025<br />month: 9<br />month:  9","hour:  6.367089<br />avg_delay: -12.49668391<br />month: 9<br />month:  9","hour:  6.594937<br />avg_delay: -12.39146947<br />month: 9<br />month:  9","hour:  6.822785<br />avg_delay: -12.27061415<br />month: 9<br />month:  9","hour:  7.050633<br />avg_delay: -12.13411282<br />month: 9<br />month:  9","hour:  7.278481<br />avg_delay: -11.97951456<br />month: 9<br />month:  9","hour:  7.506329<br />avg_delay: -11.80653357<br />month: 9<br />month:  9","hour:  7.734177<br />avg_delay: -11.61623554<br />month: 9<br />month:  9","hour:  7.962025<br />avg_delay: -11.40968620<br />month: 9<br />month:  9","hour:  8.189873<br />avg_delay: -11.18795125<br />month: 9<br />month:  9","hour:  8.417722<br />avg_delay: -10.95209642<br />month: 9<br />month:  9","hour:  8.645570<br />avg_delay: -10.70318740<br />month: 9<br />month:  9","hour:  8.873418<br />avg_delay: -10.44228991<br />month: 9<br />month:  9","hour:  9.101266<br />avg_delay: -10.16905339<br />month: 9<br />month:  9","hour:  9.329114<br />avg_delay:  -9.87431735<br />month: 9<br />month:  9","hour:  9.556962<br />avg_delay:  -9.55825578<br />month: 9<br />month:  9","hour:  9.784810<br />avg_delay:  -9.22332727<br />month: 9<br />month:  9","hour: 10.012658<br />avg_delay:  -8.87199039<br />month: 9<br />month:  9","hour: 10.240506<br />avg_delay:  -8.50670372<br />month: 9<br />month:  9","hour: 10.468354<br />avg_delay:  -8.12992584<br />month: 9<br />month:  9","hour: 10.696203<br />avg_delay:  -7.74411532<br />month: 9<br />month:  9","hour: 10.924051<br />avg_delay:  -7.35173074<br />month: 9<br />month:  9","hour: 11.151899<br />avg_delay:  -6.92187605<br />month: 9<br />month:  9","hour: 11.379747<br />avg_delay:  -6.38229951<br />month: 9<br />month:  9","hour: 11.607595<br />avg_delay:  -5.79854859<br />month: 9<br />month:  9","hour: 11.835443<br />avg_delay:  -5.24585710<br />month: 9<br />month:  9","hour: 12.063291<br />avg_delay:  -4.78981178<br />month: 9<br />month:  9","hour: 12.291139<br />avg_delay:  -4.31576624<br />month: 9<br />month:  9","hour: 12.518987<br />avg_delay:  -3.78445052<br />month: 9<br />month:  9","hour: 12.746835<br />avg_delay:  -3.21711586<br />month: 9<br />month:  9","hour: 12.974684<br />avg_delay:  -2.63501347<br />month: 9<br />month:  9","hour: 13.202532<br />avg_delay:  -2.05939458<br />month: 9<br />month:  9","hour: 13.430380<br />avg_delay:  -1.51151042<br />month: 9<br />month:  9","hour: 13.658228<br />avg_delay:  -1.01261221<br />month: 9<br />month:  9","hour: 13.886076<br />avg_delay:  -0.58395116<br />month: 9<br />month:  9","hour: 14.113924<br />avg_delay:  -0.23505239<br />month: 9<br />month:  9","hour: 14.341772<br />avg_delay:   0.09031743<br />month: 9<br />month:  9","hour: 14.569620<br />avg_delay:   0.40084895<br />month: 9<br />month:  9","hour: 14.797468<br />avg_delay:   0.69429868<br />month: 9<br />month:  9","hour: 15.025316<br />avg_delay:   0.96842312<br />month: 9<br />month:  9","hour: 15.253165<br />avg_delay:   1.22097880<br />month: 9<br />month:  9","hour: 15.481013<br />avg_delay:   1.44972223<br />month: 9<br />month:  9","hour: 15.708861<br />avg_delay:   1.65240993<br />month: 9<br />month:  9","hour: 15.936709<br />avg_delay:   1.82679839<br />month: 9<br />month:  9","hour: 16.164557<br />avg_delay:   1.93883262<br />month: 9<br />month:  9","hour: 16.392405<br />avg_delay:   1.93669840<br />month: 9<br />month:  9","hour: 16.620253<br />avg_delay:   1.88510923<br />month: 9<br />month:  9","hour: 16.848101<br />avg_delay:   1.85441806<br />month: 9<br />month:  9","hour: 17.075949<br />avg_delay:   1.90474234<br />month: 9<br />month:  9","hour: 17.303797<br />avg_delay:   1.95489599<br />month: 9<br />month:  9","hour: 17.531646<br />avg_delay:   1.97654774<br />month: 9<br />month:  9","hour: 17.759494<br />avg_delay:   1.97768897<br />month: 9<br />month:  9","hour: 17.987342<br />avg_delay:   1.96631106<br />month: 9<br />month:  9","hour: 18.215190<br />avg_delay:   1.95040537<br />month: 9<br />month:  9","hour: 18.443038<br />avg_delay:   1.93796329<br />month: 9<br />month:  9","hour: 18.670886<br />avg_delay:   1.93697619<br />month: 9<br />month:  9","hour: 18.898734<br />avg_delay:   1.95543544<br />month: 9<br />month:  9","hour: 19.126582<br />avg_delay:   1.99457512<br />month: 9<br />month:  9","hour: 19.354430<br />avg_delay:   2.02733454<br />month: 9<br />month:  9","hour: 19.582278<br />avg_delay:   2.05175301<br />month: 9<br />month:  9","hour: 19.810127<br />avg_delay:   2.07000291<br />month: 9<br />month:  9","hour: 20.037975<br />avg_delay:   2.08425666<br />month: 9<br />month:  9","hour: 20.265823<br />avg_delay:   2.09668663<br />month: 9<br />month:  9","hour: 20.493671<br />avg_delay:   2.10946523<br />month: 9<br />month:  9","hour: 20.721519<br />avg_delay:   2.12476486<br />month: 9<br />month:  9","hour: 20.949367<br />avg_delay:   2.14475790<br />month: 9<br />month:  9","hour: 21.177215<br />avg_delay:   2.16986087<br />month: 9<br />month:  9","hour: 21.405063<br />avg_delay:   2.19698304<br />month: 9<br />month:  9","hour: 21.632911<br />avg_delay:   2.22559825<br />month: 9<br />month:  9","hour: 21.860759<br />avg_delay:   2.25530245<br />month: 9<br />month:  9","hour: 22.088608<br />avg_delay:   2.28569161<br />month: 9<br />month:  9","hour: 22.316456<br />avg_delay:   2.31636168<br />month: 9<br />month:  9","hour: 22.544304<br />avg_delay:   2.34690863<br />month: 9<br />month:  9","hour: 22.772152<br />avg_delay:   2.37692842<br />month: 9<br />month:  9","hour: 23.000000<br />avg_delay:   2.40601700<br />month: 9<br />month:  9"],"frame":"9","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-15.5600392387149,-15.3231389750139,-15.0918443931631,-14.8664634199044,-14.6466184836287,-14.4317722034364,-14.2239715836912,-14.023612865317,-13.8302795395154,-13.642705062604,-13.4554870103647,-13.2650653664565,-13.0696118220681,-12.8675095658878,-12.6574235417171,-12.438326577616,-12.2094945614194,-11.9704867974392,-11.7189373966506,-11.4399086283071,-11.1350796113639,-10.8102261987325,-10.4703535340769,-10.1188669797604,-9.75721731694273,-9.38502749706766,-9.0006372529091,-8.56669911876846,-8.01488078429555,-7.43067780587437,-6.88999385794148,-6.43845791999959,-5.9496210197966,-5.39443235075097,-4.80591232070517,-4.21434912197716,-3.64484506758257,-3.11617165279399,-2.64151442177202,-2.23071768352904,-1.8818189186341,-1.53858478577082,-1.20381228198161,-0.891151807914371,-0.610912529068784,-0.367817659832546,-0.1602595968503,0.0185551425356354,0.178152256507448,0.29469586578707,0.304569186612987,0.252527953899645,0.209594985460877,0.255835825278919,0.313983808350188,0.349256261415105,0.365525714576977,0.367947916608915,0.363506445999962,0.361139462443016,0.371384906931258,0.405551429705689,0.466378225876197,0.521027374729723,0.565522845564856,0.600530626910615,0.626433290818851,0.64331034956664,0.650933431172643,0.648792408542191,0.63616565708105,0.610300223660883,0.565139419825601,0.498516564295166,0.409287497397548,0.297082592455667,0.162105375674657,0.00491245481734293,-0.17377291891104,-0.373193086025715,-0.373193086025715,5.18522708054098,4.92762975291386,4.68890481098665,4.47061799357924,4.27430063123195,4.10131741104273,3.95267993855179,3.82882666641718,3.72942151430195,3.65335014682851,3.60073730211774,3.56799702797665,3.55006290703875,3.54208001943712,3.53947520041815,3.53798316948667,3.53364170592225,3.52277200548166,3.50531944117014,3.50256746656631,3.51478711958367,3.53730430094196,3.56467420211307,3.58985223326864,3.60383922337643,3.5958081716883,3.55364885878626,3.49924113122725,3.51769049950679,3.56882761072622,3.58296938047093,3.47544452668331,3.28626470930671,3.05970406651236,2.80977526974121,2.54775877490972,2.27974915863201,2.00551017977918,1.7192196461103,1.41171413023625,1.0628153653413,0.616290010109089,0.0931508089667918,-0.473944101036187,-1.05567781799865,-1.62831939113142,-2.17446868738831,-2.68191145302552,-3.14116564982373,-3.60172034325762,-4.16641938176114,-4.74971823868841,-5.2770529730021,-5.70282421940176,-6.10320313372956,-6.5026343549814,-6.89454046106871,-7.2736272485727,-7.63642834379053,-7.98143195422322,-8.30872606867204,-8.61916938518613,-8.91409301783372,-9.1968802302269,-9.46586625369424,-9.71847896820955,-9.95186283726952,-10.162859264596,-10.3480017696525,-10.5035421167892,-10.6255205728565,-10.7109487598023,-10.7593260683704,-10.769396229969,-10.7405482949675,-10.6724240547148,-10.5625423531923,-10.4120822072451,-10.2239839392922,-10.0018733701035,-15.5600392387149],"text":["hour:  5.000000<br />avg_delay: -12.78095630<br />month: 9<br />month:  9","hour:  5.227848<br />avg_delay: -12.77356146<br />month: 9<br />month:  9","hour:  5.455696<br />avg_delay: -12.75196330<br />month: 9<br />month:  9","hour:  5.683544<br />avg_delay: -12.71450289<br />month: 9<br />month:  9","hour:  5.911392<br />avg_delay: -12.65952127<br />month: 9<br />month:  9","hour:  6.139241<br />avg_delay: -12.58616025<br />month: 9<br />month:  9","hour:  6.367089<br />avg_delay: -12.49668391<br />month: 9<br />month:  9","hour:  6.594937<br />avg_delay: -12.39146947<br />month: 9<br />month:  9","hour:  6.822785<br />avg_delay: -12.27061415<br />month: 9<br />month:  9","hour:  7.050633<br />avg_delay: -12.13411282<br />month: 9<br />month:  9","hour:  7.278481<br />avg_delay: -11.97951456<br />month: 9<br />month:  9","hour:  7.506329<br />avg_delay: -11.80653357<br />month: 9<br />month:  9","hour:  7.734177<br />avg_delay: -11.61623554<br />month: 9<br />month:  9","hour:  7.962025<br />avg_delay: -11.40968620<br />month: 9<br />month:  9","hour:  8.189873<br />avg_delay: -11.18795125<br />month: 9<br />month:  9","hour:  8.417722<br />avg_delay: -10.95209642<br />month: 9<br />month:  9","hour:  8.645570<br />avg_delay: -10.70318740<br />month: 9<br />month:  9","hour:  8.873418<br />avg_delay: -10.44228991<br />month: 9<br />month:  9","hour:  9.101266<br />avg_delay: -10.16905339<br />month: 9<br />month:  9","hour:  9.329114<br />avg_delay:  -9.87431735<br />month: 9<br />month:  9","hour:  9.556962<br />avg_delay:  -9.55825578<br />month: 9<br />month:  9","hour:  9.784810<br />avg_delay:  -9.22332727<br />month: 9<br />month:  9","hour: 10.012658<br />avg_delay:  -8.87199039<br />month: 9<br />month:  9","hour: 10.240506<br />avg_delay:  -8.50670372<br />month: 9<br />month:  9","hour: 10.468354<br />avg_delay:  -8.12992584<br />month: 9<br />month:  9","hour: 10.696203<br />avg_delay:  -7.74411532<br />month: 9<br />month:  9","hour: 10.924051<br />avg_delay:  -7.35173074<br />month: 9<br />month:  9","hour: 11.151899<br />avg_delay:  -6.92187605<br />month: 9<br />month:  9","hour: 11.379747<br />avg_delay:  -6.38229951<br />month: 9<br />month:  9","hour: 11.607595<br />avg_delay:  -5.79854859<br />month: 9<br />month:  9","hour: 11.835443<br />avg_delay:  -5.24585710<br />month: 9<br />month:  9","hour: 12.063291<br />avg_delay:  -4.78981178<br />month: 9<br />month:  9","hour: 12.291139<br />avg_delay:  -4.31576624<br />month: 9<br />month:  9","hour: 12.518987<br />avg_delay:  -3.78445052<br />month: 9<br />month:  9","hour: 12.746835<br />avg_delay:  -3.21711586<br />month: 9<br />month:  9","hour: 12.974684<br />avg_delay:  -2.63501347<br />month: 9<br />month:  9","hour: 13.202532<br />avg_delay:  -2.05939458<br />month: 9<br />month:  9","hour: 13.430380<br />avg_delay:  -1.51151042<br />month: 9<br />month:  9","hour: 13.658228<br />avg_delay:  -1.01261221<br />month: 9<br />month:  9","hour: 13.886076<br />avg_delay:  -0.58395116<br />month: 9<br />month:  9","hour: 14.113924<br />avg_delay:  -0.23505239<br />month: 9<br />month:  9","hour: 14.341772<br />avg_delay:   0.09031743<br />month: 9<br />month:  9","hour: 14.569620<br />avg_delay:   0.40084895<br />month: 9<br />month:  9","hour: 14.797468<br />avg_delay:   0.69429868<br />month: 9<br />month:  9","hour: 15.025316<br />avg_delay:   0.96842312<br />month: 9<br />month:  9","hour: 15.253165<br />avg_delay:   1.22097880<br />month: 9<br />month:  9","hour: 15.481013<br />avg_delay:   1.44972223<br />month: 9<br />month:  9","hour: 15.708861<br />avg_delay:   1.65240993<br />month: 9<br />month:  9","hour: 15.936709<br />avg_delay:   1.82679839<br />month: 9<br />month:  9","hour: 16.164557<br />avg_delay:   1.93883262<br />month: 9<br />month:  9","hour: 16.392405<br />avg_delay:   1.93669840<br />month: 9<br />month:  9","hour: 16.620253<br />avg_delay:   1.88510923<br />month: 9<br />month:  9","hour: 16.848101<br />avg_delay:   1.85441806<br />month: 9<br />month:  9","hour: 17.075949<br />avg_delay:   1.90474234<br />month: 9<br />month:  9","hour: 17.303797<br />avg_delay:   1.95489599<br />month: 9<br />month:  9","hour: 17.531646<br />avg_delay:   1.97654774<br />month: 9<br />month:  9","hour: 17.759494<br />avg_delay:   1.97768897<br />month: 9<br />month:  9","hour: 17.987342<br />avg_delay:   1.96631106<br />month: 9<br />month:  9","hour: 18.215190<br />avg_delay:   1.95040537<br />month: 9<br />month:  9","hour: 18.443038<br />avg_delay:   1.93796329<br />month: 9<br />month:  9","hour: 18.670886<br />avg_delay:   1.93697619<br />month: 9<br />month:  9","hour: 18.898734<br />avg_delay:   1.95543544<br />month: 9<br />month:  9","hour: 19.126582<br />avg_delay:   1.99457512<br />month: 9<br />month:  9","hour: 19.354430<br />avg_delay:   2.02733454<br />month: 9<br />month:  9","hour: 19.582278<br />avg_delay:   2.05175301<br />month: 9<br />month:  9","hour: 19.810127<br />avg_delay:   2.07000291<br />month: 9<br />month:  9","hour: 20.037975<br />avg_delay:   2.08425666<br />month: 9<br />month:  9","hour: 20.265823<br />avg_delay:   2.09668663<br />month: 9<br />month:  9","hour: 20.493671<br />avg_delay:   2.10946523<br />month: 9<br />month:  9","hour: 20.721519<br />avg_delay:   2.12476486<br />month: 9<br />month:  9","hour: 20.949367<br />avg_delay:   2.14475790<br />month: 9<br />month:  9","hour: 21.177215<br />avg_delay:   2.16986087<br />month: 9<br />month:  9","hour: 21.405063<br />avg_delay:   2.19698304<br />month: 9<br />month:  9","hour: 21.632911<br />avg_delay:   2.22559825<br />month: 9<br />month:  9","hour: 21.860759<br />avg_delay:   2.25530245<br />month: 9<br />month:  9","hour: 22.088608<br />avg_delay:   2.28569161<br />month: 9<br />month:  9","hour: 22.316456<br />avg_delay:   2.31636168<br />month: 9<br />month:  9","hour: 22.544304<br />avg_delay:   2.34690863<br />month: 9<br />month:  9","hour: 22.772152<br />avg_delay:   2.37692842<br />month: 9<br />month:  9","hour: 23.000000<br />avg_delay:   2.40601700<br />month: 9<br />month:  9","hour: 23.000000<br />avg_delay:   2.40601700<br />month: 9<br />month:  9","hour: 23.000000<br />avg_delay:   2.40601700<br />month: 9<br />month:  9","hour: 22.772152<br />avg_delay:   2.37692842<br />month: 9<br />month:  9","hour: 22.544304<br />avg_delay:   2.34690863<br />month: 9<br />month:  9","hour: 22.316456<br />avg_delay:   2.31636168<br />month: 9<br />month:  9","hour: 22.088608<br />avg_delay:   2.28569161<br />month: 9<br />month:  9","hour: 21.860759<br />avg_delay:   2.25530245<br />month: 9<br />month:  9","hour: 21.632911<br />avg_delay:   2.22559825<br />month: 9<br />month:  9","hour: 21.405063<br />avg_delay:   2.19698304<br />month: 9<br />month:  9","hour: 21.177215<br />avg_delay:   2.16986087<br />month: 9<br />month:  9","hour: 20.949367<br />avg_delay:   2.14475790<br />month: 9<br />month:  9","hour: 20.721519<br />avg_delay:   2.12476486<br />month: 9<br />month:  9","hour: 20.493671<br />avg_delay:   2.10946523<br />month: 9<br />month:  9","hour: 20.265823<br />avg_delay:   2.09668663<br />month: 9<br />month:  9","hour: 20.037975<br />avg_delay:   2.08425666<br />month: 9<br />month:  9","hour: 19.810127<br />avg_delay:   2.07000291<br />month: 9<br />month:  9","hour: 19.582278<br />avg_delay:   2.05175301<br />month: 9<br />month:  9","hour: 19.354430<br />avg_delay:   2.02733454<br />month: 9<br />month:  9","hour: 19.126582<br />avg_delay:   1.99457512<br />month: 9<br />month:  9","hour: 18.898734<br />avg_delay:   1.95543544<br />month: 9<br />month:  9","hour: 18.670886<br />avg_delay:   1.93697619<br />month: 9<br />month:  9","hour: 18.443038<br />avg_delay:   1.93796329<br />month: 9<br />month:  9","hour: 18.215190<br />avg_delay:   1.95040537<br />month: 9<br />month:  9","hour: 17.987342<br />avg_delay:   1.96631106<br />month: 9<br />month:  9","hour: 17.759494<br />avg_delay:   1.97768897<br />month: 9<br />month:  9","hour: 17.531646<br />avg_delay:   1.97654774<br />month: 9<br />month:  9","hour: 17.303797<br />avg_delay:   1.95489599<br />month: 9<br />month:  9","hour: 17.075949<br />avg_delay:   1.90474234<br />month: 9<br />month:  9","hour: 16.848101<br />avg_delay:   1.85441806<br />month: 9<br />month:  9","hour: 16.620253<br />avg_delay:   1.88510923<br />month: 9<br />month:  9","hour: 16.392405<br />avg_delay:   1.93669840<br />month: 9<br />month:  9","hour: 16.164557<br />avg_delay:   1.93883262<br />month: 9<br />month:  9","hour: 15.936709<br />avg_delay:   1.82679839<br />month: 9<br />month:  9","hour: 15.708861<br />avg_delay:   1.65240993<br />month: 9<br />month:  9","hour: 15.481013<br />avg_delay:   1.44972223<br />month: 9<br />month:  9","hour: 15.253165<br />avg_delay:   1.22097880<br />month: 9<br />month:  9","hour: 15.025316<br />avg_delay:   0.96842312<br />month: 9<br />month:  9","hour: 14.797468<br />avg_delay:   0.69429868<br />month: 9<br />month:  9","hour: 14.569620<br />avg_delay:   0.40084895<br />month: 9<br />month:  9","hour: 14.341772<br />avg_delay:   0.09031743<br />month: 9<br />month:  9","hour: 14.113924<br />avg_delay:  -0.23505239<br />month: 9<br />month:  9","hour: 13.886076<br />avg_delay:  -0.58395116<br />month: 9<br />month:  9","hour: 13.658228<br />avg_delay:  -1.01261221<br />month: 9<br />month:  9","hour: 13.430380<br />avg_delay:  -1.51151042<br />month: 9<br />month:  9","hour: 13.202532<br />avg_delay:  -2.05939458<br />month: 9<br />month:  9","hour: 12.974684<br />avg_delay:  -2.63501347<br />month: 9<br />month:  9","hour: 12.746835<br />avg_delay:  -3.21711586<br />month: 9<br />month:  9","hour: 12.518987<br />avg_delay:  -3.78445052<br />month: 9<br />month:  9","hour: 12.291139<br />avg_delay:  -4.31576624<br />month: 9<br />month:  9","hour: 12.063291<br />avg_delay:  -4.78981178<br />month: 9<br />month:  9","hour: 11.835443<br />avg_delay:  -5.24585710<br />month: 9<br />month:  9","hour: 11.607595<br />avg_delay:  -5.79854859<br />month: 9<br />month:  9","hour: 11.379747<br />avg_delay:  -6.38229951<br />month: 9<br />month:  9","hour: 11.151899<br />avg_delay:  -6.92187605<br />month: 9<br />month:  9","hour: 10.924051<br />avg_delay:  -7.35173074<br />month: 9<br />month:  9","hour: 10.696203<br />avg_delay:  -7.74411532<br />month: 9<br />month:  9","hour: 10.468354<br />avg_delay:  -8.12992584<br />month: 9<br />month:  9","hour: 10.240506<br />avg_delay:  -8.50670372<br />month: 9<br />month:  9","hour: 10.012658<br />avg_delay:  -8.87199039<br />month: 9<br />month:  9","hour:  9.784810<br />avg_delay:  -9.22332727<br />month: 9<br />month:  9","hour:  9.556962<br />avg_delay:  -9.55825578<br />month: 9<br />month:  9","hour:  9.329114<br />avg_delay:  -9.87431735<br />month: 9<br />month:  9","hour:  9.101266<br />avg_delay: -10.16905339<br />month: 9<br />month:  9","hour:  8.873418<br />avg_delay: -10.44228991<br />month: 9<br />month:  9","hour:  8.645570<br />avg_delay: -10.70318740<br />month: 9<br />month:  9","hour:  8.417722<br />avg_delay: -10.95209642<br />month: 9<br />month:  9","hour:  8.189873<br />avg_delay: -11.18795125<br />month: 9<br />month:  9","hour:  7.962025<br />avg_delay: -11.40968620<br />month: 9<br />month:  9","hour:  7.734177<br />avg_delay: -11.61623554<br />month: 9<br />month:  9","hour:  7.506329<br />avg_delay: -11.80653357<br />month: 9<br />month:  9","hour:  7.278481<br />avg_delay: -11.97951456<br />month: 9<br />month:  9","hour:  7.050633<br />avg_delay: -12.13411282<br />month: 9<br />month:  9","hour:  6.822785<br />avg_delay: -12.27061415<br />month: 9<br />month:  9","hour:  6.594937<br />avg_delay: -12.39146947<br />month: 9<br />month:  9","hour:  6.367089<br />avg_delay: -12.49668391<br />month: 9<br />month:  9","hour:  6.139241<br />avg_delay: -12.58616025<br />month: 9<br />month:  9","hour:  5.911392<br />avg_delay: -12.65952127<br />month: 9<br />month:  9","hour:  5.683544<br />avg_delay: -12.71450289<br />month: 9<br />month:  9","hour:  5.455696<br />avg_delay: -12.75196330<br />month: 9<br />month:  9","hour:  5.227848<br />avg_delay: -12.77356146<br />month: 9<br />month:  9","hour:  5.000000<br />avg_delay: -12.78095630<br />month: 9<br />month:  9","hour:  5.000000<br />avg_delay: -12.78095630<br />month: 9<br />month:  9"],"frame":"9","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"10","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-8.68235294117647,-5.42097769340294,-7.65536723163842,-5.52071234998064,-7.37847866419295,-4.32274789371354,-4.07472527472527,-0.704443013522215,-0.209497206703911,3.43700159489633,6.29672544080605,2.90041067761807,6.30718954248366,2.96663019693654,5.57560137457045,4.93032514930325,4.63701923076923,-3.01630434782609,-3.16279069767442],"text":["hour:  5<br />avg_delay:  -8.682352941<br />month: 10<br />month: 10","hour:  6<br />avg_delay:  -5.420977693<br />month: 10<br />month: 10","hour:  7<br />avg_delay:  -7.655367232<br />month: 10<br />month: 10","hour:  8<br />avg_delay:  -5.520712350<br />month: 10<br />month: 10","hour:  9<br />avg_delay:  -7.378478664<br />month: 10<br />month: 10","hour: 10<br />avg_delay:  -4.322747894<br />month: 10<br />month: 10","hour: 11<br />avg_delay:  -4.074725275<br />month: 10<br />month: 10","hour: 12<br />avg_delay:  -0.704443014<br />month: 10<br />month: 10","hour: 13<br />avg_delay:  -0.209497207<br />month: 10<br />month: 10","hour: 14<br />avg_delay:   3.437001595<br />month: 10<br />month: 10","hour: 15<br />avg_delay:   6.296725441<br />month: 10<br />month: 10","hour: 16<br />avg_delay:   2.900410678<br />month: 10<br />month: 10","hour: 17<br />avg_delay:   6.307189542<br />month: 10<br />month: 10","hour: 18<br />avg_delay:   2.966630197<br />month: 10<br />month: 10","hour: 19<br />avg_delay:   5.575601375<br />month: 10<br />month: 10","hour: 20<br />avg_delay:   4.930325149<br />month: 10<br />month: 10","hour: 21<br />avg_delay:   4.637019231<br />month: 10<br />month: 10","hour: 22<br />avg_delay:  -3.016304348<br />month: 10<br />month: 10","hour: 23<br />avg_delay:  -3.162790698<br />month: 10<br />month: 10"],"frame":"10","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-7.48852261054811,-7.4973761749074,-7.49363326156419,-7.47640110016994,-7.44478692037612,-7.39826857067554,-7.33788371465422,-7.26394044897726,-7.17662395560236,-7.07605529183035,-6.96077512863504,-6.83055470063956,-6.68599243405806,-6.52768675510467,-6.35623608999352,-6.17223886493874,-5.97629350615449,-5.76899843985489,-5.55040890826462,-5.3170518495345,-5.06877609587197,-4.8062845803344,-4.53028023597917,-4.24146599586367,-3.94054479304528,-3.62821956058137,-3.30519323152932,-2.94166479784858,-2.47213017178999,-1.95947957119147,-1.47554643067587,-1.08335542039287,-0.68006946871498,-0.228639347369259,0.253134211483789,0.747450475683688,1.23650871306993,1.70250819148204,2.12764817875952,2.49412794274187,2.79522481914025,3.08478055331759,3.36929510506856,3.64476526301546,3.90718781578061,4.1525595519863,4.37687726025485,4.57613772920855,4.74633774746972,4.89952300234704,5.06403253571194,5.2167281466077,5.33181732445777,5.38746179675407,5.41578177177123,5.42713801608406,5.41770124998359,5.38364219376087,5.32113156770691,5.22634009211276,5.09543848726943,4.92459747346798,4.71300454918779,4.47277902456688,4.20525332837134,3.9099391418096,3.58634814609007,3.23399202242117,2.85238245201134,2.44103111606896,1.99944969580249,1.52739917047473,1.02523077106396,0.493013110099554,-0.069201097800815,-0.661359138019471,-1.28340829593876,-1.93529585694102,-2.61696910640856,-3.32837532972373],"text":["hour:  5.000000<br />avg_delay:  -7.48852261<br />month: 10<br />month: 10","hour:  5.227848<br />avg_delay:  -7.49737617<br />month: 10<br />month: 10","hour:  5.455696<br />avg_delay:  -7.49363326<br />month: 10<br />month: 10","hour:  5.683544<br />avg_delay:  -7.47640110<br />month: 10<br />month: 10","hour:  5.911392<br />avg_delay:  -7.44478692<br />month: 10<br />month: 10","hour:  6.139241<br />avg_delay:  -7.39826857<br />month: 10<br />month: 10","hour:  6.367089<br />avg_delay:  -7.33788371<br />month: 10<br />month: 10","hour:  6.594937<br />avg_delay:  -7.26394045<br />month: 10<br />month: 10","hour:  6.822785<br />avg_delay:  -7.17662396<br />month: 10<br />month: 10","hour:  7.050633<br />avg_delay:  -7.07605529<br />month: 10<br />month: 10","hour:  7.278481<br />avg_delay:  -6.96077513<br />month: 10<br />month: 10","hour:  7.506329<br />avg_delay:  -6.83055470<br />month: 10<br />month: 10","hour:  7.734177<br />avg_delay:  -6.68599243<br />month: 10<br />month: 10","hour:  7.962025<br />avg_delay:  -6.52768676<br />month: 10<br />month: 10","hour:  8.189873<br />avg_delay:  -6.35623609<br />month: 10<br />month: 10","hour:  8.417722<br />avg_delay:  -6.17223886<br />month: 10<br />month: 10","hour:  8.645570<br />avg_delay:  -5.97629351<br />month: 10<br />month: 10","hour:  8.873418<br />avg_delay:  -5.76899844<br />month: 10<br />month: 10","hour:  9.101266<br />avg_delay:  -5.55040891<br />month: 10<br />month: 10","hour:  9.329114<br />avg_delay:  -5.31705185<br />month: 10<br />month: 10","hour:  9.556962<br />avg_delay:  -5.06877610<br />month: 10<br />month: 10","hour:  9.784810<br />avg_delay:  -4.80628458<br />month: 10<br />month: 10","hour: 10.012658<br />avg_delay:  -4.53028024<br />month: 10<br />month: 10","hour: 10.240506<br />avg_delay:  -4.24146600<br />month: 10<br />month: 10","hour: 10.468354<br />avg_delay:  -3.94054479<br />month: 10<br />month: 10","hour: 10.696203<br />avg_delay:  -3.62821956<br />month: 10<br />month: 10","hour: 10.924051<br />avg_delay:  -3.30519323<br />month: 10<br />month: 10","hour: 11.151899<br />avg_delay:  -2.94166480<br />month: 10<br />month: 10","hour: 11.379747<br />avg_delay:  -2.47213017<br />month: 10<br />month: 10","hour: 11.607595<br />avg_delay:  -1.95947957<br />month: 10<br />month: 10","hour: 11.835443<br />avg_delay:  -1.47554643<br />month: 10<br />month: 10","hour: 12.063291<br />avg_delay:  -1.08335542<br />month: 10<br />month: 10","hour: 12.291139<br />avg_delay:  -0.68006947<br />month: 10<br />month: 10","hour: 12.518987<br />avg_delay:  -0.22863935<br />month: 10<br />month: 10","hour: 12.746835<br />avg_delay:   0.25313421<br />month: 10<br />month: 10","hour: 12.974684<br />avg_delay:   0.74745048<br />month: 10<br />month: 10","hour: 13.202532<br />avg_delay:   1.23650871<br />month: 10<br />month: 10","hour: 13.430380<br />avg_delay:   1.70250819<br />month: 10<br />month: 10","hour: 13.658228<br />avg_delay:   2.12764818<br />month: 10<br />month: 10","hour: 13.886076<br />avg_delay:   2.49412794<br />month: 10<br />month: 10","hour: 14.113924<br />avg_delay:   2.79522482<br />month: 10<br />month: 10","hour: 14.341772<br />avg_delay:   3.08478055<br />month: 10<br />month: 10","hour: 14.569620<br />avg_delay:   3.36929511<br />month: 10<br />month: 10","hour: 14.797468<br />avg_delay:   3.64476526<br />month: 10<br />month: 10","hour: 15.025316<br />avg_delay:   3.90718782<br />month: 10<br />month: 10","hour: 15.253165<br />avg_delay:   4.15255955<br />month: 10<br />month: 10","hour: 15.481013<br />avg_delay:   4.37687726<br />month: 10<br />month: 10","hour: 15.708861<br />avg_delay:   4.57613773<br />month: 10<br />month: 10","hour: 15.936709<br />avg_delay:   4.74633775<br />month: 10<br />month: 10","hour: 16.164557<br />avg_delay:   4.89952300<br />month: 10<br />month: 10","hour: 16.392405<br />avg_delay:   5.06403254<br />month: 10<br />month: 10","hour: 16.620253<br />avg_delay:   5.21672815<br />month: 10<br />month: 10","hour: 16.848101<br />avg_delay:   5.33181732<br />month: 10<br />month: 10","hour: 17.075949<br />avg_delay:   5.38746180<br />month: 10<br />month: 10","hour: 17.303797<br />avg_delay:   5.41578177<br />month: 10<br />month: 10","hour: 17.531646<br />avg_delay:   5.42713802<br />month: 10<br />month: 10","hour: 17.759494<br />avg_delay:   5.41770125<br />month: 10<br />month: 10","hour: 17.987342<br />avg_delay:   5.38364219<br />month: 10<br />month: 10","hour: 18.215190<br />avg_delay:   5.32113157<br />month: 10<br />month: 10","hour: 18.443038<br />avg_delay:   5.22634009<br />month: 10<br />month: 10","hour: 18.670886<br />avg_delay:   5.09543849<br />month: 10<br />month: 10","hour: 18.898734<br />avg_delay:   4.92459747<br />month: 10<br />month: 10","hour: 19.126582<br />avg_delay:   4.71300455<br />month: 10<br />month: 10","hour: 19.354430<br />avg_delay:   4.47277902<br />month: 10<br />month: 10","hour: 19.582278<br />avg_delay:   4.20525333<br />month: 10<br />month: 10","hour: 19.810127<br />avg_delay:   3.90993914<br />month: 10<br />month: 10","hour: 20.037975<br />avg_delay:   3.58634815<br />month: 10<br />month: 10","hour: 20.265823<br />avg_delay:   3.23399202<br />month: 10<br />month: 10","hour: 20.493671<br />avg_delay:   2.85238245<br />month: 10<br />month: 10","hour: 20.721519<br />avg_delay:   2.44103112<br />month: 10<br />month: 10","hour: 20.949367<br />avg_delay:   1.99944970<br />month: 10<br />month: 10","hour: 21.177215<br />avg_delay:   1.52739917<br />month: 10<br />month: 10","hour: 21.405063<br />avg_delay:   1.02523077<br />month: 10<br />month: 10","hour: 21.632911<br />avg_delay:   0.49301311<br />month: 10<br />month: 10","hour: 21.860759<br />avg_delay:  -0.06920110<br />month: 10<br />month: 10","hour: 22.088608<br />avg_delay:  -0.66135914<br />month: 10<br />month: 10","hour: 22.316456<br />avg_delay:  -1.28340830<br />month: 10<br />month: 10","hour: 22.544304<br />avg_delay:  -1.93529586<br />month: 10<br />month: 10","hour: 22.772152<br />avg_delay:  -2.61696911<br />month: 10<br />month: 10","hour: 23.000000<br />avg_delay:  -3.32837533<br />month: 10<br />month: 10"],"frame":"10","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-10.4429374591964,-10.2078061457315,-9.98113709233291,-9.76412849217038,-9.55724979207733,-9.36031989887571,-9.17414570504373,-8.99905552310779,-8.83468839471425,-8.67982438910778,-8.52986644978876,-8.38110504558674,-8.23106199839752,-8.07748397096115,-7.91841715701772,-7.75223505893616,-7.57763335885474,-7.39360903609075,-7.19807485723411,-6.98141604209239,-6.74508149695365,-6.49330071675481,-6.22948386325724,-5.95534038696616,-5.67050184295576,-5.37265663908907,-5.05812900649099,-4.69025950509482,-4.20771074567486,-3.69457956388647,-3.22341152283906,-2.83601438624961,-2.41700389876831,-1.94019468487183,-1.43589917758954,-0.931525219369588,-0.448967597031294,-0.00339086933443755,0.395978772868572,0.743467171884511,1.04456404828289,1.35311114742664,1.66339604425208,1.95928895291423,2.22821212072733,2.46352616291298,2.66532192275228,2.83920329915522,2.99367878161298,3.15165791018385,3.32893254301693,3.48114757272283,3.58322261721152,3.6345260217924,3.67134469326353,3.69718096617357,3.70382685888111,3.6844385664828,3.6341154312865,3.55003469103108,3.43107429471154,3.27693152449849,3.08839395295194,2.87143917186663,2.62525713437392,2.3477580747854,2.03655093023358,1.68892245808171,1.30183210706416,0.871939794915242,0.395680598525067,-0.130553915784481,-0.709565615119278,-1.3430298946966,-2.03168085396036,-2.77542919419214,-3.57357630366426,-4.42504821323023,-5.32859379679202,-6.28292534915905,-0.373825310288421,0.0946555839749066,0.554456499348192,1.00675971178673,1.4527109181532,1.89327865835873,2.32905611489571,2.7600271572472,3.18535225673393,3.60321879307991,4.01012243722268,4.40293279695851,4.77906158676063,5.13614536194655,5.4721202088338,5.78524952236876,6.07411887726712,6.33761514542365,6.57226342243747,6.75980267982733,6.90264549319444,7.00814770412732,7.08284582103893,7.13157564108608,7.15709506599454,7.16021885027893,7.14039757171574,7.08041203170402,6.95230872049257,6.79913252840694,6.64738809451023,6.49899671332645,6.31307215926188,6.08843259775742,5.84159294105963,5.58616351083389,5.33024157311669,5.07519416588504,4.81644995920854,4.5458855899976,4.24478871359923,3.85931758465046,3.40840725229853,2.92198502317116,2.42642617073696,1.94216760055711,1.48291599013331,1.05686496133835,0.669303545463863,0.27231866148732,-0.22437957849646,-0.73654959790512,-1.19307009060233,-1.55225745656766,-1.88378248207367,-2.21058774313479,-2.52759160476119,-2.83107660870111,-3.11926844391399,-3.39247069479029,-3.65268765697661,-3.90274295929513,-4.14438784361904,-4.37495365345425,-4.59224267094133,-4.79405502296931,-4.97788953924818,-5.1409228697186,-5.28000435569239,-5.39168380748132,-5.47228619455293,-5.51855951649046,-5.52882537484673,-5.50162172426472,-5.43621724247537,-5.33232404867491,-5.1886737081695,-5.00612943079547,-4.78694620408333,-4.53410776189987,-10.4429374591964],"text":["hour:  5.000000<br />avg_delay:  -7.48852261<br />month: 10<br />month: 10","hour:  5.227848<br />avg_delay:  -7.49737617<br />month: 10<br />month: 10","hour:  5.455696<br />avg_delay:  -7.49363326<br />month: 10<br />month: 10","hour:  5.683544<br />avg_delay:  -7.47640110<br />month: 10<br />month: 10","hour:  5.911392<br />avg_delay:  -7.44478692<br />month: 10<br />month: 10","hour:  6.139241<br />avg_delay:  -7.39826857<br />month: 10<br />month: 10","hour:  6.367089<br />avg_delay:  -7.33788371<br />month: 10<br />month: 10","hour:  6.594937<br />avg_delay:  -7.26394045<br />month: 10<br />month: 10","hour:  6.822785<br />avg_delay:  -7.17662396<br />month: 10<br />month: 10","hour:  7.050633<br />avg_delay:  -7.07605529<br />month: 10<br />month: 10","hour:  7.278481<br />avg_delay:  -6.96077513<br />month: 10<br />month: 10","hour:  7.506329<br />avg_delay:  -6.83055470<br />month: 10<br />month: 10","hour:  7.734177<br />avg_delay:  -6.68599243<br />month: 10<br />month: 10","hour:  7.962025<br />avg_delay:  -6.52768676<br />month: 10<br />month: 10","hour:  8.189873<br />avg_delay:  -6.35623609<br />month: 10<br />month: 10","hour:  8.417722<br />avg_delay:  -6.17223886<br />month: 10<br />month: 10","hour:  8.645570<br />avg_delay:  -5.97629351<br />month: 10<br />month: 10","hour:  8.873418<br />avg_delay:  -5.76899844<br />month: 10<br />month: 10","hour:  9.101266<br />avg_delay:  -5.55040891<br />month: 10<br />month: 10","hour:  9.329114<br />avg_delay:  -5.31705185<br />month: 10<br />month: 10","hour:  9.556962<br />avg_delay:  -5.06877610<br />month: 10<br />month: 10","hour:  9.784810<br />avg_delay:  -4.80628458<br />month: 10<br />month: 10","hour: 10.012658<br />avg_delay:  -4.53028024<br />month: 10<br />month: 10","hour: 10.240506<br />avg_delay:  -4.24146600<br />month: 10<br />month: 10","hour: 10.468354<br />avg_delay:  -3.94054479<br />month: 10<br />month: 10","hour: 10.696203<br />avg_delay:  -3.62821956<br />month: 10<br />month: 10","hour: 10.924051<br />avg_delay:  -3.30519323<br />month: 10<br />month: 10","hour: 11.151899<br />avg_delay:  -2.94166480<br />month: 10<br />month: 10","hour: 11.379747<br />avg_delay:  -2.47213017<br />month: 10<br />month: 10","hour: 11.607595<br />avg_delay:  -1.95947957<br />month: 10<br />month: 10","hour: 11.835443<br />avg_delay:  -1.47554643<br />month: 10<br />month: 10","hour: 12.063291<br />avg_delay:  -1.08335542<br />month: 10<br />month: 10","hour: 12.291139<br />avg_delay:  -0.68006947<br />month: 10<br />month: 10","hour: 12.518987<br />avg_delay:  -0.22863935<br />month: 10<br />month: 10","hour: 12.746835<br />avg_delay:   0.25313421<br />month: 10<br />month: 10","hour: 12.974684<br />avg_delay:   0.74745048<br />month: 10<br />month: 10","hour: 13.202532<br />avg_delay:   1.23650871<br />month: 10<br />month: 10","hour: 13.430380<br />avg_delay:   1.70250819<br />month: 10<br />month: 10","hour: 13.658228<br />avg_delay:   2.12764818<br />month: 10<br />month: 10","hour: 13.886076<br />avg_delay:   2.49412794<br />month: 10<br />month: 10","hour: 14.113924<br />avg_delay:   2.79522482<br />month: 10<br />month: 10","hour: 14.341772<br />avg_delay:   3.08478055<br />month: 10<br />month: 10","hour: 14.569620<br />avg_delay:   3.36929511<br />month: 10<br />month: 10","hour: 14.797468<br />avg_delay:   3.64476526<br />month: 10<br />month: 10","hour: 15.025316<br />avg_delay:   3.90718782<br />month: 10<br />month: 10","hour: 15.253165<br />avg_delay:   4.15255955<br />month: 10<br />month: 10","hour: 15.481013<br />avg_delay:   4.37687726<br />month: 10<br />month: 10","hour: 15.708861<br />avg_delay:   4.57613773<br />month: 10<br />month: 10","hour: 15.936709<br />avg_delay:   4.74633775<br />month: 10<br />month: 10","hour: 16.164557<br />avg_delay:   4.89952300<br />month: 10<br />month: 10","hour: 16.392405<br />avg_delay:   5.06403254<br />month: 10<br />month: 10","hour: 16.620253<br />avg_delay:   5.21672815<br />month: 10<br />month: 10","hour: 16.848101<br />avg_delay:   5.33181732<br />month: 10<br />month: 10","hour: 17.075949<br />avg_delay:   5.38746180<br />month: 10<br />month: 10","hour: 17.303797<br />avg_delay:   5.41578177<br />month: 10<br />month: 10","hour: 17.531646<br />avg_delay:   5.42713802<br />month: 10<br />month: 10","hour: 17.759494<br />avg_delay:   5.41770125<br />month: 10<br />month: 10","hour: 17.987342<br />avg_delay:   5.38364219<br />month: 10<br />month: 10","hour: 18.215190<br />avg_delay:   5.32113157<br />month: 10<br />month: 10","hour: 18.443038<br />avg_delay:   5.22634009<br />month: 10<br />month: 10","hour: 18.670886<br />avg_delay:   5.09543849<br />month: 10<br />month: 10","hour: 18.898734<br />avg_delay:   4.92459747<br />month: 10<br />month: 10","hour: 19.126582<br />avg_delay:   4.71300455<br />month: 10<br />month: 10","hour: 19.354430<br />avg_delay:   4.47277902<br />month: 10<br />month: 10","hour: 19.582278<br />avg_delay:   4.20525333<br />month: 10<br />month: 10","hour: 19.810127<br />avg_delay:   3.90993914<br />month: 10<br />month: 10","hour: 20.037975<br />avg_delay:   3.58634815<br />month: 10<br />month: 10","hour: 20.265823<br />avg_delay:   3.23399202<br />month: 10<br />month: 10","hour: 20.493671<br />avg_delay:   2.85238245<br />month: 10<br />month: 10","hour: 20.721519<br />avg_delay:   2.44103112<br />month: 10<br />month: 10","hour: 20.949367<br />avg_delay:   1.99944970<br />month: 10<br />month: 10","hour: 21.177215<br />avg_delay:   1.52739917<br />month: 10<br />month: 10","hour: 21.405063<br />avg_delay:   1.02523077<br />month: 10<br />month: 10","hour: 21.632911<br />avg_delay:   0.49301311<br />month: 10<br />month: 10","hour: 21.860759<br />avg_delay:  -0.06920110<br />month: 10<br />month: 10","hour: 22.088608<br />avg_delay:  -0.66135914<br />month: 10<br />month: 10","hour: 22.316456<br />avg_delay:  -1.28340830<br />month: 10<br />month: 10","hour: 22.544304<br />avg_delay:  -1.93529586<br />month: 10<br />month: 10","hour: 22.772152<br />avg_delay:  -2.61696911<br />month: 10<br />month: 10","hour: 23.000000<br />avg_delay:  -3.32837533<br />month: 10<br />month: 10","hour: 23.000000<br />avg_delay:  -3.32837533<br />month: 10<br />month: 10","hour: 22.772152<br />avg_delay:  -2.61696911<br />month: 10<br />month: 10","hour: 22.544304<br />avg_delay:  -1.93529586<br />month: 10<br />month: 10","hour: 22.316456<br />avg_delay:  -1.28340830<br />month: 10<br />month: 10","hour: 22.088608<br />avg_delay:  -0.66135914<br />month: 10<br />month: 10","hour: 21.860759<br />avg_delay:  -0.06920110<br />month: 10<br />month: 10","hour: 21.632911<br />avg_delay:   0.49301311<br />month: 10<br />month: 10","hour: 21.405063<br />avg_delay:   1.02523077<br />month: 10<br />month: 10","hour: 21.177215<br />avg_delay:   1.52739917<br />month: 10<br />month: 10","hour: 20.949367<br />avg_delay:   1.99944970<br />month: 10<br />month: 10","hour: 20.721519<br />avg_delay:   2.44103112<br />month: 10<br />month: 10","hour: 20.493671<br />avg_delay:   2.85238245<br />month: 10<br />month: 10","hour: 20.265823<br />avg_delay:   3.23399202<br />month: 10<br />month: 10","hour: 20.037975<br />avg_delay:   3.58634815<br />month: 10<br />month: 10","hour: 19.810127<br />avg_delay:   3.90993914<br />month: 10<br />month: 10","hour: 19.582278<br />avg_delay:   4.20525333<br />month: 10<br />month: 10","hour: 19.354430<br />avg_delay:   4.47277902<br />month: 10<br />month: 10","hour: 19.126582<br />avg_delay:   4.71300455<br />month: 10<br />month: 10","hour: 18.898734<br />avg_delay:   4.92459747<br />month: 10<br />month: 10","hour: 18.670886<br />avg_delay:   5.09543849<br />month: 10<br />month: 10","hour: 18.443038<br />avg_delay:   5.22634009<br />month: 10<br />month: 10","hour: 18.215190<br />avg_delay:   5.32113157<br />month: 10<br />month: 10","hour: 17.987342<br />avg_delay:   5.38364219<br />month: 10<br />month: 10","hour: 17.759494<br />avg_delay:   5.41770125<br />month: 10<br />month: 10","hour: 17.531646<br />avg_delay:   5.42713802<br />month: 10<br />month: 10","hour: 17.303797<br />avg_delay:   5.41578177<br />month: 10<br />month: 10","hour: 17.075949<br />avg_delay:   5.38746180<br />month: 10<br />month: 10","hour: 16.848101<br />avg_delay:   5.33181732<br />month: 10<br />month: 10","hour: 16.620253<br />avg_delay:   5.21672815<br />month: 10<br />month: 10","hour: 16.392405<br />avg_delay:   5.06403254<br />month: 10<br />month: 10","hour: 16.164557<br />avg_delay:   4.89952300<br />month: 10<br />month: 10","hour: 15.936709<br />avg_delay:   4.74633775<br />month: 10<br />month: 10","hour: 15.708861<br />avg_delay:   4.57613773<br />month: 10<br />month: 10","hour: 15.481013<br />avg_delay:   4.37687726<br />month: 10<br />month: 10","hour: 15.253165<br />avg_delay:   4.15255955<br />month: 10<br />month: 10","hour: 15.025316<br />avg_delay:   3.90718782<br />month: 10<br />month: 10","hour: 14.797468<br />avg_delay:   3.64476526<br />month: 10<br />month: 10","hour: 14.569620<br />avg_delay:   3.36929511<br />month: 10<br />month: 10","hour: 14.341772<br />avg_delay:   3.08478055<br />month: 10<br />month: 10","hour: 14.113924<br />avg_delay:   2.79522482<br />month: 10<br />month: 10","hour: 13.886076<br />avg_delay:   2.49412794<br />month: 10<br />month: 10","hour: 13.658228<br />avg_delay:   2.12764818<br />month: 10<br />month: 10","hour: 13.430380<br />avg_delay:   1.70250819<br />month: 10<br />month: 10","hour: 13.202532<br />avg_delay:   1.23650871<br />month: 10<br />month: 10","hour: 12.974684<br />avg_delay:   0.74745048<br />month: 10<br />month: 10","hour: 12.746835<br />avg_delay:   0.25313421<br />month: 10<br />month: 10","hour: 12.518987<br />avg_delay:  -0.22863935<br />month: 10<br />month: 10","hour: 12.291139<br />avg_delay:  -0.68006947<br />month: 10<br />month: 10","hour: 12.063291<br />avg_delay:  -1.08335542<br />month: 10<br />month: 10","hour: 11.835443<br />avg_delay:  -1.47554643<br />month: 10<br />month: 10","hour: 11.607595<br />avg_delay:  -1.95947957<br />month: 10<br />month: 10","hour: 11.379747<br />avg_delay:  -2.47213017<br />month: 10<br />month: 10","hour: 11.151899<br />avg_delay:  -2.94166480<br />month: 10<br />month: 10","hour: 10.924051<br />avg_delay:  -3.30519323<br />month: 10<br />month: 10","hour: 10.696203<br />avg_delay:  -3.62821956<br />month: 10<br />month: 10","hour: 10.468354<br />avg_delay:  -3.94054479<br />month: 10<br />month: 10","hour: 10.240506<br />avg_delay:  -4.24146600<br />month: 10<br />month: 10","hour: 10.012658<br />avg_delay:  -4.53028024<br />month: 10<br />month: 10","hour:  9.784810<br />avg_delay:  -4.80628458<br />month: 10<br />month: 10","hour:  9.556962<br />avg_delay:  -5.06877610<br />month: 10<br />month: 10","hour:  9.329114<br />avg_delay:  -5.31705185<br />month: 10<br />month: 10","hour:  9.101266<br />avg_delay:  -5.55040891<br />month: 10<br />month: 10","hour:  8.873418<br />avg_delay:  -5.76899844<br />month: 10<br />month: 10","hour:  8.645570<br />avg_delay:  -5.97629351<br />month: 10<br />month: 10","hour:  8.417722<br />avg_delay:  -6.17223886<br />month: 10<br />month: 10","hour:  8.189873<br />avg_delay:  -6.35623609<br />month: 10<br />month: 10","hour:  7.962025<br />avg_delay:  -6.52768676<br />month: 10<br />month: 10","hour:  7.734177<br />avg_delay:  -6.68599243<br />month: 10<br />month: 10","hour:  7.506329<br />avg_delay:  -6.83055470<br />month: 10<br />month: 10","hour:  7.278481<br />avg_delay:  -6.96077513<br />month: 10<br />month: 10","hour:  7.050633<br />avg_delay:  -7.07605529<br />month: 10<br />month: 10","hour:  6.822785<br />avg_delay:  -7.17662396<br />month: 10<br />month: 10","hour:  6.594937<br />avg_delay:  -7.26394045<br />month: 10<br />month: 10","hour:  6.367089<br />avg_delay:  -7.33788371<br />month: 10<br />month: 10","hour:  6.139241<br />avg_delay:  -7.39826857<br />month: 10<br />month: 10","hour:  5.911392<br />avg_delay:  -7.44478692<br />month: 10<br />month: 10","hour:  5.683544<br />avg_delay:  -7.47640110<br />month: 10<br />month: 10","hour:  5.455696<br />avg_delay:  -7.49363326<br />month: 10<br />month: 10","hour:  5.227848<br />avg_delay:  -7.49737617<br />month: 10<br />month: 10","hour:  5.000000<br />avg_delay:  -7.48852261<br />month: 10<br />month: 10","hour:  5.000000<br />avg_delay:  -7.48852261<br />month: 10<br />month: 10"],"frame":"10","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"11","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[-9.85833333333333,-5.24335378323108,-5.70815677966102,-2.9603825136612,-3.71087216248507,-1.39444444444444,-1.87132644956315,-1.89650445510624,-1.56961259079903,0.0835189309576837,2.06958904109589,2.76297049847406,6.7450110864745,6.34,6.88116458704694,5.2871835443038,6.7,0.923076923076923,-3.37234042553191],"text":["hour:  5<br />avg_delay:  -9.858333333<br />month: 11<br />month: 11","hour:  6<br />avg_delay:  -5.243353783<br />month: 11<br />month: 11","hour:  7<br />avg_delay:  -5.708156780<br />month: 11<br />month: 11","hour:  8<br />avg_delay:  -2.960382514<br />month: 11<br />month: 11","hour:  9<br />avg_delay:  -3.710872162<br />month: 11<br />month: 11","hour: 10<br />avg_delay:  -1.394444444<br />month: 11<br />month: 11","hour: 11<br />avg_delay:  -1.871326450<br />month: 11<br />month: 11","hour: 12<br />avg_delay:  -1.896504455<br />month: 11<br />month: 11","hour: 13<br />avg_delay:  -1.569612591<br />month: 11<br />month: 11","hour: 14<br />avg_delay:   0.083518931<br />month: 11<br />month: 11","hour: 15<br />avg_delay:   2.069589041<br />month: 11<br />month: 11","hour: 16<br />avg_delay:   2.762970498<br />month: 11<br />month: 11","hour: 17<br />avg_delay:   6.745011086<br />month: 11<br />month: 11","hour: 18<br />avg_delay:   6.340000000<br />month: 11<br />month: 11","hour: 19<br />avg_delay:   6.881164587<br />month: 11<br />month: 11","hour: 20<br />avg_delay:   5.287183544<br />month: 11<br />month: 11","hour: 21<br />avg_delay:   6.700000000<br />month: 11<br />month: 11","hour: 22<br />avg_delay:   0.923076923<br />month: 11<br />month: 11","hour: 23<br />avg_delay:  -3.372340426<br />month: 11<br />month: 11"],"frame":"11","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[-8.40292340699504,-8.02411026054526,-7.65193135926506,-7.29004437185941,-6.94210696703328,-6.6099412886704,-6.28825733966904,-5.97614661470698,-5.67334507042833,-5.37976244441547,-5.09948914506318,-4.83301365258952,-4.57854130954443,-4.33427745847784,-4.09842744193969,-3.8691966024799,-3.64479028264841,-3.42341382499515,-3.20695361401796,-3.01949006886105,-2.859626004816,-2.71992225363721,-2.59293964707907,-2.47123901689595,-2.34738119484226,-2.21392701267238,-2.0634373021407,-1.91377775113461,-1.82195712863117,-1.74914164857372,-1.64945959706394,-1.48098876781866,-1.28207051905372,-1.07544064490261,-0.861126461472711,-0.639155284871417,-0.409554431206129,-0.172351216584236,0.0724270428868628,0.324753031099774,0.59295597023796,0.920474749861076,1.29858530839746,1.70946559886482,2.13529357428087,2.55824718766329,2.9605043920298,3.32424314039809,3.63164138578587,3.93207437414069,4.34891601054654,4.79576299109032,5.17524863335211,5.40413185558797,5.59411236234906,5.78380580574189,5.96168382971482,6.11621807821618,6.23588019519433,6.30914182459762,6.3244746103744,6.270350196473,6.14452907997531,5.9840660515326,5.79207045702863,5.56600270267119,5.30332319466809,5.00149233922716,4.65797054255621,4.27021821086304,3.83569575035547,3.3540409193156,2.82913721136556,2.26159684742897,1.6518789864959,1.0004427875564,0.307747409600492,-0.425747988381773,-1.19958424740034,-2.01330220846519],"text":["hour:  5.000000<br />avg_delay:  -8.40292341<br />month: 11<br />month: 11","hour:  5.227848<br />avg_delay:  -8.02411026<br />month: 11<br />month: 11","hour:  5.455696<br />avg_delay:  -7.65193136<br />month: 11<br />month: 11","hour:  5.683544<br />avg_delay:  -7.29004437<br />month: 11<br />month: 11","hour:  5.911392<br />avg_delay:  -6.94210697<br />month: 11<br />month: 11","hour:  6.139241<br />avg_delay:  -6.60994129<br />month: 11<br />month: 11","hour:  6.367089<br />avg_delay:  -6.28825734<br />month: 11<br />month: 11","hour:  6.594937<br />avg_delay:  -5.97614661<br />month: 11<br />month: 11","hour:  6.822785<br />avg_delay:  -5.67334507<br />month: 11<br />month: 11","hour:  7.050633<br />avg_delay:  -5.37976244<br />month: 11<br />month: 11","hour:  7.278481<br />avg_delay:  -5.09948915<br />month: 11<br />month: 11","hour:  7.506329<br />avg_delay:  -4.83301365<br />month: 11<br />month: 11","hour:  7.734177<br />avg_delay:  -4.57854131<br />month: 11<br />month: 11","hour:  7.962025<br />avg_delay:  -4.33427746<br />month: 11<br />month: 11","hour:  8.189873<br />avg_delay:  -4.09842744<br />month: 11<br />month: 11","hour:  8.417722<br />avg_delay:  -3.86919660<br />month: 11<br />month: 11","hour:  8.645570<br />avg_delay:  -3.64479028<br />month: 11<br />month: 11","hour:  8.873418<br />avg_delay:  -3.42341382<br />month: 11<br />month: 11","hour:  9.101266<br />avg_delay:  -3.20695361<br />month: 11<br />month: 11","hour:  9.329114<br />avg_delay:  -3.01949007<br />month: 11<br />month: 11","hour:  9.556962<br />avg_delay:  -2.85962600<br />month: 11<br />month: 11","hour:  9.784810<br />avg_delay:  -2.71992225<br />month: 11<br />month: 11","hour: 10.012658<br />avg_delay:  -2.59293965<br />month: 11<br />month: 11","hour: 10.240506<br />avg_delay:  -2.47123902<br />month: 11<br />month: 11","hour: 10.468354<br />avg_delay:  -2.34738119<br />month: 11<br />month: 11","hour: 10.696203<br />avg_delay:  -2.21392701<br />month: 11<br />month: 11","hour: 10.924051<br />avg_delay:  -2.06343730<br />month: 11<br />month: 11","hour: 11.151899<br />avg_delay:  -1.91377775<br />month: 11<br />month: 11","hour: 11.379747<br />avg_delay:  -1.82195713<br />month: 11<br />month: 11","hour: 11.607595<br />avg_delay:  -1.74914165<br />month: 11<br />month: 11","hour: 11.835443<br />avg_delay:  -1.64945960<br />month: 11<br />month: 11","hour: 12.063291<br />avg_delay:  -1.48098877<br />month: 11<br />month: 11","hour: 12.291139<br />avg_delay:  -1.28207052<br />month: 11<br />month: 11","hour: 12.518987<br />avg_delay:  -1.07544064<br />month: 11<br />month: 11","hour: 12.746835<br />avg_delay:  -0.86112646<br />month: 11<br />month: 11","hour: 12.974684<br />avg_delay:  -0.63915528<br />month: 11<br />month: 11","hour: 13.202532<br />avg_delay:  -0.40955443<br />month: 11<br />month: 11","hour: 13.430380<br />avg_delay:  -0.17235122<br />month: 11<br />month: 11","hour: 13.658228<br />avg_delay:   0.07242704<br />month: 11<br />month: 11","hour: 13.886076<br />avg_delay:   0.32475303<br />month: 11<br />month: 11","hour: 14.113924<br />avg_delay:   0.59295597<br />month: 11<br />month: 11","hour: 14.341772<br />avg_delay:   0.92047475<br />month: 11<br />month: 11","hour: 14.569620<br />avg_delay:   1.29858531<br />month: 11<br />month: 11","hour: 14.797468<br />avg_delay:   1.70946560<br />month: 11<br />month: 11","hour: 15.025316<br />avg_delay:   2.13529357<br />month: 11<br />month: 11","hour: 15.253165<br />avg_delay:   2.55824719<br />month: 11<br />month: 11","hour: 15.481013<br />avg_delay:   2.96050439<br />month: 11<br />month: 11","hour: 15.708861<br />avg_delay:   3.32424314<br />month: 11<br />month: 11","hour: 15.936709<br />avg_delay:   3.63164139<br />month: 11<br />month: 11","hour: 16.164557<br />avg_delay:   3.93207437<br />month: 11<br />month: 11","hour: 16.392405<br />avg_delay:   4.34891601<br />month: 11<br />month: 11","hour: 16.620253<br />avg_delay:   4.79576299<br />month: 11<br />month: 11","hour: 16.848101<br />avg_delay:   5.17524863<br />month: 11<br />month: 11","hour: 17.075949<br />avg_delay:   5.40413186<br />month: 11<br />month: 11","hour: 17.303797<br />avg_delay:   5.59411236<br />month: 11<br />month: 11","hour: 17.531646<br />avg_delay:   5.78380581<br />month: 11<br />month: 11","hour: 17.759494<br />avg_delay:   5.96168383<br />month: 11<br />month: 11","hour: 17.987342<br />avg_delay:   6.11621808<br />month: 11<br />month: 11","hour: 18.215190<br />avg_delay:   6.23588020<br />month: 11<br />month: 11","hour: 18.443038<br />avg_delay:   6.30914182<br />month: 11<br />month: 11","hour: 18.670886<br />avg_delay:   6.32447461<br />month: 11<br />month: 11","hour: 18.898734<br />avg_delay:   6.27035020<br />month: 11<br />month: 11","hour: 19.126582<br />avg_delay:   6.14452908<br />month: 11<br />month: 11","hour: 19.354430<br />avg_delay:   5.98406605<br />month: 11<br />month: 11","hour: 19.582278<br />avg_delay:   5.79207046<br />month: 11<br />month: 11","hour: 19.810127<br />avg_delay:   5.56600270<br />month: 11<br />month: 11","hour: 20.037975<br />avg_delay:   5.30332319<br />month: 11<br />month: 11","hour: 20.265823<br />avg_delay:   5.00149234<br />month: 11<br />month: 11","hour: 20.493671<br />avg_delay:   4.65797054<br />month: 11<br />month: 11","hour: 20.721519<br />avg_delay:   4.27021821<br />month: 11<br />month: 11","hour: 20.949367<br />avg_delay:   3.83569575<br />month: 11<br />month: 11","hour: 21.177215<br />avg_delay:   3.35404092<br />month: 11<br />month: 11","hour: 21.405063<br />avg_delay:   2.82913721<br />month: 11<br />month: 11","hour: 21.632911<br />avg_delay:   2.26159685<br />month: 11<br />month: 11","hour: 21.860759<br />avg_delay:   1.65187899<br />month: 11<br />month: 11","hour: 22.088608<br />avg_delay:   1.00044279<br />month: 11<br />month: 11","hour: 22.316456<br />avg_delay:   0.30774741<br />month: 11<br />month: 11","hour: 22.544304<br />avg_delay:  -0.42574799<br />month: 11<br />month: 11","hour: 22.772152<br />avg_delay:  -1.19958425<br />month: 11<br />month: 11","hour: 23.000000<br />avg_delay:  -2.01330221<br />month: 11<br />month: 11"],"frame":"11","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-10.5321097029226,-9.97746165010738,-9.4446244436379,-8.93876266681862,-8.464515710389,-8.02395151198813,-7.61161376250143,-7.22660852576407,-6.86827816627882,-6.53556599898994,-6.23030113634057,-5.95046354190274,-5.69204131248124,-5.45118458307415,-5.224259354539,-5.00786751236117,-4.79884313038984,-4.59423742118266,-4.39439273091025,-4.21896326804573,-4.0677049885124,-3.93572024501222,-3.81752091360169,-3.70639320255348,-3.59412582344376,-3.47110710143545,-3.32674222744503,-3.17395415781076,-3.07275451583106,-2.99959269074897,-2.90911018508708,-2.74409420246816,-2.53384360267684,-2.30892353610848,-2.07837824553563,-1.84915869476443,-1.62424270127764,-1.40175774498293,-1.17555164561283,-0.936912345322554,-0.668709406184369,-0.32750393863862,0.0691787799987686,0.494777328793312,0.925290164387856,1.34099540360038,1.72702150082393,2.07247005677498,2.36853595113638,2.67242378611754,3.09846496837128,3.54496560389043,3.91507222667595,4.14082693028364,4.33693227358598,4.53706117714039,4.72652964405729,4.89163681169356,5.02008220381933,5.10106284090123,5.12500141118972,5.08291107958071,4.9737054837878,4.83001320379118,4.65339954714735,4.44017079007187,4.18641607007178,3.88799233629035,3.54052065324299,3.13940621958565,2.679892195781,2.15918807318633,1.57890497218762,0.938398243030433,0.237560003919021,-0.523124220744142,-1.34272978714524,-2.22006153906335,-3.15379664688952,-4.14258591921167,0.115981502281298,0.754628152088841,1.3685655622998,1.95822460634622,2.52400979585695,3.06619796907278,3.58479545182751,4.07936945054349,4.54889376544488,4.99149930492994,5.40103020214042,5.77542043186943,6.11499234216398,6.4202303192644,6.6918346152705,6.9307413669099,7.13811889927403,7.31535267616282,7.4577893133653,7.52394780955908,7.51722080829401,7.45167818656934,7.3407993447388,7.19683801537235,7.03055043434339,6.85129245111214,6.6674367808923,6.43542504002826,6.04656037829022,5.5993670527218,5.19172496216383,4.89474682043537,4.57601622402121,4.19398728323567,3.77549897172621,3.34529698417388,2.92415386893634,2.52799183679616,2.16845343836077,1.85462134666029,1.5864184075221,1.32040573138656,1.05705531181446,0.805133838865384,0.570848125021595,0.356125322590206,0.158042246303259,-0.0302974354306074,-0.217883333169161,-0.389809009040795,-0.498690606398456,-0.571159741431275,-0.653601344458451,-0.800132376836366,-0.956746923909302,-1.10063656624076,-1.23608483123842,-1.36835838055645,-1.50412426226221,-1.65154702111961,-1.82001686967637,-2.01951449712566,-2.25259022880764,-2.49073743490698,-2.73052569259862,-2.97259552934038,-3.21737033388153,-3.46504130660762,-3.7155637632763,-3.96867715378579,-4.223958889841,-4.47841197457784,-4.7256847036499,-4.96490091683665,-5.19593106535267,-5.41969822367757,-5.64132607690021,-5.85923827489222,-6.07075887098313,-6.27373711106745,-10.5321097029226],"text":["hour:  5.000000<br />avg_delay:  -8.40292341<br />month: 11<br />month: 11","hour:  5.227848<br />avg_delay:  -8.02411026<br />month: 11<br />month: 11","hour:  5.455696<br />avg_delay:  -7.65193136<br />month: 11<br />month: 11","hour:  5.683544<br />avg_delay:  -7.29004437<br />month: 11<br />month: 11","hour:  5.911392<br />avg_delay:  -6.94210697<br />month: 11<br />month: 11","hour:  6.139241<br />avg_delay:  -6.60994129<br />month: 11<br />month: 11","hour:  6.367089<br />avg_delay:  -6.28825734<br />month: 11<br />month: 11","hour:  6.594937<br />avg_delay:  -5.97614661<br />month: 11<br />month: 11","hour:  6.822785<br />avg_delay:  -5.67334507<br />month: 11<br />month: 11","hour:  7.050633<br />avg_delay:  -5.37976244<br />month: 11<br />month: 11","hour:  7.278481<br />avg_delay:  -5.09948915<br />month: 11<br />month: 11","hour:  7.506329<br />avg_delay:  -4.83301365<br />month: 11<br />month: 11","hour:  7.734177<br />avg_delay:  -4.57854131<br />month: 11<br />month: 11","hour:  7.962025<br />avg_delay:  -4.33427746<br />month: 11<br />month: 11","hour:  8.189873<br />avg_delay:  -4.09842744<br />month: 11<br />month: 11","hour:  8.417722<br />avg_delay:  -3.86919660<br />month: 11<br />month: 11","hour:  8.645570<br />avg_delay:  -3.64479028<br />month: 11<br />month: 11","hour:  8.873418<br />avg_delay:  -3.42341382<br />month: 11<br />month: 11","hour:  9.101266<br />avg_delay:  -3.20695361<br />month: 11<br />month: 11","hour:  9.329114<br />avg_delay:  -3.01949007<br />month: 11<br />month: 11","hour:  9.556962<br />avg_delay:  -2.85962600<br />month: 11<br />month: 11","hour:  9.784810<br />avg_delay:  -2.71992225<br />month: 11<br />month: 11","hour: 10.012658<br />avg_delay:  -2.59293965<br />month: 11<br />month: 11","hour: 10.240506<br />avg_delay:  -2.47123902<br />month: 11<br />month: 11","hour: 10.468354<br />avg_delay:  -2.34738119<br />month: 11<br />month: 11","hour: 10.696203<br />avg_delay:  -2.21392701<br />month: 11<br />month: 11","hour: 10.924051<br />avg_delay:  -2.06343730<br />month: 11<br />month: 11","hour: 11.151899<br />avg_delay:  -1.91377775<br />month: 11<br />month: 11","hour: 11.379747<br />avg_delay:  -1.82195713<br />month: 11<br />month: 11","hour: 11.607595<br />avg_delay:  -1.74914165<br />month: 11<br />month: 11","hour: 11.835443<br />avg_delay:  -1.64945960<br />month: 11<br />month: 11","hour: 12.063291<br />avg_delay:  -1.48098877<br />month: 11<br />month: 11","hour: 12.291139<br />avg_delay:  -1.28207052<br />month: 11<br />month: 11","hour: 12.518987<br />avg_delay:  -1.07544064<br />month: 11<br />month: 11","hour: 12.746835<br />avg_delay:  -0.86112646<br />month: 11<br />month: 11","hour: 12.974684<br />avg_delay:  -0.63915528<br />month: 11<br />month: 11","hour: 13.202532<br />avg_delay:  -0.40955443<br />month: 11<br />month: 11","hour: 13.430380<br />avg_delay:  -0.17235122<br />month: 11<br />month: 11","hour: 13.658228<br />avg_delay:   0.07242704<br />month: 11<br />month: 11","hour: 13.886076<br />avg_delay:   0.32475303<br />month: 11<br />month: 11","hour: 14.113924<br />avg_delay:   0.59295597<br />month: 11<br />month: 11","hour: 14.341772<br />avg_delay:   0.92047475<br />month: 11<br />month: 11","hour: 14.569620<br />avg_delay:   1.29858531<br />month: 11<br />month: 11","hour: 14.797468<br />avg_delay:   1.70946560<br />month: 11<br />month: 11","hour: 15.025316<br />avg_delay:   2.13529357<br />month: 11<br />month: 11","hour: 15.253165<br />avg_delay:   2.55824719<br />month: 11<br />month: 11","hour: 15.481013<br />avg_delay:   2.96050439<br />month: 11<br />month: 11","hour: 15.708861<br />avg_delay:   3.32424314<br />month: 11<br />month: 11","hour: 15.936709<br />avg_delay:   3.63164139<br />month: 11<br />month: 11","hour: 16.164557<br />avg_delay:   3.93207437<br />month: 11<br />month: 11","hour: 16.392405<br />avg_delay:   4.34891601<br />month: 11<br />month: 11","hour: 16.620253<br />avg_delay:   4.79576299<br />month: 11<br />month: 11","hour: 16.848101<br />avg_delay:   5.17524863<br />month: 11<br />month: 11","hour: 17.075949<br />avg_delay:   5.40413186<br />month: 11<br />month: 11","hour: 17.303797<br />avg_delay:   5.59411236<br />month: 11<br />month: 11","hour: 17.531646<br />avg_delay:   5.78380581<br />month: 11<br />month: 11","hour: 17.759494<br />avg_delay:   5.96168383<br />month: 11<br />month: 11","hour: 17.987342<br />avg_delay:   6.11621808<br />month: 11<br />month: 11","hour: 18.215190<br />avg_delay:   6.23588020<br />month: 11<br />month: 11","hour: 18.443038<br />avg_delay:   6.30914182<br />month: 11<br />month: 11","hour: 18.670886<br />avg_delay:   6.32447461<br />month: 11<br />month: 11","hour: 18.898734<br />avg_delay:   6.27035020<br />month: 11<br />month: 11","hour: 19.126582<br />avg_delay:   6.14452908<br />month: 11<br />month: 11","hour: 19.354430<br />avg_delay:   5.98406605<br />month: 11<br />month: 11","hour: 19.582278<br />avg_delay:   5.79207046<br />month: 11<br />month: 11","hour: 19.810127<br />avg_delay:   5.56600270<br />month: 11<br />month: 11","hour: 20.037975<br />avg_delay:   5.30332319<br />month: 11<br />month: 11","hour: 20.265823<br />avg_delay:   5.00149234<br />month: 11<br />month: 11","hour: 20.493671<br />avg_delay:   4.65797054<br />month: 11<br />month: 11","hour: 20.721519<br />avg_delay:   4.27021821<br />month: 11<br />month: 11","hour: 20.949367<br />avg_delay:   3.83569575<br />month: 11<br />month: 11","hour: 21.177215<br />avg_delay:   3.35404092<br />month: 11<br />month: 11","hour: 21.405063<br />avg_delay:   2.82913721<br />month: 11<br />month: 11","hour: 21.632911<br />avg_delay:   2.26159685<br />month: 11<br />month: 11","hour: 21.860759<br />avg_delay:   1.65187899<br />month: 11<br />month: 11","hour: 22.088608<br />avg_delay:   1.00044279<br />month: 11<br />month: 11","hour: 22.316456<br />avg_delay:   0.30774741<br />month: 11<br />month: 11","hour: 22.544304<br />avg_delay:  -0.42574799<br />month: 11<br />month: 11","hour: 22.772152<br />avg_delay:  -1.19958425<br />month: 11<br />month: 11","hour: 23.000000<br />avg_delay:  -2.01330221<br />month: 11<br />month: 11","hour: 23.000000<br />avg_delay:  -2.01330221<br />month: 11<br />month: 11","hour: 22.772152<br />avg_delay:  -1.19958425<br />month: 11<br />month: 11","hour: 22.544304<br />avg_delay:  -0.42574799<br />month: 11<br />month: 11","hour: 22.316456<br />avg_delay:   0.30774741<br />month: 11<br />month: 11","hour: 22.088608<br />avg_delay:   1.00044279<br />month: 11<br />month: 11","hour: 21.860759<br />avg_delay:   1.65187899<br />month: 11<br />month: 11","hour: 21.632911<br />avg_delay:   2.26159685<br />month: 11<br />month: 11","hour: 21.405063<br />avg_delay:   2.82913721<br />month: 11<br />month: 11","hour: 21.177215<br />avg_delay:   3.35404092<br />month: 11<br />month: 11","hour: 20.949367<br />avg_delay:   3.83569575<br />month: 11<br />month: 11","hour: 20.721519<br />avg_delay:   4.27021821<br />month: 11<br />month: 11","hour: 20.493671<br />avg_delay:   4.65797054<br />month: 11<br />month: 11","hour: 20.265823<br />avg_delay:   5.00149234<br />month: 11<br />month: 11","hour: 20.037975<br />avg_delay:   5.30332319<br />month: 11<br />month: 11","hour: 19.810127<br />avg_delay:   5.56600270<br />month: 11<br />month: 11","hour: 19.582278<br />avg_delay:   5.79207046<br />month: 11<br />month: 11","hour: 19.354430<br />avg_delay:   5.98406605<br />month: 11<br />month: 11","hour: 19.126582<br />avg_delay:   6.14452908<br />month: 11<br />month: 11","hour: 18.898734<br />avg_delay:   6.27035020<br />month: 11<br />month: 11","hour: 18.670886<br />avg_delay:   6.32447461<br />month: 11<br />month: 11","hour: 18.443038<br />avg_delay:   6.30914182<br />month: 11<br />month: 11","hour: 18.215190<br />avg_delay:   6.23588020<br />month: 11<br />month: 11","hour: 17.987342<br />avg_delay:   6.11621808<br />month: 11<br />month: 11","hour: 17.759494<br />avg_delay:   5.96168383<br />month: 11<br />month: 11","hour: 17.531646<br />avg_delay:   5.78380581<br />month: 11<br />month: 11","hour: 17.303797<br />avg_delay:   5.59411236<br />month: 11<br />month: 11","hour: 17.075949<br />avg_delay:   5.40413186<br />month: 11<br />month: 11","hour: 16.848101<br />avg_delay:   5.17524863<br />month: 11<br />month: 11","hour: 16.620253<br />avg_delay:   4.79576299<br />month: 11<br />month: 11","hour: 16.392405<br />avg_delay:   4.34891601<br />month: 11<br />month: 11","hour: 16.164557<br />avg_delay:   3.93207437<br />month: 11<br />month: 11","hour: 15.936709<br />avg_delay:   3.63164139<br />month: 11<br />month: 11","hour: 15.708861<br />avg_delay:   3.32424314<br />month: 11<br />month: 11","hour: 15.481013<br />avg_delay:   2.96050439<br />month: 11<br />month: 11","hour: 15.253165<br />avg_delay:   2.55824719<br />month: 11<br />month: 11","hour: 15.025316<br />avg_delay:   2.13529357<br />month: 11<br />month: 11","hour: 14.797468<br />avg_delay:   1.70946560<br />month: 11<br />month: 11","hour: 14.569620<br />avg_delay:   1.29858531<br />month: 11<br />month: 11","hour: 14.341772<br />avg_delay:   0.92047475<br />month: 11<br />month: 11","hour: 14.113924<br />avg_delay:   0.59295597<br />month: 11<br />month: 11","hour: 13.886076<br />avg_delay:   0.32475303<br />month: 11<br />month: 11","hour: 13.658228<br />avg_delay:   0.07242704<br />month: 11<br />month: 11","hour: 13.430380<br />avg_delay:  -0.17235122<br />month: 11<br />month: 11","hour: 13.202532<br />avg_delay:  -0.40955443<br />month: 11<br />month: 11","hour: 12.974684<br />avg_delay:  -0.63915528<br />month: 11<br />month: 11","hour: 12.746835<br />avg_delay:  -0.86112646<br />month: 11<br />month: 11","hour: 12.518987<br />avg_delay:  -1.07544064<br />month: 11<br />month: 11","hour: 12.291139<br />avg_delay:  -1.28207052<br />month: 11<br />month: 11","hour: 12.063291<br />avg_delay:  -1.48098877<br />month: 11<br />month: 11","hour: 11.835443<br />avg_delay:  -1.64945960<br />month: 11<br />month: 11","hour: 11.607595<br />avg_delay:  -1.74914165<br />month: 11<br />month: 11","hour: 11.379747<br />avg_delay:  -1.82195713<br />month: 11<br />month: 11","hour: 11.151899<br />avg_delay:  -1.91377775<br />month: 11<br />month: 11","hour: 10.924051<br />avg_delay:  -2.06343730<br />month: 11<br />month: 11","hour: 10.696203<br />avg_delay:  -2.21392701<br />month: 11<br />month: 11","hour: 10.468354<br />avg_delay:  -2.34738119<br />month: 11<br />month: 11","hour: 10.240506<br />avg_delay:  -2.47123902<br />month: 11<br />month: 11","hour: 10.012658<br />avg_delay:  -2.59293965<br />month: 11<br />month: 11","hour:  9.784810<br />avg_delay:  -2.71992225<br />month: 11<br />month: 11","hour:  9.556962<br />avg_delay:  -2.85962600<br />month: 11<br />month: 11","hour:  9.329114<br />avg_delay:  -3.01949007<br />month: 11<br />month: 11","hour:  9.101266<br />avg_delay:  -3.20695361<br />month: 11<br />month: 11","hour:  8.873418<br />avg_delay:  -3.42341382<br />month: 11<br />month: 11","hour:  8.645570<br />avg_delay:  -3.64479028<br />month: 11<br />month: 11","hour:  8.417722<br />avg_delay:  -3.86919660<br />month: 11<br />month: 11","hour:  8.189873<br />avg_delay:  -4.09842744<br />month: 11<br />month: 11","hour:  7.962025<br />avg_delay:  -4.33427746<br />month: 11<br />month: 11","hour:  7.734177<br />avg_delay:  -4.57854131<br />month: 11<br />month: 11","hour:  7.506329<br />avg_delay:  -4.83301365<br />month: 11<br />month: 11","hour:  7.278481<br />avg_delay:  -5.09948915<br />month: 11<br />month: 11","hour:  7.050633<br />avg_delay:  -5.37976244<br />month: 11<br />month: 11","hour:  6.822785<br />avg_delay:  -5.67334507<br />month: 11<br />month: 11","hour:  6.594937<br />avg_delay:  -5.97614661<br />month: 11<br />month: 11","hour:  6.367089<br />avg_delay:  -6.28825734<br />month: 11<br />month: 11","hour:  6.139241<br />avg_delay:  -6.60994129<br />month: 11<br />month: 11","hour:  5.911392<br />avg_delay:  -6.94210697<br />month: 11<br />month: 11","hour:  5.683544<br />avg_delay:  -7.29004437<br />month: 11<br />month: 11","hour:  5.455696<br />avg_delay:  -7.65193136<br />month: 11<br />month: 11","hour:  5.227848<br />avg_delay:  -8.02411026<br />month: 11<br />month: 11","hour:  5.000000<br />avg_delay:  -8.40292341<br />month: 11<br />month: 11","hour:  5.000000<br />avg_delay:  -8.40292341<br />month: 11<br />month: 11"],"frame":"11","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]},{"name":"12","data":[{"x":[5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],"y":[1.38219895287958,3.4077519379845,2.28328173374613,8.14975191700496,9.82130177514793,10.5793304221252,11.1356907894737,14.2933774834437,15.8579335793358,15.2586015538291,18.6032731376975,21.0689283791061,22.904226859283,21.2640599892876,20.9760855884204,27.1429663608563,24.3790055248619,26.3686440677966,10.0762711864407],"text":["hour:  5<br />avg_delay:   1.382198953<br />month: 12<br />month: 12","hour:  6<br />avg_delay:   3.407751938<br />month: 12<br />month: 12","hour:  7<br />avg_delay:   2.283281734<br />month: 12<br />month: 12","hour:  8<br />avg_delay:   8.149751917<br />month: 12<br />month: 12","hour:  9<br />avg_delay:   9.821301775<br />month: 12<br />month: 12","hour: 10<br />avg_delay:  10.579330422<br />month: 12<br />month: 12","hour: 11<br />avg_delay:  11.135690789<br />month: 12<br />month: 12","hour: 12<br />avg_delay:  14.293377483<br />month: 12<br />month: 12","hour: 13<br />avg_delay:  15.857933579<br />month: 12<br />month: 12","hour: 14<br />avg_delay:  15.258601554<br />month: 12<br />month: 12","hour: 15<br />avg_delay:  18.603273138<br />month: 12<br />month: 12","hour: 16<br />avg_delay:  21.068928379<br />month: 12<br />month: 12","hour: 17<br />avg_delay:  22.904226859<br />month: 12<br />month: 12","hour: 18<br />avg_delay:  21.264059989<br />month: 12<br />month: 12","hour: 19<br />avg_delay:  20.976085588<br />month: 12<br />month: 12","hour: 20<br />avg_delay:  27.142966361<br />month: 12<br />month: 12","hour: 21<br />avg_delay:  24.379005525<br />month: 12<br />month: 12","hour: 22<br />avg_delay:  26.368644068<br />month: 12<br />month: 12","hour: 23<br />avg_delay:  10.076271186<br />month: 12<br />month: 12"],"frame":"12","type":"scatter","mode":"markers","marker":{"autocolorscale":false,"color":"rgba(0,0,0,1)","opacity":1,"size":5.66929133858268,"symbol":"circle","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)"}},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23],"y":[0.940334884597539,1.41259142319725,1.88170775413381,2.3471998271057,2.80858359181137,3.26563387499541,3.71905858724303,4.16885996787851,4.61494528520315,5.05719481033404,5.49489569704753,5.92804184666112,6.35700467251491,6.78215558794899,7.20386600630346,7.62250734091842,8.03845100513395,8.45206841229015,8.86381710375325,9.27438292949832,9.68335286059633,10.0901294548285,10.4941152699761,10.8947128638204,11.2913247941425,11.6833536187237,12.0702018953453,12.4421300710965,12.7797191804187,13.1031737666072,13.4354195140867,13.797852085668,14.1784731058152,14.5659116460689,14.9568590651036,15.3480067215934,15.7360459742126,16.1176681816356,16.4895647025367,16.8484268955901,17.1937772597416,17.5398028082598,17.8873263398905,18.2343960478822,18.5790601254833,18.919366765942,19.2533641625067,19.5791005084258,19.8946239969477,20.2201769201312,20.5936903236973,20.977078843407,21.3284604584707,21.6153485657864,21.9236551011446,22.2667469852598,22.6218228497563,22.9660813262583,23.2767210463901,23.5309406417759,23.70593874404,23.7789139848065,23.7444601407,23.671747018586,23.5677590843024,23.4289829046369,23.2519050463776,23.0330120763123,22.768790561229,22.4557270679156,22.0903081631599,21.6719077831958,21.2056397377819,20.6923766168927,20.1327897493604,19.527550464017,18.8773300896949,18.182799955226,17.4446313894427,16.663495721177],"text":["hour:  5.000000<br />avg_delay:   0.94033488<br />month: 12<br />month: 12","hour:  5.227848<br />avg_delay:   1.41259142<br />month: 12<br />month: 12","hour:  5.455696<br />avg_delay:   1.88170775<br />month: 12<br />month: 12","hour:  5.683544<br />avg_delay:   2.34719983<br />month: 12<br />month: 12","hour:  5.911392<br />avg_delay:   2.80858359<br />month: 12<br />month: 12","hour:  6.139241<br />avg_delay:   3.26563387<br />month: 12<br />month: 12","hour:  6.367089<br />avg_delay:   3.71905859<br />month: 12<br />month: 12","hour:  6.594937<br />avg_delay:   4.16885997<br />month: 12<br />month: 12","hour:  6.822785<br />avg_delay:   4.61494529<br />month: 12<br />month: 12","hour:  7.050633<br />avg_delay:   5.05719481<br />month: 12<br />month: 12","hour:  7.278481<br />avg_delay:   5.49489570<br />month: 12<br />month: 12","hour:  7.506329<br />avg_delay:   5.92804185<br />month: 12<br />month: 12","hour:  7.734177<br />avg_delay:   6.35700467<br />month: 12<br />month: 12","hour:  7.962025<br />avg_delay:   6.78215559<br />month: 12<br />month: 12","hour:  8.189873<br />avg_delay:   7.20386601<br />month: 12<br />month: 12","hour:  8.417722<br />avg_delay:   7.62250734<br />month: 12<br />month: 12","hour:  8.645570<br />avg_delay:   8.03845101<br />month: 12<br />month: 12","hour:  8.873418<br />avg_delay:   8.45206841<br />month: 12<br />month: 12","hour:  9.101266<br />avg_delay:   8.86381710<br />month: 12<br />month: 12","hour:  9.329114<br />avg_delay:   9.27438293<br />month: 12<br />month: 12","hour:  9.556962<br />avg_delay:   9.68335286<br />month: 12<br />month: 12","hour:  9.784810<br />avg_delay:  10.09012945<br />month: 12<br />month: 12","hour: 10.012658<br />avg_delay:  10.49411527<br />month: 12<br />month: 12","hour: 10.240506<br />avg_delay:  10.89471286<br />month: 12<br />month: 12","hour: 10.468354<br />avg_delay:  11.29132479<br />month: 12<br />month: 12","hour: 10.696203<br />avg_delay:  11.68335362<br />month: 12<br />month: 12","hour: 10.924051<br />avg_delay:  12.07020190<br />month: 12<br />month: 12","hour: 11.151899<br />avg_delay:  12.44213007<br />month: 12<br />month: 12","hour: 11.379747<br />avg_delay:  12.77971918<br />month: 12<br />month: 12","hour: 11.607595<br />avg_delay:  13.10317377<br />month: 12<br />month: 12","hour: 11.835443<br />avg_delay:  13.43541951<br />month: 12<br />month: 12","hour: 12.063291<br />avg_delay:  13.79785209<br />month: 12<br />month: 12","hour: 12.291139<br />avg_delay:  14.17847311<br />month: 12<br />month: 12","hour: 12.518987<br />avg_delay:  14.56591165<br />month: 12<br />month: 12","hour: 12.746835<br />avg_delay:  14.95685907<br />month: 12<br />month: 12","hour: 12.974684<br />avg_delay:  15.34800672<br />month: 12<br />month: 12","hour: 13.202532<br />avg_delay:  15.73604597<br />month: 12<br />month: 12","hour: 13.430380<br />avg_delay:  16.11766818<br />month: 12<br />month: 12","hour: 13.658228<br />avg_delay:  16.48956470<br />month: 12<br />month: 12","hour: 13.886076<br />avg_delay:  16.84842690<br />month: 12<br />month: 12","hour: 14.113924<br />avg_delay:  17.19377726<br />month: 12<br />month: 12","hour: 14.341772<br />avg_delay:  17.53980281<br />month: 12<br />month: 12","hour: 14.569620<br />avg_delay:  17.88732634<br />month: 12<br />month: 12","hour: 14.797468<br />avg_delay:  18.23439605<br />month: 12<br />month: 12","hour: 15.025316<br />avg_delay:  18.57906013<br />month: 12<br />month: 12","hour: 15.253165<br />avg_delay:  18.91936677<br />month: 12<br />month: 12","hour: 15.481013<br />avg_delay:  19.25336416<br />month: 12<br />month: 12","hour: 15.708861<br />avg_delay:  19.57910051<br />month: 12<br />month: 12","hour: 15.936709<br />avg_delay:  19.89462400<br />month: 12<br />month: 12","hour: 16.164557<br />avg_delay:  20.22017692<br />month: 12<br />month: 12","hour: 16.392405<br />avg_delay:  20.59369032<br />month: 12<br />month: 12","hour: 16.620253<br />avg_delay:  20.97707884<br />month: 12<br />month: 12","hour: 16.848101<br />avg_delay:  21.32846046<br />month: 12<br />month: 12","hour: 17.075949<br />avg_delay:  21.61534857<br />month: 12<br />month: 12","hour: 17.303797<br />avg_delay:  21.92365510<br />month: 12<br />month: 12","hour: 17.531646<br />avg_delay:  22.26674699<br />month: 12<br />month: 12","hour: 17.759494<br />avg_delay:  22.62182285<br />month: 12<br />month: 12","hour: 17.987342<br />avg_delay:  22.96608133<br />month: 12<br />month: 12","hour: 18.215190<br />avg_delay:  23.27672105<br />month: 12<br />month: 12","hour: 18.443038<br />avg_delay:  23.53094064<br />month: 12<br />month: 12","hour: 18.670886<br />avg_delay:  23.70593874<br />month: 12<br />month: 12","hour: 18.898734<br />avg_delay:  23.77891398<br />month: 12<br />month: 12","hour: 19.126582<br />avg_delay:  23.74446014<br />month: 12<br />month: 12","hour: 19.354430<br />avg_delay:  23.67174702<br />month: 12<br />month: 12","hour: 19.582278<br />avg_delay:  23.56775908<br />month: 12<br />month: 12","hour: 19.810127<br />avg_delay:  23.42898290<br />month: 12<br />month: 12","hour: 20.037975<br />avg_delay:  23.25190505<br />month: 12<br />month: 12","hour: 20.265823<br />avg_delay:  23.03301208<br />month: 12<br />month: 12","hour: 20.493671<br />avg_delay:  22.76879056<br />month: 12<br />month: 12","hour: 20.721519<br />avg_delay:  22.45572707<br />month: 12<br />month: 12","hour: 20.949367<br />avg_delay:  22.09030816<br />month: 12<br />month: 12","hour: 21.177215<br />avg_delay:  21.67190778<br />month: 12<br />month: 12","hour: 21.405063<br />avg_delay:  21.20563974<br />month: 12<br />month: 12","hour: 21.632911<br />avg_delay:  20.69237662<br />month: 12<br />month: 12","hour: 21.860759<br />avg_delay:  20.13278975<br />month: 12<br />month: 12","hour: 22.088608<br />avg_delay:  19.52755046<br />month: 12<br />month: 12","hour: 22.316456<br />avg_delay:  18.87733009<br />month: 12<br />month: 12","hour: 22.544304<br />avg_delay:  18.18279996<br />month: 12<br />month: 12","hour: 22.772152<br />avg_delay:  17.44463139<br />month: 12<br />month: 12","hour: 23.000000<br />avg_delay:  16.66349572<br />month: 12<br />month: 12"],"frame":"12","type":"scatter","mode":"lines","name":"fitted values","line":{"width":3.77952755905512,"color":"rgba(51,102,255,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","visible":true},{"x":[5,5.22784810126582,5.45569620253165,5.68354430379747,5.91139240506329,6.13924050632911,6.36708860759494,6.59493670886076,6.82278481012658,7.05063291139241,7.27848101265823,7.50632911392405,7.73417721518987,7.9620253164557,8.18987341772152,8.41772151898734,8.64556962025316,8.87341772151899,9.10126582278481,9.32911392405063,9.55696202531646,9.78481012658228,10.0126582278481,10.2405063291139,10.4683544303797,10.6962025316456,10.9240506329114,11.1518987341772,11.379746835443,11.6075949367089,11.8354430379747,12.0632911392405,12.2911392405063,12.5189873417722,12.746835443038,12.9746835443038,13.2025316455696,13.4303797468354,13.6582278481013,13.8860759493671,14.1139240506329,14.3417721518987,14.5696202531646,14.7974683544304,15.0253164556962,15.253164556962,15.4810126582278,15.7088607594937,15.9367088607595,16.1645569620253,16.3924050632911,16.620253164557,16.8481012658228,17.0759493670886,17.3037974683544,17.5316455696203,17.7594936708861,17.9873417721519,18.2151898734177,18.4430379746835,18.6708860759494,18.8987341772152,19.126582278481,19.3544303797468,19.5822784810127,19.8101265822785,20.0379746835443,20.2658227848101,20.4936708860759,20.7215189873418,20.9493670886076,21.1772151898734,21.4050632911392,21.6329113924051,21.8607594936709,22.0886075949367,22.3164556962025,22.5443037974684,22.7721518987342,23,23,22.7721518987342,22.5443037974684,22.3164556962025,22.0886075949367,21.8607594936709,21.6329113924051,21.4050632911392,21.1772151898734,20.9493670886076,20.7215189873418,20.4936708860759,20.2658227848101,20.0379746835443,19.8101265822785,19.5822784810127,19.3544303797468,19.126582278481,18.8987341772152,18.6708860759494,18.4430379746835,18.2151898734177,17.9873417721519,17.7594936708861,17.5316455696203,17.3037974683544,17.0759493670886,16.8481012658228,16.620253164557,16.3924050632911,16.1645569620253,15.9367088607595,15.7088607594937,15.4810126582278,15.253164556962,15.0253164556962,14.7974683544304,14.5696202531646,14.3417721518987,14.1139240506329,13.8860759493671,13.6582278481013,13.4303797468354,13.2025316455696,12.9746835443038,12.746835443038,12.5189873417722,12.2911392405063,12.0632911392405,11.8354430379747,11.6075949367089,11.379746835443,11.1518987341772,10.9240506329114,10.6962025316456,10.4683544303797,10.2405063291139,10.0126582278481,9.78481012658228,9.55696202531646,9.32911392405063,9.10126582278481,8.87341772151899,8.64556962025316,8.41772151898734,8.18987341772152,7.9620253164557,7.73417721518987,7.50632911392405,7.27848101265823,7.05063291139241,6.82278481012658,6.59493670886076,6.36708860759494,6.13924050632911,5.91139240506329,5.68354430379747,5.45569620253165,5.22784810126582,5,5],"y":[-4.21143901740043,-3.31373277371552,-2.45588800440959,-1.6420348866266,-0.875032842877658,-0.155701768381459,0.517068655582693,1.14324541684184,1.72368811827013,2.26061538481262,2.75878579634425,3.22426285486257,3.6627828160355,4.07968986831871,4.4798058916676,4.86738202017469,5.24610758554107,5.61914653118512,5.99069234979545,6.37214053975309,6.76028793590503,7.14838763822595,7.5311214625233,7.90613684734651,8.27470457055272,8.64148378150523,9.01351241876148,9.39301035045717,9.75329291213556,10.0775855138901,10.3875720629613,10.7416452961798,11.1496860448767,11.5813794895218,12.0115996553046,12.4202854600306,12.7969892365347,13.1429991824671,13.4699585506657,13.795704467431,14.1410548315825,14.5201966563887,14.912657340722,15.2953393102043,15.6513388639204,15.974107356143,16.2688320059596,16.5503134474873,16.8384172074595,17.1723294690058,17.5681020709802,17.9506525751239,18.2793407378314,18.5586590892025,18.8817852639261,19.25012676167,19.6332468332824,20.0030875188055,20.3349792297876,20.6078757170846,20.8036963542948,20.9057892308487,20.911538259595,20.8794035989932,20.8126337635586,20.704922790001,20.5494393267473,20.3387902198329,20.0650115694305,19.7196171672123,19.2937287376385,18.78084478829,18.1805809002567,17.4907685423251,16.7107070328428,15.8411314943287,14.8838395415448,13.841283320405,12.7162238950373,11.5114861145239,21.8155053278302,22.1730388838481,22.5243165900471,22.8708206378449,23.2139694337054,23.554872465878,23.8939846914604,24.2306985753072,24.5629707781016,24.8868875886814,25.1918369686189,25.4725695530276,25.7272339327917,25.9543707660079,26.1530430192728,26.3228844050461,26.4640904381789,26.577382021805,26.6520387387643,26.6081811337852,26.4540055664672,26.2184628629927,25.9290751337112,25.6103988662302,25.2833672088496,24.9655249383631,24.6720380423702,24.3775801791101,24.0035051116902,23.6192785764144,23.2680243712566,22.9508307864359,22.6078875693644,22.2378963190539,21.864626175741,21.5067813870461,21.1734527855602,20.8619953390591,20.5594089601308,20.2464996879006,19.9011493237491,19.5091708544077,19.0923371808042,18.6751027118906,18.2757279831562,17.9021184749026,17.5504438026161,17.2072601667537,16.8540588751562,16.4832669652122,16.1287620193243,15.8061454487018,15.4912497917358,15.1268913719291,14.7252234559422,14.3079450177323,13.8832888802942,13.4571090774289,13.0318712714311,12.6064177852876,12.1766253192435,11.736941857711,11.2849902933952,10.8307944247268,10.3776326616621,9.92792612093932,9.48462130757927,9.05122652899432,8.63182083845966,8.2310055977508,7.85377423585546,7.50620245213616,7.19447451891519,6.92104851890337,6.68696951837227,6.49220002650041,6.336434540838,6.21930351267721,6.13891562011002,6.0921087865955,-4.21143901740043],"text":["hour:  5.000000<br />avg_delay:   0.94033488<br />month: 12<br />month: 12","hour:  5.227848<br />avg_delay:   1.41259142<br />month: 12<br />month: 12","hour:  5.455696<br />avg_delay:   1.88170775<br />month: 12<br />month: 12","hour:  5.683544<br />avg_delay:   2.34719983<br />month: 12<br />month: 12","hour:  5.911392<br />avg_delay:   2.80858359<br />month: 12<br />month: 12","hour:  6.139241<br />avg_delay:   3.26563387<br />month: 12<br />month: 12","hour:  6.367089<br />avg_delay:   3.71905859<br />month: 12<br />month: 12","hour:  6.594937<br />avg_delay:   4.16885997<br />month: 12<br />month: 12","hour:  6.822785<br />avg_delay:   4.61494529<br />month: 12<br />month: 12","hour:  7.050633<br />avg_delay:   5.05719481<br />month: 12<br />month: 12","hour:  7.278481<br />avg_delay:   5.49489570<br />month: 12<br />month: 12","hour:  7.506329<br />avg_delay:   5.92804185<br />month: 12<br />month: 12","hour:  7.734177<br />avg_delay:   6.35700467<br />month: 12<br />month: 12","hour:  7.962025<br />avg_delay:   6.78215559<br />month: 12<br />month: 12","hour:  8.189873<br />avg_delay:   7.20386601<br />month: 12<br />month: 12","hour:  8.417722<br />avg_delay:   7.62250734<br />month: 12<br />month: 12","hour:  8.645570<br />avg_delay:   8.03845101<br />month: 12<br />month: 12","hour:  8.873418<br />avg_delay:   8.45206841<br />month: 12<br />month: 12","hour:  9.101266<br />avg_delay:   8.86381710<br />month: 12<br />month: 12","hour:  9.329114<br />avg_delay:   9.27438293<br />month: 12<br />month: 12","hour:  9.556962<br />avg_delay:   9.68335286<br />month: 12<br />month: 12","hour:  9.784810<br />avg_delay:  10.09012945<br />month: 12<br />month: 12","hour: 10.012658<br />avg_delay:  10.49411527<br />month: 12<br />month: 12","hour: 10.240506<br />avg_delay:  10.89471286<br />month: 12<br />month: 12","hour: 10.468354<br />avg_delay:  11.29132479<br />month: 12<br />month: 12","hour: 10.696203<br />avg_delay:  11.68335362<br />month: 12<br />month: 12","hour: 10.924051<br />avg_delay:  12.07020190<br />month: 12<br />month: 12","hour: 11.151899<br />avg_delay:  12.44213007<br />month: 12<br />month: 12","hour: 11.379747<br />avg_delay:  12.77971918<br />month: 12<br />month: 12","hour: 11.607595<br />avg_delay:  13.10317377<br />month: 12<br />month: 12","hour: 11.835443<br />avg_delay:  13.43541951<br />month: 12<br />month: 12","hour: 12.063291<br />avg_delay:  13.79785209<br />month: 12<br />month: 12","hour: 12.291139<br />avg_delay:  14.17847311<br />month: 12<br />month: 12","hour: 12.518987<br />avg_delay:  14.56591165<br />month: 12<br />month: 12","hour: 12.746835<br />avg_delay:  14.95685907<br />month: 12<br />month: 12","hour: 12.974684<br />avg_delay:  15.34800672<br />month: 12<br />month: 12","hour: 13.202532<br />avg_delay:  15.73604597<br />month: 12<br />month: 12","hour: 13.430380<br />avg_delay:  16.11766818<br />month: 12<br />month: 12","hour: 13.658228<br />avg_delay:  16.48956470<br />month: 12<br />month: 12","hour: 13.886076<br />avg_delay:  16.84842690<br />month: 12<br />month: 12","hour: 14.113924<br />avg_delay:  17.19377726<br />month: 12<br />month: 12","hour: 14.341772<br />avg_delay:  17.53980281<br />month: 12<br />month: 12","hour: 14.569620<br />avg_delay:  17.88732634<br />month: 12<br />month: 12","hour: 14.797468<br />avg_delay:  18.23439605<br />month: 12<br />month: 12","hour: 15.025316<br />avg_delay:  18.57906013<br />month: 12<br />month: 12","hour: 15.253165<br />avg_delay:  18.91936677<br />month: 12<br />month: 12","hour: 15.481013<br />avg_delay:  19.25336416<br />month: 12<br />month: 12","hour: 15.708861<br />avg_delay:  19.57910051<br />month: 12<br />month: 12","hour: 15.936709<br />avg_delay:  19.89462400<br />month: 12<br />month: 12","hour: 16.164557<br />avg_delay:  20.22017692<br />month: 12<br />month: 12","hour: 16.392405<br />avg_delay:  20.59369032<br />month: 12<br />month: 12","hour: 16.620253<br />avg_delay:  20.97707884<br />month: 12<br />month: 12","hour: 16.848101<br />avg_delay:  21.32846046<br />month: 12<br />month: 12","hour: 17.075949<br />avg_delay:  21.61534857<br />month: 12<br />month: 12","hour: 17.303797<br />avg_delay:  21.92365510<br />month: 12<br />month: 12","hour: 17.531646<br />avg_delay:  22.26674699<br />month: 12<br />month: 12","hour: 17.759494<br />avg_delay:  22.62182285<br />month: 12<br />month: 12","hour: 17.987342<br />avg_delay:  22.96608133<br />month: 12<br />month: 12","hour: 18.215190<br />avg_delay:  23.27672105<br />month: 12<br />month: 12","hour: 18.443038<br />avg_delay:  23.53094064<br />month: 12<br />month: 12","hour: 18.670886<br />avg_delay:  23.70593874<br />month: 12<br />month: 12","hour: 18.898734<br />avg_delay:  23.77891398<br />month: 12<br />month: 12","hour: 19.126582<br />avg_delay:  23.74446014<br />month: 12<br />month: 12","hour: 19.354430<br />avg_delay:  23.67174702<br />month: 12<br />month: 12","hour: 19.582278<br />avg_delay:  23.56775908<br />month: 12<br />month: 12","hour: 19.810127<br />avg_delay:  23.42898290<br />month: 12<br />month: 12","hour: 20.037975<br />avg_delay:  23.25190505<br />month: 12<br />month: 12","hour: 20.265823<br />avg_delay:  23.03301208<br />month: 12<br />month: 12","hour: 20.493671<br />avg_delay:  22.76879056<br />month: 12<br />month: 12","hour: 20.721519<br />avg_delay:  22.45572707<br />month: 12<br />month: 12","hour: 20.949367<br />avg_delay:  22.09030816<br />month: 12<br />month: 12","hour: 21.177215<br />avg_delay:  21.67190778<br />month: 12<br />month: 12","hour: 21.405063<br />avg_delay:  21.20563974<br />month: 12<br />month: 12","hour: 21.632911<br />avg_delay:  20.69237662<br />month: 12<br />month: 12","hour: 21.860759<br />avg_delay:  20.13278975<br />month: 12<br />month: 12","hour: 22.088608<br />avg_delay:  19.52755046<br />month: 12<br />month: 12","hour: 22.316456<br />avg_delay:  18.87733009<br />month: 12<br />month: 12","hour: 22.544304<br />avg_delay:  18.18279996<br />month: 12<br />month: 12","hour: 22.772152<br />avg_delay:  17.44463139<br />month: 12<br />month: 12","hour: 23.000000<br />avg_delay:  16.66349572<br />month: 12<br />month: 12","hour: 23.000000<br />avg_delay:  16.66349572<br />month: 12<br />month: 12","hour: 22.772152<br />avg_delay:  17.44463139<br />month: 12<br />month: 12","hour: 22.544304<br />avg_delay:  18.18279996<br />month: 12<br />month: 12","hour: 22.316456<br />avg_delay:  18.87733009<br />month: 12<br />month: 12","hour: 22.088608<br />avg_delay:  19.52755046<br />month: 12<br />month: 12","hour: 21.860759<br />avg_delay:  20.13278975<br />month: 12<br />month: 12","hour: 21.632911<br />avg_delay:  20.69237662<br />month: 12<br />month: 12","hour: 21.405063<br />avg_delay:  21.20563974<br />month: 12<br />month: 12","hour: 21.177215<br />avg_delay:  21.67190778<br />month: 12<br />month: 12","hour: 20.949367<br />avg_delay:  22.09030816<br />month: 12<br />month: 12","hour: 20.721519<br />avg_delay:  22.45572707<br />month: 12<br />month: 12","hour: 20.493671<br />avg_delay:  22.76879056<br />month: 12<br />month: 12","hour: 20.265823<br />avg_delay:  23.03301208<br />month: 12<br />month: 12","hour: 20.037975<br />avg_delay:  23.25190505<br />month: 12<br />month: 12","hour: 19.810127<br />avg_delay:  23.42898290<br />month: 12<br />month: 12","hour: 19.582278<br />avg_delay:  23.56775908<br />month: 12<br />month: 12","hour: 19.354430<br />avg_delay:  23.67174702<br />month: 12<br />month: 12","hour: 19.126582<br />avg_delay:  23.74446014<br />month: 12<br />month: 12","hour: 18.898734<br />avg_delay:  23.77891398<br />month: 12<br />month: 12","hour: 18.670886<br />avg_delay:  23.70593874<br />month: 12<br />month: 12","hour: 18.443038<br />avg_delay:  23.53094064<br />month: 12<br />month: 12","hour: 18.215190<br />avg_delay:  23.27672105<br />month: 12<br />month: 12","hour: 17.987342<br />avg_delay:  22.96608133<br />month: 12<br />month: 12","hour: 17.759494<br />avg_delay:  22.62182285<br />month: 12<br />month: 12","hour: 17.531646<br />avg_delay:  22.26674699<br />month: 12<br />month: 12","hour: 17.303797<br />avg_delay:  21.92365510<br />month: 12<br />month: 12","hour: 17.075949<br />avg_delay:  21.61534857<br />month: 12<br />month: 12","hour: 16.848101<br />avg_delay:  21.32846046<br />month: 12<br />month: 12","hour: 16.620253<br />avg_delay:  20.97707884<br />month: 12<br />month: 12","hour: 16.392405<br />avg_delay:  20.59369032<br />month: 12<br />month: 12","hour: 16.164557<br />avg_delay:  20.22017692<br />month: 12<br />month: 12","hour: 15.936709<br />avg_delay:  19.89462400<br />month: 12<br />month: 12","hour: 15.708861<br />avg_delay:  19.57910051<br />month: 12<br />month: 12","hour: 15.481013<br />avg_delay:  19.25336416<br />month: 12<br />month: 12","hour: 15.253165<br />avg_delay:  18.91936677<br />month: 12<br />month: 12","hour: 15.025316<br />avg_delay:  18.57906013<br />month: 12<br />month: 12","hour: 14.797468<br />avg_delay:  18.23439605<br />month: 12<br />month: 12","hour: 14.569620<br />avg_delay:  17.88732634<br />month: 12<br />month: 12","hour: 14.341772<br />avg_delay:  17.53980281<br />month: 12<br />month: 12","hour: 14.113924<br />avg_delay:  17.19377726<br />month: 12<br />month: 12","hour: 13.886076<br />avg_delay:  16.84842690<br />month: 12<br />month: 12","hour: 13.658228<br />avg_delay:  16.48956470<br />month: 12<br />month: 12","hour: 13.430380<br />avg_delay:  16.11766818<br />month: 12<br />month: 12","hour: 13.202532<br />avg_delay:  15.73604597<br />month: 12<br />month: 12","hour: 12.974684<br />avg_delay:  15.34800672<br />month: 12<br />month: 12","hour: 12.746835<br />avg_delay:  14.95685907<br />month: 12<br />month: 12","hour: 12.518987<br />avg_delay:  14.56591165<br />month: 12<br />month: 12","hour: 12.291139<br />avg_delay:  14.17847311<br />month: 12<br />month: 12","hour: 12.063291<br />avg_delay:  13.79785209<br />month: 12<br />month: 12","hour: 11.835443<br />avg_delay:  13.43541951<br />month: 12<br />month: 12","hour: 11.607595<br />avg_delay:  13.10317377<br />month: 12<br />month: 12","hour: 11.379747<br />avg_delay:  12.77971918<br />month: 12<br />month: 12","hour: 11.151899<br />avg_delay:  12.44213007<br />month: 12<br />month: 12","hour: 10.924051<br />avg_delay:  12.07020190<br />month: 12<br />month: 12","hour: 10.696203<br />avg_delay:  11.68335362<br />month: 12<br />month: 12","hour: 10.468354<br />avg_delay:  11.29132479<br />month: 12<br />month: 12","hour: 10.240506<br />avg_delay:  10.89471286<br />month: 12<br />month: 12","hour: 10.012658<br />avg_delay:  10.49411527<br />month: 12<br />month: 12","hour:  9.784810<br />avg_delay:  10.09012945<br />month: 12<br />month: 12","hour:  9.556962<br />avg_delay:   9.68335286<br />month: 12<br />month: 12","hour:  9.329114<br />avg_delay:   9.27438293<br />month: 12<br />month: 12","hour:  9.101266<br />avg_delay:   8.86381710<br />month: 12<br />month: 12","hour:  8.873418<br />avg_delay:   8.45206841<br />month: 12<br />month: 12","hour:  8.645570<br />avg_delay:   8.03845101<br />month: 12<br />month: 12","hour:  8.417722<br />avg_delay:   7.62250734<br />month: 12<br />month: 12","hour:  8.189873<br />avg_delay:   7.20386601<br />month: 12<br />month: 12","hour:  7.962025<br />avg_delay:   6.78215559<br />month: 12<br />month: 12","hour:  7.734177<br />avg_delay:   6.35700467<br />month: 12<br />month: 12","hour:  7.506329<br />avg_delay:   5.92804185<br />month: 12<br />month: 12","hour:  7.278481<br />avg_delay:   5.49489570<br />month: 12<br />month: 12","hour:  7.050633<br />avg_delay:   5.05719481<br />month: 12<br />month: 12","hour:  6.822785<br />avg_delay:   4.61494529<br />month: 12<br />month: 12","hour:  6.594937<br />avg_delay:   4.16885997<br />month: 12<br />month: 12","hour:  6.367089<br />avg_delay:   3.71905859<br />month: 12<br />month: 12","hour:  6.139241<br />avg_delay:   3.26563387<br />month: 12<br />month: 12","hour:  5.911392<br />avg_delay:   2.80858359<br />month: 12<br />month: 12","hour:  5.683544<br />avg_delay:   2.34719983<br />month: 12<br />month: 12","hour:  5.455696<br />avg_delay:   1.88170775<br />month: 12<br />month: 12","hour:  5.227848<br />avg_delay:   1.41259142<br />month: 12<br />month: 12","hour:  5.000000<br />avg_delay:   0.94033488<br />month: 12<br />month: 12","hour:  5.000000<br />avg_delay:   0.94033488<br />month: 12<br />month: 12"],"frame":"12","type":"scatter","mode":"lines","line":{"width":3.77952755905512,"color":"transparent","dash":"solid"},"fill":"toself","fillcolor":"rgba(153,153,153,0.4)","hoveron":"points","hoverinfo":"x+y","showlegend":false,"xaxis":"x","yaxis":"y","visible":true}],"traces":[0,1,2]}],"base_url":"https://plot.ly"},"evals":["config.modeBarButtonsToAdd.0.click"],"jsHooks":{"render":[{"code":"function(el, x) { var ctConfig = crosstalk.var('plotlyCrosstalkOpts').set({\"on\":\"plotly_click\",\"persistent\":false,\"dynamic\":false,\"selectize\":false,\"opacityDim\":0.2,\"selected\":{\"opacity\":1}}); }","data":null}]}}</script><!--/html_preserve-->
-
 This is the base from which this is built.
 
-
-```r
+``` r
 flights %>% 
   group_by(hour, month) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 
@@ -2919,17 +2657,30 @@ flights %>%
   geom_smooth()
 ```
 
-```
-## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
-```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 
-```
-## Warning: Removed 1 rows containing non-finite values (stat_smooth).
-```
+    ## Warning: Removed 1 rows containing non-finite values (stat_smooth).
 
-```
-## Warning: Removed 1 rows containing missing values (geom_point).
-```
+    ## Warning: Removed 1 rows containing missing values (geom_point).
 
-![](ch4to6_files/figure-html/unnamed-chunk-118-1.png)<!-- -->
+![](ch4to6_files/figure-markdown_github/unnamed-chunk-118-1.png)
 
+[1] The output below is actually just maximizing difference in proportion 2 hrs late vs on time, it does not matter whether the higher proportion is on-time or late. It just happens in practice that the higher proprotion is generally the on-time
+
+[2] This method is helpful for if you have more than ust a couple variables you are applying a transformation to.
+
+[3] Linear regression is used here which aren't learned until later in the book though.
+
+[4] The mutate step that is commented-out would reorder the `delays_q` variable according to the mean value of the `delays_val`, but this is not necessary here so I commented it out. You will learn more about this in the factors chapter.lm
+
+[5] The names assigned by the `quantile` function are a little different from those I supplied.
+
+[6] Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix...
+
+[7] Repeated t-test methods could be used for comparing MQ and FL, see function `pairwise.t.test`
+
+[8] Each colour corresponds with a `dest` though I excluded the legend.
+
+[9] You may want to add a step to pipe this into `summary()` after the `lm` step as well.
+
+[10] `table` produces contingency tables.
