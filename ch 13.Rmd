@@ -464,12 +464,11 @@ diamonds %>%
       facet_grid(weather_type ~ ., scales = "free_y")+
       labs(title = 'Hourly weather values across worst 48 hours of delays')
     ```
-    
+
     Patterns:  
       
     * `wind_gust` and `wind_speed` are the same.
     * See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
-    
     
     Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
     ```{r}
@@ -490,9 +489,36 @@ diamonds %>%
       labs(title = "Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year", 
            caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
     ```
-    
 
-    I show plots and models of 48 hour time windows in a variety of contexts and detail in [Appendix]
+    For this to be the worst 48 hour period, the weather doesn't actually seem to be as extreme as I would have guessed.
+    
+    Let's add-in average `arr_delay` by planned departure time to this to see how the delay times throughout the day varied, to see if there was a surge or change in weather that led to the huge change in delays.
+    
+    ```{r}
+    flights %>% 
+      mutate(dates = as_date(time_hour)) %>% 
+      semi_join(WorstDates) %>% 
+      group_by(time_hour) %>% 
+      summarise(value = mean(arr_delay, na.rm = TRUE)) %>% 
+      ungroup() %>% 
+      mutate(value_type = "Mean_ArrDelay") %>% 
+      bind_rows(
+      weather_worst %>% 
+        select(-dates) %>% 
+        gather(temp:visib, key = "value_type", value = "value")
+      ) %>% 
+      mutate(weather_attr = !(value_type == "Mean_ArrDelay"),
+             value_type = forcats::fct_relevel(value_type, "Mean_ArrDelay")) %>% 
+      ggplot(aes(x = time_hour, value, colour = weather_attr))+
+      geom_line()+
+      facet_grid(value_type ~ ., scales = "free_y")+
+      labs(title = 'Hourly weather and delay values across worst 48 hours of delays')
+    
+    ```
+
+    Maybe that first uptick in precipitation corresponded with the increase in delay... but still, looks extreme like an incident caused this. I cheched the news and it looks like a plane was crash landed onto the tarmac at one of the airports on this day https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4 , I checked the incident time and it occurred at 17:45 Jul 22, looks like it overlaps with the time we see the uptick in delays.  
+
+    I show plots and models of 48 hour time windows in a variety of other contexts and detail in [Appendix]
 
 1.  *What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you?*
     *What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you?*
