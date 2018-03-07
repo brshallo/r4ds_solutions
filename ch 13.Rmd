@@ -428,71 +428,71 @@ diamonds %>%
     ```
     
     Create tibble of worst 2-day period for mean `arr_delay`
-```{r}
-WorstWindow <- delays_windows %>% 
-  mutate(mean_delay_rank = dplyr::min_rank(-mean_delay)) %>% 
-  filter(mean_delay_rank <= 1)
-
-WorstDates <- tibble(dates = c(lubridate::as_date(WorstWindow$window_start_date), lubridate::as_date(WorstWindow$window_start_date) + lubridate::duration(1, "days")))
-```
-
-Ammend weather data so that weather is an average across three NY locations rather than seperate for each ^[note that a weighted average based on traffic would be more appropriate here because the `mean_delay` values will be weighted by number of flights going through each -- hopefully lack of substantial difference between locatioins means this won't be too impactful...]
-```{r}
-weather_ammended <- weather %>% 
-  mutate(time_hour = lubridate::make_datetime(year, month, day, hour)) %>% 
-  select(-one_of("origin", "year", "month", "day", "hour")) %>% 
-  group_by(time_hour) %>% 
-  summarise_all(mean, na.rm = TRUE) %>% 
-  ungroup()
-```
-
-
-Filtering join to just times weather for worst 2 days
-```{r}
-weather_worst <- weather_ammended %>%
-  mutate(dates = as_date(time_hour)) %>% 
-  semi_join(WorstDates)
-```
-
-Plot of hourly weather values across 48 hour time windows.
-```{r}
-weather_worst %>% 
-  select(-dates) %>% 
-  gather(temp:visib, key = "weather_type", value = "weather_value") %>% 
-  ggplot(aes(x = time_hour, y = weather_value))+
-  geom_line()+
-  facet_grid(weather_type ~ ., scales = "free_y")+
-  labs(title = 'Hourly weather values across worst 48 hours of delays')
-```
-
-Patterns:  
-  
-* `wind_gust` and `wind_speed` are the same.
-* See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
-
-
-Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
-```{r}
-bind_rows(  
-weather_worst %>% 
-  summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
-  mutate(category = "weather on worst 48") %>% 
-  gather(temp:visib, key = weather_type, value = weather_val)
-,
-weather_ammended %>% 
-  summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
-  mutate(category = "weather on average") %>% 
-  gather(temp:visib, key = weather_type, value = weather_val)
-) %>% 
-  ggplot(aes(x = category, y = weather_val, fill = category))+
-  geom_col()+
-  facet_wrap(~weather_type, scales = "free_y")+
-  labs(title = "Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year", 
-       caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
-```
+    ```{r}
+    WorstWindow <- delays_windows %>% 
+      mutate(mean_delay_rank = dplyr::min_rank(-mean_delay)) %>% 
+      filter(mean_delay_rank <= 1)
+    
+    WorstDates <- tibble(dates = c(lubridate::as_date(WorstWindow$window_start_date), lubridate::as_date(WorstWindow$window_start_date) + lubridate::duration(1, "days")))
+    ```
+    
+    Ammend weather data so that weather is an average across three NY locations rather than seperate for each ^[note that a weighted average based on traffic would be more appropriate here because the `mean_delay` values will be weighted by number of flights going through each -- hopefully lack of substantial difference between locatioins means this won't be too impactful...]
+    ```{r}
+    weather_ammended <- weather %>% 
+      mutate(time_hour = lubridate::make_datetime(year, month, day, hour)) %>% 
+      select(-one_of("origin", "year", "month", "day", "hour")) %>% 
+      group_by(time_hour) %>% 
+      summarise_all(mean, na.rm = TRUE) %>% 
+      ungroup()
+    ```
+    
+    
+    Filtering join to just times weather for worst 2 days
+    ```{r}
+    weather_worst <- weather_ammended %>%
+      mutate(dates = as_date(time_hour)) %>% 
+      semi_join(WorstDates)
+    ```
+    
+    Plot of hourly weather values across 48 hour time windows.
+    ```{r}
+    weather_worst %>% 
+      select(-dates) %>% 
+      gather(temp:visib, key = "weather_type", value = "weather_value") %>% 
+      ggplot(aes(x = time_hour, y = weather_value))+
+      geom_line()+
+      facet_grid(weather_type ~ ., scales = "free_y")+
+      labs(title = 'Hourly weather values across worst 48 hours of delays')
+    ```
+    
+    Patterns:  
+      
+    * `wind_gust` and `wind_speed` are the same.
+    * See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
+    
+    
+    Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
+    ```{r}
+    bind_rows(  
+    weather_worst %>% 
+      summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+      mutate(category = "weather on worst 48") %>% 
+      gather(temp:visib, key = weather_type, value = weather_val)
+    ,
+    weather_ammended %>% 
+      summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+      mutate(category = "weather on average") %>% 
+      gather(temp:visib, key = weather_type, value = weather_val)
+    ) %>% 
+      ggplot(aes(x = category, y = weather_val, fill = category))+
+      geom_col()+
+      facet_wrap(~weather_type, scales = "free_y")+
+      labs(title = "Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year", 
+           caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
+    ```
     
 
-    I show plots and models of 48 hour time windows in a variety of contexts and detail in [13.5.1.4]
+    I show plots and models of 48 hour time windows in a variety of contexts and detail in [Appendix]
 
 1.  *What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you?*
     *What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you?*
@@ -533,114 +533,114 @@ weather_ammended %>%
 
 ##13.5.1.4
 
-    Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.
-    ```{r}
-    delays_windows %>% 
-      gather(perc_cancelled, mean_delay, perc_delay, key = value_type, value = val) %>% 
-      mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
-      ggplot(aes(window_start_date, val))+
-      geom_line()+
-      facet_wrap(~value_type, scales = "free_y", ncol = 1)+
-      scale_x_date(date_labels = "%b %d")+
-      labs(title = 'Measures of delay across 48 hour time windows')
-    
-    ```
+Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.
+```{r}
+delays_windows %>% 
+  gather(perc_cancelled, mean_delay, perc_delay, key = value_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
+  ggplot(aes(window_start_date, val))+
+  geom_line()+
+  facet_wrap(~value_type, scales = "free_y", ncol = 1)+
+  scale_x_date(date_labels = "%b %d")+
+  labs(title = 'Measures of delay across 48 hour time windows')
 
-    Create 48 hour windows for weather data. Follow exact same steps as above.
-    
-    ```{r}
-    weather_windows <- weather_ammended %>% 
-      mutate(date_flight = lubridate::as_date(time_hour)) %>% 
-      mutate(startdate_window1 = cut.Date(date_flight, "2 day")) %>% 
-      mutate(date_flight2 = ifelse(!(date_flight == min(date_flight, na.rm = TRUE)), date_flight, NA),
-             date_flight2 = lubridate::as_date(date_flight2),
-             startdate_window2 = cut.Date(date_flight2, "2 day")) %>% 
-      select(-date_flight, -date_flight2) %>% 
-        #Second
-      gather(startdate_window1, startdate_window2, key = "start_window", value = "window_start_date") %>% 
-      filter(!is.na(window_start_date)) %>% 
-      #Third
-      group_by(window_start_date) %>%
-      summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
-      ungroup() %>% 
-      select(-wind_gust)
+```
 
-    ```
-    
-      Graph using same method as above...
-    ```{r}
-    weather_windows %>% 
-      gather(temp:visib, key = weather_type, value = val) %>% 
-      mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
-      ggplot(aes(x = window_start_date, y = val))+
-      geom_line()+
-      facet_wrap(~weather_type, ncol = 1, scales = "free_y")+
-      scale_x_date(date_labels = "%b %d")+
-      labs(title = 'Measures of weather across 48 hour time windows')
-    
-    ```
-   
-   Connect delays and weather data
-   
-    ```{r}
-    weather_delay_joined <- left_join(delays_windows, weather_windows, by = "window_start_date") %>% 
-      select(mean_delay, temp:visib, window_start_date) %>%
-      select(-dewp) %>%  #is almost completely correlated with temp so removed one of them...
-      na.omit()
-      
-    ```
+Create 48 hour windows for weather data. Follow exact same steps as above.
 
-    Plot of 48 hour window of weather scores against mean delay keeping intact order of observations
-    
-    ```{r}
-    weather_delay_joined %>% 
-      gather(mean_delay, temp:visib, key = value_type, value = val) %>% 
-      mutate(window_start_date = lubridate::as_date(window_start_date),
-             value_type = forcats::fct_relevel(value_type, "mean_delay")) %>%
-      ggplot(aes(x = window_start_date, y = val, colour = ! value_type == "mean_delay"))+
-      geom_line()+
-      facet_wrap(~value_type, scales = "free_y", ncol = 1)+
-      labs(colour = "Weather value", title = "Mean delay and weather value in 2-day rolling window")
+```{r}
+weather_windows <- weather_ammended %>% 
+  mutate(date_flight = lubridate::as_date(time_hour)) %>% 
+  mutate(startdate_window1 = cut.Date(date_flight, "2 day")) %>% 
+  mutate(date_flight2 = ifelse(!(date_flight == min(date_flight, na.rm = TRUE)), date_flight, NA),
+         date_flight2 = lubridate::as_date(date_flight2),
+         startdate_window2 = cut.Date(date_flight2, "2 day")) %>% 
+  select(-date_flight, -date_flight2) %>% 
+    #Second
+  gather(startdate_window1, startdate_window2, key = "start_window", value = "window_start_date") %>% 
+  filter(!is.na(window_start_date)) %>% 
+  #Third
+  group_by(window_start_date) %>%
+  summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+  ungroup() %>% 
+  select(-wind_gust)
 
-    ```
-    
-    Plot of mean_delay against weather type, each point representing a different 'window'
-    ```{r}
-    weather_delay_joined %>% 
-      gather(temp:visib, key = weather_type, value = weather_val) %>% 
-      ggplot(aes(x = weather_val, y = mean_delay))+
-      geom_point()+
-      geom_smooth()+
-      facet_wrap(~weather_type, scales = "free_x")
-    ```
+```
 
-    In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below... This is often ignored and we can also ignore it for now as it gets into time series and things we don't need to worry about for now... but somthing to be aware...
-    
-    ```{r}
-    weather_delay_joined %>% 
-      mutate(mean_delay_lag = lag(mean_delay)) %>% 
-      select(mean_delay, mean_delay_lag) %>% 
-      na.omit() %>% 
-      cor()
-    ```
+  Graph using same method as above...
+```{r}
+weather_windows %>% 
+  gather(temp:visib, key = weather_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
+  ggplot(aes(x = window_start_date, y = val))+
+  geom_line()+
+  facet_wrap(~weather_type, ncol = 1, scales = "free_y")+
+  scale_x_date(date_labels = "%b %d")+
+  labs(title = 'Measures of weather across 48 hour time windows')
 
-    Data is not Independent (as mentioned above) and many problems associated with this... but let's ignore this for now and just look at a few statisitics... 
-    
-    Can see below that raw correlation of `mean_delay` is highest with humid. 
-    
-    ```{r}
-    weather_delay_joined %>%  
-      select(-window_start_date) %>% 
-      cor()
-    ```
-   
-    When accounting for other variables, see relationship with windspeed seems to emerge as important...
-    ```{r}
-    weather_delay_joined %>% 
-      select(-window_start_date) %>% 
-      lm(mean_delay ~ ., data = .) %>% 
-      summary()
-    ```
+```
+
+Connect delays and weather data
+
+```{r}
+weather_delay_joined <- left_join(delays_windows, weather_windows, by = "window_start_date") %>% 
+  select(mean_delay, temp:visib, window_start_date) %>%
+  select(-dewp) %>%  #is almost completely correlated with temp so removed one of them...
+  na.omit()
+  
+```
+
+Plot of 48 hour window of weather scores against mean delay keeping intact order of observations
+
+```{r}
+weather_delay_joined %>% 
+  gather(mean_delay, temp:visib, key = value_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date),
+         value_type = forcats::fct_relevel(value_type, "mean_delay")) %>%
+  ggplot(aes(x = window_start_date, y = val, colour = ! value_type == "mean_delay"))+
+  geom_line()+
+  facet_wrap(~value_type, scales = "free_y", ncol = 1)+
+  labs(colour = "Weather value", title = "Mean delay and weather value in 2-day rolling window")
+
+```
+
+Plot of mean_delay against weather type, each point representing a different 'window'
+```{r}
+weather_delay_joined %>% 
+  gather(temp:visib, key = weather_type, value = weather_val) %>% 
+  ggplot(aes(x = weather_val, y = mean_delay))+
+  geom_point()+
+  geom_smooth()+
+  facet_wrap(~weather_type, scales = "free_x")
+```
+
+In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below... This is often ignored and we can also ignore it for now as it gets into time series and things we don't need to worry about for now... but somthing to be aware...
+
+```{r}
+weather_delay_joined %>% 
+  mutate(mean_delay_lag = lag(mean_delay)) %>% 
+  select(mean_delay, mean_delay_lag) %>% 
+  na.omit() %>% 
+  cor()
+```
+
+Data is not Independent (as mentioned above) and many problems associated with this... but let's ignore this for now and just look at a few statisitics... 
+
+Can see below that raw correlation of `mean_delay` is highest with humid. 
+
+```{r}
+weather_delay_joined %>%  
+  select(-window_start_date) %>% 
+  cor()
+```
+
+When accounting for other variables, see relationship with windspeed seems to emerge as important...
+```{r}
+weather_delay_joined %>% 
+  select(-window_start_date) %>% 
+  lm(mean_delay ~ ., data = .) %>% 
+  summary()
+```
 
 For a variety of reasons, especially in cases where your observations are not independent, you may want to evaluate how the change in an attribute relates to the change in another attribute. In the cases below I plot the diffs for example:  
   
