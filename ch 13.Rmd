@@ -3,10 +3,9 @@ title: "Chapter 13"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
-  html_document:
+  github_document:
     toc: true
     toc_depth: 3
-    keep_md: TRUE
 ---
 
 *Make sure the following packages are installed:*  
@@ -455,7 +454,24 @@ weather_worst <- weather_ammended %>%
   semi_join(WorstDates)
 ```
 
-Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
+Plot of hourly weather values across 48 hour time windows.
+```{r}
+weather_worst %>% 
+  select(-dates) %>% 
+  gather(temp:visib, key = "weather_type", value = "weather_value") %>% 
+  ggplot(aes(x = time_hour, y = weather_value))+
+  geom_line()+
+  facet_grid(weather_type ~ ., scales = "free_y")+
+  labs(title = 'Hourly weather values across worst 48 hours of delays')
+```
+
+Patterns:  
+  
+* `wind_gust` and `wind_speed` are the same.
+* See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
+
+
+Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
 ```{r}
 bind_rows(  
 weather_worst %>% 
