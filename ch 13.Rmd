@@ -4,12 +4,8 @@ date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
   html_document:
-    code_folding: show
     toc: true
-    toc_depth: 5
-    toc_float:
-      collapsed: false
-      smooth_scroll: false
+    toc_depth: 3
     keep_md: TRUE
 ---
 
