@@ -7,9 +7,6 @@ output:
   github_document:
     toc: true
     toc_depth: 3
-  html_document:
-    toc: true
-    toc_depth: 3
 ---
  
 ```{r, include = FALSE, eval = FALSE}
@@ -379,7 +376,7 @@ str_view(x, 'C{2,3}?')
     writeLines(x)
     str_view(x, "\\\\{4}")
     x <- c("\\\\\\\\", "\\\\\\", "\\\\", "\\")
-    str_view("", "\\\\\\\\")
+    str_view(x, "\\\\\\\\")
     ```
 
 

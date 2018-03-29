@@ -35,21 +35,16 @@ library(tidyr)
 *1. Using prose, describe how the variables and observations are organised in each of the sample tables.*  
 
 *2. Compute the rate for table2, and table4a + table4b. You will need to perform four operations:*  
+  
 a. Extract the number of TB cases per country per year.  
 b. Extract the matching population per country per year.  
 c. Divide cases by population, and multiply by 10000.  
 d. Store back in the appropriate place.  
 e. Which representation is easiest to work with? Which is hardest? Why?  
-```{r}
-
-```
 
 
 *3. Recreate the plot showing change in cases over time using table2 instead of table1. What do you need to do first?*  
 
-```{r}
-
-```
 
 ## 12.3: Spreading and gathering
 
@@ -188,22 +183,21 @@ tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>%
 
 *3. Compare and contrast separate() and extract(). Why are there three variations of separation (by position, by separator, and with groups), but only one unite?*  
   
-`extract` is like `separate` but uses a `regex` instead of `sep`, `sep` default accepts a regex expression, but it allows numeric whereas I'm guessing  
+`extract` is like `separate` but provide what to capture rather than what to split by as in `sep` instead of `sep`, `sep` default accepts a regex expression, but it allows numeric whereas I'm guessing  
 ```{r}
-df <- data.frame(x = c(NA, "a-b", "a-d", "b-c", "d-e"))
-df %>% 
-  extract(x, "A")
+df <- data.frame(x = c("a-b", "a-d", "b-c", "d&e", NA))
 
 df %>% 
-  extract(x, "A")
+  extract(col = x, into = c("1st", "2nd"), regex = "([A-z]).([A-z])")
+
 df %>% 
-  extract(x, c("A", "B"), "([a-d]+)-([a-d]+)")
+  separate(col = x, into = c("1st", "2nd"), sep = "[^A-z]")
 
 #example I made
 tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>% 
-  separate(x, c("one", "two", "three"), remove = FALSE) %>% 
+  separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
   unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
-  extract(x, c("a", "b", "c"), "([a-z]+),([a-z]+),([a-z]+)")
+  extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
 
 ```
 
