@@ -1,0 +1,728 @@
+---
+title: "Chapter 13"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(babynames)
+library(nasaweather)
+library(lubridate)
+```
+
+# ch. 13: Relational data
+
+> "The relations of three or more tables are always a property of the relations between each pairs."  
+
+*Three families of verbs in relational data: *
+
+* __Mutating joins__, which add new variables to one data frame from matching
+  observations in another.
+
+* __Filtering joins__, which filter observations from one data frame based on
+  whether or not they match an observation in the other table.
+
+* __Set operations__, which treat observations as if they were set elements.
+
+
+
+## 13.2 nycflights13
+
+```{r, eval = FALSE}
+flights
+airlines
+airports
+planes
+weather
+```
+
+
+### 13.2.1
+
+1.  *Imagine you wanted to draw (approximately) the route each plane flies from*
+    *its origin to its destination. What variables would you need? What tables*
+    *would you need to combine?*  
+    
+    To draw a line from origin to destination, I need the lat lon points from airports` as well as the dest and origin variables from `flights`.
+    
+    
+1.  *I forgot to draw the relationship between `weather` and `airports`.*
+    *What is the relationship and how should it appear in the diagram?*
+    
+    `origin` from `weather connects to `faa` from `airports` in a many to one relationship
+    
+
+1.  *`weather` only contains information for the origin (NYC) airports. If*
+    *it contained weather records for all airports in the USA, what additional*
+    *relation would it define with `flights`?*  
+    
+    It would connect to `dest`.
+
+1.  *We know that some days of the year are "special", and fewer people than*
+    *usual fly on them. How might you represent that data as a data frame?*
+    *What would be the primary keys of that table? How would it connect to the*
+    *existing tables?*
+    
+    Make a set of days that are less popular and have these dates connect by month and day
+    
+## 13.3 Keys
+
+### 13.3.1
+
+1.  *Add a surrogate key to `flights`.*
+
+```{r}
+flights %>%
+  mutate(surrogate_key = row_number()) %>% 
+  glimpse()
+
+```
+
+
+2.  *Identify the keys in the following datasets*
+
+    1.  `Lahman::Batting`: player, year, stint
+    
+    ```{r}
+    Lahman::Batting %>% 
+      count(playerID, yearID, stint) %>% 
+      filter(n > 1)
+    ```
+    
+    
+    1.  `babynames::babynames`: name, sex, year
+    ```{r}
+    babynames::babynames %>% 
+      count(name, sex, year) %>% 
+      filter(nn > 1)
+    ```
+    
+    
+    1.  `nasaweather::atmos`: lat, long, year, month
+    
+    ```{r}
+    nasaweather::atmos %>% 
+      count(lat, long, year, month) %>% 
+      filter(n > 1)
+    ```
+    
+    4.  `fueleconomy::vehicles`: id
+    
+    ```{r}
+    fueleconomy::vehicles %>% 
+      count(id) %>% 
+      filter(n > 1)
+    
+    ```
+    
+    5.  `ggplot2::diamonds`: needs surrogate
+    
+```{r}
+diamonds %>% 
+  count(x, y, z, depth, table, carat, cut, color, price, clarity ) %>% 
+  filter(n > 1)
+
+diamonds %>% 
+  mutate(surrogate_id = row_number())
+```
+    
+    
+
+3.  *Draw a diagram illustrating the connections between the `Batting`,*
+    *`Master`, and `Salaries` tables in the Lahman package. Draw another diagram*
+    *that shows the relationship between `Master`, `Managers`, `AwardsManagers`.*  
+    
+    For each dataset show just the `head(1)`
+    
+    Combine by playerid
+    ```{r, echo = FALSE}
+    Lahman::Batting %>% 
+      head(1)
+    
+    Lahman::Master %>% 
+      head(1)
+    ```
+    
+    
+    Combine by playerID, yearID
+    ```{r, echo = FALSE}
+    Lahman::Batting %>% 
+      head(1)
+    
+    Lahman::Salaries %>% 
+      head(1)
+    ```
+    
+    Combine by playerID
+    ```{r, echo = FALSE}
+    Lahman::Master %>% 
+      head(1)
+    
+    Lahman::Salaries %>% 
+      head(1)
+    ```
+    
+    Connect by playerID
+    ```{r, echo = FALSE}
+    Lahman::Master %>% 
+      head(1)
+    
+    Lahman::Managers %>% 
+      head(1)
+    ```
+    
+    Connect by playerID 
+    ```{r, echo = FALSE}
+    Lahman::Master %>% 
+      head(1)
+    
+    Lahman::AwardsManagers %>% 
+      head(1)
+    ```
+
+    *How would you characterise the relationship between the `Batting`,*
+    *`Pitching`, and `Fielding` tables?*
+
+    All connect by playerID, yearID, stint
+    
+    ```{r, echo = FALSE}
+    Lahman::Batting %>% head(1)
+    Lahman::Pitching %>% head(1)
+    Lahman::Fielding %>% head(1)
+    
+    ```
+  
+  
+## 13.4 Mutating joins
+
+> The most commonly used join is the left join: you use this whenever you look up additional data from another table, because it preserves the original observations even when there isn't a match.
+
+### 13.4.6 
+
+1.  *Compute the average delay by destination, then join on the `airports`*
+    *data frame so you can show the spatial distribution of delays. Here's an*
+    *easy way to draw a map of the United States:*  
+
+    ```{r, eval = FALSE}
+    airports %>%
+      semi_join(flights, c("faa" = "dest")) %>%
+      ggplot(aes(lon, lat)) +
+      borders("state") +
+      geom_point() +
+      coord_quickmap()
+    
+    ```
+  
+    Now adding in colour by average delay.
+  
+    ```{r}
+    flights %>% 
+      semi_join(airports, c("dest" = "faa")) %>%
+      group_by(dest) %>% 
+      summarise(delay = mean(arr_delay, na.rm=TRUE)) %>% 
+      left_join(airports, by = c("dest"="faa")) %>% 
+      ggplot(aes(lon, lat)) +
+      borders("state") +
+      geom_point(aes(colour = delay)) +
+      coord_quickmap()+
+      scale_color_gradientn(colours = rainbow(3))
+    
+    ```
+    
+
+1.  *Add the location of the origin _and_ destination (i.e. the `lat` and `lon`)*
+    *to `flights`.*
+    
+    ```{r}
+    flights %>% 
+      left_join(airports, by = c("dest" = "faa")) %>% 
+      left_join(airports, by = c("origin" = "faa"), suffix=c("_dest", "_origin")) %>%
+      select(flight, carrier, dest, lat_dest, lon_dest, origin, lat_origin, lon_origin)
+    
+    ```
+    
+    Note that the suffix allows you to tag names onto first and second table, hence why vector is length 2  
+  
+1.  *Is there a relationship between the age of a plane and its delays?*
+
+    ```{r}
+    group_by(flights, tailnum) %>% 
+      summarise(avg_delay = mean(arr_delay, na.rm=TRUE), 
+                n = n()) %>% 
+      left_join(planes, by="tailnum") %>% 
+      mutate(age = 2013 - year) %>% 
+      filter(n > 50, age < 30) %>% 
+      ggplot(aes(x = age, y = avg_delay))+
+      geom_point()+
+      geom_smooth()
+    ```
+    
+    Looks as though planes that are 5 to 12 years old have higher delays... Let's look at same thing using boxplots.
+    
+    ```{r}
+    group_by(flights, tailnum) %>% 
+      summarise(avg_delay = mean(arr_delay, na.rm=TRUE), 
+                n = n()) %>% 
+      left_join(planes, by="tailnum") %>% 
+      mutate(age = 2013 - year) %>% 
+      filter(n > 50, age <= 30, age >= 0) %>% 
+      ggplot()+
+      geom_boxplot(aes(x = cut_width(age, 2, boundary = 0), y = avg_delay))+
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    ```
+    
+    Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern -- though this may just be me seeing things... perhaps worth exploring mroe.
+
+1.  *What weather conditions make it more likely to see a delay?*
+
+    There are a lot of ways you could have approached this problem. Below, I look at the average weather value for each of the groups `FALSE`, `TRUE` and `Canceled` -- `FALSE` corresponding with non-delayed flights, `TRUE` with delayed flights and `Canceled` with flights that were canceled. If I were feeling fancy, I would have also added the standard errors on these...
+
+    ```{r}
+    flights_weath <- mutate(flights, delay_TF = dep_delay > 0) %>%
+      separate(sched_dep_time, 
+               into = c("hour_sched", "min_sched"), 
+               sep = -3,
+               remove = FALSE, 
+               convert = TRUE) %>%
+      left_join(weather, by = c("origin", "year","month", "day", "hour_sched"="hour"))
+    
+    flights_weath_gath <- flights_weath %>% 
+      select(sched_dep_time, delay_TF, sched_dep_time, temp:visib) %>% 
+      mutate(key = row_number()) %>% 
+      gather(temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, 
+           key="weather", value="values") 
+    
+    flights_summarized <- flights_weath_gath %>% 
+      group_by(weather, delay_TF) %>% 
+      summarise(median_weath = median(values, na.rm = TRUE),
+                mean_weath = mean(values, na.rm = TRUE), 
+                sum_n = sum(!is.na(values))) %>% 
+      ungroup() %>% 
+      mutate(delay_TF = ifelse(is.na(delay_TF), "Canceled", delay_TF),
+             delay_TF = forcats::as_factor(delay_TF, c(FALSE, TRUE, "Canceled")))
+    
+    flights_summarized %>%  
+      ggplot(aes(x = delay_TF, y = mean_weath, fill = delay_TF))+
+      geom_col()+
+      facet_wrap(~weather, scales = "free_y")+
+      theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    ```
+
+    While precipitation is the largest difference, my guess is that the standard error on this would be much greater day to day because as you can see the values are very low, so it could be that a few cases with a lot of rain may tick it up, but it may be tough to actually use this as a predictor... 
+
+1.  *What happened on June 13 2013? Display the spatial pattern of delays,*
+    *and then use Google to cross-reference with the weather.*
+
+    ```{r, eval = FALSE, include = FALSE}
+    worst <- filter(flights, month == 6, day == 13)
+    worst %>%
+      group_by(dest) %>%
+      summarise(delay = mean(arr_delay, na.rm = TRUE), 
+                n = sum(!is.na(arr_delay))) %>%
+      filter(n > 5) %>%
+      inner_join(airports, by = c("dest" = "faa")) %>%
+      ggplot(aes(lon, lat)) +
+        borders("state") +
+        geom_point(aes(size = n, colour = delay)) +
+        coord_quickmap()
+    ```
+    
+    Looks like East coast is getting hammered and flights arriving from Atlanta an similar locations were very delayed. Guessing either weather issue, or problem in Atl or delta.
+    
+## 13.5 Filtering joins
+
+### 13.5.1
+
+1.  *What does it mean for a flight to have a missing `tailnum`?*
+
+    All flights with a missing tailnum in the `flights` table were cancelled as you can see below.
+    ```{r}
+    flights %>% 
+      count(is.na(tailnum), is.na(arr_delay))
+    
+    ```
+
+    *What do the tail numbers that don't have a matching record in `planes` have in common?*
+    *(Hint: one variable explains ~90% of the problems.)*
+    
+    ```{r}
+    flights %>% 
+      anti_join(planes, by="tailnum") %>% 
+      count(carrier, sort = TRUE)
+    
+    flights %>% 
+      mutate(in_planes = tailnum %in% planes$tailnum) %>% 
+      group_by(carrier, in_planes) %>% 
+      summarise(flights_inPlanes = )
+    ```
+
+    Some carriers do not have many of their tailnums data in the `planes` table. Anyone have more insight here?
+
+
+1.  *Filter flights to only show flights with planes that have flown at least 100*
+    *flights.*
+    
+    ```{r}
+    planes_many <- flights %>% 
+      count(tailnum, sort=TRUE) %>% 
+      filter(n > 100)
+    
+    semi_join(flights, planes_many)
+    
+    ```
+
+1.  *Combine `fueleconomy::vehicles` and `fueleconomy::common` to find only the*
+    *records for the most common models.*
+    
+    ```{r}
+    fueleconomy::vehicles %>% 
+      semi_join(fueleconomy::common, by=c("make", "model"))
+    ```
+    
+
+1.  *Find the 48 hours (over the course of the whole year) that have the worst*
+    *delays. Cross-reference it with the `weather` data. Can you see any*
+    *patterns?*
+    
+    
+    First: Create two variables that together capture all 48 hour time windows across the year, at the day window of granularity (e.g. the time of day the flight takes off does not matter in establishing time windows for this example, only the day).
+    Second: Gather these time windows into a single dataframe (note that this will increase the length of your data by ~364/365 * 100 %)
+    Third: Group by `window_start_date` and calculate average `arr_delay` and related metrics.
+    
+    ```{r}
+    delays_windows <- flights %>% 
+      #First
+      mutate(date_flight = lubridate::as_date(time_hour)) %>% 
+      mutate(startdate_window1 = cut.Date(date_flight, "2 day")) %>% 
+      mutate(date_flight2 = ifelse(!(date_flight == min(date_flight, na.rm = TRUE)), date_flight, NA),
+             date_flight2 = lubridate::as_date(date_flight2),
+             startdate_window2 = cut.Date(date_flight2, "2 day")) %>% 
+      select(-date_flight, -date_flight2) %>% 
+      #Second
+      gather(startdate_window1, startdate_window2, key = "start_window", value = "window_start_date") %>% 
+      filter(!is.na(window_start_date)) %>% 
+      #Third
+      group_by(window_start_date) %>% 
+      summarise(num = n(),
+                perc_cancelled = sum(is.na(arr_delay)) / n(),
+                mean_delay = mean(arr_delay, na.rm = TRUE),
+                perc_delay = mean(arr_delay > 0, na.rm = TRUE),
+                total_delay_mins = sum(arr_delay, na.rm = TRUE)) %>% 
+      ungroup()
+    
+    #don't worry about warning of 'attributes are not identical...', that is
+    #because the cut function assigns attributes to the value, it's fine if
+    #these are dropped here.
+    ```
+    
+    Create tibble of worst 2-day period for mean `arr_delay`
+    ```{r}
+    WorstWindow <- delays_windows %>% 
+      mutate(mean_delay_rank = dplyr::min_rank(-mean_delay)) %>% 
+      filter(mean_delay_rank <= 1)
+    
+    WorstDates <- tibble(dates = c(lubridate::as_date(WorstWindow$window_start_date), lubridate::as_date(WorstWindow$window_start_date) + lubridate::duration(1, "days")))
+    ```
+    
+    Ammend weather data so that weather is an average across three NY locations rather than seperate for each ^[note that a weighted average based on traffic would be more appropriate here because the `mean_delay` values will be weighted by number of flights going through each -- hopefully lack of substantial difference between locatioins means this won't be too impactful...]
+    ```{r}
+    weather_ammended <- weather %>% 
+      mutate(time_hour = lubridate::make_datetime(year, month, day, hour)) %>% 
+      select(-one_of("origin", "year", "month", "day", "hour")) %>% 
+      group_by(time_hour) %>% 
+      summarise_all(mean, na.rm = TRUE) %>% 
+      ungroup()
+    ```
+    
+    
+    Filtering join to just times weather for worst 2 days
+    ```{r}
+    weather_worst <- weather_ammended %>%
+      mutate(dates = as_date(time_hour)) %>% 
+      semi_join(WorstDates)
+    ```
+    
+    Plot of hourly weather values across 48 hour time windows.
+    ```{r}
+    weather_worst %>% 
+      select(-dates) %>% 
+      gather(temp:visib, key = "weather_type", value = "weather_value") %>% 
+      ggplot(aes(x = time_hour, y = weather_value))+
+      geom_line()+
+      facet_grid(weather_type ~ ., scales = "free_y")+
+      labs(title = 'Hourly weather values across worst 48 hours of delays')
+    ```
+
+    Patterns:  
+      
+    * `wind_gust` and `wind_speed` are the same.
+    * See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
+    
+    Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
+    ```{r}
+    bind_rows(  
+    weather_worst %>% 
+      summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+      mutate(category = "weather on worst 48") %>% 
+      gather(temp:visib, key = weather_type, value = weather_val)
+    ,
+    weather_ammended %>% 
+      summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+      mutate(category = "weather on average") %>% 
+      gather(temp:visib, key = weather_type, value = weather_val)
+    ) %>% 
+      ggplot(aes(x = category, y = weather_val, fill = category))+
+      geom_col()+
+      facet_wrap(~weather_type, scales = "free_y")+
+      labs(title = "Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year", 
+           caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
+    ```
+
+    For this to be the worst 48 hour period, the weather doesn't actually seem to be as extreme as I would have guessed.
+    
+    Let's add-in average `arr_delay` by planned departure time to this to see how the delay times throughout the day varied, to see if there was a surge or change in weather that led to the huge change in delays.
+    
+    ```{r}
+    flights %>% 
+      mutate(dates = as_date(time_hour)) %>% 
+      semi_join(WorstDates) %>% 
+      group_by(time_hour) %>% 
+      summarise(value = mean(arr_delay, na.rm = TRUE)) %>% 
+      ungroup() %>% 
+      mutate(value_type = "Mean_ArrDelay") %>% 
+      bind_rows(
+      weather_worst %>% 
+        select(-dates) %>% 
+        gather(temp:visib, key = "value_type", value = "value")
+      ) %>% 
+      mutate(weather_attr = !(value_type == "Mean_ArrDelay"),
+             value_type = forcats::fct_relevel(value_type, "Mean_ArrDelay")) %>% 
+      ggplot(aes(x = time_hour, value, colour = weather_attr))+
+      geom_line()+
+      facet_grid(value_type ~ ., scales = "free_y")+
+      labs(title = 'Hourly weather and delay values across worst 48 hours of delays')
+    
+    ```
+
+    Maybe that first uptick in precipitation corresponded with the increase in delay... but still, looks extreme like an incident caused this. I cheched the news and it looks like a plane was crash landed onto the tarmac at one of the airports on this day https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4 , I checked the incident time and it occurred at 17:45 Jul 22, looks like it overlaps with the time we see the uptick in delays.  
+
+    I show plots and models of 48 hour time windows in a variety of other contexts and detail in [Appendix]
+
+1.  *What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you?*
+    *What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you?*
+
+    `anti_join(flights, airports, by = c("dest" = "faa"))` --tells me the flight dests missing an airport
+    `anti_join(airports, flights, by = c("faa" = "dest"))` -- tells me the airports with no flights coming to them
+
+1.  *You might expect that there's an implicit relationship between plane*
+    *and airline, because each plane is flown by a single airline. Confirm*
+    *or reject this hypothesis using the tools you've learned above.*
+
+    ```{r}
+    tail_carr <- flights %>% 
+      filter(!is.na(tailnum)) %>% 
+      distinct(carrier, tailnum) %>% 
+      count(tailnum, sort=TRUE)
+    
+    tail_carr %>% 
+      filter(n > 1)
+    ```
+    
+    
+    You should reject that hypothesis, you can see that 17 `tailnum`s are duplicated on multiple carriers.  
+    
+    Below is code to show those 17 tailnums
+    ```{r}
+    flights %>% 
+      distinct(carrier, tailnum) %>% 
+      filter(!is.na(tailnum)) %>% 
+      group_by(tailnum) %>% 
+      mutate(n_tail = n()) %>%
+      ungroup() %>% 
+      filter(n_tail > 1) %>% 
+      arrange(desc(n_tail), tailnum)
+    ```
+
+#Appendix
+
+##13.5.1.4
+
+Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.
+```{r}
+delays_windows %>% 
+  gather(perc_cancelled, mean_delay, perc_delay, key = value_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
+  ggplot(aes(window_start_date, val))+
+  geom_line()+
+  facet_wrap(~value_type, scales = "free_y", ncol = 1)+
+  scale_x_date(date_labels = "%b %d")+
+  labs(title = 'Measures of delay across 48 hour time windows')
+
+```
+
+Create 48 hour windows for weather data. Follow exact same steps as above.
+
+```{r}
+weather_windows <- weather_ammended %>% 
+  mutate(date_flight = lubridate::as_date(time_hour)) %>% 
+  mutate(startdate_window1 = cut.Date(date_flight, "2 day")) %>% 
+  mutate(date_flight2 = ifelse(!(date_flight == min(date_flight, na.rm = TRUE)), date_flight, NA),
+         date_flight2 = lubridate::as_date(date_flight2),
+         startdate_window2 = cut.Date(date_flight2, "2 day")) %>% 
+  select(-date_flight, -date_flight2) %>% 
+    #Second
+  gather(startdate_window1, startdate_window2, key = "start_window", value = "window_start_date") %>% 
+  filter(!is.na(window_start_date)) %>% 
+  #Third
+  group_by(window_start_date) %>%
+  summarise_at(vars(temp:visib), mean, na.rm = TRUE) %>% 
+  ungroup() %>% 
+  select(-wind_gust)
+
+```
+
+  Graph using same method as above...
+```{r}
+weather_windows %>% 
+  gather(temp:visib, key = weather_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date)) %>% 
+  ggplot(aes(x = window_start_date, y = val))+
+  geom_line()+
+  facet_wrap(~weather_type, ncol = 1, scales = "free_y")+
+  scale_x_date(date_labels = "%b %d")+
+  labs(title = 'Measures of weather across 48 hour time windows')
+
+```
+
+Connect delays and weather data
+
+```{r}
+weather_delay_joined <- left_join(delays_windows, weather_windows, by = "window_start_date") %>% 
+  select(mean_delay, temp:visib, window_start_date) %>%
+  select(-dewp) %>%  #is almost completely correlated with temp so removed one of them...
+  na.omit()
+  
+```
+
+Plot of 48 hour window of weather scores against mean delay keeping intact order of observations
+
+```{r}
+weather_delay_joined %>% 
+  gather(mean_delay, temp:visib, key = value_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date),
+         value_type = forcats::fct_relevel(value_type, "mean_delay")) %>%
+  ggplot(aes(x = window_start_date, y = val, colour = ! value_type == "mean_delay"))+
+  geom_line()+
+  facet_wrap(~value_type, scales = "free_y", ncol = 1)+
+  labs(colour = "Weather value", title = "Mean delay and weather value in 2-day rolling window")
+
+```
+
+Plot of mean_delay against weather type, each point representing a different 'window'
+```{r}
+weather_delay_joined %>% 
+  gather(temp:visib, key = weather_type, value = weather_val) %>% 
+  ggplot(aes(x = weather_val, y = mean_delay))+
+  geom_point()+
+  geom_smooth()+
+  facet_wrap(~weather_type, scales = "free_x")
+```
+
+In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below... This is often ignored and we can also ignore it for now as it gets into time series and things we don't need to worry about for now... but somthing to be aware...
+
+```{r}
+weather_delay_joined %>% 
+  mutate(mean_delay_lag = lag(mean_delay)) %>% 
+  select(mean_delay, mean_delay_lag) %>% 
+  na.omit() %>% 
+  cor()
+```
+
+Data is not Independent (as mentioned above) and many problems associated with this... but let's ignore this for now and just look at a few statisitics... 
+
+Can see below that raw correlation of `mean_delay` is highest with humid. 
+
+```{r}
+weather_delay_joined %>%  
+  select(-window_start_date) %>% 
+  cor()
+```
+
+When accounting for other variables, see relationship with windspeed seems to emerge as important...
+```{r}
+weather_delay_joined %>% 
+  select(-window_start_date) %>% 
+  lm(mean_delay ~ ., data = .) %>% 
+  summary()
+```
+
+For a variety of reasons, especially in cases where your observations are not independent, you may want to evaluate how the change in an attribute relates to the change in another attribute. In the cases below I plot the diffs for example:  
+  
+*(average value on 2013-02-07 to 2013-02-08) - (average value on 2013-02-08 to 2013-02-09)*  
+  
+Note that the time windows are not distinct but overlap by 24 hours.
+
+If doing a thorough account of time-series you would do a lot more than I show below...
+
+```{r}
+weather_delay_joined %>% 
+  gather(mean_delay, temp:visib, key = value_type, value = val) %>% 
+  mutate(window_start_date = lubridate::as_date(window_start_date),
+         value_type = forcats::fct_relevel(value_type, "mean_delay")) %>%
+  group_by(value_type) %>% 
+  mutate(value_diff = val - lag(val)) %>% 
+  ggplot(aes(x = window_start_date, y = value_diff, colour = !value_type == "mean_delay"))+
+  geom_line()+
+  facet_wrap(~value_type, scales = "free_y", ncol = 1)+
+  labs(colour = "Weather value", title = "Plot of diffs in value")
+
+```
+
+Let's plot these diffs as a scatter plot now (no longer looking at the order in which the observations emerged)
+```{r}
+weather_delay_joined %>% 
+  gather(temp:visib, key = weather_type, value = val) %>% 
+  group_by(weather_type) %>% 
+  mutate(weather_diff = val - lag(val),
+         delay_diff = mean_delay - lag(mean_delay)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = weather_diff, y = delay_diff))+
+  geom_point()+
+  geom_smooth()+
+  facet_wrap(~weather_type, scales = "free_x")+
+  labs(title = "scatter plot of diffs in value")
+```
+
+Let's look at the correlatioin and regression against these diffs
+```{r}
+diff_data <- weather_delay_joined %>% 
+  gather(mean_delay, temp:visib, key = value_type, value = val) %>% 
+  group_by(value_type) %>% 
+  mutate(diff = val - lag(val)) %>% 
+  ungroup() %>% 
+  select(-val) %>% 
+  spread(key = value_type, value = diff)
+
+diff_data %>%
+  select(-window_start_date) %>% 
+  na.omit() %>% 
+  cor()
+
+diff_data %>% 
+  select(-window_start_date) %>% 
+  lm(mean_delay ~ ., data = .) %>% 
+  summary()
+
+```
