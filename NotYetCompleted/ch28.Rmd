@@ -1,0 +1,93 @@
+---
+title: "Chapter 28 Graphics for communication"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(babynames)
+library(nasaweather)
+library(lubridate)
+```
+
+
+# ch. 28: Graphics for communication
+
+## 28.2: Label
+
+### 28.2.1
+
+1.  Create one plot on the fuel economy data with customised `title`,
+    `subtitle`, `caption`, `x`, `y`, and `colour` labels.
+
+1.  The `geom_smooth()` is somewhat misleading because the `hwy` for
+    large engines is skewed upwards due to the inclusion of lightweight
+    sports cars with big engines. Use your modelling tools to fit and display
+    a better model.
+
+1.  Take an exploratory graphic that you've created in the last month, and add
+    informative titles to make it easier for others to understand.
+    
+## 28.3: Annotations
+
+### 28.3.1
+
+1.  Use `geom_text()` with infinite positions to place text at the
+    four corners of the plot.
+
+1.  Read the documentation for `annotate()`. How can you use it to add a text
+    label to a plot without having to create a tibble?
+
+1.  How do labels with `geom_text()` interact with faceting? How can you
+    add a label to a single facet? How can you put a different label in
+    each facet? (Hint: think about the underlying data.)
+
+1.  What arguments to `geom_label()` control the appearance of the background
+    box?
+
+1.  What are the four arguments to `arrow()`? How do they work? Create a series
+    of plots that demonstrate the most important options.
+    
+## 28.4: Scales
+
+### 28.4.4
+
+1.  Why doesn't the following code override the default scale?
+
+    ```{r fig.show = "hide"}
+    ggplot(df, aes(x, y)) +
+      geom_hex() +
+      scale_colour_gradient(low = "white", high = "red") +
+      coord_fixed()
+    ```
+
+1.  What is the first argument to every scale? How does it compare to `labs()`?
+
+1.  Change the display of the presidential terms by:
+
+    1. Combining the two variants shown above.
+    1. Improving the display of the y axis.
+    1. Labelling each term with the name of the president.
+    1. Adding informative plot labels.
+    1. Placing breaks every 4 years (this is trickier than it seems!).
+
+1.  Use `override.aes` to make the legend on the following plot easier to see.
+
+    ```{r, dev = "png", out.width = "50%"}
+    ggplot(diamonds, aes(carat, price)) +
+      geom_point(aes(colour = cut), alpha = 1/20)
+    ```
+    
+

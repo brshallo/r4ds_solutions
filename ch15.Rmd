@@ -1,0 +1,284 @@
+---
+title: "Chapter 15 Factors"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(lubridate)
+library(forcats)
+```
+
+# ch. 15: Factors
+
+Create factors by order they come-in:
+
+Avoiding dropping levels with `drop = FALSE`
+```{r}
+gss_cat %>% 
+  ggplot(aes(race))+
+  geom_bar()+
+  scale_x_discrete(drop = FALSE)
+
+# Is there a similar way to do this with count?
+```
+
+* `factor` make variable a factor based on `levels` provided
+* `fct_rev` reverses order of factors
+* `fct_infreq` orders levels in increasing frequency
+* `fct_relevel` lets you move levels to front of order
+* `fct_inorder` orders existing factor by order values show-up in in data
+* `fct_reorder` orders input factors by other specified variables value (median by default), 3 inputs: `f`: factor to modify, `x`: input var to order by, `fun`: function to use on x, also have `desc` option
+* `fct_reorder2` orders input factor by max of other specified variable (good for making legends align as expected)
+* `fct_recode` lets you change value of each level
+* `fct_collapse` is variant of `fct_recode` that allows you to provide multiple old levels as a vector
+* `fct_lump` allows you to lump together small groups, use `n` to specify number of groups to end with
+
+## 15.4: Modifying factor order
+
+Example with `fct_recode`
+
+```{r}
+gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong"    = "Strong republican",
+    "Republican, weak"      = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak"        = "Not str democrat",
+    "Democrat, strong"      = "Strong democrat"
+  )) %>%
+  count(partyid)
+```
+
+
+### 15.3.1 
+
+1.  Explore the distribution of `rincome` (reported income). What makes the
+    default bar chart hard to understand? How could you improve the plot?
+    
+    ```{r}
+    gss_cat %>% 
+      ggplot(aes(x = rincome)) +
+      geom_bar()
+
+    ```
+    
+    
+    * Default bar chart has categories across the x-asix, I flipped these to be across the y-axis 
+    * Also, have highest values at the bottom rather than at the top and have different version of NA showing-up at both top and bottom, all should be on one side
+    * In `bar_prep`, I used reg expressions to extract the numeric values, arrange by that, and then set factor levels according to the new order
+        + Solution is probably unnecessarily complicated...
+
+    ```{r}
+    bar_prep <- gss_cat %>% 
+      extract(col = rincome, into =c("dollars1", "dollars2"), "([0-9]+)[^0-9]*([0-9]*)", remove = FALSE) %>% 
+      mutate_at(c("dollars1", "dollars2"), funs(ifelse(is.na(.) | . == "", 0, as.numeric(.)))) %>% 
+      arrange(dollars1, dollars2) %>% 
+      mutate(rincome = fct_inorder(rincome))
+    
+    bar_prep %>% 
+      ggplot(aes(x = rincome)) +
+      geom_bar() +
+      scale_x_discrete(drop = FALSE) +
+      coord_flip()
+    ```
+
+
+1.  What is the most common `relig` in this survey? What's the most
+    common `partyid`?
+
+    ```{r}
+    gss_cat %>%
+      count(relig, sort = TRUE)
+      
+    gss_cat %>%
+      count(partyid, sort = TRUE)
+      
+    ```
+
+    * `relig` most common -- Protestant, 10846,
+    * `partyid` most common -- Independent, 4119
+
+1.  Which `relig` does `denom` (denomination) apply to? How can you find
+    out with a table? How can you find out with a visualisation?
+    
+    *With visualization:*
+    ```{r}
+    gss_cat %>% 
+      ggplot(aes(x=relig, fill=denom))+
+      geom_bar()+
+      coord_flip()
+    ```
+    
+    * Notice which have the widest variety of colours -- are protestant, and Christian slightly
+    
+    *With table:*
+    ```{r}
+    gss_cat %>% 
+      count(relig, denom) %>% 
+      count(relig, sort = TRUE)
+    ```
+    
+	
+## 	15.4: Modifying factor order
+
+### 15.4.1
+	
+1.  There are some suspiciously high numbers in `tvhours`. Is the mean a good
+    summary?
+    
+    ```{r}
+    gss_cat %>%
+      mutate(tvhours_fct = factor(tvhours)) %>% 
+      ggplot(aes(x = tvhours_fct)) +
+      geom_bar()
+    
+    ```
+   
+   * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
+   * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
+
+1.  For each factor in `gss_cat` identify whether the order of the levels is
+    arbitrary or principled.
+    
+    ```{r}
+    gss_cat %>% 
+      purrr::keep(is.factor) %>% 
+      purrr::map(levels)
+    
+    ```
+    
+    * `rincome` is principaled, rest are arbitrary
+
+
+1.  Why did moving "Not applicable" to the front of the levels move it to the
+    bottom of the plot?
+    
+    * Becuase is moving this factor to be first in order
+	
+## 	15.5: Modifying factor levels
+
+### 15.5.1
+
+1.  How have the proportions of people identifying as Democrat, Republican, and
+    Independent changed over time?
+
+    *As a line plot: * 
+    ```{r}
+    gss_cat %>%
+      mutate(partyid = fct_collapse(
+        partyid,
+        other = c("No answer", "Don't know", "Other party"),
+        rep = c("Strong republican", "Not str republican"),
+        ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+        dem = c("Not str democrat", "Strong democrat")
+      )) %>%
+      count(year, partyid) %>%
+      group_by(year) %>%
+      mutate(prop = n / sum(n)) %>%
+      ungroup() %>%
+      ggplot(aes(
+        x = year,
+        y = prop,
+        colour = fct_reorder2(partyid, year, prop)
+      )) +
+      geom_line() +
+      labs(colour = "partyid")
+    ```
+    
+    *As a bar plot: * 
+    
+    ```{r}
+    gss_cat %>%
+      mutate(partyid = fct_collapse(
+        partyid,
+        other = c("No answer", "Don't know", "Other party"),
+        rep = c("Strong republican", "Not str republican"),
+        ind = c("Ind,near rep", "Independent", "Ind,near dem"),
+        dem = c("Not str democrat", "Strong democrat")
+      )) %>%
+      count(year, partyid) %>%
+      group_by(year) %>%
+      mutate(prop = n / sum(n)) %>%
+      ungroup() %>%
+      ggplot(aes(
+        x = year,
+        y = prop,
+        fill = fct_reorder2(partyid, year, prop)
+      )) +
+      geom_col() +
+      labs(colour = "partyid")
+    
+    ```
+
+    * Suggests proportion of republicans has gone down with independents and other going up.
+
+1.  How could you collapse `rincome` into a small set of categories?
+
+    ```{r}
+    other = c("No answer", "Don't know", "Refused", "Not applicable")
+    high = c("$25000 or more", "$20000 - 24999", "$15000 - 19999", "$10000 - 14999")
+    med = c("$8000 to 9999", "$7000 to 7999", "$6000 to 6999", "$5000 to 5999")
+    low = c("$4000 to 4999", "$3000 to 3999", "$1000 to 2999", "Lt $1000")
+    
+    mutate(gss_cat,
+           rincome = fct_collapse(
+           rincome,
+           other = other,
+           high = high,
+           med = med,
+           low = low
+           )) %>%
+           count(rincome)
+    
+    ```
+
+
+
+# Appendix 
+
+## Viewing all levels
+
+A few ways to get an initial look at the levels or counts across a dataset
+
+```{r}
+gss_cat %>% 
+  purrr::map(unique)
+
+gss_cat %>% 
+  purrr::map(table)
+
+gss_cat %>% 
+  purrr::map(table) %>% 
+  purrr::map(plot)
+
+```
+
+## Percentage NA each level
+
+```{r}
+gss_cat %>% 
+  purrr::map(~(sum(is.na(.x)) / length(.x)))
+```
+
+## Print all levels of tibble
+
+```{r}
+gss_cat %>% 
+  count(tvhours) %>% 
+  print(n = Inf)
+```
+

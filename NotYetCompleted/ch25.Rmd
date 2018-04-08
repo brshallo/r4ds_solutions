@@ -1,0 +1,83 @@
+---
+title: "Chapter 25 Many models"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(babynames)
+library(nasaweather)
+library(lubridate)
+```
+
+# ch. 25: Many modeling
+
+## 25.2: gapminder
+
+### 25.2.5
+
+1.  A linear trend seems to be slightly too simple for the overall trend.
+    Can you do better with a quadratic polynomial? How can you interpret
+    the coefficients of the quadratic? (Hint you might want to transform
+    `year` so that it has mean zero.)
+
+1.  Explore other methods for visualising the distribution of $R^2$ per
+    continent. You might want to try the ggbeeswarm package, which provides 
+    similar methods for avoiding overlaps as jitter, but uses deterministic
+    methods.
+
+1.  To create the last plot (showing the data for the countries with the
+    worst model fits), we needed two steps: we created a data frame with
+    one row per country and then semi-joined it to the original dataset.
+    It's possible avoid this join if we use `unnest()` instead of 
+    `unnest(.drop = TRUE)`. How?
+    
+## 25.4: Creating list-columns
+
+### 25.4.5
+
+1.  List all the functions that you can think of that take a atomic vector and 
+    return a list.
+    
+1.  Brainstorm useful summary functions that, like `quantile()`, return
+    multiple values.
+    
+1.  What's missing in the following data frame? How does `quantile()` return
+    that missing piece? Why isn't that helpful here?
+
+    ```{r}
+    mtcars %>% 
+      group_by(cyl) %>% 
+      summarise(q = list(quantile(mpg))) %>% 
+      unnest()
+    ```
+
+1.  What does this code do? Why might might it be useful?
+
+    ```{r, eval = FALSE}
+    mtcars %>% 
+      group_by(cyl) %>% 
+      summarise_each(funs(list))
+    ```
+
+## 25.5: Simplifying list-columns
+
+### 25.5.3
+
+1.  Why might the `lengths()` function be useful for creating atomic
+    vector columns from list-columns?
+    
+1.  List the most common types of vector found in a data frame. What makes
+    lists different?
