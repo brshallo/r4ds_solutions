@@ -119,8 +119,6 @@ flights_dt %>%
     geom_line()
 ```
 
-Accessor functions can also 
-
 
 ### 16.3.4
 
