@@ -14,12 +14,14 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 *Make sure the following packages are installed:*  
 ```{r}
+library(nycflights13)
 library(ggplot2)
 library(dplyr)
 library(forcats)
 library(tidyr)
 library(lubridate)
 library(stringr)
+library(e1071)
 ```
 
 # ch. 19: Functions
@@ -81,7 +83,6 @@ commas(letters[1:10])
     unchanged. Rewrite `rescale01()` so that `-Inf` is mapped to 0, and 
     `Inf` is mapped to 1.
 
-    * Check how Stephen and others did this    
     ```{r}
     rescale01_inf <- function(x){
       
@@ -110,7 +111,7 @@ commas(letters[1:10])
     sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)
     ```
 
-    * See solutions below
+    * See solutions below:
     ```{r}
     x <- c(1, 4, 2, 0, NA, 3, NA)
     
@@ -141,23 +142,76 @@ commas(letters[1:10])
     write your own functions to compute the variance and skew of a numeric 
     vector.
     
-    * Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)    
+    * Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)  
+    
+    ```{r}
+    var_bry <- function(x){
+      sum((x - mean(x)) ^ 2) / (length(x) - 1)
+    }
+    
+    skewness_bry <- function(x) {
+      mean((x - mean(x)) ^ 3) / var_bry(x) ^ (3 / 2)
+    }
+    
+    
+    ```
+    
+    Let's create some samples of distributions -- normal, t (with 7 degrees of freedom), unifrom, poisson (with lambda of 2).  
+    
+    Note that an example with a cauchy distribution and looking at difference in kurtosis between that and a normal distribution has been moved to the [Appendix] section [19.2.1.4].
+    ```{r}
+    nd <- rnorm(10000)
+    td_df7 <- rt(10000, df = 7)
+    ud <- runif(10000)
+    pd_l2 <- rpois(10000, 2)
+    ```
+    
+    
+    Verify that these functions match with established functions
+    ```{r}
+    dplyr::near(skewness_bry(pd_l2), e1071::skewness(pd_l2, type = 3))
+    
+    dplyr::near(var_bry(pd_l2), var(pd_l2))
+    
+    ```
+    
+    Let's look at the distributions as well as their variance an skewness
+    ```{r}
+    distributions_df <- tibble(normal_dist = nd,
+           t_7df_dist = td_df7,
+           uniform_dist = ud,
+           poisson_dist = pd_l2)
+    
+    distributions_df %>% 
+      gather(normal_dist:poisson_dist, value = "sample", key = "dist_type") %>% 
+      mutate(dist_type = factor(forcats::fct_inorder(dist_type))) %>% 
+      ggplot(aes(x = sample))+
+      geom_histogram()+
+      facet_wrap(~ dist_type, scales = "free")
+    
+    tibble(dist_type = names(distributions_df),
+    skewness = purrr::map_dbl(distributions_df, skewness_bry), 
+    variance = purrr::map_dbl(distributions_df, var_bry))
+    
+    ```
+    
+    * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
     
 1.  Write `both_na()`, a function that takes two vectors of the same length 
     and returns the number of positions that have an `NA` in both vectors.
     
-    * Re-do to make more elegant
-
-    ```{r}
+    ```{r, error = TRUE}
     both_na <- function(x, y) {
       if (length(x) == length(y)) {
-      (c(1:length(x)))[(is.na(x) & is.na(y))]
+      sum(is.na(x) & is.na(y))
       } else
-      warning("Vectors are not equal length")
+      stop("Vectors are not equal length")
     }
+    
     x <- c(4, NA, 7, NA, 3)
     y <- c(NA, NA, 5, NA, 0)
     z <- c(NA, 4)
+    
     both_na(x, y)
     both_na(x, z)
     ```
@@ -178,15 +232,15 @@ commas(letters[1:10])
     Extend the initial piping example to recreate the complete song, and use 
     functions to reduce the duplication.
     
-    * Do later
+    * Do later...
 
 ## 19.3: Functions are for humans and computers
 
 * Recommends snake_case over camelCase, but just choose one and be consistent
 * When functions have a link, common prefix over suffix (i.e. input_select, input_text over, select_input, text_input) 
-* ctrl + shift + r creates section breaks in R scripts like below
+* ctrl + shift + r creates section breaks in R scripts like below  
 `# test label --------------------------------------------------------------`
-    + though these cannot be made in markdown documents
+    + (though these cannot be made in markdown documents)
 
 
 
@@ -281,16 +335,21 @@ has_name <- function(x) {
     easier to test your function.)
 
     ```{r}
-    greeting <- function(when = now()) {
+    greeting <- function(when) {
+      
       time <- hour(when)
+      
       if (time < 12 && time > 4) {
         greating <- "good morning"
       } else if (time < 17 && time >= 12) {
         greeting <- "good afternoon"
       } else greeting <- "good evening"
       
-      cat(greeting, ", it is ", as.character(when), sep = "")
+      when_char <- as.character(when)
+      mid <- ", it is: "
+      cat(greeting, mid, when_char, sep = "")
     }
+    
     greeting(now())
     
     ```
@@ -483,7 +542,6 @@ has_name <- function(x) {
 show_missings <- function(df) {
   n <- sum(is.na(df))
   cat("Missing values: ", n, "\n", sep = "")
-  
   invisible(df)
 }
 
@@ -503,10 +561,10 @@ mtcars %>%
 
 # Appendix
 
-What is best practice for replacing long chain of `ifelse` statements in vectorized contexts?
-For 19.2.1.2 if this were in a dataframe context, what would be the best practice -- typically I would use a bunch of `ifelse` statements, but this does not seem optimal...
+## 19.2.1.4
 
-## sample_SE
+*Function for Standard Error* 
+
 
     ```{r}
     x <- c(5, -2, 8, 6, 9)
@@ -518,3 +576,203 @@ For 19.2.1.2 if this were in a dataframe context, what would be the best practic
     
     sample_se(x)
     ```
+
+
+*Function for kurtosis*
+```{r}
+kurtosis_type3 <- function(x){
+  sum((x - mean(x)) ^ 4) / length(x) / sd(x) ^ 4 - 3
+}
+
+```
+
+Notice differences between cauchy and normal distribution
+
+```{r}
+set.seed(1235)
+norm_exp <- rnorm(10000)
+
+set.seed(1235)
+cauchy_exp <- rcauchy(10000)
+
+hist(norm_exp)
+hist(cauchy_exp)
+
+kurtosis_type3(norm_exp)
+
+kurtosis_type3(cauchy_exp)
+
+```
+
+```{r}
+
+```
+
+
+## Changing values with indexes
+
+*In this section I use the word 'indexes' to refer to any base R method for specifying position ^[I am using the word loosely to mean both either the situation when you specify postions by a series of `TRUE` / `FALSE` values or a series of numeric indexes E.g. x[c(TRUE, TRUE, FALSE, FALSE, TRUE)] or x[c(1, 2, 5)] , 'index' obviously sounds more like the later, but I mean it generally to cover just 'base R method of specifying positoin'.].
+
+My solution to building the new function in 19.2.1.2 shows another way of replacing values over re-writing a new vector, namely by specifying indexes and then forcing those to be a new value.  
+
+For example, say we have a vector `c(1:20)` and we want to make all even values equal to 0.  below is how you could do that by simply re-writing this to a new vector
+```{r}
+x <- c(1:20)
+
+x_0_even <- ifelse((x %% 2) == 0, 0, x)
+
+x_0_even
+```
+
+Alternatively, you could do this by simply overwriting the values in a specified index with a value (like I did in question 19.2.1.2)
+```{r}
+x <- c(1:20)
+
+x[(x %% 2) == 0] <- 0
+
+x
+```
+
+Both the indexing and the ifelse method give the same output. I have a slight preference for the `ifelse` method as I think it is a little easier to read. Also, it doesn't force you to overwrite your data -- to save against this second problem I will often save a copy before applying the indexed approach (though if it's in a function don't need to worry about this as changes will default to occur within function not global environment). e.g.
+
+```{r}
+x <- c(1:20)
+x_0_even <- x
+
+x_0_even[(x %% 2) == 0] <- 0
+
+x_0_even
+```
+
+If you're curious about speed of each, you can see the index method tends to be faster on this dataset.  
+
+*Build functions (necessary for measuring speed): *
+```{r}
+method_ifelse <- function(vector = c(1:20)){
+  x <- vector
+  
+  x_0_even <- ifelse((x %% 2) == 0, 0, x)
+  
+  x_0_even
+}
+
+method_index <- function(vector = c(1:20)){
+  x <- vector
+  x[(x %% 2) == 0] <- 0
+  
+  x
+}
+
+```
+
+*Measure time it takes to run: *
+```{r}
+microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
+                               index = method_index(1:1000),
+                               times = 500)
+
+```
+
+The index methods tends to be faster.
+
+### Applying indexing to dfs
+
+I have a high preference for using tidyverse style approaches when applying transformations to dataframes, though there are instances when it's easier to use indexing methods. A common example of this is say we want to replace all of the `NA` values across multiple columns in a dataframe.
+
+```{r}
+df <- tibble(x = c(NA, 3, 4),
+       y = c(4, NA, NA))
+
+```
+
+The code below uses an indexing method to replace all `NA` values in the df with 0
+```{r}
+df_cleanNA <- df
+df_cleanNA[is.na(df)] <- 0
+
+df_cleanNA
+```
+
+Below is the dplyr approach (requires knowledge of `mutate_all` and `funs`)
+```{r}
+mutate_all(df, funs(ifelse(is.na(.), 0, .)))
+```
+
+With a purrr function you could have done:
+```{r}
+purrr::map_df(df, ~ifelse(is.na(.x), 0, .x))
+
+```
+
+If you're curious of speed of each, below is microbenchmark test
+
+```{r}
+df_na0_index <- function(df){
+  df[is.na(df)] <- 0
+  df
+}
+
+df_na0_dplyr <- function(df){
+  mutate_all(df, funs(ifelse(is.na(.), 0, .)))
+}
+
+df_na0_purrr <- function(df){
+  purrr::map_df(df, ~ifelse(is.na(.x), 0, .x))
+}
+
+```
+
+*Measure time it takes to run: *  
+
+First on tiny dataset:
+```{r}
+microbenchmark::microbenchmark(index = df_na0_index(flights),
+                               dplyr = df_na0_index(flights),
+                               purrr = df_na0_purrr(flights),
+                               times = 10)
+```
+
+
+Then on larger dataset:
+```{r}
+microbenchmark::microbenchmark(index = df_na0_index(flights),
+                               dplyr = df_na0_index(flights),
+                               purrr = df_na0_purrr(flights),
+                               times = 10)
+```
+
+You should see that the index and dplyr method are pretty consistent on time, whereas the purrr method will be slower. For this example and some problems like this then indexing may be the best option (generally though I lean more towards using dplyr where possible).  
+
+I also wonder if there may be a better alternative to `ifelse` in this situation.
+
+## Better than `ifelse()`?
+
+I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style...
+
+## Dplyr and functions
+
+As was mentioned, dplyr uses non-standard evaluation. This means that when referring to column names form within a function, dplyr will require some slightly different syntax... I typically find ways around this by deploying tricks with the `*_` verbs or taking advantage of the `vars` functions and `*_at` or by messing with the names, though am interested to hear other methods...
+
+Say you want to write a function that takes in a dataframe and a list of column names and you want to return a sum of these into a new column with the name corresponding with the name of the spliced together columns. What would be the most elegant way of doing this with tidyverse style?
+
+## 19.2.3.5
+
+    ```{r, error = TRUE}
+
+    position_both_na <- function(x, y) {
+      if (length(x) == length(y)) {
+      (c(1:length(x)))[(is.na(x) & is.na(y))]
+      } else
+      stop("Vectors are not equal length")
+    }
+
+    x <- c(4, NA, 7, NA, 3)
+    y <- c(NA, NA, 5, NA, 0)
+    z <- c(NA, 4)
+    both_na(x, y)
+    both_na(x, z)
+    
+    ```
+
+* specifies position where both are `NA`
+* second example shows returning of 'stop' argument
