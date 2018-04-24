@@ -8,7 +8,7 @@ Last updated: 2018-04-24
 -   [Other reasons...](#other-reasons...)
 
 ``` r
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, cache = TRUE)
 
 library(dplyr)
 library(ggplot2)
@@ -43,8 +43,6 @@ flights %>%
   filter(n() > 100) %>% 
   summarise_all(mean, na.rm = TRUE)
 ```
-
-    ## Warning: package 'bindrcpp' was built under R version 3.4.4
 
     ## # A tibble: 93 x 3
     ##    dest  air_time dep_delay

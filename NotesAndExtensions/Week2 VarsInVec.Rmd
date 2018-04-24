@@ -8,14 +8,8 @@ output:
     toc_depth: 3
 ---
 
-```{r setup, warning = FALSE, message = FALSE, eval = FALSE, include = FALSE}
-rmarkdown::render(paste0(getwd(), "/Week2 VarsInVec.Rmd"),
-                  rmarkdown::word_document(toc = TRUE),
-                  knitr::opts_chunk$set(echo = TRUE))
-```
-
 ```{r, results='hide', message=FALSE, warning=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, cache = TRUE)
 
 library(dplyr)
 library(ggplot2)
