@@ -1,1 +1,10 @@
+# basic options
+title: R4DS solutions
+author: Bryan Shalloway
+email: brshallo@gmail.com
+description: solutions to http://r4ds.had.co.nz with notes and commentary 
+github_user: brshallo
+
+# Bulid settings
+markdown: kramdown
 theme: jekyll-theme-architect
