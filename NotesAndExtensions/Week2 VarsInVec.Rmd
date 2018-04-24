@@ -1,0 +1,112 @@
+---
+title: "On variable names in character vectors (wk 2)"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, warning = FALSE, message = FALSE, eval = FALSE, include = FALSE}
+rmarkdown::render(paste0(getwd(), "/Week2 VarsInVec.Rmd"),
+                  rmarkdown::word_document(toc = TRUE),
+                  knitr::opts_chunk$set(echo = TRUE))
+```
+
+```{r, results='hide', message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(dplyr)
+library(ggplot2)
+library(Lahman)
+library(nycflights13)
+```
+
+
+vincent asked about the utlitiy of keeping the names of your columns in a seperate character vector and when it may be useful to do this versus just having the names within the funciton itself.  
+I.e.:  
+`select(flights, dep_delay, arr_delay)`
+  
+VS  
+  
+`vars <- c("dep_delay", "arr_delay")`  
+`select(flights, vars)`  
+  
+What/when does this extra step get you something...? I answered this briefly but wanted to restate this and give a little more thorough explanation on when this capability may be useful.    
+
+##Reason 1: single place to change
+
+If you have multiple operations on the same set of fields, it may be helpful to keep them in a character vector in a single location. Then, if you want to change your list of variables, you only need to change one location.
+
+```{r}
+vars <- c("air_time", "dep_delay")
+
+
+##Operation 1
+flights %>% 
+  select(dest, vars) %>% 
+  group_by(dest) %>% 
+  filter(n() > 100) %>% 
+  summarise_all(mean, na.rm = TRUE)
+
+##Operation 2
+flights %>% 
+  select(dest, vars) %>% 
+  group_by(dest) %>% 
+  filter(n() > 100) %>% 
+  summarise_all(median, na.rm = TRUE)
+
+##Operation 3
+##Don't worry if you don't understand this function yet
+flights %>% 
+  select(vars) %>% 
+  mutate_at(vars, funs(in_hours = . / 60))
+
+```
+
+
+In the above example you have three different operations all stemming from the same set of variables. Let's say you want to change your `vars` to `c("distance", "arr_delay")`, rather than needing to change the vars in each operation individually, if they all connect back to a single vector you can change this vector in just one location and all operations will be changed accordingly.  
+
+This goal of having parameters in as few places as possible and avoiding duplication is a key principle that we'll talk about when we get into functional programming and helps make it easier to make changes to your code in the future.
+
+##Reason 2, dynamic list of vars
+
+**We are not here yet**, but a very common reason you may want to input your variable names as a text string is when building functions (again, we will learn about these in the future). In this case, rather than keeping your var names in one location, you are keeping your logic in one location (within the funtion). But it's often easier to build quick funcitons when you pass the arguments in as character strings.  
+  
+Let's first look at an operation you may want to think about building a new function for.
+
+```{r}
+flights %>% 
+  group_by(dest) %>% 
+  summarise_at(c("dep_delay", "arr_delay"), mean, na.rm = TRUE)
+
+```
+
+Maybe you find yourself doing this a lot where you have a dataframe, you group by some variable, and then you want to do some aggregation upon this.  
+  
+If this is the case, you could put this into a funciton. Let's just take the above and replace our inputs with generic values. So `flights` is replaced with `df`, `dest` with `var_group`, `c("dep_delay", "arr_delay")` with `vars` and `mean` with `fun`. Then wrap this in a function call providing place holders for the inputs.
+
+```{r}
+GroupAndSummariseAt <- function(df, var_group, vars, fun){
+  df %>% 
+    group_by_(var_group) %>% 
+    summarise_at(vars, fun, na.rm = TRUE)
+}
+
+```
+
+The variables exist within the dataframe and for this function must be passed into the function as text strings^[If you tried inputting the variable names without text strings the function would assume there was some value associated with the name and would send an error once it didn't find any corresponding object in your environment.] Note also the slight change in the `group_by_` function^[Note that for this example `group_by` has to be changed to `group_by_` which is a version of the function designed for receiving a quoted string to specify the variables. `mutate` and `select` have `*_` variants as well, I believe `select` works either way though.].) This new function also allows you to change the method used for aggregation.  
+
+```{r}
+GroupAndSummariseAt(df = flights, var_group = "dest", vars = c("dep_delay", "arr_delay"), fun = "mean")
+
+GroupAndSummariseAt(flights, "origin", c("air_time", "distance"), "sd")
+
+GroupAndSummariseAt(Lahman::Batting, "yearID", c("H", "HR", "AB"), "sum")
+
+```
+
+
+##Other reasons...
+There are other dynamic processes you may have for generating character vectors to be fed into dplyr functions, but hopefully these provide a couple examples of possible motivations...  

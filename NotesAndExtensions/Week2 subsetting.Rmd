@@ -1,0 +1,275 @@
+---
+title: "On subsetting (wk 2)"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+```{r setup, warning = FALSE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+
+library(dplyr)
+library(ggplot2)
+library(nycflights13)
+
+```
+
+##on subsetting DFs
+
+Caroline asked how she would get JUST the 'flight' column in the flights data. For our purposes, I would recommend using dplyr code to do this.
+
+```{r}
+select(flights, flight)
+```
+
+
+This outputs a data frame / tibble ^[Note that dataframes and tibbles are essentially the same thing, tibbles are just dataframes with a few nice properties. There are occasionally instances where they behave a little differently, but generally they are the same.  We will typically use the phrase "dataframe" as a catch-all.] with a single column, `flight`.
+  
+**WARNING: LEAVING TIDYVERSE**  
+  
+In base R this is equivalent to any of the following
+
+`flights["flight"]`  
+`flights[11]`  
+`flights[c(FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE)]`  
+  
+(Running any of the above should give the exact same output)
+
+Likewise, these are also equivalent:  
+  
+dplyr/tidyverse approach: `select(flights, flight, dep_delay)`  
+  
+base R approach: `flights[c("flight", "dep_delay")]`  
+
+*For a wide variety of reasons (improved performance, more consistent handling, more friendly with pipes, others) we will be using the tidy approach as opposed to the base R approach, so you don't need to hurt your brain by becoming an expert at both, though any familiarity with the base R subsetting is always good to know^[A tip for searching stack overflow boards with questions is to include the tag "dplyr" or "tidyverse" on your searches, this will help filter to approaches that are consistent with the style we will be using. Base R stack overflow solutions can be tough to follow if you don't have a strong backgorund there.]*  
+
+##Subsetting vectors, difference
+
+This is a slight digression and not necessary for where we are right now... but in the meeting, I briefly showed how to extract the `flight` column out of the `flights` dataframe and output it as a vector (as opposed to as a one-columned dataframe) using base R's subsetting syntax. You can do this with any of the following:
+
+`flights$flight`  
+`flights[["flight"]]`  
+`flights[[11]]`  
+
+If you run one of these, you'll notice it just returns a vector of numbers corresponding with the values that were in the `flight` column.  
+
+This is now an atomic vector and no longer a dataframe. Much of the meta-data has been stripped or changed.  
+*Looking at each of these with `glimpse` can show some these differences*
+
+```{r}
+glimpse(flights$flight)
+glimpse(select(flights, flight))
+```
+
+##Functions that take dfs
+
+What may be helpful to understand is that functions like `mutate`, `filter`, `select`, etc., are expecting dataframes as their first argument, so if you pass them vectors, they are going to fail.  
+*E.g. the following outputs a dataframe in the firstline and pipes this to the first argument in the second line so the code works:*  
+
+```{r}
+flights["flight"] %>% 
+  select(flight)
+
+```
+
+The first line produces a one-columned dataframe. This is then piped into the second line that again selects the `flight` column giving the final output. This is also equivalent to the following:
+
+```{r}
+select(flights, flight) %>% 
+  select(flight)
+```
+
+The second line in both of these cases is actually completely redundant and you would get the same output with just `select(flights, flight)` or `flights["flight"]`.  
+  
+You could even run this to get a 0 columned dataframe...  
+```{r}
+select(flights, flight) %>% 
+  select(-flight)
+```
+
+However, the following produces a vector in it's first line and tries to pipe this into the select statement in the second line. 
+
+```{r, error = TRUE}
+flights$flight %>% 
+  select(flight)
+```
+
+The select statement is expecting a dataframe^[vectors don't have key things like column headers.] so the code will fail^[Use the error and warning messages as helpers when testing thing out.].  
+
+##Functions that take vectors
+
+###Expecting vector inputs
+
+Functions like `mean`, `sum`, `sd`, `median` etc. are expecting vectors, not dataframes.  
+
+So this works:
+
+```{r}
+
+median(flights$flight)
+```
+
+But this does not.
+
+```{r, error = TRUE}
+median(select(flights, flight))
+```
+
+Be careful though, some function may give output when they probably shouldn't notice that in this case it outputted NA and simply gave you a warning (as opposed to an error and no output).
+
+```{r}
+mean(select(flights, flight))
+
+```
+
+Others may automatically convert it to a vector for you and not throw any problem which may be fine in some cases but problematic in others^[Some of these inconsistencies in R are what have contributed to the rise of the tidyverse].  
+
+###Num values outputted
+The functions just mentioned like `mean`, `sum` etc. take in multiple values and output just a single value.   
+
+Many functions in R though output a value for every item inputted. For example, the logical operators `+`, `-`, `!`, etc.
+
+```{r}
+x <- c(1:10)
+
+x + 2
+
+y <- c(rep(TRUE, 5), rep(FALSE, 5))
+!y
+
+```
+
+As well as functions like `ifelse`
+
+```{r}
+x <- c(1:10)
+x
+
+ifelse(x > 4, "greater than 4", "less than 4")
+
+```
+
+`ifelse` function.  
+
+###Dplyr and outputs
+Dplyr's `mutate` handles functions differently depending on if the function outputs a single value for a vector of inputs or if it outputs a value for every vector of inputs. The example below shows how these differ.
+
+```{r}
+mtcars %>% 
+  mutate(function_giving_single_output = sum(mpg),
+         function_giving_multiple_outputs = mpg + 7)
+```
+
+`sum(mpg)` outputted a single value for all rows. If you had first done a `group_by` statement, you would have gotten a single value for every group.
+
+You'll notice in the example below that the `...single_output` only has 3 unique values, each corresponding with the `cyl` varibale used in the `group_by` whereas the `...multiple_ouputs` values are the exact same as without the `group_by` as the `mpg + 7` function operates at the row level, so the grouping here doesn't affect the output^[When there is no grouping it's as if the entire dataframe is a single group].
+
+```{r}
+mtcars %>% 
+  group_by(cyl) %>%
+  mutate(function_giving_single_output = sum(mpg),
+         function_giving_multiple_outputs = mpg + 7)
+```
+
+The `mutate` function outputs the same number of rows as are in the input dataframe, however the `summarise` funciton outputs the number of rows as there are groups. E.g. 
+
+```{r, error = TRUE}
+mtcars %>% 
+  group_by(cyl) %>%
+  summarise(function_giving_single_output = sum(mpg))
+```
+
+This means that functions outputting a value for each input will cause an error to occur.
+
+```{r, error = TRUE}
+mtcars %>% 
+  group_by(cyl) %>%
+  summarise(function_giving_single_output = sum(mpg),
+         function_giving_multiple_outputs = mpg + 7)
+```
+
+You may be wondering why the error message reads 'must be length 1... not 11' when there are actually 32 rows in the dataframe and not 11. This is because the error happens on each individual grouped vector and the first error occurs on the vector associated with `cyl` 4, which is of length 11.
+
+```{r}
+count(mtcars)
+```
+
+If you had no `group_by` statement you would see the error message would reference the length for the entire dataframe.
+```{r, error = TRUE}
+mtcars %>% 
+  summarise(function_giving_single_output = sum(mpg),
+         function_giving_multiple_outputs = mpg + 7)
+```
+
+You can though specify mult_output functions within aggregating functions and it work as expected. For example, the function below will show the percentage of cars with mpg greater than 20 for each `cyl` value
+
+```{r}
+mtcars %>% 
+  group_by(cyl) %>% 
+  summarise(function_giving_single_output = mean(mpg > 20))
+```
+
+###More than 1, less than all outputs
+Dplyr mostly handles functions that output either a single value for each group, or multiple values for each group.
+
+
+
+##DPLYR and non-standard evaluation
+
+###Part 1
+
+Functions like `mutate` `filter` `summarise`, etc. use 'non-standard evaluation' that allow you to specify the names of the columns in functions like `mean` and `median` that dplyr then  passes as vectors parsed by w/e `group_by` or other specifications are set.
+
+```{r}
+select(flights, origin, dep_delay) %>% 
+  group_by(origin) %>% 
+  summarise(dep_delay_mean = mean(dep_delay, na.rm = TRUE))
+
+```
+
+It is kind of like doing each of the following...^[Not exactly like this though because DPLYR is actually running in C in the backend]
+```{r}
+mean(flights$dep_delay[flights$origin == "EWR"], na.rm = TRUE)
+
+mean(flights$dep_delay[flights$origin == "JFK"], na.rm = TRUE)
+
+mean(flights$dep_delay[flights$origin == "LGA"], na.rm = TRUE)
+```
+
+For now, I would not worry about base R's subsetting syntax too much, we'll talk about it in chapter 20 and it is something that we will touch-on sporadically throughout the book^[However if you have an itch see Advanced R: http://adv-r.had.co.nz/Subsetting.html for a thorough treatment on the subject]. In generaly though it won't be our focus.
+
+###Part 2, subsetting in Dplyr calcs
+
+Vincent pointed out this method in our discussion in week 3^[I initially recommended using an `ifelse`, but would definitely use method mentioned below.]
+
+Say your goal is to calculate the average `arr_delay` by origin and only want to include those values that are actually delayed, i.e. have an `arr_delay` value greater than 0, and you don't want to preface your `summarise` with a `filter`^[Continue reading for why you may not want to do this.]. You can use brackets to subset to just those values that meet the condition.
+```{r}
+select(flights, origin, arr_delay) %>% 
+  group_by(origin) %>% 
+  summarise(arr_delay_late_mean = mean(arr_delay[arr_delay > 0], na.rm = TRUE))
+```
+
+You may wonder, why not just perform a filter before hand. You could do this, but in some situations you may want to have summarized values on different subsets of the values so this can become inconvenient.. For example, say you want to calculate the average arrival delay on all flights^[This might be thought of as the average difference in time between when the flight arrived and when it was scheduled to arrive.] but then also on just flights that had an arrival delay that was greater than zero^[This can be thought of as the average amount of delay for flights that were actually delayed.]. These are represented below by `arr_delay_all_mean` and `arr_delay_only_late_mean` respecticely. 
+
+```{r}
+select(flights, origin, arr_delay) %>% 
+  group_by(origin) %>% 
+  summarise(
+    arr_delay_all_mean = mean(arr_delay, na.rm = TRUE),
+    arr_delay_late_mean = mean(arr_delay[arr_delay > 0], na.rm = TRUE))
+
+```
+
+The brackets in this case signify that the mean is being calculated just on those rows that satisfy the condition. If the subset is not in brackets it does not become a subset but a vector of `TRUE` `FALSE` values. In the example below `summarise` is instead returning the proportion of flights that have an `arr_delay` greater than 0.
+
+```{r}
+select(flights, origin, arr_delay) %>% 
+  group_by(origin) %>% 
+  summarise(
+    arr_delay_all_mean = mean(arr_delay, na.rm = TRUE),
+    arr_delay_late_mean = mean(arr_delay > 0, na.rm = TRUE))
+```
+
