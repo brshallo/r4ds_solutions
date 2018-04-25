@@ -1,0 +1,3 @@
+Stephen noted that he will often read-in his data with `readr::read_csv` and then copy the initial `col_type`s that are outputted and make changes to these and then use this as the default way he reads in the file. This seems like a good practice for reading in files consistently and no being overly reliant on the `guess` args in `readr`. Also, it speeds-up the read-in time when opening the file in the future as it does not have to guess the file type.  
+
+I wonder if I can apply a similar practice to data I read-in from databases that often comes-in in character format, perhaps apply guess to all and then use outputted...
