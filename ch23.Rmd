@@ -360,9 +360,9 @@ library(splines)
       add_residuals(sim1_mod, var = "resid_lin") %>%
       # mutate(row_n = row_number) %>% 
       ggplot()+
+      geom_ref_line(h = 0)+
       geom_point(aes(x = x, y = resid_loess), colour = "red")+
-      geom_point(aes(x = x, y = resid_lin), colour = "blue")+
-      geom_ref_line(h = 0)
+      geom_point(aes(x = x, y = resid_lin), colour = "blue")
     
     ```
     
@@ -470,6 +470,15 @@ library(splines)
     ```
     
     * The aggregate `rmse` between the two models is nearly the same.
+    
+    ```{r}
+    sim4 %>% 
+      gather_residuals(mod1, mod2) %>% 
+      ggplot(aes(x = resid, fill = model, group = model))+
+      geom_density(alpha = 0.3)
+    ```
+    
+    * any difference in resids is pretty subtle...
     
     *Let's plot them though and see how their predictions differ*
     ```{r}
@@ -698,4 +707,17 @@ grid_space <- models_error %>%
 grid_space
 ```
 
+
+## 23.4.5.4
+Rather than `geom_density` or `geom_freqpoly` let's look at histogram with values overlaid rather than stacked.
+
+    ```{r}
+    sim4 %>% 
+      gather_residuals(mod1, mod2) %>% 
+      ggplot(aes(x = resid, y = ..density.., fill = model))+
+      geom_histogram(position = "identity", alpha = 0.3)
+    
+    ```
+
+```
 
