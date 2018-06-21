@@ -1,0 +1,500 @@
+---
+title: "Programming with DPLYR"
+author: "Bryan Shalloway"
+date: "June 16, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(tidyverse)
+library(rlang)
+library(gapminder)
+```
+
+
+These notes are from the vignette on programming with DPLYR:
+https://dplyr.tidyverse.org/articles/programming.html 
+
+# modifying inputs
+```{r}
+quo(g1)
+
+```
+
+Function that let's you vary the grouping variable and then takes the sum and mean of a specified variable
+
+```{r}
+summarise_edit <- function(df, grp_var, input_var){
+  
+  grp_var <- enquo(grp_var)
+  input_var <- enquo(input_var)
+  
+  df %>% 
+    group_by(!!grp_var) %>% 
+    summarise(calc_mean = mean(!!input_var),
+              calc_sum = sum(!!input_var))
+}
+
+summarise_edit(iris, Species, Sepal.Length)
+
+```
+
+
+```{r}
+summarise_edit <- function(df, grp_var, input_var){
+  
+  grp_var <- enquo(grp_var)
+  input_var <- enquo(input_var)
+  
+  df %>% 
+    group_by(!!grp_var) %>% 
+    summarise(calc_mean = mean(!!input_var),
+              calc_sum = sum(!!input_var))
+}
+
+summarise_edit(iris, Species, Sepal.Length)
+
+
+```
+
+`enquo` is what you use wrapped in a function to replace `quo`, e.g. the above not in a funciton could have have been written as
+
+```{r}
+df <- iris
+grp_var <- quo(Species)
+input_var <- quo(Sepal.Length)
+
+
+df %>% 
+  group_by(!!grp_var) %>% 
+  summarise(calc_mean = mean(!!input_var),
+            calc_sum = sum(!!input_var))
+
+```
+
+You can also wrap args in `quo` to aide with debugging as in below
+```{r}
+quo(df %>% 
+  group_by(!!grp_var) %>% 
+  summarise(calc_mean = mean(!!input_var),
+            calc_sum = sum(!!input_var))
+)
+
+```
+
+# modifying outputs
+We'll need to use the `:=` in place of the equals sign to do this.
+
+```{r}
+summarise_edit <- function(df, grp_var, input_var){
+  
+  grp_var <- enquo(grp_var)
+  input_var <- enquo(input_var)
+  calc_mean <- paste0("mean_", quo_name(input_var))
+  calc_sum <- paste0("sum_", quo_name(input_var))
+  
+  df %>% 
+    group_by(!!grp_var) %>% 
+    summarise(!!calc_mean := mean(!!input_var),
+              !!calc_sum := sum(!!input_var))
+}
+
+summarise_edit(iris, Species, Sepal.Length)
+```
+
+## mulitple inputs
+
+```{r, eval = FALSE}
+quo(a)
+
+enquo(a)
+
+
+```
+
+```{r}
+my_summarise <- function(df, calc_var, ...){
+  group_vars <- quos(...)
+  calc_valt <- quo(calc_var)
+  calc_val <- enquo(calc_var)
+  calc_name <- paste0("mean_", quo_name(calc_val))
+  
+  # added below in just to print everything
+  purrr::map(list(group_vars, calc_val, calc_name), print)
+  
+  df %>% 
+    group_by(!!! group_vars) %>% 
+    summarise(!! calc_name := mean(!! calc_val))
+}
+
+# debugonce("my_summarise")
+my_summarise(gapminder, lifeExp, country, year)
+
+```
+
+Let's break the parts of the function out
+```{r}
+  group_vars <- quos(continent, year)
+  calc_val <- quo(lifeExp)
+  calc_name <- paste0("mean_", quo_name(calc_val))
+  
+  gapminder %>% 
+    group_by(!!! group_vars) %>% 
+    summarise(!! calc_name := mean(!! calc_val))
+  
+```
+
+* note that `quos` behaves more like `enquos` in that it is quoting the values in the `...` rather than just quoting `...` the way that `quo` simply creates a quosure of whatever is inputted to it...
+
+*!!!*  
+* takes a list, and splices it into the current call
+* think of `!!! args` as being like `...`
+
+```{r}
+args <- list(na.rm = TRUE, trim = 0.25)
+quo(mean(x, !!! args))
+```
+
+# Example problem
+e.g. say you want a function that inputs a dataframe and let's you specify two columns and then it takes a sum of those and outputs a new variable with a name that is a blend of those... e.g. in base R:
+
+**In base R**
+```{r}
+sum_2cols_base <- function(df, col1, col2){
+  new_col_name <- paste0("sum_", col1, col2)
+  df[new_col_name] <- df[col1] + df[col2]
+  df
+}
+
+sum_2cols_base(iris, "Sepal.Length", "Petal.Length") %>% 
+  as_tibble()
+```
+
+**with tidyeval**
+```{r}
+sum_2cols_tidy <- function(df, col1, col2){
+  col1_q <- enquo(col1)
+  col2_q <- enquo(col2)
+  new_col_name <- paste0("sum_", quo_name(col1_q), quo_name(col2_q))
+  
+  mutate(df, !!new_col_name := (!!col1_q + !!col2_q))
+}
+
+sum_2cols_tidy(iris, Sepal.Length, Petal.Length) %>% 
+  as_tibble()
+
+```
+
+
+# Theory
+
+## Quoting
+* quoting is the action of capturing an expression instead of evaluating it
+
+Common other example is the formula
+
+```{r}
+lm(Sepal.Length ~ Sepal.Width, data = iris)
+```
+
+In the past I've used the `as.formula` function when using fomrulas in a function, e.g.
+```{r}
+lm_fun <- function(df, target, inputs){
+  formula_str <- paste0(target, " ~ ", str_c(inputs, collapse = " + "))
+  lm(as.formula(formula_str), data = df)
+}
+
+lm_fun(iris, "Sepal.Length", c("Sepal.Width", "Petal.Length"))
+
+```
+
+> For the rest of the chapter I think I should read through some of the chapters in Advanced R programming and non-standard evaluation first...
+
+# Tidyeval pub
+On this conversation on tidyeval: https://community.rstudio.com/t/should-tidyeval-be-abandoned/2238/39 
+
+There was a reference to this publication: http://rpubs.com/lionel-/programming-draft 
+
+That some other members seemed to be a fan of. Below are my notes from reading this...
+
+## Intro
+*two types of functions, 'regular', and 'quoting'* 
+(regualar takes in the value in the argument, quoting sees the expression typed and may evaluate this later)
+
+* identity` is the quentisential regular function as it simply returns the value of tis argument
+
+```{r}
+a <- 7*3
+identity(a)
+identity(7*3)
+identity(21)
+# all above are same
+```
+
+* `quote` is the quintesential quoting function
+```{r}
+a <- 7*3
+quote(a)
+quote(7*3)
+quote(21)
+# all above are unique
+```
+
+All three below are similar in that they are 'quoting' input
+```{r}
+"a * b"
+~a * b
+quote(a * b)
+```
+
+* `eval` let's you evaluate quoted expressions
+```{r}
+x <- quote(letters[1:5])
+x
+eval(x)
+```
+
+You can change contexts / environments, e.g.
+```{r}
+context <- list(letters = rev(LETTERS))
+
+x
+
+eval(x, envir = context)
+```
+
+datafranes can be used as evaluation contexts (similar to above where list names were supplied, we could have supplied column names as the names).
+
+```{r}
+data1 <- tibble(mass = c(70, 80, 90), height = 1.6, 1.7, 1.8)
+data2 <- tibble(mass = c(75, 85, 95), height = 1.5, 1.7, 1.9)
+
+bmi_expr <- quote(mass / height^2)
+
+eval(bmi_expr, data1)
+eval(bmi_expr, data2)
+```
+
+This is just the same as doing, but the funcitons changes things around a little
+```{r}
+with(data1, mass / height^2)
+with(data2, mass / height^2)
+```
+
+
+Quoting funcitons usually take a data frame as input in addition to user expresions so they can be evaluated in the context of the data, e.g.
+* `with(data, expr)`
+* `lm(formula, data)`
+* `mutate(data, new = expr)`
+* `ggplot(data, aes(expr))`
+
+## Varying quoted inputs
+
+```{r}
+cement <- function(..., .sep = " ") {
+  strings <- map(exprs(...), as_string)
+  paste(strings, collapse = .sep)
+}
+
+```
+
+Think of `cement` above as having the same evaluation style as dplyr but for replacing the `paste` function
+
+```{r}
+paste("it", "is", "rainy")
+cement(it, is, rainy)
+```
+
+The challenge is that if we wanted to save the var name in a variable, this is not easy to do. Quasiquotation enables you to do it, we can simply put a `!!` in front of the item
+
+```{r}
+x <- "shiny"
+
+paste("it", "is", x)
+cement(it, is, !!x)
+
+```
+
+In tidyverse `expr` is fundamental quoting expression rather than `quote`
+```{r}
+expr(x)
+
+expr(!! x)
+```
+
+It is useful for debugging quasiquotation to examine the effect of unquoting
+```{r}
+expr(cement(it, is, !!x))
+
+# output woudl be
+# cement(it, is, "shiny")
+# note that cement can handle shiny being in quotes, but dplyr cannot handle this, though dplyr cannot, hence why just doing this doesn't work
+```
+
+What we want is actually something more like the following
+```{r}
+expr(cement(it, is, !!sym(x)))
+# notice shiny is not in quotes
+# this would work with dplyr now
+
+```
+
+Below is a very simple wrapper
+```{r}
+mean_by <- function(data, var, group) {
+  var <- sym(var)
+  group <- sym(group)
+
+  data %>%
+    group_by(!! group) %>%
+    summarise(avg = mean(!! var))
+}
+
+mean_by(starwars, "height", "species")
+
+```
+
+Instead though, do this with `enexpr`, so that you don't need to quote the inputs
+
+```{r}
+mean_by_expr <- function(data, var, group) {
+  var <- enexpr(var)
+  group <- enexpr(group)
+
+  data %>%
+    group_by(!! group) %>%
+    summarise(avg = mean(!! var))
+}
+
+mean_by_expr(starwars, height, species)
+
+mean_by_expr(starwars, height, as.factor(species))
+```
+
+However, it's better practice to use quosures rather than expressions, as they also take into account the environment, so will behave how you expect them to when incorporating variables in the altered function.
+
+```{r}
+mean_by_quo <- function(data, var, group) {
+  var <- enquo(var)
+  group <- enquo(group)
+
+  data %>%
+    group_by(!! group) %>%
+    summarise(avg = mean(!! var))
+}
+
+mean_by_quo(starwars, height, species)
+
+# problem wiht naming
+mean_by_quo(starwars, height, as.factor(species))
+
+```
+
+## Accepting multiple arguments
+`...` can be passed in without incident, e.g. let's say for grouping functions
+
+```{r}
+mean_by <- function(df, var, ...){
+  
+  var <- enquo(var)
+  
+  df %>% 
+    group_by(...) %>% 
+    summarise(mean = mean(!!var))
+}
+
+mean_by(starwars, height, species, eye_color, skin_color)
+```
+
+This also fixes some of the issues with naming for example
+
+```{r}
+mean_by(starwars, height, species_fct = as.factor(species), eye_color, skin_color)
+
+starwars %>% 
+  group_by(species_fct = as.factor(species)) %>% 
+  mutate(sum = sum(height)) %>% 
+  glimpse
+```
+
+In single case, need to use `quo_name` which gets the name from the quosure...
+
+```{r}
+mean_by_quo <- function(data, var, group) {
+  var <- enquo(var)
+  group <- enquo(group)
+  var_name <- paste0("avg_", quo_name(var))
+
+  data %>%
+    group_by(!! group) %>%
+    summarise(!! var_name := mean(!! var))
+}
+
+mean_by_quo(starwars, height, species)
+
+```
+
+
+
+```{r}
+dog <- "hello"
+cat <- "goodbye"
+
+
+quos(dog, cat)
+exprs(dog, cat)
+```
+
+```{r}
+# I feel like I would need something like this
+purrr::map(list(dog, cat), quo)
+
+```
+
+## capturing and modifying arguments in `...`
+The reason its quos instead of enquos, is because of how `...` works w/o any names, which is why `enquo` was necessary before...
+```{r}
+test_fun <- function(...){
+  quo(...)
+}
+
+test_fun(hello)
+```
+
+*Let's force all `group_by` vars to have a `grp` prefix*
+
+```{r}
+my_summarise <- function(df, input_var, ...) {
+  
+  input_var <- enquo(input_var)
+  avg_var <- paste0("avg_", quo_name(input_var))
+  
+  output <- df %>% 
+    group_by(...) %>% 
+    summarise(!! avg_var := mean(!!input_var))
+  
+  names(output) <- names(output)
+}
+
+my_summarise(starwars, height, species, eye_color)
+
+```
+
+
+# videos
+This 5 min video is a helpful, quick summary: https://www.youtube.com/watch?v=nERXS3ssntw 
+
+It's a cleaned-up version of the R-conf talk here: https://www.rstudio.com/resources/videos/tidy-eval-programming-with-dplyr-tidyr-and-ggplot2/ 
+
+There's also a longer talk that can be found here: https://www.rstudio.com/resources/webinars/tidy-eval/
+
+# Personal notes
+* `expr` captures expression
+* `enexpr` captures expression in the context of a function because it is not capturing simply what is typed, but what the user inputted
+* `quo` is like `expr` but also captures information on the environment
+    * short for quosure, which is a portmanteau of "quote" and "closure", which are synonymous with an expression and an environment
+* `enquo` is the same as `enexpr` but again captures information on the environment

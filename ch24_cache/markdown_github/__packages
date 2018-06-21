@@ -1,0 +1,13 @@
+base
+ggplot2
+dplyr
+tidyr
+nycflights13
+babynames
+purrr
+nasaweather
+lubridate
+modelr
+broom
+bindrcpp
+hexbin

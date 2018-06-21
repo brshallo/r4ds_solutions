@@ -1,0 +1,18 @@
+---
+title: "modify function note"
+author: "Bryan Shalloway"
+date: "June 7, 2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+modify function seems pretty similar to `mutate_at` or `mutate_if`, but perhaps it let's you do row operations at each level that you couldn't do with something like these...
+
+```{r}
+iris %>% 
+  modify(is.numeric)
+```
+
