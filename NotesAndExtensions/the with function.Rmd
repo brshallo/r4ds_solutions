@@ -65,4 +65,4 @@ Or maybe I want to use `table` and then pass the outputs into `cor` (to check th
 
 * LGA and JFK seem to have at least some correlation of flights and carrier
 
-Essentially, I use `with` when I want to do operations in a "non-standard evaluation" format similar to that used in dplyr while also facilitating the use of the pipe. I'm mostly working in dataframes so I don't use it a ton, though sometimes `with` can be very useful.
+Essentially, I use `with` when I want to do operations in a "non-standard evaluation" format similar to that used in dplyr while also facilitating the use of the pipe, but when I want to do operations outside of the context of dataframes. (I mostly keep my data in dataframes though so I don't use `with` that frequently - though it can be useful.)
