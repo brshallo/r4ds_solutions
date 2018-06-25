@@ -11,3 +11,9 @@ modelr
 broom
 bindrcpp
 hexbin
+tidyverse
+tibble
+readr
+stringr
+forcats
+MASS

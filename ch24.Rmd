@@ -26,32 +26,67 @@ library(lubridate)
 library(modelr)
 library(broom)
 library(splines)
+library(MASS)
+
 ```
 
 # ch. 24: Model building
 
-* `data_grid`
-  * `.model` argument
-ADD-IN OTHER FUNCTIONS THAT ARE INTRODUCED HERE
+* `data_grid`, argument: `.model` :
+  * if the model needs variables that haven't been supplied explicitly, will auto-fill them with "typical" values; continuous --> median; categorical --> mode
+* `MASS:rlm` robust linear model that uses "M estimation by default"
 
 ## 24.2: Why are low quality diamonds more expensive?
 
 ```{r}
-    diamonds2 <- diamonds %>% 
-      filter(carat <= 2.5) %>% 
-      mutate(lprice = log2(price), 
-             lcarat = log2(carat))
+# model for only small diamonds
+diamonds2 <- diamonds %>% 
+  filter(carat <= 2.5) %>% 
+  mutate(lprice = log2(price), 
+         lcarat = log2(carat))
 
-    mod_diamond <- lm(lprice ~ lcarat, data = diamonds2)
-    
-    mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
-    
-    diamonds2 <- diamonds2 %>% 
-      add_residuals(mod_diamond2, "resid_lg")
+mod_diamond <- lm(lprice ~ lcarat, data = diamonds2)
+
+mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
+
+diamonds2 <- diamonds2 %>% 
+  add_residuals(mod_diamond2, "resid_lg")
 
 ```
 
-* add note onto opening regarding the reason there are so few of the higher price items at those upper ranges... is not simply that carat 'matters more' but that the higher values do not have those, lets check...
+## 24.3 What affects the number of daily flights?
+
+These were some useful notes copied from this section of the chapter
+```{r}
+daily <- flights %>% 
+  mutate(date = make_date(year, month, day)) %>% 
+  count(date)
+
+daily <- daily %>% 
+  mutate(month = month(date, label = TRUE))
+
+daily <- daily %>% 
+  mutate(wday = wday(date, label = TRUE))
+
+
+term <- function(date) {
+  cut(date, 
+    breaks = ymd(20130101, 20130605, 20130825, 20140101),
+    labels = c("spring", "summer", "fall") 
+  )
+}
+
+daily <- daily %>% 
+  mutate(term = term(date))
+
+daily %>% 
+  filter(wday == "Sat") %>% 
+  ggplot(aes(date, n, colour = term))+
+  geom_point(alpha = .3)+
+  geom_line()+
+  scale_x_date(NULL, date_breaks = "1 month", date_labels = "%b")
+
+```
 
 ### 24.2.3
 
@@ -76,30 +111,11 @@ ADD-IN OTHER FUNCTIONS THAT ARE INTRODUCED HERE
     
     gridExtra::grid.arrange(plot_lc_lp, plot_lc, plot_lp + coord_flip()) 
     
-    # horizontal stripes
-    gridExtra::grid.arrange(plot_lp_lc, plot_lp, plot_lc + coord_flip()) 
     ```
+    
     * The vertical bands correspond with clumps of `carat_lg` values falling across a range of `price_lg` values
-
-* let's see which one affects the bands more when providing a random value...
-```{r}
-diamonds2 %>% 
-  mutate(rand_val = rnorm(n())) %>% 
-      ggplot(aes(lcarat, lprice))+
-      geom_hex(show.legend = FALSE)
-
-diamonds2 %>% 
-  mutate(rand_val = rnorm(n())) %>% 
-      ggplot(aes(lcarat, rand_val))+
-      geom_hex(show.legend = FALSE)
-
-diamonds2 %>% 
-  mutate(rand_val = rnorm(n())) %>% 
-      ggplot(aes(rand_val, lprice))+
-      geom_hex(show.legend = FALSE)
-
-```
-
+    
+    *Histogram of `carat` values*
 
 ```{r}
 diamonds2 %>% 
@@ -120,7 +136,7 @@ diamonds2 %>%
     * because we're using a natural log it means that an a_1 percentage change in carat corresponds with an a_1 percentage increase in the price
     * if you had used a log base 2 it has a different interpretation that can be thought of in terms of relationship of doubling
 
-1.  Extract the diamonds that have very high and very low residuals. Is there anything unusual about these diamonds? Are the particularly bad or good, or do you think these are pricing errors?
+1.  Extract the diamonds that have very high and very low residuals. Is there anything unusual about these diamonds? Are they particularly bad or good, or do you think these are pricing errors?
 
     ```{r}
     extreme_vals <- diamonds2 %>% 
@@ -141,16 +157,16 @@ diamonds2 %>%
     
     * It's possible some of these these were mislabeled or errors, e.g. an error in typing e.g. 200 miswritten as  2000, though given the wide range in pricing this does not seem like that extreme of a variation.
     
-```{r}
-diamonds2 %>% 
-  add_predictions(mod_diamond2) %>% 
-  mutate(extreme_value = (abs(resid_lg) > 1),
-         price_pred = 2^pred) %>%
-  filter(extreme_value) %>% 
-  select(price, price_pred)
-```
-
-* If the mislabeling were an issue of 200 to 2000 you would expect that some of the predictions looked similar to this, though none of them appear to have this issue, except for maybe the item that was priced at 2160 but has a price of 314, this could have been a 200 to 2000 price error
+    ```{r}
+    diamonds2 %>% 
+      add_predictions(mod_diamond2) %>% 
+      mutate(extreme_value = (abs(resid_lg) > 1),
+             price_pred = 2^pred) %>%
+      filter(extreme_value) %>% 
+      select(price, price_pred)
+    ```
+    
+    * If the mislabeling were an issue of e.g. 200 to 2000, you would expect that some of the actual values were ~1/10th or 10x the value of the predicted value. Though none of them appear to have this issue, except for maybe the item that was priced at 2160 but has a price of 314, which is the closest error where the actual value was ~1/10th the value of the prediction
 
 1.  Does the final model, `mod_diamonds2`, do a good job of predicting diamond prices? Would you trust it to tell you how much to spend if you were buying a diamond?
 
@@ -179,7 +195,11 @@ diamonds2 %>%
 
 1.  Use your Google sleuthing skills to brainstorm why there were fewer than expected flights on Jan 20, May 26, and Sep 1. (Hint: they all have the same explanation.) How would these days generalise to another year?
 
-* view later
+* January 20th was the day for MLK day^[it was also the 2nd inauguration for Obama]
+* May 26th was the day before Memorial Day weekend
+* September 1st was the day before labor day
+
+Based on the above, it seems a variable representing "holiday" or "holiday weekend" may be valuable.
 
 1.  What do the three days with high positive residuals represent? How would these days generalise to another year?
 
@@ -198,21 +218,25 @@ diamonds2 %>%
     
     daily <- daily %>% 
       add_residuals(mod)
-    ```
 
-
-    ```{r}
     daily %>% 
       top_n(3, resid)
     ```
 
 * these days correspond with the Saturday and Sunday of Thanksgiving, as well as the Saturday after Christmas
 * these days can fall on different days of the week each year so would vary from year to year depending on which day they fell on
-    * ideally you would include some "holiday" variable to help capture the impact of these
+    * ideally you would include some "holiday" variable to help capture the impact of these / better generalise between years
+    
+*Check the absolute values*
+```{r}
+    daily %>% 
+      top_n(3, abs(resid))
+```
+
+*  The days with the greatest magnitude for residuals were on Christmast Day, Thanksgiving Day, and the day after Thanksgiving
 
 1.  Create a new variable that splits the `wday` variable into terms, but only for Saturdays, i.e. it should have `Thurs`, `Fri`, but `Sat-summer`, `Sat-spring`, `Sat-fall`. How does this model compare with the model with every combination of `wday` and `term`?
     
-
 ```{r}
 
     term <- function(date) {
@@ -224,70 +248,173 @@ diamonds2 %>%
     
     daily <- daily %>% 
       mutate(term = term(date))
-    
-# just wday
-mod_daily2 <- daily %>% 
-  lm(n ~ wday, data = .)
 
 # example with wday_mod
-mod_daily3 <- daily %>% 
+Example_term_with_sat <- daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
   lm(n ~ wday_mod, data = .)
+        
+# just wday
+wkday <- daily %>% 
+  lm(n ~ wday, data = .)
 
-# wday and term, did it want an interaction here?...
-mod_daily4 <- daily %>% 
+# wday and term, no interaction...
+wkday_term <- daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
   lm(n ~ wday + term, data = .)
 
-# with interaction have differential effect in summer
-mod_daily5 <- daily %>% 
+# wday and term, interaction
+wkday_term_interaction <- daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
   lm(n ~ wday*term, data = .)
 
 daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
-  gather_predictions(mod_daily2, mod_daily3, mod_daily4, mod_daily5) %>% 
+  gather_predictions(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) %>% 
   ggplot(aes(date, pred, colour = wday))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(~model, ncol = 1)
+
+```
+
+* In the example, saturday has different predicted number of flights in the summer
+  * when just including `wkday` you don't see this differentiation
+  * when including `wkday` and `term` you see differentiation in the summer, though this difference is the same across all `wday`s, hence the increased number for Saturday's is less than it shows-up as as compared to either the example (where the term is only interacted with for Saturday) or the `wkday_term_interaction` chart where the interaciton is allowed for each day of the week
+  * you see increases in flights across pretty much all `wday`s in summer, though you see the biggest difference in Saturday^[Interactions facilitate encoding these types of conditional relationships, i.e. the impact of summer depends on the day of the week (/ vice versa)]
+
+*Residuals of these models*
+```{r}
+daily %>% 
+  mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
+  gather_residuals(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) %>% 
+  ggplot(aes(date, resid, colour = wday))+
   geom_point()+
   geom_line()+
   facet_wrap(~model, ncol = 1)
 ```
 
-    
+* The graphs with saturday term and interaction across terms do not show gross changes in residuals varying by season the way the models that included just weekday or weekday and term without an interaction do.
+* note that you have a few days with large negative residuals^[Remember this corresponds with days where the predictions are higher than the actuals.] 
+  * these likely correspond with holidays
+
 1.  Create a new `wday` variable that combines the day of week, term (for Saturdays), and public holidays. What do the residuals of that model look like?
 
-* Do later
+*Create dataset of federal holidays*
+```{r}
+# holiday's that could have been added: Easter, black friday
+# consider adding a filter to remove Columbus day and perhaps Veteran's day
+holidays <- tribble(
+  ~HolidayName, ~HolidayDate,
+  "New Year's", "2013-01-01",
+  "MLK", "2013-01-21",
+  "President's Day", "2013-02-18", 
+  "Memorial Day", "2013-05-27",
+  "Independene Day", "2013-07-04",
+  "Labor Day", "2013-09-02",
+  "Columbus Day", "2013-10-14",
+  "Veteran's Day", "2013-11-11",
+  "Thanksgiving", "2013-11-28",
+  "Christmas Day", "2013-12-25"
+) %>% 
+  mutate(HolidayDate = ymd(HolidayDate))
+```
+
+Create model with Holiday variable
+```{r}
+
+Example_term_with_sat_holiday <- daily %>% 
+  mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
+  left_join(holidays, by = c("date" = "HolidayDate")) %>% 
+  mutate(Holiday = !is.na(HolidayName)) %>% 
+  lm(n ~ wday_mod + Holiday, data = .)
+
+```
+
+Look at residuals of model
+```{r}
+daily %>% 
+  mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
+  left_join(holidays, by = c("date" = "HolidayDate")) %>% 
+  mutate(Holiday = !is.na(HolidayName)) %>% 
+  gather_residuals(Example_term_with_sat_holiday, Example_term_with_sat) %>% 
+  ggplot(aes(date, resid, colour = wday))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(~model, ncol = 1)
+
+```
+
+* Notice the residuals for day's like July 4th and Christas are closer to 0 now, though residuals for smaller holidays like MLK, President's, Columbus, and Veteran's Day are now positive when before they did not have such noticable abberations
+* Suggests that just "holiday" is not enough to capture the relationship
+    * In [24.3.5.4] I show how to create a "near holiday" variable (though I do not add any new analysis after creating this)
 
 1.  What happens if you fit a day of week effect that varies by month (i.e. `n ~ wday * month`)? Why is this not very helpful? 
 
-```{r, eval = FALSE}
-mod_daily_wk <- daily %>% 
-  # mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
+*Create model*
+```{r}
+week_month <- daily %>% 
+  mutate(month = month(date) %>% as.factor()) %>% 
   lm(n ~ wday * month, data = .)
 
+```
+
+*Graph predictions*
+(with `n ~ wday * term` as the comparison)
+```{r}
+
 daily %>% 
-  mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>%
-  gather_predictions(mod_daily5, mod_daily_wk) %>% 
+  mutate(month = month(date) %>% as.factor()) %>% 
+  gather_predictions(wkday_term_interaction, week_month) %>% 
   ggplot(aes(date, pred, colour = wday))+
   geom_point()+
   geom_line()+
   facet_wrap(~model, ncol = 1)
+
 ```
 
-* see most flexibility
+* This model has the most flexibility / inputs, though this makes the pattern harder to follow / interpret
+* Certain decreases in the month to month model are difficult to explain, for example the decrease in the month of May
+
+*Graph residuals*
+(with `n ~ wday * term` as the comparison)
+```{r}
+daily %>% 
+  mutate(month = month(date) %>% as.factor()) %>% 
+  gather_residuals(wkday_term_interaction, week_month) %>% 
+  ggplot(aes(date, resid, colour = wday))+
+  geom_point()+
+  geom_line()+
+  facet_wrap(~model, ncol = 1)
+
+```
+
+The residuals seem to partially explain some of these inexplicable ups / downs:  
+  * For the model that incorporates an interaciton with month, you see the residuals in months with a holiday tend to cause the associated day of the week the holiday fell on to then have high residuals on the non-holiday days, an effect thta is less pronounced on the models interacted with `term`
+      * The reason for this is that for the monthly variables there are only 4-5 week days in each month, so a holiday on one of these can substantially impact the expected number of flights on the weekend in that month (i.e. the prediction is based just on 4-5 observations). For the term interaction you have more like 12 observations to get an expected value, so while there is still an aberration on that day, the other days predictioins are less affected
+
+Questions such as this fall into the general space of balancing "bias" vs. "variance"
+
 
 1.  What would you expect the model `n ~ wday + ns(date, 5)` to look like? Knowing what you know about the data, why would you expect it to be not particularly effective?
 
+I would expect to see a similar overall pattern, but with more smoothed affects. Let's check what these actually look like below.
+
 ```{r}
-mod_daily7 <- daily %>% 
+wkday_term_ns <- daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>% 
-  lm(n ~ wday + ns(date, 5), data = .)
+  lm(n ~ wday + splines::ns(date, 5), data = .)
 
-mod_daily8 <- lm(n ~ wday * ns(date, 5), data = daily)
+wkday_term_interaction_ns <- lm(n ~ wday * splines::ns(date, 5), data = daily)
 
+```
+
+Look at predictions
+(light grey are actuals)
+```{r}
 daily %>% 
   mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>% 
-  gather_predictions(mod_daily7, mod_daily8) %>% 
+  gather_predictions(wkday_term_ns, wkday_term_interaction_ns) %>% 
   ggplot(aes(date, pred, colour = wday))+
   geom_point()+
   geom_line(aes(x = date, y = n, group = wday), colour = "grey", alpha = 0.5)+
@@ -296,7 +423,20 @@ daily %>%
 
 ```
 
-* see more smoothed affects
+Look at residuals
+(in light grey are actuals)
+```{r}
+daily %>% 
+  mutate(wday_mod = ifelse(wday == "Sat", paste(wday, "_", term), wday)) %>% 
+  gather_residuals(wkday_term_ns, wkday_term_interaction_ns) %>% 
+  ggplot(aes(date, resid, colour = wday))+
+  geom_point()+
+  geom_line(aes(x = date, y = n, group = wday), colour = "grey", alpha = 0.5)+
+  geom_line()+
+  facet_wrap(~model, ncol = 1)
+
+```
+
 
 1.  We hypothesised that people leaving on Sundays are more likely to be business travellers who need to be somewhere on Monday. Explore that hypothesis by seeing how it breaks down based on distance and time: if it's true, you'd expect to see more Sunday evening flights to places that are far away.
 
@@ -304,80 +444,97 @@ daily %>%
 flights %>% 
   mutate(date = lubridate::make_date(year, month, day),
          wday = wday(date, label = TRUE)) %>% 
-  select(date, wday, distance) %>% 
+  select(date, wday, distance) %>%
   filter(distance < 3000) %>% 
   ggplot(aes(wday, distance))+
   geom_boxplot()
 
-# flights %>% 
-#   mutate(date = lubridate::make_date(year, month, day),
-#          wday = wday(date, label = TRUE)) %>% 
-#   select(date, wday, distance) %>%
-#   filter(distance < 3000) %>% 
-#   ggplot(aes(distance))+
-#   geom_histogram()+
-#   facet_wrap(~wday, ncol = 1)
+
 ```
 
 * 25th and 75th percentiles aren't different, but median is a little higher
+* the same is the case for Saturday travel which does not seem to fit into this hypothesis as neatly. The effect seems more general to the weekend than just Saturday, and there seem like there may be other potential explanations than "business travel"
 
 1.  It's a little frustrating that Sunday and Saturday are on separate ends of the plot. Write a small function to set the levels of the factor so that the week starts on Monday.
 
+```{r}
+wday_modified <- function(date){
+  date_order <- (wday(date) + 5) %% 7
+  date <- wday(date, label = TRUE) %>% fct_reorder(date_order)
+  date
+}
+
+flights %>% 
+  mutate(date = lubridate::make_date(year, month, day),
+         wday = wday_modified(date)) %>% 
+  select(date, wday, distance) %>%
+  filter(distance < 3000) %>% 
+  ggplot(aes(wday, distance))+
+  geom_boxplot()
+
+```
+
 
 # Appendix
-I get nervous that in the opening example that the diamonds dataset was biased because all values with price over 19000 or carat over 2.5 were removed. This seemed to have the affect of causing larger diamonds to have lower prices than expected. I was worried this might in some way impact the pattern described regarding the residuals across the other dimensions -- so looked at the residuals when building the model on just diamonds with carats less than 0.90. None of the prices seemed to approach 19000 for carats this small so this seemed like a good place to validate the discussion on residuals.
-
-The pattern did indeed hold for even just these small diamonds, so the example Hadley discusses seems appropriate.
-
-*diamonds2 alternative... say that we only want to look at diamonds with carat less than 0.9*
-```{r, eval = FALSE}
-diamonds2 <- diamonds %>% 
-  filter(carat <= 0.9) %>%
-  mutate_at(vars(price, carat), funs(lg = log2))
-
-mod_diamond <- diamonds2 %>% 
-  lm(price_lg ~ carat_lg, data = .)
-
-diamonds2_w_mod <- diamonds2 %>% 
-  add_residuals(mod_diamond, "resid_lg")
-
-ggplot(diamonds2_w_mod, aes(cut, resid_lg)) + geom_boxplot()
-ggplot(diamonds2_w_mod, aes(color, resid_lg)) + geom_boxplot()
-ggplot(diamonds2_w_mod, aes(clarity, resid_lg)) + geom_boxplot()
-```
 
 ## 24.2.3.3
+Plots of extreme values against a sample and colored by some of the key attributes
 
+*Plots of extreme values against carat, price, clarity*
 ```{r}
 diamonds2 %>% 
   add_predictions(mod_diamond2) %>% 
+  sample_n(5000) %>% 
   ggplot(aes(carat, price))+
-  geom_hex(bins = 50)+
-  geom_point(aes(carat, price, colour = color), data = extreme_vals, size = 5)
+  geom_point(aes(carat, price, colour = clarity), alpha = 0.5)+
+  geom_point(aes(carat, price, colour = clarity), data = extreme_vals, size = 3)
 
 ```
 
+*Plots of extreme values against carat, price, cut*
 ```{r}
 diamonds2 %>% 
   add_predictions(mod_diamond2) %>% 
+  sample_n(5000) %>% 
   ggplot(aes(carat, price))+
-  geom_hex(bins = 50)+
-  geom_point(aes(carat, price, colour = clarity), data = extreme_vals, size = 5)
+  # geom_hex(bins = 50)+
+  geom_point(aes(carat, price, colour = cut), alpha = 0.5)+
+  geom_point(aes(carat, price, colour = cut), data = extreme_vals, size = 3)
 
 ```
-## 24.2.3.3
+
+## 24.2.3.4
 
 ### heteroskedasticity
+Note that heteroskedasticity is one (of several other) important considerations that would be important when deciding how much you trust the model.
 
+*residual vs lprice*
 ```{r}
-#actual resid vs price
+diamonds2 %>% 
+  add_residuals(mod_diamond2) %>% 
+  ggplot(aes(lprice, resid))+
+  geom_hex()
+
+```
+
+* the log transformation helped to ensure our residuals did not have heteroskedasticity against the predictor
+* Note below that if you transform the predictions into predictions on `price` rather than `log2(price)` and then look at the residuals, you see heteroskedasticity.
+
+*residual (transformed) vs price*
+(`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
+```{r}
 diamonds2 %>% 
   add_predictions(mod_diamond2) %>% 
   mutate(resid_transformed = price - 2^(pred)) %>% 
   ggplot(aes(price, resid_transformed))+
   geom_hex()
 
-# % change on x resid
+```
+
+*residual (transformed) vs log price*
+(`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
+```{r}
+# resid v lprice (% change on x resid)
 diamonds2 %>% 
   add_predictions(mod_diamond2) %>% 
   mutate(resid_transformed = price - 2^(pred)) %>% 
@@ -385,11 +542,9 @@ diamonds2 %>%
   geom_hex()
 ```
 
-* looks like some heteroskedasticity
-
 ### rsquared on logged values
-(incorrect)
-This is what I did previously, though I don't think this is really a great metric because the R^2 is on the log values...
+**(incorrect)**
+This is what I did initially. Below I calculate the R^2 on the log values. Within the exercise solution I decided to report the R^2 when calculated on `2^pred`. This has the more useful interpretation of representing the percentage of the variance on the actual price that the model captures, which seems more appropriate in some ways. This question about which is more appropriate to report may be worth revisiting in the future.
 ```{r}
 #to see if I'm doing it right let's calculate the R_squared of the model using this technique
 ss_res <-  diamonds2 %>% 
@@ -417,103 +572,145 @@ rsquare(mod_diamond2, diamonds2)
 
 The R-squred is ~ 0.983, which means that the model accounts for 0.983% of the variance in price, which seems pretty solid.
 
-## carat by mean `table` value
-`table` represents the percentage of the max area that is covered by the flat top part of the diamond
+
+## 24.2.3.1
+Visualization with horizontal stripes and `lprice` as the focus
+```{r}
+# horizontal stripes
+gridExtra::grid.arrange(plot_lp_lc, plot_lp, plot_lc + coord_flip()) 
+
+```
+
+* same thing, just change orientation and highlight `lprice` with a histogram
+
+*A few other graphs from this problem*
+```{r}
+diamonds2 %>%
+  ggplot(aes(price))+
+  geom_histogram(binwidth = 50)
+
+diamonds2 %>% 
+  ggplot(aes(carat))+
+  geom_histogram(binwidth = 0.01)
+```
+
+Taking the log of price seems to have a bigger impact on the shape of the geom_hex graph
 ```{r}
 diamonds2 %>% 
-  group_by(carat) %>% 
-  summarise(n = n(),
-            sd = sd(table),
-            mean = mean(table)) %>% 
-  filter(n > 100) %>% 
-  ggplot(aes(x = carat, y = mean))+
-  geom_point(aes(size = n))+
-  geom_line()
+  ggplot(aes(carat, lprice))+
+  geom_hex(show.legend = FALSE)
+
+diamonds2 %>% 
+  ggplot(aes(lcarat, price))+
+  geom_hex(show.legend = FALSE)
 
 ```
 
-
-## notes on mod daily
-
-```{r}
-
-    daily <- flights %>% 
-      mutate(date = make_date(year, month, day)) %>% 
-      count(date)
-    
-    daily <- daily %>% 
-      mutate(month = month(date, label = TRUE))
-    
-    daily <- daily %>% 
-      mutate(wday = wday(date, label = TRUE))
-
-
-    term <- function(date) {
-      cut(date, 
-        breaks = ymd(20130101, 20130605, 20130825, 20140101),
-        labels = c("spring", "summer", "fall") 
-      )
-    }
-    
-    daily <- daily %>% 
-      mutate(term = term(date))
-    
-daily %>% 
-  filter(wday == "Sat") %>% 
-  ggplot(aes(date, n, colour = term))+
-  geom_point(alpha = .3)+
-  geom_line()+
-  scale_x_date(NULL, date_breaks = "1 month", date_labels = "%b")
-
-```
-
-## taking logs notes
+### More notes on logs
 While taking the log of both price and carat seems to help improve the 'linearity' of the model, perhaps taking the log of the price makes a bigger difference.
 
 ```{r}
+# a few other plots
+plot_c <- diamonds2 %>%
+  ggplot(aes(carat))+
+  geom_histogram(binwidth = 0.1)
+
+plot_p <- diamonds2 %>%
+  ggplot(aes(price))+
+  geom_histogram(binwidth = 10)
+
+plot_c_lp <- diamonds2 %>% 
+  ggplot(aes(carat, lprice))+
+  geom_hex(show.legend = FALSE)
+
+plot_lc_p <- diamonds2 %>% 
+  ggplot(aes(lcarat, price))+
+  geom_hex(show.legend = FALSE)
+
+
 gridExtra::grid.arrange(plot_lc_lp, plot_c_lp, plot_lc_p)
 
 ```
 
-* The reason for this may be that the log of the price better resembles a normal distribution than the log of the carat, though taking the log of the carat does help by centering the distribution...
+* The reason for this may be that the log of the price better resembles a normal distribution than the log of the carat, though taking the log of the carat does also help by, at the least, centering the distribution...
 
 ```{r}
+
 gridExtra::grid.arrange(plot_lp_lc, plot_lp, plot_p)
 gridExtra::grid.arrange(plot_lc_lp, plot_lc, plot_c)
 
 ```
 
-Taking the log of a value often centers the distribution which is helpful for getting more normal errors, it's actually not about making the relationship linear per se...
+### carat more clumped than price
+*(Unnecessary)*
+* let's see between price and carat, which causes the appearance of "bands" in the data
+* to do this let's look at `geom_hex` when making the accompanying value random
+```{r}
+diamonds2 %>% 
+  mutate(rand_val = rnorm(n())) %>% 
+      ggplot(aes(lcarat, lprice))+
+      geom_hex(show.legend = FALSE)
+
+diamonds2 %>% 
+  mutate(rand_val = rnorm(n())) %>% 
+      ggplot(aes(lcarat, rand_val))+
+      geom_hex(show.legend = FALSE)
+
+diamonds2 %>% 
+  mutate(rand_val = rnorm(n())) %>% 
+      ggplot(aes(lprice, rand_val))+
+      geom_hex(show.legend = FALSE)
+
+```
+
+* clearly carat are much more clumped
+* this check was unnecessary in this case, though the method felt worth saving
+
+## Logs (simulated examples)
+
+### Exponential relationship
+
+Taking the log of a value often centers the distribution which is helpful for getting more normal errors, it's actually not about making the relationship linear per se... but about making the errors normal (and linearlizing the relationship has the effect of doing this). Let's generate some data.
+
+*Review logs on simulated dataset*
 
 ```{r}
+set.seed(12)
 log_notes_df <- tibble(rand_origin = rnorm(1000, mean = 5),
                        rand_noise = rand_origin + rnorm(1000, mean = 0, sd = 1),
                        rand_exp = 8^rand_noise,
                        rand_exp_log = log2(rand_exp))
 
+# exponential distribution
+log_notes_df %>% 
+  ggplot(aes(x = rand_exp))+
+  geom_histogram()
+
+# Then take log base 2 of
 # centered at 15 because 8 = 2^3 and it becomes 3*rnorm(mean = 5)
 log_notes_df %>% 
   ggplot(aes(x = rand_exp_log))+
   geom_histogram()
 
-log_notes_df %>% 
-  ggplot(aes(x = rand_origin, y = rand_exp_log))+
-  geom_hex()+
-  coord_fixed()
-
-# for every one unit increase in 'rand_origin' we get a 3 fold increase in the log of the output
-log_notes_df %>% 
-  lm(rand_exp_log ~ rand_origin, data = .)
-
+# The log helped us to uncover the relationship that existed between the original values and the values after some noise was added and then exponentiated
 log_notes_df %>% 
   ggplot(aes(x = rand_origin, y = rand_exp_log))+
   geom_hex()
+  # coord_fixed()
+
+# for every one unit increase in 'rand_origin' we get a ~3 fold increase in the log of the output
+# this corresponds with the relationship being 2^3*1 , i.e. 3 comes from 2^3, and the 1 is because there is a 1 to ~1 relationship
+log_notes_df %>% 
+  lm(rand_exp_log ~ rand_origin, data = .)
 
 ```
 
-* because of the way logs work, taking the log transform is robust to linearlizing any type of exponential relationship
+* because of the properties of logs and exponents, taking the log transform is robust to linearlizing any exponential relationship regardles of log
 
-What about a log relationship?
+### Log relationship
+
+What happens if you have a log relationship and you take the log of this leading to a log-log relationship?
+* You would not need to take the log of a graph in this relationship, but let's look at what happens
 ```{r}
 log_notes_df2 <- tibble(rand_origin = rnorm(1000, mean = 256, sd = 20),
                        rand_noise = rand_origin + rnorm(1000, mean = 0, sd = 10),
@@ -532,27 +729,26 @@ log_notes_df2 %>%
   geom_histogram()
 
 log_notes_df2 %>% 
-  ggplot(aes(x = rand_origin, y = rand_log_log))+
-  geom_hex()
-
-# for every one unit increase in 'rand_origin' we get a 3 fold increase in the log of the output
-log_notes_df %>% 
-  lm(rand_exp_log ~ rand_origin, data = .)
-
-log_notes_df %>% 
-  ggplot(aes(x = rand_origin, y = rand_exp_log))+
+  ggplot(aes(x = rand_log_log, y = rand_origin))+
   geom_hex()
 
 ```
 
-* what about exponential distribution
+* linear relationship is not visibly destroyed by taking additional log transform here
+
+## Exponential distribution of original values
+
+While log transforms can help with a lot of problems, they will not fix all issues. For example, below, I generate some simulated data that folows an exponential distribution. I then add some errors in that are normally distributed. a linear model has some challenges with these.
+
 ```{r}
+set.seed(1234)
 log_notes_df3 <- tibble(origin = rexp(1000, rate = .5) + 2,
                        rand_noise = origin + rnorm(1000, mean = 0, sd = 1),
                        rand_log = log(rand_noise),
+                       rand_log_plus1 = log(rand_noise + 1),
                        origin_log = log(origin))
 
-
+# a few NaN's produced due to trying to take the log of a negative value
 log_notes_df3 %>% 
   ggplot(aes(x = rand_noise, fill = rand_noise < 0))+
   geom_histogram(binwidth = .1)
@@ -561,10 +757,15 @@ log_notes_df3 %>%
   ggplot(aes(x = rand_noise, y = origin))+
   geom_hex()+
   lims(x = c(0, 30), y = c(0, 30))
+```
 
+`rand_noise` and `origin` seem to follow a linear relationship, but due to the distribution of the data, this is not captured 
+```{r}
 # in this case, it's underestimating the strength of the association...
 mod_exp_dist <- log_notes_df3 %>% 
   lm(origin ~ rand_noise, data = .)
+
+mod_exp_dist
 
 log_notes_df3 %>% 
   add_predictions(mod_exp_dist) %>% 
@@ -573,20 +774,69 @@ log_notes_df3 %>%
   geom_abline(aes(intercept = coef(mod_exp_dist)[[1]], slope = coef(mod_exp_dist)[[2]]), colour = "red")+
   lims(x = c(0, 30), y = c(0, 30))
 
+```
+
+* the coefficient on `rand_noise` would be 1 if the relationshpi were being captured...
+* we see the slope is only ~0.8 (rather than 1) and the predictions skewed
+
+```{r}
 log_notes_df3 %>% 
-  ggplot(aes(x = rand_noise, y = origin_log))+
+  ggplot(aes(x = rand_noise, y = origin))+
   geom_hex()+
   geom_smooth()
 
+```
+
+* `geom_smooth` helps to show how some of the skew in the distribution is affecting the model
+
+Simply taking log on its own does not fix this issue
+```{r}
 log_notes_df3 %>% 
   ggplot(aes(x = rand_log, y = origin_log))+
   geom_hex()+
   geom_smooth()
 
+```
 
+Robust regression also does not fix the issue
+```{r}
+MASS::rlm(origin ~ rand_noise, data = log_notes_df3)
+```
+
+* the slope is still only ~ 0.8
+
+To fix challenges you may need to use other types of transformations like box-cox, rescaling, centering, etc. ^[The point being that log-transforms are not a panacea for any fix.].
+
+### Rescale example
+
+Centering and rescaling also does not fix the problem
+```{r}
+range_origin <- range(log_notes_df3$origin)
+sd_origin = sd(log_notes_df3$origin)
+mean_origin = mean(log_notes_df3$origin)
+
+log_notes_df3_rescaled <- log_notes_df3 %>% 
+  mutate(origin_center_normalize = (origin - mean(origin)) / sd(origin),
+         rand_center_normalize = (rand_noise - mean(rand_noise)) / sd(rand_noise))
+
+mod_rescaled <- lm(origin_center_normalize ~ rand_center_normalize, data = log_notes_df3_rescaled)
+
+log_notes_df3_rescaled %>%
+  add_predictions(mod_rescaled) %>% 
+  ggplot(aes(rand_center_normalize, origin_center_normalize))+
+  geom_hex() +
+  geom_smooth()
+
+# what is the fix for this?
+
+```
+
+### distributions of simulated data
+Let's look at the distribution of our target (`origin`) and predictor (`rand_noise`) and their various log transforms
+```{r}
 log_notes_df3 %>% 
-  ggplot(aes(x = log(rand_log), y = log(origin_log)))+
-  geom_hex()
+  ggplot(aes(x = rand_noise))+
+  geom_histogram()
 
 log_notes_df3 %>% 
   ggplot(aes(x = rand_log))+
@@ -604,55 +854,104 @@ log_notes_df3 %>%
   ggplot(aes(x = log(origin_log)))+
   geom_histogram()
 
-
-log_notes_df3 %>% 
-  ggplot(aes(x = rand_log, y = origin_log))+
-  geom_hex()
-
-range_origin <- range(log_notes_df3$origin)
-sd_origin = sd(log_notes_df3$origin)
-mean_origin = mean(log_notes_df3$origin)
-
-log_notes_df3 %>% 
-  mutate(origin_center = (origin - mean(origin)) / sd(origin),
-         rand_center = (rand_noise - mean(rand_noise)) / sd(rand_noise)) %>%
-ggplot(aes(rand_center, origin_center))+
-  geom_hex()
-
-
-# what is the fix for this?
-
 ```
 
-* in this case it systematically underestimates the slope due to the distribution...
-* here is predicting a slope of 0.77, when it should be 1
+### Fix
+Finish this example later
 
+## Diamonds data review
+*(Section arguably unnecessary)*
+
+### carat by mean `table` value
+`table` represents the percentage of the max area that is covered by the flat top part of the diamond
 ```{r}
-log_notes_df3 %>% 
-  lm(log(rand_origin) ~ log(rand_noise), data = .)
+diamonds2 %>% 
+  group_by(carat) %>% 
+  summarise(n = n(),
+            sd = sd(table),
+            mean = mean(table)) %>% 
+  filter(n > 100) %>% 
+  ggplot(aes(x = carat, y = mean))+
+  geom_point(aes(size = n))+
+  geom_line()
+
 ```
 
-## 24.2.3.1
+### Cutoff, Part 1
+I get nervous that in the opening example that the diamonds dataset was biased because all values with price over 19000 or carat over 2.5 were removed. This seemed to have the affect of causing larger diamonds to have lower prices than expected. I was worried this might in some way impact the pattern described regarding the residuals across the other dimensions -- so looked at the residuals when building the model on just diamonds with carats less than 0.90. None of the prices seemed to approach 19000 for carats this small so this seemed like a good place to validate the discussion on residuals.
 
-A few other graphs from this problem 
+The pattern did indeed hold for even just these small diamonds, so the example Hadley discusses seems appropriate.
+
+*diamonds2 alternative... say that we only want to look at diamonds with carat less than 0.9*
 ```{r}
-diamonds2 %>%
-  ggplot(aes(price))+
-  geom_histogram(binwidth = 50)
+diamonds_test <- diamonds %>% 
+  filter(carat <= 0.9) %>%
+  mutate_at(vars(price, carat), funs(lg = log2))
 
-diamonds2 %>% 
-  ggplot(aes(carat))+
-  geom_histogram(binwidth = 0.01)
+mod_diamond <- diamonds_test %>% 
+  lm(price_lg ~ carat_lg, data = .)
 
+diamonds2_w_mod <- diamonds_test %>% 
+  add_residuals(mod_diamond, "resid_lg")
+```
 
-diamonds2 %>% 
-  ggplot(aes(carat, lprice))+
-  geom_hex(show.legend = FALSE)
+All the patterns Hadley pointed-out seem to hold on this slightly modified dataset
+```{r}
+ggplot(diamonds2_w_mod, aes(cut, resid_lg)) + geom_boxplot()
+ggplot(diamonds2_w_mod, aes(color, resid_lg)) + geom_boxplot()
+ggplot(diamonds2_w_mod, aes(clarity, resid_lg)) + geom_boxplot()
+```
 
-diamonds2 %>% 
-  ggplot(aes(lcarat, price))+
-  geom_hex(show.legend = FALSE)
+### Cutoff, Part 2
+
+Check if there are differences in coefficients when training on full `diamonds` data set v `diamonds2` dataset
+```{r}
+mod_diamonds <- diamonds %>% 
+   mutate(lprice = log2(price), 
+         lcarat = log2(carat)) %>% 
+lm(lprice ~ lcarat, data = .)
+
+mod_diamonds2 <- lm(lprice ~ lcarat, data = diamonds2)
+
+diamonds %>% 
+   mutate(lprice = log2(price), 
+         lcarat = log2(carat)) %>% 
+   spread_predictions(mod_diamonds, mod_diamonds2) %>% 
+  sample_n(1000) %>% 
+ggplot(aes(x = lcarat, y = lprice))+
+  geom_point()+
+  geom_line(aes(y = mod_diamonds), colour = "red")+
+  geom_line(aes(y = mod_diamonds2), colour = "blue")
+
 
 ```
 
-* taking the log of price seems to have had a bigger impact on shape comparatively
+essentially no difference between the models that come-out when training on one v the the other
+
+## 25.3.5.4
+
+In this section I create a marker for days that are "near a holiday"
+```{r}
+near_holidays <- holidays %>% 
+  # This creates a series of helper variables to create the variable 'Holiday_IntervalDay' that represents an interval that encloses the period between the holiday and the beginning or end of the most recent weekend
+  mutate(HolidayWday = wday(HolidayDate, label = TRUE),
+         HolidayWknd = lubridate::round_date(HolidayDate, unit = "week"),
+         HolidayFloor = lubridate::floor_date(HolidayDate, unit = "week"),
+         HolidayCeiling = lubridate::ceiling_date(HolidayDate, unit = "week"),
+         Holiday_IntervalDay = case_when(HolidayWknd == HolidayFloor ~ (HolidayFloor - ddays(2)),
+                                         TRUE ~ HolidayCeiling)) %>% 
+  mutate(Holiday_Period = interval(pmin(HolidayDate, Holiday_IntervalDay), pmax(HolidayDate, Holiday_IntervalDay)))
+
+# This returns each day and whether it occurred near a holiday
+near_holiday <- map(near_holidays$Holiday_Period, ~(seq.Date(ymd("2013-01-01"), ymd("2013-12-31"), by = "day") %within% .x)) %>% 
+  transpose() %>% 
+  map_lgl(any) %>% 
+  as_tibble() %>% 
+  rename(NearHoliday = value) %>% 
+  mutate(date = seq.Date(ymd("2013-01-01"), ymd("2013-12-31"), by = "day"))
+
+near_holiday
+```
+
+* I ended-up not adding any additional analysis here, though the methodology for creating the "near holiday" seemed worth saving
+* Could come back to add more in the future
