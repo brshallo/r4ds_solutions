@@ -1,0 +1,68 @@
+---
+title: "explanation of the `with` function"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+```
+
+
+```{r, warning = FALSE}
+library(tidyverse)
+library(nycflights13)
+```
+
+The `with` function takes a named list or dataframe as its first argument. The second argument can be an an expression you want evaluated. `with` then allows you to type column names to insert the associated vector into that location. The ability to evaluate expressions by just referencing the column names is called "non-standard evaluation" very similar to how dplyr facilitates this (also using "non-standard evaluation").
+
+For example, say I want to output the column `Sepal.Width` from the `iris` dataset as a vector.
+
+```{r}
+iris <- as_tibble(iris)
+```
+
+
+```{r}
+# base R methods
+iris$Sepal.Width
+iris[["Sepal.Width"]]
+
+# using the with function
+with(iris, Sepal.Width)
+
+# the above are the same, just different methods
+
+# note that the below dplyr function gives you something different
+# the output is a one-column dataframe as opposed to an atomic vector
+select(iris, Sepal.Width)
+```
+
+Say I want to take the `sum` of `Sepal.Width` and ouptut it as a vector. `with` makes it easier to keep this in a pipe format.
+```{r}
+iris %>% 
+  with(sum(Sepal.Width))
+```
+
+You can also reference more than one column vector in an expression. E.g. lets look at using it with the `table` function (`table` essentially works like a pivot-table with default count option).
+```{r}
+flights %>% 
+  with(table(carrier, origin))
+
+```
+
+Or maybe I want to use `table` and then pass the outputs into `cor` (to check the correlation of flights by carrier between the three airports in NYC).
+
+```{r}
+ flights %>% 
+  with(table(carrier, origin)) %>% 
+  cor()
+```
+
+* LGA and JFK seem to have at least some correlation of flights and carrier
+
+Essentially, I use `with` when I want to do operations in a "non-standard evaluation" format similar to that used in dplyr while also facilitating the use of the pipe. I'm mostly working in dataframes so I don't use it a ton, though sometimes `with` can be very useful.
