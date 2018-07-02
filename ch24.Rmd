@@ -821,7 +821,7 @@ log_notes_df3 %>%
   add_predictions(mod_exp_dist_flipped) %>% 
   ggplot(aes(x = origin, y = rand_noise))+
   geom_hex()+
-  geom_abline(aes(intercept = coef(mod_exp_dist)[[1]], slope = coef(mod_exp_dist)[[2]]), colour = "red")+
+  geom_abline(aes(intercept = coef(mod_exp_dist_flipped)[[1]], slope = coef(mod_exp_dist_flipped)[[2]]), colour = "red")+
   lims(x = c(0, 30), y = c(0, 30))
 
 ```
