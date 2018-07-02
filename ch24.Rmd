@@ -808,6 +808,65 @@ MASS::rlm(origin ~ rand_noise, data = log_notes_df3)
 
 To fix challenges you may need to use other types of transformations like box-cox, rescaling, centering, etc.^[The point being that log-transforms are not a panacea for any fix.] or other modeling techniques.
 
+### flip x and y
+
+```{r}
+# in this case, it's underestimating the strength of the association...
+mod_exp_dist_flipped <- log_notes_df3 %>% 
+  lm(rand_noise ~ origin , data = .)
+
+mod_exp_dist_flipped
+
+log_notes_df3 %>% 
+  add_predictions(mod_exp_dist_flipped) %>% 
+  ggplot(aes(x = origin, y = rand_noise))+
+  geom_hex()+
+  geom_abline(aes(intercept = coef(mod_exp_dist)[[1]], slope = coef(mod_exp_dist)[[2]]), colour = "red")+
+  lims(x = c(0, 30), y = c(0, 30))
+
+```
+
+* when flipping the x and y values, the coefficient is 1 rather than ~ 0.8
+* If you were doing PCA regression instead I wonder if there would be any difference when flipping like this?
+
+### simulation
+Check coefficient values when simulating this 100x
+```{r}
+sim_data_models <- function(num_sims = 100, size_sims = 1000){
+  
+  sim_data <- tibble(x = 1:num_sims) %>% 
+    group_by(x) %>% 
+    mutate(data = list(tibble(origin = rexp(size_sims, rate = .5) + 2, 
+         rand_noise = origin + rnorm(size_sims, mean = 0, sd = 1)))) %>% 
+    ungroup()
+  
+  lm_df <- function(df) lm(origin ~ rand_noise , data = df)
+  lm_df_flip <- function(df) lm(rand_noise ~ origin , data = df)
+  
+  models_data <- sim_data %>% 
+    mutate(mod_rand_noise = map(data, lm_df),
+           mod_origin = map(data, lm_df_flip),
+           coef_rand_noise = map_dbl(mod_rand_noise, ~coef(.x)[[2]]),
+           coef_origin = map_dbl(mod_origin, ~coef(.x)[[2]]))
+  
+  models_data
+}
+
+set.seed(1234)
+sim_output <- sim_data_models()
+
+sim_output %>% 
+  select(coef_rand_noise, coef_origin) %>%
+  gather(coef_rand_noise, coef_origin, key = "x_predictor", value = "coefficient") %>%
+  ggplot(aes(x = coefficient))+
+  geom_histogram(bin_width = 0.01)+
+  facet_wrap(~x_predictor, ncol = 1)
+  
+```
+
+* Note that when using the origin as the predictor we have the coefficient centered at ~ 1, whereas when the predictor is rand_noise, coefficients are closer to 0.8
+* Interested to understand this incongruity better...
+
 ### Rescale example
 
 Centering and rescaling also do not fix the problem
