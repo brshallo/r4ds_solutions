@@ -520,7 +520,6 @@ diamonds2 %>%
 ```
 
 * the log transformation helped to ensure our residuals did not have heteroskedasticity against the predictor
-* Note below that if you transform the predictions into predictions on `price` rather than `log2(price)` and then look at the residuals, you see heteroskedasticity.
 
 *residual (transformed) vs price*
 (`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
@@ -532,6 +531,9 @@ diamonds2 %>%
   geom_hex()
 
 ```
+
+* This is what heteroskedasticity looks like
+
 
 *residual (transformed) vs log price*
 (`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
@@ -572,7 +574,7 @@ ss_tot <- diamonds2 %>%
 rsquare(mod_diamond2, diamonds2)
 ```
 
-The R-squred is ~ 0.983, which means that the model accounts for 0.983% of the variance in price, which seems pretty solid.
+The R-squred is ~ 0.983, which means that the model accounts for 98.3% of the variance in price, which seems pretty solid.
 
 
 ## 24.2.3.1
