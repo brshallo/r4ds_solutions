@@ -1,0 +1,194 @@
+---
+title: "Chapter 27 R Markdown"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(babynames)
+library(nasaweather)
+library(lubridate)
+```
+
+# ch. 27: R Markdown
+
+## 27.2 R Markdown basics
+
+### 27.2.1
+
+1.  Create a new notebook using _File > New File > R Notebook_. Read the 
+    instructions. Practice running the chunks. Verify that you can modify
+    the code, re-run it, and see modified output.
+    
+1.  Create a new R Markdown document with _File > New File > R Markdown..._
+    Knit it by clicking the appropriate button. Knit it by using the 
+    appropriate keyboard short cut. Verify that you can modify the
+    input and see the output update.
+    
+1.  Compare and contrast the R notebook and R markdown files you created
+    above. How are the outputs similar? How are they different? How are
+    the inputs similar? How are they different? What happens if you
+    copy the YAML header from one to the other?
+    
+    * Both by default have code chunks display 'in-line' while working, though with RMD can force to not output in-line.
+    * When rendering, default of notebooks will be to render whichever chunks have been rendered while working, whereas RMD document needs directions from code chunk options
+    * I've found some of my company's security software sometimes interferes with my notebook documents if I have the output be outputted in-line^[I have not had these issues with RMD documents (as long as I 'unclick' "Show output inline for all Rmarkdown documents" from Tools-->Global Options -->Appearance. This is an issue with my work computer set-up, though because of it I rarely use in-line output when doing anything that requires substantial processing at work.].
+
+1.  Create one new R Markdown document for each of the three built-in
+    formats: HTML, PDF and Word. Knit each of the three documents.
+    How does the output differ? How does the input differ? (You may need
+    to install LaTeX in order to build the PDF output --- RStudio will
+    prompt you if this is necessary.)
+    
+## 27.3: Text formatting with Markdown
+
+*Print file from Hadley's github page with commmon formatting:*
+```{r}
+
+cat(readr::read_file("https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd"))
+```
+
+*Other notes*
+The following will actually run in the console when knitted
+```
+summary(mpg)
+```
+
+### 27.3.1
+
+1.  Practice what you've learned by creating a brief CV. The title should be
+    your name, and you should include headings for (at least) education or
+    employment. Each of the sections should include a bulleted list of
+    jobs/degrees. Highlight the year in bold.
+    
+* this is a kind of weak example for a cv:
+    
+__CV of Bryan Shalloway__
+---
+_(425) 591-6020_
+
+##Experience
+Teacher | _2013_ 
+-|-
+__Durham__ |
+
+##Experience
+Data Scientist | _2017_ 
+---|---
+__Durham__ |
+
+##Education
+ IAA | _2017_  
+-|-
+    + Analytics
+    + Machine Learning
+    + etc.
+
+    
+2.  Using the R Markdown quick reference, figure out how to:
+
+    1.  Add a footnote.
+    
+Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line one^[Superb footnote.]
+
+[^1]: Here is the foonote.
+
+[^2]: 
+  here's one with multiple blocks.  
+  boo ya this is an awesome foonote.  
+  don't you believe it!
+
+[^3]: and the third
+
+    
+    1.  Add a horizontal rule.
+    
+---
+
+A [linked phrase][id].
+
+[id]: http://example.com/ "Title"
+
+
+---
+
+pagebreaks above and below (AKA horizontal rules)
+
+***
+
+    1.  Add a block quote.
+    
+A friend once said:
+
+>tis better to give   
+>than to receive...  
+
+    
+3.  Copy and paste the contents of `diamond-sizes.Rmd` from
+    <https://github.com/hadley/r4ds/tree/master/rmarkdown> in to a local
+    R markdown document. Check that you can run it, then add text after the 
+    frequency polygon that describes its most striking features.
+
+```{r, echo = FALSE}
+
+smaller <- diamonds %>% 
+  filter(carat <= 2.5)
+
+smaller %>% 
+  ggplot(aes(carat)) + 
+  geom_freqpoly(binwidth = 0.01)
+
+```
+
+* It's interesting that the count of number of diamonds spikes at whole numbers...
+
+## 27.4: Code chunks
+
+* shortcut for inserting code chunk is cmd/ctrl+alt+i
+* shortcut for running entire code chunks: cmd/ctrl+shift+enter
+* chunk headers
+    * chunk name is first part after type of code in chunk, e.g. code chunk by name: `"```{r by-name}"`
+    * `eval=FALSE` show example output code, but don't evaluate
+    * `include=FALSE` evaluate code but don't show code or output
+    * `echo = FALSE` is for when you just want the output but not the code itself
+    * `message = FALSE` or `warning = False` prevents messages or warnings appearing in the finished line
+    * `error = TRUE` causes code to render even if there is an error
+    * `results = 'hide'` hides printied output and `fig.show = 'hide'` hides plots
+        * allows you to hide particular bits of output
+
+* Full chunk options here: https://yihui.name/knitr/options/ 
+
+
+### 27.4.7
+
+1.  Add a section that explores how diamond sizes vary by cut, colour,
+    and clarity. Assume you're writing a report for someone who doesn't know
+    R, and instead of setting `echo = FALSE` on each chunk, set a global 
+    option.
+
+1.  Download `diamond-sizes.Rmd` from
+    <https://github.com/hadley/r4ds/tree/master/rmarkdown>. Add a section
+    that describes the largest 20 diamonds, including a table that displays
+    their most important attributes.
+
+1.  Modify `diamonds-sizes.Rmd` to use `comma()` to produce nicely
+    formatted output. Also include the percentage of diamonds that are
+    larger than 2.5 carats.
+
+1.  Set up a network of chunks where `d` depends on `c` and `b`, and
+    both `b` and `c` depend on `a`. Have each chunk print `lubridate::now()`,
+    set `cache = TRUE`, then verify your understanding of caching.
+    
+

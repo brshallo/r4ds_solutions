@@ -31,8 +31,7 @@ library(splines)
 
 # ch. 24: Model building
 
-* `data_grid`, argument: `.model` :
-  * if the model needs variables that haven't been supplied explicitly, will auto-fill them with "typical" values; continuous --> median; categorical --> mode
+* `data_grid`, argument: `.model`: if the model needs variables that haven't been supplied explicitly, will auto-fill them with "typical" values; continuous --> median; categorical --> mode
 * `MASS:rlm` robust linear model that uses "M estimation by default"
     * warning: MASS::select will clash with dplyr::select, so I usually won't load in MASS explicitly
 
