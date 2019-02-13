@@ -23,6 +23,17 @@ library(forcats)
 
 # ch. 15: Factors
 
+* `factor` make variable a factor based on `levels` provided
+* `fct_rev` reverses order of factors
+* `fct_infreq` orders levels in increasing frequency
+* `fct_relevel` lets you move levels to front of order
+* `fct_inorder` orders existing factor by order values show-up in in data
+* `fct_reorder` orders input factors by other specified variables value (median by default), 3 inputs: `f`: factor to modify, `x`: input var to order by, `fun`: function to use on x, also have `desc` option
+* `fct_reorder2` orders input factor by max of other specified variable (good for making legends align as expected)
+* `fct_recode` lets you change value of each level
+* `fct_collapse` is variant of `fct_recode` that allows you to provide multiple old levels as a vector
+* `fct_lump` allows you to lump together small groups, use `n` to specify number of groups to end with
+
 Create factors by order they come-in:
 
 Avoiding dropping levels with `drop = FALSE`
@@ -34,17 +45,6 @@ gss_cat %>%
 
 # Is there a similar way to do this with count?
 ```
-
-* `factor` make variable a factor based on `levels` provided
-* `fct_rev` reverses order of factors
-* `fct_infreq` orders levels in increasing frequency
-* `fct_relevel` lets you move levels to front of order
-* `fct_inorder` orders existing factor by order values show-up in in data
-* `fct_reorder` orders input factors by other specified variables value (median by default), 3 inputs: `f`: factor to modify, `x`: input var to order by, `fun`: function to use on x, also have `desc` option
-* `fct_reorder2` orders input factor by max of other specified variable (good for making legends align as expected)
-* `fct_recode` lets you change value of each level
-* `fct_collapse` is variant of `fct_recode` that allows you to provide multiple old levels as a vector
-* `fct_lump` allows you to lump together small groups, use `n` to specify number of groups to end with
 
 ## 15.4: Modifying factor order
 

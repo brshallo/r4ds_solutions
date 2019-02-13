@@ -1,0 +1,262 @@
+---
+title: "Chapter 28 Graphics for communication"
+date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
+author: "Bryan Shalloway"
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+---
+
+*Make sure the following packages are installed:*  
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(nycflights13)
+library(babynames)
+library(nasaweather)
+library(lubridate)
+library(ggrepel)
+library(scales)
+```
+
+
+# ch. 28: Graphics for communication
+
+## 28.2: Label
+
+### 28.2.1
+
+1.  Create one plot on the fuel economy data with customised `title`,
+    `subtitle`, `caption`, `x`, `y`, and `colour` labels.
+    
+```{r}
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")
+```
+    
+
+1.  The `geom_smooth()` is somewhat misleading because the `hwy` for
+    large engines is skewed upwards due to the inclusion of lightweight
+    sports cars with big engines. Use your modelling tools to fit and display
+    a better model.
+
+```{r}
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  geom_smooth()
+```
+
+You could take into account the class of the car
+
+```{r}
+mpg %>% 
+  ggplot(aes(x = hwy, displ, colour = class))+
+  geom_count()+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  geom_smooth()
+```
+
+1.  Take an exploratory graphic that you've created in the last month, and add
+    informative titles to make it easier for others to understand.
+    
+See example
+    
+## 28.3: Annotations
+
+### 28.3.1
+
+1.  Use `geom_text()` with infinite positions to place text at the
+    four corners of the plot.
+    
+```{r}
+data_label <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
+
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
+
+
+```
+
+You could technically create the lable w/o the tibble, though it will print multiple times:
+```{r}
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  geom_text(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
+```
+
+
+1.  Read the documentation for `annotate()`. How can you use it to add a text
+    label to a plot without having to create a tibble?
+    
+```{r}
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  annotate("text", x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
+
+```
+
+* function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
+* can specify the geom type with annotate
+
+1.  How do labels with `geom_text()` interact with faceting? How can you
+    add a label to a single facet? How can you put a different label in
+    each facet? (Hint: think about the underlying data.)
+
+```{r}
+data_label <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
+
+data_label <- mpg %>% 
+  group_by(class) %>% 
+  summarise(hwy = round(mean(hwy))) %>% 
+  mutate(label = paste0("hwy mpg for ", class, ": ", hwy)) %>% 
+  mutate(x = Inf, y = Inf)
+
+mpg %>% 
+  ggplot(aes(x = hwy, displ))+
+  geom_count(aes(colour = class))+
+  labs(title = "Larger displacement has lower gas mileage efficiency",
+       subtitle = "SUV and pickup classes` tend to be highest on disp",
+       caption = "Data is for cars made in either 1999 or 2008",
+       colour = "Car class")+
+  facet_wrap(~class)+
+  geom_smooth()+
+  geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
+
+
+```
+
+
+1.  What arguments to `geom_label()` control the appearance of the background
+    box?
+    
+* `fill` argument controls background color
+* `alpha` controls it's relative brighness
+```{r}
+best_in_class <- mpg %>%
+  group_by(class) %>%
+  filter(row_number(desc(hwy)) == 1)
+
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_label(aes(label = model), data = best_in_class, nudge_y = 2, alpha = 0.1, fill = "green")
+```
+
+
+1.  What are the four arguments to `arrow()`? How do they work? Create a series
+    of plots that demonstrate the most important options.
+    
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
+  
+```
+
+```{r}
+b <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point()
+
+df <- data.frame(x1 = 2.62, x2 = 3.57, y1 = 21.0, y2 = 15.0)
+b +
+ geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "curve"), data = df) +
+ geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
+
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
+b + geom_curve(
+  aes(x = x1, y = y1, xend = x2, yend = y2),
+  data = df,
+  arrow = arrow(length = unit(0.03, "npc"))
+)
+```
+
+    
+## 28.4: Scales
+
+### 28.4.4
+
+1.  Why doesn't the following code override the default scale?
+
+    ```{r fig.show = "hide"}
+    df <- tibble(x = rnorm(100), y = rnorm(100))
+    
+    ggplot(df, aes(x, y)) +
+      geom_hex() +
+      scale_colour_gradient(low = "white", high = "red") +
+      coord_fixed()
+    ```
+
+    * `geom_hex` uses `fill`, not `colour`
+
+    ```{r fig.show = "hide"}
+    df <- tibble(x = rnorm(100), y = rnorm(100))
+    
+    ggplot(df, aes(x, y)) +
+      geom_hex() +
+      scale_fill_gradient(low = "white", high = "red") +
+      coord_fixed()
+    ```
+
+
+
+1.  What is the first argument to every scale? How does it compare to `labs()`?
+
+* expects the `x` value first, i.e. the value that will be editing the format of. `labs` takes `...` first, or if using the specific options like `xlab`, `ylab` etc. expects the `label`
+
+```{r}
+scales::comma
+```
+
+
+1.  Change the display of the presidential terms by:
+
+    1. Combining the two variants shown above.
+    1. Improving the display of the y axis.
+    1. Labelling each term with the name of the president.
+    1. Adding informative plot labels.
+    1. Placing breaks every 4 years (this is trickier than it seems!).
+
+1.  Use `override.aes` to make the legend on the following plot easier to see.
+
+    ```{r, dev = "png", out.width = "50%"}
+    diamonds %>% 
+      ggplot(aes(carat, price)) +
+      geom_point(aes(colour = cut), alpha = 1/20)+
+      guides(colour = guide_legend(override.aes = list(alpha = 1)))
+    ```
+    
+

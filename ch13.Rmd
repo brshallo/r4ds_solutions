@@ -26,17 +26,40 @@ library(lubridate)
 
 > "The relations of three or more tables are always a property of the relations between each pairs."  
 
-*Three families of verbs in relational data: *
+* Three families of verbs in relational data: *
 
 * __Mutating joins__, which add new variables to one data frame from matching
   observations in another.
-
+    + `inner_join`: match when equal
+    + `left_join`: keep all observations in table in 1st arg
+    + `right_join`: keep all observations in table in 2nd arg
+    + `full_join`: keep all observations in table in 1st and 2nd arg
 * __Filtering joins__, which filter observations from one data frame based on
   whether or not they match an observation in the other table.
-
+    + `semi_join(x, y)` __keeps__ all observations in `x` that have a match in `y`.
+    + `anti_join(x, y)` __drops__ all observations in `x` that have a match in `y`.
 * __Set operations__, which treat observations as if they were set elements.
+    + `intersect(x, y)`: return only observations in both `x` and `y` (when inputs are a df, is comparing across all values in a row).
+    + `union(x, y)`: return unique observations in `x` and `y`.
+    + `setdiff(x, y)`: return observations in `x`, but not in `y`.
 
+`base::merge()` can perform all four types of mutating join:  
 
+dplyr              | merge
+-------------------|-------------------------------------------
+`inner_join(x, y)` | `merge(x, y)`
+`left_join(x, y)`  | `merge(x, y, all.x = TRUE)`
+`right_join(x, y)` | `merge(x, y, all.y = TRUE)`,
+`full_join(x, y)`  | `merge(x, y, all.x = TRUE, all.y = TRUE)`
+
+SQL is the inspiration for dplyr's conventions, so the translation is straightforward:
+
+dplyr                        | SQL
+-----------------------------|-------------------------------------------
+`inner_join(x, y, by = "z")` | `SELECT * FROM x INNER JOIN y USING (z)`
+`left_join(x, y, by = "z")`  | `SELECT * FROM x LEFT OUTER JOIN y USING (z)`
+`right_join(x, y, by = "z")` | `SELECT * FROM x RIGHT OUTER JOIN y USING (z)`
+`full_join(x, y, by = "z")`  | `SELECT * FROM x FULL OUTER JOIN y USING (z)`
 
 ## 13.2 nycflights13
 
@@ -83,15 +106,15 @@ weather
 
 1.  *Add a surrogate key to `flights`.*
 
-```{r}
-flights %>%
-  mutate(surrogate_key = row_number()) %>% 
-  glimpse()
+    ```{r}
+    flights %>%
+      mutate(surrogate_key = row_number()) %>% 
+      glimpse()
+    
+    ```
 
-```
 
-
-2.  *Identify the keys in the following datasets*
+1.  *Identify the keys in the following datasets*
 
     1.  `Lahman::Batting`: player, year, stint
     
@@ -118,7 +141,7 @@ flights %>%
       filter(n > 1)
     ```
     
-    4.  `fueleconomy::vehicles`: id
+    1.  `fueleconomy::vehicles`: id
     
     ```{r}
     fueleconomy::vehicles %>% 
@@ -127,20 +150,20 @@ flights %>%
     
     ```
     
-    5.  `ggplot2::diamonds`: needs surrogate
+    1.  `ggplot2::diamonds`: needs surrogate
     
-```{r}
-diamonds %>% 
-  count(x, y, z, depth, table, carat, cut, color, price, clarity ) %>% 
-  filter(n > 1)
+    ```{r}
+    diamonds %>% 
+      count(x, y, z, depth, table, carat, cut, color, price, clarity ) %>% 
+      filter(n > 1)
+    
+    diamonds %>% 
+      mutate(surrogate_id = row_number())
+    ```
+    
+    
 
-diamonds %>% 
-  mutate(surrogate_id = row_number())
-```
-    
-    
-
-3.  *Draw a diagram illustrating the connections between the `Batting`,*
+1.  *Draw a diagram illustrating the connections between the `Batting`,*
     *`Master`, and `Salaries` tables in the Lahman package. Draw another diagram*
     *that shows the relationship between `Master`, `Managers`, `AwardsManagers`.*  
     
@@ -265,11 +288,11 @@ diamonds %>%
       mutate(age = 2013 - year) %>% 
       filter(n > 50, age < 30) %>% 
       ggplot(aes(x = age, y = avg_delay))+
-      geom_point()+
+      ggbeeswarm::geom_quasirandom()+
       geom_smooth()
     ```
     
-    Looks as though planes that are 5 to 12 years old have higher delays... Let's look at same thing using boxplots.
+    Looks as though planes that are roughly 5 to 10 years old have higher delays... Let's look at same thing using boxplots.
     
     ```{r}
     group_by(flights, tailnum) %>% 
@@ -283,7 +306,23 @@ diamonds %>%
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern -- though this may just be me seeing things... perhaps worth exploring mroe.
+    Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern -- though this may just be me seeing things... perhaps worth exploring more...
+    
+    A simple way to test for a non-linear relationship would be to discretize age and then pass it through an anova
+    
+    ```{r}
+    nycflights13::flights %>% 
+      select(arr_delay, tailnum) %>% 
+      left_join(planes, by="tailnum") %>% 
+      filter(!is.na(arr_delay)) %>% 
+      mutate(age = 2013 - year,
+             age_round_5 = (5 * age %/% 5) %>% as.factor()) %>% 
+      with(aov(arr_delay ~ age_round_5)) %>% 
+      summary()
+    ```
+    
+    * There are weaknesses to using anova, but according to this test arrival delay does not appear to be randomly distributed across age
+    * The reason for such a difference may be trivial or may be confounded by a more interesting pattern... but these are deeper questions
 
 1.  *What weather conditions make it more likely to see a delay?*
 
@@ -364,8 +403,12 @@ diamonds %>%
     
     flights %>% 
       mutate(in_planes = tailnum %in% planes$tailnum) %>% 
-      group_by(carrier, in_planes) %>% 
-      summarise(flights_inPlanes = )
+      group_by(carrier) %>% 
+      summarise(flights_inPlanes = sum(in_planes),
+                n = n(),
+                perc_inPlanes = flights_inPlanes / n) %>% 
+      ungroup()
+
     ```
 
     Some carriers do not have many of their tailnums data in the `planes` table. Anyone have more insight here?

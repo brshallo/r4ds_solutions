@@ -40,6 +40,23 @@ library(maps)
 ```
 
 # ch. 7, data exploration
+* `cut_width`: specify binsize of each cut (often use with `geom_boxplot`)
+* `cut_number`:  specify number of groups to make, allowing for variable binsize (often use with `geom_boxplot`)
+* `geom_histogram`: ...
+* `geom_freqpoly`: for if you want to have overlapping histograms (so outputs lines instead)
+    + can set y as `..density..` to equalize scale of each (similar to how `geom_density` does).
+* `geom_boxplot`: ...
+* `geom_violin`: Creates double sided histograms for each factor of x
+* `geom_bin2d`: scatter plot of x and y values, but use shading to determine count/density in each point
+* `geom_hex`: same as `geom_bin2d` but hexagon instead of square shapes are shaded in
+* `reorder`: arg1 = variable to reorder, arg2 = variable to reorder it by arg3 = function to reorder by (e.g. median, mean, max...)
+* `coord_cartesian`: adjust x,y window w/o filtering out values that are excluded from view
+* `xlim`; `ylim`: adjust window and filter out values not within window (same method as `scale_x(/y)_continuous`)
+    + these v. `coord_cartesian` is important for geoms like `geom_smooth` that aggregate as they visualize
+* `ifelse`: vectorized if else (not to be confused with `if` and `else` functions)
+    + `dplyr::if_else` is more strict alternative
+* `case_when`: create new variable that relies on complex combination of existing variables
+    + often use when you have complex or multiple `ifelse` statements accruing
 
 ## 7.3. Variation
 
@@ -142,7 +159,7 @@ ggplot(diamonds)+
 
 The difference may be caused by jewlers rounding-up because people want to buy '1' carat diamonds not 0.99 carat diamonds. It could also be that some listings are simpoly only in integers^[not necessarily rounding one way or the other.].
 
-*4.Compare and contrast coord_cartesian() vs xlim() or ylim() when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?*  
+*4.Compare and contrast `coord_cartesian()` vs `xlim()` or `ylim()` when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?*  
 
 `coord_cartesian` does not change data ust window view where as `xlim` and `ylim` will get rid of data outside of domain^[This is especially important when building things like boxplots whose graphs depend on all points in the graph.].
 
@@ -173,7 +190,7 @@ mutate(diamonds, carattest=ifelse(carat<1.5 & carat>.7, NA, color)) %>%
 ```
 
 
-*2. What does na.rm = TRUE do in mean() and sum()?*  
+*2. What does na.rm = TRUE do in `mean()` and `sum()`?*  
   
 Filters it out of the vector of values.  
 
@@ -359,7 +376,7 @@ library(heatmaply)
 
 Did anyone explore these?  
   
-*2. Use geom_tile() together with dplyr to explore how average flight delays vary by destination and month of year. What makes the plot difficult to read? How could you improve it?*
+*2. Use `geom_tile()` together with dplyr to explore how average flight delays vary by destination and month of year. What makes the plot difficult to read? How could you improve it?*
 
 
 I improved the original graph by adding in a filter so that only destinations that received over 10000 flights were included

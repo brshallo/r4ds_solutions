@@ -35,22 +35,51 @@ library(plotly)
 ```
 
 # ch. 5
-
+  
 **Key functions from chapter:**  
   
-`filter()`: for filtering rows by some condition(s)  
-  
-`arrange()`: for ordering rows by some condition(s)  
-  
-`select()`: for selecting columns by name, position, or criteria  
-  
-`mutate()`: for changing columns and adding new columns  
-  
-`group_by()`: for performing operations grouped by the values of some fields  
-  
-`summarise()`: for collapsing dataframes into individual rows or aggregates -- typically used in conjunction with group_by(), typically used to aggregate
-  
-`%>%`: pass the previous output into the first position of the next argument, think of as saying, "then you do..."  
+* `filter()`: for filtering rows by some condition(s)  
+* `arrange()`: for ordering rows by some condition(s) 
+    * `desc`: order by descending instead (often use within arrange or with ranking functions)
+* `select()`: for selecting columns by name, position, or criteria  
+    * helper functions: `everything`, `starts_with`, `ends_with`, `contains`, `matches`: selects variables that match a regular expression, `num_range("x", 1:3)`:  matches `x1`, `x2` and `x3`
+* `rename()`: rename variables w/o dropping variables not indicated
+* `mutate()`: for changing columns and adding new columns * `group_by()`: for performing operations grouped by the values of some fields  
+* `summarise()`: for collapsing dataframes into individual rows or aggregates -- typically used in conjunction with group_by(), typically used to aggregate
+* `%>%`: pass the previous output into the first position of the next argument, think of as saying, "then you do..."  
+* `count`: shortcut for <group_by([var])> --> <summarise(n = n())>
+* `near`: Are two values essentially equal (use to test equivalence and deals with oddities in floats)
+* `is.na`: TRUE output if `NA` (and related values) else FALSE
+* `between`: `between(Sepal.Length, 1, 3)` is equivalent to `Sepal.Length >=1 & Sepal.Length <=3`
+* `transmute`: mutate but only keep the outputted column(s)
+* `lead`, `lag`: take value n positions in lead or lag position
+* `log`, `log2`, `log10`: log funcitons of base `e`, 2, 10
+* `cumsum`, `cumprod`, `cummin`, `cummax`, `cummean`: Common cumalitive functions
+* `<`, `<=`, `>`, `>=`, `!=`: Logical operators
+* `min_rank`, `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`: common ranking functions
+* Location: `mean`; `median`
+* Spread: `sd`: standard deviation; `IQR()`: Interquartile range; `mad()`: median absolute deviaiton
+```{r, eval = FALSE}
+x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
+IQR(x)
+mad(x)
+sd(x)
+```
+
+* Rank: `min`; `quantile`; `max`
+* Position: `first(x)`, `nth(x, 2)`, `last(x)`. These work similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default value if that position does not exist
+```{r, eval = FALSE}
+first(x)
+nth(x, 5)
+last(x)
+```
+
+* measures of rank: `min`, `max`, `rank`, `quantile(x, 0.25)` is just 0.25 value (generalization of median, but allows you to specify)  
+* counts: `n()` for rows, `sum(!is.na(x))` for non-missing rows, for distinct count, use `n_distinct(x)`
+* Counts and proportions of logical values: `sum(x > 10)`, `mean(y == 0)`
+* `range()` returns vector containing min and max of values in a vector (so returns two values).  
+* `vignette`: function to open vignettes
+    + e.g. `vignette("window-functions")`
 
 ## 5.2: Filter rows
 
@@ -193,7 +222,6 @@ arrange(flights, distance) %>%
 ```
 
 #5.4: Select columns
-`starts_with` , `ends_with`, `contains`, `matches`, `num_range`, `one_of`, `everything`
 
 #5.4.1.
 **1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.**
@@ -242,8 +270,6 @@ select(flights, contains("TIME", ignore.case = FALSE))
 ```
 
 ##5.5: Add new vars
-`cumsum`, `cummean`, `cumprod`, `cummin`, `cummax`, `min_rank` (use in conunction with `desc`), `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`  
-
 
 ###5.5.2.
 
@@ -358,38 +384,7 @@ This is returned because `1:3` is being recycled as each element is added to an 
 
 
 ## 5.6: Grouped summaries
-Learn the PIPE!!  
 
-*Useful functions:*  
-`IQR()` : Interquartile range  
-`mad()` : median absolute deviaiton
-
-```{r, eval = FALSE}
-x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
-IQR(x)
-mad(x)
-sd(x)
-```
-
-*measures of rank:*  
-`quantile(x, 0.25)` is just 0.25 value (generalization of median, but allows you to specify)  
-
-*measures of postion:*  
-`first(x)`, `nth(x, 2)`, `last(x)`. These work similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default value if that position does not exist
-
-```{r, eval = FALSE}
-first(x)
-nth(x, 5)
-last(x)
-range(x)
-
-
-x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
-
-range(x)
-```
-
-`range()` returns vector containing min and max of values in a vector (so returns two values).  
 
 ```{r, eval = FALSE}
 
@@ -402,10 +397,6 @@ not_cancelled %>%
           range_max = range(r)[2]) %>% 
   filter(r %in% range(r)) 
 ```
-
-*counts:*  
-
-`n()` for rows, `sum(!is.na(x))` for non-missing rows, for distinct count, use `n_distinct(x)`  
 
 ### 5.6.7.
 
@@ -468,7 +459,6 @@ flights %>%
 **Consider the following scenarios:**  
 
 *1.1 A flight is 15 minutes early 50% of the time, and 15 minutes late 50% of the time.*  
-
 ```{r}
 flights %>% 
   group_by(flight) %>% 
@@ -482,7 +472,6 @@ flights %>%
 ```
 
 *1.2 A flight is always 10 minutes late.*
-
 ```{r}
 flights %>% 
   group_by(flight) %>% 
@@ -667,12 +656,12 @@ flights %>%
 To get at the question of 'best carrier', you may consider doing a grouped comparison of average delays or cancellataions controlling for where they are flying to and from what origin...
 
 
-**7. What does the sort argument to count() do. When might you use it?**  
+**7. What does the `sort` argument to `count()` do. When might you use it?**  
   
 `sort` orders by `n`, you may want to use it when you 
 
 
-##Grouped mutates (and filters)
+## Grouped mutates (and filters)
 
 ### 5.7.1.
 
@@ -707,7 +696,6 @@ flights %>%
 
 Fly in the morning.
 
-
 **4. For each destination, compute the total minutes of delay. For each, flight, compute the proportion of the total delay for its destination.**  
 
 ```{r}
@@ -718,12 +706,10 @@ flights %>%
          PropOfDest = TotalDelay_DestFlight / TotalDelay_Dest)
   
 ```
+
 I did this such that flights could have "negative" delays, this could have been approached differently though...  
 
-
 **5. Delays are typically temporally correlated: even once the problem that caused the initial delay has been resolved, later flights are delayed to allow earlier flights to leave. Using lag() explore how the delay of a flight is related to the delay of the immediately preceding flight.**  
-  
-`lead()` and `lag()` look like helpful function to remember.
 
 ```{r}
 flights %>% 
@@ -835,9 +821,6 @@ tail_nums_counts %>%
   arrange(tailnum)
 
 ```
-
-
-
 
 
 # Appendix

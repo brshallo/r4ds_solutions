@@ -27,12 +27,52 @@ library(tidyr)
 
 # ch. 12: Tidy data
 
+* `spread`: pivot, e.g. `spread(iris, Species)`
+* `gather`: unpivot, e.g. `gather(mpg, drv, class, key = "drive_or_class", value = "value")`
+* `separate`: one column into many, e.g. `separate(table3, rate, into = c("cases", "population"), sep = "/")`
+    + default uses non-alphanumeric character as `sep`, can also use number to separate by width
+* `extract` similar to separate but specify what to pull-out rather than what to split by
+* `unite` inverse of separate
+```{r}
+# example distinguishing separate, extract, unite
+tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>% 
+  separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
+  unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
+  extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
+
+```
+
+* `complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit NAs where necessary.
+* `fill()` takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward).
+```{r}
+# examples of complete and fill
+treatment <- tribble(
+  ~ person,           ~ treatment, ~response,
+  "Derrick Whitmore", 1,           7,
+  NA,                 2,           10,
+  NA,                 3,           9,
+  "Katherine Burke",  1,           4
+)
+
+treatment %>% 
+  fill(person)
+
+treatment %>% 
+  fill(person) %>% 
+  complete(person, treatment)
+
+```
+
 
 ## 12.2: Tidy data
 
 ### 12.2.1.
 
 *1. Using prose, describe how the variables and observations are organised in each of the sample tables.*  
+* `table1`: each country-year is a row with cases and pop as values
+* `table2`: each country-year-type is a row
+* `table3`: each country-year is a row with rate containing values for both `cases` and `population`
+* `table4a` and `table4b`: a represents cases, b population, each row is a country and then column are the year for the value 
 
 *2. Compute the rate for table2, and table4a + table4b. You will need to perform four operations:*  
   
@@ -42,9 +82,37 @@ c. Divide cases by population, and multiply by 10000.
 d. Store back in the appropriate place.  
 e. Which representation is easiest to work with? Which is hardest? Why?  
 
+with `table2`:
+```{r}
+table2 %>% 
+  spread(type, count) %>% 
+  mutate(rate = 1000 * cases / population) %>% 
+  arrange(country, year)
+```
+
+with `table4` 'a' and 'b'`:
+```{r}
+table4a %>% 
+  gather(2,3, key = "year", value = "cases") %>% 
+  inner_join(table4b %>% 
+               gather(c(2,3), key = "year", value = "population"),
+             by = c("country", "year")) %>% 
+  mutate(rate = 1000 * cases / population)
+```
+
+* between these, `table2` was easier, though `table1` would have been easiest -- is fewer steps to get 1 row = 1 observation (if we define an observation as a country in a year with certain attributes)
 
 *3. Recreate the plot showing change in cases over time using table2 instead of table1. What do you need to do first?*  
+```{r}
+table2 %>% 
+  spread(type, count) %>% 
+  ggplot(aes(x = year, y = cases, group = country))+
+  geom_line(colour = "grey50")+
+  geom_point(aes(colour = country))
 
+```
+
+* first had to spread data
 
 ## 12.3: Spreading and gathering
 
@@ -183,22 +251,15 @@ tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>%
 
 *3. Compare and contrast separate() and extract(). Why are there three variations of separation (by position, by separator, and with groups), but only one unite?*  
   
-`extract` is like `separate` but provide what to capture rather than what to split by as in `sep` instead of `sep`, `sep` default accepts a regex expression, but it allows numeric whereas I'm guessing  
+`extract` is like `separate` but provide what to capture rather than what to split by as in `regex` instead of `sep`.
 ```{r}
-df <- data.frame(x = c("a-b", "a-d", "b-c", "d&e", NA))
+df <- data.frame(x = c("a-b", "a-d", "b-c", "d&e", NA), y = 1)
 
 df %>% 
   extract(col = x, into = c("1st", "2nd"), regex = "([A-z]).([A-z])")
 
 df %>% 
   separate(col = x, into = c("1st", "2nd"), sep = "[^A-z]")
-
-#example I made
-tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>% 
-  separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
-  unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
-  extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
-
 ```
 
 
@@ -206,30 +267,6 @@ Because there are many ways to split something up, but only one way to bring mul
 
 
 ## 12.5: missing values
-
-`complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit NAs where necessary
-
-
-`fill()` takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward).
-
-See a couple examples
-```{r}
-treatment <- tribble(
-  ~ person,           ~ treatment, ~response,
-  "Derrick Whitmore", 1,           7,
-  NA,                 2,           10,
-  NA,                 3,           9,
-  "Katherine Burke",  1,           4
-)
-
-treatment %>% 
-  fill(person)
-
-treatment %>% 
-  fill(person) %>% 
-  complete(person, treatment)
-```
-
 
 ### 12.5.1. 
 

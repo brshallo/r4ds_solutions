@@ -28,6 +28,52 @@ library(stringi)
 
 # ch. 14: Strings
 
+NO SEPERATE DEFINITIONS SECTION AT TOP FOR THIS CHAPTER. 
+
+* `writeLines`: see raw contents of a string (prints each string in a vector on a new line)
+* `str_length`: number of characters in a string
+* `str_c`: combine two or more strings
+    * use `collapse` arg to make vector of strings to single string
+* `str_replace_na`: print `NA` as "NA"
+* `str_sub`: `start` and `end` args to specify position to remove (or replace), can use negative numbers as well to represent from back
+* `str_to_lower`, `str_to_upper`, `str_to_upper`: for changing string case
+    * `locale` arg (to handle slight differences in characters)
+* `str_order`, `str_sort`: more robust version of `order` and `sort` which take allow a `locale` argument
+* `str_view`, `str_view_all`: shows how character and regular expression match
+
+* `\d`: matches any digit.
+* `\s`: matches any whitespace (e.g. space, tab, newline).
+* `[abc]`: matches a, b, or c.
+* `[^abc]`: matches anything except a, b, or c.
+
+* `{n}`: exactly n
+* `{n,}`: n or more
+* `{,m}`: at most m
+* `{n,m}`: between n and m
+
+* `str_detect`: returns logical vector of `TRUE`/`FALSE` values
+* `str_subset`: subset of `TRUE` values from `str_detect`
+* `str_count`: number of matches in a string
+* `str_extract`: extract actual text of a match
+* `str_extract_all`: returns list with all matches
+    * `simplify = TRUE` returns a matrix
+* `str_match`: similar to `str_extract` but gives each individual component of match in a matrix, rather than a character vector (also have a `str_match_all`)
+* `tidyr::extract`: like `str_match` but name columns with matches which are moved into new columns
+* `str_replace`, `str_replace_all`: replace matches with new strings
+* `str_split` split a string into pieces -- default is individual words (returns list)
+    * `simplify = TRUE` again will return a matrix
+* `boundary` use to specify level of split, e.g. `str_view_all(x, boundary("word"))`
+* `str_locate`, `str_locate_all`: gives starting an dending positions of each match
+* `regex` use in match to specify more options, e.g. `str_view(bananas, regex("banana", ignore_case = TRUE))`
+    * `multiline = TRUE` allows `^` and `$` to match start and end of each line (rather than of string)
+    * `comments = TRUE` allows you to add comments on a complex regular expression
+    * `dotall = TRUE` allows `.` to match more than just letters e.g. `\\n`
+* `fixed`, `coll` related alternatives to `regex`
+* `apropos` searches all objects available from global environment (e.g. say you can't remember function name)
+* `dir`: lists all files in a directory
+    * `pattern` arg takes a regex
+* `stringi` more comprehensive package than `stringr` (~5x as many funs)
+
 ## 14.2: String basics
 
 Use `wrteLines` to show what string 'This string has a \\n new line' looks like printed.

@@ -27,6 +27,40 @@ library(dplyr)
 
 # Chapter 3
 
+* `geom_point`: 
+* `geom_smooth`: 
+* `geom_bar`: 
+* `geom_count`: 
+* `geom_jitter`: 
+* `geom_boxplot`: 
+* `geom_polygon`: 
+* `geom_abline`: 
+* `facet_wrap`: 
+* `facet_grid`: 
+* `stat_count`: 
+* `stat_summary`: 
+* `stat_bin`: 
+* `stat_smooth`: 
+* `position` adjustments:
+    + `identity`: ; `dodge`: ; `fill`: ;
+    + `position_dodge` ; `position_fill` ; `position_identiy` ; `position_jitter` ; `position_stack` ; 
+* 3 ways to override default mapping
+    + 
+* `coord_flip`: 
+* `coord_quickmap`: 
+* `coord_polar`: 
+* `coord_fixed`: 
+
+`ggplot(data = <DATA>) + 
+  <GEOM_FUNCTION>(
+     mapping = aes(<MAPPINGS>),
+     stat = <STAT>, 
+     position = <POSITION>
+  ) +
+  <COORDINATE_FUNCTION> +
+  <FACET_FUNCTION>`
+  
+
 ## 3.2: First steps
 ### 3.2.4
 **1. Run ggplot(data = mpg). What do you see?**
@@ -217,13 +251,14 @@ My guess though would be that it's because our computer screens are generally wi
 ### 3.6.1
 
 **1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?**  
-`geom_line`  
-`geom_boxplot`  
-`geom_histogram`  
-`geom_area`  
+* `geom_line`  
+* `geom_boxplot`  
+* `geom_histogram`  
+* `geom_area`
+    + Notice that `geom_area` is just a special case of `geom_ribbon`
 
-*Example of `geom_area`*  
-Notice that `geom_area` is just a special case of `geom_ribbon`
+*Example of `geom_area`:*  
+
 ```{r}
 huron <- data.frame(year = 1875:1972, level = as.vector(LakeHuron) - 575)
 h <- ggplot(huron, aes(year))

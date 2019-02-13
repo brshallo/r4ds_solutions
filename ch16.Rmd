@@ -136,7 +136,9 @@ flights_dt %>%
       ungroup() %>% 
       ggplot(aes(x = day_dep, y = day_median)) +
       geom_line(aes(colour = quarter_dep, group = 1)) +
-      labs(title = "Median flight times by day, coloured by quarter", subtitle = "Q1 and Q4 have several months with typical flight times being slightly earlier")
+      labs(title = "Median flight times by day, coloured by quarter", subtitle = "Typical flight times change with daylight savings times")+
+      geom_vline(xintercept = ymd("20130310"), linetype = 2)+
+      geom_vline(xintercept = ymd("20131103"), linetype = 2)
     
     ```
     

@@ -32,10 +32,14 @@ library(lubridate)
     instructions. Practice running the chunks. Verify that you can modify
     the code, re-run it, and see modified output.
     
+    Done seperately.
+    
 1.  Create a new R Markdown document with _File > New File > R Markdown..._
     Knit it by clicking the appropriate button. Knit it by using the 
     appropriate keyboard short cut. Verify that you can modify the
     input and see the output update.
+    
+    Done seperately.
     
 1.  Compare and contrast the R notebook and R markdown files you created
     above. How are the outputs similar? How are they different? How are
@@ -51,6 +55,8 @@ library(lubridate)
     How does the output differ? How does the input differ? (You may need
     to install LaTeX in order to build the PDF output --- RStudio will
     prompt you if this is necessary.)
+    
+    Done seperately
     
 ## 27.3: Text formatting with Markdown
 
@@ -79,17 +85,17 @@ __CV of Bryan Shalloway__
 ---
 _(425) 591-6020_
 
-##Experience
+## Experience
 Teacher | _2013_ 
 -|-
 __Durham__ |
 
-##Experience
+## Experience
 Data Scientist | _2017_ 
 ---|---
 __Durham__ |
 
-##Education
+## Education
  IAA | _2017_  
 -|-
     + Analytics
@@ -101,7 +107,7 @@ __Durham__ |
 
     1.  Add a footnote.
     
-Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line one^[Superb footnote.]
+Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line one^[Superb fourth footnote.]
 
 [^1]: Here is the foonote.
 
@@ -113,7 +119,7 @@ Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line on
 [^3]: and the third
 
     
-    1.  Add a horizontal rule.
+    2.  Add a horizontal rule.
     
 ---
 
@@ -128,7 +134,7 @@ pagebreaks above and below (AKA horizontal rules)
 
 ***
 
-    1.  Add a block quote.
+    3.  Add a block quote.
     
 A friend once said:
 
@@ -160,8 +166,8 @@ smaller %>%
 * shortcut for running entire code chunks: cmd/ctrl+shift+enter
 * chunk headers
     * chunk name is first part after type of code in chunk, e.g. code chunk by name: `"```{r by-name}"`
-    * `eval=FALSE` show example output code, but don't evaluate
-    * `include=FALSE` evaluate code but don't show code or output
+    * `eval = FALSE` show example output code, but don't evaluate
+    * `include = FALSE` evaluate code but don't show code or output
     * `echo = FALSE` is for when you just want the output but not the code itself
     * `message = FALSE` or `warning = False` prevents messages or warnings appearing in the finished line
     * `error = TRUE` causes code to render even if there is an error

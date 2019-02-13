@@ -79,7 +79,7 @@ a[[4]][[1]]
 
 1.  Describe the difference between `is.finite(x)` and  `!is.infinite(x)`.
 
-    * both `is.infinite` and `is.infinite` return `FALSE` for `NA` or `NaN` values, therefore these values will become `TRUE` when negated, e.g. see example below:
+    * both `is.infinite` and `!is.infinite` return `FALSE` for `NA` or `NaN` values, therefore these values will become `TRUE` when negated, e.g. see example below:
 
     ```{r}
     is.finite(c(6,11,-Inf, NA, NaN))
