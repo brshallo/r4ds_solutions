@@ -1,5 +1,5 @@
 ---
-title: "Chapter 28 Graphics for communication"
+title: "Graphics for communication"
 date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
 author: "Bryan Shalloway"
 output: 
@@ -26,7 +26,7 @@ library(scales)
 
 
 # ch. 28: Graphics for communication
-
+`rmarkdown::render("ch7to9.Rmd", output_format = "all")` to render all formats in YAML header
 ## 28.2: Label
 
 ### 28.2.1
