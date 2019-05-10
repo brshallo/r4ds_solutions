@@ -1,7 +1,7 @@
 Vectors
 ================
 Bryan Shalloway
-Last updated: 2019-02-13
+Last updated: 2019-05-10
 
   - [ch. 20: Vectors](#ch.-20-vectors)
       - [20.3.5](#section)
@@ -36,17 +36,24 @@ library(readr)
 ![Types of vectors, not including augmented
 types](data-structures-overview.png)
 
-![Check special values](check-special.png)
+  - `is.finite`, `is.infinite`, `is.na`, `is.nan` ![Check special
+    values](check-special.png)
 
   - `typeof` retruns type of vector
+
   - `length` returns length of vector
+
   - `pryr::object_size` view size of object stored
+
   - specific `NA` values can be defined explicitly with `NA_integer_`,
     `NA_real_`, `NA_character_` (usually don’t need to know)
-  - explicitly differentiate integers from doubles with 10L v 10
+
+  - explicitly differentiate integers from doubles with `10L` v `10`
+
   - explicit coersion functions: `as.logical`, `as.integer`,
     `as.double`, `as.character`, or use `col_[types]` when reading in so
     that coersion done at source
+
   - test functions from `purrr` package that are more consistent than
     base R’s
 

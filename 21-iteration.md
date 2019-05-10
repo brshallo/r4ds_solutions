@@ -1,42 +1,29 @@
-chapter 21: Iteration
+Iteration
 ================
 Bryan Shalloway
-Last updated: 2018-05-09
+Last updated: 2019-05-10
 
--   [ch. 21: Iteration](#ch.-21-iteration)
-    -   [21.2: For loops](#for-loops)
-        -   [21.2.1](#section)
-    -   [21.3 For loop variations](#for-loop-variations)
-        -   [21.3.5](#section-1)
-    -   [21.4: For loops vs. functionals](#for-loops-vs.-functionals)
-        -   [21.4.1](#section-2)
-    -   [21.5: The map functions](#the-map-functions)
-        -   [21.5.3](#section-3)
-    -   [21.9 Other patterns of for loops](#other-patterns-of-for-loops)
-        -   [21.9.3](#section-4)
--   [Appendix](#appendix)
-    -   [21.3.5.1](#section-5)
-        -   [Using map](#using-map)
-        -   [Plot of names](#plot-of-names)
-        -   [csv other example](#csv-other-example)
-    -   [21.3.5.2 with purrr](#with-purrr)
-    -   [21.9 mirroring keep](#mirroring-keep)
-    -   [invoke examples](#invoke-examples)
-    -   [indexing nms caution](#indexing-nms-caution)
-    -   [in class notes](#in-class-notes)
-
-<script>
-    $(document).ready(function() {
-      $items = $('div#TOC li');
-      $items.each(function(idx) {
-        num_ul = $(this).parentsUntil('#TOC').length;
-        $(this).css({'text-indent': num_ul * 10, 'padding-left': 0});
-      });
-
-    });
-</script>
-
-------------------------------------------------------------------------
+  - [ch. 21: Iteration](#ch.-21-iteration)
+      - [21.2: For loops](#for-loops)
+          - [21.2.1](#section)
+      - [21.3 For loop variations](#for-loop-variations)
+          - [21.3.5](#section-1)
+      - [21.4: For loops vs. functionals](#for-loops-vs.-functionals)
+          - [21.4.1](#section-2)
+      - [21.5: The map functions](#the-map-functions)
+          - [21.5.3](#section-3)
+      - [21.9 Other patterns of for loops](#other-patterns-of-for-loops)
+          - [21.9.3](#section-4)
+  - [Appendix](#appendix)
+      - [21.3.5.1](#section-5)
+          - [Using map](#using-map)
+          - [Plot of names](#plot-of-names)
+          - [csv other example](#csv-other-example)
+      - [21.3.5.2 with purrr](#with-purrr)
+      - [21.9 mirroring keep](#mirroring-keep)
+      - [invoke examples](#invoke-examples)
+      - [indexing nms caution](#indexing-nms-caution)
+      - [in class notes](#in-class-notes)
 
 *Make sure the following packages are installed:*
 
@@ -44,17 +31,15 @@ Last updated: 2018-05-09
 library(tidyverse)
 ```
 
-    ## Warning: package 'tidyverse' was built under R version 3.4.3
+    ## Warning: package 'tidyverse' was built under R version 3.5.3
 
-    ## Warning: package 'tibble' was built under R version 3.4.4
+    ## Warning: package 'ggplot2' was built under R version 3.5.2
 
-    ## Warning: package 'tidyr' was built under R version 3.4.4
+    ## Warning: package 'tibble' was built under R version 3.5.2
 
-    ## Warning: package 'readr' was built under R version 3.4.4
+    ## Warning: package 'purrr' was built under R version 3.5.2
 
-    ## Warning: package 'stringr' was built under R version 3.4.4
-
-    ## Warning: package 'forcats' was built under R version 3.4.4
+    ## Warning: package 'dplyr' was built under R version 3.5.3
 
 ``` r
 library(ggplot2)
@@ -62,27 +47,18 @@ library(dplyr)
 library(tidyr)
 library(nycflights13)
 library(babynames)
-```
-
-    ## Warning: package 'babynames' was built under R version 3.4.3
-
-``` r
 library(nasaweather)
 library(lubridate)
-```
-
-    ## Warning: package 'lubridate' was built under R version 3.4.4
-
-``` r
 library(purrr)
 library(readr)
 library(stringr)
 ```
 
-ch. 21: Iteration
-=================
+# ch. 21: Iteration
 
--   Common `for` loop template:
+  - Common `for` loop template:
+
+<!-- end list -->
 
 ``` r
 output <- vector("double", ncol(df)) # common for loop style  
@@ -91,7 +67,9 @@ for (i in seq_len(length(df))){
   }  
 ```
 
--   Common `while` loop template:
+  - Common `while` loop template:
+
+<!-- end list -->
 
 ``` r
 i <- 1
@@ -101,19 +79,25 @@ while (i <= length(x)){
 }  
 ```
 
--   `seq_along(df)` does essentially same as `seq_len(length(df))`
--   `unlist` flatten list of vectors into single vector
-    -   `flaten_dbl` is stricter alternative
--   `dplyr::bind_rows` save output in a list of dfs and then append all at end rather than sequential `rbind`ing
--   `sample(c("T", "H"), 1)`
--   `sapply` is wrapper around `lapply` that automatically simplifies output -- problematic in that never know what ouptut will be
--   `vapply` is safe alternative to `sapply` e.g. for logical `vapply(df, is.numeric, logical(1))`, but `map_lgl(df, is.numeric)` is more simple
--   `map()` makes a list.
--   `map_lgl()` makes a logical vector.
--   `map_int()` makes an integer vector.
--   `map_dbl()` makes a double vector.
--   `map_chr()` makes a character vector.
--   shortcuts for applying functions in `map`:
+  - `seq_along(df)` does essentially same as `seq_len(length(df))`
+  - `unlist` flatten list of vectors into single vector
+      - `flaten_dbl` is stricter alternative
+  - `dplyr::bind_rows` save output in a list of dfs and then append all
+    at end rather than sequential `rbind`ing
+  - `sample(c("T", "H"), 1)`
+  - `sapply` is wrapper around `lapply` that automatically simplifies
+    output – problematic in that never know what ouptut will be
+  - `vapply` is safe alternative to `sapply` e.g. for logical
+    `vapply(df, is.numeric, logical(1))`, but `map_lgl(df, is.numeric)`
+    is more simple
+  - `map()` makes a list.
+      - `map_lgl()` makes a logical vector.
+      - `map_int()` makes an integer vector.
+      - `map_dbl()` makes a double vector.
+      - `map_chr()` makes a character vector.
+  - shortcuts for applying functions in `map`:
+
+<!-- end list -->
 
 ``` r
 models <- mtcars %>% 
@@ -125,7 +109,9 @@ models <- mtcars %>%
   map(~lm(mpg ~ wt, data = .))
 ```
 
--   extracting by named elements from `map`:
+  - extracting by named elements from `map`:
+
+<!-- end list -->
 
 ``` r
 models %>% 
@@ -136,7 +122,9 @@ models %>%
     ##         4         6         8 
     ## 0.5086326 0.4645102 0.4229655
 
--   extracting by positions from `map`
+  - extracting by positions from `map`
+
+<!-- end list -->
 
 ``` r
 x <- list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
@@ -146,14 +134,21 @@ x %>%
 
     ## [1] 2 5 8
 
--   `map2` let's you iterate through two components at once
--   `pmap` allows you to iterate over p components -- works well to hold inputs in a dataframe
--   `safely` takes funciton returns two parts, result and error object
--   similar to `try` but more consistent
--   `possibly` similar to safely, but provide it a default value to return for errors
--   `quietly` is similar to safely but captures all printed output messages and warnings
--   `purrr::transpose` allows you to do things like get all 2nd elements in list, e.g. show later
--   `invoke_map` let's you iterate over both the functions and the parameters, have an `f` and a `param` input, e.g.
+  - `map2` let’s you iterate through two components at once
+  - `pmap` allows you to iterate over p components – works well to hold
+    inputs in a dataframe
+  - `safely` takes funciton returns two parts, result and error object
+      - similar to `try` but more consistent
+  - `possibly` similar to safely, but provide it a default value to
+    return for errors
+  - `quietly` is similar to safely but captures all printed output
+    messages and warnings
+  - `purrr::transpose` allows you to do things like get all 2nd elements
+    in list, e.g. show later
+  - `invoke_map` let’s you iterate over both the functions and the
+    parameters, have an `f` and a `param` input, e.g. 
+
+<!-- end list -->
 
 ``` r
 f <- c("runif", "rnorm", "rpois")
@@ -167,28 +162,36 @@ invoke_map(f, param, n = 5) %>% str()
 ```
 
     ## List of 3
-    ##  $ : num [1:5] -0.149 0.904 0.403 0.234 0.888
-    ##  $ : num [1:5] 3.494 3.735 0.355 -1.692 1.811
-    ##  $ : int [1:5] 6 6 11 14 6
+    ##  $ : num [1:5] 0.414 0.504 0.592 0.47 -0.635
+    ##  $ : num [1:5] -3.691 0.199 0.296 -1.427 1.453
+    ##  $ : int [1:5] 14 13 6 9 10
 
--   `walk` is alternative to `map` that you call for side effects. Also have `walk2` and `pwalk` that are generally more useful
--   all invisibly return \`.x (the first argument) so can used in the middle of pipelines
--   `keep` and `discard` keep or discard elements in the input based off if `TRUE` to predicate
--   `some` and `every` determine if the predicte is true for any or for all of our elements
--   `detect` finds the first element where the predicate is true, `detect_index` returns its position
--   `head_while` and `tail_while` take elements from the start or end of a vector while a predicate is true
--   `reduce` is good for applying two table rule repeatedly, e.g. joins
--   `accumulate` is similar but keeps all the interim results
+  - `walk` is alternative to `map` that you call for side effects. Also
+    have `walk2` and `pwalk` that are generally more useful
+      - all invisibly return \`.x (the first argument) so can used in
+        the middle of pipelines
+  - `keep` and `discard` keep or discard elements in the input based off
+    if `TRUE` to predicate
+  - `some` and `every` determine if the predicte is true for any or for
+    all of our elements
+  - `detect` finds the first element where the predicate is true,
+    `detect_index` returns its position
+  - `head_while` and `tail_while` take elements from the start or end of
+    a vector while a predicate is true
+  - `reduce` is good for applying two table rule repeatedly, e.g. joins
+      - `accumulate` is similar but keeps all the interim results
 
-21.2: For loops
----------------
+## 21.2: For loops
 
 ### 21.2.1
 
-1.  Write for loops to (think about the output, sequence, and body **before** you start writing the loop):
-
+1.  Write for loops to (think about the output, sequence, and body
+    **before** you start writing the loop):
+    
     1.  Compute the mean of every column in `mtcars`.
-
+    
+    <!-- end list -->
+    
     ``` r
     output <- vector("double", length(mtcars))
     for (i in seq_along(mtcars)){
@@ -196,12 +199,14 @@ invoke_map(f, param, n = 5) %>% str()
     }
     output
     ```
-
+    
         ##  [1]  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250
         ##  [7]  17.848750   0.437500   0.406250   3.687500   2.812500
-
+    
     1.  Determine the type of each column in `nycflights13::flights`.
-
+    
+    <!-- end list -->
+    
     ``` r
     output <- vector("character", length(flights))
     for (i in seq_along(flights)){
@@ -209,14 +214,16 @@ invoke_map(f, param, n = 5) %>% str()
     }
     output
     ```
-
+    
         ##  [1] "integer"   "integer"   "integer"   "integer"   "integer"  
         ##  [6] "double"    "integer"   "integer"   "double"    "character"
         ## [11] "integer"   "character" "character" "character" "double"   
         ## [16] "double"    "double"    "double"    "double"
-
+    
     1.  Compute the number of unique values in each column of `iris`.
-
+    
+    <!-- end list -->
+    
     ``` r
     output <- vector("integer", length(iris))
     for (i in seq_along(iris)){
@@ -224,11 +231,14 @@ invoke_map(f, param, n = 5) %>% str()
     }
     output
     ```
-
+    
         ## [1] 35 23 43 22  3
-
-    1.  Generate 10 random normals for each of *μ* = −10, 0, 10, and 100.
-
+    
+    1.  Generate 10 random normals for each of \(\mu = -10\), \(0\),
+        \(10\), and \(100\).
+    
+    <!-- end list -->
+    
     ``` r
     output <- vector("list", 4)
     input_means <- c(-10, 0, 10, 100)
@@ -237,27 +247,28 @@ invoke_map(f, param, n = 5) %>% str()
     }
     output
     ```
-
+    
         ## [[1]]
-        ##  [1] -10.577688  -9.435804 -10.870559  -9.994862  -9.861379 -10.183972
-        ##  [7]  -8.547441 -10.684193 -10.569735  -9.704878
+        ##  [1]  -9.311774 -10.028684  -9.526345  -9.959638 -10.834916 -10.031415
+        ##  [7]  -7.878510 -10.398332 -10.919776 -11.568739
         ## 
         ## [[2]]
-        ##  [1] -2.13085945  0.73040430 -0.30260180 -0.08091767 -0.90230631
-        ##  [6]  0.62910307 -0.86760486 -0.99340703 -0.61972598  0.78038532
+        ##  [1] -1.0973417 -0.4659939  1.7365974  0.3743261  0.1530881  0.2665193
+        ##  [7]  0.5701674  1.0833007 -0.2591115 -0.7432906
         ## 
         ## [[3]]
-        ##  [1]  9.619831 11.623451 10.026529 10.398175 10.904514  9.408647  9.882461
-        ##  [8] 10.142299 10.370858  9.245915
+        ##  [1] 10.322126  9.036852 10.215182  8.846718 10.794686 10.632552 10.940150
+        ##  [8] 11.357501 10.049282 13.343674
         ## 
         ## [[4]]
-        ##  [1] 101.32972  98.43481 100.67693 100.19736 100.28608 100.21482  99.91964
-        ##  [8]  99.05263  98.74803  99.68909
+        ##  [1]  99.17410  99.46471 101.18415  99.77273 100.67430  99.91119  99.67393
+        ##  [8] 101.86374 102.31878  99.03721
 
-2.  Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:
-
+2.  Eliminate the for loop in each of the following examples by taking
+    advantage of an existing function that works with vectors:
+    
     *example:*
-
+    
     ``` r
     out <- ""
     for (x in letters) {
@@ -265,17 +276,20 @@ invoke_map(f, param, n = 5) %>% str()
     }
     out
     ```
-
-    -   collabse letters into length-one character vector with all characters concatenated
-
+    
+      - collabse letters into length-one character vector with all
+        characters concatenated
+    
+    <!-- end list -->
+    
     ``` r
     str_c(letters, collapse = "")
     ```
-
+    
         ## [1] "abcdefghijklmnopqrstuvwxyz"
-
+    
     *example:*
-
+    
     ``` r
     x <- sample(100)
     sd <- 0
@@ -285,19 +299,21 @@ invoke_map(f, param, n = 5) %>% str()
     sd <- sqrt(sd / (length(x) - 1))
     sd
     ```
-
+    
         ## [1] 29.01149
-
-    -   calculate standard deviaiton of x
-
+    
+      - calculate standard deviaiton of x
+    
+    <!-- end list -->
+    
     ``` r
     sd(x)
     ```
-
+    
         ## [1] 29.01149
-
+    
     *example:*
-
+    
     ``` r
     x <- runif(100)
     out <- vector("numeric", length(x))
@@ -307,67 +323,73 @@ invoke_map(f, param, n = 5) %>% str()
     }
     out
     ```
-
-        ##   [1]  0.1994094  0.4805079  1.4342976  2.4271657  2.7607480  3.2865428
-        ##   [7]  4.2415249  4.6665127  5.4252870  5.9909912  6.1968451  6.7349948
-        ##  [13]  7.3096367  8.2882457  8.7503361  9.0935299  9.3203866  9.7417915
-        ##  [19] 10.2799381 10.5463196 11.3086404 11.3101582 11.6206152 12.3154188
-        ##  [25] 13.1530921 14.0986288 14.9717509 15.6749382 16.5433424 17.0329863
-        ##  [31] 17.4946951 18.1453412 18.3104766 18.3849890 18.5282768 19.4988975
-        ##  [37] 19.7275648 19.9037638 20.4570156 21.4209865 21.7883092 22.3678826
-        ##  [43] 23.0282971 23.4041946 23.6083124 24.4096716 25.0194444 25.9857778
-        ##  [49] 26.2212199 26.8366924 27.5742960 28.1430418 28.6603640 29.1579814
-        ##  [55] 29.8689480 30.3216052 30.6560179 31.2492427 32.1989946 32.3546595
-        ##  [61] 32.8679884 33.0739567 33.7404574 34.3394226 34.9309172 35.7573549
-        ##  [67] 35.7748933 36.6423459 37.3738370 37.9131878 38.7216306 38.9176195
-        ##  [73] 39.4846902 40.0807383 40.1634601 40.4412832 40.7318872 41.1190222
-        ##  [79] 41.9036005 42.7846742 43.4957222 44.2880403 44.5763894 45.1815707
-        ##  [85] 45.3679442 45.9740863 46.9500503 47.4103582 48.1264976 49.1042141
-        ##  [91] 49.4331905 49.5080493 49.6059157 50.3296842 50.7168947 50.8247028
-        ##  [97] 51.3517565 52.3347022 52.9208003 53.1361662
-
-    -   calculate cumulative sum
-
+    
+        ##   [1]  0.5534951  1.3176780  2.1284632  2.3206446  2.8643081  3.3100101
+        ##   [7]  4.2140044  5.0016937  5.2217764  5.6226071  5.7847174  6.1257446
+        ##  [13]  6.9183404  7.9170652  8.6891735  9.6673482 10.0301159 10.2377504
+        ##  [19] 11.0822128 12.0239712 12.1935028 12.9886051 13.7185701 14.2474248
+        ##  [25] 14.3674941 14.8752358 15.8107473 16.0429972 16.5676244 16.5751289
+        ##  [31] 16.8976960 17.3813580 17.8846867 18.8273776 19.0321191 19.6882079
+        ##  [37] 20.2464976 20.7226019 21.6639242 21.9849747 21.9977333 22.8228720
+        ##  [43] 23.7675241 24.2119978 25.2094590 26.0562318 26.6283821 26.6764953
+        ##  [49] 26.6769851 27.6664515 28.3583733 29.1433585 29.6331409 29.9853781
+        ##  [55] 30.0502660 30.5116501 30.8071357 30.8789346 31.6725601 31.8612573
+        ##  [61] 32.2135410 32.7572327 32.7814675 33.0074888 33.3879073 33.6292808
+        ##  [67] 34.4716608 34.7076880 35.2623430 35.5792101 36.0313099 36.1087785
+        ##  [73] 36.8182443 37.6665013 38.2881962 38.4221264 38.6919058 38.8068710
+        ##  [79] 39.7892828 40.4893072 41.1678646 41.4613576 42.4276494 42.7745358
+        ##  [85] 43.7183484 44.1390762 44.4842505 44.9946905 45.8075506 45.9809065
+        ##  [91] 46.3382730 47.1028780 47.4104030 48.2976312 49.0996290 49.7929372
+        ##  [97] 50.3394278 50.9451741 51.6312674 51.7835421
+    
+      - calculate cumulative
+        sum
+    
+    <!-- end list -->
+    
     ``` r
     cumsum(x)
     ```
-
-        ##   [1]  0.1994094  0.4805079  1.4342976  2.4271657  2.7607480  3.2865428
-        ##   [7]  4.2415249  4.6665127  5.4252870  5.9909912  6.1968451  6.7349948
-        ##  [13]  7.3096367  8.2882457  8.7503361  9.0935299  9.3203866  9.7417915
-        ##  [19] 10.2799381 10.5463196 11.3086404 11.3101582 11.6206152 12.3154188
-        ##  [25] 13.1530921 14.0986288 14.9717509 15.6749382 16.5433424 17.0329863
-        ##  [31] 17.4946951 18.1453412 18.3104766 18.3849890 18.5282768 19.4988975
-        ##  [37] 19.7275648 19.9037638 20.4570156 21.4209865 21.7883092 22.3678826
-        ##  [43] 23.0282971 23.4041946 23.6083124 24.4096716 25.0194444 25.9857778
-        ##  [49] 26.2212199 26.8366924 27.5742960 28.1430418 28.6603640 29.1579814
-        ##  [55] 29.8689480 30.3216052 30.6560179 31.2492427 32.1989946 32.3546595
-        ##  [61] 32.8679884 33.0739567 33.7404574 34.3394226 34.9309172 35.7573549
-        ##  [67] 35.7748933 36.6423459 37.3738370 37.9131878 38.7216306 38.9176195
-        ##  [73] 39.4846902 40.0807383 40.1634601 40.4412832 40.7318872 41.1190222
-        ##  [79] 41.9036005 42.7846742 43.4957222 44.2880403 44.5763894 45.1815707
-        ##  [85] 45.3679442 45.9740863 46.9500503 47.4103582 48.1264976 49.1042141
-        ##  [91] 49.4331905 49.5080493 49.6059157 50.3296842 50.7168947 50.8247028
-        ##  [97] 51.3517565 52.3347022 52.9208003 53.1361662
+    
+        ##   [1]  0.5534951  1.3176780  2.1284632  2.3206446  2.8643081  3.3100101
+        ##   [7]  4.2140044  5.0016937  5.2217764  5.6226071  5.7847174  6.1257446
+        ##  [13]  6.9183404  7.9170652  8.6891735  9.6673482 10.0301159 10.2377504
+        ##  [19] 11.0822128 12.0239712 12.1935028 12.9886051 13.7185701 14.2474248
+        ##  [25] 14.3674941 14.8752358 15.8107473 16.0429972 16.5676244 16.5751289
+        ##  [31] 16.8976960 17.3813580 17.8846867 18.8273776 19.0321191 19.6882079
+        ##  [37] 20.2464976 20.7226019 21.6639242 21.9849747 21.9977333 22.8228720
+        ##  [43] 23.7675241 24.2119978 25.2094590 26.0562318 26.6283821 26.6764953
+        ##  [49] 26.6769851 27.6664515 28.3583733 29.1433585 29.6331409 29.9853781
+        ##  [55] 30.0502660 30.5116501 30.8071357 30.8789346 31.6725601 31.8612573
+        ##  [61] 32.2135410 32.7572327 32.7814675 33.0074888 33.3879073 33.6292808
+        ##  [67] 34.4716608 34.7076880 35.2623430 35.5792101 36.0313099 36.1087785
+        ##  [73] 36.8182443 37.6665013 38.2881962 38.4221264 38.6919058 38.8068710
+        ##  [79] 39.7892828 40.4893072 41.1678646 41.4613576 42.4276494 42.7745358
+        ##  [85] 43.7183484 44.1390762 44.4842505 44.9946905 45.8075506 45.9809065
+        ##  [91] 46.3382730 47.1028780 47.4104030 48.2976312 49.0996290 49.7929372
+        ##  [97] 50.3394278 50.9451741 51.6312674 51.7835421
 
 3.  Combine your function writing and for loop skills:
-
-    1.  Write a for loop that `prints()` the lyrics to the children's song "Alice the camel".
-
+    
+    1.  Write a for loop that `prints()` the lyrics to the children’s
+        song “Alice the camel”.
+    
+    <!-- end list -->
+    
     ``` r
     num_humps <- c("five", "four", "three", "two", "one", "no")
-
+    
     for (i in seq_along(num_humps)){
-
+    
       paste0("Alice the camel has ", num_humps[[i]], " humps.") %>% 
         rep(3) %>% 
         writeLines()
-
+    
       writeLines("So go, Alice, go.\n")
-
+    
     }
     ```
-
+    
         ## Alice the camel has five humps.
         ## Alice the camel has five humps.
         ## Alice the camel has five humps.
@@ -397,9 +419,12 @@ invoke_map(f, param, n = 5) %>% str()
         ## Alice the camel has no humps.
         ## Alice the camel has no humps.
         ## So go, Alice, go.
-
-    1.  Convert the nursery rhyme "ten in the bed" to a function. Generalise it to any number of people in any sleeping structure.
-
+    
+    1.  Convert the nursery rhyme “ten in the bed” to a function.
+        Generalise it to any number of people in any sleeping structure.
+    
+    <!-- end list -->
+    
     ``` r
     nursery_bed <- function(num, y) {
       output <- vector("character", num)
@@ -410,10 +435,10 @@ invoke_map(f, param, n = 5) %>% str()
       str_c(output, collapse = "\n\n") %>% 
         writeLines()
     }
-
+    
     nursery_bed(3, "asteroid")
     ```
-
+    
         ## There were 3 in the asteroid
         ##  And the little one said, 
         ## "Roll over! Roll over!"
@@ -431,11 +456,17 @@ invoke_map(f, param, n = 5) %>% str()
         ## "Roll over! Roll over!"
         ##  So they all rolled over and
         ##  one fell out.
-
-    1.  Convert the song "99 bottles of beer on the wall" to a function. Generalise to any number of any vessel containing any liquid on any surface.
-
-    -   This is a little bit of a lazy version...
-
+    
+    1.  Convert the song “99 bottles of beer on the wall” to a function.
+        Generalise to any number of any vessel containing any liquid on
+        any surface.
+    
+    <!-- end list -->
+    
+      - This is a little bit of a lazy version…
+    
+    <!-- end list -->
+    
     ``` r
     beer_rhyme <- function(x, y, z){
       output <- vector("character", x)
@@ -451,10 +482,10 @@ invoke_map(f, param, n = 5) %>% str()
                    str_c("\nNo more bottles...", collapse = ""))
       writeLines(output)
     }
-
+    
     beer_rhyme(4, "soda", "toilet")
     ```
-
+    
         ## 4 bottles of soda on the toilet.
         ##  One fell off...
         ## 3 bottles of soda on the toilet.
@@ -465,8 +496,10 @@ invoke_map(f, param, n = 5) %>% str()
         ##  One fell off...
         ## No more bottles...
 
-4.  It's common to see for loops that don't preallocate the output and instead increase the length of a vector at each step. How does this affect performance? Design and execute an experiment.
-
+4.  It’s common to see for loops that don’t preallocate the output and
+    instead increase the length of a vector at each step. How does this
+    affect performance? Design and execute an experiment.
+    
     ``` r
     preallocate <- function(){
     x <- vector("double", 100)
@@ -474,30 +507,33 @@ invoke_map(f, param, n = 5) %>% str()
         x[i] <- rnorm(1)
       }
     }
-
+    
     growing <- function(){
       x <- c(0)
         for (i in 1:100){
           x[i] <- rnorm(1)
       }
     }
-
+    
     microbenchmark::microbenchmark(
       space = preallocate(),
       no_space = growing(),
       times = 20
     )  
     ```
-
+    
         ## Unit: microseconds
-        ##      expr     min       lq     mean   median      uq      max neval cld
-        ##     space 124.602 177.6525 620.9899 190.3020 281.676 8395.525    20   a
-        ##  no_space 206.538 224.6610 556.5367 259.0215 372.107 5401.304    20   a
-
-    -   see roughly 35% better performance when creating ahead of time
-
-    -   note: if you can do these operations with vectorized approach though -- they're often much faster
-
+        ##      expr     min       lq    mean   median       uq      max neval cld
+        ##     space 191.001 297.3505 761.106 373.9015 530.3010 7701.002    20   a
+        ##  no_space 223.601 366.8510 772.596 387.1010 469.9515 7558.301    20   a
+    
+      - see roughly 35% better performance when creating ahead of time
+    
+      - note: if you can do these operations with vectorized approach
+        though – they’re often much faster
+    
+    <!-- end list -->
+    
     ``` r
     microbenchmark::microbenchmark(
       space = preallocate(),
@@ -506,24 +542,33 @@ invoke_map(f, param, n = 5) %>% str()
       times = 20
     )
     ```
-
+    
         ## Unit: microseconds
-        ##      expr     min       lq      mean  median       uq      max neval cld
-        ##     space 186.904 207.2925 293.72120 267.517 303.0100  935.270    20   b
-        ##  no_space 195.588 321.7000 371.99390 346.054 363.0455 1049.300    20   b
-        ##    vector  11.705  12.4610  14.78275  13.216  15.2920   28.696    20  a
+        ##      expr     min       lq     mean  median       uq     max neval cld
+        ##     space 191.601 205.1515 260.6061 217.551 286.2010 733.801    20   b
+        ##  no_space 226.602 251.7015 278.6959 259.101 280.5505 483.401    20   b
+        ##    vector  10.901  11.9010  14.0511  12.902  14.8010  23.601    20  a
+    
+      - vectorized was \> 10x faster
 
-    -   vectorized was &gt; 10x faster
-
-21.3 For loop variations
-------------------------
+## 21.3 For loop variations
 
 ### 21.3.5
 
-1.  Imagine you have a directory full of CSV files that you want to read in. You have their paths in a vector, `files <- dir("data/", pattern = "\\.csv$", full.names = TRUE)`, and now want to read each one with `read_csv()`. Write the for loop that will load them into a single data frame.
+1.  Imagine you have a directory full of CSV files that you want to read
+    in. You have their paths in a vector, `files <- dir("data/", pattern
+    = "\\.csv$", full.names = TRUE)`, and now want to read each one with
+    `read_csv()`. Write the for loop that will load them into a single
+    data frame.
 
--   To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter[1].
--   Next I read these into a single dataframe with a for loop
+<!-- end list -->
+
+  - To start this problem, I first created a file directory, and then
+    wrote in 26 csvs each with the most popular name from each year
+    since 1880 for a particular letter\[1\].
+  - Next I read these into a single dataframe with a for loop
+
+<!-- end list -->
 
 ``` r
 append_csvs <- function(dir){
@@ -549,21 +594,27 @@ names_appended
     ## # A tibble: 3,514 x 6
     ##     year sex   name      n   prop first_letter
     ##    <dbl> <chr> <chr> <int>  <dbl> <chr>       
-    ##  1 1880. F     Anna   2604 0.0267 A           
-    ##  2 1881. F     Anna   2698 0.0273 A           
-    ##  3 1882. F     Anna   3143 0.0272 A           
-    ##  4 1883. F     Anna   3306 0.0275 A           
-    ##  5 1884. F     Anna   3860 0.0281 A           
-    ##  6 1885. F     Anna   3994 0.0281 A           
-    ##  7 1886. F     Anna   4283 0.0279 A           
-    ##  8 1887. F     Anna   4227 0.0272 A           
-    ##  9 1888. F     Anna   4982 0.0263 A           
-    ## 10 1889. F     Anna   5062 0.0268 A           
+    ##  1  1880 F     Anna   2604 0.0267 A           
+    ##  2  1881 F     Anna   2698 0.0273 A           
+    ##  3  1882 F     Anna   3143 0.0272 A           
+    ##  4  1883 F     Anna   3306 0.0275 A           
+    ##  5  1884 F     Anna   3860 0.0281 A           
+    ##  6  1885 F     Anna   3994 0.0281 A           
+    ##  7  1886 F     Anna   4283 0.0279 A           
+    ##  8  1887 F     Anna   4227 0.0272 A           
+    ##  9  1888 F     Anna   4982 0.0263 A           
+    ## 10  1889 F     Anna   5062 0.0268 A           
     ## # ... with 3,504 more rows
 
--   See [Using map](#using-map) for example of how this could be accomplished using `map` and `map(safely(read_csv))`.
+  - See [Using map](#using-map) for example of how this could be
+    accomplished using `map` and `map(safely(read_csv))`.
 
-1.  *What happens if you use `for (nm in names(x))` and `x` has no names?*
+<!-- end list -->
+
+2.  *What happens if you use `for (nm in names(x))` and `x` has no
+    names?*
+
+<!-- end list -->
 
 ``` r
 x <- list(1:10, 11:18, 19:25)
@@ -572,7 +623,7 @@ for (nm in names(x)) {
 }
 ```
 
--   each iteration produces an error, so nothing is written
+  - each iteration produces an error, so nothing is written
 
 *What if only some of the elements are named? *
 
@@ -587,7 +638,7 @@ for (nm in names(x)) {
     ## NULL
     ## [1] 19 20 21 22 23 24 25
 
--   you have output for those with names and NULL for those without
+  - you have output for those with names and NULL for those without
 
 *What if the names are not unique?*
 
@@ -602,9 +653,15 @@ for (nm in names(x)) {
     ##  [1]  1  2  3  4  5  6  7  8  9 10
     ## [1] 19 20 21 22 23 24 25
 
--   it prints the first position with the name
+  - it prints the first position with the name
 
-1.  Write a function that prints the mean of each numeric column in a data frame, along with its name. For example, `show_mean(iris)` would print:
+<!-- end list -->
+
+3.  Write a function that prints the mean of each numeric column in a
+    data frame, along with its name. For example, `show_mean(iris)`
+    would print:
+
+<!-- end list -->
 
 ``` r
 show_mean(iris)
@@ -614,7 +671,8 @@ show_mean(iris)
 #> Petal.Width:  1.20
 ```
 
-(Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)
+(Extra challenge: what function did I use to make sure that the numbers
+lined up nicely, even though the variable names had different lengths?)
 
 ``` r
 show_mean <- function(df){
@@ -663,7 +721,9 @@ show_mean(flights)
     ## hour:             13.18
     ## minute:           26.23
 
-1.  What does this code do? How does it work?
+4.  What does this code do? How does it work?
+
+<!-- end list -->
 
 ``` r
 trans <- list( 
@@ -678,20 +738,25 @@ for (var in names(trans)) {
 mtcars
 ```
 
--   first part builds list of functions, 2nd applies those to a dataset
--   are storing the data transformations as a function and then applying this to a dataframe [2]
+  - first part builds list of functions, 2nd applies those to a dataset
+  - are storing the data transformations as a function and then applying
+    this to a dataframe \[2\]
 
-21.4: For loops vs. functionals
--------------------------------
+## 21.4: For loops vs. functionals
 
 ### 21.4.1
 
-1.  Read the documentation for `apply()`. In the 2d case, what two for loops does it generalise?
+1.  Read the documentation for `apply()`. In the 2d case, what two for
+    loops does it generalise?
+    
+      - It allows you to input either 1 or 2 for the `MARGIN` argument,
+        which corresponds with looping over either the rows or the
+        columns.
 
-    -   It allows you to input either 1 or 2 for the `MARGIN` argument, which corresponds with looping over either the rows or the columns.
-
-2.  Adapt `col_summary()` so that it only applies to numeric columns You might want to start with an `is_numeric()` function that returns a logical vector that has a TRUE corresponding to each numeric column.
-
+2.  Adapt `col_summary()` so that it only applies to numeric columns You
+    might want to start with an `is_numeric()` function that returns a
+    logical vector that has a TRUE corresponding to each numeric column.
+    
     ``` r
     col_summary_gen <- function(df, fun, ...) {
       #find cols that are numeric
@@ -707,58 +772,59 @@ mtcars
         output[[nm]] <- fun(df_select[[nm]], ...) %>% 
           round(digits = 2)
       }
-
+    
       as_tibble(output)
     }
-
+    
     col_summary_gen(flights, fun = median, na.rm = TRUE) %>% 
       gather() # trick to gather all easily
     ```
-
+    
         ## # A tibble: 14 x 2
-        ##    key             value
-        ##    <chr>           <dbl>
-        ##  1 year            2013.
-        ##  2 month              7.
-        ##  3 day               16.
-        ##  4 dep_time        1401.
-        ##  5 sched_dep_time  1359.
-        ##  6 dep_delay         -2.
-        ##  7 arr_time        1535.
-        ##  8 sched_arr_time  1556.
-        ##  9 arr_delay         -5.
-        ## 10 flight          1496.
-        ## 11 air_time         129.
-        ## 12 distance         872.
-        ## 13 hour              13.
-        ## 14 minute            29.
+        ##    key            value
+        ##    <chr>          <dbl>
+        ##  1 year            2013
+        ##  2 month              7
+        ##  3 day               16
+        ##  4 dep_time        1401
+        ##  5 sched_dep_time  1359
+        ##  6 dep_delay         -2
+        ##  7 arr_time        1535
+        ##  8 sched_arr_time  1556
+        ##  9 arr_delay         -5
+        ## 10 flight          1496
+        ## 11 air_time         129
+        ## 12 distance         872
+        ## 13 hour              13
+        ## 14 minute            29
+    
+      - the `...` makes this so you can add arguments to the functions.
 
-    -   the `...` makes this so you can add arguments to the functions.
-
-21.5: The map functions
------------------------
+## 21.5: The map functions
 
 ### 21.5.3
 
 1.  Write code that uses one of the map functions to:
-
-    *Compute the mean of every column in `mtcars`.*
-
+    
+    *Compute the mean of every column in
+        `mtcars`.*
+    
     ``` r
     purrr::map_dbl(mtcars, mean)
     ```
-
+    
         ##        mpg        cyl       disp         hp       drat         wt 
         ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
         ##       qsec         vs         am       gear       carb 
         ##  17.848750   0.437500   0.406250   3.687500   2.812500
-
-    *Determine the type of each column in `nycflights13::flights`.*
-
+    
+    *Determine the type of each column in
+        `nycflights13::flights`.*
+    
     ``` r
     purrr::map_chr(flights, typeof)
     ```
-
+    
         ##           year          month            day       dep_time sched_dep_time 
         ##      "integer"      "integer"      "integer"      "integer"      "integer" 
         ##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
@@ -767,23 +833,25 @@ mtcars
         ##      "integer"    "character"    "character"    "character"       "double" 
         ##       distance           hour         minute      time_hour 
         ##       "double"       "double"       "double"       "double"
-
+    
     *Compute the number of unique values in each column of `iris`.*
-
+    
     ``` r
     purrr::map(iris, unique) %>% 
       map_dbl(length)
     ```
-
+    
         ## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
         ##           35           23           43           22            3
-
-    *Generate 10 random normals for each of *μ* = −10, 0, 10, and 100.*
-
+    
+    *Generate 10 random normals for each of \(\mu = -10\), \(0\),
+    \(10\), and
+        \(100\).*
+    
     ``` r
     purrr::map_dbl(flights, ~mean(is.na(.x)))
     ```
-
+    
         ##           year          month            day       dep_time sched_dep_time 
         ##    0.000000000    0.000000000    0.000000000    0.024511842    0.000000000 
         ##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
@@ -793,88 +861,102 @@ mtcars
         ##       distance           hour         minute      time_hour 
         ##    0.000000000    0.000000000    0.000000000    0.000000000
 
-2.  How can you create a single vector that for each column in a data frame indicates whether or not it's a factor?
-
+2.  How can you create a single vector that for each column in a data
+    frame indicates whether or not it’s a factor?
+    
     ``` r
     purrr::map_lgl(iris, is.factor) %>% 
       as_tibble() %>% 
       mutate(column_names = row.names(.))
     ```
-
-        ## Warning: package 'bindrcpp' was built under R version 3.4.4
-
+    
+        ## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
+        ## This warning is displayed once per session.
+    
         ## # A tibble: 5 x 2
         ##   value column_names
         ##   <lgl> <chr>       
-        ## 1 FALSE Sepal.Length
-        ## 2 FALSE Sepal.Width 
-        ## 3 FALSE Petal.Length
-        ## 4 FALSE Petal.Width 
-        ## 5 TRUE  Species
+        ## 1 FALSE 1           
+        ## 2 FALSE 2           
+        ## 3 FALSE 3           
+        ## 4 FALSE 4           
+        ## 5 TRUE  5
+    
+      - for this example, I added in a simple extra little trick to
+        convert to a tibble and include original column names as a field
 
-    -   for this example, I added in a simple extra little trick to convert to a tibble and include original column names as a field
-
-3.  What happens when you use the map functions on vectors that aren't lists? What does `map(1:5, runif)` do? Why?
-
+3.  What happens when you use the map functions on vectors that aren’t
+    lists? What does `map(1:5, runif)` do? Why?
+    
     ``` r
     purrr::map(1:5, rnorm)
     ```
-
+    
         ## [[1]]
-        ## [1] -1.110355
+        ## [1] -0.4342344
         ## 
         ## [[2]]
-        ## [1] -1.09692003  0.02628681
+        ## [1]  1.5728702 -0.5227394
         ## 
         ## [[3]]
-        ## [1]  1.559570 -1.701335  1.374736
+        ## [1] -0.7077144  1.3051469 -0.0199586
         ## 
         ## [[4]]
-        ## [1]  0.3715218 -0.3751712  1.5226716  1.0719612
+        ## [1] -1.2513986 -1.4139458 -0.2850313  0.8268700
         ## 
         ## [[5]]
-        ## [1] -1.5831872  0.8828104  0.5919175 -0.8071349  0.5620246
-
-    -   it runs on each item in the vector. In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of `rnorm`, hence pattern above.
+        ## [1]  0.3095783  0.2980271 -0.1402482  0.2566213 -0.1826114
+    
+      - it runs on each item in the vector. In this case then it is
+        passing the values 1, 2, 3, 4, 5 into the first argument of
+        `rnorm`, hence pattern above.
 
 4.  What does `map(-2:2, rnorm, n = 5)` do? Why?
-
+    
     ``` r
     map(-2:2, rnorm, n = 5)
     ```
-
+    
         ## [[1]]
-        ## [1] -2.1904250 -2.7093031  0.4104091 -1.9307708 -1.1787109
+        ## [1] -1.87527363 -3.48886500 -1.31389670 -0.03716526 -1.36428331
         ## 
         ## [[2]]
-        ## [1] -0.5646532 -0.2844619 -0.6396976 -0.2897713 -0.4002771
+        ## [1] -0.04019663 -2.05049042 -1.43832306 -0.50670421 -1.21910607
         ## 
         ## [[3]]
-        ## [1] -1.66616519 -0.52980051 -0.63839150  0.92016732 -0.06450867
+        ## [1]  0.07730768 -0.48028517  0.50134309 -0.77369419  0.29377881
         ## 
         ## [[4]]
-        ## [1] -0.06306131 -0.54345589  2.14919190  0.63615195  2.05781415
+        ## [1]  1.2372021  1.4279879  1.7984030 -0.2203957  1.3068912
         ## 
         ## [[5]]
-        ## [1] 1.89807616 1.39470393 0.09883415 2.64891116 3.92485012
+        ## [1] 1.6250610 2.1921307 2.5937880 2.1156808 0.1748571
+    
+      - It makes 5 vectors each of length 5 with the values centered at
+        the means of -2,-1, 0, 1, 2 respectively.
+      - The reason is that the default filling of the first argument is
+        already named by the defined input of ‘n = 5’, therefore, the
+        inputs are instead going to the 2nd argument, and hence become
+        the mean of the different rnorm calls.
 
-    -   It makes 5 vectors each of length 5 with the values centered at the means of -2,-1, 0, 1, 2 respectively.
-    -   The reason is that the default filling of the first argument is already named by the defined input of 'n = 5', therefore, the inputs are instead going to the 2nd argument, and hence become the mean of the different rnorm calls.
+5.  Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate
+    the anonymous function.
 
-5.  Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate the anonymous function.
+<!-- end list -->
 
 ``` r
 mtcars %>% 
   purrr::map( ~ lm(mpg ~ wt, data = .))
 ```
 
-21.9 Other patterns of for loops
---------------------------------
+## 21.9 Other patterns of for loops
 
 ### 21.9.3
 
-1.  Implement your own version of `every()` using a for loop. Compare it with `purrr::every()`. What does purrr's version do that your version doesn't?
-
+1.  Implement your own version of `every()` using a for loop. Compare it
+    with `purrr::every()`. What does purrr’s version do that your
+    version doesn’t?
+    
     ``` r
     every_loop <- function(x, fun, ...) {
       output <- vector("list", length(x))
@@ -884,37 +966,40 @@ mtcars %>%
       total <- flatten_lgl(output)
       sum(total) == length(x)
     }
-
+    
     x <- list(flights, mtcars, iris)
     every_loop(x, is.data.frame)
     ```
-
+    
         ## [1] TRUE
-
+    
     ``` r
     every(x, is.data.frame)
     ```
-
+    
         ## [1] TRUE
-
-    -   mine can't handle shortcut formulas or new functions
-
+    
+      - mine can’t handle shortcut formulas or new functions
+    
+    <!-- end list -->
+    
     ``` r
     z <- sample(10)
     z %>% 
       every( ~ . < 11)
     ```
-
+    
         ## [1] TRUE
-
+    
     ``` r
     # e.g. below would fail
     # z %>%
     #   every_loop( ~ . < 11)
     ```
 
-2.  Create an enhanced `col_sum()` that applies a summary function to every numeric column in a data frame.
-
+2.  Create an enhanced `col_sum()` that applies a summary function to
+    every numeric column in a data frame.
+    
     ``` r
     col_summary_enh <- function(x,fun){
       x %>% 
@@ -923,25 +1008,26 @@ mtcars %>%
     }
     col_summary_enh(mtcars, median)
     ```
-
+    
         ##     mpg     cyl    disp      hp    drat      wt    qsec      vs      am 
         ##  19.200   6.000 196.300 123.000   3.695   3.325  17.710   0.000   0.000 
         ##    gear    carb 
         ##   4.000   2.000
 
 3.  A possible base R equivalent of `col_sum()` is:
-
+    
     ``` r
     col_sum3 <- function(df, f) {
       is_num <- sapply(df, is.numeric)
       df_num <- df[, is_num]
-
+    
       sapply(df_num, f)
     }
     ```
-
-    But it has a number of bugs as illustrated with the following inputs:
-
+    
+    But it has a number of bugs as illustrated with the following
+    inputs:
+    
     ``` r
     df <- tibble(
       x = 1:3, 
@@ -955,16 +1041,16 @@ mtcars %>%
     col_sum3(df[1], mean) 
     col_sum3(df[0], mean)
     ```
-
+    
     What causes the bugs?
+    
+      - The vector output is not always consistent in it’s output type.
+        Also, returns error when inputting an empty list due to indexing
+        issue.
 
-    -   The vector output is not always consistent in it's output type. Also, returns error when inputting an empty list due to indexing issue.
+# Appendix
 
-Appendix
-========
-
-21.3.5.1
---------
+## 21.3.5.1
 
 ### Using map
 
@@ -978,7 +1064,12 @@ Appendix
 
 ### Plot of names
 
--   Below is a plot of the proportion of individuals named the most popular letter in each year. This suggests that the top names by letter do not have as large of a proportion of the population ocmpared to historically.
+  - Below is a plot of the proportion of individuals named the most
+    popular letter in each year. This suggests that the top names by
+    letter do not have as large of a proportion of the population
+    ocmpared to historically.
+
+<!-- end list -->
 
 ``` r
 names_appended %>% 
@@ -986,11 +1077,14 @@ names_appended %>%
   geom_line()
 ```
 
-![](ch21_files/figure-markdown_github/unnamed-chunk-46-1.png)
+![](21-iteration_files/figure-gfm/unnamed-chunk-46-1.png)<!-- -->
 
 ### csv other example
 
-This is some code I used to read csvs from a shared drive. I added on the 'file\_path\_pull' and 'files\_example' components to add in information on the file paths and other details that were relevant... you might also add this data into a new column on the output...
+This is some code I used to read csvs from a shared drive. I added on
+the ‘file\_path\_pull’ and ‘files\_example’ components to add in
+information on the file paths and other details that were relevant… you
+might also add this data into a new column on the output…
 
 ``` r
 files_path_pull <- dir("//companydomain.com/directory/", 
@@ -1013,8 +1107,7 @@ read_dir <- function(dir){
 read_dir(files_example$file_paths)
 ```
 
-21.3.5.2 with purrr
--------------------
+## 21.3.5.2 with purrr
 
 Slightly less attractive printing
 
@@ -1050,22 +1143,22 @@ show_mean3(flights)
 ```
 
     ## # A tibble: 14 x 2
-    ##      value names         
-    ##      <dbl> <chr>         
-    ##  1 2013.   year          
-    ##  2    6.55 month         
-    ##  3   15.7  day           
-    ##  4 1349.   dep_time      
-    ##  5 1344.   sched_dep_time
-    ##  6   12.6  dep_delay     
-    ##  7 1502.   arr_time      
-    ##  8 1536.   sched_arr_time
-    ##  9    6.90 arr_delay     
-    ## 10 1972.   flight        
-    ## 11  151.   air_time      
-    ## 12 1040.   distance      
-    ## 13   13.2  hour          
-    ## 14   26.2  minute
+    ##      value names
+    ##      <dbl> <chr>
+    ##  1 2013    1    
+    ##  2    6.55 2    
+    ##  3   15.7  3    
+    ##  4 1349.   4    
+    ##  5 1344.   5    
+    ##  6   12.6  6    
+    ##  7 1502.   7    
+    ##  8 1536.   8    
+    ##  9    6.90 9    
+    ## 10 1972.   10   
+    ## 11  151.   11   
+    ## 12 1040.   12   
+    ## 13   13.2  13   
+    ## 14   26.2  14
 
 Other method is to take advantage of the gather function
 
@@ -1080,7 +1173,7 @@ flights %>%
     ## # A tibble: 14 x 2
     ##    key              value
     ##    <chr>            <dbl>
-    ##  1 year           2013.  
+    ##  1 year           2013   
     ##  2 month             6.55
     ##  3 day              15.7 
     ##  4 dep_time       1349.  
@@ -1095,11 +1188,12 @@ flights %>%
     ## 13 hour             13.2 
     ## 14 minute           26.2
 
-21.9 mirroring keep
--------------------
+## 21.9 mirroring keep
 
--   below is one method for passing multiple, more complex arguments through keep, though you can also use function shortcuts (`~`) in `keep` and `discard`
-
+  - below is one method for passing multiple, more complex arguments
+    through keep, though you can also use function shortcuts (`~`) in
+    `keep` and `discard`
+    
     ``` r
     ##how to pass multiple functions through keep?
     #can use map to subset columns by multiple criteria and then subset at end
@@ -1109,33 +1203,33 @@ flights %>%
       purrr::map_lgl(~.>10) %>% 
       flights[.]
     ```
-
+    
         ## # A tibble: 336,776 x 6
         ##    dep_time dep_delay arr_time arr_delay tailnum air_time
         ##       <int>     <dbl>    <int>     <dbl> <chr>      <dbl>
-        ##  1      517        2.      830       11. N14228      227.
-        ##  2      533        4.      850       20. N24211      227.
-        ##  3      542        2.      923       33. N619AA      160.
-        ##  4      544       -1.     1004      -18. N804JB      183.
-        ##  5      554       -6.      812      -25. N668DN      116.
-        ##  6      554       -4.      740       12. N39463      150.
-        ##  7      555       -5.      913       19. N516JB      158.
-        ##  8      557       -3.      709      -14. N829AS       53.
-        ##  9      557       -3.      838       -8. N593JB      140.
-        ## 10      558       -2.      753        8. N3ALAA      138.
+        ##  1      517         2      830        11 N14228       227
+        ##  2      533         4      850        20 N24211       227
+        ##  3      542         2      923        33 N619AA       160
+        ##  4      544        -1     1004       -18 N804JB       183
+        ##  5      554        -6      812       -25 N668DN       116
+        ##  6      554        -4      740        12 N39463       150
+        ##  7      555        -5      913        19 N516JB       158
+        ##  8      557        -3      709       -14 N829AS        53
+        ##  9      557        -3      838        -8 N593JB       140
+        ## 10      558        -2      753         8 N3ALAA       138
         ## # ... with 336,766 more rows
 
-invoke examples
----------------
+## invoke examples
 
-Let's change the example to be with quantile...
+Let’s change the example to be with
+    quantile…
 
 ``` r
 invoke(runif, n = 10)
 ```
 
-    ##  [1] 0.618391522 0.140993476 0.643137967 0.001076812 0.706567077
-    ##  [6] 0.921515820 0.072070356 0.323458452 0.144910690 0.954837738
+    ##  [1] 0.70897553 0.10914411 0.54071969 0.68201799 0.33195883 0.41483641
+    ##  [7] 0.06425982 0.83566253 0.92678663 0.33504597
 
 ``` r
 list("01a", "01b") %>%
@@ -1203,7 +1297,7 @@ rcauchy(100)
     ##  [91]   17.70703023    1.01880490    0.80764382   -1.63905090    0.15086898
     ##  [96]   -1.36865319    1.99173761    3.39988162   -0.63043489   -0.26058630
 
-Let's store everything in a dataframe...
+Let’s store everything in a dataframe…
 
 ``` r
 set.seed(123)
@@ -1245,16 +1339,16 @@ map_df(iris, ~.x*2)
     ## # A tibble: 150 x 5
     ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
     ##           <dbl>       <dbl>        <dbl>       <dbl> <lgl>  
-    ##  1        10.2         7.00         2.80       0.400 NA     
-    ##  2         9.80        6.00         2.80       0.400 NA     
-    ##  3         9.40        6.40         2.60       0.400 NA     
-    ##  4         9.20        6.20         3.00       0.400 NA     
-    ##  5        10.0         7.20         2.80       0.400 NA     
-    ##  6        10.8         7.80         3.40       0.800 NA     
-    ##  7         9.20        6.80         2.80       0.600 NA     
-    ##  8        10.0         6.80         3.00       0.400 NA     
-    ##  9         8.80        5.80         2.80       0.400 NA     
-    ## 10         9.80        6.20         3.00       0.200 NA     
+    ##  1         10.2         7            2.8         0.4 NA     
+    ##  2          9.8         6            2.8         0.4 NA     
+    ##  3          9.4         6.4          2.6         0.4 NA     
+    ##  4          9.2         6.2          3           0.4 NA     
+    ##  5         10           7.2          2.8         0.4 NA     
+    ##  6         10.8         7.8          3.4         0.8 NA     
+    ##  7          9.2         6.8          2.8         0.6 NA     
+    ##  8         10           6.8          3           0.4 NA     
+    ##  9          8.8         5.8          2.8         0.4 NA     
+    ## 10          9.8         6.2          3           0.2 NA     
     ## # ... with 140 more rows
 
 ``` r
@@ -1272,7 +1366,8 @@ mean.and.median <- function(x){
 }
 ```
 
-Difference between dfr and dfc, taken from here: <https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html>
+Difference between dfr and dfc, taken from here:
+<https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html>
 
 ``` r
 iris %>%
@@ -1284,10 +1379,10 @@ iris %>%
     ## # A tibble: 4 x 3
     ##    mean median names       
     ##   <dbl>  <dbl> <chr>       
-    ## 1  5.84   5.80 Sepal.Length
-    ## 2  3.06   3.00 Sepal.Width 
+    ## 1  5.84   5.8  Sepal.Length
+    ## 2  3.06   3    Sepal.Width 
     ## 3  3.76   4.35 Petal.Length
-    ## 4  1.20   1.30 Petal.Width
+    ## 4  1.20   1.3  Petal.Width
 
 ``` r
 iris %>%
@@ -1299,10 +1394,10 @@ iris %>%
     ## # A tibble: 4 x 3
     ##    mean median names       
     ##   <dbl>  <dbl> <chr>       
-    ## 1  5.84   5.80 Sepal.Length
-    ## 2  3.06   3.00 Sepal.Width 
+    ## 1  5.84   5.8  Sepal.Length
+    ## 2  3.06   3    Sepal.Width 
     ## 3  3.76   4.35 Petal.Length
-    ## 4  1.20   1.30 Petal.Width
+    ## 4  1.20   1.3  Petal.Width
 
 ``` r
 iris %>%
@@ -1313,12 +1408,14 @@ iris %>%
     ## # A tibble: 1 x 8
     ##    mean median mean1 median1 mean2 median2 mean3 median3
     ##   <dbl>  <dbl> <dbl>   <dbl> <dbl>   <dbl> <dbl>   <dbl>
-    ## 1  5.84   5.80  3.06      3.  3.76    4.35  1.20    1.30
+    ## 1  5.84    5.8  3.06       3  3.76    4.35  1.20     1.3
 
-indexing nms caution
---------------------
+## indexing nms caution
 
-When creating your empty list, use indexes rather than names if you are creating values, otherwise you are creating new values on the list. E.g. in the example below I the output ends up being length 6 because you have the 3 `NULL` values plus the 3 newly created named positions.
+When creating your empty list, use indexes rather than names if you are
+creating values, otherwise you are creating new values on the list. E.g.
+in the example below I the output ends up being length 6 because you
+have the 3 `NULL` values plus the 3 newly created named positions.
 
 ``` r
 x <- list(a = 1:10, b = 11:18, c = 19:25)
@@ -1347,10 +1444,10 @@ output
     ## $c
     ## [1] 57 60 63 66 69 72 75
 
-in class notes
---------------
+## in class notes
 
-the `map_*` functions are essentially like running a `flatten_*` after running `map`. E.g. the two things below are equivalent
+the `map_*` functions are essentially like running a `flatten_*` after
+running `map`. E.g. the two things below are equivalent
 
 ``` r
 map(flights, typeof) %>% 
@@ -1405,7 +1502,7 @@ map2(.x = min_params, .y = max_params, ~runif(n = 10, min = .x, max = .y))
     ##  [1]  3.7997461 -2.3450586  1.2380998 11.9528980  1.1067551 10.4780551
     ##  [7] 11.0320783  4.0009046 -0.5541351 -6.6168221
 
-When using `pmap` it's often best to keep the parameters in a dataframe
+When using `pmap` it’s often best to keep the parameters in a dataframe
 
 ``` r
 min_df_params <- tibble(n = c(10, 15, 20, 50 ), 
@@ -1439,7 +1536,8 @@ pmap(min_df_params, runif)
     ## [43] 2.659230 2.152347 2.572867 2.238726 2.962359 2.601366 2.515030
     ## [50] 2.402573
 
-You can often use `map` a bunch of output that can then be stored in a tibble
+You can often use `map` a bunch of output that can then be stored in a
+tibble
 
 ``` r
 tibble(type = map_chr(mtcars, typeof),
@@ -1452,18 +1550,19 @@ tibble(type = map_chr(mtcars, typeof),
     ##    type     means median names
     ##    <chr>    <dbl>  <dbl> <chr>
     ##  1 double  20.1    19.2  mpg  
-    ##  2 double   6.19    6.00 cyl  
+    ##  2 double   6.19    6    cyl  
     ##  3 double 231.    196.   disp 
-    ##  4 double 147.    123.   hp   
+    ##  4 double 147.    123    hp   
     ##  5 double   3.60    3.70 drat 
     ##  6 double   3.22    3.32 wt   
     ##  7 double  17.8    17.7  qsec 
-    ##  8 double   0.438   0.   vs   
-    ##  9 double   0.406   0.   am   
-    ## 10 double   3.69    4.00 gear 
-    ## 11 double   2.81    2.00 carb
+    ##  8 double   0.438   0    vs   
+    ##  9 double   0.406   0    am   
+    ## 10 double   3.69    4    gear 
+    ## 11 double   2.81    2    carb
 
-*Provide the number of unique values for all columns excluding columns with numeric types or date types.*
+*Provide the number of unique values for all columns excluding columns
+with numeric types or date types.*
 
 ``` r
 num_unique <- function(df) {
@@ -1509,21 +1608,25 @@ num_unique(mpg)
     ## 5 fl                    5
     ## 6 class                 7
 
-[1] Below is the code that accomplished this. I used `walk2` and methods we learn later in the chapter.
+1.  Below is the code that accomplished this. I used `walk2` and methods
+    we learn later in the chapter.
+    
+    ``` r
+    dir.create("ch21_csvs_example")
+    
+    babynames %>% 
+      mutate(first_letter = str_sub(name, 1, 1)) %>% 
+      group_by(first_letter, year) %>% 
+      filter(dplyr::min_rank(-prop) == 1) %>%  
+      split(.$first_letter) %>% 
+      # map(~select(.x, -first_letter)) %>% 
+      walk2(.x = ., .y = names(.), 
+            ~write_csv(.x,
+                       paste0("ch21_csvs_example/", "letter_", .y, ".csv"))
+            )
+    ```
 
-``` r
-dir.create("ch21_csvs_example")
-
-babynames %>% 
-  mutate(first_letter = str_sub(name, 1, 1)) %>% 
-  group_by(first_letter, year) %>% 
-  filter(dplyr::min_rank(-prop) == 1) %>%  
-  split(.$first_letter) %>% 
-  # map(~select(.x, -first_letter)) %>% 
-  walk2(.x = ., .y = names(.), 
-        ~write_csv(.x,
-                   paste0("ch21_csvs_example/", "letter_", .y, ".csv"))
-        )
-```
-
-[2] This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized -- go and use this for documenting your work / transformations
+2.  This is a very powerful practice because it allows you to save /
+    keep track of your manipulations and apply them at other locations,
+    while keeping the logic very well organized – go and use this for
+    documenting your work / transformations

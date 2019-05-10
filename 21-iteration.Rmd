@@ -113,7 +113,7 @@ invoke_map(f, param, n = 5) %>% str()
 * `detect` finds the first element where the predicate is true, `detect_index` returns its position
 * `head_while` and `tail_while` take elements from the start or end of a vector while a predicate is true
 * `reduce` is good for applying two table rule repeatedly, e.g. joins
-* `accumulate` is similar but keeps all the interim results
+  * `accumulate` is similar but keeps all the interim results
 
 ## 21.2: For loops
 

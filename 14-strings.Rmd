@@ -28,8 +28,6 @@ library(stringi)
 
 # ch. 14: Strings
 
-NO SEPERATE DEFINITIONS SECTION AT TOP FOR THIS CHAPTER. 
-
 * `writeLines`: see raw contents of a string (prints each string in a vector on a new line)
 * `str_length`: number of characters in a string
 * `str_c`: combine two or more strings
