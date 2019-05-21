@@ -1,22 +1,6 @@
----
-title: "Strings"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-always_allow_html: yes
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
- 
-```{r, include = FALSE, eval = FALSE}
-# Execute chunk to render both the markdown and html document specified in the YAML header.
-rmarkdown::render("14-strings.Rmd", output_format = "all")
-```
-
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup14, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)

@@ -1,27 +1,6 @@
----
-title: "Exploratory data analysis"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-params: 
-  output_type:  !r knitr::is_html_output(excludes = c("markdown"))
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
-  html_document:
-    toc: true
-    toc_depth: 3
-
----
-
-```{r, include = FALSE, eval = FALSE}
-# Execute chunk to render both the markdown and html document specified in the YAML header.
-rmarkdown::render("07-exploratory-data-analysis.Rmd", output_format = "all")
-```
-
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup07, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
@@ -486,7 +465,7 @@ ggplot(smaller, aes(x=price))+
 ```
 
 However, I set the code chunks such that it will only execute for html, not markdown docs.
-```{r, eval = params$output_type}
+```{r}
 p <- ggplot(smaller, aes(x=price))+
   geom_freqpoly(aes(colour = cut_width(carat, 0.25)))
 

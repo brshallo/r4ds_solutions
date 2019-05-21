@@ -1,16 +1,7 @@
----
-title: "Many models"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup25, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 library(ggplot2)
@@ -102,7 +93,7 @@ The set-up example Hadley goes through is important, below is a slightly altered
 
 __Nested Data__
 ```{r}
-by_country <- gapminder %>% 
+by_country <- gapminder::gapminder %>% 
   group_by(country, continent) %>% 
   nest()
 ```

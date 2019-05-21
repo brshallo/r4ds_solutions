@@ -1,16 +1,7 @@
----
-title: 'Model basics'
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup23, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE) 
 
 library(ggplot2)
@@ -36,7 +27,7 @@ library(splines)
   * when using with continuous data, `seq_range` or similar can be a good complement, see [^SplineNote] for an example where this is used.
 * `seq_range(x1, 5)` takes 5 values evenly spaced within this set.  Two other useful args:  
   + `pretty = TRUE ` : will generate a "pretty sequence"
-  ++ `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , `r seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)`
+  ++ `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , `r modelr::seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)`
   + `trim = 0.1` will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
   +`expand = 0.1 is kind of the opposite and expands the range by 10%
 * `modelr::add_predictions` takes a data frame and modle an adds predictions from the model to a new column
@@ -63,14 +54,14 @@ library(splines)
     
     
     ```{r}
-    mod1 <- lm(y ~ ns(x, 1), data = sim5)
-    mod2 <- lm(y ~ ns(x, 2), data = sim5)
-    mod3 <- lm(y ~ ns(x, 3), data = sim5)
-    mod4 <- lm(y ~ ns(x, 4), data = sim5)
-    mod5 <- lm(y ~ ns(x, 5), data = sim5)
+    mod1 <- lm(y ~ splines::ns(x, 1), data = sim5)
+    mod2 <- lm(y ~ splines::ns(x, 2), data = sim5)
+    mod3 <- lm(y ~ splines::ns(x, 3), data = sim5)
+    mod4 <- lm(y ~ splines::ns(x, 4), data = sim5)
+    mod5 <- lm(y ~ splines::ns(x, 5), data = sim5)
     
     grid <- sim5 %>% 
-      data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+      data_grid(x = modelr::seq_range(x, n = 50, expand = 0.1)) %>% 
       gather_predictions(mod1, mod2, mod3, mod4, mod5, .pred = "y")
     
     ggplot(sim5, aes(x, y)) + 
@@ -93,7 +84,7 @@ library(splines)
     ```{r}
     
     grid <- sim5.1 %>% 
-      data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+      data_grid(x = modelr::seq_range(x, n = 50, expand = 0.1)) %>% 
       gather_predictions(mod1, mod2, mod3, mod4, mod5, .pred = "y")
     
     ggplot(sim5.1, aes(x, y)) + 
@@ -118,7 +109,7 @@ library(splines)
   
     ```{r}
     grid <- sim5.1 %>% 
-      data_grid(x = seq_range(x, n = 50, expand = 0.1)) %>% 
+      data_grid(x = modelr::seq_range(x, n = 50, expand = 0.1)) %>% 
       gather_predictions(mod1, mod2, mod3, mod4, mod5, .pred = "y")
     
     ggplot(sim5.1, aes(x, y)) + 
@@ -154,18 +145,23 @@ library(splines)
     ```
 
     generate n number of datasets that fit characteristics of sim1a
+    
     ```{r}
-    sim1a_mult <- tibble(num = 1:500) %>% 
-      rowwise() %>% 
+    sim1a_mult <- tibble(num = 1:500) %>%
+      rowwise() %>%
       mutate(data = list(tibble(
-          x = rep(1:10, each = 3),
-          y = x * 1.5 + 6 + rt(length(x), df = 2))))
+        x = rep(1:10, each = 3),
+        y = x * 1.5 + 6 + rt(length(x), df = 2)
+      ))) %>%
+      #undoes rowwise (used to have much more of workflow with rowwise, but have
+      #changed to use more of map)
+      ungroup()
     
     plots_prep <- sim1a_mult %>% 
-      mutate(mods = list(lm(y ~ x, data = data))) %>% 
-      mutate(preds = list(data %>% add_predictions(mods)),
-             rmse = modelr::rmse(mods, data),
-             mae = modelr::mae(mods, data))
+      mutate(mods = map(data, ~lm(y ~ x, data = .x))) %>% 
+      mutate(preds = map2(data, mods, modelr::add_predictions),
+             rmse = map2_dbl(mods, data, modelr::rmse),
+             mae = map2_dbl(mods, data, modelr::mae))
     
     plots_prep %>% 
       ggplot(aes(x = "rmse", y = rmse))+
@@ -460,7 +456,7 @@ library(splines)
     mod1 <- lm(y ~ x1 + x2, data = sim4)
     mod2 <- lm(y ~ x1 * x2, data = sim4)
     
-    grid <-  seq_range(sim4$x1, n = 3, pretty = TRUE)
+    grid <-  modelr::seq_range(sim4$x1, n = 3, pretty = TRUE)
     
     sim4 %>% 
       gather_residuals(mod1, mod2) %>% 

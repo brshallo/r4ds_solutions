@@ -1,28 +1,7 @@
----
-title: "Data transformations"
-author: "Bryan Shalloway"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-params: 
-  output_type:  !r knitr::is_html_output(excludes = c("markdown"))
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
-  html_document:
-    toc: true
-    toc_depth: 3
----
- 
-
-```{r, include = FALSE, eval = FALSE}
-# Execute chunk to render both the markdown and html document specified in the YAML header.
-rmarkdown::render("05-data-transformations.Rmd", output_format = "all")
-```
-
 
 *Make sure the following packages are installed:*  
 
-```{r setup, results='hide', message=FALSE, warning=FALSE}
+```{r setup05, results='hide', message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
@@ -31,7 +10,7 @@ library(nycflights13)
 library(Lahman)
 library(gapminder)
 library(tidyr)
-library(plotly)
+library(plotly) 
 ```
 
 # ch. 5
@@ -1128,8 +1107,8 @@ It can be a hassle naming the values explicitly. `quantile`'s default `probs` ar
 flights_quantiles2 <- flights %>% 
   group_by(dest) %>% 
   summarise(delays_val = list(quantile(arr_delay, na.rm = TRUE)),
-            delays_q = list(c('0th', '25th', '50th', '75th', '100th')),
-            delays_q2 = purrr::map(delays_val, names)) 
+            delays_q = list(c('0th', '25th', '50th', '75th', '100th'))) %>% 
+  mutate(delays_q2 = purrr::map(delays_val, names))
 
 flights_quantiles2
 ```
@@ -1491,7 +1470,7 @@ the `plotly` package has a cool function `ggplotly` that allows you to add wrapp
 
 Note that this will not render in a markdown format, but only in html.
 
-```{r, eval = params$output_type}
+```{r, eval = FALSE}
 p <- flights %>% 
   group_by(hour, month) %>% 
   summarise(avg_delay = mean(arr_delay, na.rm = TRUE)) %>% 

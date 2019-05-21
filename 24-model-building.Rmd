@@ -1,12 +1,3 @@
----
-title: "Model building"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 
 ```{r}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
@@ -15,7 +6,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup24, include=FALSE}
 library(ggplot2)
 library(tidyverse)
 library(nycflights13)

@@ -1,15 +1,6 @@
----
-title: "Tibbles"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup10, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)

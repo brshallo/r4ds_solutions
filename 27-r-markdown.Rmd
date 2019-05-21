@@ -1,16 +1,7 @@
----
-title: "R Markdown"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 
 *Make sure the following packages are installed:*  
 
-```{r setup, include=FALSE}
+```{r setup27, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 library(ggplot2)
@@ -118,7 +109,7 @@ params:
 ## 27.3: Text formatting with Markdown
 
 *Print file from Hadley's github page with commmon formatting:*
-```{r}
+```{r, eval = FALSE}
 
 cat(readr::read_file("https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd"))
 ```

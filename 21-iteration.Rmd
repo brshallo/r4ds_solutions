@@ -1,14 +1,6 @@
----
-title: "Iteration"
-date: "`r paste('Last updated: ', format(Sys.time(), '%Y-%m-%d'))`"
-author: "Bryan Shalloway"
-output: 
-  github_document:
-    toc: true
-    toc_depth: 3
----
 
-```{r setup, message = FALSE, warning = FALSE, include = FALSE}
+
+```{r setup21, message = FALSE, warning = FALSE, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 ```
 
