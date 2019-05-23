@@ -1,0 +1,17 @@
+base
+ggplot2
+dplyr
+nycflights13
+seriation
+d3heatmap
+plotly
+viridisLite
+viridis
+heatmaply
+gapminder
+ggstance
+ggbeeswarm
+lvplot
+gridExtra
+hexbin
+maps

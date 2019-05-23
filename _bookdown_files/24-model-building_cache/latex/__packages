@@ -1,0 +1,17 @@
+base
+ggplot2
+tidyverse
+tibble
+tidyr
+readr
+purrr
+dplyr
+stringr
+forcats
+nycflights13
+babynames
+nasaweather
+lubridate
+modelr
+broom
+hexbin
