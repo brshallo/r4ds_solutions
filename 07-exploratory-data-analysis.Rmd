@@ -18,7 +18,8 @@ library(hexbin)
 library(maps)
 ```
 
-# ch. 7, data exploration
+# ch. 7: Data exploration
+
 * `cut_width`: specify binsize of each cut (often use with `geom_boxplot`)
 * `cut_number`:  specify number of groups to make, allowing for variable binsize (often use with `geom_boxplot`)
 * `geom_histogram`: ...

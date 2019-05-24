@@ -4,15 +4,15 @@
 
 # Chapter 3
 
-* `geom_point`: 
-* `geom_smooth`: 
-* `geom_bar`: 
-* `geom_count`: 
-* `geom_jitter`: 
+* `geom_point`: Add points to plot, `x`, `y`, `size`, `stroke`, `colour`, `alpha`, `shape`
+* `geom_smooth`: Add line and confidence intervals to x-y plot, can use `se` to turn off standard errors, can use `method` to change algorithm to make line. 
+* `geom_bar`: Stack values on top of each to make bars.
+* `geom_count`: Make bar charts out of discrete row values in dataframe.
+* `geom_jitter`: like `geom_point()` but with randomness added
 * `geom_boxplot`: 
 * `geom_polygon`: 
 * `geom_abline`: 
-* `facet_wrap`: 
+* `facet_wrap`: `scales`, `space`
 * `facet_grid`: 
 * `stat_count`: 
 * `stat_summary`: 

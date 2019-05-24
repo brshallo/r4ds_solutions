@@ -527,7 +527,7 @@ weather
 1.  *What happened on June 13 2013? Display the spatial pattern of delays,*
     *and then use Google to cross-reference with the weather.*
 
-    
+
     
     Looks like East coast is getting hammered and flights arriving from Atlanta an similar locations were very delayed. Guessing either weather issue, or problem in Atl or delta.
     

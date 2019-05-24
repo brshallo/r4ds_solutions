@@ -15,13 +15,16 @@ library(tidyr)
 * `separate`: one column into many, e.g. `separate(table3, rate, into = c("cases", "population"), sep = "/")`
     + default uses non-alphanumeric character as `sep`, can also use number to separate by width
 * `extract` similar to separate but specify what to pull-out rather than what to split by
-* `unite` inverse of separate
+* `unite` inverse of separate  
+  
+
 ```{r}
+
 # example distinguishing separate, extract, unite
 tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>% 
-  separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
-  unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
-  extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
+  tidyr::separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
+  tidyr::unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
+  tidyr::extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
 
 ```
 

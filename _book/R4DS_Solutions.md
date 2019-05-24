@@ -1,7 +1,7 @@
 --- 
 title: "A Minimal Book Example"
 author: "Yihui Xie"
-date: "2019-05-22"
+date: "2019-05-24"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -16641,6 +16641,10 @@ lubridate::now()
       geom_smooth()
     ```
     
+    ```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+    ```
+    
     <img src="R4DS_Solutions_files/figure-html/unnamed-chunk-665-1.png" width="672" />
     
     You could take into account the class of the car
@@ -16655,6 +16659,10 @@ lubridate::now()
            caption = "Data is for cars made in either 1999 or 2008",
            colour = "Car class")+
       geom_smooth()
+    ```
+    
+    ```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
     ```
     
     ```
@@ -16877,6 +16885,10 @@ lubridate::now()
       facet_wrap(~class)+
       geom_smooth()+
       geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
+    ```
+    
+    ```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
     ```
     
     ```

@@ -13,7 +13,7 @@ library(tidyr)
 library(plotly) 
 ```
 
-# ch. 5
+# ch. 5 Data transformations
   
 **Key functions from chapter:**  
   

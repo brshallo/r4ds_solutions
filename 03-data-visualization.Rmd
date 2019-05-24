@@ -9,31 +9,30 @@ library(mapproj)
 library(dplyr)
 ```
 
-# Chapter 3
+# ch 3: Data visualization
 
-* `geom_point`: 
-* `geom_smooth`: 
-* `geom_bar`: 
-* `geom_count`: 
-* `geom_jitter`: 
-* `geom_boxplot`: 
-* `geom_polygon`: 
+* `geom_point`: Add points to plot, `x`, `y`, `size`, `stroke`, `colour`, `alpha`, `shape`
+* `geom_smooth`: Add line and confidence intervals to x-y plot, can use `se` to turn off standard errors, can use `method` to change algorithm to make line. `linetype` to make dotted line.
+* `geom_bar`: Stack values on top of each to make bars (default `stat = "count"`, can also change to `"identity"`. May want to make `y = ..prop..` to show y as proportion of values). `postion = "stacked"` may take on values of "`identity"`, "`dodge"`, "`fill"`
+* `geom_count`: Make bar charts out of discrete row values in dataframe. `fill` to fill bars, `colour` to outline.
+* `geom_jitter`: like `geom_point()` but with randomness added, use `width` and `height` args to control (could also use `geom_point()` with `position = "jitter"`)
+* `geom_boxplot`: box and whiskers plot
+* `geom_polygon`: Can use to plot points -- use with objects created from `map_data()`
 * `geom_abline`: 
-* `facet_wrap`: 
-* `facet_grid`: 
-* `stat_count`: 
-* `stat_summary`: 
-* `stat_bin`: 
-* `stat_smooth`: 
+* `facet_wrap`: Facet multiple charts by one variable; `scales = "free_x"` (or "free", or "free_y" are helpful)
+* `facet_grid`: Facet multiple by charts by one or two variables: `space` is helpful arg (not within `facet_wrap()`)
+* `stat_count`: Like `geom_bar()`
+* `stat_summary`: can use to explicitly show ranges, e.g. with args `fun.ymin = min`, `fun.ymax = max`, `fun.y = median`
+* `stat_bin`: Like `geom_histogram()`
+* `stat_smooth`: Sames as `geom_smooth` but can take non-standard geom
 * `position` adjustments:
     + `identity`: ; `dodge`: ; `fill`: ;
     + `position_dodge` ; `position_fill` ; `position_identiy` ; `position_jitter` ; `position_stack` ; 
 * 3 ways to override default mapping
-    + 
-* `coord_flip`: 
-* `coord_quickmap`: 
-* `coord_polar`: 
-* `coord_fixed`: 
+* `coord_quickmap`: Set aspect ratio for maps
+* `coord_flip`: Flip x and y coordinates
+* `coord_polar`: Use polar coordinates -- don't use much (should set `theme(aspect.ratio = 1) +labs(x = NULL, y = NULL))`
+* `coord_fixed`: Fix x and y to be same size distance between tickmarks
 
 `ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(
@@ -130,9 +129,11 @@ ggplot(data = mpg)+
 
 
 **5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)**
-```{r}
+```{r, eval = FALSE}
 ?geom_point
+```
 
+```{r}
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
 
@@ -393,7 +394,7 @@ ggplot(data = diamonds)+
 
 **3.Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?**  
 
-```{r}
+```{r, eval = FALSE}
 ?ggplot2
 ```
 
@@ -532,7 +533,7 @@ ggplot(mpg, aes(x = as.factor(cyl), fill = class))+
 
 **2. What does labs() do? Read the documentation.**  
 Used for giving labels.
-```{r}
+```{r, eval = FALSE}
 ?labs
 ```
 

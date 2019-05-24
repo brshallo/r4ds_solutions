@@ -10,6 +10,7 @@ link-citations: yes
 description: "My notes and solutions to 'R for Data Science' by Garrett Grolemund and Hadley Wickham"
 ---
 
+
 # Purpose of this book
 
 This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham's book, *R for Data Science* (R4DS). First and foremost my book is set-up as a resource and refresher for myself. 
@@ -18,14 +19,14 @@ If you are looking for a place to check your solutions for R4DS I would recommen
 
 I am not actively seeking feedback, but if you find a major issue, or want to comment on one of my notes, feel free to open a github issue @brshallo.
 
-# Features of this book
+## Features of this book
 
 Each chapter may contain the following:
 * list of functions and notes from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]. 
 * Solutions to exercises
 * Appendix containing notes, or alternative solutions to problems
 
-# Origin of this book
+## Origin of this book
 
 'R for Data Science' is my go to resource I recommend for people interested in getting started in "data science", R programming, or the "tidyverse". I've gone through the book front to back three times and regularly come back to it as a reference.
 
