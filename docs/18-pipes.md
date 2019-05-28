@@ -37,7 +37,7 @@ library(stringr)
 ```
 
 
-# ch. 18: Pipes (notes only)
+# Ch. 18: Pipes (notes only)
 
 * `pryr::object_size` gives the memory occupied by all of its arguments (note that built-in object.size does not allow measuring multiple objects so can't see shared space). This function is actually shown in chapter 18: Pipes
 * Some functions do not work naturally with the pipe.
@@ -67,10 +67,10 @@ rnorm(100) %>%
   str()
 ```
 
-![](18-pipes_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+<img src="18-pipes_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ```
-##  num [1:50, 1:2] -0.3227 0.5359 0.0968 0.4378 0.877 ...
+##  num [1:50, 1:2] -0.682 -1.389 -0.429 -0.124 -1.372 ...
 ```
 
 ```r
@@ -81,7 +81,7 @@ iris %>%
   head(10)
 ```
 
-![](18-pipes_files/figure-epub3/unnamed-chunk-3-2.png)<!-- -->
+<img src="18-pipes_files/figure-html/unnamed-chunk-3-2.png" width="672" />
 
 ```
 ##    Sepal.Length

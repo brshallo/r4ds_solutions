@@ -20,7 +20,7 @@ library(splines)
 
 ```
 
-# ch. 24: Model building
+# Ch. 24: Model building
 
 * `data_grid`, argument: `.model`: if the model needs variables that haven't been supplied explicitly, will auto-fill them with "typical" values; continuous --> median; categorical --> mode
 * `MASS:rlm` robust linear model that uses "M estimation by default"
@@ -467,9 +467,9 @@ daily %>%
     ```
 
 
-# Appendix
+## Appendix
 
-## 24.2.3.3
+### 24.2.3.3
 Plots of extreme values against a sample and colored by some of the key attributes
 
 *Plots of extreme values against carat, price, clarity*
@@ -495,9 +495,9 @@ diamonds2 %>%
 
 ```
 
-## 24.2.3.4
+### 24.2.3.4
 
-### heteroskedasticity
+#### heteroskedasticity
 Note that heteroskedasticity is one (of several other) important considerations that would be important when deciding how much you trust the model.
 
 *residual vs lprice*
@@ -524,7 +524,6 @@ diamonds2 %>%
 
 * This is what heteroskedasticity looks like
 
-
 *residual (transformed) vs log price*
 (`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
 ```{r}
@@ -536,7 +535,7 @@ diamonds2 %>%
   geom_hex()
 ```
 
-### rsquared on logged values
+#### rsquared on logged values
 **(incorrect)**
 This is what I did initially. Below I calculate the R^2 on the log values. Within the exercise solution I decided to report the R^2 when calculated on `2^pred`. This has the more useful interpretation of representing the percentage of the variance on the actual price that the model captures, which seems more appropriate in some ways. This question about which is more appropriate to report may be worth revisiting in the future.
 ```{r}
@@ -567,7 +566,7 @@ rsquare(mod_diamond2, diamonds2)
 The R-squred is ~ 0.983, which means that the model accounts for 98.3% of the variance in price, which seems pretty solid.
 
 
-## 24.2.3.1
+### 24.2.3.1
 Visualization with horizontal stripes and `lprice` as the focus
 ```{r}
 # horizontal stripes
@@ -600,7 +599,7 @@ diamonds2 %>%
 
 ```
 
-### More notes on logs
+#### More notes on logs
 While taking the log of both price and carat seems to help improve the 'linearity' of the model, perhaps taking the log of the price makes a bigger difference.
 
 ```{r}
@@ -635,7 +634,7 @@ gridExtra::grid.arrange(plot_lc_lp, plot_lc, plot_c)
 
 ```
 
-### carat more clumped than price
+#### carat more clumped than price
 *(Unnecessary)*
 * let's see between price and carat, which causes the appearance of "bands" in the data
 * to do this let's look at `geom_hex` when making the accompanying value random
@@ -660,9 +659,9 @@ diamonds2 %>%
 * clearly carat are much more clumped
 * this check was unnecessary in this case, though the method felt worth saving
 
-## Logs (simulated examples)
+### Logs (simulated examples)
 
-### Exponential relationship
+#### Exponential relationship
 
 Taking the log of a value often centers the distribution which is helpful for getting more normal errors, it's actually not about making the relationship linear per se... but about making the errors normal (and linearlizing the relationship has the effect of doing this). Let's generate some data.
 
@@ -701,7 +700,7 @@ log_notes_df %>%
 
 * because of the properties of logs and exponents, taking the log transform is robust to linearlizing any exponential relationship regardles of log
 
-### Log log relationship
+#### Log log relationship
 
 What happens if you have a log relationship and you take the log of this leading to a log-log relationship?
 * You would not need to take the log of a graph in this relationship, but let's look at what happens
@@ -731,10 +730,10 @@ log_notes_df2 %>%
 
 Conceptualizing Linear regression can actually get surprisingly complicated.  I'll pull this into a separate blog post at some point.
 
-## Diamonds data review
+### Diamonds data review
 *(Section arguably unnecessary)*
 
-### carat by mean `table` value
+#### carat by mean `table` value
 `table` represents the percentage of the max area that is covered by the flat top part of the diamond
 ```{r}
 diamonds2 %>% 
@@ -749,7 +748,7 @@ diamonds2 %>%
 
 ```
 
-### Cutoff, Part 1
+#### Cutoff, Part 1
 I get nervous that in the opening example that the diamonds dataset was biased because all values with price over 19000 or carat over 2.5 were removed. This seemed to have the affect of causing larger diamonds to have lower prices than expected. I was worried this might in some way impact the pattern described regarding the residuals across the other dimensions -- so looked at the residuals when building the model on just diamonds with carats less than 0.90. None of the prices seemed to approach 19000 for carats this small so this seemed like a good place to validate the discussion on residuals.
 
 The pattern did indeed hold for even just these small diamonds, so the example Hadley discusses seems appropriate.
@@ -774,7 +773,7 @@ ggplot(diamonds2_w_mod, aes(color, resid_lg)) + geom_boxplot()
 ggplot(diamonds2_w_mod, aes(clarity, resid_lg)) + geom_boxplot()
 ```
 
-### Cutoff, Part 2
+#### Cutoff, Part 2
 
 Check if there are differences in coefficients when training on full `diamonds` data set v `diamonds2` dataset
 ```{r}
@@ -800,7 +799,7 @@ ggplot(aes(x = lcarat, y = lprice))+
 
 essentially no difference between the models that come-out when training on one v the the other
 
-## 25.3.5.4
+### 25.3.5.4
 
 In this section I create a marker for days that are "near a holiday"
 ```{r, warning=FALSE}

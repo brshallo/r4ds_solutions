@@ -3,7 +3,7 @@
 
 
 
-# ch. 25: Many models
+# Ch. 25: Many models
 * `nest` creates a list-column with default key value `data`. Each row value becomes a dataframe with all non-grouping columns and all rows corresponding with a particular group
 
 ```r
@@ -245,7 +245,7 @@ resids
       facet_wrap(~order)
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-15-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
     
     * The quadratic trend seems to do better --> indicated by the distribution of the R^2 values being closer to one. The level of improvement seems especially pronounced for African countries.
     
@@ -267,7 +267,7 @@ resids
            subtitle = "(When adding a quadratic term to the linear regression model)")
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-16-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
     
     *View predictions from linear model with quadratic term*
     (of countries where linear trend did not capture relationship)
@@ -290,7 +290,7 @@ resids
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-17-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
     
     * while the quadratic model does a better job fitting the model than a linear term does, I wouldn't say it does a good job of fitting the model
     * it looks like the trends are generally consistent rates of improvement and then there is a sudden drop-off associated with some event, hence an intervention variable may be a more appropriate method for modeling this pattern
@@ -316,7 +316,7 @@ resids
     ## Warning: Using alpha for a discrete variable is not advised.
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-18-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
     
     * The quadratic term (in a linear function, trained with the x-value centered at the mean, as in this dataset) has a few important notes related to interpretation
         * If the coefficient is positive the output will be convex, if it is negative it will be concave (i.e. smile vs. frown shape)
@@ -338,7 +338,7 @@ resids
     labs(title = "Data and quadratic trend of predictions for Botswana")
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-19-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
     
     *(note that the centered value for year in the 'centered' dataset is 1979.5)*  
     In the model for Botswana, coefficents are:  
@@ -399,7 +399,7 @@ resids
       coord_fixed()
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-22-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
     
     ```r
         by_country3_quad %>% 
@@ -413,7 +413,7 @@ resids
       coord_fixed()
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-22-2.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-22-2.png" width="672" />
     
     Below is the relevant output in a table.  
     `x1`: represents the change in x value from 1979.5  
@@ -450,7 +450,7 @@ resids
       ggbeeswarm::geom_quasirandom()
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-24-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
     
     ```r
     by_country3_quad %>% 
@@ -460,7 +460,7 @@ resids
       geom_jitter()
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-24-2.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-24-2.png" width="672" />
     
     ```r
     by_country3_quad %>% 
@@ -470,7 +470,7 @@ resids
       ggbeeswarm::geom_beeswarm()
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-24-3.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-24-3.png" width="672" />
 
     * I like `geom_quasirandom` the best as an overlay on boxplot, it keeps things centered and doesn't have the gravitational pull affect that makes `geom_beeswarm` become a little misaligned
 
@@ -492,7 +492,7 @@ resids
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    ![](25-many-models_files/figure-epub3/unnamed-chunk-25-1.png)<!-- -->
+    <img src="25-many-models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 ## 25.4: Creating list-columns
 
@@ -694,9 +694,9 @@ resids
 
     * the atomic types: char, int, double, fact, date are all more common, they are atomic, whereas lists are not
 
-# Appendix
+## Appendix
 
-## models in lists
+### Models in lists
 this is the more traditional way you might store models
 
 
@@ -739,7 +739,7 @@ models_countries[1:3]
 ##  -1067.8590       0.5693
 ```
 
-## list-columns for sampling
+### List-columns for sampling
 say you want to sample all the flights on 50 days out of the year. List-cols can be helpful in generating a sample like this:
 
 ```r
@@ -753,20 +753,20 @@ flights %>%
 ```
 
 ```
-## # A tibble: 47,102 x 5
+## # A tibble: 46,007 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    <date>               <int>     <dbl>    <int>          <int>
-##  1 2013-01-06            2359        17      451            442
-##  2 2013-01-06             500        -2      718            650
-##  3 2013-01-06             525         1      827            819
-##  4 2013-01-06             540        -6      855            850
-##  5 2013-01-06             559        -4      930            930
-##  6 2013-01-06             600        -3      830            837
-##  7 2013-01-06             600        -3      855            851
-##  8 2013-01-06             600        -2      905            910
-##  9 2013-01-06             600        -2      849            850
-## 10 2013-01-06             600        -2      910            901
-## # ... with 47,092 more rows
+##  1 2013-05-16            2127       161      159           2337
+##  2 2013-05-16            2145       148      255            105
+##  3 2013-05-16            2359        59      426            341
+##  4 2013-05-16             500        -4      629            640
+##  5 2013-05-16             515        -9      745            811
+##  6 2013-05-16             545        -8      839            827
+##  7 2013-05-16             540        -2      833            840
+##  8 2013-05-16             602       -14      653            710
+##  9 2013-05-16             600       -12      832            854
+## 10 2013-05-16             600        -9      814            835
+## # ... with 45,997 more rows
 ```
 
 The alternative a join, e.g.
@@ -784,28 +784,28 @@ flights %>%
 ```
 
 ```
-## # A tibble: 46,152 x 5
+## # A tibble: 46,796 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    <date>               <int>     <dbl>    <int>          <int>
-##  1 2013-01-05            2359        15      503            445
-##  2 2013-01-05            2230       127      341            131
-##  3 2013-01-05             500        -2      640            650
-##  4 2013-01-05             515         1      821            816
-##  5 2013-01-05             530         4      829            829
-##  6 2013-01-05             540        -3      831            850
-##  7 2013-01-05             600        -7      903            903
-##  8 2013-01-05             600        -6      739            759
-##  9 2013-01-05             600        -5      824            810
-## 10 2013-01-05             600        -5      818            837
-## # ... with 46,142 more rows
+##  1 2013-01-08             500        -6      625            648
+##  2 2013-01-08             525        -1      837            820
+##  3 2013-01-08             540        -9      826            850
+##  4 2013-01-08             540         0     1025           1017
+##  5 2013-01-08             530        14      853            829
+##  6 2013-01-08             600       -10      850            910
+##  7 2013-01-08             600        -9      824            837
+##  8 2013-01-08             600        -8      650            703
+##  9 2013-01-08             600        -7      819            815
+## 10 2013-01-08             600        -6      844            906
+## # ... with 46,786 more rows
 ```
 
 * I find the `nest` - `unnest` method more elegant
 * I've found the `semi_join` method seems to run goes faster on large dataframes
 
-## 25.2.5.1
+### 25.2.5.1
 
-### Include cubic term
+#### Include cubic term
 Let's look at this example if we had allowed year to be a 3rd order polynomial.  We're really stretching our degrees of freedom in this case -- these might be unlikely to generalize to other data well. 
 
 
@@ -827,11 +827,11 @@ by_country3 %>%
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
-![](25-many-models_files/figure-epub3/unnamed-chunk-35-1.png)<!-- -->
+<img src="25-many-models_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 * interpretibility of coefficients beyond quadratic term becomes less strait forward to explain
 
-## Multiple graphs in chunk
+### Multiple graphs in chunk
 My work flow for pulling multiple graphs into a single input has typically been either to build the graphs seperately and then add each to the function `gridExtra::grid.arrange()` or to use faceting as much as possible.  
 
 In 25.2 Hadley showed an example where he put all the graphs within a chunk into a single outputted figure by setting the code chunk options for this. The chunk below is that example.
@@ -845,7 +845,7 @@ nz %>%
   ggtitle("Full data = ")
 ```
 
-<img src="25-many-models_files/figure-epub3/unnamed-chunk-36-1.png" width="33%" />
+<img src="25-many-models_files/figure-html/unnamed-chunk-36-1.png" width="33%" />
 
 ```r
 nz_mod <- lm(lifeExp ~ year, data = nz)
@@ -856,7 +856,7 @@ nz %>%
   ggtitle("Linear trend + ")
 ```
 
-<img src="25-many-models_files/figure-epub3/unnamed-chunk-36-2.png" width="33%" />
+<img src="25-many-models_files/figure-html/unnamed-chunk-36-2.png" width="33%" />
 
 ```r
 nz %>% 
@@ -867,11 +867,13 @@ nz %>%
   ggtitle("Remaining pattern")
 ```
 
-<img src="25-many-models_files/figure-epub3/unnamed-chunk-36-3.png" width="33%" />
+<img src="25-many-models_files/figure-html/unnamed-chunk-36-3.png" width="33%" />
 
 * still printing as 3 individual plots, how to fix?
 
-## list(quantile()) examples
+### `list(quantile())` examples
+
+Not really best practice...
 
 
 ```r
@@ -916,6 +918,18 @@ iris %>%
 ```
 
 ```
+## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.
+```
+
+```
 ## # A tibble: 15 x 6
 ##    Species    Sepal.Length Sepal.Width Petal.Length Petal.Width probs
 ##    <fct>             <dbl>       <dbl>        <dbl>       <dbl> <chr>
@@ -936,7 +950,7 @@ iris %>%
 ## 15 virginica          7.9         3.8          6.9          2.5 100%
 ```
 
-## extracting row names
+### Extracting row names
 Don't know I'd do this...
 
 ```r
@@ -961,7 +975,7 @@ quantile(1:100) %>%
 ## 5 5       100
 ```
 
-## `invoke_map` example (book)
+### `invoke_map` example (book)
 I liked Hadley's example with invoke_map and wanted to save it
 
 ```r
@@ -985,7 +999,7 @@ sim %>%
 ## 3 rpois <list [1]> <int [10]>
 ```
 
-## named list example (book)
+### named list example (book)
 I liked Hadley's example where you have a list of named vectors that you need to iterate over both the values as well as the names and the use of enframe to facilitate this. 
 
 Below is the copied example and notes:
@@ -1013,8 +1027,7 @@ df
 
 The advantage of this structure is that it generalises in a straightforward way - names are useful if you have character vector of metadata, but don't help if you have other types of data, or multiple vectors.
 
- Now if you want to iterate over names and values in parallel, you can use `map2()`:
-
+Now if you want to iterate over names and values in parallel, you can use `map2()`:
 
 
 ```r

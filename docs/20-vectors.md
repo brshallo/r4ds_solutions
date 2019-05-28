@@ -16,7 +16,7 @@ library(purrr)
 library(readr)
 ```
 
-# ch. 20: Vectors
+# Ch. 20: Vectors
 ![Types of vectors, not including augmented types](data-structures-overview.png)
 
 * `is.finite`, `is.infinite`, `is.na`, `is.nan`
@@ -50,7 +50,7 @@ as.Date
 ```
 ## function (x, ...) 
 ## UseMethod("as.Date")
-## <bytecode: 0x000000001dbd5328>
+## <bytecode: 0x000000001c4b0bf8>
 ## <environment: namespace:base>
 ```
 
@@ -78,7 +78,7 @@ getS3method("as.Date", "default")
 ##     else stop(gettextf("do not know how to convert '%s' to class %s", 
 ##         deparse(substitute(x)), dQuote("Date")), domain = NA)
 ## }
-## <bytecode: 0x000000001dd82a10>
+## <bytecode: 0x000000001c63da58>
 ## <environment: namespace:base>
 ```
 
@@ -93,7 +93,7 @@ select
 ## {
 ##     UseMethod("select")
 ## }
-## <bytecode: 0x000000001a038160>
+## <bytecode: 0x000000001889fbb8>
 ## <environment: namespace:dplyr>
 ```
 
@@ -116,7 +116,7 @@ getS3method("select", "default")
 ## {
 ##     select_(.data, .dots = compat_as_lazy_dots(...))
 ## }
-## <bytecode: 0x000000001a6dec90>
+## <bytecode: 0x000000001cfd1770>
 ## <environment: namespace:dplyr>
 ```
 
@@ -418,9 +418,9 @@ a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
     
     * Yes, as long as the number of elements align with the other length of the other columns -- this will come-up a lot in the modeling chapters.
   
-# Appendix 
+## Appendix 
 
-## subsetting nested lists    
+### Subsetting nested lists    
 
 
 ```r

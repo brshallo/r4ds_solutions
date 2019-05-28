@@ -2,7 +2,7 @@
 
 
 
-# ch. 14: Strings
+# Ch. 14: Strings
 
 * `writeLines`: see raw contents of a string (prints each string in a vector on a new line)
 * `str_length`: number of characters in a string
@@ -304,7 +304,8 @@ x <- c("apple", "banana", "pear")
 str_view(x, "an")
 ```
 
-![](14-strings_files/figure-epub3/unnamed-chunk-15-1.png)<!-- -->
+<!--html_preserve--><div id="htmlwidget-d950eb9e150a41daa877" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d950eb9e150a41daa877">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 To match a literal `\` need `\\\\` because both string and regex will escape it.
 
@@ -321,7 +322,8 @@ writeLines(x)
 str_view(x,"\\\\")
 ```
 
-![](14-strings_files/figure-epub3/unnamed-chunk-16-1.png)<!-- -->
+<!--html_preserve--><div id="htmlwidget-ebee1aabb66124150e75" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-ebee1aabb66124150e75">{"x":{"html":"<ul>\n  <li>a<span class='match'>\\<\/span>b<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 ### 14.3.1.1
@@ -347,7 +349,8 @@ str_view(x,"\\\\")
     str_view(x, "\\\"'\\\\")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-17-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-c68b952bfa9c899b4742" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-c68b952bfa9c899b4742">{"x":{"html":"<ul>\n  <li>alfred<span class='match'>\"'\\<\/span>goes<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 1.  *What patterns will the regular expression `\..\..\..` match? *
@@ -359,7 +362,8 @@ str_view(x,"\\\\")
     str_view(x, pattern = "\\..\\..\\..")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-18-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-e0a1dd2d359370ecd70b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-e0a1dd2d359370ecd70b">{"x":{"html":"<ul>\n  <li>alf<span class='match'>.r.e.d<\/span>d.ss..lsdf.d.kj<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
     *How would you represent it as a string?*
     
@@ -401,7 +405,8 @@ apropos("^(sum)$")
     str_view(x, "\\$\\^\\$")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-21-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-591c0c5fad98f45538ba" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-591c0c5fad98f45538ba">{"x":{"html":"<ul>\n  <li>so it goes <span class='match'>$^$<\/span> here<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 1.  *Given the corpus of common words in `stringr::words`, create regular*
@@ -413,7 +418,8 @@ apropos("^(sum)$")
     str_view(stringr::words, "^y", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-22-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-8a22dac42794640eee37" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-8a22dac42794640eee37">{"x":{"html":"<ul>\n  <li><span class='match'>y<\/span>ear<\/li>\n  <li><span class='match'>y<\/span>es<\/li>\n  <li><span class='match'>y<\/span>esterday<\/li>\n  <li><span class='match'>y<\/span>et<\/li>\n  <li><span class='match'>y<\/span>ou<\/li>\n  <li><span class='match'>y<\/span>oung<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     2. *End with "x"*
     
@@ -421,7 +427,8 @@ apropos("^(sum)$")
     str_view(stringr::words, "x$", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-23-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-db943a529d2af3fde1dc" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-db943a529d2af3fde1dc">{"x":{"html":"<ul>\n  <li>bo<span class='match'>x<\/span><\/li>\n  <li>se<span class='match'>x<\/span><\/li>\n  <li>si<span class='match'>x<\/span><\/li>\n  <li>ta<span class='match'>x<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     3. *Are exactly three letters long. (Don't cheat by using `str_length()`!)*
     
@@ -463,7 +470,8 @@ Other special characters
     str_view(stringr::words, "^[^aeiou]*[^aeiouy]$", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-27-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-2b2ab1fcd8752155e590" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-2b2ab1fcd8752155e590">{"x":{"html":"<ul>\n  <li><span class='match'>mrs<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
        
 
     3. *End with `ed`, but not with `eed`.*
@@ -472,7 +480,8 @@ Other special characters
     str_view(stringr::words, "[^e]ed$", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-28-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-c73ab7d8e2c927d38541" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-c73ab7d8e2c927d38541">{"x":{"html":"<ul>\n  <li><span class='match'>bed<\/span><\/li>\n  <li>hund<span class='match'>red<\/span><\/li>\n  <li><span class='match'>red<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     4. *End with `ing` or `ise`.*
     
@@ -480,7 +489,8 @@ Other special characters
     str_view(stringr::words, "(ing|ise)$", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-29-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-ca0aa3624d47d66f8047" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-ca0aa3624d47d66f8047">{"x":{"html":"<ul>\n  <li>advert<span class='match'>ise<\/span><\/li>\n  <li>br<span class='match'>ing<\/span><\/li>\n  <li>dur<span class='match'>ing<\/span><\/li>\n  <li>even<span class='match'>ing<\/span><\/li>\n  <li>exerc<span class='match'>ise<\/span><\/li>\n  <li>k<span class='match'>ing<\/span><\/li>\n  <li>mean<span class='match'>ing<\/span><\/li>\n  <li>morn<span class='match'>ing<\/span><\/li>\n  <li>otherw<span class='match'>ise<\/span><\/li>\n  <li>pract<span class='match'>ise<\/span><\/li>\n  <li>ra<span class='match'>ise<\/span><\/li>\n  <li>real<span class='match'>ise<\/span><\/li>\n  <li>r<span class='match'>ing<\/span><\/li>\n  <li>r<span class='match'>ise<\/span><\/li>\n  <li>s<span class='match'>ing<\/span><\/li>\n  <li>surpr<span class='match'>ise<\/span><\/li>\n  <li>th<span class='match'>ing<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
 1.  *Empirically verify the rule "i before e except after c".*
 
@@ -489,7 +499,8 @@ Other special characters
     str_view(stringr::words, "(^(ei))|cie|[^c]ei", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-30-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-ffd0ca217c43ee92a125" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-ffd0ca217c43ee92a125">{"x":{"html":"<ul>\n  <li><span class='match'>ei<\/span>ght<\/li>\n  <li><span class='match'>ei<\/span>ther<\/li>\n  <li>s<span class='match'>cie<\/span>nce<\/li>\n  <li>so<span class='match'>cie<\/span>ty<\/li>\n  <li><span class='match'>wei<\/span>gh<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
 
 1.  *Is "q" always followed by a "u"?*
@@ -498,7 +509,8 @@ Other special characters
     str_view(stringr::words, "q[^u]", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-31-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-0c4f738d71c83a3ee26e" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-0c4f738d71c83a3ee26e">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
      
      of the words in list, yes.
 
@@ -509,7 +521,8 @@ Other special characters
     str_view(stringr::words, "(l|b)our|parat", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-32-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-1ce3dc438fcc1fccadc3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-1ce3dc438fcc1fccadc3">{"x":{"html":"<ul>\n  <li>co<span class='match'>lour<\/span><\/li>\n  <li>la<span class='match'>bour<\/span><\/li>\n  <li>se<span class='match'>parat<\/span>e<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 1.  *Create a regular expression that will match telephone numbers as commonly*
     *written in your country.*
@@ -519,7 +532,8 @@ Other special characters
     str_view(x, "\\(\\d\\d\\d\\)\\s\\d\\d\\d-\\d\\d\\d\\d")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-33-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-ce5bacca9c7ced80512f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-ce5bacca9c7ced80512f">{"x":{"html":"<ul>\n  <li>dkl kls. klk. _<\/li>\n  <li><span class='match'>(425) 591-6020<\/span><\/li>\n  <li>her number is <span class='match'>(581) 434-3242<\/span><\/li>\n  <li>442<\/li>\n  <li>  dsi<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     Aboves not a good way to solve this, will see better methods in next section.
 
@@ -543,13 +557,15 @@ x <- "1888 is the longest year in Roman numerals: MDCCCLXXXVIII"
 str_view(x, 'C{2,3}')
 ```
 
-![](14-strings_files/figure-epub3/unnamed-chunk-34-1.png)<!-- -->
+<!--html_preserve--><div id="htmlwidget-d03fa42718fba877c723" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d03fa42718fba877c723">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 ```r
 str_view(x, 'C{2,3}?')
 ```
 
-![](14-strings_files/figure-epub3/unnamed-chunk-34-2.png)<!-- -->
+<!--html_preserve--><div id="htmlwidget-495bd5493ae1206728c9" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-495bd5493ae1206728c9">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 1.  *Describe the equivalents of `?`, `+`, `*` in `{m,n}` form.*
     `?` : `{0,1}`
@@ -567,7 +583,8 @@ str_view(x, 'C{2,3}?')
     str_view(x, "^.*$")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-35-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-b6f1657c29a56aba1ce0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-b6f1657c29a56aba1ce0">{"x":{"html":"<ul>\n  <li><span class='match'>1888 is the longest year in Roman numerals: MDCCCLXXXVIII<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     2.   `"\\{.+\\}"`    : match text in brackets greater than nothing
     
@@ -577,7 +594,8 @@ str_view(x, 'C{2,3}?')
     str_view(x, "\\{.+\\}")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-36-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-af3e1733b4050f9a200c" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-af3e1733b4050f9a200c">{"x":{"html":"<ul>\n  <li>test<\/li>\n  <li>some in <span class='match'>{brackets}<\/span><\/li>\n  <li>just {} no match<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     3. `\d{4}-\d{2}-\d{2}`   : 4 numbers - 2 numbers - 2 numbers
     
@@ -587,7 +605,8 @@ str_view(x, 'C{2,3}?')
     str_view(x, "\\d{4}-\\d{2}-\\d{2}")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-37-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-0873f00224d2bae2545f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-0873f00224d2bae2545f">{"x":{"html":"<ul>\n  <li><span class='match'>4444-22-22<\/span><\/li>\n  <li>test<\/li>\n  <li>333-4444-22<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     4. `"\\\\{4}"`   :  4 brackets
     
@@ -608,14 +627,16 @@ str_view(x, 'C{2,3}?')
     str_view(x, "\\\\{4}")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-38-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-589537b483666a5417ce" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-589537b483666a5417ce">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\\\\\<\/span><\/li>\n  <li>\\\\\\<\/li>\n  <li>\\\\<\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     ```r
     x <- c("\\\\\\\\", "\\\\\\", "\\\\", "\\")
     str_view(x, "\\\\\\\\")
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-38-2.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-cb33a2c044a2dc472f0d" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-cb33a2c044a2dc472f0d">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\<\/span>\\\\<\/li>\n  <li><span class='match'>\\\\<\/span>\\<\/li>\n  <li><span class='match'>\\\\<\/span><\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 
 1.  *Create regular expressions to find all words that:*
@@ -627,7 +648,8 @@ str_view(x, 'C{2,3}?')
     str_view(stringr::words, "^[^aeoiouy]{3}", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-39-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-8833febe027cbe4473e2" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-8833febe027cbe4473e2">{"x":{"html":"<ul>\n  <li><span class='match'>Chr<\/span>ist<\/li>\n  <li><span class='match'>Chr<\/span>istmas<\/li>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>sch<\/span>eme<\/li>\n  <li><span class='match'>sch<\/span>ool<\/li>\n  <li><span class='match'>str<\/span>aight<\/li>\n  <li><span class='match'>str<\/span>ategy<\/li>\n  <li><span class='match'>str<\/span>eet<\/li>\n  <li><span class='match'>str<\/span>ike<\/li>\n  <li><span class='match'>str<\/span>ong<\/li>\n  <li><span class='match'>str<\/span>ucture<\/li>\n  <li><span class='match'>thr<\/span>ee<\/li>\n  <li><span class='match'>thr<\/span>ough<\/li>\n  <li><span class='match'>thr<\/span>ow<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     Include `y` because when it shows up otherwise, is in vowel form.
     
@@ -638,7 +660,8 @@ str_view(x, 'C{2,3}?')
     str_view(stringr::words, "[aeiou]{3}", match = TRUE)
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-40-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-c6cca10c634b0e7e82ff" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-c6cca10c634b0e7e82ff">{"x":{"html":"<ul>\n  <li>b<span class='match'>eau<\/span>ty<\/li>\n  <li>obv<span class='match'>iou<\/span>s<\/li>\n  <li>prev<span class='match'>iou<\/span>s<\/li>\n  <li>q<span class='match'>uie<\/span>t<\/li>\n  <li>ser<span class='match'>iou<\/span>s<\/li>\n  <li>var<span class='match'>iou<\/span>s<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     In this case, do not include the `y`.
     
@@ -671,31 +694,36 @@ str_view(x, 'C{2,3}?')
     str_view_all(x, "(.)\\1\\1", match = TRUE) #xxx
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-42-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-c8eb2f7bd17d79e9fe0a" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-c8eb2f7bd17d79e9fe0a">{"x":{"html":"<ul>\n  <li>ssdfsd<span class='match'>fff<\/span>sdasdlkd<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     ```r
     str_view_all(fruit, "(.)(.)\\2\\1", match = TRUE) #xyyx
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-42-2.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-1a104bd1581f6b791c21" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-1a104bd1581f6b791c21">{"x":{"html":"<ul>\n  <li>bell p<span class='match'>eppe<\/span>r<\/li>\n  <li>chili p<span class='match'>eppe<\/span>r<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     ```r
     str_view_all(fruit, "(..)\\1", match = TRUE) #xxyy
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-42-3.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-ca6646ca52734e06854e" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-ca6646ca52734e06854e">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     ```r
     str_view(stringr::words, "(.).\\1.\\1", match = TRUE) #x.x.x
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-42-4.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-10cb42b4053c21cf028b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-10cb42b4053c21cf028b">{"x":{"html":"<ul>\n  <li><span class='match'>eleve<\/span>n<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
     
     ```r
     str_view(stringr::words, "(.)(.)(.).*\\3\\2\\1", match = TRUE) #xyz.*zyx
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-42-5.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-705c0d2f78cc825fc336" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-705c0d2f78cc825fc336">{"x":{"html":"<ul>\n  <li><span class='match'>paragrap<\/span>h<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 1.  *Construct regular expressions to match words that:*
 
@@ -1091,7 +1119,8 @@ Alternatives to `regex()`:
     str_view_all("so \\ the party is on\\ right?", fixed("\\"))
     ```
     
-    ![](14-strings_files/figure-epub3/unnamed-chunk-65-1.png)<!-- -->
+    <!--html_preserve--><div id="htmlwidget-6b47d88a931c645323a3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-6b47d88a931c645323a3">{"x":{"html":"<ul>\n  <li>so <span class='match'>\\<\/span> the party is on<span class='match'>\\<\/span> right?<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script><!--/html_preserve-->
 
 1.  *What are the five most common words in `sentences`?*
     

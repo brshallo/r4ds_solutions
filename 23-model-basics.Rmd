@@ -17,7 +17,7 @@ library(stringr)
 library(splines)
 ```
 
-# ch. 23: Model basics
+# Ch. 23: Model basics
 
 * `geom_abline` create line or lines given intercept and slopes, e.g. `geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)`
 * `optim` general purpose function for optimization using Newton-Raphson search
@@ -527,9 +527,9 @@ sim4 %>%
 * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
   * however very little difference, and I might lean more towards `mod1` for simplicities sake
 
-# Appendix
+## Appendix
 
-## Other model families
+### Other model families
 
 * __Generalised linear models__, e.g. `stats::glm()`. Linear models assume that
   the response is continuous and the error has a normal distribution. 
@@ -560,8 +560,7 @@ sim4 %>%
   by models like __random forests__ (e.g. `randomForest::randomForest()`) or 
   __gradient boosting machines__ (e.g. `xgboost::xgboost`.)
   
-## 23.2 book example
-
+### 23.2 book example
 
 ```{r}
 models <- tibble(
@@ -619,7 +618,6 @@ sim1_rmse <- function(b0, b1, df = sim1, x = "x", y = "y"){
 sim1_rmse(2,3)
 
 ```
-
 
 ```{r grid search}
 grid_space <- models_error %>% 
@@ -704,16 +702,14 @@ grid_space
 ```
 
 
-## 23.4.5.4
+### 23.4.5.4
 Rather than `geom_density` or `geom_freqpoly` let's look at histogram with values overlaid rather than stacked.
 
-    ```{r}
-    sim4 %>% 
-      gather_residuals(mod1, mod2) %>% 
-      ggplot(aes(x = resid, y = ..density.., fill = model))+
-      geom_histogram(position = "identity", alpha = 0.3)
-    
-    ```
+```{r}
+sim4 %>% 
+  gather_residuals(mod1, mod2) %>% 
+  ggplot(aes(x = resid, y = ..density.., fill = model))+
+  geom_histogram(position = "identity", alpha = 0.3)
 
 ```
 

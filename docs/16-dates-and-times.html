@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="15-factors.html">
+<link rel="next" href="18-pipes.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Chapter contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds-1"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section"><i class="fa fa-check"></i>3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i>3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-1"><i class="fa fa-check"></i>3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#facets"><i class="fa fa-check"></i>3.5: Facets</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-2"><i class="fa fa-check"></i>3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#geometric-objects"><i class="fa fa-check"></i>3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-3"><i class="fa fa-check"></i>3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-4"><i class="fa fa-check"></i>3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i>3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-5"><i class="fa fa-check"></i>3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i>3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-6"><i class="fa fa-check"></i>3.9.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#appendix"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#extension"><i class="fa fa-check"></i>3.7.1.1 extension</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html"><i class="fa fa-check"></i>Ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#filter-rows"><i class="fa fa-check"></i>5.2: Filter rows</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-7"><i class="fa fa-check"></i>5.2.4.</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-8"><i class="fa fa-check"></i>5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i>5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-9"><i class="fa fa-check"></i>5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i>Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-10"><i class="fa fa-check"></i>5.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#appendix-1"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-11"><i class="fa fa-check"></i>5.4.1.3.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-12"><i class="fa fa-check"></i>5.5.2.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-13"><i class="fa fa-check"></i>5.5.2.2</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-14"><i class="fa fa-check"></i>5.6.7.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-15"><i class="fa fa-check"></i>5.6.7.4.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-16"><i class="fa fa-check"></i>5.6.7.5.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-17"><i class="fa fa-check"></i>5.6.7.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-18"><i class="fa fa-check"></i>5.7.1.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-19"><i class="fa fa-check"></i>5.7.1.5</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-20"><i class="fa fa-check"></i>5.7.1.8.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#on-piping-dots"><i class="fa fa-check"></i>On piping dots</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#plotly"><i class="fa fa-check"></i>plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html"><i class="fa fa-check"></i>Ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#variation"><i class="fa fa-check"></i>7.3. Variation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-21"><i class="fa fa-check"></i>7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i>7.4. Missing values</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-22"><i class="fa fa-check"></i>7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i>7.5. Covariation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-23"><i class="fa fa-check"></i>7.5.1.1.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-24"><i class="fa fa-check"></i>7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i>7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-25"><i class="fa fa-check"></i>7.5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#appendix-2"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-26"><i class="fa fa-check"></i>7.5.2.1.2.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-27"><i class="fa fa-check"></i>7.5.3.1.4.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html"><i class="fa fa-check"></i>Ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#section-28"><i class="fa fa-check"></i>10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html"><i class="fa fa-check"></i>Ch. 11: Data import</a><ul>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-29"><i class="fa fa-check"></i>11.2.2.</a></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-30"><i class="fa fa-check"></i>11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html"><i class="fa fa-check"></i>ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#tidy-data"><i class="fa fa-check"></i>12.2: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-31"><i class="fa fa-check"></i>12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i>12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-32"><i class="fa fa-check"></i>12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i>12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-33"><i class="fa fa-check"></i>12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i>12.5: missing values</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-34"><i class="fa fa-check"></i>12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#case-study"><i class="fa fa-check"></i>12.6 Case Study</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-35"><i class="fa fa-check"></i>12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html"><i class="fa fa-check"></i>Ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#nycflights13"><i class="fa fa-check"></i>13.2 nycflights13</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-36"><i class="fa fa-check"></i>13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#keys"><i class="fa fa-check"></i>13.3 Keys</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-37"><i class="fa fa-check"></i>13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#mutating-joins"><i class="fa fa-check"></i>13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-38"><i class="fa fa-check"></i>13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#filtering-joins"><i class="fa fa-check"></i>13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-39"><i class="fa fa-check"></i>13.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#appendix-3"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-40"><i class="fa fa-check"></i>13.5.1.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html"><i class="fa fa-check"></i>Ch. 14: Strings</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#string-basics"><i class="fa fa-check"></i>14.2: String basics</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-41"><i class="fa fa-check"></i>14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i>14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-42"><i class="fa fa-check"></i>14.3.1.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-43"><i class="fa fa-check"></i>14.3.2.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-44"><i class="fa fa-check"></i>14.3.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-45"><i class="fa fa-check"></i>14.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-46"><i class="fa fa-check"></i>14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#tools"><i class="fa fa-check"></i>14.4 Tools</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-47"><i class="fa fa-check"></i>14.4.2</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-48"><i class="fa fa-check"></i>14.4.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-49"><i class="fa fa-check"></i>14.4.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-50"><i class="fa fa-check"></i>14.4.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-51"><i class="fa fa-check"></i>14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i>14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-52"><i class="fa fa-check"></i>14.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-53"><i class="fa fa-check"></i>14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html"><i class="fa fa-check"></i>Ch. 15: Factors</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-54"><i class="fa fa-check"></i>15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-55"><i class="fa fa-check"></i>15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i>15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-56"><i class="fa fa-check"></i>15.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#appendix-4"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#viewing-all-levels"><i class="fa fa-check"></i>Viewing all levels</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#percentage-na-each-level"><i class="fa fa-check"></i>Percentage NA each level</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#print-all-levels-of-tibble"><i class="fa fa-check"></i>Print all levels of tibble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html"><i class="fa fa-check"></i>Ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i>16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-57"><i class="fa fa-check"></i>16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i>16.3: Date-time components</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-58"><i class="fa fa-check"></i>16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#time-spans"><i class="fa fa-check"></i>16.4: Time spans</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-59"><i class="fa fa-check"></i>16.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#appendix-5"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-60"><i class="fa fa-check"></i>16.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-61"><i class="fa fa-check"></i>16.3.4.3</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-62"><i class="fa fa-check"></i>16.3.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="18-pipes.html"><a href="18-pipes.html"><i class="fa fa-check"></i>Ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>ch. 19: Functions</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i>19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-63"><i class="fa fa-check"></i>19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-64"><i class="fa fa-check"></i>19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-65"><i class="fa fa-check"></i>19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#function-arguments"><i class="fa fa-check"></i>19.5: Function arguments</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-66"><i class="fa fa-check"></i>19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-6"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1.4</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#applying-indexing-to-dfs"><i class="fa fa-check"></i>Applying indexing to dfs</a></li>
+</ul></li>
+<li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-69"><i class="fa fa-check"></i>20.3.5</a></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i>20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-70"><i class="fa fa-check"></i>20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i>20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-71"><i class="fa fa-check"></i>20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#augmented-vectors"><i class="fa fa-check"></i>20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-72"><i class="fa fa-check"></i>20.7.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#appendix-7"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#subsetting-nested-lists"><i class="fa fa-check"></i>Subsetting nested lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html"><i class="fa fa-check"></i>Ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops"><i class="fa fa-check"></i>21.2: For loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-73"><i class="fa fa-check"></i>21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loop-variations"><i class="fa fa-check"></i>21.3 For loop variations</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-74"><i class="fa fa-check"></i>21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i>21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-75"><i class="fa fa-check"></i>21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#the-map-functions"><i class="fa fa-check"></i>21.5: The map functions</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-76"><i class="fa fa-check"></i>21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i>21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-77"><i class="fa fa-check"></i>21.9.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-8"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-78"><i class="fa fa-check"></i>21.3.5.1</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#in-class-notes"><i class="fa fa-check"></i>in-class notes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-79"><i class="fa fa-check"></i>23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-80"><i class="fa fa-check"></i>23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-81"><i class="fa fa-check"></i>23.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-82"><i class="fa fa-check"></i>23.4.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-83"><i class="fa fa-check"></i>24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-84"><i class="fa fa-check"></i>24.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-85"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-86"><i class="fa fa-check"></i>24.2.3.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>25.3.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-89"><i class="fa fa-check"></i>25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-90"><i class="fa fa-check"></i>25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-91"><i class="fa fa-check"></i>25.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-92"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
+<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-93"><i class="fa fa-check"></i>27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-94"><i class="fa fa-check"></i>27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-95"><i class="fa fa-check"></i>27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i>28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i>28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-98"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch.-16-dates-and-times" class="section level1">
+<h1>Ch. 16: Dates and times</h1>
+<ul>
+<li><code>today</code> get current date</li>
+<li><code>now</code> get current date-time</li>
+<li><code>ymd_hms</code> one example of straight-forward set-of of functions that take either strings or unquoted numbers and output dates or date-times</li>
+<li><code>make_datetime</code> create date-time from individual components, e.g. make_datetime(year, month, day, hour, minute)</li>
+<li><code>as_date_time</code> and <code>as_date</code> let you switch between date-time and dates, e.g. <code>as_datetime(today())</code> or <code>as_date(now())</code></li>
+<li>Accessor functions let you pull out components from an existing date-time:
+<ul>
+<li><code>year</code>, <code>month</code>, <code>mday</code>, <code>yday</code>, <code>wday</code>, <code>hour</code>, <code>minute</code>, <code>second</code>
+<ul>
+<li><code>month</code> and <code>wday</code> have <code>label = TRUE</code> to pull the abbreviated name rather than the number, and pull full name with <code>abbr = FALSE</code></li>
+</ul></li>
+<li>You can also use these to set particular components <code>year(datetime) &lt;- 2020</code></li>
+</ul></li>
+<li><code>update</code> allows you to specify multiple values at one time, e.g. <code>update(datetime, year = 2020, month = 2, mday = 2, hour = 2)</code>
+<ul>
+<li>When values are too big they roll-over e.g. <code>update(ymd("2015-02-01"), mday = 30)</code> will become ‘2015-03-02’</li>
+</ul></li>
+<li>Rounding functions to nearest unit of time
+<ul>
+<li><code>floor_date</code>, <code>round_date</code>, <code>ceiling_date</code></li>
+</ul></li>
+<li><code>as.duration</code> convert diff-time to a duration</li>
+<li>Durations (can add and multiply):
+<ul>
+<li><code>dseconds</code>, <code>dhours</code>, <code>ddays</code>, <code>dweeks</code>, <code>dyears</code></li>
+</ul></li>
+<li>Periods (can add and multiply), more likely to do what you expect than duration:
+<ul>
+<li><code>seconds</code>, <code>minutes</code>, <code>hours</code>, <code>days</code>, <code>weeks</code>, <code>months</code></li>
+</ul></li>
+<li>Interval is a duration with a starting point, making it precise and possible to determine EXACT length
+<ul>
+<li>e.g. <code>(today() %--% next_year) / ddays(1)</code> to find exact duration</li>
+</ul></li>
+<li><code>Sys.timezone</code> to see what R thinks your current time zone is</li>
+<li><code>tz =</code> arg in <code>ymd_hms</code> let’s you change printing behavior (not underlying value, as assumes UTC unless changed)</li>
+<li><code>with_tz</code> allows you to print an existing date-time object to a specific other timezone</li>
+<li><code>force_tz</code> when have an object that’s been labeled with wrong time-zone and need to fix it</li>
+</ul>
+<div id="creating-datetimes" class="section level2">
+<h2>16.2: Creating date/times</h2>
+<p>Note that 1 in date-times is treated as 1 - second in numeric contexts, so example below sets <code>binwidth = 86400</code> to specify 1 day</p>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb777-1" title="1">make_datetime_<span class="dv">100</span> &lt;-<span class="st"> </span><span class="cf">function</span>(year, month, day, time) {</a>
+<a class="sourceLine" id="cb777-2" title="2">  <span class="kw">make_datetime</span>(year, month, day, time <span class="op">%/%</span><span class="st"> </span><span class="dv">100</span>, time <span class="op">%%</span><span class="st"> </span><span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb777-3" title="3">}</a>
+<a class="sourceLine" id="cb777-4" title="4"></a>
+<a class="sourceLine" id="cb777-5" title="5">flights_dt &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-6" title="6"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_time), <span class="op">!</span><span class="kw">is.na</span>(arr_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-7" title="7"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;arr_time&quot;</span>, <span class="st">&quot;sched_dep_time&quot;</span>, <span class="st">&quot;sched_arr_time&quot;</span>), <span class="kw">funs</span>(<span class="kw">make_datetime_100</span>(year, month, day, .))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-8" title="8"><span class="st">  </span><span class="kw">select</span>(origin, dest, <span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(dep_time)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-3" title="3"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">86400</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<div id="section-57" class="section level3">
+<h3>16.2.4</h3>
+<ol style="list-style-type: decimal">
+<li><p>What happens if you parse a string that contains invalid dates?</p>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" title="1"><span class="kw">ymd</span>(<span class="kw">c</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: 1 failed to parse.</code></pre>
+<pre><code>## [1] &quot;2010-10-10&quot; NA</code></pre>
+<ul>
+<li>Outputs an NA and sends warning of number that failed to parse</li>
+</ul></li>
+<li><p>What does the <code>tzone</code> argument to <code>today()</code> do? Why is it important?</p>
+<ul>
+<li>Let’s you specify timezones, may be different days depending on location</li>
+</ul>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" title="1"><span class="kw">today</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-28&quot;</code></pre>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1"><span class="kw">now</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-28 13:41:49 MST&quot;</code></pre></li>
+<li><p>Use the appropriate lubridate function to parse each of the following dates:</p>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" title="1">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span></a>
+<a class="sourceLine" id="cb787-2" title="2">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
+<a class="sourceLine" id="cb787-3" title="3">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
+<a class="sourceLine" id="cb787-4" title="4">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)</a>
+<a class="sourceLine" id="cb787-5" title="5">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span></a></code></pre></div>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" title="1"><span class="kw">mdy</span>(d1)</a></code></pre></div>
+<pre><code>## [1] &quot;2010-01-01&quot;</code></pre>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1"><span class="kw">ymd</span>(d2)</a></code></pre></div>
+<pre><code>## [1] &quot;2015-03-07&quot;</code></pre>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1"><span class="kw">dmy</span>(d3)</a></code></pre></div>
+<pre><code>## [1] &quot;2017-06-06&quot;</code></pre>
+<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" title="1"><span class="kw">mdy</span>(d4)</a></code></pre></div>
+<pre><code>## [1] &quot;2015-08-19&quot; &quot;2015-07-01&quot;</code></pre>
+<div class="sourceCode" id="cb796"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb796-1" title="1"><span class="kw">mdy</span>(d5)</a></code></pre></div>
+<pre><code>## [1] &quot;2014-12-30&quot;</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="date-time-components" class="section level2">
+<h2>16.3: Date-time components</h2>
+<p>This allows you to plot the number of flights per week</p>
+<div class="sourceCode" id="cb798"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb798-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb798-2" title="2"><span class="st">  </span><span class="kw">count</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;week&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb798-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(week, n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb798-4" title="4"><span class="st">    </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div id="section-58" class="section level3">
+<h3>16.3.4</h3>
+<ol style="list-style-type: decimal">
+<li><p>How does the distribution of flight times within a day change over the
+course of the year?</p>
+<p><em>Median flight time by day</em></p>
+<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb799-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb799-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
+<a class="sourceLine" id="cb799-4" title="4">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb799-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, day_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb799-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">day_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb799-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb799-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_dep, <span class="dt">y =</span> day_median)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb799-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb799-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Median flight times by day, coloured by quarter&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Typical flight times change with daylight savings times&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb799-11" title="11"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20130310&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb799-12" title="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20131103&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<ul>
+<li>First couple and last couple months tend to have slightly earlier start times</li>
+</ul>
+<p><em>Quantiles of flight times by month</em></p>
+<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb800-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb800-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb800-3" title="3">            <span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb800-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
+<a class="sourceLine" id="cb800-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb800-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(month_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb800-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb800-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> month_dep, <span class="dt">y =</span> dep_time, <span class="dt">group =</span> month_dep)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb800-9" title="9"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<ul>
+<li>Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day</li>
+</ul>
+<p><em>Weekly flight proportions by 4 hour blocks</em></p>
+<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb801-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb801-3" title="3">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
+<a class="sourceLine" id="cb801-4" title="4">            <span class="dt">dep_time_4hrs =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;4 hours&quot;</span>),</a>
+<a class="sourceLine" id="cb801-5" title="5">            <span class="dt">hour_dep_4hrs =</span> <span class="kw">hour</span>(dep_time_4hrs) <span class="op">%&gt;%</span><span class="st"> </span>factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb801-6" title="6"><span class="st">  </span><span class="kw">count</span>(wk_dep, hour_dep_4hrs) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb801-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb801-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb801-9" title="9">         <span class="dt">wk_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>wk_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb801-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb801-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb801-12" title="12"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> hour_dep_4hrs))</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<ul>
+<li>Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights</li>
+</ul>
+<p>See <a href="16-dates-and-times.html#section-60">16.3.4.1</a> for a few other plots I looked at.</p></li>
+<li><p>Compare <code>dep_time</code>, <code>sched_dep_time</code> and <code>dep_delay</code>. Are they consistent?
+Explain your findings.</p>
+<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb802-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dep_delay_check =</span> (dep_time <span class="op">-</span><span class="st"> </span>sched_dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb802-3" title="3">         <span class="dt">same =</span> dep_delay <span class="op">==</span><span class="st"> </span>dep_delay_check,</a>
+<a class="sourceLine" id="cb802-4" title="4">         <span class="dt">difference =</span> dep_delay_check <span class="op">-</span><span class="st"> </span>dep_delay) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb802-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">abs</span>(difference) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1,205 x 12
+##    origin dest  dep_delay arr_delay dep_time            sched_dep_time     
+##    &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
+##  1 JFK    BWI         853       851 2013-01-01 08:48:00 2013-01-01 18:35:00
+##  2 JFK    SJU          43        36 2013-01-02 00:42:00 2013-01-02 23:59:00
+##  3 JFK    SYR         156       154 2013-01-02 01:26:00 2013-01-02 22:50:00
+##  4 JFK    SJU          33        22 2013-01-03 00:32:00 2013-01-03 23:59:00
+##  5 JFK    BUF         185       172 2013-01-03 00:50:00 2013-01-03 21:45:00
+##  6 JFK    BQN         156       143 2013-01-03 02:35:00 2013-01-03 23:59:00
+##  7 JFK    SJU          26        23 2013-01-04 00:25:00 2013-01-04 23:59:00
+##  8 JFK    PWM         141       125 2013-01-04 01:06:00 2013-01-04 22:45:00
+##  9 JFK    PSE          15        18 2013-01-05 00:14:00 2013-01-05 23:59:00
+## 10 JFK    FLL         127       130 2013-01-05 00:37:00 2013-01-05 22:30:00
+## # ... with 1,195 more rows, and 6 more variables: arr_time &lt;dttm&gt;,
+## #   sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;, dep_delay_check &lt;dbl&gt;,
+## #   same &lt;lgl&gt;, difference &lt;dbl&gt;</code></pre>
+<ul>
+<li>They are except in the case when it goes over a day, the day is not pushed forward so it counts it as being 24 hours off</li>
+</ul></li>
+<li><p>Compare <code>air_time</code> with the duration between the departure and arrival.
+Explain your findings. (Hint: consider the location of the airport.)</p>
+<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb804-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_check =</span> (arr_time <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb804-3" title="3"><span class="st">  </span><span class="kw">select</span>(air_time_check, air_time, dep_time, arr_time, <span class="kw">everything</span>())</a></code></pre></div>
+<pre><code>## # A tibble: 328,063 x 10
+##    air_time_check air_time dep_time            arr_time            origin
+##             &lt;dbl&gt;    &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt; 
+##  1            193      227 2013-01-01 05:17:00 2013-01-01 08:30:00 EWR   
+##  2            197      227 2013-01-01 05:33:00 2013-01-01 08:50:00 LGA   
+##  3            221      160 2013-01-01 05:42:00 2013-01-01 09:23:00 JFK   
+##  4            260      183 2013-01-01 05:44:00 2013-01-01 10:04:00 JFK   
+##  5            138      116 2013-01-01 05:54:00 2013-01-01 08:12:00 LGA   
+##  6            106      150 2013-01-01 05:54:00 2013-01-01 07:40:00 EWR   
+##  7            198      158 2013-01-01 05:55:00 2013-01-01 09:13:00 EWR   
+##  8             72       53 2013-01-01 05:57:00 2013-01-01 07:09:00 LGA   
+##  9            161      140 2013-01-01 05:57:00 2013-01-01 08:38:00 JFK   
+## 10            115      138 2013-01-01 05:58:00 2013-01-01 07:53:00 LGA   
+## # ... with 328,053 more rows, and 5 more variables: dest &lt;chr&gt;,
+## #   dep_delay &lt;dbl&gt;, arr_delay &lt;dbl&gt;, sched_dep_time &lt;dttm&gt;,
+## #   sched_arr_time &lt;dttm&gt;</code></pre>
+<ul>
+<li>Initial check is off, so need to take into account the time-zone and difference from NYC, so join timezone document</li>
+</ul>
+<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb806-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb806-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">select</span>(nycflights13<span class="op">::</span>airports, <span class="dt">dest =</span> faa, tz), <span class="dt">by =</span> <span class="st">&quot;dest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb806-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_time_new =</span> arr_time <span class="op">-</span><span class="st"> </span><span class="kw">dhours</span>(tz <span class="op">+</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb806-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_tz =</span> (arr_time_new <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb806-5" title="5">         <span class="dt">diff_Airtime =</span> air_time_tz <span class="op">-</span><span class="st"> </span>air_time) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb806-6" title="6"><span class="st">  </span><span class="kw">select</span>( origin, dest, tz, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>), <span class="op">-</span>(<span class="kw">contains</span>(<span class="st">&quot;sched&quot;</span>)))</a></code></pre></div>
+<pre><code>## # A tibble: 328,063 x 9
+##    origin dest     tz dep_time            arr_time            air_time
+##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;                 &lt;dbl&gt;
+##  1 EWR    IAH      -6 2013-01-01 05:17:00 2013-01-01 08:30:00      227
+##  2 LGA    IAH      -6 2013-01-01 05:33:00 2013-01-01 08:50:00      227
+##  3 JFK    MIA      -5 2013-01-01 05:42:00 2013-01-01 09:23:00      160
+##  4 JFK    BQN      NA 2013-01-01 05:44:00 2013-01-01 10:04:00      183
+##  5 LGA    ATL      -5 2013-01-01 05:54:00 2013-01-01 08:12:00      116
+##  6 EWR    ORD      -6 2013-01-01 05:54:00 2013-01-01 07:40:00      150
+##  7 EWR    FLL      -5 2013-01-01 05:55:00 2013-01-01 09:13:00      158
+##  8 LGA    IAD      -5 2013-01-01 05:57:00 2013-01-01 07:09:00       53
+##  9 JFK    MCO      -5 2013-01-01 05:57:00 2013-01-01 08:38:00      140
+## 10 LGA    ORD      -6 2013-01-01 05:58:00 2013-01-01 07:53:00      138
+## # ... with 328,053 more rows, and 3 more variables: arr_time_new &lt;dttm&gt;,
+## #   air_time_tz &lt;dbl&gt;, diff_Airtime &lt;dbl&gt;</code></pre>
+<ul>
+<li>Is closer but still off. In chapter 5, problem 5.5.2.1 I go further into this</li>
+<li>In <a href="25-many-models.html#appendix-11">Appendix</a> section <a href="16-dates-and-times.html#section-61">16.3.4.3</a> filter to NAs</li>
+</ul></li>
+<li><p>How does the average delay time change over the course of a day?
+Should you use <code>dep_time</code> or <code>sched_dep_time</code>? Why?</p>
+<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb808-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sched_dep_time =</span> <span class="kw">as.hms</span>(<span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;30 mins&quot;</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb808-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sched_dep_time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb808-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay_mean =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb808-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb808-6" title="6">            <span class="dt">n_na =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(arr_delay)) <span class="op">/</span><span class="st"> </span>n,</a>
+<a class="sourceLine" id="cb808-7" title="7">            <span class="dt">delay_median =</span> <span class="kw">median</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb808-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sched_dep_time, <span class="dt">y =</span> delay_mean, <span class="dt">size =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb808-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>It goes-up throughout the day</li>
+<li>Use <code>sched_dep_time</code> because it has the correct day</li>
+</ul></li>
+<li><p>On what day of the week should you leave if you want to minimise the
+chance of a delay?</p>
+<div class="sourceCode" id="cb809"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb809-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb809-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(sched_dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb809-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weekday) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb809-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delay =</span> <span class="kw">sum</span>(dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a></code></pre></div>
+<pre><code>## # A tibble: 7 x 2
+##   weekday prop_delay
+##   &lt;ord&gt;        &lt;dbl&gt;
+## 1 Sun          0.383
+## 2 Mon          0.401
+## 3 Tue          0.364
+## 4 Wed          0.372
+## 5 Thu          0.431
+## 6 Fri          0.425
+## 7 Sat          0.348</code></pre>
+<ul>
+<li>wknd has a slightly lower proportion of flights delayed (Thursday has the worst)</li>
+</ul></li>
+<li><p>What makes the distribution of <code>diamonds$carat</code> and
+<code>flights$sched_dep_time</code> similar?</p>
+<div class="sourceCode" id="cb811"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb811-1" title="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> carat)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb811-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">500</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb811-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of carat in diamonds dataset&quot;</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb812-1" title="1"><span class="kw">ggplot</span>(flights, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.hms</span>(sched_dep_time))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb812-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">24</span><span class="op">*</span><span class="dv">6</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb812-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of scheduled departure times in flights dataset&quot;</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-2.png" width="672" /></p>
+<ul>
+<li>Both have gaps and peaks at ‘attractive’ values</li>
+</ul></li>
+<li><p>Confirm my hypothesis that the early departures of flights in minutes
+20-30 and 50-60 are caused by scheduled flights that leave early.
+Hint: create a binary variable that tells you whether or not a flight
+was delayed.</p>
+<div class="sourceCode" id="cb813"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb813-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb813-2" title="2">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb813-3" title="3">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb813-4" title="4">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb813-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb813-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delayed =</span> <span class="kw">sum</span>(delayed) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb813-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_delayed)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb813-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>Consistent with above hypothesis</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="time-spans" class="section level2">
+<h2>16.4: Time spans</h2>
+<ul>
+<li><strong>durations</strong>, which represent an exact number of seconds.</li>
+<li><strong>periods</strong>, which represent human units like weeks and months.</li>
+<li><strong>intervals</strong>, which represent a starting and ending point.</li>
+</ul>
+<div class="figure">
+<img src="datetimes-arithmetic.png" alt="Permitted arithmetic operations between different data types" />
+<p class="caption">Permitted arithmetic operations between different data types</p>
+</div>
+<p>Periods example, using durations to fix oddity of problem when flight arrives overnight</p>
+<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb814-1" title="1">flights_dt &lt;-<span class="st"> </span>flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb814-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb814-3" title="3">    <span class="dt">overnight =</span> arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time,</a>
+<a class="sourceLine" id="cb814-4" title="4">    <span class="dt">arr_time =</span> arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb814-5" title="5">    <span class="dt">sched_arr_time =</span> sched_arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb814-6" title="6">  )</a></code></pre></div>
+<p>Intervals example to get precise number of days dependent on specific time</p>
+<div class="sourceCode" id="cb815"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb815-1" title="1">next_year &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb815-2" title="2">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">/</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1] 366</code></pre>
+<p>To find out how many periods fall in an interval, need to use integer division</p>
+<div class="sourceCode" id="cb817"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb817-1" title="1">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">%/%</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1] 366</code></pre>
+<div id="section-59" class="section level3">
+<h3>16.4.5</h3>
+<ol style="list-style-type: decimal">
+<li><p>Why is there <code>months()</code> but no <code>dmonths()</code>?</p>
+<ul>
+<li>the duration varies from month to month</li>
+</ul></li>
+<li><p>Explain <code>days(overnight * 1)</code> to someone who has just started
+learning R. How does it work?</p>
+<ul>
+<li>this used in the example above makes it such that if <code>overnight</code> is TRUE, it will return the same time period but one day ahead, if false, does not change (as is adding 0 days)</li>
+</ul></li>
+<li><ol style="list-style-type: lower-alpha">
+<li>Create a vector of dates giving the first day of every month in 2015.</li>
+</ol>
+<div class="sourceCode" id="cb819"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb819-1" title="1">x &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;2015-01-01&quot;</span>)</a>
+<a class="sourceLine" id="cb819-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb819-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] Thu Sun Sun Wed Fri Mon Wed Sat Tue Thu Sun Tue
+## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Create a vector of dates giving the first day of every month
+in the <em>current</em> year.</li>
+</ol>
+<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb821-1" title="1">x &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">update</span>(<span class="dt">month =</span> <span class="dv">1</span>, <span class="dt">mday =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb821-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb821-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] Tue Fri Fri Mon Wed Sat Mon Thu Sun Tue Fri Sun
+## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre></li>
+<li><p>Write a function that given your birthday (as a date), returns
+how old you are in years.</p>
+<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb823-1" title="1">birthday_age &lt;-<span class="st"> </span><span class="cf">function</span>(birthday) {</a>
+<a class="sourceLine" id="cb823-2" title="2">  (<span class="kw">ymd</span>(birthday) <span class="op">%--%</span><span class="st"> </span><span class="kw">today</span>()) <span class="op">%/%</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb823-3" title="3">}</a>
+<a class="sourceLine" id="cb823-4" title="4"><span class="kw">birthday_age</span>(<span class="st">&quot;1989-09-07&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 29</code></pre></li>
+<li>Why can’t <code>(today() %--% (today() + years(1)) / months(1)</code> work?
+<ul>
+<li>Can’t add and subtract intervals</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="appendix-5" class="section level2">
+<h2>Appendix</h2>
+<div id="section-60" class="section level3">
+<h3>16.3.4.1</h3>
+<p><em>Weekly median fight time</em></p>
+<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb825-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb825-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb825-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
+<a class="sourceLine" id="cb825-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;1 week&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>as_date,</a>
+<a class="sourceLine" id="cb825-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb825-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb825-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wk_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb825-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb825-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_median =</span> <span class="kw">as.hms</span>(wk_median)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb825-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_median)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb825-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><em>Proportion of flights in each hour, by quarter</em></p>
+<div class="sourceCode" id="cb826"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb826-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb826-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb826-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb826-4" title="4"><span class="st">  </span><span class="kw">count</span>(quarter_dep, hour_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb826-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb826-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quarter_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb826-7" title="7">         <span class="dt">quarter_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>quarter_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb826-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb826-9" title="9"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> quarter_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb826-10" title="10"><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep))</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<ul>
+<li>Q1 seems to be a little more extreme at the local maximas</li>
+</ul>
+<p><em>Look at proportion of flights by hour faceted by each month</em></p>
+<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb827-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb827-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb827-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb827-4" title="4"><span class="st">  </span><span class="kw">count</span>(month_dep, hour_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb827-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(month_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb827-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb827-7" title="7">         <span class="dt">month_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>month_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb827-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb827-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> month_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb827-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb827-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>month_dep)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+</div>
+<div id="section-61" class="section level3">
+<h3>16.3.4.3</h3>
+<ul>
+<li>Perhaps these are flights where landed in different location…</li>
+</ul>
+<div class="sourceCode" id="cb828"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb828-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb828-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_delay_test =</span> (arr_time <span class="op">-</span><span class="st"> </span>sched_arr_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb828-3" title="3"><span class="st">  </span><span class="kw">select</span>( origin, dest, dep_delay, arr_delay, arr_delay_test, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb828-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(arr_delay))</a></code></pre></div>
+<pre><code>## # A tibble: 717 x 10
+##    origin dest  dep_delay arr_delay arr_delay_test dep_time           
+##    &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;dttm&gt;             
+##  1 LGA    XNA          -5        NA             89 2013-01-01 15:25:00
+##  2 EWR    STL          29        NA            195 2013-01-01 15:28:00
+##  3 LGA    XNA          -5        NA             98 2013-01-01 17:40:00
+##  4 EWR    SAN          29        NA            108 2013-01-01 18:07:00
+##  5 JFK    DFW          59        NA          -1282 2013-01-01 19:39:00
+##  6 EWR    TUL          22        NA            111 2013-01-01 19:52:00
+##  7 EWR    XNA          43        NA            148 2013-01-02 09:05:00
+##  8 LGA    GRR         120        NA            179 2013-01-02 11:25:00
+##  9 JFK    DFW           8        NA            102 2013-01-02 18:48:00
+## 10 EWR    MCI          85        NA            177 2013-01-02 18:49:00
+## # ... with 707 more rows, and 4 more variables: sched_dep_time &lt;dttm&gt;,
+## #   arr_time &lt;dttm&gt;, sched_arr_time &lt;dttm&gt;, air_time &lt;dbl&gt;</code></pre>
+</div>
+<div id="section-62" class="section level3">
+<h3>16.3.4.4</h3>
+<p>*Below started looking at proportions…</p>
+<div class="sourceCode" id="cb830"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb830-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb830-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
+<a class="sourceLine" id="cb830-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
+<a class="sourceLine" id="cb830-4" title="4">       <span class="dt">dep_time =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
+<a class="sourceLine" id="cb830-5" title="5">       <span class="dt">sched_dep_time =</span> <span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
+<a class="sourceLine" id="cb830-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb830-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb830-8" title="8">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb830-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(mins_dep, mins_sched) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb830-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num_delayed =</span> <span class="kw">sum</span>(delayed),</a>
+<a class="sourceLine" id="cb830-11" title="11">            <span class="dt">num =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb830-12" title="12">            <span class="dt">prop_delayed =</span> num_delayed <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb830-13" title="13"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb830-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">num_tot =</span> <span class="kw">sum</span>(num),</a>
+<a class="sourceLine" id="cb830-15" title="15">         <span class="dt">prop_sched =</span> num <span class="op">/</span><span class="st"> </span>num_tot,</a>
+<a class="sourceLine" id="cb830-16" title="16">         <span class="dt">sched_dep_diff =</span> mins_dep <span class="op">-</span><span class="st"> </span>mins_sched) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb830-17" title="17"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb830-18" title="18"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_sched, <span class="dt">fill =</span> <span class="kw">factor</span>(mins_sched))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb830-19" title="19"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb830-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Proportion of early flights by minute scheduled v. minute departed&quot;</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb831-1" title="1">  <span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb831-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
+<a class="sourceLine" id="cb831-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
+<a class="sourceLine" id="cb831-4" title="4">       <span class="co"># dep_time = floor_date(dep_time, &quot;5 minutes&quot;),</span></a>
+<a class="sourceLine" id="cb831-5" title="5">       <span class="co"># sched_dep_time = floor_date(sched_dep_time, &quot;5 minutes&quot;),</span></a>
+<a class="sourceLine" id="cb831-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb831-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb831-8" title="8">       <span class="dt">early_less10 =</span> dep_delay <span class="op">&gt;=</span><span class="st"> </span><span class="dv">-10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb831-9" title="9"><span class="st">  </span><span class="kw">filter</span>(dep_delay <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb831-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb831-11" title="11"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb831-12" title="12">            <span class="dt">sum_recent10 =</span> <span class="kw">sum</span>(early_less10),</a>
+<a class="sourceLine" id="cb831-13" title="13">            <span class="dt">prop_recent10 =</span> sum_recent10 <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb831-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb831-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_recent10)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb831-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb831-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;proportion of early flights that were scheduled to leave within 10 mins of when they did&quot;</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//brshallo.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="15-factors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="18-pipes.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -10,7 +10,7 @@ library(stringr)
 library(stringi)
 ```
 
-# ch. 14: Strings
+# Ch. 14: Strings
 
 * `writeLines`: see raw contents of a string (prints each string in a vector on a new line)
 * `str_length`: number of characters in a string

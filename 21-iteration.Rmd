@@ -6,7 +6,6 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 *Make sure the following packages are installed:*  
 ```{r}
-
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
@@ -21,7 +20,7 @@ library(stringr)
 ```
 
 
-# ch. 21: Iteration
+# Ch. 21: Iteration
 
 * Common `for` loop template:
 ```{r, eval = FALSE}
@@ -38,7 +37,6 @@ while (i <= length(x)){
   # body
   i <- i + 1
 }  
-
 ```
 
 * `seq_along(df)` does essentially same as `seq_len(length(df))`
@@ -649,11 +647,11 @@ mtcars %>%
     
     * The vector output is not always consistent in it's output type. Also, returns error when inputting an empty list due to indexing issue.
     
-# Appendix
+## Appendix
 
-## 21.3.5.1
+### 21.3.5.1
 
-### Using map
+#### Using map
 
 ```{r, eval = FALSE}
     outputted_csv <- files_example %>% 
@@ -664,7 +662,7 @@ mtcars %>%
 
 ```
 
-### Plot of names
+#### Plot of names
 * Below is a plot of the proportion of individuals named the most popular letter in each year. This suggests that the top names by letter do not have as large of a proportion of the population ocmpared to historically.
 
 ```{r}
@@ -673,7 +671,7 @@ names_appended %>%
   geom_line()
 ```
 
-### csv other example
+#### csv other example
 
 This is some code I used to read csvs from a shared drive. I added on the 'file_path_pull' and 'files_example' components to add in information on the file paths and other details that were relevant... you might also add this data into a new column on the output...
 ```{r, eval = FALSE}
@@ -700,7 +698,7 @@ read_dir(files_example$file_paths)
 ```
 
 
-## 21.3.5.2 with purrr
+### 21.3.5.2 (with purrr)
 Slightly less attractive printing
 ```{r}
 show_mean2 <- function(df) {
@@ -735,7 +733,7 @@ flights %>%
 ```
 
 
-## 21.9 mirroring keep
+### 21.9 mirroring `keep`
 * below is one method for passing multiple, more complex arguments through keep, though you can also use function shortcuts (`~`) in `keep` and `discard`
     ```{r}
     ##how to pass multiple functions through keep?
@@ -747,8 +745,7 @@ flights %>%
       flights[.]
     ```
 
-
-## invoke examples
+### invoke examples
 
 Let's change the example to be with quantile...
 
@@ -819,7 +816,7 @@ iris %>%
   map_dfc(mean.and.median)
 ```
 
-## indexing nms caution
+### indexing nms caution
 When creating your empty list, use indexes rather than names if you are creating values, otherwise you are creating new values on the list. E.g. in the example below I the output ends up being length 6 because you have the 3 `NULL` values plus the 3 newly created named positions.
 ```{r}
 x <- list(a = 1:10, b = 11:18, c = 19:25)
@@ -830,7 +827,7 @@ for (nm in names(x)) {
 output
 ```
 
-## in class notes
+### in-class notes
 
 the `map_*` functions are essentially like running a `flatten_*` after running `map`. E.g. the two things below are equivalent
 

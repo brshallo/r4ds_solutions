@@ -4,7 +4,7 @@
 
 
 
-# ch. 28: Graphics for communication
+# Ch. 28: Graphics for communication
 
 * `labs()` to add labels
   * common args: `title`, `subtitle`, `caption`, `x`, `y`, `colour`, ...
@@ -55,7 +55,7 @@
            colour = "Car class")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-1-1.png" width="672" />
     
 
 1.  The `geom_smooth()` is somewhat misleading because the `hwy` for
@@ -75,7 +75,7 @@
       geom_smooth()
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-2-1.png" width="672" />
     
     You could take into account the class of the car
     
@@ -199,7 +199,7 @@
     ## near singularities as well. 1
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 1.  Take an exploratory graphic that you've created in the last month, and add
     informative titles to make it easier for others to understand.
@@ -227,7 +227,7 @@
       geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
     You could technically create the lable w/o the tibble, though it will print multiple times for each row:
     
@@ -242,7 +242,7 @@
       geom_text(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-5-1.png" width="672" />
     
     Place label in each of four courners:
 
@@ -265,7 +265,7 @@
                 data = data_label)
 ```
 
-![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 1.  Read the documentation for `annotate()`. How can you use it to add a text
     label to a plot without having to create a tibble?
@@ -282,7 +282,7 @@
       annotate("text", x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-7-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-7-1.png" width="672" />
     
     * function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
     * can specify the geom type with annotate
@@ -421,7 +421,7 @@
     ## near singularities as well. 1
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 1.  What arguments to `geom_label()` control the appearance of the background
     box?
@@ -439,7 +439,7 @@
       geom_label(aes(label = model), data = best_in_class, nudge_y = 2, alpha = 0.1, fill = "green")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-9-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 1.  What are the four arguments to `arrow()`? How do they work? Create a series
     of plots that demonstrate the most important options.
@@ -451,7 +451,7 @@
       geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-10-1.png" width="672" />
     
     
     ```r
@@ -464,19 +464,19 @@
      geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     ```r
     b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-11-2.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-2.png" width="672" />
     
     ```r
     b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-11-3.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-3.png" width="672" />
     
     ```r
     b + geom_curve(
@@ -486,7 +486,7 @@
     )
     ```
     
-    ![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-11-4.png)<!-- -->
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-4.png" width="672" />
     
     * `angle` (in degrees), `length` (use `unit()` function to specify with number and type, e.g. "inches"), `ends` ("last", "first", or "both" -- specifying which end), `type` ("open" or "closed")
     
@@ -552,7 +552,7 @@ presidential %>%
   labs(y = "President number", x = "Year")
 ```
 
-![](28-graphics-for-communication_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-14-1.png" width="672" />
     
 1.  Use `override.aes` to make the legend on the following plot easier to see.
 
@@ -564,6 +564,6 @@ presidential %>%
       guides(colour = guide_legend(override.aes = list(alpha = 1)))
     ```
     
-    <img src="28-graphics-for-communication_files/figure-epub3/unnamed-chunk-15-1.png" width="50%" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-15-1.png" width="50%" />
     
 

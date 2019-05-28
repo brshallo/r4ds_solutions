@@ -12,7 +12,7 @@ library(nasaweather)
 library(lubridate)
 ```
 
-# ch. 13: Relational data
+# Ch. 13: Relational data
 
 > "The relations of three or more tables are always a property of the relations between each pairs."  
 
@@ -588,9 +588,9 @@ weather
       arrange(desc(n_tail), tailnum)
     ```
 
-#Appendix
+## Appendix
 
-##13.5.1.4
+### 13.5.1.4
 
 Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.
 ```{r}

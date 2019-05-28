@@ -13,7 +13,7 @@ library(tidyr)
 library(plotly) 
 ```
 
-# ch. 5 Data transformations
+# Ch. 5 Data transformations
   
 **Key functions from chapter:**  
   
@@ -802,18 +802,17 @@ tail_nums_counts %>%
 ```
 
 
-# Appendix
+## Appendix
 The appendix is either extensions upon solutions. Solving the problems using functions we haven'te learned yet, or other random notes / tidbits.  
 
-## 5.4.1.3.
+### 5.4.1.3.
 You actually don't need `one_of` for selecting by character vector, more useful is when using it to negate fields by name.  
 
 ```{r}
 select(flights, -one_of(vars))
 ```
 
-
-## 5.5.2.1.
+### 5.5.2.1.
 Other, more sophisticated method^[This method is helpful for if you have more than ust a couple variables you are applying a transformation to.]
 ```{r, eval = FALSE}
 
@@ -822,9 +821,9 @@ mutate_at(.tbl = flights,
           .funs = funs(new = time_to_mins)) 
 ```
 
-## 5.5.2.2
+### 5.5.2.2
 
-### Closer look at `air_time`
+**Closer look at `air_time`**
 
 Wanted to look at original `air_time` variable a little more. Histogram below shows that most differences are now between 20 - 40 minutes from the actual time.
 ```{r}
@@ -892,7 +891,7 @@ flights_preds_mod %>%
 
 I'm going to stop there though for now. Below are just some other plots I was messing aroun with.
 
-### Other plots with `air_time`
+**Other plots with `air_time`:**
 These are mostly just me messing around. This section will be very tough to follow.  
   
 Produce 3-d plot with actuals in black and predictions in red and green (not evaluated in html document).
@@ -923,7 +922,6 @@ flights_new2 %>%
   scale_y_continuous(breaks = seq(0, 660, 60))
 
 ```
-
 
 Use linear regression to identify those points that were off from the relationship between `air_time` and `distance`.
 +First build model
@@ -966,7 +964,6 @@ flights %>%
 
 ```
 
-
 For fun, select 6 random `dest` and plot the `dep_time` vs `air_calc` (true `air_time`) with a median line cutting through the ponits.
 ```{r}
 set.seed(1234)
@@ -988,7 +985,6 @@ flights_new2 %>%
 
 Do the same with the original `air_calc` values (would want to standardize access between these and above)
 ```{r}
-
 set.seed(1234)
 flights %>% 
   # select(dest, dep_time, arr_time, air_time, distance) %>% 
@@ -1005,7 +1001,6 @@ flights %>%
   scale_x_continuous(breaks = seq(0, 24*60, 120), limits = c(0, 24*60))+
   facet_wrap(~dest)
 ```
-
 
 Explore the `air_time` var more.
 If you want to see how these may differ by different categories^[ Linear regression is used here which aren't learned until later in the book though.]. 
@@ -1024,7 +1019,6 @@ flights %>%
   geom_point(aes(colour = dest))
 ```
 
-
 Distribution of times each flight number runs in window.
 ```{r}
 
@@ -1037,8 +1031,7 @@ flights %>%
   geom_histogram(bins = 100)
 ```
 
-
-## 5.6.7.1.
+### 5.6.7.1.
 
 Below is an extension on using the `quantile` method, but it is far beyond where we are right now.
 
@@ -1120,7 +1113,7 @@ flights_quantiles2 %>%
 ```
 
 
-## 5.6.7.4.
+### 5.6.7.4.
 
 To measure the difference in speed you can use the `microbenchmark` function
 ```{r}
@@ -1129,9 +1122,7 @@ microbenchmark::microbenchmark(sub_optimal = filter(flights, is.na(dep_delay) | 
                                times = 10)
 ```
 
-
-
-## 5.6.7.5.
+### 5.6.7.5.
 
 Explore the percentage delayed vs. percentage cancelled.
 ```{r}
@@ -1147,7 +1138,6 @@ flights %>%
     geom_line(aes(y = delayed_perc), colour = "dark red")
 
 ```
-
 
 Let's try faceting by origin and looking at both values next to each other.
 ```{r}
@@ -1191,7 +1181,7 @@ flights %>%
   geom_smooth()
 ```
 
-### Modeling approach
+**Modeling approach:**
 
 We also could approach this using a model and regressing the average proportion of cancelled flights on average delay.
 ```{r}
@@ -1267,7 +1257,7 @@ cancelled_preds2 %>%
 ^[Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix...]
   
 
-## 5.6.7.6.
+### 5.6.7.6.
 
 
 As an example, let's look at just Atl flights from LGA and compare DL, FL, MQ.
@@ -1315,7 +1305,7 @@ carriers_lga_atl %>%
 This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)^[Repeated t-test methods could be used for comparing MQ and FL, see function `pairwise.t.test`]. The carrier accouts for ~1.6% of the variation in arrival... etc....  
 
 
-## 5.7.1.6.
+### 5.7.1.6.
 
 Let's look at the fastest 20 `air_time`s for each destination.
 ```{r}
@@ -1372,7 +1362,7 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-## 5.7.1.5
+### 5.7.1.5
 
 Let's run this for every 3 lags (1, 4, 7, ...) and plot.
 
@@ -1387,7 +1377,7 @@ lags_cors %>%
 ```
 
 
-## 5.7.1.8.
+### 5.7.1.8.
 
 ```{r, eval = FALSE}
 tail_nums_counts %>% 
@@ -1397,8 +1387,6 @@ tail_nums_counts %>%
   View()
 
 ```
-
-## Other
 
 ### On piping dots
 
@@ -1465,8 +1453,9 @@ flights %>%
 
 ```
 
-## plotly
-the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
+### plotly
+
+The `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
 
 Note that this will not render in a markdown format, but only in html.
 

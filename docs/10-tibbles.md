@@ -2,7 +2,7 @@
 
 
 
-# ch. 10: Tibbles
+# Ch. 10: Tibbles
 
 
 ```r
@@ -101,7 +101,7 @@ df %>%
   geom_point()
 ```
 
-![](10-tibbles_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+<img src="10-tibbles_files/figure-html/unnamed-chunk-6-1.png" width="672" />
  
 *c. Creating a new column called 3 which is 2 divided by 1.*  
   

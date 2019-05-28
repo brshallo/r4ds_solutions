@@ -2,7 +2,7 @@
 
 
 
-# ch. 15: Factors
+# Ch. 15: Factors
 
 * `factor` make variable a factor based on `levels` provided
 * `fct_rev` reverses order of factors
@@ -26,7 +26,7 @@ gss_cat %>%
   scale_x_discrete(drop = FALSE)
 ```
 
-![](15-factors_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
+<img src="15-factors_files/figure-html/unnamed-chunk-1-1.png" width="672" />
 
 ```r
 # Is there a similar way to do this with count?
@@ -79,7 +79,7 @@ gss_cat %>%
       geom_bar()
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" />
     
     
     * Default bar chart has categories across the x-asix, I flipped these to be across the y-axis 
@@ -102,7 +102,7 @@ gss_cat %>%
       coord_flip()
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 
 1.  What is the most common `relig` in this survey? What's the most
@@ -171,7 +171,7 @@ gss_cat %>%
       coord_flip()
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-6-1.png" width="672" />
     
     * Notice which have the widest variety of colours -- are protestant, and Christian slightly
     
@@ -220,7 +220,7 @@ gss_cat %>%
       geom_bar()
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-8-1.png" width="672" />
    
    * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
    * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
@@ -317,7 +317,7 @@ gss_cat %>%
       labs(colour = "partyid")
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-10-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-10-1.png" width="672" />
     
     *As a bar plot: * 
     
@@ -344,7 +344,7 @@ gss_cat %>%
       labs(colour = "partyid")
     ```
     
-    ![](15-factors_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
+    <img src="15-factors_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
     * Suggests proportion of republicans has gone down with independents and other going up.
 
@@ -380,9 +380,9 @@ gss_cat %>%
 
 
 
-# Appendix 
+## Appendix 
 
-## Viewing all levels
+### Viewing all levels
 
 A few ways to get an initial look at the levels or counts across a dataset
 
@@ -562,7 +562,7 @@ gss_cat %>%
   purrr::map(plot)
 ```
 
-![](15-factors_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-2.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-3.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-4.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-5.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-6.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-7.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-8.png)<!-- -->![](15-factors_files/figure-epub3/unnamed-chunk-13-9.png)<!-- -->
+<img src="15-factors_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-3.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-4.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-5.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-6.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-7.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-8.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-9.png" width="672" />
 
 ```
 ## $year
@@ -598,7 +598,7 @@ gss_cat %>%
 ## [24] 24
 ```
 
-## Percentage NA each level
+### Percentage NA each level
 
 
 ```r
@@ -635,7 +635,7 @@ gss_cat %>%
 ## [1] 0.4722804
 ```
 
-## Print all levels of tibble
+### Print all levels of tibble
 
 
 ```r

@@ -18,7 +18,7 @@ library(hexbin)
 library(maps)
 ```
 
-# ch. 7: Data exploration
+# Ch. 7: Data exploration
 
 * `cut_width`: specify binsize of each cut (often use with `geom_boxplot`)
 * `cut_number`:  specify number of groups to make, allowing for variable binsize (often use with `geom_boxplot`)
@@ -540,9 +540,9 @@ ggplot(data = diamonds) +
 ```
   
   
-# Appendix
+## Appendix
 
-## 7.5.2.1.2.
+### 7.5.2.1.2.
 
 Plot below shows four regions I'll split the country into. Seems like for a few destinations the lat and long points were likely misentered (probably backwards).
 
@@ -581,7 +581,7 @@ flights %>%
 
 I think changing the color from light-->dark to instead blue-->red may make for a more effective visualization as well.  
   
-## 7.5.3.1.4.
+### 7.5.3.1.4.
 
 To get the `fill` value to vary need to iterate through and make each graph seperate, can't ust use facet.
 ```{r}
@@ -600,9 +600,7 @@ ggplot(df)+
 gridExtra::grid.arrange(grobs = mutate(diamonds_nest, out = purrr::map2(data, cut, plot_free))$out)
 ```
 
-
 ```{r}
-
 diamonds %>% 
   mutate(cut = forcats::as_factor(as.character(cut), levels = c("Fair", "Good", "Very Good", "Premium", "Ideal"))) %>%
   # with(contrasts(cut))

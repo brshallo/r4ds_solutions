@@ -16,7 +16,7 @@ library(scales)
 ```
 
 
-# ch. 28: Graphics for communication
+# Ch. 28: Graphics for communication
 
 * `labs()` to add labels
   * common args: `title`, `subtitle`, `caption`, `x`, `y`, `colour`, ...

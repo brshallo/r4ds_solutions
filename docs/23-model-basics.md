@@ -3,7 +3,7 @@
 
 
 
-# ch. 23: Model basics
+# Ch. 23: Model basics
 
 * `geom_abline` create line or lines given intercept and slopes, e.g. `geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)`
 * `optim` general purpose function for optimization using Newton-Raphson search
@@ -39,7 +39,7 @@
       geom_point()
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-1-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-1-1.png" width="672" />
     
     
     
@@ -60,7 +60,7 @@
       facet_wrap(~ model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-2-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-2-1.png" width="672" />
     
     *Notice that model with 5 degrees of freedom is able to now roughly approximate the model
     
@@ -86,7 +86,7 @@
       facet_wrap(~ model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" />
     
     * Notice 5 degrees of freedom only allows it to mirror up-down-up-down, representing behavior of 5th degree polynomial, extrapolating outside of this performance is poor  
       
@@ -113,7 +113,7 @@
       facet_wrap(~ model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-6-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-6-1.png" width="672" />
   
     * Performance on extrapolation becomes much worse for the polynomial though
     * Notice that the values cover a much larger codomain that is much farther from the actual data once extended.
@@ -166,7 +166,7 @@
       geom_violin()
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
     
     ```r
     plots_prep %>% 
@@ -174,7 +174,7 @@
       ggbeeswarm::geom_beeswarm()
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-8-2.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-8-2.png" width="672" />
     
     * as a metric it tends to be more suseptible to outliers, than say mae
 
@@ -239,7 +239,7 @@
       geom_point(aes(y = error))
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     * you can see the error for rmse seems to have more extreme examples
     
@@ -251,7 +251,7 @@
       facet_wrap(~error_type, scales = "free_x")
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-12-1.png" width="672" />
     
     * let's look at differences in the coefficients produced
     
@@ -279,7 +279,7 @@
       geom_point(aes(y = b1))
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-13-1.png" width="672" />
         
     * see more variability in the b1
     * another way of visualizing the variability in coefficients is below
@@ -292,7 +292,7 @@
       coord_fixed()
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-14-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
     
 1.  One challenge with performing numerical optimisation is that it's only
@@ -401,7 +401,7 @@
       geom_smooth(aes(x = x, y = y), se = FALSE)
     ```
     
-    ![](23-model-basics_files/figure-epub3/23.3.3 1-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/23.3.3 1-1.png" width="672" />
     
     * For sim1, the default value for `geom_smooth` is to use loess, os it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
     * this relationship looks pretty solidly linear
@@ -421,7 +421,7 @@
       geom_point(aes(x = x, y = resid_lin), colour = "blue")
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-16-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-16-1.png" width="672" />
     
     
     ```r
@@ -432,7 +432,7 @@
       facet_wrap(~model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-17-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
     
 1.  `add_predictions()` is paired with `gather_predictions()` and 
@@ -500,7 +500,7 @@
       facet_wrap(~model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/23.3.3 2-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/23.3.3 2-1.png" width="672" />
     
     
 1.  What does `geom_ref_line()` do? What package does it come from?
@@ -649,7 +649,7 @@
       geom_density(alpha = 0.3)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-19-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-19-1.png" width="672" />
     
     * any difference in resids is pretty subtle...
     
@@ -665,7 +665,7 @@
       facet_wrap(~model)
     ```
     
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-20-1.png)<!-- -->
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-20-1.png" width="672" />
     
     * notice subtle difference where for mod2 as x2 decreases, the predicted value for x1 also decreases, this is because the interaciton term between these is positive
     * the values near where x2 and x1 are most near 0 should be where the residuals are most similar
@@ -686,7 +686,7 @@ sim4 %>%
   scale_fill_gradient2()
 ```
 
-![](23-model-basics_files/figure-epub3/unnamed-chunk-21-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 * This shows how `mod2` has higher valued predictions when x1 and x2 are opposite signs compared to the predictions from `mod1`
 
@@ -706,14 +706,14 @@ sim4 %>%
   scale_fill_gradient2()
 ```
 
-![](23-model-basics_files/figure-epub3/unnamed-chunk-22-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
   * however very little difference, and I might lean more towards `mod1` for simplicities sake
 
-# Appendix
+## Appendix
 
-## Other model families
+### Other model families
 
 * __Generalised linear models__, e.g. `stats::glm()`. Linear models assume that
   the response is continuous and the error has a normal distribution. 
@@ -744,8 +744,7 @@ sim4 %>%
   by models like __random forests__ (e.g. `randomForest::randomForest()`) or 
   __gradient boosting machines__ (e.g. `xgboost::xgboost`.)
   
-## 23.2 book example
-
+### 23.2 book example
 
 
 ```r
@@ -759,7 +758,7 @@ ggplot(sim1, aes(x,y))+
   geom_point()
 ```
 
-![](23-model-basics_files/figure-epub3/unnamed-chunk-23-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 Next, lets set-up a way to calculate the distance between predicted value and each point. 
 
@@ -783,7 +782,7 @@ ggplot(sim1, aes(x, y))+
   geom_point()  
 ```
 
-![](23-model-basics_files/figure-epub3/distance_graph-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/distance_graph-1.png" width="672" />
 
 Could instead plot this as a model of a1 vs a2 and whichever does the best
 
@@ -795,7 +794,7 @@ models_error %>%
   geom_point(aes(colour = -rmse))
 ```
 
-![](23-model-basics_files/figure-epub3/unnamed-chunk-24-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 *Could be more methodical and use Grid Search.* Let's use the min and max points of the top 15 to set.
 
@@ -812,7 +811,6 @@ sim1_rmse(2,3)
 ```
 ## [1] 4.574414
 ```
-
 
 
 ```r
@@ -835,7 +833,7 @@ grid_models %>%
   geom_point(aes(colour = -rmse))
 ```
 
-![](23-model-basics_files/figure-epub3/grid search-1.png)<!-- -->
+<img src="23-model-basics_files/figure-html/grid search-1.png" width="672" />
 
 In the future add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.
 
@@ -934,22 +932,20 @@ grid_space
 ## # A tibble: 1 x 4
 ##   min_x min_y max_x max_y
 ##   <dbl> <dbl> <dbl> <dbl>
-## 1 -6.37 0.344  13.0  3.76
+## 1 -8.30 0.381  14.0  3.86
 ```
 
 
-## 23.4.5.4
+### 23.4.5.4
 Rather than `geom_density` or `geom_freqpoly` let's look at histogram with values overlaid rather than stacked.
 
-    
-    ```r
-    sim4 %>% 
-      gather_residuals(mod1, mod2) %>% 
-      ggplot(aes(x = resid, y = ..density.., fill = model))+
-      geom_histogram(position = "identity", alpha = 0.3)
-    ```
-    
-    ![](23-model-basics_files/figure-epub3/unnamed-chunk-30-1.png)<!-- -->
 
+```r
+sim4 %>% 
+  gather_residuals(mod1, mod2) %>% 
+  ggplot(aes(x = resid, y = ..density.., fill = model))+
+  geom_histogram(position = "identity", alpha = 0.3)
 ```
+
+<img src="23-model-basics_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 

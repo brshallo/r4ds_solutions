@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
 
 
 
-# ch. 24: Model building
+# Ch. 24: Model building
 
 * `data_grid`, argument: `.model`: if the model needs variables that haven't been supplied explicitly, will auto-fill them with "typical" values; continuous --> median; categorical --> mode
 * `MASS:rlm` robust linear model that uses "M estimation by default"
@@ -57,7 +57,7 @@ diamonds2 <- diamonds2 %>%
     gridExtra::grid.arrange(plot_lc_lp, plot_lc, plot_lp + coord_flip()) 
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-3-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-3-1.png" width="672" />
     
     * The vertical bands correspond with clumps of `carat_lg` values falling across a range of `price_lg` values
     
@@ -71,7 +71,7 @@ diamonds2 <- diamonds2 %>%
       scale_x_continuous(breaks = seq(0, 2, 0.1))
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-4-1.png" width="672" />
     
     * The chart above shows spikes in carat values at 0.3, 0.4, 0.41, 0.5, 0.7, 0.9, 1.0, 1.01, 1.2, 1.5, 1.7 and 2.0, each distribution spikes at that value and then decreases until hitting the next spike
     * This suggests there is a preference for round numbers ending on tenths
@@ -104,7 +104,7 @@ diamonds2 <- diamonds2 %>%
       geom_point(aes(carat, price), data = extreme_vals, color = "orange")
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-5-1.png" width="672" />
     
     * It's possible some of these these were mislabeled or errors, e.g. an error in typing e.g. 200 miswritten as  2000, though given the wide range in pricing this does not seem like that extreme of a variation.
     
@@ -202,7 +202,7 @@ daily %>%
   scale_x_date(NULL, date_breaks = "1 month", date_labels = "%b")
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-8-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 ### 24.3.5 
 
@@ -310,7 +310,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-12-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-12-1.png" width="672" />
     
     * In the example, saturday has different predicted number of flights in the summer
         * when just including `wkday` you don't see this differentiation
@@ -329,7 +329,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-13-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-13-1.png" width="672" />
     
     * The graphs with saturday term and interaction across terms do not show gross changes in residuals varying by season the way the models that included just weekday or weekday and term without an interaction do.
     * note that you have a few days with large negative residuals^[Remember this corresponds with days where the predictions are higher than the actuals.] 
@@ -382,7 +382,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-16-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-16-1.png" width="672" />
     
     * Notice the residuals for day's like July 4th and Christas are closer to 0 now, though residuals for smaller holidays like MLK, President's, Columbus, and Veteran's Day are now positive when before they did not have such noticable abberations
     * Suggests that just "holiday" is not enough to capture the relationship
@@ -411,7 +411,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-18-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-18-1.png" width="672" />
     
     * This model has the most flexibility / inputs, though this makes the pattern harder to follow / interpret
     * Certain decreases in the month to month model are difficult to explain, for example the decrease in the month of May
@@ -429,7 +429,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-19-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-19-1.png" width="672" />
     
     The residuals seem to partially explain some of these inexplicable ups / downs: 
     
@@ -466,7 +466,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-21-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-21-1.png" width="672" />
     
     Look at residuals
     (in light grey are actuals)
@@ -482,7 +482,7 @@ daily %>%
       facet_wrap(~model, ncol = 1)
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-22-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 
 1.  We hypothesised that people leaving on Sundays are more likely to be business travellers who need to be somewhere on Monday. Explore that hypothesis by seeing how it breaks down based on distance and time: if it's true, you'd expect to see more Sunday evening flights to places that are far away.
@@ -498,7 +498,7 @@ daily %>%
       geom_boxplot()
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-23-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-23-1.png" width="672" />
     
     * 25th and 75th percentiles aren't different, but median is a little higher
     * the same is the case for Saturday travel which does not seem to fit into this hypothesis as neatly. The effect seems more general to the weekend than just Saturday, and there seem like there may be other potential explanations than "business travel"
@@ -522,12 +522,12 @@ daily %>%
       geom_boxplot()
     ```
     
-    ![](24-model-building_files/figure-epub3/unnamed-chunk-24-1.png)<!-- -->
+    <img src="24-model-building_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 
-# Appendix
+## Appendix
 
-## 24.2.3.3
+### 24.2.3.3
 Plots of extreme values against a sample and colored by some of the key attributes
 
 *Plots of extreme values against carat, price, clarity*
@@ -541,7 +541,7 @@ diamonds2 %>%
   geom_point(aes(carat, price, colour = clarity), data = extreme_vals, size = 3)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-25-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 *Plots of extreme values against carat, price, cut*
 
@@ -555,11 +555,11 @@ diamonds2 %>%
   geom_point(aes(carat, price, colour = cut), data = extreme_vals, size = 3)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-26-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
-## 24.2.3.4
+### 24.2.3.4
 
-### heteroskedasticity
+#### heteroskedasticity
 Note that heteroskedasticity is one (of several other) important considerations that would be important when deciding how much you trust the model.
 
 *residual vs lprice*
@@ -571,7 +571,7 @@ diamonds2 %>%
   geom_hex()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-27-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 * the log transformation helped to ensure our residuals did not have heteroskedasticity against the predictor
 
@@ -586,10 +586,9 @@ diamonds2 %>%
   geom_hex()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-28-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 * This is what heteroskedasticity looks like
-
 
 *residual (transformed) vs log price*
 (`resid_transformed` represents the residual against the residual after transforming it from a prediction for `log2(price)` to a prediction for `price`)
@@ -603,9 +602,9 @@ diamonds2 %>%
   geom_hex()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-29-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
-### rsquared on logged values
+#### rsquared on logged values
 **(incorrect)**
 This is what I did initially. Below I calculate the R^2 on the log values. Within the exercise solution I decided to report the R^2 when calculated on `2^pred`. This has the more useful interpretation of representing the percentage of the variance on the actual price that the model captures, which seems more appropriate in some ways. This question about which is more appropriate to report may be worth revisiting in the future.
 
@@ -647,7 +646,7 @@ rsquare(mod_diamond2, diamonds2)
 The R-squred is ~ 0.983, which means that the model accounts for 98.3% of the variance in price, which seems pretty solid.
 
 
-## 24.2.3.1
+### 24.2.3.1
 Visualization with horizontal stripes and `lprice` as the focus
 
 ```r
@@ -655,7 +654,7 @@ Visualization with horizontal stripes and `lprice` as the focus
 gridExtra::grid.arrange(plot_lp_lc, plot_lp, plot_lc + coord_flip()) 
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-31-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 * same thing, just change orientation and highlight `lprice` with a histogram
 
@@ -667,7 +666,7 @@ diamonds2 %>%
   geom_histogram(binwidth = 50)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-32-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 ```r
 diamonds2 %>% 
@@ -675,7 +674,7 @@ diamonds2 %>%
   geom_histogram(binwidth = 0.01)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-32-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-32-2.png" width="672" />
 
 Taking the log of price seems to have a bigger impact on the shape of the geom_hex graph
 
@@ -685,7 +684,7 @@ diamonds2 %>%
   geom_hex(show.legend = FALSE)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-33-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 ```r
 diamonds2 %>% 
@@ -693,9 +692,9 @@ diamonds2 %>%
   geom_hex(show.legend = FALSE)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-33-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-33-2.png" width="672" />
 
-### More notes on logs
+#### More notes on logs
 While taking the log of both price and carat seems to help improve the 'linearity' of the model, perhaps taking the log of the price makes a bigger difference.
 
 
@@ -721,7 +720,7 @@ plot_lc_p <- diamonds2 %>%
 gridExtra::grid.arrange(plot_lc_lp, plot_c_lp, plot_lc_p)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-34-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 * The reason for this may be that the log of the price better resembles a normal distribution than the log of the carat, though taking the log of the carat does also help by, at the least, centering the distribution...
 
@@ -730,15 +729,15 @@ gridExtra::grid.arrange(plot_lc_lp, plot_c_lp, plot_lc_p)
 gridExtra::grid.arrange(plot_lp_lc, plot_lp, plot_p)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-35-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 ```r
 gridExtra::grid.arrange(plot_lc_lp, plot_lc, plot_c)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-35-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-35-2.png" width="672" />
 
-### carat more clumped than price
+#### carat more clumped than price
 *(Unnecessary)*
 * let's see between price and carat, which causes the appearance of "bands" in the data
 * to do this let's look at `geom_hex` when making the accompanying value random
@@ -750,7 +749,7 @@ diamonds2 %>%
       geom_hex(show.legend = FALSE)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-36-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
 ```r
 diamonds2 %>% 
@@ -759,7 +758,7 @@ diamonds2 %>%
       geom_hex(show.legend = FALSE)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-36-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-36-2.png" width="672" />
 
 ```r
 diamonds2 %>% 
@@ -768,14 +767,14 @@ diamonds2 %>%
       geom_hex(show.legend = FALSE)
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-36-3.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-36-3.png" width="672" />
 
 * clearly carat are much more clumped
 * this check was unnecessary in this case, though the method felt worth saving
 
-## Logs (simulated examples)
+### Logs (simulated examples)
 
-### Exponential relationship
+#### Exponential relationship
 
 Taking the log of a value often centers the distribution which is helpful for getting more normal errors, it's actually not about making the relationship linear per se... but about making the errors normal (and linearlizing the relationship has the effect of doing this). Let's generate some data.
 
@@ -795,7 +794,7 @@ log_notes_df %>%
   geom_histogram()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-37-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 ```r
 # Then take log base 2 of
@@ -805,7 +804,7 @@ log_notes_df %>%
   geom_histogram()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-37-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-37-2.png" width="672" />
 
 ```r
 # The log helped us to uncover the relationship that existed between the original values and the values after some noise was added and then exponentiated
@@ -814,7 +813,7 @@ log_notes_df %>%
   geom_hex()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-37-3.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-37-3.png" width="672" />
 
 ```r
   # coord_fixed()
@@ -838,7 +837,7 @@ log_notes_df %>%
 
 * because of the properties of logs and exponents, taking the log transform is robust to linearlizing any exponential relationship regardles of log
 
-### Log log relationship
+#### Log log relationship
 
 What happens if you have a log relationship and you take the log of this leading to a log-log relationship?
 * You would not need to take the log of a graph in this relationship, but let's look at what happens
@@ -856,7 +855,7 @@ log_notes_df2 %>%
   geom_histogram()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-38-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-38-1.png" width="672" />
 
 ```r
 # centered at 3 because 2^3 = 8
@@ -865,7 +864,7 @@ log_notes_df2 %>%
   geom_histogram()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-38-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-38-2.png" width="672" />
 
 ```r
 log_notes_df2 %>% 
@@ -873,16 +872,16 @@ log_notes_df2 %>%
   geom_hex()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-38-3.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-38-3.png" width="672" />
 
 * linear relationship still visually seems to exist
 
 Conceptualizing Linear regression can actually get surprisingly complicated.  I'll pull this into a separate blog post at some point.
 
-## Diamonds data review
+### Diamonds data review
 *(Section arguably unnecessary)*
 
-### carat by mean `table` value
+#### carat by mean `table` value
 `table` represents the percentage of the max area that is covered by the flat top part of the diamond
 
 ```r
@@ -897,9 +896,9 @@ diamonds2 %>%
   geom_line()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-39-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
-### Cutoff, Part 1
+#### Cutoff, Part 1
 I get nervous that in the opening example that the diamonds dataset was biased because all values with price over 19000 or carat over 2.5 were removed. This seemed to have the affect of causing larger diamonds to have lower prices than expected. I was worried this might in some way impact the pattern described regarding the residuals across the other dimensions -- so looked at the residuals when building the model on just diamonds with carats less than 0.90. None of the prices seemed to approach 19000 for carats this small so this seemed like a good place to validate the discussion on residuals.
 
 The pattern did indeed hold for even just these small diamonds, so the example Hadley discusses seems appropriate.
@@ -938,21 +937,21 @@ All the patterns Hadley pointed-out seem to hold on this slightly modified datas
 ggplot(diamonds2_w_mod, aes(cut, resid_lg)) + geom_boxplot()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-41-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 ```r
 ggplot(diamonds2_w_mod, aes(color, resid_lg)) + geom_boxplot()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-41-2.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-41-2.png" width="672" />
 
 ```r
 ggplot(diamonds2_w_mod, aes(clarity, resid_lg)) + geom_boxplot()
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-41-3.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-41-3.png" width="672" />
 
-### Cutoff, Part 2
+#### Cutoff, Part 2
 
 Check if there are differences in coefficients when training on full `diamonds` data set v `diamonds2` dataset
 
@@ -975,11 +974,11 @@ ggplot(aes(x = lcarat, y = lprice))+
   geom_line(aes(y = mod_diamonds2), colour = "blue")
 ```
 
-![](24-model-building_files/figure-epub3/unnamed-chunk-42-1.png)<!-- -->
+<img src="24-model-building_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 essentially no difference between the models that come-out when training on one v the the other
 
-## 25.3.5.4
+### 25.3.5.4
 
 In this section I create a marker for days that are "near a holiday"
 

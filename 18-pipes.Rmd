@@ -14,7 +14,7 @@ library(stringr)
 ```
 
 
-# ch. 18: Pipes (notes only)
+# Ch. 18: Pipes (notes only)
 
 * `pryr::object_size` gives the memory occupied by all of its arguments (note that built-in object.size does not allow measuring multiple objects so can't see shared space). This function is actually shown in chapter 18: Pipes
 * Some functions do not work naturally with the pipe.

@@ -151,7 +151,7 @@ table2 %>%
   geom_point(aes(colour = country))
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-5-1.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 * first had to spread data
 
@@ -582,7 +582,7 @@ who_present %>%
   geom_jitter()
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-1.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 #ratio of female tb cases over time
@@ -599,7 +599,7 @@ who_present %>%
   geom_line()
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-2.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 ```r
 #countries with the most outbreaks
@@ -614,7 +614,7 @@ who_present %>%
   geom_line()
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-3.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-3.png" width="672" />
 
 ```r
 #countries with the most split by gender as well
@@ -630,7 +630,7 @@ who_present %>%
   facet_wrap(~country)
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-4.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-4.png" width="672" />
 
 ```r
 #take log and summarise
@@ -645,7 +645,7 @@ who_present %>%
   geom_line(show.legend=TRUE)
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-5.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-5.png" width="672" />
 
 ```r
 #average # of countries with more female TB cases
@@ -664,5 +664,5 @@ who_present %>%
   geom_line()
 ```
 
-![](12-tidy-data_files/figure-epub3/unnamed-chunk-22-6.png)<!-- -->
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-6.png" width="672" />
 

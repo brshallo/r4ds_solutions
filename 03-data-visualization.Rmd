@@ -9,9 +9,9 @@ library(mapproj)
 library(dplyr)
 ```
 
-# ch 3: Data visualization
+# Ch 3: Data visualization
 
-* `geom_point`: Add points to plot, `x`, `y`, `size`, `stroke`, `colour`, `alpha`, `shape`
+* `geom_point`: Add points to plot, key args: `x`, `y`, `size`, `stroke`, `colour`, `alpha`, `shape`
 * `geom_smooth`: Add line and confidence intervals to x-y plot, can use `se` to turn off standard errors, can use `method` to change algorithm to make line. `linetype` to make dotted line.
 * `geom_bar`: Stack values on top of each to make bars (default `stat = "count"`, can also change to `"identity"`. May want to make `y = ..prop..` to show y as proportion of values). `postion = "stacked"` may take on values of "`identity"`, "`dodge"`, "`fill"`
 * `geom_count`: Make bar charts out of discrete row values in dataframe. `fill` to fill bars, `colour` to outline.
@@ -52,7 +52,7 @@ library(dplyr)
 ggplot(data = mpg)
 ```
 
-Just a blank grey space.
+A blank grey space.
 
 **2. How many rows are in mpg? How many columns?**
 
@@ -450,6 +450,26 @@ diamonds %>%
 
 ## 3.8: Position Adjjustment
 
+*Some "dodge"" examples:*
+```{r}
+
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
+
+diamonds %>% 
+  count(cut, color) %>% 
+  ggplot(aes(x = cut, y = n, fill = color))+
+  geom_col(position = "dodge")
+
+```
+
+Looking of `geom_jitter` and only changing width.
+```{r}
+ggplot(data = mpg, mapping = aes(x = drv, y = hwy))+
+  geom_jitter(height = 0, width = .2)
+
+```
+
 ### 3.8.1.
 
 **1.What is the problem with this plot? How could you improve it?**
@@ -459,7 +479,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point()
 ```
 
-The points overlap, could use `geom_jjitter` instead
+The points overlap, could use `geom_jitter` instead
 
 ```{r}
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
@@ -510,6 +530,11 @@ ggplot(data=mpg, mapping=aes(x=class, y=hwy))+
 ```
 
 ## 3.9: Coordinate systems
+
+`coord_flip` is helpful, especially for quickly tackling issues with axis labels
+`coord_quickmap` is important to remember if plotting spatial data.
+`coord_polar` is important to remember if plotting spatial coordinates.
+`map_data` for extracting data on maps of locations
 
 ### 3.9.1.
 
@@ -566,8 +591,9 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   coord_fixed()
 ```
 
-# Appendix
-## 3.7.1.1 extension
+## Appendix
+
+### 3.7.1.1 extension
 ```{r}
 ggplot(mpg, aes(x = cyl, y = cty, group = cyl))+
   geom_pointrange(stat = "summary")
@@ -611,34 +637,3 @@ ggplot(mpg) +
   stat_summary(aes(cyl, cty), geom = "linerange")
 
 ```
-
-
-## 3.8: Position adustments
-
-Some "dodge"" examples
-```{r}
-
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
-
-diamonds %>% 
-  count(cut, color) %>% 
-  ggplot(aes(x = cut, y = n, fill = color))+
-  geom_col(position = "dodge")
-
-```
-
-Looking of `geom_jitter` and only changing width.
-```{r}
-ggplot(data = mpg, mapping = aes(x = drv, y = hwy))+
-  geom_jitter(height = 0, width = .2)
-
-```
-
-## 3.9: Coordinate systems  
-`coord_flip` is helpful, especially for quickly tackling issues with axis labels
-`coord_quickmap` is important to remember if plotting spatial data.
-`coord_polar` is important to remember if plotting spatial coordinates.
-`map_data` for extracting data on maps of locations
-
-## add in table of contents and other details...

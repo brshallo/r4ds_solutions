@@ -11,7 +11,7 @@ library(lubridate)
 library(forcats)
 ```
 
-# ch. 15: Factors
+# Ch. 15: Factors
 
 * `factor` make variable a factor based on `levels` provided
 * `fct_rev` reverses order of factors
@@ -238,9 +238,9 @@ gss_cat %>%
 
 
 
-# Appendix 
+## Appendix 
 
-## Viewing all levels
+### Viewing all levels
 
 A few ways to get an initial look at the levels or counts across a dataset
 
@@ -257,14 +257,14 @@ gss_cat %>%
 
 ```
 
-## Percentage NA each level
+### Percentage NA each level
 
 ```{r}
 gss_cat %>% 
   purrr::map(~(sum(is.na(.x)) / length(.x)))
 ```
 
-## Print all levels of tibble
+### Print all levels of tibble
 
 ```{r}
 gss_cat %>% 

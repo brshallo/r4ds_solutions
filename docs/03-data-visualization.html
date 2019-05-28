@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="index.html">
+<link rel="next" href="05-data-transformations.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Chapter contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds-1"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section"><i class="fa fa-check"></i>3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i>3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-1"><i class="fa fa-check"></i>3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#facets"><i class="fa fa-check"></i>3.5: Facets</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-2"><i class="fa fa-check"></i>3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#geometric-objects"><i class="fa fa-check"></i>3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-3"><i class="fa fa-check"></i>3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-4"><i class="fa fa-check"></i>3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i>3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-5"><i class="fa fa-check"></i>3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i>3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-6"><i class="fa fa-check"></i>3.9.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#appendix"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#extension"><i class="fa fa-check"></i>3.7.1.1 extension</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html"><i class="fa fa-check"></i>Ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#filter-rows"><i class="fa fa-check"></i>5.2: Filter rows</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-7"><i class="fa fa-check"></i>5.2.4.</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-8"><i class="fa fa-check"></i>5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i>5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-9"><i class="fa fa-check"></i>5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i>Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-10"><i class="fa fa-check"></i>5.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#appendix-1"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-11"><i class="fa fa-check"></i>5.4.1.3.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-12"><i class="fa fa-check"></i>5.5.2.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-13"><i class="fa fa-check"></i>5.5.2.2</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-14"><i class="fa fa-check"></i>5.6.7.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-15"><i class="fa fa-check"></i>5.6.7.4.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-16"><i class="fa fa-check"></i>5.6.7.5.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-17"><i class="fa fa-check"></i>5.6.7.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-18"><i class="fa fa-check"></i>5.7.1.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-19"><i class="fa fa-check"></i>5.7.1.5</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-20"><i class="fa fa-check"></i>5.7.1.8.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#on-piping-dots"><i class="fa fa-check"></i>On piping dots</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#plotly"><i class="fa fa-check"></i>plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html"><i class="fa fa-check"></i>Ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#variation"><i class="fa fa-check"></i>7.3. Variation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-21"><i class="fa fa-check"></i>7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i>7.4. Missing values</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-22"><i class="fa fa-check"></i>7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i>7.5. Covariation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-23"><i class="fa fa-check"></i>7.5.1.1.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-24"><i class="fa fa-check"></i>7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i>7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-25"><i class="fa fa-check"></i>7.5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#appendix-2"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-26"><i class="fa fa-check"></i>7.5.2.1.2.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-27"><i class="fa fa-check"></i>7.5.3.1.4.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html"><i class="fa fa-check"></i>Ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#section-28"><i class="fa fa-check"></i>10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html"><i class="fa fa-check"></i>Ch. 11: Data import</a><ul>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-29"><i class="fa fa-check"></i>11.2.2.</a></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-30"><i class="fa fa-check"></i>11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html"><i class="fa fa-check"></i>ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#tidy-data"><i class="fa fa-check"></i>12.2: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-31"><i class="fa fa-check"></i>12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i>12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-32"><i class="fa fa-check"></i>12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i>12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-33"><i class="fa fa-check"></i>12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i>12.5: missing values</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-34"><i class="fa fa-check"></i>12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#case-study"><i class="fa fa-check"></i>12.6 Case Study</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-35"><i class="fa fa-check"></i>12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html"><i class="fa fa-check"></i>Ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#nycflights13"><i class="fa fa-check"></i>13.2 nycflights13</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-36"><i class="fa fa-check"></i>13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#keys"><i class="fa fa-check"></i>13.3 Keys</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-37"><i class="fa fa-check"></i>13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#mutating-joins"><i class="fa fa-check"></i>13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-38"><i class="fa fa-check"></i>13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#filtering-joins"><i class="fa fa-check"></i>13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-39"><i class="fa fa-check"></i>13.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#appendix-3"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-40"><i class="fa fa-check"></i>13.5.1.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html"><i class="fa fa-check"></i>Ch. 14: Strings</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#string-basics"><i class="fa fa-check"></i>14.2: String basics</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-41"><i class="fa fa-check"></i>14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i>14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-42"><i class="fa fa-check"></i>14.3.1.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-43"><i class="fa fa-check"></i>14.3.2.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-44"><i class="fa fa-check"></i>14.3.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-45"><i class="fa fa-check"></i>14.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-46"><i class="fa fa-check"></i>14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#tools"><i class="fa fa-check"></i>14.4 Tools</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-47"><i class="fa fa-check"></i>14.4.2</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-48"><i class="fa fa-check"></i>14.4.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-49"><i class="fa fa-check"></i>14.4.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-50"><i class="fa fa-check"></i>14.4.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-51"><i class="fa fa-check"></i>14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i>14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-52"><i class="fa fa-check"></i>14.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-53"><i class="fa fa-check"></i>14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html"><i class="fa fa-check"></i>Ch. 15: Factors</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-54"><i class="fa fa-check"></i>15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-55"><i class="fa fa-check"></i>15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i>15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-56"><i class="fa fa-check"></i>15.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#appendix-4"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#viewing-all-levels"><i class="fa fa-check"></i>Viewing all levels</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#percentage-na-each-level"><i class="fa fa-check"></i>Percentage NA each level</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#print-all-levels-of-tibble"><i class="fa fa-check"></i>Print all levels of tibble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html"><i class="fa fa-check"></i>Ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i>16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-57"><i class="fa fa-check"></i>16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i>16.3: Date-time components</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-58"><i class="fa fa-check"></i>16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#time-spans"><i class="fa fa-check"></i>16.4: Time spans</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-59"><i class="fa fa-check"></i>16.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#appendix-5"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-60"><i class="fa fa-check"></i>16.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-61"><i class="fa fa-check"></i>16.3.4.3</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-62"><i class="fa fa-check"></i>16.3.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="18-pipes.html"><a href="18-pipes.html"><i class="fa fa-check"></i>Ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>ch. 19: Functions</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i>19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-63"><i class="fa fa-check"></i>19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-64"><i class="fa fa-check"></i>19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-65"><i class="fa fa-check"></i>19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#function-arguments"><i class="fa fa-check"></i>19.5: Function arguments</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-66"><i class="fa fa-check"></i>19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-6"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1.4</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#applying-indexing-to-dfs"><i class="fa fa-check"></i>Applying indexing to dfs</a></li>
+</ul></li>
+<li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-69"><i class="fa fa-check"></i>20.3.5</a></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i>20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-70"><i class="fa fa-check"></i>20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i>20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-71"><i class="fa fa-check"></i>20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#augmented-vectors"><i class="fa fa-check"></i>20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-72"><i class="fa fa-check"></i>20.7.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#appendix-7"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#subsetting-nested-lists"><i class="fa fa-check"></i>Subsetting nested lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html"><i class="fa fa-check"></i>Ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops"><i class="fa fa-check"></i>21.2: For loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-73"><i class="fa fa-check"></i>21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loop-variations"><i class="fa fa-check"></i>21.3 For loop variations</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-74"><i class="fa fa-check"></i>21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i>21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-75"><i class="fa fa-check"></i>21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#the-map-functions"><i class="fa fa-check"></i>21.5: The map functions</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-76"><i class="fa fa-check"></i>21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i>21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-77"><i class="fa fa-check"></i>21.9.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-8"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-78"><i class="fa fa-check"></i>21.3.5.1</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#in-class-notes"><i class="fa fa-check"></i>in-class notes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-79"><i class="fa fa-check"></i>23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-80"><i class="fa fa-check"></i>23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-81"><i class="fa fa-check"></i>23.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-82"><i class="fa fa-check"></i>23.4.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-83"><i class="fa fa-check"></i>24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-84"><i class="fa fa-check"></i>24.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-85"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-86"><i class="fa fa-check"></i>24.2.3.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>25.3.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-89"><i class="fa fa-check"></i>25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-90"><i class="fa fa-check"></i>25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-91"><i class="fa fa-check"></i>25.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-92"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
+<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-93"><i class="fa fa-check"></i>27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-94"><i class="fa fa-check"></i>27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-95"><i class="fa fa-check"></i>27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i>28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i>28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-98"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch-3-data-visualization" class="section level1">
+<h1>Ch 3: Data visualization</h1>
+<ul>
+<li><code>geom_point</code>: Add points to plot, key args: <code>x</code>, <code>y</code>, <code>size</code>, <code>stroke</code>, <code>colour</code>, <code>alpha</code>, <code>shape</code></li>
+<li><code>geom_smooth</code>: Add line and confidence intervals to x-y plot, can use <code>se</code> to turn off standard errors, can use <code>method</code> to change algorithm to make line. <code>linetype</code> to make dotted line.</li>
+<li><code>geom_bar</code>: Stack values on top of each to make bars (default <code>stat = "count"</code>, can also change to <code>"identity"</code>. May want to make <code>y = ..prop..</code> to show y as proportion of values). <code>postion = "stacked"</code> may take on values of “<code>identity"</code>,”<code>dodge"</code>, "<code>fill"</code></li>
+<li><code>geom_count</code>: Make bar charts out of discrete row values in dataframe. <code>fill</code> to fill bars, <code>colour</code> to outline.</li>
+<li><code>geom_jitter</code>: like <code>geom_point()</code> but with randomness added, use <code>width</code> and <code>height</code> args to control (could also use <code>geom_point()</code> with <code>position = "jitter"</code>)</li>
+<li><code>geom_boxplot</code>: box and whiskers plot</li>
+<li><code>geom_polygon</code>: Can use to plot points – use with objects created from <code>map_data()</code></li>
+<li><code>geom_abline</code>:</li>
+<li><code>facet_wrap</code>: Facet multiple charts by one variable; <code>scales = "free_x"</code> (or “free”, or “free_y” are helpful)</li>
+<li><code>facet_grid</code>: Facet multiple by charts by one or two variables: <code>space</code> is helpful arg (not within <code>facet_wrap()</code>)</li>
+<li><code>stat_count</code>: Like <code>geom_bar()</code></li>
+<li><code>stat_summary</code>: can use to explicitly show ranges, e.g. with args <code>fun.ymin = min</code>, <code>fun.ymax = max</code>, <code>fun.y = median</code></li>
+<li><code>stat_bin</code>: Like <code>geom_histogram()</code></li>
+<li><code>stat_smooth</code>: Sames as <code>geom_smooth</code> but can take non-standard geom</li>
+<li><code>position</code> adjustments:
+<ul>
+<li><code>identity</code>: ; <code>dodge</code>: ; <code>fill</code>: ;</li>
+<li><code>position_dodge</code> ; <code>position_fill</code> ; <code>position_identiy</code> ; <code>position_jitter</code> ; <code>position_stack</code> ;</li>
+</ul></li>
+<li>3 ways to override default mapping</li>
+<li><code>coord_quickmap</code>: Set aspect ratio for maps</li>
+<li><code>coord_flip</code>: Flip x and y coordinates</li>
+<li><code>coord_polar</code>: Use polar coordinates – don’t use much (should set <code>theme(aspect.ratio = 1) +labs(x = NULL, y = NULL))</code></li>
+<li><code>coord_fixed</code>: Fix x and y to be same size distance between tickmarks</li>
+</ul>
+<p><code>ggplot(data = &lt;DATA&gt;) +    &lt;GEOM_FUNCTION&gt;(      mapping = aes(&lt;MAPPINGS&gt;),      stat = &lt;STAT&gt;,       position = &lt;POSITION&gt;   ) +   &lt;COORDINATE_FUNCTION&gt; +   &lt;FACET_FUNCTION&gt;</code></p>
+<div id="first-steps" class="section level2">
+<h2>3.2: First steps</h2>
+<div id="section" class="section level3">
+<h3>3.2.4</h3>
+<p><strong>1. Run ggplot(data = mpg). What do you see?</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>A blank grey space.</p>
+<p><strong>2. How many rows are in mpg? How many columns?</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">ncol</span>(mtcars)</a></code></pre></div>
+<pre><code>## [1] 11</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">nrow</span>(mtcars)</a></code></pre></div>
+<pre><code>## [1] 32</code></pre>
+<p><strong>3. What does the drv variable describe? Read the help for ?mpg to find out.</strong></p>
+<p>Front wheel, rear wheel or 4 wheel drive.</p>
+<p><strong>4. Make a scatterplot of hwy vs cyl.</strong></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hwy, <span class="dt">y =</span> cyl))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Inverse relationship.</p>
+<p><strong>5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?</strong><br />
+<em>(key question)</em></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> class, <span class="dt">y =</span> drv))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/3.2.4.5-1.png" width="672" /></p>
+<p>The points stack-up on top of one another so you don’t get a sense of how many are on each point.</p>
+<p><em>Any ideas for what methods could you use to improve the view of this data?</em></p>
+</div>
+</div>
+<div id="aesthetic-mappings" class="section level2">
+<h2>3.3: Aesthetic mappings</h2>
+<div id="section-1" class="section level3">
+<h3>3.3.1.</h3>
+<p><strong>1. What’s gone wrong with this code? Why are the points not blue?</strong></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The <code>color</code> field is in the <code>aes</code> function so it is expecting a character or factor variable. By inputting “blue” here, ggplot reads this as a character field with the value “blue” that it then supplies it’s default color schemes to (1st: salmon, 2nd: teal)</p>
+<p><strong>2. Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">mpg</a></code></pre></div>
+<pre><code>## # A tibble: 234 x 11
+##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
+##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 audi         a4      1.8  1999     4 auto~ f        18    29 p     comp~
+##  2 audi         a4      1.8  1999     4 manu~ f        21    29 p     comp~
+##  3 audi         a4      2    2008     4 manu~ f        20    31 p     comp~
+##  4 audi         a4      2    2008     4 auto~ f        21    30 p     comp~
+##  5 audi         a4      2.8  1999     6 auto~ f        16    26 p     comp~
+##  6 audi         a4      2.8  1999     6 manu~ f        18    26 p     comp~
+##  7 audi         a4      3.1  2008     6 auto~ f        18    27 p     comp~
+##  8 audi         a4 q~   1.8  1999     4 manu~ 4        18    26 p     comp~
+##  9 audi         a4 q~   1.8  1999     4 auto~ 4        16    25 p     comp~
+## 10 audi         a4 q~   2    2008     4 manu~ 4        20    28 p     comp~
+## # ... with 224 more rows</code></pre>
+<p>The data is in tibble form already so just printing it shows the type, but could also use the <code>glimpse</code> and <code>str</code> functions.</p>
+<p><strong>3. Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?</strong></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> cyl, <span class="dt">size =</span> displ, <span class="dt">shape =</span> fl))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><code>color</code>: For continuous applies a gradient, for categorical it applies distinct colors based on the number of categories.<br />
+<code>size</code>: For continuous, applies in order, for categorical will apply in an order that may be arbitrary if there is not an order provided.<br />
+<code>shape</code>: Will not allow you to input a continuous variable.</p>
+<p><strong>4. What happens if you map the same variable to multiple aesthetics?</strong><br />
+Will map onto both fields. Can be redundant in some cases, in others it can be valuable for clarity.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)<span class="op">+</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> fl, <span class="dt">shape =</span> fl))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><strong>5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)</strong></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">?geom_point</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">5</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<p>For shapes that have a border (like 21), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border.</p>
+<p><strong>6. What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ &lt; 5)?</strong></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> displ <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>The field becomes a logical operator in this case.</p>
+</div>
+</div>
+<div id="facets" class="section level2">
+<h2>3.5: Facets</h2>
+<div id="section-2" class="section level3">
+<h3>3.5.1.</h3>
+<p><strong>1. What happens if you facet on a continuous variable?</strong></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>It will facet along all of the possible values.</p>
+<p><strong>2. What do the empty cells in plot with <code>facet_grid(drv ~ cyl)</code> mean?</strong></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>cyl)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><strong>How do they relate to this plot?</strong></p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> cyl))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>They represent the locations where there is no point on the above graph (could be made more clear by giving consistent order to axes).</p>
+<p><strong>3. What plots does the following code make? What does . do?</strong></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>cyl)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<p>Can use to specify if to facet by rows or columns.</p>
+<p><strong>4. Take the first faceted plot in this section:</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>class, <span class="dt">nrow =</span> <span class="dv">2</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><strong>What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?</strong></p>
+<p>Faceting prevents overlapping points in the data. A disadvantage is that you have to move your eye to look at different graphs. Some groups you don’t have much data on as well so those don’t present much information. If there is more data, you may be more comfortable using facetting as each group should have points that you can view.</p>
+<p><strong>5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn’t facet_grid() have nrow and ncol argument?</strong></p>
+<p><code>nrow</code> and <code>ncol</code> specify the number of columns or rows to facet by, <code>facet_grid</code> does not have this option because the splits are defined by the number of unique values in each variable. Other important options are <code>scales</code> which let you define if the scales are able to change between each plot.</p>
+<p><strong>6. When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?</strong></p>
+<p>I’m not sure why exactly, if I compare these, it’s not completely unclear.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co">#more unique levels on columns</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="st">  </span><span class="kw">facet_grid</span>(year <span class="op">~</span><span class="st"> </span>class)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co">#more unique levels on rows</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="st">  </span><span class="kw">facet_grid</span>(class <span class="op">~</span><span class="st"> </span>year)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<p>My guess though would be that it’s because our computer screens are generally wider than they are tall. Hence there will be more space for viewing a higher number of attributes going across columns than by rows.</p>
+</div>
+</div>
+<div id="geometric-objects" class="section level2">
+<h2>3.6: Geometric Objects</h2>
+<div id="section-3" class="section level3">
+<h3>3.6.1</h3>
+<p><strong>1. What geom would you use to draw a line chart? A boxplot? A histogram? An area chart?</strong><br />
+* <code>geom_line</code><br />
+* <code>geom_boxplot</code><br />
+* <code>geom_histogram</code><br />
+* <code>geom_area</code>
++ Notice that <code>geom_area</code> is just a special case of <code>geom_ribbon</code></p>
+<p><em>Example of <code>geom_area</code>:</em></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">huron &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">year =</span> <span class="dv">1875</span><span class="op">:</span><span class="dv">1972</span>, <span class="dt">level =</span> <span class="kw">as.vector</span>(LakeHuron) <span class="op">-</span><span class="st"> </span><span class="dv">575</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2">h &lt;-<span class="st"> </span><span class="kw">ggplot</span>(huron, <span class="kw">aes</span>(year))</a>
+<a class="sourceLine" id="cb25-3" title="3"></a>
+<a class="sourceLine" id="cb25-4" title="4">h <span class="op">+</span><span class="st"> </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> level))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">h <span class="op">+</span><span class="st"> </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Add aesthetic mappings</span></a>
+<a class="sourceLine" id="cb27-2" title="2">h <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-3" title="3"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> level <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">ymax =</span> level <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb27-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-17-3.png" width="672" /></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">h <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-17-4.png" width="672" /></p>
+<p><strong>2. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.</strong></p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><strong>3. What does show.legend = FALSE do? What happens if you remove it? Why do you think I used it earlier in the chapter?</strong></p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="st">  </span><span class="kw">geom_smooth</span>(</a>
+<a class="sourceLine" id="cb31-3" title="3">    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv),</a>
+<a class="sourceLine" id="cb31-4" title="4">    <span class="dt">show.legend =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb31-5" title="5">  )</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>It get’s rid of the legend that would be assogiated with this geom. You removed it previously to keep it consistent with your other graphs that did not include them to specify the <code>drv</code>.</p>
+<p><strong>4. What does the <code>se</code> argument to <code>geom_smooth()</code> do?</strong><br />
+<code>se</code> here stands for standard error, so if we specify it as <code>FALSE</code> we are saying we do not want to show the standard errors for the plot.</p>
+<p><strong>5. Will these two graphs look different? Why/why not?</strong></p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb33-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy))</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-20-2.png" width="672" /></p>
+<p>No, because local mappings for each geom are the same as the global mappings in the other.</p>
+<p><strong>6. Recreate the R code necessary to generate the following graphs.</strong></p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">group =</span> drv))<span class="op">+</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">colour =</span> drv))<span class="op">+</span></a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb43-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> drv)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb45-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> drv), <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+</div>
+<div id="statistical-transformations" class="section level2">
+<h2>3.7: statistical transformations</h2>
+<div id="section-4" class="section level3">
+<h3>3.7.1.</h3>
+<p><strong>1. What is the default <code>geom</code> associated with <code>stat_summary()</code>? How could you rewrite the previous plot to use that geom function instead of the stat function?</strong></p>
+<p>The default is <code>geom_pointrange</code>, the point being the mean, and the lines being the standard error on the y value (i.e. the deviation of the mean of the value).</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty))</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><em>Rewritten with geom<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>:</em></p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty), <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>The specific example though is actually not the default:</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(</a>
+<a class="sourceLine" id="cb52-3" title="3">    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth),</a>
+<a class="sourceLine" id="cb52-4" title="4">    <span class="dt">fun.ymin =</span> min,</a>
+<a class="sourceLine" id="cb52-5" title="5">    <span class="dt">fun.ymax =</span> max,</a>
+<a class="sourceLine" id="cb52-6" title="6">    <span class="dt">fun.y =</span> median</a>
+<a class="sourceLine" id="cb52-7" title="7">  )</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p><em>Rewritten with geom:</em></p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds)<span class="op">+</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth), </a>
+<a class="sourceLine" id="cb53-3" title="3">                  <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, </a>
+<a class="sourceLine" id="cb53-4" title="4">                  <span class="dt">fun.ymin =</span> <span class="st">&quot;min&quot;</span>,</a>
+<a class="sourceLine" id="cb53-5" title="5">                  <span class="dt">fun.ymax =</span> <span class="st">&quot;max&quot;</span>, </a>
+<a class="sourceLine" id="cb53-6" title="6">                  <span class="dt">fun.y =</span> <span class="st">&quot;median&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><strong>2. What does geom_col() do? How is it different to geom_bar()?</strong><br />
+<code>geom_col</code> has <code>"identity" as the default</code>stat<code>, so it expects to receive a variable that already has the value aggregated^[I often use this over</code>geom_bar` and do the aggregation with dplyr rather than ggplot2]</p>
+<p><strong>3.Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?</strong></p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">?ggplot2</a></code></pre></div>
+<p><strong>4.What variables does stat_smooth() compute? What parameters control its behaviour?</strong><br />
+See here: <a href="http://ggplot2.tidyverse.org/reference/#section-layer-stats" class="uri">http://ggplot2.tidyverse.org/reference/#section-layer-stats</a> for a helpful resource.
+Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/geom" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/geom</a><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p><strong>5. In our proportion bar chart, we need to set group = 1. Why? In other words what is the problem with these two graphs?</strong><br />
+(key question)</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop..))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color, <span class="dt">y =</span> ..prop..))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<p>This is a solution, but still seems off as prop becomes out of a value greater than 1</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> color))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>For this second graph though, I would think you would want something more like the following:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color), <span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>Which could be generated by this code as well</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> prop, <span class="dt">fill =</span> color))<span class="op">+</span></a>
+<a class="sourceLine" id="cb60-6" title="6"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
+</div>
+</div>
+<div id="position-adjjustment" class="section level2">
+<h2>3.8: Position Adjjustment</h2>
+<p><em>Some “dodge”" examples:</em></p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> n, <span class="dt">fill =</span> color))<span class="op">+</span></a>
+<a class="sourceLine" id="cb62-4" title="4"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-38-2.png" width="672" /></p>
+<p>Looking of <code>geom_jitter</code> and only changing width.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb63-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">width =</span> <span class="fl">.2</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<div id="section-5" class="section level3">
+<h3>3.8.1.</h3>
+<p><strong>1.What is the problem with this plot? How could you improve it?</strong>
+(key question)</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<p>The points overlap, could use <code>geom_jitter</code> instead</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb65-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p><strong>2. What parameters to geom_jitter() control the amount of jittering?</strong><br />
+<code>height</code> and <code>width</code></p>
+<p><strong>3. Compare and contrast geom_jitter() with geom_count().</strong><br />
+(key question)
+Take the above chart and instead use <code>geom_count</code></p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb66-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>Can also use <code>geom_count</code> with <code>color</code>, and can use “jitter” in <code>position</code> arg.</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-43-2.png" width="672" /></p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-43-3.png" width="672" /></p>
+<p>One problem with <code>geom_count</code> is that the shapes can still block-out other shapes at that same point of different colors. You can flip the orderof the stacking order of the colors with <code>position</code> = “dodge”. Still this seems limited.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning: Width not defined. Set with `position_dodge(width = ?)`</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><strong>4. What’s the default position adjustment for geom_boxplot()? Create a visualisation of the mpg dataset that demonstrates it.</strong><br />
+<code>dodge</code>, but seems like <code>identity</code> is the same</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>mpg, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>class, <span class="dt">y=</span>hwy))<span class="op">+</span></a>
+<a class="sourceLine" id="cb72-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+</div>
+</div>
+<div id="coordinate-systems" class="section level2">
+<h2>3.9: Coordinate systems</h2>
+<p><code>coord_flip</code> is helpful, especially for quickly tackling issues with axis labels
+<code>coord_quickmap</code> is important to remember if plotting spatial data.
+<code>coord_polar</code> is important to remember if plotting spatial coordinates.
+<code>map_data</code> for extracting data on maps of locations</p>
+<div id="section-6" class="section level3">
+<h3>3.9.1.</h3>
+<p><strong>1.Turn a stacked bar chart into a pie chart using <code>coord_polar()</code>.</strong><br />
+These are more illustrative than anything, here is a note from the documetantion:<br />
+<em>NOTE: Use these plots with caution - polar coordinates has major perceptual problems. The main point of these examples is to demonstrate how these common plots can be described in the grammar. Use with EXTREME caution.</em></p>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">fill =</span> class))<span class="op">+</span></a>
+<a class="sourceLine" id="cb73-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb73-3" title="3"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb73-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+<p>If I want to make multiple levels:</p>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(cyl), <span class="dt">fill =</span> class))<span class="op">+</span></a>
+<a class="sourceLine" id="cb74-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb74-3" title="3"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>)</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
+<p><strong>2. What does labs() do? Read the documentation.</strong><br />
+Used for giving labels.</p>
+<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">?labs</a></code></pre></div>
+<p><strong>3. What’s the difference between <code>coord_quickmap()</code> and <code>coord_map()</code>?</strong><br />
+The first is an approximation, useful for smaller regions to be proected. For this example, do not see substantial differences.</p>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">nz &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;nz&quot;</span>)</a>
+<a class="sourceLine" id="cb76-2" title="2"></a>
+<a class="sourceLine" id="cb76-3" title="3"><span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span></a>
+<a class="sourceLine" id="cb76-4" title="4"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb76-5" title="5"><span class="st">  </span><span class="kw">coord_quickmap</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
+<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span></a>
+<a class="sourceLine" id="cb77-2" title="2"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb77-3" title="3"><span class="st">  </span><span class="kw">coord_map</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-49-2.png" width="672" /></p>
+<p><strong>4. What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?</strong><br />
+<code>geom_abline()</code> adds a line with a given intercept and slope (either given by <code>aes</code> or by <code>intercept</code> and <code>slope</code> args)<br />
+<code>coord_fixed</code> ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.</p>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb78-3" title="3"><span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb78-4" title="4"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+</div>
+</div>
+<div id="appendix" class="section level2">
+<h2>Appendix</h2>
+<div id="extension" class="section level3">
+<h3>3.7.1.1 extension</h3>
+<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty, <span class="dt">group =</span> cyl))<span class="op">+</span></a>
+<a class="sourceLine" id="cb79-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>This seems to be the same as what you would get by doing the following with dplyr:</p>
+<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">mpg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb81-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb81-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(cty),</a>
+<a class="sourceLine" id="cb81-4" title="4">            <span class="dt">sd =</span> (<span class="kw">sum</span>((cty <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cty))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">n</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))<span class="op">^</span><span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb81-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb81-6" title="6">            <span class="dt">se =</span> sd <span class="op">/</span><span class="st"> </span>n<span class="op">^</span><span class="fl">0.5</span>,</a>
+<a class="sourceLine" id="cb81-7" title="7">            <span class="dt">lower =</span> mean <span class="op">-</span><span class="st"> </span>se,</a>
+<a class="sourceLine" id="cb81-8" title="8">            <span class="dt">upper =</span> mean <span class="op">+</span><span class="st"> </span>se) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb81-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> mean, <span class="dt">group =</span> cyl))<span class="op">+</span></a>
+<a class="sourceLine" id="cb81-10" title="10"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper))</a></code></pre></div>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<p>Other geoms you could have set stat_summary to:</p>
+<p><code>crossbar</code>:</p>
+<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;crossbar&quot;</span>)</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
+<p><code>errorbar</code>:</p>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>)</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><code>linerange</code>:</p>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;linerange&quot;</span>)</a></code></pre></div>
+<pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
+<p><img src="03-data-visualization_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+
+<p><em>Make sure the following packages are installed:</em></p>
+<div class="footnotes">
+<hr />
+<ol start="2">
+<li id="fn2"><p>See <a href="03-data-visualization.html#extension">3.7.1.1 extension</a> for notes on how to relate this to dplyr code.<a href="03-data-visualization.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>Though it’s missing some very common ones like <code>geom_col</code> and <code>geom_bar</code>.<a href="03-data-visualization.html#fnref3" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//brshallo.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="05-data-transformations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

@@ -13,7 +13,7 @@ library(nasaweather)
 library(lubridate)
 ```
 
-# ch. 27: R Markdown
+# Ch. 27: R Markdown
 
 * shortcut for inserting code chunk is cmd/ctrl+alt+i
 * shortcut for running entire code chunks: cmd/ctrl+shift+enter
@@ -129,7 +129,8 @@ summary(mpg)
     jobs/degrees. Highlight the year in bold.
     
 *this is a weak example (see __ for better examples):*
-    
+
+```{block2, type = 'FOO', echo = FALSE} 
 __CV of Bryan Shalloway__
 ---
 _###-###-####_
@@ -157,6 +158,8 @@ WashU in STL, AB | _2012_
     + Major: Cognitive Neuroscience
     + Minor: Political Science
     + Minor: American Culture Studies
+
+```
     
 2.  Using the R Markdown quick reference, figure out how to:
 

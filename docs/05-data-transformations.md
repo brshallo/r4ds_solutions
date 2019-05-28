@@ -14,7 +14,7 @@ library(tidyr)
 library(plotly) 
 ```
 
-# ch. 5 Data transformations
+# Ch. 5 Data transformations
   
 **Key functions from chapter:**  
   
@@ -946,7 +946,7 @@ flights %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-39-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 *Percentage of flights delayed or canceled by `origin`*  
 
@@ -1288,7 +1288,7 @@ flights %>%
   geom_line()
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-51-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-51-1.png" width="672" />
 
 **Is the proportion of cancelled flights related to the average delay?**  
 
@@ -1305,7 +1305,7 @@ flights %>%
   geom_line()
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-52-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-52-1.png" width="672" />
 
 ```r
 flights %>% 
@@ -1318,7 +1318,7 @@ flights %>%
   geom_line()
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-52-2.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-52-2.png" width="672" />
 
 Looks roughly like there is some overlap.  
   
@@ -1502,7 +1502,7 @@ flights %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-57-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-57-1.png" width="672" />
 
 Fly in the morning.
 
@@ -1736,10 +1736,10 @@ tail_nums_counts %>%
 ```
 
 
-# Appendix
+## Appendix
 The appendix is either extensions upon solutions. Solving the problems using functions we haven'te learned yet, or other random notes / tidbits.  
 
-## 5.4.1.3.
+### 5.4.1.3.
 You actually don't need `one_of` for selecting by character vector, more useful is when using it to negate fields by name.  
 
 
@@ -1766,8 +1766,7 @@ select(flights, -one_of(vars))
 ## #   time_hour <dttm>
 ```
 
-
-## 5.5.2.1.
+### 5.5.2.1.
 Other, more sophisticated method^[This method is helpful for if you have more than ust a couple variables you are applying a transformation to.]
 
 ```r
@@ -1776,9 +1775,9 @@ mutate_at(.tbl = flights,
           .funs = funs(new = time_to_mins)) 
 ```
 
-## 5.5.2.2
+### 5.5.2.2
 
-### Closer look at `air_time`
+**Closer look at `air_time`**
 
 Wanted to look at original `air_time` variable a little more. Histogram below shows that most differences are now between 20 - 40 minutes from the actual time.
 
@@ -1803,7 +1802,7 @@ flights_new2 %>%
 ## Warning: Removed 5 rows containing non-finite values (stat_bin).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-67-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-67-1.png" width="672" />
 
 Regressing `diff` on `arr_delay` and `dep_delay` (remember `diff` is the difference between `air_time` and `air_calc`)
 
@@ -1909,11 +1908,11 @@ flights_preds_mod %>%
   geom_point(aes(colour = diff_group))
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-72-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-72-1.png" width="672" />
 
 I'm going to stop there though for now. Below are just some other plots I was messing aroun with.
 
-### Other plots with `air_time`
+**Other plots with `air_time`:**
 These are mostly just me messing around. This section will be very tough to follow.  
   
 Produce 3-d plot with actuals in black and predictions in red and green (not evaluated in html document).
@@ -1962,8 +1961,7 @@ flights_new2 %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-74-1.png)<!-- -->
-
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-74-1.png" width="672" />
 
 Use linear regression to identify those points that were off from the relationship between `air_time` and `distance`.
 +First build model
@@ -2027,8 +2025,7 @@ flights %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-76-1.png)<!-- -->
-
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-76-1.png" width="672" />
 
 For fun, select 6 random `dest` and plot the `dep_time` vs `air_calc` (true `air_time`) with a median line cutting through the ponits.
 
@@ -2057,7 +2054,7 @@ flights_new2 %>%
 ## Warning: Removed 101 rows containing missing values (geom_path).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-77-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-77-1.png" width="672" />
 
 Do the same with the original `air_calc` values (would want to standardize access between these and above)
 
@@ -2080,6 +2077,18 @@ flights %>%
 ```
 
 ```
+## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.
+```
+
+```
 ## Warning: Removed 289 rows containing missing values (geom_point).
 ```
 
@@ -2087,8 +2096,7 @@ flights %>%
 ## Warning: Removed 101 rows containing missing values (geom_path).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-78-1.png)<!-- -->
-
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-78-1.png" width="672" />
 
 Explore the `air_time` var more.
 If you want to see how these may differ by different categories^[ Linear regression is used here which aren't learned until later in the book though.]. 
@@ -2112,8 +2120,7 @@ flights %>%
 ## Warning: Removed 341 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-79-1.png)<!-- -->
-
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-79-1.png" width="672" />
 
 Distribution of times each flight number runs in window.
 
@@ -2127,10 +2134,9 @@ flights %>%
   geom_histogram(bins = 100)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-80-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-80-1.png" width="672" />
 
-
-## 5.6.7.1.
+### 5.6.7.1.
 
 Below is an extension on using the `quantile` method, but it is far beyond where we are right now.
 
@@ -2281,7 +2287,7 @@ flights_quantiles %>%
 ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-87-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-87-1.png" width="672" />
 
 It can be a hassle naming the values explicitly. `quantile`'s default `probs` argument value is 0, 0.25, 0.5, 0.75, 1. Rather than needing to type the `delays_q` values `list(c('0%', '25%', '50%', '75%', '100%'))` you could have generated the values of these names dynamically using the `map` function in the `purrr` package (see chapter on iteration) to pass the `names` function over each value in `delays_val`.    
 
@@ -2338,7 +2344,7 @@ flights_quantiles2 %>%
 ```
 
 
-## 5.6.7.4.
+### 5.6.7.4.
 
 To measure the difference in speed you can use the `microbenchmark` function
 
@@ -2350,14 +2356,15 @@ microbenchmark::microbenchmark(sub_optimal = filter(flights, is.na(dep_delay) | 
 
 ```
 ## Unit: milliseconds
-##         expr     min      lq     mean   median      uq     max neval cld
-##  sub_optimal 10.1081 11.6101 12.15488 11.75005 12.3097 15.6739    10   b
-##      optimal  7.1464  7.3394  8.04483  8.10905  8.4581  9.3521    10  a
+##         expr      min       lq     mean   median       uq       max neval
+##  sub_optimal 4.837101 5.660301 7.055281 6.891951 7.830601 10.312501    10
+##      optimal 3.363102 3.972701 4.787591 4.713501 5.686901  6.458901    10
+##  cld
+##    b
+##   a
 ```
 
-
-
-## 5.6.7.5.
+### 5.6.7.5.
 
 Explore the percentage delayed vs. percentage cancelled.
 
@@ -2374,8 +2381,7 @@ flights %>%
     geom_line(aes(y = delayed_perc), colour = "dark red")
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-91-1.png)<!-- -->
-
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-91-1.png" width="672" />
 
 Let's try faceting by origin and looking at both values next to each other.
 
@@ -2392,7 +2398,7 @@ flights %>%
   facet_grid(type ~ origin, scales = "free_y")
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-92-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-92-1.png" width="672" />
 
 Look's like the relationship across origins with the delay overlaid with color (not actually crazy about how this look).  
 
@@ -2409,7 +2415,7 @@ flights %>%
   facet_grid(origin ~ .)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-93-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-93-1.png" width="672" />
 
 Let's look at values as individual points and overlay a `geom_smooth`
 
@@ -2429,9 +2435,9 @@ flights %>%
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-94-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-94-1.png" width="672" />
 
-### Modeling approach
+**Modeling approach:**
 
 We also could approach this using a model and regressing the average proportion of cancelled flights on average delay.
 
@@ -2537,12 +2543,12 @@ cancelled_preds2 %>%
   geom_line(aes(y = cancelled_mod2), colour = "red", size = 1)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-99-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-99-1.png" width="672" />
 
 ^[Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix...]
   
 
-## 5.6.7.6.
+### 5.6.7.6.
 
 
 As an example, let's look at just Atl flights from LGA and compare DL, FL, MQ.
@@ -2592,7 +2598,7 @@ carriers_lga_atl %>%
   geom_text(mapping = aes(x = carrier, group = carrier, y = arr_delay + 5, label = arr_delay), data = label)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-101-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-101-1.png" width="672" />
 
 Or perhaps you want to use a statistical method to compare if the differences in the grouped are significant...
 
@@ -2627,7 +2633,7 @@ carriers_lga_atl %>%
 This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)^[Repeated t-test methods could be used for comparing MQ and FL, see function `pairwise.t.test`]. The carrier accouts for ~1.6% of the variation in arrival... etc....  
 
 
-## 5.7.1.6.
+### 5.7.1.6.
 
 Let's look at the fastest 20 `air_time`s for each destination.
 
@@ -2641,7 +2647,7 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-103-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-103-1.png" width="672" />
 
 Let's do the same for my custom `air_time` calculation `air_calc`. 
 
@@ -2655,7 +2661,7 @@ flights_new2 %>%
   guides(colour = FALSE)
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-104-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-104-1.png" width="672" />
 
 *Rather than the fastest 20, let's look at the mean `dist` and `air_time` for each^[Each colour corresponds with a `dest` though I excluded the legend.].*  
   
@@ -2678,7 +2684,7 @@ flights_new2 %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-105-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-105-1.png" width="672" />
 
 Then with the custom `air_calc`.
 
@@ -2699,9 +2705,9 @@ flights_new2 %>%
 ## Warning: Removed 5 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-106-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-106-1.png" width="672" />
 
-## 5.7.1.5
+### 5.7.1.5
 
 Let's run this for every 3 lags (1, 4, 7, ...) and plot.
 
@@ -2716,10 +2722,10 @@ lags_cors %>%
   coord_cartesian(ylim = c(0, 0.40))
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-107-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-107-1.png" width="672" />
 
 
-## 5.7.1.8.
+### 5.7.1.8.
 
 
 ```r
@@ -2729,8 +2735,6 @@ tail_nums_counts %>%
   unnest() %>% 
   View()
 ```
-
-## Other
 
 ### On piping dots
 
@@ -2852,8 +2856,9 @@ flights %>%
 ##    LGA  7803 12541     0  5988   544
 ```
 
-## plotly
-the `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
+### plotly
+
+The `plotly` package has a cool function `ggplotly` that allows you to add wrappers `ggplot` that turn it into html that allow you to do things like zoom-in and hover over points. It also has a `frame` argument that allows you to make animations or filter between points. Here is an example from the `flights` dataset.  
 
 Note that this will not render in a markdown format, but only in html.
 
@@ -2893,5 +2898,5 @@ flights %>%
 ## Warning: Removed 1 rows containing missing values (geom_point).
 ```
 
-![](05-data-transformations_files/figure-epub3/unnamed-chunk-117-1.png)<!-- -->
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-117-1.png" width="672" />
 

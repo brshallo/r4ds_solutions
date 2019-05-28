@@ -3,7 +3,7 @@
 
 
 
-# ch. 27: R Markdown
+# Ch. 27: R Markdown
 
 * shortcut for inserting code chunk is cmd/ctrl+alt+i
 * shortcut for running entire code chunks: cmd/ctrl+shift+enter
@@ -133,34 +133,8 @@ summary(mpg)
     jobs/degrees. Highlight the year in bold.
     
 *this is a weak example (see __ for better examples):*
-    
-__CV of Bryan Shalloway__
----
-_###-###-####_
 
-## Experience
-NetApp, Data Scientist | _2017-present_ 
----|---
-__Durham__ |
 
-Education Pioneers, Analyst | _2015-2016_ 
--|-
-__Denver__ |
-
-Teach for America, High School Math | _2013-2015_ 
--|-
-__Durham__ |
-
-## Education
-IAA, MS | _2017_  
--|-
-    + Advanced Analytics
-
-WashU in STL, AB | _2012_  
--|-
-    + Major: Cognitive Neuroscience
-    + Minor: Political Science
-    + Minor: American Culture Studies
     
 2.  Using the R Markdown quick reference, figure out how to:
 
@@ -202,7 +176,7 @@ pagebreaks above and below (AKA horizontal rules)
     R markdown document. Check that you can run it, then add text after the 
     frequency polygon that describes its most striking features.
 
-    ![](27-r-markdown_files/figure-epub3/unnamed-chunk-4-1.png)<!-- -->
+    <img src="27-r-markdown_files/figure-html/unnamed-chunk-5-1.png" width="672" />
 
 * It's interesting that the count of number of diamonds spikes at whole numbers...
 
@@ -234,7 +208,7 @@ pagebreaks above and below (AKA horizontal rules)
     
     
     
-    Table: (\#tab:unnamed-chunk-5)The four C's of the 20 biggest diamonds
+    Table: (\#tab:unnamed-chunk-6)The four C's of the 20 biggest diamonds
     
      carat  cut         color   clarity 
     ------  ----------  ------  --------
@@ -299,7 +273,7 @@ lubridate::now()
 ```
 
 ```
-## [1] "2019-05-24 16:12:01 EDT"
+## [1] "2019-05-28 16:46:47 EDT"
 ```
     
 
@@ -308,7 +282,7 @@ lubridate::now()
 ```
 
 ```
-## [1] "2019-05-24 16:12:02 EDT"
+## [1] "2019-05-28 16:46:47 EDT"
 ```
 
 
@@ -317,7 +291,7 @@ lubridate::now()
 ```
 
 ```
-## [1] "2019-05-24 16:12:02 EDT"
+## [1] "2019-05-28 16:46:47 EDT"
 ```
 
 
@@ -326,6 +300,6 @@ lubridate::now()
 ```
 
 ```
-## [1] "2019-05-24 16:12:02 EDT"
+## [1] "2019-05-28 16:46:47 EDT"
 ```
 

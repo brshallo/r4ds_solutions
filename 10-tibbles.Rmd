@@ -9,7 +9,7 @@ library(nycflights13)
 library(readr)
 ```
 
-# ch. 10: Tibbles
+# Ch. 10: Tibbles
 
 ```{r, eval = FALSE}
 vignette("tibble")

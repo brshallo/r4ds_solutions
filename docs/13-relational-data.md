@@ -2,7 +2,7 @@
 
 
 
-# ch. 13: Relational data
+# Ch. 13: Relational data
 
 > "The relations of three or more tables are always a property of the relations between each pairs."  
 
@@ -389,7 +389,7 @@ weather
       scale_color_gradientn(colours = rainbow(3))
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-15-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-15-1.png" width="672" />
     
 
 1.  *Add the location of the origin _and_ destination (i.e. the `lat` and `lon`)*
@@ -437,7 +437,7 @@ weather
       geom_smooth()
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-17-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-17-1.png" width="672" />
     
     Looks as though planes that are roughly 5 to 10 years old have higher delays... Let's look at same thing using boxplots.
     
@@ -454,7 +454,7 @@ weather
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-18-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-18-1.png" width="672" />
     
     Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern -- though this may just be me seeing things... perhaps worth exploring more...
     
@@ -520,7 +520,7 @@ weather
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-20-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
     While precipitation is the largest difference, my guess is that the standard error on this would be much greater day to day because as you can see the values are very low, so it could be that a few cases with a lot of rain may tick it up, but it may be tough to actually use this as a predictor... 
 
@@ -758,7 +758,7 @@ weather
       labs(title = 'Hourly weather values across worst 48 hours of delays')
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-30-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
     Patterns:  
       
@@ -786,7 +786,7 @@ weather
            caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-31-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
     For this to be the worst 48 hour period, the weather doesn't actually seem to be as extreme as I would have guessed.
     
@@ -814,7 +814,7 @@ weather
       labs(title = 'Hourly weather and delay values across worst 48 hours of delays')
     ```
     
-    ![](13-relational-data_files/figure-epub3/unnamed-chunk-32-1.png)<!-- -->
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
     Maybe that first uptick in precipitation corresponded with the increase in delay... but still, looks extreme like an incident caused this. I cheched the news and it looks like a plane was crash landed onto the tarmac at one of the airports on this day https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4 , I checked the incident time and it occurred at 17:45 Jul 22, looks like it overlaps with the time we see the uptick in delays.  
 
@@ -897,9 +897,9 @@ weather
     ## # ... with 24 more rows
     ```
 
-#Appendix
+## Appendix
 
-##13.5.1.4
+### 13.5.1.4
 
 Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.
 
@@ -914,7 +914,7 @@ delays_windows %>%
   labs(title = 'Measures of delay across 48 hour time windows')
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-35-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 Create 48 hour windows for weather data. Follow exact same steps as above.
 
@@ -955,7 +955,7 @@ weather_windows %>%
   labs(title = 'Measures of weather across 48 hour time windows')
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-37-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-37-1.png" width="672" />
 
 Connect delays and weather data
 
@@ -981,7 +981,7 @@ weather_delay_joined %>%
   labs(colour = "Weather value", title = "Mean delay and weather value in 2-day rolling window")
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-39-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 Plot of mean_delay against weather type, each point representing a different 'window'
 
@@ -994,7 +994,7 @@ weather_delay_joined %>%
   facet_wrap(~weather_type, scales = "free_x")
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-40-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below... This is often ignored and we can also ignore it for now as it gets into time series and things we don't need to worry about for now... but somthing to be aware...
 
@@ -1107,7 +1107,7 @@ weather_delay_joined %>%
 ## Warning: Removed 2 rows containing missing values (geom_path).
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-44-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 Let's plot these diffs as a scatter plot now (no longer looking at the order in which the observations emerged)
 
@@ -1133,7 +1133,7 @@ weather_delay_joined %>%
 ## Warning: Removed 7 rows containing missing values (geom_point).
 ```
 
-![](13-relational-data_files/figure-epub3/unnamed-chunk-45-1.png)<!-- -->
+<img src="13-relational-data_files/figure-html/unnamed-chunk-45-1.png" width="672" />
 
 Let's look at the correlatioin and regression against these diffs
 

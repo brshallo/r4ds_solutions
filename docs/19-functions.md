@@ -226,7 +226,7 @@ commas(letters[1:10])
       facet_wrap(~ dist_type, scales = "free")
     ```
     
-    ![](19-functions_files/figure-epub3/unnamed-chunk-11-1.png)<!-- -->
+    <img src="19-functions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     ```r
     tibble(dist_type = names(distributions_df),
@@ -238,10 +238,10 @@ commas(letters[1:10])
     ## # A tibble: 4 x 3
     ##   dist_type    skewness variance
     ##   <chr>           <dbl>    <dbl>
-    ## 1 normal_dist  -0.0161    1.02  
-    ## 2 t_7df_dist   -0.0768    1.35  
-    ## 3 uniform_dist -0.00587   0.0825
-    ## 4 poisson_dist  0.688     1.95
+    ## 1 normal_dist   -0.0110   1.01  
+    ## 2 t_7df_dist     0.0597   1.41  
+    ## 3 uniform_dist  -0.0219   0.0833
+    ## 4 poisson_dist   0.707    1.97
     ```
     
     * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
@@ -435,7 +435,7 @@ has_name <- function(x) {
     ```
     
     ```
-    ## good afternoon, it is: 2019-05-24 16:06:38
+    ## good afternoon, it is: 2019-05-28 16:42:31
     ```
 
 1.  Implement a `fizzbuzz` function. It takes a single number as input. If
@@ -803,13 +803,13 @@ cauchy_exp <- rcauchy(10000)
 hist(norm_exp)
 ```
 
-![](19-functions_files/figure-epub3/unnamed-chunk-33-1.png)<!-- -->
+<img src="19-functions_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 
 ```r
 hist(cauchy_exp)
 ```
 
-![](19-functions_files/figure-epub3/unnamed-chunk-33-2.png)<!-- -->
+<img src="19-functions_files/figure-html/unnamed-chunk-33-2.png" width="672" />
 
 ```r
 kurtosis_type3(norm_exp)
@@ -911,9 +911,9 @@ microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
 
 ```
 ## Unit: microseconds
-##    expr  min    lq     mean median    uq     max neval cld
-##  ifelse 62.3 71.70 146.0926   93.4 135.6 16005.7   500   b
-##   index 25.6 29.25  46.2020   38.8  44.4  3840.7   500  a
+##    expr    min      lq      mean median       uq      max neval cld
+##  ifelse 53.701 57.3015 103.93380 64.351 107.1505 4448.601   500   b
+##   index 21.500 23.4510  37.10377 26.001  34.7010 3061.202   500  a
 ```
 
 The index methods tends to be faster.
@@ -1020,9 +1020,9 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 ```
 ## Unit: milliseconds
 ##   expr       min        lq      mean    median        uq       max neval
-##  index  120.2948  151.2278  223.9065  248.3265  276.6518  319.1782    10
-##  dplyr  142.6055  285.1252  300.0355  312.0125  336.3470  448.1001    10
-##  purrr 1693.6892 1788.6279 1959.1419 1855.3558 2058.3053 2590.0183    10
+##  index   76.4143  108.5001  195.4987  214.5160  222.3934  319.3723    10
+##  dplyr   76.3414   77.8325  141.4804  121.5022  192.6553  258.9295    10
+##  purrr 1103.8537 1209.7316 1424.7291 1313.7910 1426.7856 2205.4433    10
 ##  cld
 ##   a 
 ##   a 
@@ -1041,10 +1041,10 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 
 ```
 ## Unit: milliseconds
-##   expr       min        lq      mean    median        uq       max neval
-##  index   93.1343  109.6156  189.2503  144.2494  276.5623  341.5069    10
-##  dplyr  100.7915  102.6435  181.4843  173.2571  249.5053  267.6536    10
-##  purrr 1712.8799 1811.4781 1892.4751 1880.7891 1939.2587 2214.9239    10
+##   expr       min        lq      mean     median       uq       max neval
+##  index   78.9846   95.7065  101.6078   97.13825  114.364  130.3182    10
+##  dplyr   61.0618   82.6142  126.2712  115.14610  171.070  222.4850    10
+##  purrr 1173.6570 1194.9358 1231.8845 1219.70455 1267.879 1350.9402    10
 ##  cld
 ##   a 
 ##   a 

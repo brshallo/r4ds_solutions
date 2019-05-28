@@ -13,7 +13,7 @@ library(hms)
 ```
 
 
-# ch. 16: Dates and times
+# Ch. 16: Dates and times
 
 * `today` get current date
 * `now` get current date-time
@@ -350,9 +350,9 @@ To find out how many periods fall in an interval, need to use integer division
 1.  Why can't `(today() %--% (today() + years(1)) / months(1)` work?
     * Can't add and subtract intervals
 
-# Appendix
+## Appendix
 
-## 16.3.4.1
+### 16.3.4.1
 
 *Weekly median fight time*
 ```{r}
@@ -404,7 +404,7 @@ flights_dt %>%
 ```
 
 
-## 16.3.4.3
+### 16.3.4.3
 
 * Perhaps these are flights where landed in different location...
 ```{r}
@@ -414,7 +414,7 @@ flights_dt %>%
   filter(is.na(arr_delay))
 ```
 
-## 16.3.4.4
+### 16.3.4.4
 
 *Below started looking at proportions...
 ```{r}
@@ -457,6 +457,4 @@ mutate(flights_dt,
   ggplot(aes(x = mins_dep, y = prop_recent10)) +
   geom_line()+
   labs(title = "proportion of early flights that were scheduled to leave within 10 mins of when they did")
-
-
 ```

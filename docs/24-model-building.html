@@ -1,0 +1,1340 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="23-model-basics.html">
+<link rel="next" href="25-many-models.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Chapter contents</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#plug-for-r4ds-1"><i class="fa fa-check"></i>Plug for R4DS</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section"><i class="fa fa-check"></i>3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i>3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-1"><i class="fa fa-check"></i>3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#facets"><i class="fa fa-check"></i>3.5: Facets</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-2"><i class="fa fa-check"></i>3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#geometric-objects"><i class="fa fa-check"></i>3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-3"><i class="fa fa-check"></i>3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-4"><i class="fa fa-check"></i>3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i>3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-5"><i class="fa fa-check"></i>3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i>3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-6"><i class="fa fa-check"></i>3.9.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#appendix"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#extension"><i class="fa fa-check"></i>3.7.1.1 extension</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html"><i class="fa fa-check"></i>Ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#filter-rows"><i class="fa fa-check"></i>5.2: Filter rows</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-7"><i class="fa fa-check"></i>5.2.4.</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-8"><i class="fa fa-check"></i>5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i>5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-9"><i class="fa fa-check"></i>5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i>Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-10"><i class="fa fa-check"></i>5.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#appendix-1"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-11"><i class="fa fa-check"></i>5.4.1.3.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-12"><i class="fa fa-check"></i>5.5.2.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-13"><i class="fa fa-check"></i>5.5.2.2</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-14"><i class="fa fa-check"></i>5.6.7.1.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-15"><i class="fa fa-check"></i>5.6.7.4.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-16"><i class="fa fa-check"></i>5.6.7.5.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-17"><i class="fa fa-check"></i>5.6.7.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-18"><i class="fa fa-check"></i>5.7.1.6.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-19"><i class="fa fa-check"></i>5.7.1.5</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#section-20"><i class="fa fa-check"></i>5.7.1.8.</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#on-piping-dots"><i class="fa fa-check"></i>On piping dots</a></li>
+<li class="chapter" data-level="" data-path="05-data-transformations.html"><a href="05-data-transformations.html#plotly"><i class="fa fa-check"></i>plotly</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html"><i class="fa fa-check"></i>Ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#variation"><i class="fa fa-check"></i>7.3. Variation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-21"><i class="fa fa-check"></i>7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i>7.4. Missing values</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-22"><i class="fa fa-check"></i>7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i>7.5. Covariation</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-23"><i class="fa fa-check"></i>7.5.1.1.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-24"><i class="fa fa-check"></i>7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i>7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-25"><i class="fa fa-check"></i>7.5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#appendix-2"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-26"><i class="fa fa-check"></i>7.5.2.1.2.</a></li>
+<li class="chapter" data-level="" data-path="07-exploratory-data-analysis.html"><a href="07-exploratory-data-analysis.html#section-27"><i class="fa fa-check"></i>7.5.3.1.4.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html"><i class="fa fa-check"></i>Ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#section-28"><i class="fa fa-check"></i>10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html"><i class="fa fa-check"></i>Ch. 11: Data import</a><ul>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-29"><i class="fa fa-check"></i>11.2.2.</a></li>
+<li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#section-30"><i class="fa fa-check"></i>11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html"><i class="fa fa-check"></i>ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#tidy-data"><i class="fa fa-check"></i>12.2: Tidy data</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-31"><i class="fa fa-check"></i>12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i>12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-32"><i class="fa fa-check"></i>12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i>12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-33"><i class="fa fa-check"></i>12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i>12.5: missing values</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-34"><i class="fa fa-check"></i>12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#case-study"><i class="fa fa-check"></i>12.6 Case Study</a><ul>
+<li class="chapter" data-level="" data-path="12-tidy-data.html"><a href="12-tidy-data.html#section-35"><i class="fa fa-check"></i>12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html"><i class="fa fa-check"></i>Ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#nycflights13"><i class="fa fa-check"></i>13.2 nycflights13</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-36"><i class="fa fa-check"></i>13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#keys"><i class="fa fa-check"></i>13.3 Keys</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-37"><i class="fa fa-check"></i>13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#mutating-joins"><i class="fa fa-check"></i>13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-38"><i class="fa fa-check"></i>13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#filtering-joins"><i class="fa fa-check"></i>13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-39"><i class="fa fa-check"></i>13.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#appendix-3"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="13-relational-data.html"><a href="13-relational-data.html#section-40"><i class="fa fa-check"></i>13.5.1.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html"><i class="fa fa-check"></i>Ch. 14: Strings</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#string-basics"><i class="fa fa-check"></i>14.2: String basics</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-41"><i class="fa fa-check"></i>14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i>14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-42"><i class="fa fa-check"></i>14.3.1.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-43"><i class="fa fa-check"></i>14.3.2.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-44"><i class="fa fa-check"></i>14.3.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-45"><i class="fa fa-check"></i>14.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-46"><i class="fa fa-check"></i>14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#tools"><i class="fa fa-check"></i>14.4 Tools</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-47"><i class="fa fa-check"></i>14.4.2</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-48"><i class="fa fa-check"></i>14.4.3.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-49"><i class="fa fa-check"></i>14.4.4.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-50"><i class="fa fa-check"></i>14.4.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-51"><i class="fa fa-check"></i>14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i>14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-52"><i class="fa fa-check"></i>14.5.1</a></li>
+<li class="chapter" data-level="" data-path="14-strings.html"><a href="14-strings.html#section-53"><i class="fa fa-check"></i>14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html"><i class="fa fa-check"></i>Ch. 15: Factors</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-54"><i class="fa fa-check"></i>15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i>15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-55"><i class="fa fa-check"></i>15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i>15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#section-56"><i class="fa fa-check"></i>15.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#appendix-4"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#viewing-all-levels"><i class="fa fa-check"></i>Viewing all levels</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#percentage-na-each-level"><i class="fa fa-check"></i>Percentage NA each level</a></li>
+<li class="chapter" data-level="" data-path="15-factors.html"><a href="15-factors.html#print-all-levels-of-tibble"><i class="fa fa-check"></i>Print all levels of tibble</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html"><i class="fa fa-check"></i>Ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i>16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-57"><i class="fa fa-check"></i>16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i>16.3: Date-time components</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-58"><i class="fa fa-check"></i>16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#time-spans"><i class="fa fa-check"></i>16.4: Time spans</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-59"><i class="fa fa-check"></i>16.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#appendix-5"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-60"><i class="fa fa-check"></i>16.3.4.1</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-61"><i class="fa fa-check"></i>16.3.4.3</a></li>
+<li class="chapter" data-level="" data-path="16-dates-and-times.html"><a href="16-dates-and-times.html#section-62"><i class="fa fa-check"></i>16.3.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="18-pipes.html"><a href="18-pipes.html"><i class="fa fa-check"></i>Ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>ch. 19: Functions</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i>19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-63"><i class="fa fa-check"></i>19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-64"><i class="fa fa-check"></i>19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-65"><i class="fa fa-check"></i>19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#function-arguments"><i class="fa fa-check"></i>19.5: Function arguments</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-66"><i class="fa fa-check"></i>19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-6"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1.4</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#applying-indexing-to-dfs"><i class="fa fa-check"></i>Applying indexing to dfs</a></li>
+</ul></li>
+<li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-69"><i class="fa fa-check"></i>20.3.5</a></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i>20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-70"><i class="fa fa-check"></i>20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i>20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-71"><i class="fa fa-check"></i>20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#augmented-vectors"><i class="fa fa-check"></i>20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-72"><i class="fa fa-check"></i>20.7.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#appendix-7"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#subsetting-nested-lists"><i class="fa fa-check"></i>Subsetting nested lists</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html"><i class="fa fa-check"></i>Ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops"><i class="fa fa-check"></i>21.2: For loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-73"><i class="fa fa-check"></i>21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loop-variations"><i class="fa fa-check"></i>21.3 For loop variations</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-74"><i class="fa fa-check"></i>21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i>21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-75"><i class="fa fa-check"></i>21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#the-map-functions"><i class="fa fa-check"></i>21.5: The map functions</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-76"><i class="fa fa-check"></i>21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i>21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-77"><i class="fa fa-check"></i>21.9.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-8"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-78"><i class="fa fa-check"></i>21.3.5.1</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#in-class-notes"><i class="fa fa-check"></i>in-class notes</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-79"><i class="fa fa-check"></i>23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-80"><i class="fa fa-check"></i>23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-81"><i class="fa fa-check"></i>23.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-82"><i class="fa fa-check"></i>23.4.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-83"><i class="fa fa-check"></i>24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-84"><i class="fa fa-check"></i>24.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-85"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-86"><i class="fa fa-check"></i>24.2.3.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>25.3.5.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-89"><i class="fa fa-check"></i>25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-90"><i class="fa fa-check"></i>25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-91"><i class="fa fa-check"></i>25.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-92"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
+<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-93"><i class="fa fa-check"></i>27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-94"><i class="fa fa-check"></i>27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-95"><i class="fa fa-check"></i>27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i>28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i>28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-98"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div class="sourceCode" id="cb1208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1208-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><em>Make sure the following packages are installed:</em></p>
+</div>
+</div>
+</div>
+<div id="ch.-24-model-building" class="section level1">
+<h1>Ch. 24: Model building</h1>
+<ul>
+<li><code>data_grid</code>, argument: <code>.model</code>: if the model needs variables that haven’t been supplied explicitly, will auto-fill them with “typical” values; continuous –&gt; median; categorical –&gt; mode</li>
+<li><code>MASS:rlm</code> robust linear model that uses “M estimation by default”
+<ul>
+<li>warning: MASS::select will clash with dplyr::select, so I usually won’t load in MASS explicitly</li>
+</ul></li>
+</ul>
+<div id="why-are-low-quality-diamonds-more-expensive" class="section level2">
+<h2>24.2: Why are low quality diamonds more expensive?</h2>
+<div class="sourceCode" id="cb1209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1209-1" title="1"><span class="co"># model for only small diamonds</span></a>
+<a class="sourceLine" id="cb1209-2" title="2">diamonds2 &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-3" title="3"><span class="st">  </span><span class="kw">filter</span>(carat <span class="op">&lt;=</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lprice =</span> <span class="kw">log2</span>(price), </a>
+<a class="sourceLine" id="cb1209-5" title="5">         <span class="dt">lcarat =</span> <span class="kw">log2</span>(carat))</a>
+<a class="sourceLine" id="cb1209-6" title="6"></a>
+<a class="sourceLine" id="cb1209-7" title="7">mod_diamond &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat, <span class="dt">data =</span> diamonds2)</a>
+<a class="sourceLine" id="cb1209-8" title="8"></a>
+<a class="sourceLine" id="cb1209-9" title="9">mod_diamond2 &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>cut <span class="op">+</span><span class="st"> </span>clarity, <span class="dt">data =</span> diamonds2)</a>
+<a class="sourceLine" id="cb1209-10" title="10"></a>
+<a class="sourceLine" id="cb1209-11" title="11">diamonds2 &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-12" title="12"><span class="st">  </span><span class="kw">add_residuals</span>(mod_diamond2, <span class="st">&quot;resid_lg&quot;</span>)</a></code></pre></div>
+<div id="section-83" class="section level3">
+<h3>24.2.3</h3>
+<ol style="list-style-type: decimal">
+<li><p>In the plot of <code>lcarat</code> vs. <code>lprice</code>, there are some bright vertical strips. What do they represent?</p>
+<div class="sourceCode" id="cb1210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1210-1" title="1">plot_lc_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1210-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1210-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1210-4" title="4"></a>
+<a class="sourceLine" id="cb1210-5" title="5">plot_lp_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1210-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, lcarat))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1210-7" title="7"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1210-8" title="8"></a>
+<a class="sourceLine" id="cb1210-9" title="9">plot_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1210-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1210-11" title="11"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.1</span>)</a>
+<a class="sourceLine" id="cb1210-12" title="12"></a>
+<a class="sourceLine" id="cb1210-13" title="13">plot_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1210-14" title="14"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1210-15" title="15"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb1210-16" title="16"></a>
+<a class="sourceLine" id="cb1210-17" title="17">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lc_lp, plot_lc, plot_lp <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>The vertical bands correspond with clumps of <code>carat_lg</code> values falling across a range of <code>price_lg</code> values</li>
+</ul>
+<p><em>Histogram of <code>carat</code> values</em></p>
+<div class="sourceCode" id="cb1211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1211-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1211-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1211-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1211-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<ul>
+<li>The chart above shows spikes in carat values at 0.3, 0.4, 0.41, 0.5, 0.7, 0.9, 1.0, 1.01, 1.2, 1.5, 1.7 and 2.0, each distribution spikes at that value and then decreases until hitting the next spike</li>
+<li>This suggests there is a preference for round numbers ending on tenths</li>
+<li>It’s curious why you don’t see really see spikes at 0.6, 0.8, 0.9, 1.1, 1.3, 1.4, 1.6, 1.8, 1.9, it suggests either there is something special about those paricular values – perhaps diamonds just tend to develop near those sizes so are more available in sizes of 0.7 than say 0.8</li>
+<li>this article also found similar spikes: <a href="https://www.diamdb.com/carat-weight-vs-face-up-size/" class="uri">https://www.diamdb.com/carat-weight-vs-face-up-size/</a> as did this: <a href="https://www.pricescope.com/wiki/diamonds/diamond-carat-weight" class="uri">https://www.pricescope.com/wiki/diamonds/diamond-carat-weight</a> , which use different data sets (though they do not explain the spike at 0.9 but no spike at 1.4)</li>
+</ul></li>
+<li><p>If <code>log(price) = a_0 + a_1 * log(carat)</code>, what does that say about the relationship between <code>price</code> and <code>carat</code>?</p>
+<ul>
+<li>because we’re using a natural log it means that an a_1 percentage change in carat corresponds with an a_1 percentage increase in the price</li>
+<li>if you had used a log base 2 it has a different interpretation that can be thought of in terms of relationship of doubling</li>
+</ul></li>
+<li><p>Extract the diamonds that have very high and very low residuals. Is there anything unusual about these diamonds? Are they particularly bad or good, or do you think these are pricing errors?</p>
+<div class="sourceCode" id="cb1212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1212-1" title="1">extreme_vals &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-3" title="3"><span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-4" title="4"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred_lg&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>(pred_lg))</a>
+<a class="sourceLine" id="cb1212-6" title="6"></a>
+<a class="sourceLine" id="cb1212-7" title="7"><span class="co">#graph extreme points as well as line of pred</span></a>
+<a class="sourceLine" id="cb1212-8" title="8">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-9" title="9"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1212-10" title="10"><span class="st">  </span><span class="co"># mutate(extreme_value = (abs(resid_lg) &gt; 1)) %&gt;% </span></a>
+<a class="sourceLine" id="cb1212-11" title="11"><span class="st">  </span><span class="co"># filter(!extreme_value) %&gt;% </span></a>
+<a class="sourceLine" id="cb1212-12" title="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1212-13" title="13"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">50</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1212-14" title="14"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price), <span class="dt">data =</span> extreme_vals, <span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>It’s possible some of these these were mislabeled or errors, e.g. an error in typing e.g. 200 miswritten as 2000, though given the wide range in pricing this does not seem like that extreme of a variation.</li>
+</ul>
+<div class="sourceCode" id="cb1213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1213-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb1213-4" title="4">         <span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>pred) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1213-5" title="5"><span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">multiple =</span> price <span class="op">/</span><span class="st"> </span>price_pred) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(multiple)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-8" title="8"><span class="st">  </span><span class="kw">select</span>(price, price_pred, multiple)</a></code></pre></div>
+<pre><code>## # A tibble: 16 x 3
+##    price price_pred multiple
+##    &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt;
+##  1  2160       314.    6.88 
+##  2  1776       412.    4.31 
+##  3  1186       284.    4.17 
+##  4  1186       284.    4.17 
+##  5  1013       264.    3.83 
+##  6  2366       774.    3.05 
+##  7  1715       576.    2.98 
+##  8  4368      1705.    2.56 
+##  9 10011      4048.    2.47 
+## 10  3807      1540.    2.47 
+## 11  3360      1373.    2.45 
+## 12  3920      1705.    2.30 
+## 13  1415       639.    2.21 
+## 14  1415       639.    2.21 
+## 15  1262      2644.    0.477
+## 16 10470     23622.    0.443</code></pre>
+<ul>
+<li>If the mislabeling were an issue of e.g. 200 to 2000, you would expect that some of the actual values were ~1/10th or 10x the value of the predicted value. Though none of them appear to have this issue, except for maybe the item that was priced at 2160 but has a price of 314, which is the closest error where the actual value was ~1/10th the value of the prediction</li>
+</ul></li>
+<li><p>Does the final model, <code>mod_diamonds2</code>, do a good job of predicting diamond prices? Would you trust it to tell you how much to spend if you were buying a diamond?</p>
+<div class="sourceCode" id="cb1215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1215-1" title="1">perc_unexplained &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pred_2 =</span> <span class="dv">2</span><span class="op">^</span>pred,</a>
+<a class="sourceLine" id="cb1215-4" title="4">         <span class="dt">mean_price =</span> <span class="kw">mean</span>(price),</a>
+<a class="sourceLine" id="cb1215-5" title="5">         <span class="dt">error_deviation =</span> (price <span class="op">-</span><span class="st"> </span>pred_<span class="dv">2</span>)<span class="op">^</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb1215-6" title="6">         <span class="dt">reg_deviation =</span> (pred_<span class="dv">2</span> <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb1215-7" title="7">         <span class="dt">tot_deviation =</span> (price <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">R_squared =</span> <span class="kw">sum</span>(error_deviation) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot_deviation)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-9" title="9"><span class="st">  </span><span class="kw">flatten_dbl</span>()</a>
+<a class="sourceLine" id="cb1215-10" title="10"></a>
+<a class="sourceLine" id="cb1215-11" title="11"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>perc_unexplained</a></code></pre></div>
+<pre><code>## [1] 0.9653255</code></pre>
+<ul>
+<li>~96.5% of variance is explained by model which seems pretty solid, though is relative to each situation</li>
+<li>See <a href="24-model-building.html#section-85">24.2.3.3</a> for other considerations, though even this is very incomplete. Would want to check a variety of other metrics to further evaluate trust.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="what-affects-the-number-of-daily-flights" class="section level2">
+<h2>24.3 What affects the number of daily flights?</h2>
+<p>These were some useful notes copied from this section of the chapter</p>
+<div class="sourceCode" id="cb1217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1217-1" title="1">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-3" title="3"><span class="st">  </span><span class="kw">count</span>(date)</a>
+<a class="sourceLine" id="cb1217-4" title="4"></a>
+<a class="sourceLine" id="cb1217-5" title="5">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1217-7" title="7"></a>
+<a class="sourceLine" id="cb1217-8" title="8">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1217-10" title="10"></a>
+<a class="sourceLine" id="cb1217-11" title="11"></a>
+<a class="sourceLine" id="cb1217-12" title="12">term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {</a>
+<a class="sourceLine" id="cb1217-13" title="13">  <span class="kw">cut</span>(date, </a>
+<a class="sourceLine" id="cb1217-14" title="14">    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),</a>
+<a class="sourceLine" id="cb1217-15" title="15">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) </a>
+<a class="sourceLine" id="cb1217-16" title="16">  )</a>
+<a class="sourceLine" id="cb1217-17" title="17">}</a>
+<a class="sourceLine" id="cb1217-18" title="18"></a>
+<a class="sourceLine" id="cb1217-19" title="19">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-20" title="20"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))</a>
+<a class="sourceLine" id="cb1217-21" title="21"></a>
+<a class="sourceLine" id="cb1217-22" title="22">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-23" title="23"><span class="st">  </span><span class="kw">filter</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-24" title="24"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, n, <span class="dt">colour =</span> term))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-25" title="25"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-26" title="26"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-27" title="27"><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="ot">NULL</span>, <span class="dt">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div id="section-84" class="section level3">
+<h3>24.3.5</h3>
+<ol style="list-style-type: decimal">
+<li><p>Use your Google sleuthing skills to brainstorm why there were fewer than expected flights on Jan 20, May 26, and Sep 1. (Hint: they all have the same explanation.) How would these days generalise to another year?</p>
+<ul>
+<li>January 20th was the day for MLK day<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a></li>
+<li>May 26th was the day before Memorial Day weekend</li>
+<li>September 1st was the day before labor day</li>
+</ul>
+<p>Based on the above, it seems a variable representing “holiday” or “holiday weekend” may be valuable.</p></li>
+<li><p>What do the three days with high positive residuals represent? How would these days generalise to another year?</p>
+<div class="sourceCode" id="cb1218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1218-1" title="1">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-3" title="3"><span class="st">  </span><span class="kw">count</span>(date)</a>
+<a class="sourceLine" id="cb1218-4" title="4"></a>
+<a class="sourceLine" id="cb1218-5" title="5">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1219-1" title="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> daily)</a>
+<a class="sourceLine" id="cb1219-2" title="2"></a>
+<a class="sourceLine" id="cb1219-3" title="3">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-4" title="4"><span class="st">  </span><span class="kw">add_residuals</span>(mod)</a>
+<a class="sourceLine" id="cb1219-5" title="5"></a>
+<a class="sourceLine" id="cb1219-6" title="6">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-7" title="7"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, resid)</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   date           n wday  resid
+##   &lt;date&gt;     &lt;int&gt; &lt;ord&gt; &lt;dbl&gt;
+## 1 2013-11-30   857 Sat   112. 
+## 2 2013-12-01   987 Sun    95.5
+## 3 2013-12-28   814 Sat    69.4</code></pre>
+<ul>
+<li>these days correspond with the Saturday and Sunday of Thanksgiving, as well as the Saturday after Christmas</li>
+<li>these days can fall on different days of the week each year so would vary from year to year depending on which day they fell on
+<ul>
+<li>ideally you would include some “holiday” variable to help capture the impact of these / better generalise between years</li>
+</ul></li>
+</ul>
+<p><em>Check the absolute values</em></p>
+<div class="sourceCode" id="cb1221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1221-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1221-2" title="2"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, <span class="kw">abs</span>(resid))</a></code></pre></div>
+<pre><code>## # A tibble: 3 x 4
+##   date           n wday  resid
+##   &lt;date&gt;     &lt;int&gt; &lt;ord&gt; &lt;dbl&gt;
+## 1 2013-11-28   634 Thu   -332.
+## 2 2013-11-29   661 Fri   -306.
+## 3 2013-12-25   719 Wed   -244.</code></pre>
+<ul>
+<li>The days with the greatest magnitude for residuals were on Christmast Day, Thanksgiving Day, and the day after Thanksgiving</li>
+</ul></li>
+<li><p>Create a new variable that splits the <code>wday</code> variable into terms, but only for Saturdays, i.e. it should have <code>Thurs</code>, <code>Fri</code>, but <code>Sat-summer</code>, <code>Sat-spring</code>, <code>Sat-fall</code>. How does this model compare with the model with every combination of <code>wday</code> and <code>term</code>?</p>
+<div class="sourceCode" id="cb1223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1223-1" title="1">term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {</a>
+<a class="sourceLine" id="cb1223-2" title="2">  <span class="kw">cut</span>(date, </a>
+<a class="sourceLine" id="cb1223-3" title="3">    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),</a>
+<a class="sourceLine" id="cb1223-4" title="4">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) </a>
+<a class="sourceLine" id="cb1223-5" title="5">  )</a>
+<a class="sourceLine" id="cb1223-6" title="6">}</a>
+<a class="sourceLine" id="cb1223-7" title="7"></a>
+<a class="sourceLine" id="cb1223-8" title="8">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))</a>
+<a class="sourceLine" id="cb1223-10" title="10"></a>
+<a class="sourceLine" id="cb1223-11" title="11"><span class="co"># example with wday_mod</span></a>
+<a class="sourceLine" id="cb1223-12" title="12">Example_term_with_sat &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1223-14" title="14"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1223-15" title="15"></a>
+<a class="sourceLine" id="cb1223-16" title="16"><span class="co"># just wday</span></a>
+<a class="sourceLine" id="cb1223-17" title="17">wkday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-18" title="18"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1223-19" title="19"></a>
+<a class="sourceLine" id="cb1223-20" title="20"><span class="co"># wday and term, no interaction...</span></a>
+<a class="sourceLine" id="cb1223-21" title="21">wkday_term &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1223-23" title="23"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>term, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1223-24" title="24"></a>
+<a class="sourceLine" id="cb1223-25" title="25"><span class="co"># wday and term, interaction</span></a>
+<a class="sourceLine" id="cb1223-26" title="26">wkday_term_interaction &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-27" title="27"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1223-28" title="28"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday<span class="op">*</span>term, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1223-29" title="29"></a>
+<a class="sourceLine" id="cb1223-30" title="30">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-31" title="31"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1223-32" title="32"><span class="st">  </span><span class="kw">gather_predictions</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-33" title="33"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1223-34" title="34"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1223-35" title="35"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1223-36" title="36"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<ul>
+<li>In the example, saturday has different predicted number of flights in the summer
+<ul>
+<li>when just including <code>wkday</code> you don’t see this differentiation</li>
+<li>when including <code>wkday</code> and <code>term</code> you see differentiation in the summer, though this difference is the same across all <code>wday</code>s, hence the increased number for Saturday’s is less than it shows-up as as compared to either the example (where the term is only interacted with for Saturday) or the <code>wkday_term_interaction</code> chart where the interaciton is allowed for each day of the week</li>
+<li>you see increases in flights across pretty much all <code>wday</code>s in summer, though you see the biggest difference in Saturday<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></li>
+</ul></li>
+</ul>
+<p><em>Residuals of these models</em></p>
+<div class="sourceCode" id="cb1224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1224-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1224-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1224-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1224-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1224-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1224-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1224-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<ul>
+<li>The graphs with saturday term and interaction across terms do not show gross changes in residuals varying by season the way the models that included just weekday or weekday and term without an interaction do.</li>
+<li>note that you have a few days with large negative residuals<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a>
+<ul>
+<li>these likely correspond with holidays</li>
+</ul></li>
+</ul></li>
+<li><p>Create a new <code>wday</code> variable that combines the day of week, term (for Saturdays), and public holidays. What do the residuals of that model look like?</p>
+<p><em>Create dataset of federal holidays</em></p>
+<div class="sourceCode" id="cb1225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1225-1" title="1"><span class="co"># holiday&#39;s that could have been added: Easter, black friday</span></a>
+<a class="sourceLine" id="cb1225-2" title="2"><span class="co"># consider adding a filter to remove Columbus day and perhaps Veteran&#39;s day</span></a>
+<a class="sourceLine" id="cb1225-3" title="3">holidays &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb1225-4" title="4">  <span class="op">~</span>HolidayName, <span class="op">~</span>HolidayDate,</a>
+<a class="sourceLine" id="cb1225-5" title="5">  <span class="st">&quot;New Year&#39;s&quot;</span>, <span class="st">&quot;2013-01-01&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-6" title="6">  <span class="st">&quot;MLK&quot;</span>, <span class="st">&quot;2013-01-21&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-7" title="7">  <span class="st">&quot;President&#39;s Day&quot;</span>, <span class="st">&quot;2013-02-18&quot;</span>, </a>
+<a class="sourceLine" id="cb1225-8" title="8">  <span class="st">&quot;Memorial Day&quot;</span>, <span class="st">&quot;2013-05-27&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-9" title="9">  <span class="st">&quot;Independene Day&quot;</span>, <span class="st">&quot;2013-07-04&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-10" title="10">  <span class="st">&quot;Labor Day&quot;</span>, <span class="st">&quot;2013-09-02&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-11" title="11">  <span class="st">&quot;Columbus Day&quot;</span>, <span class="st">&quot;2013-10-14&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-12" title="12">  <span class="st">&quot;Veteran&#39;s Day&quot;</span>, <span class="st">&quot;2013-11-11&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-13" title="13">  <span class="st">&quot;Thanksgiving&quot;</span>, <span class="st">&quot;2013-11-28&quot;</span>,</a>
+<a class="sourceLine" id="cb1225-14" title="14">  <span class="st">&quot;Christmas Day&quot;</span>, <span class="st">&quot;2013-12-25&quot;</span></a>
+<a class="sourceLine" id="cb1225-15" title="15">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1225-16" title="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayDate =</span> <span class="kw">ymd</span>(HolidayDate))</a></code></pre></div>
+<p>Create model with Holiday variable</p>
+<div class="sourceCode" id="cb1226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1226-1" title="1">Example_term_with_sat_holiday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1226-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1226-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1226-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1226-5" title="5"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod <span class="op">+</span><span class="st"> </span>Holiday, <span class="dt">data =</span> .)</a></code></pre></div>
+<p>Look at residuals of model</p>
+<div class="sourceCode" id="cb1227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1227-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1227-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1227-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1227-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1227-5" title="5"><span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat_holiday, Example_term_with_sat) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1227-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1227-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1227-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1227-9" title="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<ul>
+<li>Notice the residuals for day’s like July 4th and Christas are closer to 0 now, though residuals for smaller holidays like MLK, President’s, Columbus, and Veteran’s Day are now positive when before they did not have such noticable abberations</li>
+<li>Suggests that just “holiday” is not enough to capture the relationship
+<ul>
+<li>In [24.3.5.4] I show how to create a “near holiday” variable (though I do not add any new analysis after creating this)</li>
+</ul></li>
+</ul></li>
+<li><p>What happens if you fit a day of week effect that varies by month (i.e. <code>n ~ wday * month</code>)? Why is this not very helpful?</p>
+<p><em>Create model</em></p>
+<div class="sourceCode" id="cb1228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1228-1" title="1">week_month &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1228-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1228-3" title="3"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>month, <span class="dt">data =</span> .)</a></code></pre></div>
+<p><em>Graph predictions</em>
+(with <code>n ~ wday * term</code> as the comparison)</p>
+<div class="sourceCode" id="cb1229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1229-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1229-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1229-3" title="3"><span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1229-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1229-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1229-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1229-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<ul>
+<li>This model has the most flexibility / inputs, though this makes the pattern harder to follow / interpret</li>
+<li>Certain decreases in the month to month model are difficult to explain, for example the decrease in the month of May</li>
+</ul>
+<p><em>Graph residuals</em>
+(with <code>n ~ wday * term</code> as the comparison)</p>
+<div class="sourceCode" id="cb1230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1230-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1230-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1230-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1230-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1230-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1230-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1230-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>The residuals seem to partially explain some of these inexplicable ups / downs:</p>
+<ul>
+<li>For the model that incorporates an interaciton with month, you see the residuals in months with a holiday tend to cause the associated day of the week the holiday fell on to then have high residuals on the non-holiday days, an effect thta is less pronounced on the models interacted with <code>term</code>
+<ul>
+<li>The reason for this is that for the monthly variables there are only 4-5 week days in each month, so a holiday on one of these can substantially impact the expected number of flights on the weekend in that month (i.e. the prediction is based just on 4-5 observations). For the term interaction you have more like 12 observations to get an expected value, so while there is still an aberration on that day, the other days predictioins are less affected</li>
+</ul></li>
+</ul>
+<p>Questions such as this fall into the general space of balancing “bias” vs. “variance”</p></li>
+<li><p>What would you expect the model <code>n ~ wday + ns(date, 5)</code> to look like? Knowing what you know about the data, why would you expect it to be not particularly effective?</p>
+<p>I would expect to see a similar overall pattern, but with more smoothed affects. Let’s check what these actually look like below.</p>
+<div class="sourceCode" id="cb1231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1231-1" title="1">wkday_term_ns &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1231-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1231-3" title="3"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1231-4" title="4"></a>
+<a class="sourceLine" id="cb1231-5" title="5">wkday_term_interaction_ns &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> daily)</a></code></pre></div>
+<p>Look at predictions
+(light grey are actuals)</p>
+<div class="sourceCode" id="cb1232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1232-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1232-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1232-3" title="3"><span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1232-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1232-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1232-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1232-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1232-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Look at residuals
+(in light grey are actuals)</p>
+<div class="sourceCode" id="cb1233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1233-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1233-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1233-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1233-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1233-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1233-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1233-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1233-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p></li>
+<li><p>We hypothesised that people leaving on Sundays are more likely to be business travellers who need to be somewhere on Monday. Explore that hypothesis by seeing how it breaks down based on distance and time: if it’s true, you’d expect to see more Sunday evening flights to places that are far away.</p>
+<div class="sourceCode" id="cb1234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1234-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1234-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),</a>
+<a class="sourceLine" id="cb1234-3" title="3">         <span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1234-4" title="4"><span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1234-5" title="5"><span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1234-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1234-7" title="7"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<ul>
+<li>25th and 75th percentiles aren’t different, but median is a little higher</li>
+<li>the same is the case for Saturday travel which does not seem to fit into this hypothesis as neatly. The effect seems more general to the weekend than just Saturday, and there seem like there may be other potential explanations than “business travel”</li>
+</ul></li>
+<li><p>It’s a little frustrating that Sunday and Saturday are on separate ends of the plot. Write a small function to set the levels of the factor so that the week starts on Monday.</p>
+<div class="sourceCode" id="cb1235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1235-1" title="1">wday_modified &lt;-<span class="st"> </span><span class="cf">function</span>(date){</a>
+<a class="sourceLine" id="cb1235-2" title="2">  date_order &lt;-<span class="st"> </span>(<span class="kw">wday</span>(date) <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span></a>
+<a class="sourceLine" id="cb1235-3" title="3">  date &lt;-<span class="st"> </span><span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_reorder</span>(date_order)</a>
+<a class="sourceLine" id="cb1235-4" title="4">  date</a>
+<a class="sourceLine" id="cb1235-5" title="5">}</a>
+<a class="sourceLine" id="cb1235-6" title="6"></a>
+<a class="sourceLine" id="cb1235-7" title="7">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1235-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),</a>
+<a class="sourceLine" id="cb1235-9" title="9">         <span class="dt">wday =</span> <span class="kw">wday_modified</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1235-10" title="10"><span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1235-11" title="11"><span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1235-12" title="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1235-13" title="13"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p></li>
+</ol>
+</div>
+</div>
+<div id="appendix-10" class="section level2">
+<h2>Appendix</h2>
+<div id="section-85" class="section level3">
+<h3>24.2.3.3</h3>
+<p>Plots of extreme values against a sample and colored by some of the key attributes</p>
+<p><em>Plots of extreme values against carat, price, clarity</em></p>
+<div class="sourceCode" id="cb1236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1236-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1236-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1236-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1236-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1236-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1236-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p><em>Plots of extreme values against carat, price, cut</em></p>
+<div class="sourceCode" id="cb1237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1237-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1237-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1237-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1237-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1237-5" title="5"><span class="st">  </span><span class="co"># geom_hex(bins = 50)+</span></a>
+<a class="sourceLine" id="cb1237-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1237-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+</div>
+<div id="section-86" class="section level3">
+<h3>24.2.3.4</h3>
+<div id="heteroskedasticity" class="section level4">
+<h4>heteroskedasticity</h4>
+<p>Note that heteroskedasticity is one (of several other) important considerations that would be important when deciding how much you trust the model.</p>
+<p><em>residual vs lprice</em></p>
+<div class="sourceCode" id="cb1238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1238-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1238-2" title="2"><span class="st">  </span><span class="kw">add_residuals</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1238-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, resid))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1238-4" title="4"><span class="st">  </span><span class="kw">geom_hex</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<ul>
+<li>the log transformation helped to ensure our residuals did not have heteroskedasticity against the predictor</li>
+</ul>
+<p><em>residual (transformed) vs price</em>
+(<code>resid_transformed</code> represents the residual against the residual after transforming it from a prediction for <code>log2(price)</code> to a prediction for <code>price</code>)</p>
+<div class="sourceCode" id="cb1239"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1239-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1239-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1239-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">resid_transformed =</span> price <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>(pred)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1239-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(price, resid_transformed))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1239-5" title="5"><span class="st">  </span><span class="kw">geom_hex</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<ul>
+<li>This is what heteroskedasticity looks like</li>
+</ul>
+<p><em>residual (transformed) vs log price</em>
+(<code>resid_transformed</code> represents the residual against the residual after transforming it from a prediction for <code>log2(price)</code> to a prediction for <code>price</code>)</p>
+<div class="sourceCode" id="cb1240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1240-1" title="1"><span class="co"># resid v lprice (% change on x resid)</span></a>
+<a class="sourceLine" id="cb1240-2" title="2">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1240-3" title="3"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1240-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">resid_transformed =</span> price <span class="op">-</span><span class="st"> </span><span class="dv">2</span><span class="op">^</span>(pred)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1240-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, resid_transformed))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1240-6" title="6"><span class="st">  </span><span class="kw">geom_hex</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="rsquared-on-logged-values" class="section level4">
+<h4>rsquared on logged values</h4>
+<p><strong>(incorrect)</strong>
+This is what I did initially. Below I calculate the R^2 on the log values. Within the exercise solution I decided to report the R^2 when calculated on <code>2^pred</code>. This has the more useful interpretation of representing the percentage of the variance on the actual price that the model captures, which seems more appropriate in some ways. This question about which is more appropriate to report may be worth revisiting in the future.</p>
+<div class="sourceCode" id="cb1241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1241-1" title="1"><span class="co">#to see if I&#39;m doing it right let&#39;s calculate the R_squared of the model using this technique</span></a>
+<a class="sourceLine" id="cb1241-2" title="2">ss_res &lt;-<span class="st">  </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-3" title="3"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb1241-5" title="5">         <span class="dt">pred_exp =</span> <span class="dv">2</span><span class="op">^</span>(pred),</a>
+<a class="sourceLine" id="cb1241-6" title="6">         <span class="dt">squ_mod =</span> (<span class="kw">log2</span>(price) <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb1241-7" title="7">         <span class="dt">squ_error =</span> (<span class="kw">log2</span>(price) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">log2</span>(price)))<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-8" title="8"><span class="st">  </span>.<span class="op">$</span>squ_mod <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</a>
+<a class="sourceLine" id="cb1241-9" title="9"></a>
+<a class="sourceLine" id="cb1241-10" title="10">ss_tot &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-11" title="11"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb1241-13" title="13">         <span class="dt">pred_exp =</span> <span class="dv">2</span><span class="op">^</span>(pred),</a>
+<a class="sourceLine" id="cb1241-14" title="14">         <span class="dt">squ_mod =</span> (<span class="kw">log2</span>(price) <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb1241-15" title="15">         <span class="dt">squ_error =</span> (<span class="kw">log2</span>(price) <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(<span class="kw">log2</span>(price)))<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1241-16" title="16"><span class="st">  </span>.<span class="op">$</span>squ_error <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>()</a>
+<a class="sourceLine" id="cb1241-17" title="17"></a>
+<a class="sourceLine" id="cb1241-18" title="18"><span class="co"># calculated by hand</span></a>
+<a class="sourceLine" id="cb1241-19" title="19"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>ss_res <span class="op">/</span><span class="st"> </span>ss_tot</a></code></pre></div>
+<pre><code>## [1] 0.9827876</code></pre>
+<div class="sourceCode" id="cb1243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1243-1" title="1"><span class="co"># built-in calculation</span></a>
+<a class="sourceLine" id="cb1243-2" title="2"><span class="kw">rsquare</span>(mod_diamond2, diamonds2)</a></code></pre></div>
+<pre><code>## [1] 0.9827876</code></pre>
+<p>The R-squred is ~ 0.983, which means that the model accounts for 98.3% of the variance in price, which seems pretty solid.</p>
+</div>
+</div>
+<div id="section-87" class="section level3">
+<h3>24.2.3.1</h3>
+<p>Visualization with horizontal stripes and <code>lprice</code> as the focus</p>
+<div class="sourceCode" id="cb1245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1245-1" title="1"><span class="co"># horizontal stripes</span></a>
+<a class="sourceLine" id="cb1245-2" title="2">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lp_lc, plot_lp, plot_lc <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<ul>
+<li>same thing, just change orientation and highlight <code>lprice</code> with a histogram</li>
+</ul>
+<p><em>A few other graphs from this problem</em></p>
+<div class="sourceCode" id="cb1246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1246-1" title="1">diamonds2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1246-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1246-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1247-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1247-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1247-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-32-2.png" width="672" /></p>
+<p>Taking the log of price seems to have a bigger impact on the shape of the geom_hex graph</p>
+<div class="sourceCode" id="cb1248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1248-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1248-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1248-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1249-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1249-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1249-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-33-2.png" width="672" /></p>
+<div id="more-notes-on-logs" class="section level4">
+<h4>More notes on logs</h4>
+<p>While taking the log of both price and carat seems to help improve the ‘linearity’ of the model, perhaps taking the log of the price makes a bigger difference.</p>
+<div class="sourceCode" id="cb1250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1250-1" title="1"><span class="co"># a few other plots</span></a>
+<a class="sourceLine" id="cb1250-2" title="2">plot_c &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1250-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1250-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb1250-5" title="5"></a>
+<a class="sourceLine" id="cb1250-6" title="6">plot_p &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1250-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1250-8" title="8"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1250-9" title="9"></a>
+<a class="sourceLine" id="cb1250-10" title="10">plot_c_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1250-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1250-12" title="12"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1250-13" title="13"></a>
+<a class="sourceLine" id="cb1250-14" title="14">plot_lc_p &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1250-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, price))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1250-16" title="16"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1250-17" title="17"></a>
+<a class="sourceLine" id="cb1250-18" title="18"></a>
+<a class="sourceLine" id="cb1250-19" title="19">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lc_lp, plot_c_lp, plot_lc_p)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+<ul>
+<li>The reason for this may be that the log of the price better resembles a normal distribution than the log of the carat, though taking the log of the carat does also help by, at the least, centering the distribution…</li>
+</ul>
+<div class="sourceCode" id="cb1251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1251-1" title="1">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lp_lc, plot_lp, plot_p)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1252-1" title="1">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lc_lp, plot_lc, plot_c)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-35-2.png" width="672" /></p>
+</div>
+<div id="carat-more-clumped-than-price" class="section level4">
+<h4>carat more clumped than price</h4>
+<p><em>(Unnecessary)</em>
+* let’s see between price and carat, which causes the appearance of “bands” in the data
+* to do this let’s look at <code>geom_hex</code> when making the accompanying value random</p>
+<div class="sourceCode" id="cb1253"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1253-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1253-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rand_val =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1253-3" title="3"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1253-4" title="4"><span class="st">      </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1254-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1254-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rand_val =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1254-3" title="3"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, rand_val))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1254-4" title="4"><span class="st">      </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-36-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1255"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1255-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1255-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rand_val =</span> <span class="kw">rnorm</span>(<span class="kw">n</span>())) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1255-3" title="3"><span class="st">      </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, rand_val))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1255-4" title="4"><span class="st">      </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-36-3.png" width="672" /></p>
+<ul>
+<li>clearly carat are much more clumped</li>
+<li>this check was unnecessary in this case, though the method felt worth saving</li>
+</ul>
+</div>
+</div>
+<div id="logs-simulated-examples" class="section level3">
+<h3>Logs (simulated examples)</h3>
+<div id="exponential-relationship" class="section level4">
+<h4>Exponential relationship</h4>
+<p>Taking the log of a value often centers the distribution which is helpful for getting more normal errors, it’s actually not about making the relationship linear per se… but about making the errors normal (and linearlizing the relationship has the effect of doing this). Let’s generate some data.</p>
+<p><em>Review logs on simulated dataset</em></p>
+<div class="sourceCode" id="cb1256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1256-1" title="1"><span class="kw">set.seed</span>(<span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb1256-2" title="2">log_notes_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">rand_origin =</span> <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb1256-3" title="3">                       <span class="dt">rand_noise =</span> rand_origin <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb1256-4" title="4">                       <span class="dt">rand_exp =</span> <span class="dv">8</span><span class="op">^</span>rand_noise,</a>
+<a class="sourceLine" id="cb1256-5" title="5">                       <span class="dt">rand_exp_log =</span> <span class="kw">log2</span>(rand_exp))</a>
+<a class="sourceLine" id="cb1256-6" title="6"></a>
+<a class="sourceLine" id="cb1256-7" title="7"><span class="co"># exponential distribution</span></a>
+<a class="sourceLine" id="cb1256-8" title="8">log_notes_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1256-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_exp))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1256-10" title="10"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1257"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1257-1" title="1"><span class="co"># Then take log base 2 of</span></a>
+<a class="sourceLine" id="cb1257-2" title="2"><span class="co"># centered at 15 because 8 = 2^3 and it becomes 3*rnorm(mean = 5)</span></a>
+<a class="sourceLine" id="cb1257-3" title="3">log_notes_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1257-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_exp_log))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1257-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-37-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1258-1" title="1"><span class="co"># The log helped us to uncover the relationship that existed between the original values and the values after some noise was added and then exponentiated</span></a>
+<a class="sourceLine" id="cb1258-2" title="2">log_notes_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1258-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_origin, <span class="dt">y =</span> rand_exp_log))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1258-4" title="4"><span class="st">  </span><span class="kw">geom_hex</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-37-3.png" width="672" /></p>
+<div class="sourceCode" id="cb1259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1259-1" title="1">  <span class="co"># coord_fixed()</span></a>
+<a class="sourceLine" id="cb1259-2" title="2"></a>
+<a class="sourceLine" id="cb1259-3" title="3"></a>
+<a class="sourceLine" id="cb1259-4" title="4"><span class="co"># for every one unit increase in &#39;rand_origin&#39; we get a ~3 fold increase in the log of the output</span></a>
+<a class="sourceLine" id="cb1259-5" title="5"><span class="co"># this corresponds with the relationship being 2^3*1 , i.e. 3 comes from 2^3, and the 1 is because there is a 1 to ~1 relationship</span></a>
+<a class="sourceLine" id="cb1259-6" title="6">log_notes_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1259-7" title="7"><span class="st">  </span><span class="kw">lm</span>(rand_exp_log <span class="op">~</span><span class="st"> </span>rand_origin, <span class="dt">data =</span> .)</a></code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = rand_exp_log ~ rand_origin, data = .)
+## 
+## Coefficients:
+## (Intercept)  rand_origin  
+##       0.246        2.972</code></pre>
+<ul>
+<li>because of the properties of logs and exponents, taking the log transform is robust to linearlizing any exponential relationship regardles of log</li>
+</ul>
+</div>
+<div id="log-log-relationship" class="section level4">
+<h4>Log log relationship</h4>
+<p>What happens if you have a log relationship and you take the log of this leading to a log-log relationship?
+* You would not need to take the log of a graph in this relationship, but let’s look at what happens</p>
+<div class="sourceCode" id="cb1261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1261-1" title="1">log_notes_df2 &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">rand_origin =</span> <span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">256</span>, <span class="dt">sd =</span> <span class="dv">20</span>),</a>
+<a class="sourceLine" id="cb1261-2" title="2">                       <span class="dt">rand_noise =</span> rand_origin <span class="op">+</span><span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1000</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb1261-3" title="3">                       <span class="dt">rand_log =</span> <span class="kw">log2</span>(rand_noise),</a>
+<a class="sourceLine" id="cb1261-4" title="4">                       <span class="dt">rand_log_log =</span> <span class="kw">log2</span>(rand_log),</a>
+<a class="sourceLine" id="cb1261-5" title="5">                       <span class="dt">rand_exp =</span> <span class="dv">2</span><span class="op">^</span>rand_log)</a>
+<a class="sourceLine" id="cb1261-6" title="6"></a>
+<a class="sourceLine" id="cb1261-7" title="7"><span class="co"># centered at 8 because 256 = 2^8 </span></a>
+<a class="sourceLine" id="cb1261-8" title="8">log_notes_df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1261-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_log))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1261-10" title="10"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1262-1" title="1"><span class="co"># centered at 3 because 2^3 = 8</span></a>
+<a class="sourceLine" id="cb1262-2" title="2">log_notes_df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1262-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_log_log))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1262-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-38-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1263-1" title="1">log_notes_df2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1263-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rand_log_log, <span class="dt">y =</span> rand_origin))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1263-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-38-3.png" width="672" /></p>
+<ul>
+<li>linear relationship still visually seems to exist</li>
+</ul>
+<p>Conceptualizing Linear regression can actually get surprisingly complicated. I’ll pull this into a separate blog post at some point.</p>
+</div>
+</div>
+<div id="diamonds-data-review" class="section level3">
+<h3>Diamonds data review</h3>
+<p><em>(Section arguably unnecessary)</em></p>
+<div id="carat-by-mean-table-value" class="section level4">
+<h4>carat by mean <code>table</code> value</h4>
+<p><code>table</code> represents the percentage of the max area that is covered by the flat top part of the diamond</p>
+<div class="sourceCode" id="cb1264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1264-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1264-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(carat) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1264-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb1264-4" title="4">            <span class="dt">sd =</span> <span class="kw">sd</span>(table),</a>
+<a class="sourceLine" id="cb1264-5" title="5">            <span class="dt">mean =</span> <span class="kw">mean</span>(table)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1264-6" title="6"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1264-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> carat, <span class="dt">y =</span> mean))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1264-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">size =</span> n))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1264-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+</div>
+<div id="cutoff-part-1" class="section level4">
+<h4>Cutoff, Part 1</h4>
+<p>I get nervous that in the opening example that the diamonds dataset was biased because all values with price over 19000 or carat over 2.5 were removed. This seemed to have the affect of causing larger diamonds to have lower prices than expected. I was worried this might in some way impact the pattern described regarding the residuals across the other dimensions – so looked at the residuals when building the model on just diamonds with carats less than 0.90. None of the prices seemed to approach 19000 for carats this small so this seemed like a good place to validate the discussion on residuals.</p>
+<p>The pattern did indeed hold for even just these small diamonds, so the example Hadley discusses seems appropriate.</p>
+<p><em>diamonds2 alternative… say that we only want to look at diamonds with carat less than 0.9</em></p>
+<div class="sourceCode" id="cb1265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1265-1" title="1">diamonds_test &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1265-2" title="2"><span class="st">  </span><span class="kw">filter</span>(carat <span class="op">&lt;=</span><span class="st"> </span><span class="fl">0.9</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1265-3" title="3"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">vars</span>(price, carat), <span class="kw">funs</span>(<span class="dt">lg =</span> log2))</a></code></pre></div>
+<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
+## please use list() instead
+## 
+## # Before:
+## funs(name = f(.)
+## 
+## # After: 
+## list(name = ~f(.))
+## This warning is displayed once per session.</code></pre>
+<div class="sourceCode" id="cb1267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1267-1" title="1">mod_diamond &lt;-<span class="st"> </span>diamonds_test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1267-2" title="2"><span class="st">  </span><span class="kw">lm</span>(price_lg <span class="op">~</span><span class="st"> </span>carat_lg, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1267-3" title="3"></a>
+<a class="sourceLine" id="cb1267-4" title="4">diamonds2_w_mod &lt;-<span class="st"> </span>diamonds_test <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1267-5" title="5"><span class="st">  </span><span class="kw">add_residuals</span>(mod_diamond, <span class="st">&quot;resid_lg&quot;</span>)</a></code></pre></div>
+<p>All the patterns Hadley pointed-out seem to hold on this slightly modified dataset</p>
+<div class="sourceCode" id="cb1268"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1268-1" title="1"><span class="kw">ggplot</span>(diamonds2_w_mod, <span class="kw">aes</span>(cut, resid_lg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1269-1" title="1"><span class="kw">ggplot</span>(diamonds2_w_mod, <span class="kw">aes</span>(color, resid_lg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-41-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1270"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1270-1" title="1"><span class="kw">ggplot</span>(diamonds2_w_mod, <span class="kw">aes</span>(clarity, resid_lg)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-41-3.png" width="672" /></p>
+</div>
+<div id="cutoff-part-2" class="section level4">
+<h4>Cutoff, Part 2</h4>
+<p>Check if there are differences in coefficients when training on full <code>diamonds</code> data set v <code>diamonds2</code> dataset</p>
+<div class="sourceCode" id="cb1271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1271-1" title="1">mod_diamonds &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-2" title="2"><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">lprice =</span> <span class="kw">log2</span>(price), </a>
+<a class="sourceLine" id="cb1271-3" title="3">         <span class="dt">lcarat =</span> <span class="kw">log2</span>(carat)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-4" title="4"><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat, <span class="dt">data =</span> .)</a>
+<a class="sourceLine" id="cb1271-5" title="5"></a>
+<a class="sourceLine" id="cb1271-6" title="6">mod_diamonds2 &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat, <span class="dt">data =</span> diamonds2)</a>
+<a class="sourceLine" id="cb1271-7" title="7"></a>
+<a class="sourceLine" id="cb1271-8" title="8">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-9" title="9"><span class="st">   </span><span class="kw">mutate</span>(<span class="dt">lprice =</span> <span class="kw">log2</span>(price), </a>
+<a class="sourceLine" id="cb1271-10" title="10">         <span class="dt">lcarat =</span> <span class="kw">log2</span>(carat)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-11" title="11"><span class="st">   </span><span class="kw">spread_predictions</span>(mod_diamonds, mod_diamonds2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-12" title="12"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1271-13" title="13"><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> lcarat, <span class="dt">y =</span> lprice))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1271-14" title="14"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1271-15" title="15"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> mod_diamonds), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1271-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> mod_diamonds2), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<p><img src="24-model-building_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>essentially no difference between the models that come-out when training on one v the the other</p>
+</div>
+</div>
+<div id="section-88" class="section level3">
+<h3>25.3.5.4</h3>
+<p>In this section I create a marker for days that are “near a holiday”</p>
+<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" title="1">near_holidays &lt;-<span class="st"> </span>holidays <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-2" title="2"><span class="st">  </span><span class="co"># This creates a series of helper variables to create the variable &#39;Holiday_IntervalDay&#39; that represents an interval that encloses the period between the holiday and the beginning or end of the most recent weekend</span></a>
+<a class="sourceLine" id="cb1272-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayWday =</span> <span class="kw">wday</span>(HolidayDate, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb1272-4" title="4">         <span class="dt">HolidayWknd =</span> lubridate<span class="op">::</span><span class="kw">round_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
+<a class="sourceLine" id="cb1272-5" title="5">         <span class="dt">HolidayFloor =</span> lubridate<span class="op">::</span><span class="kw">floor_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
+<a class="sourceLine" id="cb1272-6" title="6">         <span class="dt">HolidayCeiling =</span> lubridate<span class="op">::</span><span class="kw">ceiling_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
+<a class="sourceLine" id="cb1272-7" title="7">         <span class="dt">Holiday_IntervalDay =</span> <span class="kw">case_when</span>(HolidayWknd <span class="op">==</span><span class="st"> </span>HolidayFloor <span class="op">~</span><span class="st"> </span>(HolidayFloor <span class="op">-</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">2</span>)),</a>
+<a class="sourceLine" id="cb1272-8" title="8">                                         <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>HolidayCeiling)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday_Period =</span> <span class="kw">interval</span>(<span class="kw">pmin</span>(HolidayDate, Holiday_IntervalDay), <span class="kw">pmax</span>(HolidayDate, Holiday_IntervalDay)))</a>
+<a class="sourceLine" id="cb1272-10" title="10"></a>
+<a class="sourceLine" id="cb1272-11" title="11"><span class="co"># This returns each day and whether it occurred near a holiday</span></a>
+<a class="sourceLine" id="cb1272-12" title="12">near_holiday &lt;-<span class="st"> </span><span class="kw">map</span>(near_holidays<span class="op">$</span>Holiday_Period, <span class="op">~</span>(<span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>) <span class="op">%within%</span><span class="st"> </span>.x)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-13" title="13"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-14" title="14"><span class="st">  </span><span class="kw">map_lgl</span>(any) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-15" title="15"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">NearHoliday =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1272-17" title="17"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>))</a>
+<a class="sourceLine" id="cb1272-18" title="18"></a>
+<a class="sourceLine" id="cb1272-19" title="19">near_holiday</a></code></pre></div>
+<pre><code>## # A tibble: 365 x 2
+##    NearHoliday date      
+##    &lt;lgl&gt;       &lt;date&gt;    
+##  1 TRUE        2013-01-01
+##  2 FALSE       2013-01-02
+##  3 FALSE       2013-01-03
+##  4 FALSE       2013-01-04
+##  5 FALSE       2013-01-05
+##  6 FALSE       2013-01-06
+##  7 FALSE       2013-01-07
+##  8 FALSE       2013-01-08
+##  9 FALSE       2013-01-09
+## 10 FALSE       2013-01-10
+## # ... with 355 more rows</code></pre>
+<ul>
+<li>I ended-up not adding any additional analysis here, though the methodology for creating the “near holiday” seemed worth saving</li>
+<li>Could come back to add more in the future</li>
+</ul>
+
+<p><em>Make sure the following packages are installed:</em></p>
+</div>
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="32">
+<li id="fn32"><p>it was also the 2nd inauguration for Obama<a href="24-model-building.html#fnref32" class="footnote-back">↩</a></p></li>
+<li id="fn33"><p>Interactions facilitate encoding these types of conditional relationships, i.e. the impact of summer depends on the day of the week (/ vice versa)<a href="24-model-building.html#fnref33" class="footnote-back">↩</a></p></li>
+<li id="fn34"><p>Remember this corresponds with days where the predictions are higher than the actuals.<a href="24-model-building.html#fnref34" class="footnote-back">↩</a></p></li>
+</ol>
+</div>
+<div id="disqus_thread"></div>
+<script>
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = '//brshallo.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the
+<a href="https://disqus.com/?ref_noscript">
+  comments powered by Disqus.</a></noscript>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="23-model-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="25-many-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": true,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
