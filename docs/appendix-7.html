@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions and notes to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ch-21-iteration.html">
+<link rel="next" href="ch-23-model-basics.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Purpose of this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i><b>1.1</b> Features of this book</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i><b>1.2</b> Origin of this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html"><i class="fa fa-check"></i><b>2</b> Plug for R4DS</a><ul>
+<li class="chapter" data-level="2.1" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#plug-for-r4ds-1"><i class="fa fa-check"></i><b>2.1</b> Plug for R4DS</a></li>
+<li class="chapter" data-level="2.2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#acknowledgements"><i class="fa fa-check"></i><b>2.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html"><i class="fa fa-check"></i><b>3</b> ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#first-steps"><i class="fa fa-check"></i><b>3.1</b> 3.2: First steps</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section"><i class="fa fa-check"></i><b>3.1.1</b> 3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.2</b> 3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-1"><i class="fa fa-check"></i><b>3.2.1</b> 3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#facets"><i class="fa fa-check"></i><b>3.3</b> 3.5: Facets</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-2"><i class="fa fa-check"></i><b>3.3.1</b> 3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#geometric-objects"><i class="fa fa-check"></i><b>3.4</b> 3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-3"><i class="fa fa-check"></i><b>3.4.1</b> 3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i><b>3.5</b> 3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-4"><i class="fa fa-check"></i><b>3.5.1</b> 3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i><b>3.6</b> 3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-5"><i class="fa fa-check"></i><b>3.6.1</b> 3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i><b>3.7</b> 3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-6"><i class="fa fa-check"></i><b>3.7.1</b> 3.9.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix</a><ul>
+<li class="chapter" data-level="4.1" data-path="appendix.html"><a href="appendix.html#extension"><i class="fa fa-check"></i><b>4.1</b> 3.7.1.1 extension</a></li>
+<li class="chapter" data-level="4.2" data-path="appendix.html"><a href="appendix.html#position-adustments"><i class="fa fa-check"></i><b>4.2</b> 3.8: Position adustments</a></li>
+<li class="chapter" data-level="4.3" data-path="appendix.html"><a href="appendix.html#coordinate-systems-1"><i class="fa fa-check"></i><b>4.3</b> 3.9: Coordinate systems</a></li>
+<li class="chapter" data-level="4.4" data-path="appendix.html"><a href="appendix.html#add-in-table-of-contents-and-other-details"><i class="fa fa-check"></i><b>4.4</b> add in table of contents and other details…</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html"><i class="fa fa-check"></i><b>5</b> ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="5.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#filter-rows"><i class="fa fa-check"></i><b>5.1</b> 5.2: Filter rows</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-7"><i class="fa fa-check"></i><b>5.2</b> 5.2.4.</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-8"><i class="fa fa-check"></i><b>5.2.1</b> 5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i><b>5.3</b> 5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-9"><i class="fa fa-check"></i><b>5.3.1</b> 5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.4</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-10"><i class="fa fa-check"></i><b>5.4.1</b> 5.7.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>6</b> Appendix</a><ul>
+<li class="chapter" data-level="6.1" data-path="appendix-1.html"><a href="appendix-1.html#section-11"><i class="fa fa-check"></i><b>6.1</b> 5.4.1.3.</a></li>
+<li class="chapter" data-level="6.2" data-path="appendix-1.html"><a href="appendix-1.html#section-12"><i class="fa fa-check"></i><b>6.2</b> 5.5.2.1.</a></li>
+<li class="chapter" data-level="6.3" data-path="appendix-1.html"><a href="appendix-1.html#section-13"><i class="fa fa-check"></i><b>6.3</b> 5.5.2.2</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="appendix-1.html"><a href="appendix-1.html#closer-look-at-air_time"><i class="fa fa-check"></i><b>6.3.1</b> Closer look at <code>air_time</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="appendix-1.html"><a href="appendix-1.html#other-plots-with-air_time"><i class="fa fa-check"></i><b>6.3.2</b> Other plots with <code>air_time</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="appendix-1.html"><a href="appendix-1.html#section-14"><i class="fa fa-check"></i><b>6.4</b> 5.6.7.1.</a></li>
+<li class="chapter" data-level="6.5" data-path="appendix-1.html"><a href="appendix-1.html#section-15"><i class="fa fa-check"></i><b>6.5</b> 5.6.7.4.</a></li>
+<li class="chapter" data-level="6.6" data-path="appendix-1.html"><a href="appendix-1.html#section-16"><i class="fa fa-check"></i><b>6.6</b> 5.6.7.5.</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="appendix-1.html"><a href="appendix-1.html#modeling-approach"><i class="fa fa-check"></i><b>6.6.1</b> Modeling approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="appendix-1.html"><a href="appendix-1.html#section-17"><i class="fa fa-check"></i><b>6.7</b> 5.6.7.6.</a></li>
+<li class="chapter" data-level="6.8" data-path="appendix-1.html"><a href="appendix-1.html#section-18"><i class="fa fa-check"></i><b>6.8</b> 5.7.1.6.</a></li>
+<li class="chapter" data-level="6.9" data-path="appendix-1.html"><a href="appendix-1.html#section-19"><i class="fa fa-check"></i><b>6.9</b> 5.7.1.5</a></li>
+<li class="chapter" data-level="6.10" data-path="appendix-1.html"><a href="appendix-1.html#section-20"><i class="fa fa-check"></i><b>6.10</b> 5.7.1.8.</a></li>
+<li class="chapter" data-level="6.11" data-path="appendix-1.html"><a href="appendix-1.html#other"><i class="fa fa-check"></i><b>6.11</b> Other</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="appendix-1.html"><a href="appendix-1.html#on-piping-dots"><i class="fa fa-check"></i><b>6.11.1</b> On piping dots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="appendix-1.html"><a href="appendix-1.html#plotly"><i class="fa fa-check"></i><b>6.12</b> plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html"><i class="fa fa-check"></i><b>7</b> ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="7.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#variation"><i class="fa fa-check"></i><b>7.1</b> 7.3. Variation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-21"><i class="fa fa-check"></i><b>7.1.1</b> 7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.2</b> 7.4. Missing values</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-22"><i class="fa fa-check"></i><b>7.2.1</b> 7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#covariation"><i class="fa fa-check"></i><b>7.3</b> 7.5. Covariation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-23"><i class="fa fa-check"></i><b>7.3.1</b> 7.5.1.1.</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-24"><i class="fa fa-check"></i><b>7.3.2</b> 7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.4</b> 7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-25"><i class="fa fa-check"></i><b>7.4.1</b> 7.5.3.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-2.html"><a href="appendix-2.html"><i class="fa fa-check"></i><b>8</b> Appendix</a><ul>
+<li class="chapter" data-level="8.1" data-path="appendix-2.html"><a href="appendix-2.html#section-26"><i class="fa fa-check"></i><b>8.1</b> 7.5.2.1.2.</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-2.html"><a href="appendix-2.html#section-27"><i class="fa fa-check"></i><b>8.2</b> 7.5.3.1.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html"><i class="fa fa-check"></i><b>9</b> ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html#section-28"><i class="fa fa-check"></i><b>9.1</b> 10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html"><i class="fa fa-check"></i><b>10</b> ch. 11: Data import</a><ul>
+<li class="chapter" data-level="10.1" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-29"><i class="fa fa-check"></i><b>10.1</b> 11.2.2.</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-30"><i class="fa fa-check"></i><b>10.2</b> 11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html"><i class="fa fa-check"></i><b>11</b> ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="11.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#tidy-data"><i class="fa fa-check"></i><b>11.1</b> 12.2: Tidy data</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-31"><i class="fa fa-check"></i><b>11.1.1</b> 12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i><b>11.2</b> 12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-32"><i class="fa fa-check"></i><b>11.2.1</b> 12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>11.3</b> 12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-33"><i class="fa fa-check"></i><b>11.3.1</b> 12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i><b>11.4</b> 12.5: missing values</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-34"><i class="fa fa-check"></i><b>11.4.1</b> 12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#case-study"><i class="fa fa-check"></i><b>11.5</b> 12.6 Case Study</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-35"><i class="fa fa-check"></i><b>11.5.1</b> 12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html"><i class="fa fa-check"></i><b>12</b> ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="12.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#nycflights13"><i class="fa fa-check"></i><b>12.1</b> 13.2 nycflights13</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-36"><i class="fa fa-check"></i><b>12.1.1</b> 13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#keys"><i class="fa fa-check"></i><b>12.2</b> 13.3 Keys</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-37"><i class="fa fa-check"></i><b>12.2.1</b> 13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>12.3</b> 13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-38"><i class="fa fa-check"></i><b>12.3.1</b> 13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>12.4</b> 13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-39"><i class="fa fa-check"></i><b>12.4.1</b> 13.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch-14-strings.html"><a href="ch-14-strings.html"><i class="fa fa-check"></i><b>13</b> ch. 14: Strings</a><ul>
+<li class="chapter" data-level="13.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#string-basics"><i class="fa fa-check"></i><b>13.1</b> 14.2: String basics</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-40"><i class="fa fa-check"></i><b>13.1.1</b> 14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i><b>13.2</b> 14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-41"><i class="fa fa-check"></i><b>13.2.1</b> 14.3.1.1</a></li>
+<li class="chapter" data-level="13.2.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-42"><i class="fa fa-check"></i><b>13.2.2</b> 14.3.2.1</a></li>
+<li class="chapter" data-level="13.2.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-43"><i class="fa fa-check"></i><b>13.2.3</b> 14.3.3.1</a></li>
+<li class="chapter" data-level="13.2.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-44"><i class="fa fa-check"></i><b>13.2.4</b> 14.3.4.1</a></li>
+<li class="chapter" data-level="13.2.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-45"><i class="fa fa-check"></i><b>13.2.5</b> 14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#tools"><i class="fa fa-check"></i><b>13.3</b> 14.4 Tools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-46"><i class="fa fa-check"></i><b>13.3.1</b> 14.4.2</a></li>
+<li class="chapter" data-level="13.3.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-47"><i class="fa fa-check"></i><b>13.3.2</b> 14.4.3.1</a></li>
+<li class="chapter" data-level="13.3.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-48"><i class="fa fa-check"></i><b>13.3.3</b> 14.4.4.1</a></li>
+<li class="chapter" data-level="13.3.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-49"><i class="fa fa-check"></i><b>13.3.4</b> 14.4.5.1</a></li>
+<li class="chapter" data-level="13.3.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-50"><i class="fa fa-check"></i><b>13.3.5</b> 14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i><b>13.4</b> 14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-51"><i class="fa fa-check"></i><b>13.4.1</b> 14.5.1</a></li>
+<li class="chapter" data-level="13.4.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-52"><i class="fa fa-check"></i><b>13.4.2</b> 14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-15-factors.html"><a href="ch-15-factors.html"><i class="fa fa-check"></i><b>14</b> ch. 15: Factors</a><ul>
+<li class="chapter" data-level="14.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>14.1</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-53"><i class="fa fa-check"></i><b>14.1.1</b> 15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i><b>14.2</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-54"><i class="fa fa-check"></i><b>14.2.1</b> 15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>14.3</b> 15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-55"><i class="fa fa-check"></i><b>14.3.1</b> 15.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="appendix-3.html"><a href="appendix-3.html"><i class="fa fa-check"></i><b>15</b> Appendix</a><ul>
+<li class="chapter" data-level="15.1" data-path="appendix-3.html"><a href="appendix-3.html#viewing-all-levels"><i class="fa fa-check"></i><b>15.1</b> Viewing all levels</a></li>
+<li class="chapter" data-level="15.2" data-path="appendix-3.html"><a href="appendix-3.html#percentage-na-each-level"><i class="fa fa-check"></i><b>15.2</b> Percentage NA each level</a></li>
+<li class="chapter" data-level="15.3" data-path="appendix-3.html"><a href="appendix-3.html#print-all-levels-of-tibble"><i class="fa fa-check"></i><b>15.3</b> Print all levels of tibble</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html"><i class="fa fa-check"></i><b>16</b> ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="16.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.1</b> 16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-56"><i class="fa fa-check"></i><b>16.1.1</b> 16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.2</b> 16.3: Date-time components</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-57"><i class="fa fa-check"></i><b>16.2.1</b> 16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#time-spans"><i class="fa fa-check"></i><b>16.3</b> 16.4: Time spans</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-58"><i class="fa fa-check"></i><b>16.3.1</b> 16.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="appendix-4.html"><a href="appendix-4.html"><i class="fa fa-check"></i><b>17</b> Appendix</a><ul>
+<li class="chapter" data-level="17.1" data-path="appendix-4.html"><a href="appendix-4.html#section-59"><i class="fa fa-check"></i><b>17.1</b> 16.3.4.1</a></li>
+<li class="chapter" data-level="17.2" data-path="appendix-4.html"><a href="appendix-4.html#section-60"><i class="fa fa-check"></i><b>17.2</b> 16.3.4.3</a></li>
+<li class="chapter" data-level="17.3" data-path="appendix-4.html"><a href="appendix-4.html#section-61"><i class="fa fa-check"></i><b>17.3</b> 16.3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch-18-pipes-notes-only.html"><a href="ch-18-pipes-notes-only.html"><i class="fa fa-check"></i><b>18</b> ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="19" data-path="ch-19-functions.html"><a href="ch-19-functions.html"><i class="fa fa-check"></i><b>19</b> ch. 19: Functions</a><ul>
+<li class="chapter" data-level="19.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i><b>19.1</b> 19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-62"><i class="fa fa-check"></i><b>19.1.1</b> 19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ch-19-functions.html"><a href="ch-19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i><b>19.2</b> 19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-63"><i class="fa fa-check"></i><b>19.2.1</b> 19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ch-19-functions.html"><a href="ch-19-functions.html#conditional-execution"><i class="fa fa-check"></i><b>19.3</b> 19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="19.3.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-64"><i class="fa fa-check"></i><b>19.3.1</b> 19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="ch-19-functions.html"><a href="ch-19-functions.html#function-arguments"><i class="fa fa-check"></i><b>19.4</b> 19.5: Function arguments</a><ul>
+<li class="chapter" data-level="19.4.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-65"><i class="fa fa-check"></i><b>19.4.1</b> 19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="ch-19-functions.html"><a href="ch-19-functions.html#return-values"><i class="fa fa-check"></i><b>19.5</b> 19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="appendix-5.html"><a href="appendix-5.html"><i class="fa fa-check"></i><b>20</b> Appendix</a><ul>
+<li class="chapter" data-level="20.1" data-path="appendix-5.html"><a href="appendix-5.html#section-66"><i class="fa fa-check"></i><b>20.1</b> 19.2.1.4</a></li>
+<li class="chapter" data-level="20.2" data-path="appendix-5.html"><a href="appendix-5.html#changing-values-with-indexes"><i class="fa fa-check"></i><b>20.2</b> Changing values with indexes</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="appendix-5.html"><a href="appendix-5.html#applying-indexing-to-dfs"><i class="fa fa-check"></i><b>20.2.1</b> Applying indexing to dfs</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="appendix-5.html"><a href="appendix-5.html#better-than-ifelse"><i class="fa fa-check"></i><b>20.3</b> Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="20.4" data-path="appendix-5.html"><a href="appendix-5.html#dplyr-and-functions"><i class="fa fa-check"></i><b>20.4</b> Dplyr and functions</a></li>
+<li class="chapter" data-level="20.5" data-path="appendix-5.html"><a href="appendix-5.html#section-67"><i class="fa fa-check"></i><b>20.5</b> 19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html"><i class="fa fa-check"></i><b>21</b> ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="21.0.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-68"><i class="fa fa-check"></i><b>21.0.1</b> 20.3.5</a></li>
+<li class="chapter" data-level="21.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i><b>21.1</b> 20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-69"><i class="fa fa-check"></i><b>21.1.1</b> 20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i><b>21.2</b> 20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-70"><i class="fa fa-check"></i><b>21.2.1</b> 20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#augmented-vectors"><i class="fa fa-check"></i><b>21.3</b> 20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-71"><i class="fa fa-check"></i><b>21.3.1</b> 20.7.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="appendix-6.html"><a href="appendix-6.html"><i class="fa fa-check"></i><b>22</b> Appendix</a><ul>
+<li class="chapter" data-level="22.1" data-path="appendix-6.html"><a href="appendix-6.html#subsetting-nested-lists"><i class="fa fa-check"></i><b>22.1</b> subsetting nested lists</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html"><i class="fa fa-check"></i><b>23</b> ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="23.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops"><i class="fa fa-check"></i><b>23.1</b> 21.2: For loops</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-72"><i class="fa fa-check"></i><b>23.1.1</b> 21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loop-variations"><i class="fa fa-check"></i><b>23.2</b> 21.3 For loop variations</a><ul>
+<li class="chapter" data-level="23.2.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-73"><i class="fa fa-check"></i><b>23.2.1</b> 21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="23.3" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i><b>23.3</b> 21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="23.3.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-74"><i class="fa fa-check"></i><b>23.3.1</b> 21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.4" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#the-map-functions"><i class="fa fa-check"></i><b>23.4</b> 21.5: The map functions</a><ul>
+<li class="chapter" data-level="23.4.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-75"><i class="fa fa-check"></i><b>23.4.1</b> 21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="23.5" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i><b>23.5</b> 21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="23.5.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-76"><i class="fa fa-check"></i><b>23.5.1</b> 21.9.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="appendix-7.html"><a href="appendix-7.html"><i class="fa fa-check"></i><b>24</b> Appendix</a><ul>
+<li class="chapter" data-level="24.1" data-path="appendix-7.html"><a href="appendix-7.html#section-77"><i class="fa fa-check"></i><b>24.1</b> 21.3.5.1</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="appendix-7.html"><a href="appendix-7.html#using-map"><i class="fa fa-check"></i><b>24.1.1</b> Using map</a></li>
+<li class="chapter" data-level="24.1.2" data-path="appendix-7.html"><a href="appendix-7.html#plot-of-names"><i class="fa fa-check"></i><b>24.1.2</b> Plot of names</a></li>
+<li class="chapter" data-level="24.1.3" data-path="appendix-7.html"><a href="appendix-7.html#csv-other-example"><i class="fa fa-check"></i><b>24.1.3</b> csv other example</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="appendix-7.html"><a href="appendix-7.html#with-purrr"><i class="fa fa-check"></i><b>24.2</b> 21.3.5.2 with purrr</a></li>
+<li class="chapter" data-level="24.3" data-path="appendix-7.html"><a href="appendix-7.html#mirroring-keep"><i class="fa fa-check"></i><b>24.3</b> 21.9 mirroring keep</a></li>
+<li class="chapter" data-level="24.4" data-path="appendix-7.html"><a href="appendix-7.html#invoke-examples"><i class="fa fa-check"></i><b>24.4</b> invoke examples</a></li>
+<li class="chapter" data-level="24.5" data-path="appendix-7.html"><a href="appendix-7.html#indexing-nms-caution"><i class="fa fa-check"></i><b>24.5</b> indexing nms caution</a></li>
+<li class="chapter" data-level="24.6" data-path="appendix-7.html"><a href="appendix-7.html#in-class-notes"><i class="fa fa-check"></i><b>24.6</b> in class notes</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html"><i class="fa fa-check"></i><b>25</b> ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="25.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#a-simple-model"><i class="fa fa-check"></i><b>25.1</b> 23.2: A simple model</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-78"><i class="fa fa-check"></i><b>25.1.1</b> 23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#visualising-models"><i class="fa fa-check"></i><b>25.2</b> 23.3: Visualising models</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-79"><i class="fa fa-check"></i><b>25.2.1</b> 23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i><b>25.3</b> 23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-80"><i class="fa fa-check"></i><b>25.3.1</b> 23.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="appendix-8.html"><a href="appendix-8.html"><i class="fa fa-check"></i><b>26</b> Appendix</a><ul>
+<li class="chapter" data-level="26.1" data-path="appendix-8.html"><a href="appendix-8.html#other-model-families"><i class="fa fa-check"></i><b>26.1</b> Other model families</a></li>
+<li class="chapter" data-level="26.2" data-path="appendix-8.html"><a href="appendix-8.html#book-example"><i class="fa fa-check"></i><b>26.2</b> 23.2 book example</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="appendix-8.html"><a href="appendix-8.html#tidy-grid_space"><i class="fa fa-check"></i><b>26.2.1</b> tidy grid_space</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="appendix-8.html"><a href="appendix-8.html#section-81"><i class="fa fa-check"></i><b>26.3</b> 23.4.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html"><i class="fa fa-check"></i><b>27</b> ch. 24: Model building</a><ul>
+<li class="chapter" data-level="27.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i><b>27.1</b> 24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-82"><i class="fa fa-check"></i><b>27.1.1</b> 24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i><b>27.2</b> 24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-83"><i class="fa fa-check"></i><b>27.2.1</b> 24.3.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="appendix-9.html"><a href="appendix-9.html"><i class="fa fa-check"></i><b>28</b> Appendix</a><ul>
+<li class="chapter" data-level="28.1" data-path="appendix-9.html"><a href="appendix-9.html#section-84"><i class="fa fa-check"></i><b>28.1</b> 24.2.3.3</a></li>
+<li class="chapter" data-level="28.2" data-path="appendix-9.html"><a href="appendix-9.html#section-85"><i class="fa fa-check"></i><b>28.2</b> 24.2.3.4</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="appendix-9.html"><a href="appendix-9.html#heteroskedasticity"><i class="fa fa-check"></i><b>28.2.1</b> heteroskedasticity</a></li>
+<li class="chapter" data-level="28.2.2" data-path="appendix-9.html"><a href="appendix-9.html#rsquared-on-logged-values"><i class="fa fa-check"></i><b>28.2.2</b> rsquared on logged values</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="appendix-9.html"><a href="appendix-9.html#section-86"><i class="fa fa-check"></i><b>28.3</b> 24.2.3.1</a><ul>
+<li class="chapter" data-level="28.3.1" data-path="appendix-9.html"><a href="appendix-9.html#more-notes-on-logs"><i class="fa fa-check"></i><b>28.3.1</b> More notes on logs</a></li>
+<li class="chapter" data-level="28.3.2" data-path="appendix-9.html"><a href="appendix-9.html#carat-more-clumped-than-price"><i class="fa fa-check"></i><b>28.3.2</b> carat more clumped than price</a></li>
+</ul></li>
+<li class="chapter" data-level="28.4" data-path="appendix-9.html"><a href="appendix-9.html#logs-simulated-examples"><i class="fa fa-check"></i><b>28.4</b> Logs (simulated examples)</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="appendix-9.html"><a href="appendix-9.html#exponential-relationship"><i class="fa fa-check"></i><b>28.4.1</b> Exponential relationship</a></li>
+<li class="chapter" data-level="28.4.2" data-path="appendix-9.html"><a href="appendix-9.html#log-log-relationship"><i class="fa fa-check"></i><b>28.4.2</b> Log log relationship</a></li>
+</ul></li>
+<li class="chapter" data-level="28.5" data-path="appendix-9.html"><a href="appendix-9.html#diamonds-data-review"><i class="fa fa-check"></i><b>28.5</b> Diamonds data review</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="appendix-9.html"><a href="appendix-9.html#carat-by-mean-table-value"><i class="fa fa-check"></i><b>28.5.1</b> carat by mean <code>table</code> value</a></li>
+<li class="chapter" data-level="28.5.2" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-1"><i class="fa fa-check"></i><b>28.5.2</b> Cutoff, Part 1</a></li>
+<li class="chapter" data-level="28.5.3" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-2"><i class="fa fa-check"></i><b>28.5.3</b> Cutoff, Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="28.6" data-path="appendix-9.html"><a href="appendix-9.html#section-87"><i class="fa fa-check"></i><b>28.6</b> 25.3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html"><i class="fa fa-check"></i><b>29</b> ch. 25: Many models</a><ul>
+<li class="chapter" data-level="29.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#gapminder"><i class="fa fa-check"></i><b>29.1</b> 25.2: gapminder</a><ul>
+<li class="chapter" data-level="29.1.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-88"><i class="fa fa-check"></i><b>29.1.1</b> 25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#creating-list-columns"><i class="fa fa-check"></i><b>29.2</b> 25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="29.2.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-89"><i class="fa fa-check"></i><b>29.2.1</b> 25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i><b>29.3</b> 25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="29.3.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-90"><i class="fa fa-check"></i><b>29.3.1</b> 25.5.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="appendix-10.html"><a href="appendix-10.html"><i class="fa fa-check"></i><b>30</b> Appendix</a><ul>
+<li class="chapter" data-level="30.1" data-path="appendix-10.html"><a href="appendix-10.html#models-in-lists"><i class="fa fa-check"></i><b>30.1</b> models in lists</a></li>
+<li class="chapter" data-level="30.2" data-path="appendix-10.html"><a href="appendix-10.html#list-columns-for-sampling"><i class="fa fa-check"></i><b>30.2</b> list-columns for sampling</a></li>
+<li class="chapter" data-level="30.3" data-path="appendix-10.html"><a href="appendix-10.html#section-91"><i class="fa fa-check"></i><b>30.3</b> 25.2.5.1</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="appendix-10.html"><a href="appendix-10.html#include-cubic-term"><i class="fa fa-check"></i><b>30.3.1</b> Include cubic term</a></li>
+</ul></li>
+<li class="chapter" data-level="30.4" data-path="appendix-10.html"><a href="appendix-10.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i><b>30.4</b> Multiple graphs in chunk</a></li>
+<li class="chapter" data-level="30.5" data-path="appendix-10.html"><a href="appendix-10.html#listquantile-examples"><i class="fa fa-check"></i><b>30.5</b> list(quantile()) examples</a></li>
+<li class="chapter" data-level="30.6" data-path="appendix-10.html"><a href="appendix-10.html#extracting-row-names"><i class="fa fa-check"></i><b>30.6</b> extracting row names</a></li>
+<li class="chapter" data-level="30.7" data-path="appendix-10.html"><a href="appendix-10.html#invoke_map-example-book"><i class="fa fa-check"></i><b>30.7</b> <code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="30.8" data-path="appendix-10.html"><a href="appendix-10.html#named-list-example-book"><i class="fa fa-check"></i><b>30.8</b> named list example (book)</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html"><i class="fa fa-check"></i><b>31</b> ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="31.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>31.1</b> 27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="31.1.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-92"><i class="fa fa-check"></i><b>31.1.1</b> 27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>31.2</b> 27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="31.2.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-93"><i class="fa fa-check"></i><b>31.2.1</b> 27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.3" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#cv-of-bryan-shalloway"><i class="fa fa-check"></i><b>31.3</b> <strong>CV of Bryan Shalloway</strong></a></li>
+<li class="chapter" data-level="31.4" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#experience"><i class="fa fa-check"></i><b>31.4</b> Experience</a></li>
+<li class="chapter" data-level="31.5" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#education"><i class="fa fa-check"></i><b>31.5</b> Education</a></li>
+<li class="chapter" data-level="31.6" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>31.6</b> 27.4: Code chunks</a><ul>
+<li class="chapter" data-level="31.6.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-94"><i class="fa fa-check"></i><b>31.6.1</b> 27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html"><i class="fa fa-check"></i><b>32</b> ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="32.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#label"><i class="fa fa-check"></i><b>32.1</b> 28.2: Label</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-95"><i class="fa fa-check"></i><b>32.1.1</b> 28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>32.2</b> 28.3: Annotations</a><ul>
+<li class="chapter" data-level="32.2.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i><b>32.2.1</b> 28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.3" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>32.3</b> 28.4: Scales</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i><b>32.3.1</b> 28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions and notes to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="appendix-7" class="section level1">
+<h1><span class="header-section-number">Chapter 24</span> Appendix</h1>
+<div id="section-77" class="section level2">
+<h2><span class="header-section-number">24.1</span> 21.3.5.1</h2>
+<div id="using-map" class="section level3">
+<h3><span class="header-section-number">24.1.1</span> Using map</h3>
+<div class="sourceCode" id="cb1085"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1085-1" title="1">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1085-2" title="2"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, read_csv))</a>
+<a class="sourceLine" id="cb1085-3" title="3">    </a>
+<a class="sourceLine" id="cb1085-4" title="4">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1085-5" title="5"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, <span class="kw">safely</span>(read_csv)))</a></code></pre></div>
+</div>
+<div id="plot-of-names" class="section level3">
+<h3><span class="header-section-number">24.1.2</span> Plot of names</h3>
+<ul>
+<li>Below is a plot of the proportion of individuals named the most popular letter in each year. This suggests that the top names by letter do not have as large of a proportion of the population ocmpared to historically.</li>
+</ul>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1086-1" title="1">names_appended <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1086-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> prop, <span class="dt">colour =</span> first_letter))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1086-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="21-iteration_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
+</div>
+<div id="csv-other-example" class="section level3">
+<h3><span class="header-section-number">24.1.3</span> csv other example</h3>
+<p>This is some code I used to read csvs from a shared drive. I added on the ‘file_path_pull’ and ‘files_example’ components to add in information on the file paths and other details that were relevant… you might also add this data into a new column on the output…</p>
+<div class="sourceCode" id="cb1087"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1087-1" title="1">files_path_pull &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;//companydomain.com/directory/&quot;</span>, </a>
+<a class="sourceLine" id="cb1087-2" title="2">                       <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>,</a>
+<a class="sourceLine" id="cb1087-3" title="3">                       <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1087-4" title="4"></a>
+<a class="sourceLine" id="cb1087-5" title="5">files_example &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">file_paths =</span> files_path_pull[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1087-6" title="6"><span class="st">  </span><span class="kw">extract</span>(file_paths, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;path&quot;</span>, <span class="st">&quot;name&quot;</span>), <span class="dt">regex =</span> <span class="st">&quot;(.*)([0-9]{4}-[0-9]{2}-[0-9]{2})&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1087-7" title="7"></a>
+<a class="sourceLine" id="cb1087-8" title="8">read_dir &lt;-<span class="st"> </span><span class="cf">function</span>(dir){</a>
+<a class="sourceLine" id="cb1087-9" title="9">  <span class="co">#input vector of file paths name and output appended file</span></a>
+<a class="sourceLine" id="cb1087-10" title="10">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(dir))</a>
+<a class="sourceLine" id="cb1087-11" title="11">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(out)){</a>
+<a class="sourceLine" id="cb1087-12" title="12">    out[[i]] &lt;-<span class="st"> </span><span class="kw">read_csv</span>(dir[[i]])</a>
+<a class="sourceLine" id="cb1087-13" title="13">  }</a>
+<a class="sourceLine" id="cb1087-14" title="14">  out &lt;-<span class="st">  </span><span class="kw">bind_rows</span>(out)</a>
+<a class="sourceLine" id="cb1087-15" title="15">  out</a>
+<a class="sourceLine" id="cb1087-16" title="16">}</a>
+<a class="sourceLine" id="cb1087-17" title="17"></a>
+<a class="sourceLine" id="cb1087-18" title="18"><span class="kw">read_dir</span>(files_example<span class="op">$</span>file_paths)</a></code></pre></div>
+</div>
+</div>
+<div id="with-purrr" class="section level2">
+<h2><span class="header-section-number">24.2</span> 21.3.5.2 with purrr</h2>
+<p>Slightly less attractive printing</p>
+<div class="sourceCode" id="cb1088"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1088-1" title="1">show_mean2 &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb1088-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1088-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1088-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1088-5" title="5">}</a>
+<a class="sourceLine" id="cb1088-6" title="6"></a>
+<a class="sourceLine" id="cb1088-7" title="7"><span class="kw">show_mean2</span>(flights)</a></code></pre></div>
+<pre><code>##           year          month            day       dep_time sched_dep_time 
+##    2013.000000       6.548510      15.710787    1349.109947    1344.254840 
+##      dep_delay       arr_time sched_arr_time      arr_delay         flight 
+##      12.639070    1502.054999    1536.380220       6.895377    1971.923620 
+##       air_time       distance           hour         minute 
+##     150.686460    1039.912604      13.180247      26.230100</code></pre>
+<p>Maybe slightly better printing and in df</p>
+<div class="sourceCode" id="cb1090"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1090-1" title="1">show_mean3 &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb1090-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1090-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1090-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1090-5" title="5"><span class="st">    </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1090-6" title="6"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw">row.names</span>(.))</a>
+<a class="sourceLine" id="cb1090-7" title="7">}</a>
+<a class="sourceLine" id="cb1090-8" title="8"></a>
+<a class="sourceLine" id="cb1090-9" title="9"><span class="kw">show_mean3</span>(flights)</a></code></pre></div>
+<pre><code>## # A tibble: 14 x 2
+##      value names
+##      &lt;dbl&gt; &lt;chr&gt;
+##  1 2013    1    
+##  2    6.55 2    
+##  3   15.7  3    
+##  4 1349.   4    
+##  5 1344.   5    
+##  6   12.6  6    
+##  7 1502.   7    
+##  8 1536.   8    
+##  9    6.90 9    
+## 10 1972.   10   
+## 11  151.   11   
+## 12 1040.   12   
+## 13   13.2  13   
+## 14   26.2  14</code></pre>
+<p>Other method is to take advantage of the gather function</p>
+<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1092-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1092-2" title="2"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1092-3" title="3"><span class="st">  </span><span class="kw">map</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1092-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1092-5" title="5"><span class="st">  </span><span class="kw">gather</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 14 x 2
+##    key              value
+##    &lt;chr&gt;            &lt;dbl&gt;
+##  1 year           2013   
+##  2 month             6.55
+##  3 day              15.7 
+##  4 dep_time       1349.  
+##  5 sched_dep_time 1344.  
+##  6 dep_delay        12.6 
+##  7 arr_time       1502.  
+##  8 sched_arr_time 1536.  
+##  9 arr_delay         6.90
+## 10 flight         1972.  
+## 11 air_time        151.  
+## 12 distance       1040.  
+## 13 hour             13.2 
+## 14 minute           26.2</code></pre>
+</div>
+<div id="mirroring-keep" class="section level2">
+<h2><span class="header-section-number">24.3</span> 21.9 mirroring keep</h2>
+<ul>
+<li><p>below is one method for passing multiple, more complex arguments through keep, though you can also use function shortcuts (<code>~</code>) in <code>keep</code> and <code>discard</code></p>
+<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1094-1" title="1"><span class="co">##how to pass multiple functions through keep?</span></a>
+<a class="sourceLine" id="cb1094-2" title="2"><span class="co">#can use map to subset columns by multiple criteria and then subset at end</span></a>
+<a class="sourceLine" id="cb1094-3" title="3">flights <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1094-4" title="4"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(is.na) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1094-5" title="5"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_dbl</span>(sum) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1094-6" title="6"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span>.<span class="op">&gt;</span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1094-7" title="7"><span class="st">  </span>flights[.]</a></code></pre></div>
+<pre><code>## # A tibble: 336,776 x 6
+##    dep_time dep_delay arr_time arr_delay tailnum air_time
+##       &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
+##  1      517         2      830        11 N14228       227
+##  2      533         4      850        20 N24211       227
+##  3      542         2      923        33 N619AA       160
+##  4      544        -1     1004       -18 N804JB       183
+##  5      554        -6      812       -25 N668DN       116
+##  6      554        -4      740        12 N39463       150
+##  7      555        -5      913        19 N516JB       158
+##  8      557        -3      709       -14 N829AS        53
+##  9      557        -3      838        -8 N593JB       140
+## 10      558        -2      753         8 N3ALAA       138
+## # ... with 336,766 more rows</code></pre></li>
+</ul>
+</div>
+<div id="invoke-examples" class="section level2">
+<h2><span class="header-section-number">24.4</span> invoke examples</h2>
+<p>Let’s change the example to be with quantile…</p>
+<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1096-1" title="1"><span class="kw">invoke</span>(runif, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.84953495 0.65261855 0.05608915 0.66774468 0.87637116 0.88567103
+##  [7] 0.35989083 0.42194676 0.56473870 0.18702454</code></pre>
+<div class="sourceCode" id="cb1098"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1098-1" title="1"><span class="kw">list</span>(<span class="st">&quot;01a&quot;</span>, <span class="st">&quot;01b&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1098-2" title="2"><span class="st">  </span><span class="kw">invoke</span>(paste, ., <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;01a-01b&quot;</code></pre>
+<div class="sourceCode" id="cb1100"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1100-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1100-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">5</span>)))</a></code></pre></div>
+<pre><code>## [[1]]
+##  [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673 0.0455565 0.5281055
+##  [8] 0.8924190 0.5514350 0.4566147
+## 
+## [[2]]
+## [1]  1.7150650  0.4609162 -1.2650612 -0.6868529 -0.4456620</code></pre>
+<div class="sourceCode" id="cb1102"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1102-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1102-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dv">5</span>, <span class="dv">50</span>)))</a></code></pre></div>
+<pre><code>## [[1]]
+##  [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673 0.0455565 0.5281055
+##  [8] 0.8924190 0.5514350 0.4566147
+## 
+## [[2]]
+## [1] 51.71506 50.46092 48.73494 49.31315 49.55434</code></pre>
+<div class="sourceCode" id="cb1104"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1104-1" title="1"><span class="kw">list</span>(<span class="dt">m1 =</span> mean, <span class="dt">m2 =</span> median) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">invoke_map</span>(<span class="dt">x =</span> <span class="kw">rcauchy</span>(<span class="dv">100</span>))</a></code></pre></div>
+<pre><code>## $m1
+## [1] 0.7316016
+## 
+## $m2
+## [1] 0.1690467</code></pre>
+<div class="sourceCode" id="cb1106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1106-1" title="1"><span class="kw">rcauchy</span>(<span class="dv">100</span>)</a></code></pre></div>
+<pre><code>##   [1]   -1.99514216    1.57378677    1.44901985    0.82604308    2.30072052
+##   [6]   -0.04961749    0.52626840    0.29408692    0.47790231   -1.47138470
+##  [11]   -2.54305059   -0.35508248   -1.65511601   -1.08467708  -15.03813728
+##  [16]   -1.82118206   -0.62669137   -0.79456204   -0.06347636    5.19179251
+##  [21]    1.48851593    3.42095041    0.03289526    0.65171559   -0.53864091
+##  [26]    0.88812626    0.93375555    0.24570517    0.97348569   -1.11905466
+##  [31]   -0.51964526  128.72537963    2.72138263    0.97793363    0.36391811
+##  [36]    2.77745450   -4.34935786    0.81096079    5.70518746    0.81669440
+##  [41] -138.41947905    2.02359725   -1.96283674    2.40809060    2.04850398
+##  [46]   -9.41347275   -1.06265274    0.83312509    3.55625549    1.10375978
+##  [51]   -2.31140048    0.65162145   -0.45665528   -1.02179975   -1.71189590
+##  [56]   -2.57239721    2.35617831  -10.63750166   -0.41538322   -3.80770683
+##  [61]   -0.55070513    1.49607830   -1.30359005    1.09910916   -3.27457763
+##  [66]   16.99304208    1.09921270   -4.86030197   -0.27969649   -0.31842181
+##  [71]    1.16466121    1.59209243   -0.04514112   -2.52586678   -0.19951960
+##  [76]    9.47599952    3.31841045   -1.82945785    0.51884667   -4.29179059
+##  [81]    0.93155898   -0.11880720   -3.03333758  -21.16294537    3.16450655
+##  [86]   -0.39503234    2.19801293    1.27457150    0.59413768    0.60064481
+##  [91]   17.70703023    1.01880490    0.80764382   -1.63905090    0.15086898
+##  [96]   -1.36865319    1.99173761    3.39988162   -0.63043489   -0.26058630</code></pre>
+<p>Let’s store everything in a dataframe…</p>
+<div class="sourceCode" id="cb1108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1108-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1108-2" title="2"><span class="kw">tibble</span>(<span class="dt">funs =</span> <span class="kw">list</span>(<span class="dt">rn =</span> <span class="st">&quot;rnorm&quot;</span>, <span class="dt">rp =</span> <span class="st">&quot;rpois&quot;</span>, <span class="dt">ru =</span> <span class="st">&quot;runif&quot;</span>),</a>
+<a class="sourceLine" id="cb1108-3" title="3">       <span class="dt">params =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">mean =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">lambda =</span> <span class="dv">3</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1108-4" title="4"><span class="st">  </span><span class="kw">with</span>(<span class="kw">invoke_map_df</span>(funs, params))</a></code></pre></div>
+<pre><code>## # A tibble: 20 x 3
+##       rn    rp      ru
+##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
+##  1  9.44     1  0.330 
+##  2  9.77     2 -0.810 
+##  3 11.6      2 -0.232 
+##  4 10.1      2 -0.451 
+##  5 10.1      1  0.629 
+##  6 11.7      1 -0.103 
+##  7 10.5      2  0.620 
+##  8  8.73     3  0.625 
+##  9  9.31     2  0.589 
+## 10  9.55     5 -0.120 
+## 11 11.2      0  0.509 
+## 12 10.4      3  0.258 
+## 13 10.4      4  0.420 
+## 14 10.1      1 -0.999 
+## 15  9.44     3 -0.0494
+## 16 11.8      2 -0.560 
+## 17 10.5      1 -0.240 
+## 18  8.03     4  0.226 
+## 19 10.7      5 -0.296 
+## 20  9.53     2 -0.778</code></pre>
+<div class="sourceCode" id="cb1110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1110-1" title="1"><span class="kw">map_df</span>(iris, <span class="op">~</span>.x<span class="op">*</span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code>## Warning in Ops.factor(.x, 2): &#39;*&#39; not meaningful for factors</code></pre>
+<pre><code>## # A tibble: 150 x 5
+##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##           &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;lgl&gt;  
+##  1         10.2         7            2.8         0.4 NA     
+##  2          9.8         6            2.8         0.4 NA     
+##  3          9.4         6.4          2.6         0.4 NA     
+##  4          9.2         6.2          3           0.4 NA     
+##  5         10           7.2          2.8         0.4 NA     
+##  6         10.8         7.8          3.4         0.8 NA     
+##  7          9.2         6.8          2.8         0.6 NA     
+##  8         10           6.8          3           0.4 NA     
+##  9          8.8         5.8          2.8         0.4 NA     
+## 10          9.8         6.2          3           0.2 NA     
+## # ... with 140 more rows</code></pre>
+<div class="sourceCode" id="cb1113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1113-1" title="1"><span class="kw">select</span>(iris, <span class="op">-</span>Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1113-2" title="2"><span class="st">  </span><span class="kw">flatten_dbl</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1113-3" title="3"><span class="st">  </span><span class="kw">mean</span>()</a></code></pre></div>
+<pre><code>## [1] 3.4645</code></pre>
+<div class="sourceCode" id="cb1115"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1115-1" title="1">mean.and.median &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1115-2" title="2">  <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb1115-3" title="3">       <span class="dt">median =</span> <span class="kw">median</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1115-4" title="4">}</a></code></pre></div>
+<p>Difference between dfr and dfc, taken from here: <a href="https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html" class="uri">https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html</a></p>
+<div class="sourceCode" id="cb1116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1116-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1116-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1116-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1116-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##    mean median names       
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       
+## 1  5.84   5.8  Sepal.Length
+## 2  3.06   3    Sepal.Width 
+## 3  3.76   4.35 Petal.Length
+## 4  1.20   1.3  Petal.Width</code></pre>
+<div class="sourceCode" id="cb1118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1118-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1118-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1118-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1118-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##    mean median names       
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       
+## 1  5.84   5.8  Sepal.Length
+## 2  3.06   3    Sepal.Width 
+## 3  3.76   4.35 Petal.Length
+## 4  1.20   1.3  Petal.Width</code></pre>
+<div class="sourceCode" id="cb1120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1120-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1120-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1120-3" title="3"><span class="st">  </span><span class="kw">map_dfc</span>(mean.and.median)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 8
+##    mean median mean1 median1 mean2 median2 mean3 median3
+##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
+## 1  5.84    5.8  3.06       3  3.76    4.35  1.20     1.3</code></pre>
+</div>
+<div id="indexing-nms-caution" class="section level2">
+<h2><span class="header-section-number">24.5</span> indexing nms caution</h2>
+<p>When creating your empty list, use indexes rather than names if you are creating values, otherwise you are creating new values on the list. E.g. in the example below I the output ends up being length 6 because you have the 3 <code>NULL</code> values plus the 3 newly created named positions.</p>
+<div class="sourceCode" id="cb1122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1122-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">c =</span> <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb1122-2" title="2">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb1122-3" title="3"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb1122-4" title="4">  output[[nm]] &lt;-<span class="st"> </span>x[[nm]] <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb1122-5" title="5">}</a>
+<a class="sourceLine" id="cb1122-6" title="6">output</a></code></pre></div>
+<pre><code>## [[1]]
+## NULL
+## 
+## [[2]]
+## NULL
+## 
+## [[3]]
+## NULL
+## 
+## $a
+##  [1]  3  6  9 12 15 18 21 24 27 30
+## 
+## $b
+## [1] 33 36 39 42 45 48 51 54
+## 
+## $c
+## [1] 57 60 63 66 69 72 75</code></pre>
+</div>
+<div id="in-class-notes" class="section level2">
+<h2><span class="header-section-number">24.6</span> in class notes</h2>
+<p>the <code>map_*</code> functions are essentially like running a <code>flatten_*</code> after running <code>map</code>. E.g. the two things below are equivalent</p>
+<div class="sourceCode" id="cb1124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1124-1" title="1"><span class="kw">map</span>(flights, typeof) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1124-2" title="2"><span class="st">  </span><span class="kw">flatten_chr</span>()</a></code></pre></div>
+<pre><code>##  [1] &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;  
+##  [6] &quot;double&quot;    &quot;integer&quot;   &quot;integer&quot;   &quot;double&quot;    &quot;character&quot;
+## [11] &quot;integer&quot;   &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;double&quot;   
+## [16] &quot;double&quot;    &quot;double&quot;    &quot;double&quot;    &quot;double&quot;</code></pre>
+<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1126-1" title="1"><span class="kw">map_chr</span>(flights, typeof)</a></code></pre></div>
+<pre><code>##           year          month            day       dep_time sched_dep_time 
+##      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot; 
+##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
+##       &quot;double&quot;      &quot;integer&quot;      &quot;integer&quot;       &quot;double&quot;    &quot;character&quot; 
+##         flight        tailnum         origin           dest       air_time 
+##      &quot;integer&quot;    &quot;character&quot;    &quot;character&quot;    &quot;character&quot;       &quot;double&quot; 
+##       distance           hour         minute      time_hour 
+##       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;</code></pre>
+<p>Calculate the number of unique values for each level</p>
+<div class="sourceCode" id="cb1128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1128-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1128-2" title="2"><span class="st">  </span><span class="kw">map</span>(unique) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1128-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(length)</a>
+<a class="sourceLine" id="cb1128-4" title="4"></a>
+<a class="sourceLine" id="cb1128-5" title="5"><span class="kw">map_int</span>(iris, <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x)))</a></code></pre></div>
+<p>Iterate through different min and max values</p>
+<div class="sourceCode" id="cb1129"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1129-1" title="1">min_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-10</span>)</a>
+<a class="sourceLine" id="cb1129-2" title="2">max_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">11</span><span class="op">:</span><span class="dv">13</span>)</a>
+<a class="sourceLine" id="cb1129-3" title="3"><span class="kw">map2</span>(<span class="dt">.x =</span> min_params, <span class="dt">.y =</span> max_params, <span class="op">~</span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> .x, <span class="dt">max =</span> .y))</a></code></pre></div>
+<pre><code>## [[1]]
+##  [1]  1.9234337  7.0166670  4.0117614  8.4583500  0.2343757  4.2187129
+##  [7] 10.8194838  9.7166134  9.6376287  1.1006318
+## 
+## [[2]]
+##  [1] 1.568348 7.837223 4.122198 7.881098 3.844479 2.252293 9.387532
+##  [8] 1.123140 5.601348 6.138066
+## 
+## [[3]]
+##  [1]  3.7997461 -2.3450586  1.2380998 11.9528980  1.1067551 10.4780551
+##  [7] 11.0320783  4.0009046 -0.5541351 -6.6168221</code></pre>
+<p>When using <code>pmap</code> it’s often best to keep the parameters in a dataframe</p>
+<div class="sourceCode" id="cb1131"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1131-1" title="1">min_df_params &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span> ), </a>
+<a class="sourceLine" id="cb1131-2" title="2">                        <span class="dt">min =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb1131-3" title="3">                        <span class="dt">max =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1131-4" title="4"></a>
+<a class="sourceLine" id="cb1131-5" title="5"><span class="kw">pmap</span>(min_df_params, runif)</a></code></pre></div>
+<pre><code>## [[1]]
+##  [1] -0.06470020 -0.69877110 -0.93927943 -0.05227306 -0.27940373
+##  [6] -0.85770570 -0.45071534 -0.04590876 -0.41451665 -0.59548972
+## 
+## [[2]]
+##  [1] 0.6478935 0.3198206 0.3077200 0.2197676 0.3694889 0.9842192 0.1542023
+##  [8] 0.0910440 0.1419069 0.6900071 0.6192565 0.8913941 0.6729991 0.7370777
+## [15] 0.5211357
+## 
+## [[3]]
+##  [1] 1.659838 1.821805 1.786282 1.979822 1.439432 1.311702 1.409475
+##  [8] 1.010467 1.183850 1.842729 1.231162 1.239100 1.076691 1.245724
+## [15] 1.732135 1.847453 1.497527 1.387909 1.246449 1.111096
+## 
+## [[4]]
+##  [1] 2.389994 2.571935 2.216893 2.444768 2.217991 2.502300 2.353905
+##  [8] 2.649985 2.374714 2.355445 2.533688 2.740334 2.221103 2.412746
+## [15] 2.265687 2.629973 2.183828 2.863644 2.746568 2.668285 2.618018
+## [22] 2.372238 2.529836 2.874682 2.581750 2.839768 2.312448 2.708290
+## [29] 2.265018 2.594343 2.481290 2.265033 2.564590 2.913188 2.901874
+## [36] 2.274167 2.321483 2.985641 2.619993 2.937314 2.466533 2.406833
+## [43] 2.659230 2.152347 2.572867 2.238726 2.962359 2.601366 2.515030
+## [50] 2.402573</code></pre>
+<p>You can often use <code>map</code> a bunch of output that can then be stored in a tibble</p>
+<div class="sourceCode" id="cb1133"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1133-1" title="1"><span class="kw">tibble</span>(<span class="dt">type =</span> <span class="kw">map_chr</span>(mtcars, typeof),</a>
+<a class="sourceLine" id="cb1133-2" title="2">       <span class="dt">means =</span> <span class="kw">map_dbl</span>(mtcars, mean),</a>
+<a class="sourceLine" id="cb1133-3" title="3">       <span class="dt">median =</span> <span class="kw">map_dbl</span>(mtcars, median),</a>
+<a class="sourceLine" id="cb1133-4" title="4">       <span class="dt">names =</span> <span class="kw">names</span>(mtcars))</a></code></pre></div>
+<pre><code>## # A tibble: 11 x 4
+##    type     means median names
+##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1 double  20.1    19.2  mpg  
+##  2 double   6.19    6    cyl  
+##  3 double 231.    196.   disp 
+##  4 double 147.    123    hp   
+##  5 double   3.60    3.70 drat 
+##  6 double   3.22    3.32 wt   
+##  7 double  17.8    17.7  qsec 
+##  8 double   0.438   0    vs   
+##  9 double   0.406   0    am   
+## 10 double   3.69    4    gear 
+## 11 double   2.81    2    carb</code></pre>
+<p><em>Provide the number of unique values for all columns excluding columns with numeric types or date types.</em></p>
+<div class="sourceCode" id="cb1135"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1135-1" title="1">num_unique &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb1135-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1135-3" title="3"><span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="kw">is_character</span>(.x) <span class="op">|</span><span class="st"> </span><span class="kw">is.factor</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1135-4" title="4"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1135-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1135-6" title="6"><span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1135-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">field_name =</span> key, <span class="dt">num_unique =</span> value)</a>
+<a class="sourceLine" id="cb1135-8" title="8">}</a>
+<a class="sourceLine" id="cb1135-9" title="9"></a>
+<a class="sourceLine" id="cb1135-10" title="10"><span class="kw">num_unique</span>(flights)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 2
+##   field_name num_unique
+##   &lt;chr&gt;           &lt;int&gt;
+## 1 carrier            16
+## 2 tailnum          4044
+## 3 origin              3
+## 4 dest              105</code></pre>
+<div class="sourceCode" id="cb1137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1137-1" title="1"><span class="kw">num_unique</span>(iris)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 2
+##   field_name num_unique
+##   &lt;chr&gt;           &lt;int&gt;
+## 1 Species             3</code></pre>
+<div class="sourceCode" id="cb1139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1139-1" title="1"><span class="kw">num_unique</span>(mpg)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 2
+##   field_name   num_unique
+##   &lt;chr&gt;             &lt;int&gt;
+## 1 manufacturer         15
+## 2 model                38
+## 3 trans                10
+## 4 drv                   3
+## 5 fl                    5
+## 6 class                 7</code></pre>
+
+<p><em>Make sure the following packages are installed:</em></p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-21-iteration.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch-23-model-basics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

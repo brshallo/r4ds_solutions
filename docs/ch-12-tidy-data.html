@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions and notes to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ch-11-data-import.html">
+<link rel="next" href="ch-13-relational-data.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Purpose of this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i><b>1.1</b> Features of this book</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i><b>1.2</b> Origin of this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html"><i class="fa fa-check"></i><b>2</b> Plug for R4DS</a><ul>
+<li class="chapter" data-level="2.1" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#plug-for-r4ds-1"><i class="fa fa-check"></i><b>2.1</b> Plug for R4DS</a></li>
+<li class="chapter" data-level="2.2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#acknowledgements"><i class="fa fa-check"></i><b>2.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html"><i class="fa fa-check"></i><b>3</b> ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#first-steps"><i class="fa fa-check"></i><b>3.1</b> 3.2: First steps</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section"><i class="fa fa-check"></i><b>3.1.1</b> 3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.2</b> 3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-1"><i class="fa fa-check"></i><b>3.2.1</b> 3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#facets"><i class="fa fa-check"></i><b>3.3</b> 3.5: Facets</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-2"><i class="fa fa-check"></i><b>3.3.1</b> 3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#geometric-objects"><i class="fa fa-check"></i><b>3.4</b> 3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-3"><i class="fa fa-check"></i><b>3.4.1</b> 3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i><b>3.5</b> 3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-4"><i class="fa fa-check"></i><b>3.5.1</b> 3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i><b>3.6</b> 3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-5"><i class="fa fa-check"></i><b>3.6.1</b> 3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i><b>3.7</b> 3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-6"><i class="fa fa-check"></i><b>3.7.1</b> 3.9.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix</a><ul>
+<li class="chapter" data-level="4.1" data-path="appendix.html"><a href="appendix.html#extension"><i class="fa fa-check"></i><b>4.1</b> 3.7.1.1 extension</a></li>
+<li class="chapter" data-level="4.2" data-path="appendix.html"><a href="appendix.html#position-adustments"><i class="fa fa-check"></i><b>4.2</b> 3.8: Position adustments</a></li>
+<li class="chapter" data-level="4.3" data-path="appendix.html"><a href="appendix.html#coordinate-systems-1"><i class="fa fa-check"></i><b>4.3</b> 3.9: Coordinate systems</a></li>
+<li class="chapter" data-level="4.4" data-path="appendix.html"><a href="appendix.html#add-in-table-of-contents-and-other-details"><i class="fa fa-check"></i><b>4.4</b> add in table of contents and other details…</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html"><i class="fa fa-check"></i><b>5</b> ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="5.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#filter-rows"><i class="fa fa-check"></i><b>5.1</b> 5.2: Filter rows</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-7"><i class="fa fa-check"></i><b>5.2</b> 5.2.4.</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-8"><i class="fa fa-check"></i><b>5.2.1</b> 5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i><b>5.3</b> 5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-9"><i class="fa fa-check"></i><b>5.3.1</b> 5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.4</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-10"><i class="fa fa-check"></i><b>5.4.1</b> 5.7.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>6</b> Appendix</a><ul>
+<li class="chapter" data-level="6.1" data-path="appendix-1.html"><a href="appendix-1.html#section-11"><i class="fa fa-check"></i><b>6.1</b> 5.4.1.3.</a></li>
+<li class="chapter" data-level="6.2" data-path="appendix-1.html"><a href="appendix-1.html#section-12"><i class="fa fa-check"></i><b>6.2</b> 5.5.2.1.</a></li>
+<li class="chapter" data-level="6.3" data-path="appendix-1.html"><a href="appendix-1.html#section-13"><i class="fa fa-check"></i><b>6.3</b> 5.5.2.2</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="appendix-1.html"><a href="appendix-1.html#closer-look-at-air_time"><i class="fa fa-check"></i><b>6.3.1</b> Closer look at <code>air_time</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="appendix-1.html"><a href="appendix-1.html#other-plots-with-air_time"><i class="fa fa-check"></i><b>6.3.2</b> Other plots with <code>air_time</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="appendix-1.html"><a href="appendix-1.html#section-14"><i class="fa fa-check"></i><b>6.4</b> 5.6.7.1.</a></li>
+<li class="chapter" data-level="6.5" data-path="appendix-1.html"><a href="appendix-1.html#section-15"><i class="fa fa-check"></i><b>6.5</b> 5.6.7.4.</a></li>
+<li class="chapter" data-level="6.6" data-path="appendix-1.html"><a href="appendix-1.html#section-16"><i class="fa fa-check"></i><b>6.6</b> 5.6.7.5.</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="appendix-1.html"><a href="appendix-1.html#modeling-approach"><i class="fa fa-check"></i><b>6.6.1</b> Modeling approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="appendix-1.html"><a href="appendix-1.html#section-17"><i class="fa fa-check"></i><b>6.7</b> 5.6.7.6.</a></li>
+<li class="chapter" data-level="6.8" data-path="appendix-1.html"><a href="appendix-1.html#section-18"><i class="fa fa-check"></i><b>6.8</b> 5.7.1.6.</a></li>
+<li class="chapter" data-level="6.9" data-path="appendix-1.html"><a href="appendix-1.html#section-19"><i class="fa fa-check"></i><b>6.9</b> 5.7.1.5</a></li>
+<li class="chapter" data-level="6.10" data-path="appendix-1.html"><a href="appendix-1.html#section-20"><i class="fa fa-check"></i><b>6.10</b> 5.7.1.8.</a></li>
+<li class="chapter" data-level="6.11" data-path="appendix-1.html"><a href="appendix-1.html#other"><i class="fa fa-check"></i><b>6.11</b> Other</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="appendix-1.html"><a href="appendix-1.html#on-piping-dots"><i class="fa fa-check"></i><b>6.11.1</b> On piping dots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="appendix-1.html"><a href="appendix-1.html#plotly"><i class="fa fa-check"></i><b>6.12</b> plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html"><i class="fa fa-check"></i><b>7</b> ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="7.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#variation"><i class="fa fa-check"></i><b>7.1</b> 7.3. Variation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-21"><i class="fa fa-check"></i><b>7.1.1</b> 7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.2</b> 7.4. Missing values</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-22"><i class="fa fa-check"></i><b>7.2.1</b> 7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#covariation"><i class="fa fa-check"></i><b>7.3</b> 7.5. Covariation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-23"><i class="fa fa-check"></i><b>7.3.1</b> 7.5.1.1.</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-24"><i class="fa fa-check"></i><b>7.3.2</b> 7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.4</b> 7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-25"><i class="fa fa-check"></i><b>7.4.1</b> 7.5.3.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-2.html"><a href="appendix-2.html"><i class="fa fa-check"></i><b>8</b> Appendix</a><ul>
+<li class="chapter" data-level="8.1" data-path="appendix-2.html"><a href="appendix-2.html#section-26"><i class="fa fa-check"></i><b>8.1</b> 7.5.2.1.2.</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-2.html"><a href="appendix-2.html#section-27"><i class="fa fa-check"></i><b>8.2</b> 7.5.3.1.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html"><i class="fa fa-check"></i><b>9</b> ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html#section-28"><i class="fa fa-check"></i><b>9.1</b> 10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html"><i class="fa fa-check"></i><b>10</b> ch. 11: Data import</a><ul>
+<li class="chapter" data-level="10.1" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-29"><i class="fa fa-check"></i><b>10.1</b> 11.2.2.</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-30"><i class="fa fa-check"></i><b>10.2</b> 11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html"><i class="fa fa-check"></i><b>11</b> ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="11.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#tidy-data"><i class="fa fa-check"></i><b>11.1</b> 12.2: Tidy data</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-31"><i class="fa fa-check"></i><b>11.1.1</b> 12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i><b>11.2</b> 12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-32"><i class="fa fa-check"></i><b>11.2.1</b> 12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>11.3</b> 12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-33"><i class="fa fa-check"></i><b>11.3.1</b> 12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i><b>11.4</b> 12.5: missing values</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-34"><i class="fa fa-check"></i><b>11.4.1</b> 12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#case-study"><i class="fa fa-check"></i><b>11.5</b> 12.6 Case Study</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-35"><i class="fa fa-check"></i><b>11.5.1</b> 12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html"><i class="fa fa-check"></i><b>12</b> ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="12.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#nycflights13"><i class="fa fa-check"></i><b>12.1</b> 13.2 nycflights13</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-36"><i class="fa fa-check"></i><b>12.1.1</b> 13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#keys"><i class="fa fa-check"></i><b>12.2</b> 13.3 Keys</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-37"><i class="fa fa-check"></i><b>12.2.1</b> 13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>12.3</b> 13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-38"><i class="fa fa-check"></i><b>12.3.1</b> 13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>12.4</b> 13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-39"><i class="fa fa-check"></i><b>12.4.1</b> 13.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch-14-strings.html"><a href="ch-14-strings.html"><i class="fa fa-check"></i><b>13</b> ch. 14: Strings</a><ul>
+<li class="chapter" data-level="13.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#string-basics"><i class="fa fa-check"></i><b>13.1</b> 14.2: String basics</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-40"><i class="fa fa-check"></i><b>13.1.1</b> 14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i><b>13.2</b> 14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-41"><i class="fa fa-check"></i><b>13.2.1</b> 14.3.1.1</a></li>
+<li class="chapter" data-level="13.2.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-42"><i class="fa fa-check"></i><b>13.2.2</b> 14.3.2.1</a></li>
+<li class="chapter" data-level="13.2.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-43"><i class="fa fa-check"></i><b>13.2.3</b> 14.3.3.1</a></li>
+<li class="chapter" data-level="13.2.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-44"><i class="fa fa-check"></i><b>13.2.4</b> 14.3.4.1</a></li>
+<li class="chapter" data-level="13.2.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-45"><i class="fa fa-check"></i><b>13.2.5</b> 14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#tools"><i class="fa fa-check"></i><b>13.3</b> 14.4 Tools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-46"><i class="fa fa-check"></i><b>13.3.1</b> 14.4.2</a></li>
+<li class="chapter" data-level="13.3.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-47"><i class="fa fa-check"></i><b>13.3.2</b> 14.4.3.1</a></li>
+<li class="chapter" data-level="13.3.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-48"><i class="fa fa-check"></i><b>13.3.3</b> 14.4.4.1</a></li>
+<li class="chapter" data-level="13.3.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-49"><i class="fa fa-check"></i><b>13.3.4</b> 14.4.5.1</a></li>
+<li class="chapter" data-level="13.3.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-50"><i class="fa fa-check"></i><b>13.3.5</b> 14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i><b>13.4</b> 14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-51"><i class="fa fa-check"></i><b>13.4.1</b> 14.5.1</a></li>
+<li class="chapter" data-level="13.4.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-52"><i class="fa fa-check"></i><b>13.4.2</b> 14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-15-factors.html"><a href="ch-15-factors.html"><i class="fa fa-check"></i><b>14</b> ch. 15: Factors</a><ul>
+<li class="chapter" data-level="14.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>14.1</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-53"><i class="fa fa-check"></i><b>14.1.1</b> 15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i><b>14.2</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-54"><i class="fa fa-check"></i><b>14.2.1</b> 15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>14.3</b> 15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-55"><i class="fa fa-check"></i><b>14.3.1</b> 15.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="appendix-3.html"><a href="appendix-3.html"><i class="fa fa-check"></i><b>15</b> Appendix</a><ul>
+<li class="chapter" data-level="15.1" data-path="appendix-3.html"><a href="appendix-3.html#viewing-all-levels"><i class="fa fa-check"></i><b>15.1</b> Viewing all levels</a></li>
+<li class="chapter" data-level="15.2" data-path="appendix-3.html"><a href="appendix-3.html#percentage-na-each-level"><i class="fa fa-check"></i><b>15.2</b> Percentage NA each level</a></li>
+<li class="chapter" data-level="15.3" data-path="appendix-3.html"><a href="appendix-3.html#print-all-levels-of-tibble"><i class="fa fa-check"></i><b>15.3</b> Print all levels of tibble</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html"><i class="fa fa-check"></i><b>16</b> ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="16.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.1</b> 16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-56"><i class="fa fa-check"></i><b>16.1.1</b> 16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.2</b> 16.3: Date-time components</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-57"><i class="fa fa-check"></i><b>16.2.1</b> 16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#time-spans"><i class="fa fa-check"></i><b>16.3</b> 16.4: Time spans</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-58"><i class="fa fa-check"></i><b>16.3.1</b> 16.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="appendix-4.html"><a href="appendix-4.html"><i class="fa fa-check"></i><b>17</b> Appendix</a><ul>
+<li class="chapter" data-level="17.1" data-path="appendix-4.html"><a href="appendix-4.html#section-59"><i class="fa fa-check"></i><b>17.1</b> 16.3.4.1</a></li>
+<li class="chapter" data-level="17.2" data-path="appendix-4.html"><a href="appendix-4.html#section-60"><i class="fa fa-check"></i><b>17.2</b> 16.3.4.3</a></li>
+<li class="chapter" data-level="17.3" data-path="appendix-4.html"><a href="appendix-4.html#section-61"><i class="fa fa-check"></i><b>17.3</b> 16.3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch-18-pipes-notes-only.html"><a href="ch-18-pipes-notes-only.html"><i class="fa fa-check"></i><b>18</b> ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="19" data-path="ch-19-functions.html"><a href="ch-19-functions.html"><i class="fa fa-check"></i><b>19</b> ch. 19: Functions</a><ul>
+<li class="chapter" data-level="19.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i><b>19.1</b> 19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-62"><i class="fa fa-check"></i><b>19.1.1</b> 19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ch-19-functions.html"><a href="ch-19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i><b>19.2</b> 19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-63"><i class="fa fa-check"></i><b>19.2.1</b> 19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ch-19-functions.html"><a href="ch-19-functions.html#conditional-execution"><i class="fa fa-check"></i><b>19.3</b> 19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="19.3.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-64"><i class="fa fa-check"></i><b>19.3.1</b> 19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="ch-19-functions.html"><a href="ch-19-functions.html#function-arguments"><i class="fa fa-check"></i><b>19.4</b> 19.5: Function arguments</a><ul>
+<li class="chapter" data-level="19.4.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-65"><i class="fa fa-check"></i><b>19.4.1</b> 19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="ch-19-functions.html"><a href="ch-19-functions.html#return-values"><i class="fa fa-check"></i><b>19.5</b> 19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="appendix-5.html"><a href="appendix-5.html"><i class="fa fa-check"></i><b>20</b> Appendix</a><ul>
+<li class="chapter" data-level="20.1" data-path="appendix-5.html"><a href="appendix-5.html#section-66"><i class="fa fa-check"></i><b>20.1</b> 19.2.1.4</a></li>
+<li class="chapter" data-level="20.2" data-path="appendix-5.html"><a href="appendix-5.html#changing-values-with-indexes"><i class="fa fa-check"></i><b>20.2</b> Changing values with indexes</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="appendix-5.html"><a href="appendix-5.html#applying-indexing-to-dfs"><i class="fa fa-check"></i><b>20.2.1</b> Applying indexing to dfs</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="appendix-5.html"><a href="appendix-5.html#better-than-ifelse"><i class="fa fa-check"></i><b>20.3</b> Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="20.4" data-path="appendix-5.html"><a href="appendix-5.html#dplyr-and-functions"><i class="fa fa-check"></i><b>20.4</b> Dplyr and functions</a></li>
+<li class="chapter" data-level="20.5" data-path="appendix-5.html"><a href="appendix-5.html#section-67"><i class="fa fa-check"></i><b>20.5</b> 19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html"><i class="fa fa-check"></i><b>21</b> ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="21.0.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-68"><i class="fa fa-check"></i><b>21.0.1</b> 20.3.5</a></li>
+<li class="chapter" data-level="21.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i><b>21.1</b> 20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-69"><i class="fa fa-check"></i><b>21.1.1</b> 20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i><b>21.2</b> 20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-70"><i class="fa fa-check"></i><b>21.2.1</b> 20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#augmented-vectors"><i class="fa fa-check"></i><b>21.3</b> 20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-71"><i class="fa fa-check"></i><b>21.3.1</b> 20.7.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="appendix-6.html"><a href="appendix-6.html"><i class="fa fa-check"></i><b>22</b> Appendix</a><ul>
+<li class="chapter" data-level="22.1" data-path="appendix-6.html"><a href="appendix-6.html#subsetting-nested-lists"><i class="fa fa-check"></i><b>22.1</b> subsetting nested lists</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html"><i class="fa fa-check"></i><b>23</b> ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="23.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops"><i class="fa fa-check"></i><b>23.1</b> 21.2: For loops</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-72"><i class="fa fa-check"></i><b>23.1.1</b> 21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loop-variations"><i class="fa fa-check"></i><b>23.2</b> 21.3 For loop variations</a><ul>
+<li class="chapter" data-level="23.2.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-73"><i class="fa fa-check"></i><b>23.2.1</b> 21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="23.3" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i><b>23.3</b> 21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="23.3.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-74"><i class="fa fa-check"></i><b>23.3.1</b> 21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.4" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#the-map-functions"><i class="fa fa-check"></i><b>23.4</b> 21.5: The map functions</a><ul>
+<li class="chapter" data-level="23.4.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-75"><i class="fa fa-check"></i><b>23.4.1</b> 21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="23.5" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i><b>23.5</b> 21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="23.5.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-76"><i class="fa fa-check"></i><b>23.5.1</b> 21.9.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="appendix-7.html"><a href="appendix-7.html"><i class="fa fa-check"></i><b>24</b> Appendix</a><ul>
+<li class="chapter" data-level="24.1" data-path="appendix-7.html"><a href="appendix-7.html#section-77"><i class="fa fa-check"></i><b>24.1</b> 21.3.5.1</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="appendix-7.html"><a href="appendix-7.html#using-map"><i class="fa fa-check"></i><b>24.1.1</b> Using map</a></li>
+<li class="chapter" data-level="24.1.2" data-path="appendix-7.html"><a href="appendix-7.html#plot-of-names"><i class="fa fa-check"></i><b>24.1.2</b> Plot of names</a></li>
+<li class="chapter" data-level="24.1.3" data-path="appendix-7.html"><a href="appendix-7.html#csv-other-example"><i class="fa fa-check"></i><b>24.1.3</b> csv other example</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="appendix-7.html"><a href="appendix-7.html#with-purrr"><i class="fa fa-check"></i><b>24.2</b> 21.3.5.2 with purrr</a></li>
+<li class="chapter" data-level="24.3" data-path="appendix-7.html"><a href="appendix-7.html#mirroring-keep"><i class="fa fa-check"></i><b>24.3</b> 21.9 mirroring keep</a></li>
+<li class="chapter" data-level="24.4" data-path="appendix-7.html"><a href="appendix-7.html#invoke-examples"><i class="fa fa-check"></i><b>24.4</b> invoke examples</a></li>
+<li class="chapter" data-level="24.5" data-path="appendix-7.html"><a href="appendix-7.html#indexing-nms-caution"><i class="fa fa-check"></i><b>24.5</b> indexing nms caution</a></li>
+<li class="chapter" data-level="24.6" data-path="appendix-7.html"><a href="appendix-7.html#in-class-notes"><i class="fa fa-check"></i><b>24.6</b> in class notes</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html"><i class="fa fa-check"></i><b>25</b> ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="25.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#a-simple-model"><i class="fa fa-check"></i><b>25.1</b> 23.2: A simple model</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-78"><i class="fa fa-check"></i><b>25.1.1</b> 23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#visualising-models"><i class="fa fa-check"></i><b>25.2</b> 23.3: Visualising models</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-79"><i class="fa fa-check"></i><b>25.2.1</b> 23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i><b>25.3</b> 23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-80"><i class="fa fa-check"></i><b>25.3.1</b> 23.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="appendix-8.html"><a href="appendix-8.html"><i class="fa fa-check"></i><b>26</b> Appendix</a><ul>
+<li class="chapter" data-level="26.1" data-path="appendix-8.html"><a href="appendix-8.html#other-model-families"><i class="fa fa-check"></i><b>26.1</b> Other model families</a></li>
+<li class="chapter" data-level="26.2" data-path="appendix-8.html"><a href="appendix-8.html#book-example"><i class="fa fa-check"></i><b>26.2</b> 23.2 book example</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="appendix-8.html"><a href="appendix-8.html#tidy-grid_space"><i class="fa fa-check"></i><b>26.2.1</b> tidy grid_space</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="appendix-8.html"><a href="appendix-8.html#section-81"><i class="fa fa-check"></i><b>26.3</b> 23.4.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html"><i class="fa fa-check"></i><b>27</b> ch. 24: Model building</a><ul>
+<li class="chapter" data-level="27.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i><b>27.1</b> 24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-82"><i class="fa fa-check"></i><b>27.1.1</b> 24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i><b>27.2</b> 24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-83"><i class="fa fa-check"></i><b>27.2.1</b> 24.3.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="appendix-9.html"><a href="appendix-9.html"><i class="fa fa-check"></i><b>28</b> Appendix</a><ul>
+<li class="chapter" data-level="28.1" data-path="appendix-9.html"><a href="appendix-9.html#section-84"><i class="fa fa-check"></i><b>28.1</b> 24.2.3.3</a></li>
+<li class="chapter" data-level="28.2" data-path="appendix-9.html"><a href="appendix-9.html#section-85"><i class="fa fa-check"></i><b>28.2</b> 24.2.3.4</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="appendix-9.html"><a href="appendix-9.html#heteroskedasticity"><i class="fa fa-check"></i><b>28.2.1</b> heteroskedasticity</a></li>
+<li class="chapter" data-level="28.2.2" data-path="appendix-9.html"><a href="appendix-9.html#rsquared-on-logged-values"><i class="fa fa-check"></i><b>28.2.2</b> rsquared on logged values</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="appendix-9.html"><a href="appendix-9.html#section-86"><i class="fa fa-check"></i><b>28.3</b> 24.2.3.1</a><ul>
+<li class="chapter" data-level="28.3.1" data-path="appendix-9.html"><a href="appendix-9.html#more-notes-on-logs"><i class="fa fa-check"></i><b>28.3.1</b> More notes on logs</a></li>
+<li class="chapter" data-level="28.3.2" data-path="appendix-9.html"><a href="appendix-9.html#carat-more-clumped-than-price"><i class="fa fa-check"></i><b>28.3.2</b> carat more clumped than price</a></li>
+</ul></li>
+<li class="chapter" data-level="28.4" data-path="appendix-9.html"><a href="appendix-9.html#logs-simulated-examples"><i class="fa fa-check"></i><b>28.4</b> Logs (simulated examples)</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="appendix-9.html"><a href="appendix-9.html#exponential-relationship"><i class="fa fa-check"></i><b>28.4.1</b> Exponential relationship</a></li>
+<li class="chapter" data-level="28.4.2" data-path="appendix-9.html"><a href="appendix-9.html#log-log-relationship"><i class="fa fa-check"></i><b>28.4.2</b> Log log relationship</a></li>
+</ul></li>
+<li class="chapter" data-level="28.5" data-path="appendix-9.html"><a href="appendix-9.html#diamonds-data-review"><i class="fa fa-check"></i><b>28.5</b> Diamonds data review</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="appendix-9.html"><a href="appendix-9.html#carat-by-mean-table-value"><i class="fa fa-check"></i><b>28.5.1</b> carat by mean <code>table</code> value</a></li>
+<li class="chapter" data-level="28.5.2" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-1"><i class="fa fa-check"></i><b>28.5.2</b> Cutoff, Part 1</a></li>
+<li class="chapter" data-level="28.5.3" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-2"><i class="fa fa-check"></i><b>28.5.3</b> Cutoff, Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="28.6" data-path="appendix-9.html"><a href="appendix-9.html#section-87"><i class="fa fa-check"></i><b>28.6</b> 25.3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html"><i class="fa fa-check"></i><b>29</b> ch. 25: Many models</a><ul>
+<li class="chapter" data-level="29.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#gapminder"><i class="fa fa-check"></i><b>29.1</b> 25.2: gapminder</a><ul>
+<li class="chapter" data-level="29.1.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-88"><i class="fa fa-check"></i><b>29.1.1</b> 25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#creating-list-columns"><i class="fa fa-check"></i><b>29.2</b> 25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="29.2.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-89"><i class="fa fa-check"></i><b>29.2.1</b> 25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i><b>29.3</b> 25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="29.3.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-90"><i class="fa fa-check"></i><b>29.3.1</b> 25.5.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="appendix-10.html"><a href="appendix-10.html"><i class="fa fa-check"></i><b>30</b> Appendix</a><ul>
+<li class="chapter" data-level="30.1" data-path="appendix-10.html"><a href="appendix-10.html#models-in-lists"><i class="fa fa-check"></i><b>30.1</b> models in lists</a></li>
+<li class="chapter" data-level="30.2" data-path="appendix-10.html"><a href="appendix-10.html#list-columns-for-sampling"><i class="fa fa-check"></i><b>30.2</b> list-columns for sampling</a></li>
+<li class="chapter" data-level="30.3" data-path="appendix-10.html"><a href="appendix-10.html#section-91"><i class="fa fa-check"></i><b>30.3</b> 25.2.5.1</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="appendix-10.html"><a href="appendix-10.html#include-cubic-term"><i class="fa fa-check"></i><b>30.3.1</b> Include cubic term</a></li>
+</ul></li>
+<li class="chapter" data-level="30.4" data-path="appendix-10.html"><a href="appendix-10.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i><b>30.4</b> Multiple graphs in chunk</a></li>
+<li class="chapter" data-level="30.5" data-path="appendix-10.html"><a href="appendix-10.html#listquantile-examples"><i class="fa fa-check"></i><b>30.5</b> list(quantile()) examples</a></li>
+<li class="chapter" data-level="30.6" data-path="appendix-10.html"><a href="appendix-10.html#extracting-row-names"><i class="fa fa-check"></i><b>30.6</b> extracting row names</a></li>
+<li class="chapter" data-level="30.7" data-path="appendix-10.html"><a href="appendix-10.html#invoke_map-example-book"><i class="fa fa-check"></i><b>30.7</b> <code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="30.8" data-path="appendix-10.html"><a href="appendix-10.html#named-list-example-book"><i class="fa fa-check"></i><b>30.8</b> named list example (book)</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html"><i class="fa fa-check"></i><b>31</b> ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="31.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>31.1</b> 27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="31.1.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-92"><i class="fa fa-check"></i><b>31.1.1</b> 27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>31.2</b> 27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="31.2.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-93"><i class="fa fa-check"></i><b>31.2.1</b> 27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.3" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#cv-of-bryan-shalloway"><i class="fa fa-check"></i><b>31.3</b> <strong>CV of Bryan Shalloway</strong></a></li>
+<li class="chapter" data-level="31.4" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#experience"><i class="fa fa-check"></i><b>31.4</b> Experience</a></li>
+<li class="chapter" data-level="31.5" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#education"><i class="fa fa-check"></i><b>31.5</b> Education</a></li>
+<li class="chapter" data-level="31.6" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>31.6</b> 27.4: Code chunks</a><ul>
+<li class="chapter" data-level="31.6.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-94"><i class="fa fa-check"></i><b>31.6.1</b> 27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html"><i class="fa fa-check"></i><b>32</b> ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="32.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#label"><i class="fa fa-check"></i><b>32.1</b> 28.2: Label</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-95"><i class="fa fa-check"></i><b>32.1.1</b> 28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>32.2</b> 28.3: Annotations</a><ul>
+<li class="chapter" data-level="32.2.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i><b>32.2.1</b> 28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.3" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>32.3</b> 28.4: Scales</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i><b>32.3.1</b> 28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions and notes to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch.-12-tidy-data" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> ch. 12: Tidy data</h1>
+<ul>
+<li><code>spread</code>: pivot, e.g. <code>spread(iris, Species)</code></li>
+<li><code>gather</code>: unpivot, e.g. <code>gather(mpg, drv, class, key = "drive_or_class", value = "value")</code></li>
+<li><code>separate</code>: one column into many, e.g. <code>separate(table3, rate, into = c("cases", "population"), sep = "/")</code>
+<ul>
+<li>default uses non-alphanumeric character as <code>sep</code>, can also use number to separate by width</li>
+</ul></li>
+<li><code>extract</code> similar to separate but specify what to pull-out rather than what to split by</li>
+<li><code>unite</code> inverse of separate</li>
+</ul>
+<div class="sourceCode" id="cb485"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb485-1" title="1"><span class="co"># example distinguishing separate, extract, unite</span></a>
+<a class="sourceLine" id="cb485-2" title="2"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a,b,c&quot;</span>, <span class="st">&quot;d,e,f&quot;</span>, <span class="st">&quot;h,i,j&quot;</span>, <span class="st">&quot;k,l,m&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb485-3" title="3"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">separate</span>(x, <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb485-4" title="4"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">unite</span>(one, two, three, <span class="dt">col =</span> <span class="st">&quot;x2&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb485-5" title="5"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(x2, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="dt">regex =</span> <span class="st">&quot;([a-z]+),([a-z]+),([a-z]+)&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 8
+##   x     x2    a     b     c     one   two   three
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 a,b,c a,b,c a     b     c     a     b     c    
+## 2 d,e,f d,e,f d     e     f     d     e     f    
+## 3 h,i,j h,i,j h     i     j     h     i     j    
+## 4 k,l,m k,l,m k     l     m     k     l     m</code></pre>
+<ul>
+<li><code>complete()</code> takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit NAs where necessary.</li>
+<li><code>fill()</code> takes a set of columns where you want missing values to be replaced by the most recent non-missing value (sometimes called last observation carried forward).</li>
+</ul>
+<div class="sourceCode" id="cb487"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb487-1" title="1"><span class="co"># examples of complete and fill</span></a>
+<a class="sourceLine" id="cb487-2" title="2">treatment &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb487-3" title="3">  <span class="op">~</span><span class="st"> </span>person,           <span class="op">~</span><span class="st"> </span>treatment, <span class="op">~</span>response,</a>
+<a class="sourceLine" id="cb487-4" title="4">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb487-5" title="5">  <span class="ot">NA</span>,                 <span class="dv">2</span>,           <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb487-6" title="6">  <span class="ot">NA</span>,                 <span class="dv">3</span>,           <span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb487-7" title="7">  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></a>
+<a class="sourceLine" id="cb487-8" title="8">)</a>
+<a class="sourceLine" id="cb487-9" title="9"></a>
+<a class="sourceLine" id="cb487-10" title="10">treatment <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb487-11" title="11"><span class="st">  </span><span class="kw">fill</span>(person)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         3        9
+## 4 Katherine Burke          1        4</code></pre>
+<div class="sourceCode" id="cb489"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb489-1" title="1">treatment <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb489-2" title="2"><span class="st">  </span><span class="kw">fill</span>(person) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb489-3" title="3"><span class="st">  </span><span class="kw">complete</span>(person, treatment)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         3        9
+## 4 Katherine Burke          1        4
+## 5 Katherine Burke          2       NA
+## 6 Katherine Burke          3       NA</code></pre>
+<div id="tidy-data" class="section level2">
+<h2><span class="header-section-number">11.1</span> 12.2: Tidy data</h2>
+<div id="section-31" class="section level3">
+<h3><span class="header-section-number">11.1.1</span> 12.2.1.</h3>
+<p><em>1. Using prose, describe how the variables and observations are organised in each of the sample tables.</em><br />
+* <code>table1</code>: each country-year is a row with cases and pop as values
+* <code>table2</code>: each country-year-type is a row
+* <code>table3</code>: each country-year is a row with rate containing values for both <code>cases</code> and <code>population</code>
+* <code>table4a</code> and <code>table4b</code>: a represents cases, b population, each row is a country and then column are the year for the value</p>
+<p><em>2. Compute the rate for table2, and table4a + table4b. You will need to perform four operations:</em></p>
+<ol style="list-style-type: lower-alpha">
+<li>Extract the number of TB cases per country per year.<br />
+</li>
+<li>Extract the matching population per country per year.<br />
+</li>
+<li>Divide cases by population, and multiply by 10000.<br />
+</li>
+<li>Store back in the appropriate place.<br />
+</li>
+<li>Which representation is easiest to work with? Which is hardest? Why?</li>
+</ol>
+<p>with <code>table2</code>:</p>
+<div class="sourceCode" id="cb491"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb491-1" title="1">table2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb491-2" title="2"><span class="st">  </span><span class="kw">spread</span>(type, count) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb491-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rate =</span> <span class="dv">1000</span> <span class="op">*</span><span class="st"> </span>cases <span class="op">/</span><span class="st"> </span>population) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb491-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(country, year)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   country      year  cases population   rate
+##   &lt;chr&gt;       &lt;int&gt;  &lt;int&gt;      &lt;int&gt;  &lt;dbl&gt;
+## 1 Afghanistan  1999    745   19987071 0.0373
+## 2 Afghanistan  2000   2666   20595360 0.129 
+## 3 Brazil       1999  37737  172006362 0.219 
+## 4 Brazil       2000  80488  174504898 0.461 
+## 5 China        1999 212258 1272915272 0.167 
+## 6 China        2000 213766 1280428583 0.167</code></pre>
+<p>with <code>table4</code> ‘a’ and ‘b’`:</p>
+<div class="sourceCode" id="cb493"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb493-1" title="1">table4a <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb493-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="dv">2</span>,<span class="dv">3</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb493-3" title="3"><span class="st">  </span><span class="kw">inner_join</span>(table4b <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb493-4" title="4"><span class="st">               </span><span class="kw">gather</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>), <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;population&quot;</span>),</a>
+<a class="sourceLine" id="cb493-5" title="5">             <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;year&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb493-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rate =</span> <span class="dv">1000</span> <span class="op">*</span><span class="st"> </span>cases <span class="op">/</span><span class="st"> </span>population)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 5
+##   country     year   cases population   rate
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;      &lt;int&gt;  &lt;dbl&gt;
+## 1 Afghanistan 1999     745   19987071 0.0373
+## 2 Brazil      1999   37737  172006362 0.219 
+## 3 China       1999  212258 1272915272 0.167 
+## 4 Afghanistan 2000    2666   20595360 0.129 
+## 5 Brazil      2000   80488  174504898 0.461 
+## 6 China       2000  213766 1280428583 0.167</code></pre>
+<ul>
+<li>between these, <code>table2</code> was easier, though <code>table1</code> would have been easiest – is fewer steps to get 1 row = 1 observation (if we define an observation as a country in a year with certain attributes)</li>
+</ul>
+<p><em>3. Recreate the plot showing change in cases over time using table2 instead of table1. What do you need to do first?</em></p>
+<div class="sourceCode" id="cb495"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb495-1" title="1">table2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb495-2" title="2"><span class="st">  </span><span class="kw">spread</span>(type, count) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb495-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> cases, <span class="dt">group =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb495-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;grey50&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb495-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> country))</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<ul>
+<li>first had to spread data</li>
+</ul>
+</div>
+</div>
+<div id="spreading-and-gathering" class="section level2">
+<h2><span class="header-section-number">11.2</span> 12.3: Spreading and gathering</h2>
+<div id="section-32" class="section level3">
+<h3><span class="header-section-number">11.2.1</span> 12.3.3.</h3>
+<p><em>1. Why are gather() and spread() not perfectly symmetrical?</em><br />
+Carefully consider the following example:</p>
+<div class="sourceCode" id="cb496"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb496-1" title="1">stocks &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb496-2" title="2">  <span class="dt">year   =</span> <span class="kw">c</span>(<span class="dv">2015</span>, <span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2016</span>),</a>
+<a class="sourceLine" id="cb496-3" title="3">  <span class="dt">half  =</span> <span class="kw">c</span>(   <span class="dv">1</span>,    <span class="dv">2</span>,     <span class="dv">1</span>,    <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb496-4" title="4">  <span class="dt">return =</span> <span class="kw">c</span>(<span class="fl">1.88</span>, <span class="fl">0.59</span>, <span class="fl">0.92</span>, <span class="fl">0.17</span>)</a>
+<a class="sourceLine" id="cb496-5" title="5">)</a>
+<a class="sourceLine" id="cb496-6" title="6"></a>
+<a class="sourceLine" id="cb496-7" title="7">stocks <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb496-8" title="8"><span class="st">  </span><span class="kw">spread</span>(year, return) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb496-9" title="9"><span class="st">  </span><span class="kw">gather</span>(<span class="st">&quot;year&quot;</span>, <span class="st">&quot;return&quot;</span>, <span class="st">`</span><span class="dt">2015</span><span class="st">`</span><span class="op">:</span><span class="st">`</span><span class="dt">2016</span><span class="st">`</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##    half year  return
+##   &lt;dbl&gt; &lt;chr&gt;  &lt;dbl&gt;
+## 1     1 2015    1.88
+## 2     2 2015    0.59
+## 3     1 2016    0.92
+## 4     2 2016    0.17</code></pre>
+<p>(Hint: look at the variable types and think about column names.)</p>
+<ul>
+<li>are not perfectly symmetrical, because type for key = changes to character when using <code>gather</code> – column type information is not transferred.<br />
+</li>
+<li><p>position of columns change as well</p></li>
+<li><p>Both spread() and gather() have a convert argument. What does it do?*</p></li>
+</ul>
+<p>Use this to automatically change <code>key</code> column type, otherwise will default in <code>gather</code> for example to become a character type.</p>
+<p><em>2. Why does this code fail?</em></p>
+<div class="sourceCode" id="cb498"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb498-1" title="1">table4a <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb498-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="dv">1999</span>, <span class="dv">2000</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in inds_combine(.vars, ind_list): Position must be between 0 and n</code></pre>
+<p>Need backticks on year column names</p>
+<div class="sourceCode" id="cb500"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb500-1" title="1">table4a <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb500-2" title="2"><span class="st">  </span><span class="kw">gather</span>(<span class="st">`</span><span class="dt">1999</span><span class="st">`</span>, <span class="st">`</span><span class="dt">2000</span><span class="st">`</span>, <span class="dt">key =</span> <span class="st">&quot;year&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;cases&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   country     year   cases
+##   &lt;chr&gt;       &lt;chr&gt;  &lt;int&gt;
+## 1 Afghanistan 1999     745
+## 2 Brazil      1999   37737
+## 3 China       1999  212258
+## 4 Afghanistan 2000    2666
+## 5 Brazil      2000   80488
+## 6 China       2000  213766</code></pre>
+<p><em>3. Why does spreading this tibble fail? How could you add a new column to fix the problem?</em></p>
+<div class="sourceCode" id="cb502"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb502-1" title="1">people &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb502-2" title="2">  <span class="op">~</span>name,             <span class="op">~</span>key,    <span class="op">~</span>value,</a>
+<a class="sourceLine" id="cb502-3" title="3">  <span class="co">#-----------------|--------|------</span></a>
+<a class="sourceLine" id="cb502-4" title="4">  <span class="st">&quot;Phillip Woods&quot;</span>,   <span class="st">&quot;age&quot;</span>,       <span class="dv">45</span>,</a>
+<a class="sourceLine" id="cb502-5" title="5">  <span class="st">&quot;Phillip Woods&quot;</span>,   <span class="st">&quot;height&quot;</span>,   <span class="dv">186</span>,</a>
+<a class="sourceLine" id="cb502-6" title="6">  <span class="st">&quot;Phillip Woods&quot;</span>,   <span class="st">&quot;age&quot;</span>,       <span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb502-7" title="7">  <span class="st">&quot;Jessica Cordero&quot;</span>, <span class="st">&quot;age&quot;</span>,       <span class="dv">37</span>,</a>
+<a class="sourceLine" id="cb502-8" title="8">  <span class="st">&quot;Jessica Cordero&quot;</span>, <span class="st">&quot;height&quot;</span>,   <span class="dv">156</span></a>
+<a class="sourceLine" id="cb502-9" title="9">)</a>
+<a class="sourceLine" id="cb502-10" title="10"></a>
+<a class="sourceLine" id="cb502-11" title="11">people <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb502-12" title="12"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> <span class="st">&quot;key&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)</a></code></pre></div>
+<pre><code>## Error: Each row of output must be identified by a unique combination of keys.
+## Keys are shared for 2 rows:
+## * 1, 3
+## Do you need to create unique ID with tibble::rowid_to_column()?</code></pre>
+<p>Fails because you have more than one age for philip woods, could add a unique ID column and it will work.</p>
+<div class="sourceCode" id="cb504"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb504-1" title="1">people <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb504-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">id =</span> <span class="dv">1</span><span class="op">:</span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb504-3" title="3"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> <span class="st">&quot;key&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 4
+##   name               id   age height
+##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1 Jessica Cordero     4    37     NA
+## 2 Jessica Cordero     5    NA    156
+## 3 Phillip Woods       1    45     NA
+## 4 Phillip Woods       2    NA    186
+## 5 Phillip Woods       3    50     NA</code></pre>
+<p><em>4. Tidy the simple tibble below. Do you need to spread or gather it? What are the variables?</em></p>
+<div class="sourceCode" id="cb506"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb506-1" title="1">preg &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb506-2" title="2">  <span class="op">~</span>pregnant, <span class="op">~</span>male, <span class="op">~</span>female,</a>
+<a class="sourceLine" id="cb506-3" title="3">  <span class="st">&quot;yes&quot;</span>,     <span class="ot">NA</span>,    <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb506-4" title="4">  <span class="st">&quot;no&quot;</span>,      <span class="dv">20</span>,    <span class="dv">12</span></a>
+<a class="sourceLine" id="cb506-5" title="5">)</a></code></pre></div>
+<p>Need to gather <code>gender</code></p>
+<div class="sourceCode" id="cb507"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb507-1" title="1">preg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb507-2" title="2"><span class="st">  </span><span class="kw">gather</span>(male, female, <span class="dt">key=</span><span class="st">&quot;gender&quot;</span>, <span class="dt">value=</span><span class="st">&quot;Number&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   pregnant gender Number
+##   &lt;chr&gt;    &lt;chr&gt;   &lt;dbl&gt;
+## 1 yes      male       NA
+## 2 no       male       20
+## 3 yes      female     10
+## 4 no       female     12</code></pre>
+</div>
+</div>
+<div id="separating-and-uniting" class="section level2">
+<h2><span class="header-section-number">11.3</span> 12.4: Separating and uniting</h2>
+<div id="section-33" class="section level3">
+<h3><span class="header-section-number">11.3.1</span> 12.4.3.</h3>
+<p><em>1. What do the extra and fill arguments do in separate()? Experiment with the various options for the following two toy datasets.</em></p>
+<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a,b,c&quot;</span>, <span class="st">&quot;d,e,f,g&quot;</span>, <span class="st">&quot;h,i,j&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb509-2" title="2"><span class="st">  </span><span class="kw">separate</span>(x, <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: Expected 3 pieces. Additional pieces discarded in 1 rows [2].</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   one   two   three
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 a     b     c    
+## 2 d     e     f    
+## 3 h     i     j</code></pre>
+<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a,b,c&quot;</span>, <span class="st">&quot;d,e&quot;</span>, <span class="st">&quot;f,g,i&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb512-2" title="2"><span class="st">  </span><span class="kw">separate</span>(x, <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>))</a></code></pre></div>
+<pre><code>## Warning: Expected 3 pieces. Missing pieces filled with `NA` in 1 rows [2].</code></pre>
+<pre><code>## # A tibble: 3 x 3
+##   one   two   three
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 a     b     c    
+## 2 d     e     &lt;NA&gt; 
+## 3 f     g     i</code></pre>
+<p><code>fill</code> determines what to do when there are too few arguments, default is to fill right arguments with <code>NA</code> can change this though.</p>
+<div class="sourceCode" id="cb515"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb515-1" title="1"><span class="kw">tribble</span>(<span class="op">~</span>a,<span class="op">~</span>b,</a>
+<a class="sourceLine" id="cb515-2" title="2">        <span class="st">&quot;so it goes&quot;</span>,<span class="st">&quot;hello,you,are&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb515-3" title="3"><span class="st">  </span><span class="kw">separate</span>(b, <span class="dt">into=</span><span class="kw">c</span>(<span class="st">&quot;e&quot;</span>,<span class="st">&quot;f&quot;</span>,<span class="st">&quot;g&quot;</span>, <span class="st">&quot;h&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;left&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 5
+##   a          e     f     g     h    
+##   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 so it goes &lt;NA&gt;  hello you   are</code></pre>
+<p><code>extra</code> determines what to do when you have more splits than you do <code>into</code> spaces. Default is to drop extra<br />
+Can change to limit num of splits to length of <code>into</code> with value “merge”</p>
+<div class="sourceCode" id="cb517"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb517-1" title="1"><span class="kw">tribble</span>(<span class="op">~</span>a,<span class="op">~</span>b,</a>
+<a class="sourceLine" id="cb517-2" title="2">        <span class="st">&quot;so it goes&quot;</span>,<span class="st">&quot;hello,you,are&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb517-3" title="3"><span class="st">  </span><span class="kw">separate</span>(b, <span class="dt">into=</span><span class="kw">c</span>(<span class="st">&quot;e&quot;</span>,<span class="st">&quot;f&quot;</span>), <span class="dt">sep=</span><span class="st">&quot;,&quot;</span>, <span class="dt">extra=</span><span class="st">&quot;merge&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 3
+##   a          e     f      
+##   &lt;chr&gt;      &lt;chr&gt; &lt;chr&gt;  
+## 1 so it goes hello you,are</code></pre>
+<p><em>2. Both unite() and separate() have a remove argument. What does it do? Why would you set it to FALSE?</em></p>
+<p><code>remove = FALSE</code> allows you to specify to keep the input column(s)</p>
+<div class="sourceCode" id="cb519"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb519-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a,b,c&quot;</span>, <span class="st">&quot;d,e,f&quot;</span>, <span class="st">&quot;h,i,j&quot;</span>, <span class="st">&quot;k,l,m&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb519-2" title="2"><span class="st">  </span><span class="kw">separate</span>(x, <span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>), <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb519-3" title="3"><span class="st">  </span><span class="kw">unite</span>(one, two, three, <span class="dt">col =</span> <span class="st">&quot;x2&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 5
+##   x     x2    one   two   three
+##   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+## 1 a,b,c a,b,c a     b     c    
+## 2 d,e,f d,e,f d     e     f    
+## 3 h,i,j h,i,j h     i     j    
+## 4 k,l,m k,l,m k     l     m</code></pre>
+<p><em>3. Compare and contrast separate() and extract(). Why are there three variations of separation (by position, by separator, and with groups), but only one unite?</em></p>
+<p><code>extract</code> is like <code>separate</code> but provide what to capture rather than what to split by as in <code>regex</code> instead of <code>sep</code>.</p>
+<div class="sourceCode" id="cb521"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb521-1" title="1">df &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="st">&quot;a-b&quot;</span>, <span class="st">&quot;a-d&quot;</span>, <span class="st">&quot;b-c&quot;</span>, <span class="st">&quot;d&amp;e&quot;</span>, <span class="ot">NA</span>), <span class="dt">y =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb521-2" title="2"></a>
+<a class="sourceLine" id="cb521-3" title="3">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb521-4" title="4"><span class="st">  </span><span class="kw">extract</span>(<span class="dt">col =</span> x, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>), <span class="dt">regex =</span> <span class="st">&quot;([A-z]).([A-z])&quot;</span>)</a></code></pre></div>
+<pre><code>##    1st  2nd y
+## 1    a    b 1
+## 2    a    d 1
+## 3    b    c 1
+## 4    d    e 1
+## 5 &lt;NA&gt; &lt;NA&gt; 1</code></pre>
+<div class="sourceCode" id="cb523"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb523-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb523-2" title="2"><span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> x, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;1st&quot;</span>, <span class="st">&quot;2nd&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;[^A-z]&quot;</span>)</a></code></pre></div>
+<pre><code>##    1st  2nd y
+## 1    a    b 1
+## 2    a    d 1
+## 3    b    c 1
+## 4    d    e 1
+## 5 &lt;NA&gt; &lt;NA&gt; 1</code></pre>
+<p>Because there are many ways to split something up, but only one way to bring multiple things together…</p>
+</div>
+</div>
+<div id="missing-values-1" class="section level2">
+<h2><span class="header-section-number">11.4</span> 12.5: missing values</h2>
+<div id="section-34" class="section level3">
+<h3><span class="header-section-number">11.4.1</span> 12.5.1.</h3>
+<p><em>1. Compare and contrast the fill arguments to spread() and complete().</em></p>
+<p>Both create open cells by filling out those that are not currently in the dataset, <code>complete</code> though does it by adding rows of iterations not included, whereas <code>spread</code> does it by the process of spreading out fields and naturally generating values that did not have row values previously. The<code>fill</code> in each specifies what value should go into these created cells.</p>
+<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1">treatment2 &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb525-2" title="2">  <span class="op">~</span><span class="st"> </span>person,           <span class="op">~</span><span class="st"> </span>treatment, <span class="op">~</span>response,</a>
+<a class="sourceLine" id="cb525-3" title="3">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb525-4" title="4">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">2</span>,           <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb525-5" title="5">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">3</span>,           <span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb525-6" title="6">  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></a>
+<a class="sourceLine" id="cb525-7" title="7">)</a>
+<a class="sourceLine" id="cb525-8" title="8"></a>
+<a class="sourceLine" id="cb525-9" title="9">treatment2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb525-10" title="10"><span class="st">  </span><span class="kw">complete</span>(person, treatment, <span class="dt">fill =</span> <span class="kw">list</span>(<span class="dt">response =</span> <span class="dv">0</span>))</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Derrick Whitmore         2       10
+## 3 Derrick Whitmore         3        9
+## 4 Katherine Burke          1        4
+## 5 Katherine Burke          2        0
+## 6 Katherine Burke          3        0</code></pre>
+<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1">treatment2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb527-2" title="2"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> treatment, <span class="dt">value =</span> response, <span class="dt">fill =</span> <span class="dv">0</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 2 x 4
+##   person             `1`   `2`   `3`
+##   &lt;chr&gt;            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 Derrick Whitmore     7    10     9
+## 2 Katherine Burke      4     0     0</code></pre>
+<p><em>2. What does the direction argument to fill() do?</em></p>
+<p>Let’s you fill either up or down. E.g. below is filling up example.</p>
+<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1">treatment &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb529-2" title="2">  <span class="op">~</span><span class="st"> </span>person,           <span class="op">~</span><span class="st"> </span>treatment, <span class="op">~</span>response,</a>
+<a class="sourceLine" id="cb529-3" title="3">  <span class="st">&quot;Derrick Whitmore&quot;</span>, <span class="dv">1</span>,           <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb529-4" title="4">  <span class="ot">NA</span>,                 <span class="dv">2</span>,           <span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb529-5" title="5">  <span class="ot">NA</span>,                 <span class="dv">3</span>,           <span class="dv">9</span>,</a>
+<a class="sourceLine" id="cb529-6" title="6">  <span class="st">&quot;Katherine Burke&quot;</span>,  <span class="dv">1</span>,           <span class="dv">4</span></a>
+<a class="sourceLine" id="cb529-7" title="7">)</a>
+<a class="sourceLine" id="cb529-8" title="8"></a>
+<a class="sourceLine" id="cb529-9" title="9">treatment <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb529-10" title="10"><span class="st">  </span><span class="kw">fill</span>(person, <span class="dt">.direction =</span> <span class="st">&quot;up&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   person           treatment response
+##   &lt;chr&gt;                &lt;dbl&gt;    &lt;dbl&gt;
+## 1 Derrick Whitmore         1        7
+## 2 Katherine Burke          2       10
+## 3 Katherine Burke          3        9
+## 4 Katherine Burke          1        4</code></pre>
+</div>
+</div>
+<div id="case-study" class="section level2">
+<h2><span class="header-section-number">11.5</span> 12.6 Case Study</h2>
+<div id="section-35" class="section level3">
+<h3><span class="header-section-number">11.5.1</span> 12.6.1.</h3>
+<p><em>1. In this case study I set na.rm = TRUE just to make it easier to check that we had the correct values. Is this reasonable? Think about how missing values are represented in this dataset. Are there implicit missing values? What’s the difference between an NA and zero?</em></p>
+<p>In this case it’s reasonable, an <code>NA</code> perhaps means the metric wasn’t recorded in that year, whereas 0 means it was recorded but there were 0 cases.</p>
+<p>Implicit missing values represented by say Afghanistan not having any reported cases for females.</p>
+<p><em>2. What happens if you neglect the mutate() step? (mutate(key = stringr::str_replace(key, “newrel”, “new_rel”)))</em></p>
+<p>You would have had one less column, so ‘newtype’ would have been on column, rather than these splitting.</p>
+<p><em>3. I claimed that iso2 and iso3 were redundant with country. Confirm this claim.</em></p>
+<div class="sourceCode" id="cb531"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb531-1" title="1">who <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb531-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb531-3" title="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb531-4" title="4"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##       n
+##   &lt;int&gt;
+## 1   219</code></pre>
+<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1">who <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb533-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb533-3" title="3"><span class="st">  </span><span class="kw">distinct</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb533-4" title="4"><span class="st">  </span><span class="kw">unite</span>(country, iso2, iso3, <span class="dt">col =</span> <span class="st">&quot;country_combined&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb533-5" title="5"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 1 x 1
+##       n
+##   &lt;int&gt;
+## 1   219</code></pre>
+<p>Both of the above are the same length.</p>
+<p><em>4. For each country, year, and sex compute the total number of cases of TB. Make an informative visualisation of the data.</em></p>
+<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1">who_present &lt;-<span class="st"> </span>who <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb535-2" title="2"><span class="st">  </span><span class="kw">gather</span>(code, value, new_sp_m014<span class="op">:</span>newrel_f65, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb535-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">code =</span> stringr<span class="op">::</span><span class="kw">str_replace</span>(code, <span class="st">&quot;newrel&quot;</span>, <span class="st">&quot;new_rel&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb535-4" title="4"><span class="st">  </span><span class="kw">separate</span>(code, <span class="kw">c</span>(<span class="st">&quot;new&quot;</span>, <span class="st">&quot;var&quot;</span>, <span class="st">&quot;sexage&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb535-5" title="5"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>new, <span class="op">-</span>iso2, <span class="op">-</span>iso3) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb535-6" title="6"><span class="st">  </span><span class="kw">separate</span>(sexage, <span class="kw">c</span>(<span class="st">&quot;sex&quot;</span>, <span class="st">&quot;age&quot;</span>), <span class="dt">sep =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb536"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb536-1" title="1">who_present <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb536-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(sex, year, country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb536-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">mean=</span><span class="kw">mean</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb536-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>mean, <span class="dt">colour=</span>sex))<span class="op">+</span></a>
+<a class="sourceLine" id="cb536-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb536-6" title="6"><span class="st">  </span><span class="kw">geom_jitter</span>()</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" title="1"><span class="co">#ratio of female tb cases over time</span></a>
+<a class="sourceLine" id="cb537-2" title="2">who_present <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sex, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">meansex=</span><span class="kw">sum</span>(value)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb537-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tot=</span><span class="kw">sum</span>(meansex)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">ratio=</span>meansex<span class="op">/</span>tot) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-10" title="10"><span class="st">  </span><span class="kw">filter</span>(sex<span class="op">==</span><span class="st">&quot;f&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb537-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year, <span class="dt">y=</span>ratio, <span class="dt">colour=</span>sex))<span class="op">+</span></a>
+<a class="sourceLine" id="cb537-12" title="12"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<div class="sourceCode" id="cb538"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb538-1" title="1"><span class="co">#countries with the most outbreaks</span></a>
+<a class="sourceLine" id="cb538-2" title="2">who_present <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb538-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">sum</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_country=</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-8" title="8"><span class="st">  </span><span class="kw">filter</span>(total_country<span class="op">&gt;</span><span class="dv">1000000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb538-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>n,<span class="dt">colour=</span>country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb538-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
+<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" title="1"><span class="co">#countries with the most split by gender as well</span></a>
+<a class="sourceLine" id="cb539-2" title="2">who_present <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb539-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(country, sex, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">sum</span>(value)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_country=</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-8" title="8"><span class="st">  </span><span class="kw">filter</span>(total_country<span class="op">&gt;</span><span class="dv">1000000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb539-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>n,<span class="dt">colour=</span>sex))<span class="op">+</span></a>
+<a class="sourceLine" id="cb539-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb539-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-4.png" width="672" /></p>
+<div class="sourceCode" id="cb540"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb540-1" title="1"><span class="co">#take log and summarise</span></a>
+<a class="sourceLine" id="cb540-2" title="2">who_present <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb540-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">sum</span>(value), <span class="dt">logn=</span><span class="kw">log</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_c=</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-8" title="8"><span class="st">  </span><span class="kw">filter</span>(total_c<span class="op">&gt;</span><span class="dv">1000000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb540-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>logn, <span class="dt">colour=</span>country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb540-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">show.legend=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-5.png" width="672" /></p>
+<div class="sourceCode" id="cb541"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb541-1" title="1"><span class="co">#average # of countries with more female TB cases</span></a>
+<a class="sourceLine" id="cb541-2" title="2">who_present <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb541-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(country, year, sex) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n=</span><span class="kw">sum</span>(value), <span class="dt">logn=</span><span class="kw">log</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(country, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">total_c=</span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb541-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">perc_gender=</span>n<span class="op">/</span>total_c, <span class="dt">femalemore=</span><span class="kw">ifelse</span>(perc_gender<span class="op">&gt;</span>.<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">0</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-10" title="10"><span class="st">  </span><span class="kw">filter</span>(sex<span class="op">==</span><span class="st">&quot;f&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-11" title="11"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-12" title="12"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">summaryfem=</span><span class="kw">mean</span>(femalemore,<span class="dt">na.rm=</span><span class="ot">TRUE</span> )) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb541-13" title="13"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>year,<span class="dt">y=</span>summaryfem))<span class="op">+</span></a>
+<a class="sourceLine" id="cb541-14" title="14"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="12-tidy-data_files/figure-html/unnamed-chunk-22-6.png" width="672" /></p>
+
+<p><em>Make sure the following packages are installed:</em></p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-11-data-import.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch-13-relational-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

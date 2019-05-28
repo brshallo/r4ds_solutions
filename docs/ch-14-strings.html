@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions and notes to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-28">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ch-13-relational-data.html">
+<link rel="next" href="ch-15-factors.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Purpose of this book</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i><b>1.1</b> Features of this book</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i><b>1.2</b> Origin of this book</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html"><i class="fa fa-check"></i><b>2</b> Plug for R4DS</a><ul>
+<li class="chapter" data-level="2.1" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#plug-for-r4ds-1"><i class="fa fa-check"></i><b>2.1</b> Plug for R4DS</a></li>
+<li class="chapter" data-level="2.2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#acknowledgements"><i class="fa fa-check"></i><b>2.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html"><i class="fa fa-check"></i><b>3</b> ch 3: Data visualization</a><ul>
+<li class="chapter" data-level="3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#first-steps"><i class="fa fa-check"></i><b>3.1</b> 3.2: First steps</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section"><i class="fa fa-check"></i><b>3.1.1</b> 3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.2</b> 3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-1"><i class="fa fa-check"></i><b>3.2.1</b> 3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#facets"><i class="fa fa-check"></i><b>3.3</b> 3.5: Facets</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-2"><i class="fa fa-check"></i><b>3.3.1</b> 3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#geometric-objects"><i class="fa fa-check"></i><b>3.4</b> 3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="3.4.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-3"><i class="fa fa-check"></i><b>3.4.1</b> 3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="3.5" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i><b>3.5</b> 3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-4"><i class="fa fa-check"></i><b>3.5.1</b> 3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i><b>3.6</b> 3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-5"><i class="fa fa-check"></i><b>3.6.1</b> 3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#coordinate-systems"><i class="fa fa-check"></i><b>3.7</b> 3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="ch-3-data-visualization.html"><a href="ch-3-data-visualization.html#section-6"><i class="fa fa-check"></i><b>3.7.1</b> 3.9.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>4</b> Appendix</a><ul>
+<li class="chapter" data-level="4.1" data-path="appendix.html"><a href="appendix.html#extension"><i class="fa fa-check"></i><b>4.1</b> 3.7.1.1 extension</a></li>
+<li class="chapter" data-level="4.2" data-path="appendix.html"><a href="appendix.html#position-adustments"><i class="fa fa-check"></i><b>4.2</b> 3.8: Position adustments</a></li>
+<li class="chapter" data-level="4.3" data-path="appendix.html"><a href="appendix.html#coordinate-systems-1"><i class="fa fa-check"></i><b>4.3</b> 3.9: Coordinate systems</a></li>
+<li class="chapter" data-level="4.4" data-path="appendix.html"><a href="appendix.html#add-in-table-of-contents-and-other-details"><i class="fa fa-check"></i><b>4.4</b> add in table of contents and other details…</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html"><i class="fa fa-check"></i><b>5</b> ch. 5 Data transformations</a><ul>
+<li class="chapter" data-level="5.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#filter-rows"><i class="fa fa-check"></i><b>5.1</b> 5.2: Filter rows</a></li>
+<li class="chapter" data-level="5.2" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-7"><i class="fa fa-check"></i><b>5.2</b> 5.2.4.</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-8"><i class="fa fa-check"></i><b>5.2.1</b> 5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-summaries"><i class="fa fa-check"></i><b>5.3</b> 5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-9"><i class="fa fa-check"></i><b>5.3.1</b> 5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.4</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="ch-5-data-transformations.html"><a href="ch-5-data-transformations.html#section-10"><i class="fa fa-check"></i><b>5.4.1</b> 5.7.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>6</b> Appendix</a><ul>
+<li class="chapter" data-level="6.1" data-path="appendix-1.html"><a href="appendix-1.html#section-11"><i class="fa fa-check"></i><b>6.1</b> 5.4.1.3.</a></li>
+<li class="chapter" data-level="6.2" data-path="appendix-1.html"><a href="appendix-1.html#section-12"><i class="fa fa-check"></i><b>6.2</b> 5.5.2.1.</a></li>
+<li class="chapter" data-level="6.3" data-path="appendix-1.html"><a href="appendix-1.html#section-13"><i class="fa fa-check"></i><b>6.3</b> 5.5.2.2</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="appendix-1.html"><a href="appendix-1.html#closer-look-at-air_time"><i class="fa fa-check"></i><b>6.3.1</b> Closer look at <code>air_time</code></a></li>
+<li class="chapter" data-level="6.3.2" data-path="appendix-1.html"><a href="appendix-1.html#other-plots-with-air_time"><i class="fa fa-check"></i><b>6.3.2</b> Other plots with <code>air_time</code></a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="appendix-1.html"><a href="appendix-1.html#section-14"><i class="fa fa-check"></i><b>6.4</b> 5.6.7.1.</a></li>
+<li class="chapter" data-level="6.5" data-path="appendix-1.html"><a href="appendix-1.html#section-15"><i class="fa fa-check"></i><b>6.5</b> 5.6.7.4.</a></li>
+<li class="chapter" data-level="6.6" data-path="appendix-1.html"><a href="appendix-1.html#section-16"><i class="fa fa-check"></i><b>6.6</b> 5.6.7.5.</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="appendix-1.html"><a href="appendix-1.html#modeling-approach"><i class="fa fa-check"></i><b>6.6.1</b> Modeling approach</a></li>
+</ul></li>
+<li class="chapter" data-level="6.7" data-path="appendix-1.html"><a href="appendix-1.html#section-17"><i class="fa fa-check"></i><b>6.7</b> 5.6.7.6.</a></li>
+<li class="chapter" data-level="6.8" data-path="appendix-1.html"><a href="appendix-1.html#section-18"><i class="fa fa-check"></i><b>6.8</b> 5.7.1.6.</a></li>
+<li class="chapter" data-level="6.9" data-path="appendix-1.html"><a href="appendix-1.html#section-19"><i class="fa fa-check"></i><b>6.9</b> 5.7.1.5</a></li>
+<li class="chapter" data-level="6.10" data-path="appendix-1.html"><a href="appendix-1.html#section-20"><i class="fa fa-check"></i><b>6.10</b> 5.7.1.8.</a></li>
+<li class="chapter" data-level="6.11" data-path="appendix-1.html"><a href="appendix-1.html#other"><i class="fa fa-check"></i><b>6.11</b> Other</a><ul>
+<li class="chapter" data-level="6.11.1" data-path="appendix-1.html"><a href="appendix-1.html#on-piping-dots"><i class="fa fa-check"></i><b>6.11.1</b> On piping dots</a></li>
+</ul></li>
+<li class="chapter" data-level="6.12" data-path="appendix-1.html"><a href="appendix-1.html#plotly"><i class="fa fa-check"></i><b>6.12</b> plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html"><i class="fa fa-check"></i><b>7</b> ch. 7: Data exploration</a><ul>
+<li class="chapter" data-level="7.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#variation"><i class="fa fa-check"></i><b>7.1</b> 7.3. Variation</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-21"><i class="fa fa-check"></i><b>7.1.1</b> 7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#missing-values"><i class="fa fa-check"></i><b>7.2</b> 7.4. Missing values</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-22"><i class="fa fa-check"></i><b>7.2.1</b> 7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#covariation"><i class="fa fa-check"></i><b>7.3</b> 7.5. Covariation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-23"><i class="fa fa-check"></i><b>7.3.1</b> 7.5.1.1.</a></li>
+<li class="chapter" data-level="7.3.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-24"><i class="fa fa-check"></i><b>7.3.2</b> 7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.4</b> 7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-25"><i class="fa fa-check"></i><b>7.4.1</b> 7.5.3.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-2.html"><a href="appendix-2.html"><i class="fa fa-check"></i><b>8</b> Appendix</a><ul>
+<li class="chapter" data-level="8.1" data-path="appendix-2.html"><a href="appendix-2.html#section-26"><i class="fa fa-check"></i><b>8.1</b> 7.5.2.1.2.</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-2.html"><a href="appendix-2.html#section-27"><i class="fa fa-check"></i><b>8.2</b> 7.5.3.1.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html"><i class="fa fa-check"></i><b>9</b> ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html#section-28"><i class="fa fa-check"></i><b>9.1</b> 10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html"><i class="fa fa-check"></i><b>10</b> ch. 11: Data import</a><ul>
+<li class="chapter" data-level="10.1" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-29"><i class="fa fa-check"></i><b>10.1</b> 11.2.2.</a></li>
+<li class="chapter" data-level="10.2" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-30"><i class="fa fa-check"></i><b>10.2</b> 11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html"><i class="fa fa-check"></i><b>11</b> ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="11.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#tidy-data"><i class="fa fa-check"></i><b>11.1</b> 12.2: Tidy data</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-31"><i class="fa fa-check"></i><b>11.1.1</b> 12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i><b>11.2</b> 12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-32"><i class="fa fa-check"></i><b>11.2.1</b> 12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>11.3</b> 12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-33"><i class="fa fa-check"></i><b>11.3.1</b> 12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i><b>11.4</b> 12.5: missing values</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-34"><i class="fa fa-check"></i><b>11.4.1</b> 12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="11.5" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#case-study"><i class="fa fa-check"></i><b>11.5</b> 12.6 Case Study</a><ul>
+<li class="chapter" data-level="11.5.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-35"><i class="fa fa-check"></i><b>11.5.1</b> 12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html"><i class="fa fa-check"></i><b>12</b> ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="12.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#nycflights13"><i class="fa fa-check"></i><b>12.1</b> 13.2 nycflights13</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-36"><i class="fa fa-check"></i><b>12.1.1</b> 13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#keys"><i class="fa fa-check"></i><b>12.2</b> 13.3 Keys</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-37"><i class="fa fa-check"></i><b>12.2.1</b> 13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>12.3</b> 13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-38"><i class="fa fa-check"></i><b>12.3.1</b> 13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>12.4</b> 13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-39"><i class="fa fa-check"></i><b>12.4.1</b> 13.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch-14-strings.html"><a href="ch-14-strings.html"><i class="fa fa-check"></i><b>13</b> ch. 14: Strings</a><ul>
+<li class="chapter" data-level="13.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#string-basics"><i class="fa fa-check"></i><b>13.1</b> 14.2: String basics</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-40"><i class="fa fa-check"></i><b>13.1.1</b> 14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i><b>13.2</b> 14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-41"><i class="fa fa-check"></i><b>13.2.1</b> 14.3.1.1</a></li>
+<li class="chapter" data-level="13.2.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-42"><i class="fa fa-check"></i><b>13.2.2</b> 14.3.2.1</a></li>
+<li class="chapter" data-level="13.2.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-43"><i class="fa fa-check"></i><b>13.2.3</b> 14.3.3.1</a></li>
+<li class="chapter" data-level="13.2.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-44"><i class="fa fa-check"></i><b>13.2.4</b> 14.3.4.1</a></li>
+<li class="chapter" data-level="13.2.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-45"><i class="fa fa-check"></i><b>13.2.5</b> 14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#tools"><i class="fa fa-check"></i><b>13.3</b> 14.4 Tools</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-46"><i class="fa fa-check"></i><b>13.3.1</b> 14.4.2</a></li>
+<li class="chapter" data-level="13.3.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-47"><i class="fa fa-check"></i><b>13.3.2</b> 14.4.3.1</a></li>
+<li class="chapter" data-level="13.3.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-48"><i class="fa fa-check"></i><b>13.3.3</b> 14.4.4.1</a></li>
+<li class="chapter" data-level="13.3.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-49"><i class="fa fa-check"></i><b>13.3.4</b> 14.4.5.1</a></li>
+<li class="chapter" data-level="13.3.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-50"><i class="fa fa-check"></i><b>13.3.5</b> 14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i><b>13.4</b> 14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-51"><i class="fa fa-check"></i><b>13.4.1</b> 14.5.1</a></li>
+<li class="chapter" data-level="13.4.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-52"><i class="fa fa-check"></i><b>13.4.2</b> 14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-15-factors.html"><a href="ch-15-factors.html"><i class="fa fa-check"></i><b>14</b> ch. 15: Factors</a><ul>
+<li class="chapter" data-level="14.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>14.1</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-53"><i class="fa fa-check"></i><b>14.1.1</b> 15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i><b>14.2</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-54"><i class="fa fa-check"></i><b>14.2.1</b> 15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>14.3</b> 15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-55"><i class="fa fa-check"></i><b>14.3.1</b> 15.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="appendix-3.html"><a href="appendix-3.html"><i class="fa fa-check"></i><b>15</b> Appendix</a><ul>
+<li class="chapter" data-level="15.1" data-path="appendix-3.html"><a href="appendix-3.html#viewing-all-levels"><i class="fa fa-check"></i><b>15.1</b> Viewing all levels</a></li>
+<li class="chapter" data-level="15.2" data-path="appendix-3.html"><a href="appendix-3.html#percentage-na-each-level"><i class="fa fa-check"></i><b>15.2</b> Percentage NA each level</a></li>
+<li class="chapter" data-level="15.3" data-path="appendix-3.html"><a href="appendix-3.html#print-all-levels-of-tibble"><i class="fa fa-check"></i><b>15.3</b> Print all levels of tibble</a></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html"><i class="fa fa-check"></i><b>16</b> ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="16.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.1</b> 16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-56"><i class="fa fa-check"></i><b>16.1.1</b> 16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.2</b> 16.3: Date-time components</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-57"><i class="fa fa-check"></i><b>16.2.1</b> 16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#time-spans"><i class="fa fa-check"></i><b>16.3</b> 16.4: Time spans</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-58"><i class="fa fa-check"></i><b>16.3.1</b> 16.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="appendix-4.html"><a href="appendix-4.html"><i class="fa fa-check"></i><b>17</b> Appendix</a><ul>
+<li class="chapter" data-level="17.1" data-path="appendix-4.html"><a href="appendix-4.html#section-59"><i class="fa fa-check"></i><b>17.1</b> 16.3.4.1</a></li>
+<li class="chapter" data-level="17.2" data-path="appendix-4.html"><a href="appendix-4.html#section-60"><i class="fa fa-check"></i><b>17.2</b> 16.3.4.3</a></li>
+<li class="chapter" data-level="17.3" data-path="appendix-4.html"><a href="appendix-4.html#section-61"><i class="fa fa-check"></i><b>17.3</b> 16.3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch-18-pipes-notes-only.html"><a href="ch-18-pipes-notes-only.html"><i class="fa fa-check"></i><b>18</b> ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="19" data-path="ch-19-functions.html"><a href="ch-19-functions.html"><i class="fa fa-check"></i><b>19</b> ch. 19: Functions</a><ul>
+<li class="chapter" data-level="19.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i><b>19.1</b> 19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="19.1.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-62"><i class="fa fa-check"></i><b>19.1.1</b> 19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.2" data-path="ch-19-functions.html"><a href="ch-19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i><b>19.2</b> 19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-63"><i class="fa fa-check"></i><b>19.2.1</b> 19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="ch-19-functions.html"><a href="ch-19-functions.html#conditional-execution"><i class="fa fa-check"></i><b>19.3</b> 19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="19.3.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-64"><i class="fa fa-check"></i><b>19.3.1</b> 19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="ch-19-functions.html"><a href="ch-19-functions.html#function-arguments"><i class="fa fa-check"></i><b>19.4</b> 19.5: Function arguments</a><ul>
+<li class="chapter" data-level="19.4.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-65"><i class="fa fa-check"></i><b>19.4.1</b> 19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="ch-19-functions.html"><a href="ch-19-functions.html#return-values"><i class="fa fa-check"></i><b>19.5</b> 19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="appendix-5.html"><a href="appendix-5.html"><i class="fa fa-check"></i><b>20</b> Appendix</a><ul>
+<li class="chapter" data-level="20.1" data-path="appendix-5.html"><a href="appendix-5.html#section-66"><i class="fa fa-check"></i><b>20.1</b> 19.2.1.4</a></li>
+<li class="chapter" data-level="20.2" data-path="appendix-5.html"><a href="appendix-5.html#changing-values-with-indexes"><i class="fa fa-check"></i><b>20.2</b> Changing values with indexes</a><ul>
+<li class="chapter" data-level="20.2.1" data-path="appendix-5.html"><a href="appendix-5.html#applying-indexing-to-dfs"><i class="fa fa-check"></i><b>20.2.1</b> Applying indexing to dfs</a></li>
+</ul></li>
+<li class="chapter" data-level="20.3" data-path="appendix-5.html"><a href="appendix-5.html#better-than-ifelse"><i class="fa fa-check"></i><b>20.3</b> Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="20.4" data-path="appendix-5.html"><a href="appendix-5.html#dplyr-and-functions"><i class="fa fa-check"></i><b>20.4</b> Dplyr and functions</a></li>
+<li class="chapter" data-level="20.5" data-path="appendix-5.html"><a href="appendix-5.html#section-67"><i class="fa fa-check"></i><b>20.5</b> 19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html"><i class="fa fa-check"></i><b>21</b> ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="21.0.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-68"><i class="fa fa-check"></i><b>21.0.1</b> 20.3.5</a></li>
+<li class="chapter" data-level="21.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i><b>21.1</b> 20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-69"><i class="fa fa-check"></i><b>21.1.1</b> 20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i><b>21.2</b> 20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-70"><i class="fa fa-check"></i><b>21.2.1</b> 20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#augmented-vectors"><i class="fa fa-check"></i><b>21.3</b> 20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-71"><i class="fa fa-check"></i><b>21.3.1</b> 20.7.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="appendix-6.html"><a href="appendix-6.html"><i class="fa fa-check"></i><b>22</b> Appendix</a><ul>
+<li class="chapter" data-level="22.1" data-path="appendix-6.html"><a href="appendix-6.html#subsetting-nested-lists"><i class="fa fa-check"></i><b>22.1</b> subsetting nested lists</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html"><i class="fa fa-check"></i><b>23</b> ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="23.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops"><i class="fa fa-check"></i><b>23.1</b> 21.2: For loops</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-72"><i class="fa fa-check"></i><b>23.1.1</b> 21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loop-variations"><i class="fa fa-check"></i><b>23.2</b> 21.3 For loop variations</a><ul>
+<li class="chapter" data-level="23.2.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-73"><i class="fa fa-check"></i><b>23.2.1</b> 21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="23.3" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i><b>23.3</b> 21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="23.3.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-74"><i class="fa fa-check"></i><b>23.3.1</b> 21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="23.4" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#the-map-functions"><i class="fa fa-check"></i><b>23.4</b> 21.5: The map functions</a><ul>
+<li class="chapter" data-level="23.4.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-75"><i class="fa fa-check"></i><b>23.4.1</b> 21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="23.5" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i><b>23.5</b> 21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="23.5.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-76"><i class="fa fa-check"></i><b>23.5.1</b> 21.9.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="appendix-7.html"><a href="appendix-7.html"><i class="fa fa-check"></i><b>24</b> Appendix</a><ul>
+<li class="chapter" data-level="24.1" data-path="appendix-7.html"><a href="appendix-7.html#section-77"><i class="fa fa-check"></i><b>24.1</b> 21.3.5.1</a><ul>
+<li class="chapter" data-level="24.1.1" data-path="appendix-7.html"><a href="appendix-7.html#using-map"><i class="fa fa-check"></i><b>24.1.1</b> Using map</a></li>
+<li class="chapter" data-level="24.1.2" data-path="appendix-7.html"><a href="appendix-7.html#plot-of-names"><i class="fa fa-check"></i><b>24.1.2</b> Plot of names</a></li>
+<li class="chapter" data-level="24.1.3" data-path="appendix-7.html"><a href="appendix-7.html#csv-other-example"><i class="fa fa-check"></i><b>24.1.3</b> csv other example</a></li>
+</ul></li>
+<li class="chapter" data-level="24.2" data-path="appendix-7.html"><a href="appendix-7.html#with-purrr"><i class="fa fa-check"></i><b>24.2</b> 21.3.5.2 with purrr</a></li>
+<li class="chapter" data-level="24.3" data-path="appendix-7.html"><a href="appendix-7.html#mirroring-keep"><i class="fa fa-check"></i><b>24.3</b> 21.9 mirroring keep</a></li>
+<li class="chapter" data-level="24.4" data-path="appendix-7.html"><a href="appendix-7.html#invoke-examples"><i class="fa fa-check"></i><b>24.4</b> invoke examples</a></li>
+<li class="chapter" data-level="24.5" data-path="appendix-7.html"><a href="appendix-7.html#indexing-nms-caution"><i class="fa fa-check"></i><b>24.5</b> indexing nms caution</a></li>
+<li class="chapter" data-level="24.6" data-path="appendix-7.html"><a href="appendix-7.html#in-class-notes"><i class="fa fa-check"></i><b>24.6</b> in class notes</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html"><i class="fa fa-check"></i><b>25</b> ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="25.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#a-simple-model"><i class="fa fa-check"></i><b>25.1</b> 23.2: A simple model</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-78"><i class="fa fa-check"></i><b>25.1.1</b> 23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#visualising-models"><i class="fa fa-check"></i><b>25.2</b> 23.3: Visualising models</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-79"><i class="fa fa-check"></i><b>25.2.1</b> 23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i><b>25.3</b> 23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-80"><i class="fa fa-check"></i><b>25.3.1</b> 23.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="appendix-8.html"><a href="appendix-8.html"><i class="fa fa-check"></i><b>26</b> Appendix</a><ul>
+<li class="chapter" data-level="26.1" data-path="appendix-8.html"><a href="appendix-8.html#other-model-families"><i class="fa fa-check"></i><b>26.1</b> Other model families</a></li>
+<li class="chapter" data-level="26.2" data-path="appendix-8.html"><a href="appendix-8.html#book-example"><i class="fa fa-check"></i><b>26.2</b> 23.2 book example</a><ul>
+<li class="chapter" data-level="26.2.1" data-path="appendix-8.html"><a href="appendix-8.html#tidy-grid_space"><i class="fa fa-check"></i><b>26.2.1</b> tidy grid_space</a></li>
+</ul></li>
+<li class="chapter" data-level="26.3" data-path="appendix-8.html"><a href="appendix-8.html#section-81"><i class="fa fa-check"></i><b>26.3</b> 23.4.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html"><i class="fa fa-check"></i><b>27</b> ch. 24: Model building</a><ul>
+<li class="chapter" data-level="27.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i><b>27.1</b> 24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-82"><i class="fa fa-check"></i><b>27.1.1</b> 24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i><b>27.2</b> 24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-83"><i class="fa fa-check"></i><b>27.2.1</b> 24.3.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="appendix-9.html"><a href="appendix-9.html"><i class="fa fa-check"></i><b>28</b> Appendix</a><ul>
+<li class="chapter" data-level="28.1" data-path="appendix-9.html"><a href="appendix-9.html#section-84"><i class="fa fa-check"></i><b>28.1</b> 24.2.3.3</a></li>
+<li class="chapter" data-level="28.2" data-path="appendix-9.html"><a href="appendix-9.html#section-85"><i class="fa fa-check"></i><b>28.2</b> 24.2.3.4</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="appendix-9.html"><a href="appendix-9.html#heteroskedasticity"><i class="fa fa-check"></i><b>28.2.1</b> heteroskedasticity</a></li>
+<li class="chapter" data-level="28.2.2" data-path="appendix-9.html"><a href="appendix-9.html#rsquared-on-logged-values"><i class="fa fa-check"></i><b>28.2.2</b> rsquared on logged values</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="appendix-9.html"><a href="appendix-9.html#section-86"><i class="fa fa-check"></i><b>28.3</b> 24.2.3.1</a><ul>
+<li class="chapter" data-level="28.3.1" data-path="appendix-9.html"><a href="appendix-9.html#more-notes-on-logs"><i class="fa fa-check"></i><b>28.3.1</b> More notes on logs</a></li>
+<li class="chapter" data-level="28.3.2" data-path="appendix-9.html"><a href="appendix-9.html#carat-more-clumped-than-price"><i class="fa fa-check"></i><b>28.3.2</b> carat more clumped than price</a></li>
+</ul></li>
+<li class="chapter" data-level="28.4" data-path="appendix-9.html"><a href="appendix-9.html#logs-simulated-examples"><i class="fa fa-check"></i><b>28.4</b> Logs (simulated examples)</a><ul>
+<li class="chapter" data-level="28.4.1" data-path="appendix-9.html"><a href="appendix-9.html#exponential-relationship"><i class="fa fa-check"></i><b>28.4.1</b> Exponential relationship</a></li>
+<li class="chapter" data-level="28.4.2" data-path="appendix-9.html"><a href="appendix-9.html#log-log-relationship"><i class="fa fa-check"></i><b>28.4.2</b> Log log relationship</a></li>
+</ul></li>
+<li class="chapter" data-level="28.5" data-path="appendix-9.html"><a href="appendix-9.html#diamonds-data-review"><i class="fa fa-check"></i><b>28.5</b> Diamonds data review</a><ul>
+<li class="chapter" data-level="28.5.1" data-path="appendix-9.html"><a href="appendix-9.html#carat-by-mean-table-value"><i class="fa fa-check"></i><b>28.5.1</b> carat by mean <code>table</code> value</a></li>
+<li class="chapter" data-level="28.5.2" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-1"><i class="fa fa-check"></i><b>28.5.2</b> Cutoff, Part 1</a></li>
+<li class="chapter" data-level="28.5.3" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-2"><i class="fa fa-check"></i><b>28.5.3</b> Cutoff, Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="28.6" data-path="appendix-9.html"><a href="appendix-9.html#section-87"><i class="fa fa-check"></i><b>28.6</b> 25.3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html"><i class="fa fa-check"></i><b>29</b> ch. 25: Many models</a><ul>
+<li class="chapter" data-level="29.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#gapminder"><i class="fa fa-check"></i><b>29.1</b> 25.2: gapminder</a><ul>
+<li class="chapter" data-level="29.1.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-88"><i class="fa fa-check"></i><b>29.1.1</b> 25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#creating-list-columns"><i class="fa fa-check"></i><b>29.2</b> 25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="29.2.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-89"><i class="fa fa-check"></i><b>29.2.1</b> 25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="29.3" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i><b>29.3</b> 25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="29.3.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-90"><i class="fa fa-check"></i><b>29.3.1</b> 25.5.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="appendix-10.html"><a href="appendix-10.html"><i class="fa fa-check"></i><b>30</b> Appendix</a><ul>
+<li class="chapter" data-level="30.1" data-path="appendix-10.html"><a href="appendix-10.html#models-in-lists"><i class="fa fa-check"></i><b>30.1</b> models in lists</a></li>
+<li class="chapter" data-level="30.2" data-path="appendix-10.html"><a href="appendix-10.html#list-columns-for-sampling"><i class="fa fa-check"></i><b>30.2</b> list-columns for sampling</a></li>
+<li class="chapter" data-level="30.3" data-path="appendix-10.html"><a href="appendix-10.html#section-91"><i class="fa fa-check"></i><b>30.3</b> 25.2.5.1</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="appendix-10.html"><a href="appendix-10.html#include-cubic-term"><i class="fa fa-check"></i><b>30.3.1</b> Include cubic term</a></li>
+</ul></li>
+<li class="chapter" data-level="30.4" data-path="appendix-10.html"><a href="appendix-10.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i><b>30.4</b> Multiple graphs in chunk</a></li>
+<li class="chapter" data-level="30.5" data-path="appendix-10.html"><a href="appendix-10.html#listquantile-examples"><i class="fa fa-check"></i><b>30.5</b> list(quantile()) examples</a></li>
+<li class="chapter" data-level="30.6" data-path="appendix-10.html"><a href="appendix-10.html#extracting-row-names"><i class="fa fa-check"></i><b>30.6</b> extracting row names</a></li>
+<li class="chapter" data-level="30.7" data-path="appendix-10.html"><a href="appendix-10.html#invoke_map-example-book"><i class="fa fa-check"></i><b>30.7</b> <code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="30.8" data-path="appendix-10.html"><a href="appendix-10.html#named-list-example-book"><i class="fa fa-check"></i><b>30.8</b> named list example (book)</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html"><i class="fa fa-check"></i><b>31</b> ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="31.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>31.1</b> 27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="31.1.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-92"><i class="fa fa-check"></i><b>31.1.1</b> 27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>31.2</b> 27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="31.2.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-93"><i class="fa fa-check"></i><b>31.2.1</b> 27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="31.3" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#cv-of-bryan-shalloway"><i class="fa fa-check"></i><b>31.3</b> <strong>CV of Bryan Shalloway</strong></a></li>
+<li class="chapter" data-level="31.4" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#experience"><i class="fa fa-check"></i><b>31.4</b> Experience</a></li>
+<li class="chapter" data-level="31.5" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#education"><i class="fa fa-check"></i><b>31.5</b> Education</a></li>
+<li class="chapter" data-level="31.6" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>31.6</b> 27.4: Code chunks</a><ul>
+<li class="chapter" data-level="31.6.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-94"><i class="fa fa-check"></i><b>31.6.1</b> 27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html"><i class="fa fa-check"></i><b>32</b> ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="32.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#label"><i class="fa fa-check"></i><b>32.1</b> 28.2: Label</a><ul>
+<li class="chapter" data-level="32.1.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-95"><i class="fa fa-check"></i><b>32.1.1</b> 28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.2" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>32.2</b> 28.3: Annotations</a><ul>
+<li class="chapter" data-level="32.2.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i><b>32.2.1</b> 28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="32.3" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>32.3</b> 28.4: Scales</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i><b>32.3.1</b> 28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions and notes to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch.-14-strings" class="section level1">
+<h1><span class="header-section-number">Chapter 13</span> ch. 14: Strings</h1>
+<ul>
+<li><code>writeLines</code>: see raw contents of a string (prints each string in a vector on a new line)</li>
+<li><code>str_length</code>: number of characters in a string</li>
+<li><code>str_c</code>: combine two or more strings
+<ul>
+<li>use <code>collapse</code> arg to make vector of strings to single string</li>
+</ul></li>
+<li><code>str_replace_na</code>: print <code>NA</code> as “NA”</li>
+<li><code>str_sub</code>: <code>start</code> and <code>end</code> args to specify position to remove (or replace), can use negative numbers as well to represent from back</li>
+<li><code>str_to_lower</code>, <code>str_to_upper</code>, <code>str_to_upper</code>: for changing string case
+<ul>
+<li><code>locale</code> arg (to handle slight differences in characters)</li>
+</ul></li>
+<li><code>str_order</code>, <code>str_sort</code>: more robust version of <code>order</code> and <code>sort</code> which take allow a <code>locale</code> argument</li>
+<li><p><code>str_view</code>, <code>str_view_all</code>: shows how character and regular expression match</p></li>
+<li><code>\d</code>: matches any digit.</li>
+<li><code>\s</code>: matches any whitespace (e.g. space, tab, newline).</li>
+<li><code>[abc]</code>: matches a, b, or c.</li>
+<li><p><code>[^abc]</code>: matches anything except a, b, or c.</p></li>
+<li><code>{n}</code>: exactly n</li>
+<li><code>{n,}</code>: n or more</li>
+<li><code>{,m}</code>: at most m</li>
+<li><p><code>{n,m}</code>: between n and m</p></li>
+<li><code>str_detect</code>: returns logical vector of <code>TRUE</code>/<code>FALSE</code> values</li>
+<li><code>str_subset</code>: subset of <code>TRUE</code> values from <code>str_detect</code></li>
+<li><code>str_count</code>: number of matches in a string</li>
+<li><code>str_extract</code>: extract actual text of a match</li>
+<li><code>str_extract_all</code>: returns list with all matches
+<ul>
+<li><code>simplify = TRUE</code> returns a matrix</li>
+</ul></li>
+<li><code>str_match</code>: similar to <code>str_extract</code> but gives each individual component of match in a matrix, rather than a character vector (also have a <code>str_match_all</code>)</li>
+<li><code>tidyr::extract</code>: like <code>str_match</code> but name columns with matches which are moved into new columns</li>
+<li><code>str_replace</code>, <code>str_replace_all</code>: replace matches with new strings</li>
+<li><code>str_split</code> split a string into pieces – default is individual words (returns list)
+<ul>
+<li><code>simplify = TRUE</code> again will return a matrix</li>
+</ul></li>
+<li><code>boundary</code> use to specify level of split, e.g. <code>str_view_all(x, boundary("word"))</code></li>
+<li><code>str_locate</code>, <code>str_locate_all</code>: gives starting an dending positions of each match</li>
+<li><code>regex</code> use in match to specify more options, e.g. <code>str_view(bananas, regex("banana", ignore_case = TRUE))</code>
+<ul>
+<li><code>multiline = TRUE</code> allows <code>^</code> and <code>$</code> to match start and end of each line (rather than of string)</li>
+<li><code>comments = TRUE</code> allows you to add comments on a complex regular expression</li>
+<li><code>dotall = TRUE</code> allows <code>.</code> to match more than just letters e.g. <code>\\n</code></li>
+</ul></li>
+<li><code>fixed</code>, <code>coll</code> related alternatives to <code>regex</code></li>
+<li><code>apropos</code> searches all objects available from global environment (e.g. say you can’t remember function name)</li>
+<li><code>dir</code>: lists all files in a directory
+<ul>
+<li><code>pattern</code> arg takes a regex</li>
+</ul></li>
+<li><p><code>stringi</code> more comprehensive package than <code>stringr</code> (~5x as many funs)</p></li>
+</ul>
+<div id="string-basics" class="section level2">
+<h2><span class="header-section-number">13.1</span> 14.2: String basics</h2>
+<p>Use <code>wrteLines</code> to show what string ‘This string has a \n new line’ looks like printed.</p>
+<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" title="1">string_exp &lt;-<span class="st"> &#39;This string has a </span><span class="ch">\n</span><span class="st"> new line&#39;</span></a>
+<a class="sourceLine" id="cb624-2" title="2"><span class="kw">print</span>(string_exp)</a></code></pre></div>
+<pre><code>## [1] &quot;This string has a \n new line&quot;</code></pre>
+<div class="sourceCode" id="cb626"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb626-1" title="1"><span class="kw">writeLines</span>(string_exp)</a></code></pre></div>
+<pre><code>## This string has a 
+##  new line</code></pre>
+<p>To see full list of specifal characters:</p>
+<div class="sourceCode" id="cb628"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb628-1" title="1">?<span class="st">&#39;&quot;&#39;</span></a></code></pre></div>
+<p>Objects of length 0 are silently dropped. This is particularly useful in conjunction with <code>if</code>:</p>
+<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" title="1">name &lt;-<span class="st"> &quot;Bryan&quot;</span></a>
+<a class="sourceLine" id="cb629-2" title="2">time_of_day &lt;-<span class="st"> &quot;morning&quot;</span></a>
+<a class="sourceLine" id="cb629-3" title="3">birthday &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb629-4" title="4"></a>
+<a class="sourceLine" id="cb629-5" title="5"><span class="kw">str_c</span>(</a>
+<a class="sourceLine" id="cb629-6" title="6">  <span class="st">&quot;Good &quot;</span>, time_of_day, <span class="st">&quot; &quot;</span>, name,</a>
+<a class="sourceLine" id="cb629-7" title="7">  <span class="cf">if</span> (birthday) <span class="st">&quot; and HAPPY BIRTHDAY&quot;</span>,</a>
+<a class="sourceLine" id="cb629-8" title="8">  <span class="st">&quot;.&quot;</span></a>
+<a class="sourceLine" id="cb629-9" title="9">)</a></code></pre></div>
+<pre><code>## [1] &quot;Good morning Bryan.&quot;</code></pre>
+<p>Collapse vectors into single string</p>
+<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;xa, yb, zc&quot;</code></pre>
+<p>Can use assignment form of <code>str_sub()</code></p>
+<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb633-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>)</a>
+<a class="sourceLine" id="cb633-2" title="2"><span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>) &lt;-<span class="st"> </span><span class="kw">str_to_lower</span>(<span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb633-3" title="3">x</a></code></pre></div>
+<pre><code>## [1] &quot;apple&quot;  &quot;banana&quot; &quot;pear&quot;</code></pre>
+<p><code>str_pad</code> looks interesting</p>
+<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" title="1"><span class="kw">str_pad</span>(<span class="st">&quot;the dogs come for you.&quot;</span>, <span class="dt">width =</span> <span class="dv">40</span>, <span class="dt">pad =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">side =</span> <span class="st">&quot;both&quot;</span>) <span class="co">#must specify width =, side = default is left</span></a></code></pre></div>
+<pre><code>## [1] &quot;,,,,,,,,,the dogs come for you.,,,,,,,,,&quot;</code></pre>
+<div id="section-40" class="section level3">
+<h3><span class="header-section-number">13.1.1</span> 14.2.5</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>In code that doesn’t use stringr, you’ll often see <code>paste()</code> and <code>paste0()</code>.</em>
+<em>What’s the difference between the two functions?</em></p>
+<p><code>paste0</code> has no <code>sep</code> argument and just appends any value provided like another string vector.
+They differs from <code>str_c</code> in that they automatically convert NA values to character. Also, they do not return output</p>
+<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" title="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;a-b-c-x&quot; &quot;a-b-c-y&quot;</code></pre>
+<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" title="1"><span class="kw">paste0</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;abcx-&quot; &quot;abcy-&quot;</code></pre>
+<p><em>What stringr function are they equivalent to?</em><br />
+<code>paste()</code> and <code>paste0()</code> are similar to <code>str_c()</code> though are different in how they handle NAs (see below). They also will return a warning when recycling vectors whose legth do not have a common factor.</p>
+<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" title="1"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;a-x&quot; &quot;b-y&quot; &quot;x-x&quot;</code></pre>
+<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## Warning in stri_c(..., sep = sep, collapse = collapse, ignore_null = TRUE):
+## longer object length is not a multiple of shorter object length</code></pre>
+<pre><code>## [1] &quot;a-x&quot; &quot;b-y&quot; &quot;x-x&quot;</code></pre>
+<p><em>How do the functions differ in their handling of <code>NA</code>?</em></p>
+<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb646-1" title="1"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;a-NA&quot; &quot;b-y&quot;</code></pre>
+<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb648-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] NA    &quot;b-y&quot;</code></pre></li>
+<li><p><em>In your own words, describe the difference between the <code>sep</code> and <code>collapse</code></em>
+<em>arguments to <code>str_c()</code>.</em></p>
+<p>sep puts characters between items within a vector, collapse puts a character between vectors being collapsed</p></li>
+<li><p><em>Use <code>str_length()</code> and <code>str_sub()</code> to extract the middle character from </em>
+<em>a string.</em></p>
+<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb650-1" title="1">x &lt;-<span class="st"> &quot;world&quot;</span></a>
+<a class="sourceLine" id="cb650-2" title="2"><span class="kw">str_sub</span>(x, <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">end =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;r&quot;</code></pre>
+<p><em>What will you do if the string has an even number of characters?</em>
+In this circumstance the above solution would take the anterior middle value, below is a solution that would return both middle values.</p>
+<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb652-1" title="1">x &lt;-<span class="st"> &quot;worlds&quot;</span></a>
+<a class="sourceLine" id="cb652-2" title="2"></a>
+<a class="sourceLine" id="cb652-3" title="3"><span class="kw">str_sub</span>(x, <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
+<pre><code>## [1] &quot;l&quot;</code></pre>
+<div class="sourceCode" id="cb654"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb654-1" title="1"><span class="kw">str_sub</span>(x,</a>
+<a class="sourceLine" id="cb654-2" title="2">        <span class="dt">start =</span> <span class="kw">ifelse</span>(<span class="kw">str_length</span>(x) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> )), </a>
+<a class="sourceLine" id="cb654-3" title="3">        <span class="dt">end =</span> <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;rl&quot;</code></pre></li>
+<li><em>What does <code>str_wrap()</code> do? When might you want to use it?</em>
+indent = for first line, exdent = others
+<ul>
+<li>could use <code>str_wrap()</code> for editing of documents etc., setting width=1 will give each word its own line</li>
+</ul>
+<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb656-1" title="1"><span class="kw">str_wrap</span>(<span class="st">&quot;Tonight, we dine in Hell.&quot;</span>, <span class="dt">width =</span> <span class="dv">10</span>, <span class="dt">indent =</span> <span class="dv">0</span>, <span class="dt">exdent =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb656-2" title="2"><span class="st">  </span><span class="kw">writeLines</span>()</a></code></pre></div>
+<pre><code>## Tonight,
+##    we dine in
+##    Hell.</code></pre></li>
+<li><p><em>What does <code>str_trim()</code> do? What’s the opposite of <code>str_trim()</code>?</em>
+Removes whitespace from beginning and end of character, side = specifies which side</p>
+<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb658-1" title="1"><span class="kw">str_trim</span>(<span class="st">&quot;   so much white space   &quot;</span>, <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>) <span class="co"># (default is &#39;both&#39;)</span></a></code></pre></div>
+<pre><code>## [1] &quot;   so much white space&quot;</code></pre></li>
+<li><p><em>Write a function that turns (e.g.) a vector <code>c("a", "b", "c")</code> into</em>
+<em>the string <code>a, b, and c</code>. Think carefully about what it should do if</em>
+<em>given a vector of length 0, 1, or 2.</em></p>
+<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb660-1" title="1">vec_to_string &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb660-2" title="2"></a>
+<a class="sourceLine" id="cb660-3" title="3">  <span class="co">#If 1 or 0 length vector</span></a>
+<a class="sourceLine" id="cb660-4" title="4">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb660-5" title="5">  <span class="kw">return</span>(x)</a>
+<a class="sourceLine" id="cb660-6" title="6">  comma &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;, &quot;</span>, <span class="st">&quot; &quot;</span>)</a>
+<a class="sourceLine" id="cb660-7" title="7">  b &lt;-<span class="st"> </span><span class="kw">str_c</span>(x, <span class="dt">collapse =</span> comma)</a>
+<a class="sourceLine" id="cb660-8" title="8"></a>
+<a class="sourceLine" id="cb660-9" title="9">  <span class="co">#replace &#39;,&#39; with &#39;and&#39; in last</span></a>
+<a class="sourceLine" id="cb660-10" title="10">  <span class="kw">str_sub</span>(b,<span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span></a>
+<a class="sourceLine" id="cb660-11" title="11"><span class="st">  </span><span class="dv">1</span>)) &lt;-<span class="st"> &quot; and &quot;</span></a>
+<a class="sourceLine" id="cb660-12" title="12">  <span class="kw">return</span>(b)</a>
+<a class="sourceLine" id="cb660-13" title="13">}</a>
+<a class="sourceLine" id="cb660-14" title="14">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</a>
+<a class="sourceLine" id="cb660-15" title="15"><span class="kw">vec_to_string</span>(x)</a></code></pre></div>
+<pre><code>## [1] &quot;a, b, c, and d&quot;</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="matching-patterns-w-regex" class="section level2">
+<h2><span class="header-section-number">13.2</span> 14.3: Matching patterns w/ regex</h2>
+<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb662-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>)</a>
+<a class="sourceLine" id="cb662-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;an&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-18fae469dff429c47c85" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-18fae469dff429c47c85">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>To match a literal <code>\</code> need <code>\\\\</code> because both string and regex will escape it.</p>
+<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb663-1" title="1">x &lt;-<span class="st"> &quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span></a>
+<a class="sourceLine" id="cb663-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre><code>## a\b</code></pre>
+<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb665-1" title="1"><span class="kw">str_view</span>(x,<span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-1e891c073d589d1211a1" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1e891c073d589d1211a1">{"x":{"html":"<ul>\n  <li>a<span class='match'>\\<\/span>b<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div id="section-41" class="section level3">
+<h3><span class="header-section-number">13.2.1</span> 14.3.1.1</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>Explain why each of these strings don’t match a <code>\</code>: <code>"\"</code>, <code>"\\"</code>, <code>"\\\"</code>.</em></p>
+<p><code>"\"</code> -&gt; leaves open quote string because escapes quote
+<code>"\\"</code>, -&gt; escapes second <code>\</code> so left with blank
+<code>"\\\"</code> -&gt; third <code>\</code> escapes quote so left with open quote as well</p></li>
+<li><p><em>How would you match the sequence <code>"'\</code>?</em></p>
+<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb666-1" title="1">x &lt;-<span class="st"> &quot;alfred</span><span class="ch">\&quot;</span><span class="st">&#39;</span><span class="ch">\\</span><span class="st">goes&quot;</span></a>
+<a class="sourceLine" id="cb666-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre><code>## alfred&quot;&#39;\goes</code></pre>
+<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb668-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\&quot;</span><span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-e1521a57b8a930263259" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-e1521a57b8a930263259">{"x":{"html":"<ul>\n  <li>alfred<span class='match'>\"'\\<\/span>goes<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>What patterns will the regular expression <code>\..\..\..</code> match? </em></p>
+<p>Would match 6 character string of following form “(dot)(anychar)(dot)(anychar)(dot)(anychar)”</p>
+<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb669-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alf.r.e.dd.ss..lsdf.d.kj&quot;</span>)</a>
+<a class="sourceLine" id="cb669-2" title="2"><span class="kw">str_view</span>(x, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-443db94a01a85fc424e0" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-443db94a01a85fc424e0">{"x":{"html":"<ul>\n  <li>alf<span class='match'>.r.e.d<\/span>d.ss..lsdf.d.kj<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p><em>How would you represent it as a string?</em></p>
+<div class="sourceCode" id="cb670"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb670-1" title="1">x_pattern &lt;-<span class="st"> &quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span></a>
+<a class="sourceLine" id="cb670-2" title="2"><span class="kw">writeLines</span>(x_pattern)</a></code></pre></div>
+<pre><code>## \..\..\..</code></pre></li>
+</ol>
+</div>
+<div id="section-42" class="section level3">
+<h3><span class="header-section-number">13.2.2</span> 14.3.2.1</h3>
+<p>Using <code>\b</code> to set boundary between words (not used often)</p>
+<div class="sourceCode" id="cb672"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb672-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">bsum</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;contr.sum&quot; &quot;sum&quot;</code></pre>
+<div class="sourceCode" id="cb674"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb674-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(sum)$&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;sum&quot;</code></pre>
+<ol style="list-style-type: decimal">
+<li><p><em>How would you match the literal string <code>"$^$"</code>?</em></p>
+<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" title="1">x &lt;-<span class="st"> &quot;so it goes $^$ here&quot;</span></a>
+<a class="sourceLine" id="cb676-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">$</span><span class="ch">\\</span><span class="st">^</span><span class="ch">\\</span><span class="st">$&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-f8e1d63fe3b0964d8784" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-f8e1d63fe3b0964d8784">{"x":{"html":"<ul>\n  <li>so it goes <span class='match'>$^$<\/span> here<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Given the corpus of common words in <code>stringr::words</code>, create regular</em>
+<em>expressions that find all words that:</em></p>
+<ol style="list-style-type: decimal">
+<li><em>Start with “y”.</em></li>
+</ol>
+<div class="sourceCode" id="cb677"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb677-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^y&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-43e0a29b924fe73fbd9b" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-43e0a29b924fe73fbd9b">{"x":{"html":"<ul>\n  <li><span class='match'>y<\/span>ear<\/li>\n  <li><span class='match'>y<\/span>es<\/li>\n  <li><span class='match'>y<\/span>esterday<\/li>\n  <li><span class='match'>y<\/span>et<\/li>\n  <li><span class='match'>y<\/span>ou<\/li>\n  <li><span class='match'>y<\/span>oung<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="2" style="list-style-type: decimal">
+<li><em>End with “x”</em></li>
+</ol>
+<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;x$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-a4ebf0489f7d8b5d3887" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-a4ebf0489f7d8b5d3887">{"x":{"html":"<ul>\n  <li>bo<span class='match'>x<\/span><\/li>\n  <li>se<span class='match'>x<\/span><\/li>\n  <li>si<span class='match'>x<\/span><\/li>\n  <li>ta<span class='match'>x<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="3" style="list-style-type: decimal">
+<li><em>Are exactly three letters long. (Don’t cheat by using <code>str_length()</code>!)</em></li>
+</ol>
+<div class="sourceCode" id="cb679"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb679-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^...$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li><em>Have seven letters or more.</em></li>
+</ol>
+<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;.......&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>Since this list is long, you might want to use the <code>match</code> argument to
+<code>str_view()</code> to show only the matching or non-matching words.</p></li>
+</ol>
+</div>
+<div id="section-43" class="section level3">
+<h3><span class="header-section-number">13.2.3</span> 14.3.3.1</h3>
+<p>Other special characters<br />
+* <code>\d</code>: matches any digit.
+* <code>\s</code>: matches any whitespace (e.g. space, tab, newline).
+* <code>[abc]</code>: matches a, b, or c.
+* <code>[^abc]</code>: matches anything except a, b, or c.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Create regular expressions to find all words that:</em></p>
+<ol style="list-style-type: decimal">
+<li><em>Start with a vowel.</em></li>
+</ol>
+<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[aeiou]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><em>That only contain consonants. (Hint: thinking about matching </em>
+<em>“not”-vowels.)</em></li>
+</ol>
+<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeiou]*[^aeiouy]$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-72db7ef0748978d3bf09" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-72db7ef0748978d3bf09">{"x":{"html":"<ul>\n  <li><span class='match'>mrs<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="3" style="list-style-type: decimal">
+<li><em>End with <code>ed</code>, but not with <code>eed</code>.</em></li>
+</ol>
+<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[^e]ed$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-d1a086f88bb2d7150ef5" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-d1a086f88bb2d7150ef5">{"x":{"html":"<ul>\n  <li><span class='match'>bed<\/span><\/li>\n  <li>hund<span class='match'>red<\/span><\/li>\n  <li><span class='match'>red<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="4" style="list-style-type: decimal">
+<li><em>End with <code>ing</code> or <code>ise</code>.</em></li>
+</ol>
+<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(ing|ise)$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-1b0440f6f8fc9e7c4203" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-1b0440f6f8fc9e7c4203">{"x":{"html":"<ul>\n  <li>advert<span class='match'>ise<\/span><\/li>\n  <li>br<span class='match'>ing<\/span><\/li>\n  <li>dur<span class='match'>ing<\/span><\/li>\n  <li>even<span class='match'>ing<\/span><\/li>\n  <li>exerc<span class='match'>ise<\/span><\/li>\n  <li>k<span class='match'>ing<\/span><\/li>\n  <li>mean<span class='match'>ing<\/span><\/li>\n  <li>morn<span class='match'>ing<\/span><\/li>\n  <li>otherw<span class='match'>ise<\/span><\/li>\n  <li>pract<span class='match'>ise<\/span><\/li>\n  <li>ra<span class='match'>ise<\/span><\/li>\n  <li>real<span class='match'>ise<\/span><\/li>\n  <li>r<span class='match'>ing<\/span><\/li>\n  <li>r<span class='match'>ise<\/span><\/li>\n  <li>s<span class='match'>ing<\/span><\/li>\n  <li>surpr<span class='match'>ise<\/span><\/li>\n  <li>th<span class='match'>ing<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Empirically verify the rule “i before e except after c”.</em></p>
+<div class="sourceCode" id="cb685"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb685-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(^(ei))|cie|[^c]ei&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-37d74005c10d7e865297" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-37d74005c10d7e865297">{"x":{"html":"<ul>\n  <li><span class='match'>ei<\/span>ght<\/li>\n  <li><span class='match'>ei<\/span>ther<\/li>\n  <li>s<span class='match'>cie<\/span>nce<\/li>\n  <li>so<span class='match'>cie<\/span>ty<\/li>\n  <li><span class='match'>wei<\/span>gh<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Is “q” always followed by a “u”?</em></p>
+<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;q[^u]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-8f7a98ebf2830a86670f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-8f7a98ebf2830a86670f">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>of the words in list, yes.</p></li>
+<li><p><em>Write a regular expression that matches a word if it’s probably written</em>
+<em>in British English, not American English.</em></p>
+<div class="sourceCode" id="cb687"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb687-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(l|b)our|parat&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-d24eaa5c1ffdcb343a77" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-d24eaa5c1ffdcb343a77">{"x":{"html":"<ul>\n  <li>co<span class='match'>lour<\/span><\/li>\n  <li>la<span class='match'>bour<\/span><\/li>\n  <li>se<span class='match'>parat<\/span>e<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Create a regular expression that will match telephone numbers as commonly</em>
+<em>written in your country.</em></p>
+<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dkl kls. klk. _&quot;</span>, <span class="st">&quot;(425) 591-6020&quot;</span>, <span class="st">&quot;her number is (581) 434-3242&quot;</span>, <span class="st">&quot;442&quot;</span>, <span class="st">&quot;  dsi&quot;</span>)</a>
+<a class="sourceLine" id="cb688-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d-</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-889f03f30286aa138cc1" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-889f03f30286aa138cc1">{"x":{"html":"<ul>\n  <li>dkl kls. klk. _<\/li>\n  <li><span class='match'>(425) 591-6020<\/span><\/li>\n  <li>her number is <span class='match'>(581) 434-3242<\/span><\/li>\n  <li>442<\/li>\n  <li>  dsi<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>Aboves not a good way to solve this, will see better methods in next section.</p></li>
+</ol>
+</div>
+<div id="section-44" class="section level3">
+<h3><span class="header-section-number">13.2.4</span> 14.3.4.1</h3>
+<p>Controlling number of times:</p>
+<ul>
+<li><code>?</code>: 0 or 1</li>
+<li><code>+</code>: 1 or more</li>
+<li><code>*</code>: 0 or more</li>
+<li><code>{n}</code>: exactly n</li>
+<li><code>{n,}</code>: n or more</li>
+<li><code>{,m}</code>: at most m</li>
+<li><code>{n,m}</code>: between n and m</li>
+</ul>
+<p>By default these matches are “greedy”: they will match the longest string possible. You can make them “lazy”, matching the shortest string possible by putting a <code>?</code> after them. This is an advanced feature of regular expressions, but it’s useful to know that it exists:</p>
+<div class="sourceCode" id="cb689"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb689-1" title="1">x &lt;-<span class="st"> &quot;1888 is the longest year in Roman numerals: MDCCCLXXXVIII&quot;</span></a>
+<a class="sourceLine" id="cb689-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}&#39;</span>)</a></code></pre></div>
+<div id="htmlwidget-9cbb87efdc78bd32823f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9cbb87efdc78bd32823f">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb690-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}?&#39;</span>)</a></code></pre></div>
+<div id="htmlwidget-cac8d1380a754a9030c6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cac8d1380a754a9030c6">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol style="list-style-type: decimal">
+<li><p><em>Describe the equivalents of <code>?</code>, <code>+</code>, <code>*</code> in <code>{m,n}</code> form.</em>
+<code>?</code> : <code>{0,1}</code>
+<code>+</code> : <code>{1, }</code>
+<code>*</code> : <code>{0, }</code></p></li>
+<li><p><em>Describe in words what these regular expressions match:</em>
+<em>(read carefully to see if I’m using a regular expression or a string</em>
+<em>that defines a regular expression.)</em></p>
+<ol style="list-style-type: decimal">
+<li><code>^.*$</code> : starts with anything, and ends with anything–matches whole thing</li>
+</ol>
+<div class="sourceCode" id="cb691"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb691-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;^.*$&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-f582e3410d60a01f2bf1" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-f582e3410d60a01f2bf1">{"x":{"html":"<ul>\n  <li><span class='match'>1888 is the longest year in Roman numerals: MDCCCLXXXVIII<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="2" style="list-style-type: decimal">
+<li><code>"\\{.+\\}"</code> : match text in brackets greater than nothing</li>
+</ol>
+<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;some in {brackets}&quot;</span>, <span class="st">&quot;just {} no match&quot;</span>)</a>
+<a class="sourceLine" id="cb692-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">{.+</span><span class="ch">\\</span><span class="st">}&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-f03af90469a138e04b65" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-f03af90469a138e04b65">{"x":{"html":"<ul>\n  <li>test<\/li>\n  <li>some in <span class='match'>{brackets}<\/span><\/li>\n  <li>just {} no match<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="3" style="list-style-type: decimal">
+<li><code>\d{4}-\d{2}-\d{2}</code> : 4 numbers - 2 numbers - 2 numbers</li>
+</ol>
+<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb693-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;4444-22-22&quot;</span>, <span class="st">&quot;test&quot;</span>, <span class="st">&quot;333-4444-22&quot;</span>)</a>
+<a class="sourceLine" id="cb693-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-a70ee0135104d6de2e1f" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-a70ee0135104d6de2e1f">{"x":{"html":"<ul>\n  <li><span class='match'>4444-22-22<\/span><\/li>\n  <li>test<\/li>\n  <li>333-4444-22<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<ol start="4" style="list-style-type: decimal">
+<li><code>"\\\\{4}"</code> : 4 brackets</li>
+</ol>
+<div class="sourceCode" id="cb694"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb694-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb694-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre><code>## \\\\
+## \\\
+## \\
+## \</code></pre>
+<div class="sourceCode" id="cb696"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb696-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">{4}&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-fc94bae9276a6708be55" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-fc94bae9276a6708be55">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\\\\\<\/span><\/li>\n  <li>\\\\\\<\/li>\n  <li>\\\\<\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb697-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-523d9b907f182dd90817" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-523d9b907f182dd90817">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\<\/span>\\\\<\/li>\n  <li><span class='match'>\\\\<\/span>\\<\/li>\n  <li><span class='match'>\\\\<\/span><\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Create regular expressions to find all words that:</em></p>
+<ol style="list-style-type: decimal">
+<li>find all words that start with three consonants</li>
+</ol>
+<div class="sourceCode" id="cb698"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb698-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeoiouy]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-ac2e4e546d79fc90f5ae" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-ac2e4e546d79fc90f5ae">{"x":{"html":"<ul>\n  <li><span class='match'>Chr<\/span>ist<\/li>\n  <li><span class='match'>Chr<\/span>istmas<\/li>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>sch<\/span>eme<\/li>\n  <li><span class='match'>sch<\/span>ool<\/li>\n  <li><span class='match'>str<\/span>aight<\/li>\n  <li><span class='match'>str<\/span>ategy<\/li>\n  <li><span class='match'>str<\/span>eet<\/li>\n  <li><span class='match'>str<\/span>ike<\/li>\n  <li><span class='match'>str<\/span>ong<\/li>\n  <li><span class='match'>str<\/span>ucture<\/li>\n  <li><span class='match'>thr<\/span>ee<\/li>\n  <li><span class='match'>thr<\/span>ough<\/li>\n  <li><span class='match'>thr<\/span>ow<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>Include <code>y</code> because when it shows up otherwise, is in vowel form.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>have three or more vowels in a row</li>
+</ol>
+<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[aeiou]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div id="htmlwidget-15c0e9e65b1872e326d3" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-15c0e9e65b1872e326d3">{"x":{"html":"<ul>\n  <li>b<span class='match'>eau<\/span>ty<\/li>\n  <li>obv<span class='match'>iou<\/span>s<\/li>\n  <li>prev<span class='match'>iou<\/span>s<\/li>\n  <li>q<span class='match'>uie<\/span>t<\/li>\n  <li>ser<span class='match'>iou<\/span>s<\/li>\n  <li>var<span class='match'>iou<\/span>s<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<p>In this case, do not include the <code>y</code>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>have 2 or more vowel-consonant pairs in a row</li>
+</ol>
+<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;([aeiou][^aeiou]){2,}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
+<li><p><em>Solve the beginner regexp crosswords at</em>
+<em><a href="https://regexcrossword.com/challenges/beginner" class="uri">https://regexcrossword.com/challenges/beginner</a>.</em></p></li>
+</ol>
+</div>
+<div id="section-45" class="section level3">
+<h3><span class="header-section-number">13.2.5</span> 14.3.5.1</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>Describe, in words, what these expressions will match:</em></p>
+<p>*I change questions 1 and 3 to what I think they were meant to be written as <code>(.)\\1\\1</code> and <code>(.)\\1</code> respectively.</p>
+<ol style="list-style-type: decimal">
+<li><code>(.)\\1\\1</code> : repeat the char in the first group, and then repeat that char again</li>
+<li><code>"(.)(.)\\2\\1"</code> : 1st char, 2nd char followed by 2nd char, first char</li>
+<li><code>(..)\\1</code> : 2 chars repeated twice</li>
+<li><code>"(.).\\1.\\1"</code> : chars shows-up 3 times with one character between each</li>
+<li><code>"(.)(.)(.).*\\3\\2\\1"</code> : 3 chars in one order with * chars between, then 3 chars with 3 letters in the reverse order of what it started</li>
+</ol>
+<div class="sourceCode" id="cb701"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb701-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;steefddff&quot;</span>, <span class="st">&quot;ssdfsdfffsdasdlkd&quot;</span>, <span class="st">&quot;DLKKJIOWdkl&quot;</span>, <span class="st">&quot;klnlsd&quot;</span>, <span class="st">&quot;t11&quot;</span>, <span class="st">&quot;(.)\1\1&quot;</span>)</a>
+<a class="sourceLine" id="cb701-2" title="2"></a>
+<a class="sourceLine" id="cb701-3" title="3"><span class="kw">str_view_all</span>(x, <span class="st">&quot;(.)</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxx</span></a></code></pre></div>
+<div id="htmlwidget-55e21c6e6c513e63a9bc" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-55e21c6e6c513e63a9bc">{"x":{"html":"<ul>\n  <li>ssdfsd<span class='match'>fff<\/span>sdasdlkd<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb702"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb702-1" title="1"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(.)(.)</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyyx</span></a></code></pre></div>
+<div id="htmlwidget-c113981b471254aa59d6" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-c113981b471254aa59d6">{"x":{"html":"<ul>\n  <li>bell p<span class='match'>eppe<\/span>r<\/li>\n  <li>chili p<span class='match'>eppe<\/span>r<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb703-1" title="1"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(..)</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxyy</span></a></code></pre></div>
+<div id="htmlwidget-0d024c0c6d49321fc573" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-0d024c0c6d49321fc573">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb704"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb704-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).</span><span class="ch">\\</span><span class="st">1.</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#x.x.x</span></a></code></pre></div>
+<div id="htmlwidget-94fd8f656c578e186504" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-94fd8f656c578e186504">{"x":{"html":"<ul>\n  <li><span class='match'>eleve<\/span>n<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb705-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.)(.)(.).*</span><span class="ch">\\</span><span class="st">3</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyz.*zyx</span></a></code></pre></div>
+<div id="htmlwidget-90a932524f8d0fdca901" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-90a932524f8d0fdca901">{"x":{"html":"<ul>\n  <li><span class='match'>paragrap<\/span>h<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>Construct regular expressions to match words that:</em></p>
+<ol style="list-style-type: decimal">
+<li><em>Start and end with the same character.</em></li>
+</ol>
+<div class="sourceCode" id="cb706"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb706-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^(.).*</span><span class="ch">\\</span><span class="st">1$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><em>Contain a repeated pair of letters</em>
+(e.g. “church” contains “ch” repeated twice.)</li>
+</ol>
+<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb707-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(..).*</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><em>Contain one letter repeated in at least three places</em>
+(e.g. “eleven” contains three “e”s.)</li>
+</ol>
+<div class="sourceCode" id="cb708"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb708-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).+</span><span class="ch">\\</span><span class="st">1.+</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
+</ol>
+</div>
+</div>
+<div id="tools" class="section level2">
+<h2><span class="header-section-number">13.3</span> 14.4 Tools</h2>
+<p>Switch point with Stephen. Will take 30 minutes to go through the main points from exercises / solutions up to here.</p>
+<div id="section-46" class="section level3">
+<h3><span class="header-section-number">13.3.1</span> 14.4.2</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>For each of the following challenges, try solving it by using both a single</em>
+<em>regular expression, and a combination of multiple <code>str_detect()</code> calls.</em></p>
+<ol style="list-style-type: decimal">
+<li><em>Find all words that start or end with <code>x</code>.</em></li>
+</ol>
+<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" title="1"><span class="kw">str_subset</span>(words, <span class="st">&quot;^x|x$&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;box&quot; &quot;sex&quot; &quot;six&quot; &quot;tax&quot;</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><em>Find all words that start with a vowel and end with a consonant.</em></li>
+</ol>
+<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" title="1"><span class="kw">str_subset</span>(words, <span class="st">&quot;^[aeiou].*[^aeiouy]$&quot;</span>)</a></code></pre></div>
+<pre><code>##   [1] &quot;about&quot;       &quot;accept&quot;      &quot;account&quot;     &quot;across&quot;      &quot;act&quot;        
+##   [6] &quot;actual&quot;      &quot;add&quot;         &quot;address&quot;     &quot;admit&quot;       &quot;affect&quot;     
+##  [11] &quot;afford&quot;      &quot;after&quot;       &quot;afternoon&quot;   &quot;again&quot;       &quot;against&quot;    
+##  [16] &quot;agent&quot;       &quot;air&quot;         &quot;all&quot;         &quot;allow&quot;       &quot;almost&quot;     
+##  [21] &quot;along&quot;       &quot;alright&quot;     &quot;although&quot;    &quot;always&quot;      &quot;amount&quot;     
+##  [26] &quot;and&quot;         &quot;another&quot;     &quot;answer&quot;      &quot;apart&quot;       &quot;apparent&quot;   
+##  [31] &quot;appear&quot;      &quot;appoint&quot;     &quot;approach&quot;    &quot;arm&quot;         &quot;around&quot;     
+##  [36] &quot;art&quot;         &quot;as&quot;          &quot;ask&quot;         &quot;at&quot;          &quot;attend&quot;     
+##  [41] &quot;awful&quot;       &quot;each&quot;        &quot;east&quot;        &quot;eat&quot;         &quot;effect&quot;     
+##  [46] &quot;egg&quot;         &quot;eight&quot;       &quot;either&quot;      &quot;elect&quot;       &quot;electric&quot;   
+##  [51] &quot;eleven&quot;      &quot;end&quot;         &quot;english&quot;     &quot;enough&quot;      &quot;enter&quot;      
+##  [56] &quot;environment&quot; &quot;equal&quot;       &quot;especial&quot;    &quot;even&quot;        &quot;evening&quot;    
+##  [61] &quot;ever&quot;        &quot;exact&quot;       &quot;except&quot;      &quot;exist&quot;       &quot;expect&quot;     
+##  [66] &quot;explain&quot;     &quot;express&quot;     &quot;if&quot;          &quot;important&quot;   &quot;in&quot;         
+##  [71] &quot;indeed&quot;      &quot;individual&quot;  &quot;inform&quot;      &quot;instead&quot;     &quot;interest&quot;   
+##  [76] &quot;invest&quot;      &quot;it&quot;          &quot;item&quot;        &quot;obvious&quot;     &quot;occasion&quot;   
+##  [81] &quot;odd&quot;         &quot;of&quot;          &quot;off&quot;         &quot;offer&quot;       &quot;often&quot;      
+##  [86] &quot;old&quot;         &quot;on&quot;          &quot;open&quot;        &quot;or&quot;          &quot;order&quot;      
+##  [91] &quot;original&quot;    &quot;other&quot;       &quot;ought&quot;       &quot;out&quot;         &quot;over&quot;       
+##  [96] &quot;own&quot;         &quot;under&quot;       &quot;understand&quot;  &quot;union&quot;       &quot;unit&quot;       
+## [101] &quot;unless&quot;      &quot;until&quot;       &quot;up&quot;          &quot;upon&quot;        &quot;usual&quot;</code></pre>
+<p>Counted <code>y</code> as a vowel if ending with, but not to start. This does not work perfect. For example words like <code>ygritte</code> would still be included even though <code>y</code> is activng as a vowel there whereas words like <code>boy</code> would be excluded even though acting as a consonant there. From here on out I am going to always exclude <code>y</code>.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><em>Are there any words that contain at least one of each different</em>
+<em>vowel?</em></li>
+</ol>
+<div class="sourceCode" id="cb713"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb713-1" title="1">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)</a>
+<a class="sourceLine" id="cb713-2" title="2">words[<span class="kw">str_detect</span>(words, <span class="st">&quot;a&quot;</span>) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb713-3" title="3"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;e&quot;</span>) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb713-4" title="4"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;i&quot;</span>) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb713-5" title="5"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;o&quot;</span>) <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb713-6" title="6"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;u&quot;</span>)]</a></code></pre></div>
+<pre><code>## character(0)</code></pre>
+<p>No. More elgant way of doing this using iteration methods we’ll learn later is below.</p>
+<div class="sourceCode" id="cb715"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb715-1" title="1">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)</a>
+<a class="sourceLine" id="cb715-2" title="2"></a>
+<a class="sourceLine" id="cb715-3" title="3"><span class="kw">tibble</span>(<span class="dt">vowels =</span> vowels, <span class="dt">words =</span> <span class="kw">list</span>(words)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb715-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">detect_vowels =</span> purrr<span class="op">::</span><span class="kw">map2</span>(words, vowels, str_detect)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb715-5" title="5"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> vowels, <span class="dt">value =</span> detect_vowels) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb715-6" title="6"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb715-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">unique_vowels =</span> <span class="kw">rowSums</span>(.[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb715-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(unique_vowels))</a></code></pre></div>
+<pre><code>## # A tibble: 980 x 7
+##    words       a     e     i     o     u     unique_vowels
+##    &lt;chr&gt;       &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;         &lt;dbl&gt;
+##  1 absolute    TRUE  TRUE  FALSE TRUE  TRUE              4
+##  2 appropriate TRUE  TRUE  TRUE  TRUE  FALSE             4
+##  3 associate   TRUE  TRUE  TRUE  TRUE  FALSE             4
+##  4 authority   TRUE  FALSE TRUE  TRUE  TRUE              4
+##  5 colleague   TRUE  TRUE  FALSE TRUE  TRUE              4
+##  6 continue    FALSE TRUE  TRUE  TRUE  TRUE              4
+##  7 encourage   TRUE  TRUE  FALSE TRUE  TRUE              4
+##  8 introduce   FALSE TRUE  TRUE  TRUE  TRUE              4
+##  9 organize    TRUE  TRUE  TRUE  TRUE  FALSE             4
+## 10 previous    FALSE TRUE  TRUE  TRUE  TRUE              4
+## # ... with 970 more rows</code></pre>
+<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1"><span class="co">#seems that nothing gets over 4</span></a></code></pre></div></li>
+<li><p><em>What word has the highest number of vowels? What word has the highest</em>
+<em>proportion of vowels? (Hint: what is the denominator?)</em></p>
+<div class="sourceCode" id="cb718"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb718-1" title="1">vowel_counts &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">words =</span> words, </a>
+<a class="sourceLine" id="cb718-2" title="2">                       <span class="dt">n_string =</span> <span class="kw">str_length</span>(words),</a>
+<a class="sourceLine" id="cb718-3" title="3">                       <span class="dt">n_vowel =</span> <span class="kw">str_count</span>(words, vowels),</a>
+<a class="sourceLine" id="cb718-4" title="4">                       <span class="dt">prop_vowel =</span> n_vowel <span class="op">/</span><span class="st"> </span>n_string)</a></code></pre></div>
+<p>‘Experience’ has the most vowels</p>
+<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb719-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n_vowel))</a></code></pre></div>
+<pre><code>## # A tibble: 980 x 4
+##    words      n_string n_vowel prop_vowel
+##    &lt;chr&gt;         &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;
+##  1 experience       10       4      0.4  
+##  2 individual       10       3      0.3  
+##  3 achieve           7       2      0.286
+##  4 actual            6       2      0.333
+##  5 afternoon         9       2      0.222
+##  6 against           7       2      0.286
+##  7 already           7       2      0.286
+##  8 america           7       2      0.286
+##  9 benefit           7       2      0.286
+## 10 choose            6       2      0.333
+## # ... with 970 more rows</code></pre>
+<p>‘a’ has the highest proportion</p>
+<div class="sourceCode" id="cb721"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb721-1" title="1">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb721-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(prop_vowel))</a></code></pre></div>
+<pre><code>## # A tibble: 980 x 4
+##    words n_string n_vowel prop_vowel
+##    &lt;chr&gt;    &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;
+##  1 a            1       1      1    
+##  2 too          3       2      0.667
+##  3 wee          3       2      0.667
+##  4 feed         4       2      0.5  
+##  5 in           2       1      0.5  
+##  6 look         4       2      0.5  
+##  7 need         4       2      0.5  
+##  8 room         4       2      0.5  
+##  9 so           2       1      0.5  
+## 10 soon         4       2      0.5  
+## # ... with 970 more rows</code></pre></li>
+</ol>
+</div>
+<div id="section-47" class="section level3">
+<h3><span class="header-section-number">13.3.2</span> 14.4.3.1</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>In the previous example, you might have noticed that the regular</em>
+<em>expression matched “flickered”, which is not a colour. Modify the </em>
+<em>regex to fix the problem.</em></p></li>
+<li><p><em>From the Harvard sentences data, extract:</em></p>
+<ol style="list-style-type: decimal">
+<li><em>The first word from each sentence.</em></li>
+</ol>
+<div class="sourceCode" id="cb723"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb723-1" title="1"><span class="kw">str_extract</span>(sentences, <span class="st">&quot;[A-z]*&quot;</span>)</a></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li><em>All words ending in <code>ing</code>.</em></li>
+</ol>
+<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" title="1"><span class="co">#ends in &quot;ing&quot; or &quot;ing.&quot;</span></a>
+<a class="sourceLine" id="cb724-2" title="2">sent_ing &lt;-<span class="st"> </span><span class="kw">str_subset</span>(sentences, <span class="st">&quot;.*ing(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>)  </a>
+<a class="sourceLine" id="cb724-3" title="3"><span class="kw">str_extract_all</span>(sent_ing, <span class="st">&quot;[A-z]+ing&quot;</span>, <span class="dt">simplify=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li><em>All plurals.</em></li>
+</ol>
+<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb725-1" title="1"><span class="kw">str_subset</span>(sentences, <span class="st">&quot;[A-z]*s(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#take all sentences that have a word ending in s</span></a>
+<a class="sourceLine" id="cb725-2" title="2"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="st">&quot;[A-z]*s</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb725-3" title="3"><span class="st">  </span>.[<span class="kw">str_length</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>] <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#get rid of the short words</span></a>
+<a class="sourceLine" id="cb725-4" title="4"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^s]s$&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#get rid of words ending in &#39;ss&#39;</span></a>
+<a class="sourceLine" id="cb725-5" title="5"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^i]s$&quot;</span>)  <span class="co">#get rid of &#39;this&#39;</span></a></code></pre></div></li>
+</ol>
+</div>
+<div id="section-48" class="section level3">
+<h3><span class="header-section-number">13.3.3</span> 14.4.4.1</h3>
+<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" title="1">noun &lt;-<span class="st"> &quot;(a|the) ([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span></a>
+<a class="sourceLine" id="cb726-2" title="2"></a>
+<a class="sourceLine" id="cb726-3" title="3">has_noun &lt;-<span class="st"> </span>sentences <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb726-4" title="4"><span class="st">  </span><span class="kw">str_subset</span>(noun) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb726-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>) </a>
+<a class="sourceLine" id="cb726-6" title="6"></a>
+<a class="sourceLine" id="cb726-7" title="7">has_noun <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb726-8" title="8"><span class="st">  </span><span class="kw">str_extract_all</span>(noun, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb726-9" title="9"></a>
+<a class="sourceLine" id="cb726-10" title="10"><span class="co">#creates split into seperate pieces</span></a>
+<a class="sourceLine" id="cb726-11" title="11">has_noun <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb726-12" title="12"><span class="st">  </span><span class="kw">str_match_all</span>(noun)</a>
+<a class="sourceLine" id="cb726-13" title="13"></a>
+<a class="sourceLine" id="cb726-14" title="14"><span class="co">#Can make dataframe with, but need to name all</span></a>
+<a class="sourceLine" id="cb726-15" title="15"><span class="kw">tibble</span>(<span class="dt">has_noun =</span> has_noun) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb726-16" title="16"><span class="st">  </span><span class="kw">extract</span>(has_noun, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;article&quot;</span>, <span class="st">&quot;noun&quot;</span>), <span class="dt">regex =</span> noun)</a></code></pre></div>
+<ol style="list-style-type: decimal">
+<li><p><em>Find all words that come after a “number” like “one”, “two”, “three” etc.</em>
+<em>Pull out both the number and the word.</em></p>
+<div class="sourceCode" id="cb727"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb727-1" title="1"><span class="co">#Create regex expression</span></a>
+<a class="sourceLine" id="cb727-2" title="2">nums &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;nine&quot;</span>)</a>
+<a class="sourceLine" id="cb727-3" title="3">nums &lt;-<span class="st"> </span><span class="kw">str_c</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">b&quot;</span>, nums)</a>
+<a class="sourceLine" id="cb727-4" title="4">nums_c &lt;-<span class="st"> </span><span class="kw">str_c</span>(nums, <span class="dt">collapse =</span> <span class="st">&quot;|&quot;</span>)</a>
+<a class="sourceLine" id="cb727-5" title="5">re &lt;-<span class="st"> </span><span class="kw">str_c</span>(<span class="st">&quot;(&quot;</span>,nums_c,<span class="st">&quot;)&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb727-6" title="6">re</a>
+<a class="sourceLine" id="cb727-7" title="7"></a>
+<a class="sourceLine" id="cb727-8" title="8">sentences_with_nums &lt;-<span class="st"> </span>sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb727-9" title="9"><span class="st">  </span><span class="kw">str_subset</span>(<span class="kw">regex</span>(re, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb727-10" title="10"></a>
+<a class="sourceLine" id="cb727-11" title="11"><span class="co">#SAME THING, but in a DF</span></a>
+<a class="sourceLine" id="cb727-12" title="12"><span class="kw">tibble</span>(<span class="dt">sentences_var =</span> sentences_with_nums) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb727-13" title="13"><span class="st">  </span><span class="kw">extract</span>(sentences_var, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;num&quot;</span>, <span class="st">&quot;following&quot;</span>), <span class="dt">regex =</span> re, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div></li>
+<li><p><em>Find all contractions. Separate out the pieces before and after the </em>
+<em>apostrophe.</em></p>
+<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" title="1">contr &lt;-<span class="st"> &quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&#39;([^ </span><span class="ch">\\</span><span class="st">.]*)&quot;</span>  <span class="co">#note the () facilitate the split with functions</span></a>
+<a class="sourceLine" id="cb728-2" title="2">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb728-3" title="3"><span class="st">  </span><span class="kw">str_subset</span>(contr) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#note the improvement this word definition is to the above [^ ]+ </span></a>
+<a class="sourceLine" id="cb728-4" title="4"><span class="st">  </span><span class="kw">str_match_all</span>(contr)</a></code></pre></div></li>
+</ol>
+</div>
+<div id="section-49" class="section level3">
+<h3><span class="header-section-number">13.3.4</span> 14.4.5.1</h3>
+<ol style="list-style-type: decimal">
+<li><em>Replace all forward slashes in a string with backslashes.</em></li>
+</ol>
+<pre><code>```r
+x &lt;- c(&quot;test/dklsk/&quot;)
+str_replace_all(x, &quot;/&quot;, &quot;\\\\&quot;) %&gt;% 
+  writeLines()
+```
+
+```
+## test\dklsk\
+```</code></pre>
+<ol style="list-style-type: decimal">
+<li><em>Implement a simple version of <code>str_to_lower()</code> using <code>replace_all()</code>.</em></li>
+</ol>
+<pre><code>```r
+x &lt;- c(&quot;BIdklsKOS&quot;)
+str_replace_all(x, &quot;([A-Z])&quot;, tolower)
+```
+
+```
+## [1] &quot;bidklskos&quot;
+```</code></pre>
+<ol style="list-style-type: decimal">
+<li><em>Switch the first and last letters in <code>words</code>. Which of those strings</em>
+<em>are still words?</em></li>
+</ol>
+<pre><code>```r
+str_replace(words, &quot;(^.)(.*)(.$)&quot;, &quot;\\3\\2\\1&quot;)
+```
+
+Any words that start and end with the same letter, e.g. &#39;treat&#39;, as well as a few other examples like, war --&gt; raw .</code></pre>
+</div>
+<div id="section-50" class="section level3">
+<h3><span class="header-section-number">13.3.5</span> 14.4.6.1</h3>
+<p>When using <code>boundary()</code> with <code>str_split</code> can set to “character”, “line”, “sentence”, and “word” and gives alternative to splitting by pattern.</p>
+<ol style="list-style-type: decimal">
+<li><p><em>Split up a string like <code>"apples, pears, and bananas"</code> into individual</em>
+<em>components.</em></p>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb732-1" title="1">x &lt;-<span class="st"> &quot;apples, pears, and bananas&quot;</span></a>
+<a class="sourceLine" id="cb732-2" title="2"><span class="kw">str_split</span>(x, <span class="st">&quot;,* &quot;</span>)  <span class="co">#note that regular expression works to handle commas as well</span></a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;apples&quot;  &quot;pears&quot;   &quot;and&quot;     &quot;bananas&quot;</code></pre></li>
+<li><p><em>Why is it better to split up by <code>boundary("word")</code> than <code>" "</code>?</em></p>
+<p>Handles commas and punctuation, I though still would prefer to use patterns where possible over <code>boundary</code> function. regex is more generally applicabale as well outside of R.</p>
+<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" title="1"><span class="kw">str_split</span>(x, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>))</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] &quot;apples&quot;  &quot;pears&quot;   &quot;and&quot;     &quot;bananas&quot;</code></pre></li>
+<li><p><em>What does splitting with an empty string (<code>""</code>) do? Experiment, and</em>
+<em>then read the documentation.</em>
+Splitting by an empty string splits up each character.</p>
+<div class="sourceCode" id="cb736"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb736-1" title="1"><span class="kw">str_split</span>(x,<span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<pre><code>## [[1]]
+##  [1] &quot;a&quot; &quot;p&quot; &quot;p&quot; &quot;l&quot; &quot;e&quot; &quot;s&quot; &quot;,&quot; &quot; &quot; &quot;p&quot; &quot;e&quot; &quot;a&quot; &quot;r&quot; &quot;s&quot; &quot;,&quot; &quot; &quot; &quot;a&quot; &quot;n&quot;
+## [18] &quot;d&quot; &quot; &quot; &quot;b&quot; &quot;a&quot; &quot;n&quot; &quot;a&quot; &quot;n&quot; &quot;a&quot; &quot;s&quot;</code></pre></li>
+</ol>
+</div>
+</div>
+<div id="other-types-of-patterns" class="section level2">
+<h2><span class="header-section-number">13.4</span> 14.5: Other types of patterns</h2>
+<p><code>regex</code> args to know:</p>
+<ul>
+<li><code>ignore_case = TRUE</code> allows characters to match either their uppercase or
+lowercase forms. This always uses the current locale.</li>
+<li><code>multiline = TRUE</code> allows <code>^</code> and <code>$</code> to match the start and end of each
+line rather than the start and end of the complete string.</li>
+<li><code>comments = TRUE</code> allows you to use comments and white space to make
+complex regular expressions more understandable. Spaces are ignored, as is
+everything after <code>#</code>. To match a literal space, you’ll need to escape it:
+<code>"\\ "</code>.</li>
+<li><code>dotall = TRUE</code> allows <code>.</code> to match everything, including <code>\n</code>.</li>
+</ul>
+<p>Alternatives to <code>regex()</code>:
+* <code>fixed()</code>: matches exactly the specified sequence of bytes. It ignores
+all special regular expressions and operates at a very low level.
+This allows you to avoid complex escaping and can be much faster than
+regular expressions.
+* <code>coll()</code>: compare strings using standard <strong>coll</strong>ation rules. This is
+useful for doing case insensitive matching. Note that <code>coll()</code> takes a
+<code>locale</code> parameter that controls which rules are used for comparing
+characters.</p>
+<div id="section-51" class="section level3">
+<h3><span class="header-section-number">13.4.1</span> 14.5.1</h3>
+<ol style="list-style-type: decimal">
+<li><p><em>How would you find all strings containing <code>\</code> with <code>regex()</code> vs.</em>
+<em>with <code>fixed()</code>?</em>
+would be <code>\\</code> instead of <code>\\\\</code></p>
+<div class="sourceCode" id="cb738"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb738-1" title="1"><span class="kw">str_view_all</span>(<span class="st">&quot;so </span><span class="ch">\\</span><span class="st"> the party is on</span><span class="ch">\\</span><span class="st"> right?&quot;</span>, <span class="kw">fixed</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>))</a></code></pre></div>
+<div id="htmlwidget-94326758239f0282bfa7" style="width:960px;height:100%;" class="str_view html-widget"></div>
+    <script type="application/json" data-for="htmlwidget-94326758239f0282bfa7">{"x":{"html":"<ul>\n  <li>so <span class='match'>\\<\/span> the party is on<span class='match'>\\<\/span> right?<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
+<li><p><em>What are the five most common words in <code>sentences</code>?</em></p>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb739-1" title="1"><span class="kw">str_extract_all</span>(sentences, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>), <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-3" title="3"><span class="st">  </span><span class="kw">gather</span>(V1<span class="op">:</span>V12, <span class="dt">value =</span> <span class="st">&quot;words&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;order&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">words =</span> <span class="kw">str_to_lower</span>(words)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>words <span class="op">==</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-6" title="6"><span class="st">  </span><span class="kw">count</span>(words, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb739-7" title="7"><span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</a></code></pre></div>
+<pre><code>## Warning: `as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.
+## This warning is displayed once per session.</code></pre>
+<pre><code>## # A tibble: 5 x 2
+##   words     n
+##   &lt;chr&gt; &lt;int&gt;
+## 1 the     751
+## 2 a       202
+## 3 of      132
+## 4 to      123
+## 5 and     118</code></pre></li>
+</ol>
+</div>
+<div id="section-52" class="section level3">
+<h3><span class="header-section-number">13.4.2</span> 14.7.1</h3>
+<p>Other functions:
+<code>apropos</code> searches all objects available from the global environment–useful if you can’t remember fun name. E.g. below checks those that start with <code>replace</code> and then those that start with <code>str</code>, but not <code>stri</code></p>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb742-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(replace)&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;replace&quot;    &quot;replace_na&quot;</code></pre>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(str)[^i]&quot;</span>)</a></code></pre></div>
+<pre><code>##  [1] &quot;str_c&quot;           &quot;str_conv&quot;        &quot;str_count&quot;      
+##  [4] &quot;str_detect&quot;      &quot;str_dup&quot;         &quot;str_extract&quot;    
+##  [7] &quot;str_extract_all&quot; &quot;str_flatten&quot;     &quot;str_glue&quot;       
+## [10] &quot;str_glue_data&quot;   &quot;str_interp&quot;      &quot;str_length&quot;     
+## [13] &quot;str_locate&quot;      &quot;str_locate_all&quot;  &quot;str_match&quot;      
+## [16] &quot;str_match_all&quot;   &quot;str_order&quot;       &quot;str_pad&quot;        
+## [19] &quot;str_remove&quot;      &quot;str_remove_all&quot;  &quot;str_replace&quot;    
+## [22] &quot;str_replace_all&quot; &quot;str_replace_na&quot;  &quot;str_sort&quot;       
+## [25] &quot;str_split&quot;       &quot;str_split_fixed&quot; &quot;str_squish&quot;     
+## [28] &quot;str_sub&quot;         &quot;str_sub&lt;-&quot;       &quot;str_subset&quot;     
+## [31] &quot;str_to_lower&quot;    &quot;str_to_title&quot;    &quot;str_to_upper&quot;   
+## [34] &quot;str_trim&quot;        &quot;str_trunc&quot;       &quot;str_view&quot;       
+## [37] &quot;str_view_all&quot;    &quot;str_which&quot;       &quot;str_wrap&quot;       
+## [40] &quot;strcapture&quot;      &quot;strftime&quot;        &quot;strheight&quot;      
+## [43] &quot;strOptions&quot;      &quot;strptime&quot;        &quot;strrep&quot;         
+## [46] &quot;strsplit&quot;        &quot;strtoi&quot;          &quot;strtrim&quot;        
+## [49] &quot;StructTS&quot;        &quot;structure&quot;       &quot;strwidth&quot;       
+## [52] &quot;strwrap&quot;</code></pre>
+<ol style="list-style-type: decimal">
+<li><em>Find the stringi functions that:</em>
+<ol style="list-style-type: decimal">
+<li><em>Count the number of words.</em> – <code>stri_count</code></li>
+<li><em>Find duplicated strings.</em> – <code>stri_duplicated</code></li>
+<li><em>Generate random text.</em> – <code>str_rand_strings</code></li>
+</ol></li>
+<li><p><em>How do you control the language that <code>stri_sort()</code> uses for </em>
+<em>sorting?</em></p>
+<p><code>decreasing =</code></p></li>
+</ol>
+
+<p><em>Make sure the following packages are installed:</em></p>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-13-relational-data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ch-15-factors.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
