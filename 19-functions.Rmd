@@ -15,7 +15,7 @@ library(stringr)
 library(e1071)
 ```
 
-# ch. 19: Functions
+# Ch. 19: Functions
 
 * `function_name <- function(input1, input2) {}`
 * `if () {}`
@@ -550,12 +550,11 @@ mtcars %>%
 ```
 
 
-# Appendix
+## Appendix
 
-## 19.2.1.4
+### 19.2.1.4
 
-*Function for Standard Error* 
-
+*Function for Standard Error:* 
 
     ```{r}
     x <- c(5, -2, 8, 6, 9)
@@ -568,8 +567,7 @@ mtcars %>%
     sample_se(x)
     ```
 
-
-*Function for kurtosis*
+*Function for kurtosis:*
 ```{r}
 kurtosis_type3 <- function(x){
   sum((x - mean(x)) ^ 4) / length(x) / sd(x) ^ 4 - 3
@@ -592,15 +590,9 @@ hist(cauchy_exp)
 kurtosis_type3(norm_exp)
 
 kurtosis_type3(cauchy_exp)
-
 ```
 
-```{r}
-
-```
-
-
-## Changing values with indexes
+### Changing values with indexes
 
 *In this section I use the word 'indexes' to refer to any base R method for specifying position ^[I am using the word loosely to mean both either the situation when you specify postions by a series of `TRUE` / `FALSE` values or a series of numeric indexes E.g. x[c(TRUE, TRUE, FALSE, FALSE, TRUE)] or x[c(1, 2, 5)] , 'index' obviously sounds more like the later, but I mean it generally to cover just 'base R method of specifying positoin'.].
 
@@ -653,7 +645,6 @@ method_index <- function(vector = c(1:20)){
   
   x
 }
-
 ```
 
 *Measure time it takes to run: *
@@ -666,7 +657,7 @@ microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
 
 The index methods tends to be faster.
 
-### Applying indexing to dfs
+#### Applying indexing to dfs
 
 I have a high preference for using tidyverse style approaches when applying transformations to dataframes, though there are instances when it's easier to use indexing methods. A common example of this is say we want to replace all of the `NA` values across multiple columns in a dataframe.
 
@@ -710,7 +701,6 @@ df_na0_dplyr <- function(df){
 df_na0_purrr <- function(df){
   purrr::map_df(df, ~ifelse(is.na(.x), 0, .x))
 }
-
 ```
 
 *Measure time it takes to run: *  
@@ -736,20 +726,21 @@ You should see that the index and dplyr method are pretty consistent on time, wh
 
 I also wonder if there may be a better alternative to `ifelse` in this situation.
 
-## Better than `ifelse()`?
+### Better than `ifelse()`?
 
-I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style...
+I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style... 
 
 * I learned about dplyr's functions `dplyr::recode` which is similar to `forcats::fct_recode` and can be used for replacing multiple character values. 
 * `dplyr::case_when` can be used for more complex criteria
+* `dplyr::if_else` is similar to `base::ifelse` but more strict on types
 
-## Dplyr and functions
+### Dplyr and functions
 
 As was mentioned, dplyr uses non-standard evaluation. This means that when referring to column names form within a function, dplyr will require some slightly different syntax... I typically find ways around this by deploying tricks with the `*_` verbs or taking advantage of the `vars` functions and `*_at` or by messing with the names, though am interested to hear other methods...
 
 Say you want to write a function that takes in a dataframe and a list of column names and you want to return a sum of these into a new column with the name corresponding with the name of the spliced together columns. What would be the most elegant way of doing this with tidyverse style?
 
-## 19.2.3.5
+### 19.2.3.5
 
     ```{r, error = TRUE}
 
