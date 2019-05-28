@@ -1,8 +1,0 @@
-base
-ggplot2
-dplyr
-forcats
-tidyr
-lubridate
-stringr
-magrittr
