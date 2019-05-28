@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Another set of solutions and notes to ‘R for Data Science’</title>
+  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Another set of solutions and notes to ‘R for Data Science’" />
+  
+  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  
+
+<meta name="author" content="Bryan Shalloway">
+
+
+<meta name="date" content="2019-05-24">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="ch-18-pipes-notes-only-1.html">
+<link rel="next" href="appendix-16.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.8.0/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.39.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.39.2/plotly-latest.min.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.3.1/str_view.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Purpose of this book</a></li>
+<li class="chapter" data-level="2" data-path="features-of-this-book.html"><a href="features-of-this-book.html"><i class="fa fa-check"></i><b>2</b> Features of this book</a></li>
+<li class="chapter" data-level="3" data-path="origin-of-this-book.html"><a href="origin-of-this-book.html"><i class="fa fa-check"></i><b>3</b> Origin of this book</a></li>
+<li class="chapter" data-level="4" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html"><i class="fa fa-check"></i><b>4</b> Plug for R4DS</a><ul>
+<li class="chapter" data-level="4.1" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#plug-for-r4ds-1"><i class="fa fa-check"></i><b>4.1</b> Plug for R4DS</a></li>
+<li class="chapter" data-level="4.2" data-path="plug-for-r4ds.html"><a href="plug-for-r4ds.html#acknowledgements"><i class="fa fa-check"></i><b>4.2</b> Acknowledgements</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="chapter-3.html"><a href="chapter-3.html"><i class="fa fa-check"></i><b>5</b> Chapter 3</a><ul>
+<li class="chapter" data-level="5.1" data-path="chapter-3.html"><a href="chapter-3.html#first-steps"><i class="fa fa-check"></i><b>5.1</b> 3.2: First steps</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="chapter-3.html"><a href="chapter-3.html#section"><i class="fa fa-check"></i><b>5.1.1</b> 3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="chapter-3.html"><a href="chapter-3.html#aesthetic-mappings"><i class="fa fa-check"></i><b>5.2</b> 3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="chapter-3.html"><a href="chapter-3.html#section-1"><i class="fa fa-check"></i><b>5.2.1</b> 3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="chapter-3.html"><a href="chapter-3.html#facets"><i class="fa fa-check"></i><b>5.3</b> 3.5: Facets</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="chapter-3.html"><a href="chapter-3.html#section-2"><i class="fa fa-check"></i><b>5.3.1</b> 3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="chapter-3.html"><a href="chapter-3.html#geometric-objects"><i class="fa fa-check"></i><b>5.4</b> 3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="chapter-3.html"><a href="chapter-3.html#section-3"><i class="fa fa-check"></i><b>5.4.1</b> 3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="chapter-3.html"><a href="chapter-3.html#statistical-transformations"><i class="fa fa-check"></i><b>5.5</b> 3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="5.5.1" data-path="chapter-3.html"><a href="chapter-3.html#section-4"><i class="fa fa-check"></i><b>5.5.1</b> 3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="chapter-3.html"><a href="chapter-3.html#position-adjjustment"><i class="fa fa-check"></i><b>5.6</b> 3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="chapter-3.html"><a href="chapter-3.html#section-5"><i class="fa fa-check"></i><b>5.6.1</b> 3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="chapter-3.html"><a href="chapter-3.html#coordinate-systems"><i class="fa fa-check"></i><b>5.7</b> 3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="chapter-3.html"><a href="chapter-3.html#section-6"><i class="fa fa-check"></i><b>5.7.1</b> 3.9.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="appendix.html"><a href="appendix.html"><i class="fa fa-check"></i><b>6</b> Appendix</a><ul>
+<li class="chapter" data-level="6.1" data-path="appendix.html"><a href="appendix.html#extension"><i class="fa fa-check"></i><b>6.1</b> 3.7.1.1 extension</a></li>
+<li class="chapter" data-level="6.2" data-path="appendix.html"><a href="appendix.html#position-adustments"><i class="fa fa-check"></i><b>6.2</b> 3.8: Position adustments</a></li>
+<li class="chapter" data-level="6.3" data-path="appendix.html"><a href="appendix.html#coordinate-systems-1"><i class="fa fa-check"></i><b>6.3</b> 3.9: Coordinate systems</a></li>
+<li class="chapter" data-level="6.4" data-path="appendix.html"><a href="appendix.html#add-in-table-of-contents-and-other-details"><i class="fa fa-check"></i><b>6.4</b> add in table of contents and other details…</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="ch-5.html"><a href="ch-5.html"><i class="fa fa-check"></i><b>7</b> ch. 5</a><ul>
+<li class="chapter" data-level="7.1" data-path="ch-5.html"><a href="ch-5.html#filter-rows"><i class="fa fa-check"></i><b>7.1</b> 5.2: Filter rows</a></li>
+<li class="chapter" data-level="7.2" data-path="ch-5.html"><a href="ch-5.html#section-7"><i class="fa fa-check"></i><b>7.2</b> 5.2.4.</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="ch-5.html"><a href="ch-5.html#section-8"><i class="fa fa-check"></i><b>7.2.1</b> 5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="ch-5.html"><a href="ch-5.html#grouped-summaries"><i class="fa fa-check"></i><b>7.3</b> 5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="ch-5.html"><a href="ch-5.html#section-9"><i class="fa fa-check"></i><b>7.3.1</b> 5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="ch-5.html"><a href="ch-5.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>7.4</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="ch-5.html"><a href="ch-5.html#section-10"><i class="fa fa-check"></i><b>7.4.1</b> 5.7.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="appendix-1.html"><a href="appendix-1.html"><i class="fa fa-check"></i><b>8</b> Appendix</a><ul>
+<li class="chapter" data-level="8.1" data-path="appendix-1.html"><a href="appendix-1.html#section-11"><i class="fa fa-check"></i><b>8.1</b> 5.4.1.3.</a></li>
+<li class="chapter" data-level="8.2" data-path="appendix-1.html"><a href="appendix-1.html#section-12"><i class="fa fa-check"></i><b>8.2</b> 5.5.2.1.</a></li>
+<li class="chapter" data-level="8.3" data-path="appendix-1.html"><a href="appendix-1.html#section-13"><i class="fa fa-check"></i><b>8.3</b> 5.5.2.2</a><ul>
+<li class="chapter" data-level="8.3.1" data-path="appendix-1.html"><a href="appendix-1.html#closer-look-at-air_time"><i class="fa fa-check"></i><b>8.3.1</b> Closer look at <code>air_time</code></a></li>
+<li class="chapter" data-level="8.3.2" data-path="appendix-1.html"><a href="appendix-1.html#other-plots-with-air_time"><i class="fa fa-check"></i><b>8.3.2</b> Other plots with <code>air_time</code></a></li>
+</ul></li>
+<li class="chapter" data-level="8.4" data-path="appendix-1.html"><a href="appendix-1.html#section-14"><i class="fa fa-check"></i><b>8.4</b> 5.6.7.1.</a></li>
+<li class="chapter" data-level="8.5" data-path="appendix-1.html"><a href="appendix-1.html#section-15"><i class="fa fa-check"></i><b>8.5</b> 5.6.7.4.</a></li>
+<li class="chapter" data-level="8.6" data-path="appendix-1.html"><a href="appendix-1.html#section-16"><i class="fa fa-check"></i><b>8.6</b> 5.6.7.5.</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="appendix-1.html"><a href="appendix-1.html#modeling-approach"><i class="fa fa-check"></i><b>8.6.1</b> Modeling approach</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="appendix-1.html"><a href="appendix-1.html#section-17"><i class="fa fa-check"></i><b>8.7</b> 5.6.7.6.</a></li>
+<li class="chapter" data-level="8.8" data-path="appendix-1.html"><a href="appendix-1.html#section-18"><i class="fa fa-check"></i><b>8.8</b> 5.7.1.6.</a></li>
+<li class="chapter" data-level="8.9" data-path="appendix-1.html"><a href="appendix-1.html#section-19"><i class="fa fa-check"></i><b>8.9</b> 5.7.1.5</a></li>
+<li class="chapter" data-level="8.10" data-path="appendix-1.html"><a href="appendix-1.html#section-20"><i class="fa fa-check"></i><b>8.10</b> 5.7.1.8.</a></li>
+<li class="chapter" data-level="8.11" data-path="appendix-1.html"><a href="appendix-1.html#other"><i class="fa fa-check"></i><b>8.11</b> Other</a><ul>
+<li class="chapter" data-level="8.11.1" data-path="appendix-1.html"><a href="appendix-1.html#on-piping-dots"><i class="fa fa-check"></i><b>8.11.1</b> On piping dots</a></li>
+</ul></li>
+<li class="chapter" data-level="8.12" data-path="appendix-1.html"><a href="appendix-1.html#plotly"><i class="fa fa-check"></i><b>8.12</b> plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html"><i class="fa fa-check"></i><b>9</b> ch. 7, data exploration</a><ul>
+<li class="chapter" data-level="9.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#variation"><i class="fa fa-check"></i><b>9.1</b> 7.3. Variation</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-21"><i class="fa fa-check"></i><b>9.1.1</b> 7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#missing-values"><i class="fa fa-check"></i><b>9.2</b> 7.4. Missing values</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-22"><i class="fa fa-check"></i><b>9.2.1</b> 7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.3" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#covariation"><i class="fa fa-check"></i><b>9.3</b> 7.5. Covariation</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-23"><i class="fa fa-check"></i><b>9.3.1</b> 7.5.1.1.</a></li>
+<li class="chapter" data-level="9.3.2" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-24"><i class="fa fa-check"></i><b>9.3.2</b> 7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="9.4" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#two-continuous-variables"><i class="fa fa-check"></i><b>9.4</b> 7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="ch-7-data-exploration.html"><a href="ch-7-data-exploration.html#section-25"><i class="fa fa-check"></i><b>9.4.1</b> 7.5.3.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="appendix-2.html"><a href="appendix-2.html"><i class="fa fa-check"></i><b>10</b> Appendix</a><ul>
+<li class="chapter" data-level="10.1" data-path="appendix-2.html"><a href="appendix-2.html#section-26"><i class="fa fa-check"></i><b>10.1</b> 7.5.2.1.2.</a></li>
+<li class="chapter" data-level="10.2" data-path="appendix-2.html"><a href="appendix-2.html#section-27"><i class="fa fa-check"></i><b>10.2</b> 7.5.3.1.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html"><i class="fa fa-check"></i><b>11</b> ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="11.1" data-path="ch-10-tibbles.html"><a href="ch-10-tibbles.html#section-28"><i class="fa fa-check"></i><b>11.1</b> 10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html"><i class="fa fa-check"></i><b>12</b> ch. 11: Data import</a><ul>
+<li class="chapter" data-level="12.1" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-29"><i class="fa fa-check"></i><b>12.1</b> 11.2.2.</a></li>
+<li class="chapter" data-level="12.2" data-path="ch-11-data-import.html"><a href="ch-11-data-import.html#section-30"><i class="fa fa-check"></i><b>12.2</b> 11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html"><i class="fa fa-check"></i><b>13</b> ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="13.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#tidy-data"><i class="fa fa-check"></i><b>13.1</b> 12.2: Tidy data</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-31"><i class="fa fa-check"></i><b>13.1.1</b> 12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="13.2" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i><b>13.2</b> 12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-32"><i class="fa fa-check"></i><b>13.2.1</b> 12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>13.3</b> 12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-33"><i class="fa fa-check"></i><b>13.3.1</b> 12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#missing-values-1"><i class="fa fa-check"></i><b>13.4</b> 12.5: missing values</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-34"><i class="fa fa-check"></i><b>13.4.1</b> 12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#case-study"><i class="fa fa-check"></i><b>13.5</b> 12.6 Case Study</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="ch-12-tidy-data.html"><a href="ch-12-tidy-data.html#section-35"><i class="fa fa-check"></i><b>13.5.1</b> 12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html"><i class="fa fa-check"></i><b>14</b> ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="14.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#nycflights13"><i class="fa fa-check"></i><b>14.1</b> 13.2 nycflights13</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-36"><i class="fa fa-check"></i><b>14.1.1</b> 13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#keys"><i class="fa fa-check"></i><b>14.2</b> 13.3 Keys</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-37"><i class="fa fa-check"></i><b>14.2.1</b> 13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>14.3</b> 13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-38"><i class="fa fa-check"></i><b>14.3.1</b> 13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>14.4</b> 13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="ch-13-relational-data.html"><a href="ch-13-relational-data.html#section-39"><i class="fa fa-check"></i><b>14.4.1</b> 13.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="ch-14-strings.html"><a href="ch-14-strings.html"><i class="fa fa-check"></i><b>15</b> ch. 14: Strings</a><ul>
+<li class="chapter" data-level="15.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#string-basics"><i class="fa fa-check"></i><b>15.1</b> 14.2: String basics</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-40"><i class="fa fa-check"></i><b>15.1.1</b> 14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#matching-patterns-w-regex"><i class="fa fa-check"></i><b>15.2</b> 14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-41"><i class="fa fa-check"></i><b>15.2.1</b> 14.3.1.1</a></li>
+<li class="chapter" data-level="15.2.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-42"><i class="fa fa-check"></i><b>15.2.2</b> 14.3.2.1</a></li>
+<li class="chapter" data-level="15.2.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-43"><i class="fa fa-check"></i><b>15.2.3</b> 14.3.3.1</a></li>
+<li class="chapter" data-level="15.2.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-44"><i class="fa fa-check"></i><b>15.2.4</b> 14.3.4.1</a></li>
+<li class="chapter" data-level="15.2.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-45"><i class="fa fa-check"></i><b>15.2.5</b> 14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#tools"><i class="fa fa-check"></i><b>15.3</b> 14.4 Tools</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-46"><i class="fa fa-check"></i><b>15.3.1</b> 14.4.2</a></li>
+<li class="chapter" data-level="15.3.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-47"><i class="fa fa-check"></i><b>15.3.2</b> 14.4.3.1</a></li>
+<li class="chapter" data-level="15.3.3" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-48"><i class="fa fa-check"></i><b>15.3.3</b> 14.4.4.1</a></li>
+<li class="chapter" data-level="15.3.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-49"><i class="fa fa-check"></i><b>15.3.4</b> 14.4.5.1</a></li>
+<li class="chapter" data-level="15.3.5" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-50"><i class="fa fa-check"></i><b>15.3.5</b> 14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="ch-14-strings.html"><a href="ch-14-strings.html#other-types-of-patterns"><i class="fa fa-check"></i><b>15.4</b> 14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="15.4.1" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-51"><i class="fa fa-check"></i><b>15.4.1</b> 14.5.1</a></li>
+<li class="chapter" data-level="15.4.2" data-path="ch-14-strings.html"><a href="ch-14-strings.html#section-52"><i class="fa fa-check"></i><b>15.4.2</b> 14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="ch-15-factors.html"><a href="ch-15-factors.html"><i class="fa fa-check"></i><b>16</b> ch. 15: Factors</a><ul>
+<li class="chapter" data-level="16.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>16.1</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-53"><i class="fa fa-check"></i><b>16.1.1</b> 15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-order-1"><i class="fa fa-check"></i><b>16.2</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-54"><i class="fa fa-check"></i><b>16.2.1</b> 15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="ch-15-factors.html"><a href="ch-15-factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>16.3</b> 15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="ch-15-factors.html"><a href="ch-15-factors.html#section-55"><i class="fa fa-check"></i><b>16.3.1</b> 15.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="17" data-path="appendix-3.html"><a href="appendix-3.html"><i class="fa fa-check"></i><b>17</b> Appendix</a><ul>
+<li class="chapter" data-level="17.1" data-path="appendix-3.html"><a href="appendix-3.html#viewing-all-levels"><i class="fa fa-check"></i><b>17.1</b> Viewing all levels</a></li>
+<li class="chapter" data-level="17.2" data-path="appendix-3.html"><a href="appendix-3.html#percentage-na-each-level"><i class="fa fa-check"></i><b>17.2</b> Percentage NA each level</a></li>
+<li class="chapter" data-level="17.3" data-path="appendix-3.html"><a href="appendix-3.html#print-all-levels-of-tibble"><i class="fa fa-check"></i><b>17.3</b> Print all levels of tibble</a></li>
+</ul></li>
+<li class="chapter" data-level="18" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html"><i class="fa fa-check"></i><b>18</b> ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="18.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>18.1</b> 16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="18.1.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-56"><i class="fa fa-check"></i><b>18.1.1</b> 16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="18.2" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>18.2</b> 16.3: Date-time components</a><ul>
+<li class="chapter" data-level="18.2.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-57"><i class="fa fa-check"></i><b>18.2.1</b> 16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="18.3" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#time-spans"><i class="fa fa-check"></i><b>18.3</b> 16.4: Time spans</a><ul>
+<li class="chapter" data-level="18.3.1" data-path="ch-16-dates-and-times.html"><a href="ch-16-dates-and-times.html#section-58"><i class="fa fa-check"></i><b>18.3.1</b> 16.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="19" data-path="appendix-4.html"><a href="appendix-4.html"><i class="fa fa-check"></i><b>19</b> Appendix</a><ul>
+<li class="chapter" data-level="19.1" data-path="appendix-4.html"><a href="appendix-4.html#section-59"><i class="fa fa-check"></i><b>19.1</b> 16.3.4.1</a></li>
+<li class="chapter" data-level="19.2" data-path="appendix-4.html"><a href="appendix-4.html#section-60"><i class="fa fa-check"></i><b>19.2</b> 16.3.4.3</a></li>
+<li class="chapter" data-level="19.3" data-path="appendix-4.html"><a href="appendix-4.html#section-61"><i class="fa fa-check"></i><b>19.3</b> 16.3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="ch-18-pipes-notes-only.html"><a href="ch-18-pipes-notes-only.html"><i class="fa fa-check"></i><b>20</b> ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="21" data-path="ch-19-functions.html"><a href="ch-19-functions.html"><i class="fa fa-check"></i><b>21</b> ch. 19: Functions</a><ul>
+<li class="chapter" data-level="21.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i><b>21.1</b> 19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="21.1.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-62"><i class="fa fa-check"></i><b>21.1.1</b> 19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="21.2" data-path="ch-19-functions.html"><a href="ch-19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i><b>21.2</b> 19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-63"><i class="fa fa-check"></i><b>21.2.1</b> 19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="ch-19-functions.html"><a href="ch-19-functions.html#conditional-execution"><i class="fa fa-check"></i><b>21.3</b> 19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-64"><i class="fa fa-check"></i><b>21.3.1</b> 19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="ch-19-functions.html"><a href="ch-19-functions.html#function-arguments"><i class="fa fa-check"></i><b>21.4</b> 19.5: Function arguments</a><ul>
+<li class="chapter" data-level="21.4.1" data-path="ch-19-functions.html"><a href="ch-19-functions.html#section-65"><i class="fa fa-check"></i><b>21.4.1</b> 19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="ch-19-functions.html"><a href="ch-19-functions.html#return-values"><i class="fa fa-check"></i><b>21.5</b> 19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="22" data-path="appendix-5.html"><a href="appendix-5.html"><i class="fa fa-check"></i><b>22</b> Appendix</a><ul>
+<li class="chapter" data-level="22.1" data-path="appendix-5.html"><a href="appendix-5.html#section-66"><i class="fa fa-check"></i><b>22.1</b> 19.2.1.4</a></li>
+<li class="chapter" data-level="22.2" data-path="appendix-5.html"><a href="appendix-5.html#changing-values-with-indexes"><i class="fa fa-check"></i><b>22.2</b> Changing values with indexes</a><ul>
+<li class="chapter" data-level="22.2.1" data-path="appendix-5.html"><a href="appendix-5.html#applying-indexing-to-dfs"><i class="fa fa-check"></i><b>22.2.1</b> Applying indexing to dfs</a></li>
+</ul></li>
+<li class="chapter" data-level="22.3" data-path="appendix-5.html"><a href="appendix-5.html#better-than-ifelse"><i class="fa fa-check"></i><b>22.3</b> Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="22.4" data-path="appendix-5.html"><a href="appendix-5.html#dplyr-and-functions"><i class="fa fa-check"></i><b>22.4</b> Dplyr and functions</a></li>
+<li class="chapter" data-level="22.5" data-path="appendix-5.html"><a href="appendix-5.html#section-67"><i class="fa fa-check"></i><b>22.5</b> 19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="23" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html"><i class="fa fa-check"></i><b>23</b> ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="23.0.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-68"><i class="fa fa-check"></i><b>23.0.1</b> 20.3.5</a></li>
+<li class="chapter" data-level="23.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i><b>23.1</b> 20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="23.1.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-69"><i class="fa fa-check"></i><b>23.1.1</b> 20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="23.2" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i><b>23.2</b> 20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="23.2.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-70"><i class="fa fa-check"></i><b>23.2.1</b> 20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="23.3" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#augmented-vectors"><i class="fa fa-check"></i><b>23.3</b> 20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="23.3.1" data-path="ch-20-vectors.html"><a href="ch-20-vectors.html#section-71"><i class="fa fa-check"></i><b>23.3.1</b> 20.7.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="24" data-path="appendix-6.html"><a href="appendix-6.html"><i class="fa fa-check"></i><b>24</b> Appendix</a><ul>
+<li class="chapter" data-level="24.1" data-path="appendix-6.html"><a href="appendix-6.html#subsetting-nested-lists"><i class="fa fa-check"></i><b>24.1</b> subsetting nested lists</a></li>
+</ul></li>
+<li class="chapter" data-level="25" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html"><i class="fa fa-check"></i><b>25</b> ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="25.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops"><i class="fa fa-check"></i><b>25.1</b> 21.2: For loops</a><ul>
+<li class="chapter" data-level="25.1.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-72"><i class="fa fa-check"></i><b>25.1.1</b> 21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="25.2" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loop-variations"><i class="fa fa-check"></i><b>25.2</b> 21.3 For loop variations</a><ul>
+<li class="chapter" data-level="25.2.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-73"><i class="fa fa-check"></i><b>25.2.1</b> 21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="25.3" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#for-loops-vs.-functionals"><i class="fa fa-check"></i><b>25.3</b> 21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="25.3.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-74"><i class="fa fa-check"></i><b>25.3.1</b> 21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="25.4" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#the-map-functions"><i class="fa fa-check"></i><b>25.4</b> 21.5: The map functions</a><ul>
+<li class="chapter" data-level="25.4.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-75"><i class="fa fa-check"></i><b>25.4.1</b> 21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="25.5" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i><b>25.5</b> 21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="25.5.1" data-path="ch-21-iteration.html"><a href="ch-21-iteration.html#section-76"><i class="fa fa-check"></i><b>25.5.1</b> 21.9.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="26" data-path="appendix-7.html"><a href="appendix-7.html"><i class="fa fa-check"></i><b>26</b> Appendix</a><ul>
+<li class="chapter" data-level="26.1" data-path="appendix-7.html"><a href="appendix-7.html#section-77"><i class="fa fa-check"></i><b>26.1</b> 21.3.5.1</a><ul>
+<li class="chapter" data-level="26.1.1" data-path="appendix-7.html"><a href="appendix-7.html#using-map"><i class="fa fa-check"></i><b>26.1.1</b> Using map</a></li>
+<li class="chapter" data-level="26.1.2" data-path="appendix-7.html"><a href="appendix-7.html#plot-of-names"><i class="fa fa-check"></i><b>26.1.2</b> Plot of names</a></li>
+<li class="chapter" data-level="26.1.3" data-path="appendix-7.html"><a href="appendix-7.html#csv-other-example"><i class="fa fa-check"></i><b>26.1.3</b> csv other example</a></li>
+</ul></li>
+<li class="chapter" data-level="26.2" data-path="appendix-7.html"><a href="appendix-7.html#with-purrr"><i class="fa fa-check"></i><b>26.2</b> 21.3.5.2 with purrr</a></li>
+<li class="chapter" data-level="26.3" data-path="appendix-7.html"><a href="appendix-7.html#mirroring-keep"><i class="fa fa-check"></i><b>26.3</b> 21.9 mirroring keep</a></li>
+<li class="chapter" data-level="26.4" data-path="appendix-7.html"><a href="appendix-7.html#invoke-examples"><i class="fa fa-check"></i><b>26.4</b> invoke examples</a></li>
+<li class="chapter" data-level="26.5" data-path="appendix-7.html"><a href="appendix-7.html#indexing-nms-caution"><i class="fa fa-check"></i><b>26.5</b> indexing nms caution</a></li>
+<li class="chapter" data-level="26.6" data-path="appendix-7.html"><a href="appendix-7.html#in-class-notes"><i class="fa fa-check"></i><b>26.6</b> in class notes</a></li>
+</ul></li>
+<li class="chapter" data-level="27" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html"><i class="fa fa-check"></i><b>27</b> ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="27.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#a-simple-model"><i class="fa fa-check"></i><b>27.1</b> 23.2: A simple model</a><ul>
+<li class="chapter" data-level="27.1.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-78"><i class="fa fa-check"></i><b>27.1.1</b> 23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="27.2" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#visualising-models"><i class="fa fa-check"></i><b>27.2</b> 23.3: Visualising models</a><ul>
+<li class="chapter" data-level="27.2.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-79"><i class="fa fa-check"></i><b>27.2.1</b> 23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="27.3" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i><b>27.3</b> 23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="27.3.1" data-path="ch-23-model-basics.html"><a href="ch-23-model-basics.html#section-80"><i class="fa fa-check"></i><b>27.3.1</b> 23.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="28" data-path="appendix-8.html"><a href="appendix-8.html"><i class="fa fa-check"></i><b>28</b> Appendix</a><ul>
+<li class="chapter" data-level="28.1" data-path="appendix-8.html"><a href="appendix-8.html#other-model-families"><i class="fa fa-check"></i><b>28.1</b> Other model families</a></li>
+<li class="chapter" data-level="28.2" data-path="appendix-8.html"><a href="appendix-8.html#book-example"><i class="fa fa-check"></i><b>28.2</b> 23.2 book example</a><ul>
+<li class="chapter" data-level="28.2.1" data-path="appendix-8.html"><a href="appendix-8.html#tidy-grid_space"><i class="fa fa-check"></i><b>28.2.1</b> tidy grid_space</a></li>
+</ul></li>
+<li class="chapter" data-level="28.3" data-path="appendix-8.html"><a href="appendix-8.html#section-81"><i class="fa fa-check"></i><b>28.3</b> 23.4.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="29" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html"><i class="fa fa-check"></i><b>29</b> ch. 24: Model building</a><ul>
+<li class="chapter" data-level="29.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i><b>29.1</b> 24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="29.1.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-82"><i class="fa fa-check"></i><b>29.1.1</b> 24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="29.2" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i><b>29.2</b> 24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="29.2.1" data-path="ch-24-model-building.html"><a href="ch-24-model-building.html#section-83"><i class="fa fa-check"></i><b>29.2.1</b> 24.3.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="30" data-path="appendix-9.html"><a href="appendix-9.html"><i class="fa fa-check"></i><b>30</b> Appendix</a><ul>
+<li class="chapter" data-level="30.1" data-path="appendix-9.html"><a href="appendix-9.html#section-84"><i class="fa fa-check"></i><b>30.1</b> 24.2.3.3</a></li>
+<li class="chapter" data-level="30.2" data-path="appendix-9.html"><a href="appendix-9.html#section-85"><i class="fa fa-check"></i><b>30.2</b> 24.2.3.4</a><ul>
+<li class="chapter" data-level="30.2.1" data-path="appendix-9.html"><a href="appendix-9.html#heteroskedasticity"><i class="fa fa-check"></i><b>30.2.1</b> heteroskedasticity</a></li>
+<li class="chapter" data-level="30.2.2" data-path="appendix-9.html"><a href="appendix-9.html#rsquared-on-logged-values"><i class="fa fa-check"></i><b>30.2.2</b> rsquared on logged values</a></li>
+</ul></li>
+<li class="chapter" data-level="30.3" data-path="appendix-9.html"><a href="appendix-9.html#section-86"><i class="fa fa-check"></i><b>30.3</b> 24.2.3.1</a><ul>
+<li class="chapter" data-level="30.3.1" data-path="appendix-9.html"><a href="appendix-9.html#more-notes-on-logs"><i class="fa fa-check"></i><b>30.3.1</b> More notes on logs</a></li>
+<li class="chapter" data-level="30.3.2" data-path="appendix-9.html"><a href="appendix-9.html#carat-more-clumped-than-price"><i class="fa fa-check"></i><b>30.3.2</b> carat more clumped than price</a></li>
+</ul></li>
+<li class="chapter" data-level="30.4" data-path="appendix-9.html"><a href="appendix-9.html#logs-simulated-examples"><i class="fa fa-check"></i><b>30.4</b> Logs (simulated examples)</a><ul>
+<li class="chapter" data-level="30.4.1" data-path="appendix-9.html"><a href="appendix-9.html#exponential-relationship"><i class="fa fa-check"></i><b>30.4.1</b> Exponential relationship</a></li>
+<li class="chapter" data-level="30.4.2" data-path="appendix-9.html"><a href="appendix-9.html#log-log-relationship"><i class="fa fa-check"></i><b>30.4.2</b> Log log relationship</a></li>
+</ul></li>
+<li class="chapter" data-level="30.5" data-path="appendix-9.html"><a href="appendix-9.html#diamonds-data-review"><i class="fa fa-check"></i><b>30.5</b> Diamonds data review</a><ul>
+<li class="chapter" data-level="30.5.1" data-path="appendix-9.html"><a href="appendix-9.html#carat-by-mean-table-value"><i class="fa fa-check"></i><b>30.5.1</b> carat by mean <code>table</code> value</a></li>
+<li class="chapter" data-level="30.5.2" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-1"><i class="fa fa-check"></i><b>30.5.2</b> Cutoff, Part 1</a></li>
+<li class="chapter" data-level="30.5.3" data-path="appendix-9.html"><a href="appendix-9.html#cutoff-part-2"><i class="fa fa-check"></i><b>30.5.3</b> Cutoff, Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="30.6" data-path="appendix-9.html"><a href="appendix-9.html#section-87"><i class="fa fa-check"></i><b>30.6</b> 25.3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="31" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html"><i class="fa fa-check"></i><b>31</b> ch. 25: Many models</a><ul>
+<li class="chapter" data-level="31.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#gapminder"><i class="fa fa-check"></i><b>31.1</b> 25.2: gapminder</a><ul>
+<li class="chapter" data-level="31.1.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-88"><i class="fa fa-check"></i><b>31.1.1</b> 25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="31.2" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#creating-list-columns"><i class="fa fa-check"></i><b>31.2</b> 25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="31.2.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-89"><i class="fa fa-check"></i><b>31.2.1</b> 25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="31.3" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i><b>31.3</b> 25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="31.3.1" data-path="ch-25-many-models.html"><a href="ch-25-many-models.html#section-90"><i class="fa fa-check"></i><b>31.3.1</b> 25.5.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="32" data-path="appendix-10.html"><a href="appendix-10.html"><i class="fa fa-check"></i><b>32</b> Appendix</a><ul>
+<li class="chapter" data-level="32.1" data-path="appendix-10.html"><a href="appendix-10.html#models-in-lists"><i class="fa fa-check"></i><b>32.1</b> models in lists</a></li>
+<li class="chapter" data-level="32.2" data-path="appendix-10.html"><a href="appendix-10.html#list-columns-for-sampling"><i class="fa fa-check"></i><b>32.2</b> list-columns for sampling</a></li>
+<li class="chapter" data-level="32.3" data-path="appendix-10.html"><a href="appendix-10.html#section-91"><i class="fa fa-check"></i><b>32.3</b> 25.2.5.1</a><ul>
+<li class="chapter" data-level="32.3.1" data-path="appendix-10.html"><a href="appendix-10.html#include-cubic-term"><i class="fa fa-check"></i><b>32.3.1</b> Include cubic term</a></li>
+</ul></li>
+<li class="chapter" data-level="32.4" data-path="appendix-10.html"><a href="appendix-10.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i><b>32.4</b> Multiple graphs in chunk</a></li>
+<li class="chapter" data-level="32.5" data-path="appendix-10.html"><a href="appendix-10.html#listquantile-examples"><i class="fa fa-check"></i><b>32.5</b> list(quantile()) examples</a></li>
+<li class="chapter" data-level="32.6" data-path="appendix-10.html"><a href="appendix-10.html#extracting-row-names"><i class="fa fa-check"></i><b>32.6</b> extracting row names</a></li>
+<li class="chapter" data-level="32.7" data-path="appendix-10.html"><a href="appendix-10.html#invoke_map-example-book"><i class="fa fa-check"></i><b>32.7</b> <code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="32.8" data-path="appendix-10.html"><a href="appendix-10.html#named-list-example-book"><i class="fa fa-check"></i><b>32.8</b> named list example (book)</a></li>
+</ul></li>
+<li class="chapter" data-level="33" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html"><i class="fa fa-check"></i><b>33</b> ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="33.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i><b>33.1</b> 27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="33.1.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-92"><i class="fa fa-check"></i><b>33.1.1</b> 27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="33.2" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i><b>33.2</b> 27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="33.2.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-93"><i class="fa fa-check"></i><b>33.2.1</b> 27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="33.3" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#cv-of-bryan-shalloway"><i class="fa fa-check"></i><b>33.3</b> <strong>CV of Bryan Shalloway</strong></a></li>
+<li class="chapter" data-level="33.4" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#experience"><i class="fa fa-check"></i><b>33.4</b> Experience</a></li>
+<li class="chapter" data-level="33.5" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#education"><i class="fa fa-check"></i><b>33.5</b> Education</a></li>
+<li class="chapter" data-level="33.6" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#code-chunks"><i class="fa fa-check"></i><b>33.6</b> 27.4: Code chunks</a><ul>
+<li class="chapter" data-level="33.6.1" data-path="ch-27-r-markdown.html"><a href="ch-27-r-markdown.html#section-94"><i class="fa fa-check"></i><b>33.6.1</b> 27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="34" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html"><i class="fa fa-check"></i><b>34</b> ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="34.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#label"><i class="fa fa-check"></i><b>34.1</b> 28.2: Label</a><ul>
+<li class="chapter" data-level="34.1.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-95"><i class="fa fa-check"></i><b>34.1.1</b> 28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="34.2" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i><b>34.2</b> 28.3: Annotations</a><ul>
+<li class="chapter" data-level="34.2.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-96"><i class="fa fa-check"></i><b>34.2.1</b> 28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="34.3" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#scales"><i class="fa fa-check"></i><b>34.3</b> 28.4: Scales</a><ul>
+<li class="chapter" data-level="34.3.1" data-path="ch-28-graphics-for-communication.html"><a href="ch-28-graphics-for-communication.html#section-97"><i class="fa fa-check"></i><b>34.3.1</b> 28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="35" data-path="prerequisites.html"><a href="prerequisites.html"><i class="fa fa-check"></i><b>35</b> Prerequisites</a></li>
+<li class="chapter" data-level="36" data-path="chapter-3-1.html"><a href="chapter-3-1.html"><i class="fa fa-check"></i><b>36</b> Chapter 3</a><ul>
+<li class="chapter" data-level="36.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#first-steps-1"><i class="fa fa-check"></i><b>36.1</b> 3.2: First steps</a><ul>
+<li class="chapter" data-level="36.1.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-98"><i class="fa fa-check"></i><b>36.1.1</b> 3.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="36.2" data-path="chapter-3-1.html"><a href="chapter-3-1.html#aesthetic-mappings-1"><i class="fa fa-check"></i><b>36.2</b> 3.3: Aesthetic mappings</a><ul>
+<li class="chapter" data-level="36.2.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-99"><i class="fa fa-check"></i><b>36.2.1</b> 3.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="36.3" data-path="chapter-3-1.html"><a href="chapter-3-1.html#facets-1"><i class="fa fa-check"></i><b>36.3</b> 3.5: Facets</a><ul>
+<li class="chapter" data-level="36.3.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-100"><i class="fa fa-check"></i><b>36.3.1</b> 3.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="36.4" data-path="chapter-3-1.html"><a href="chapter-3-1.html#geometric-objects-1"><i class="fa fa-check"></i><b>36.4</b> 3.6: Geometric Objects</a><ul>
+<li class="chapter" data-level="36.4.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-101"><i class="fa fa-check"></i><b>36.4.1</b> 3.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="36.5" data-path="chapter-3-1.html"><a href="chapter-3-1.html#statistical-transformations-1"><i class="fa fa-check"></i><b>36.5</b> 3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="36.5.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-102"><i class="fa fa-check"></i><b>36.5.1</b> 3.7.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="36.6" data-path="chapter-3-1.html"><a href="chapter-3-1.html#position-adjjustment-1"><i class="fa fa-check"></i><b>36.6</b> 3.8: Position Adjjustment</a><ul>
+<li class="chapter" data-level="36.6.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-103"><i class="fa fa-check"></i><b>36.6.1</b> 3.8.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="36.7" data-path="chapter-3-1.html"><a href="chapter-3-1.html#coordinate-systems-2"><i class="fa fa-check"></i><b>36.7</b> 3.9: Coordinate systems</a><ul>
+<li class="chapter" data-level="36.7.1" data-path="chapter-3-1.html"><a href="chapter-3-1.html#section-104"><i class="fa fa-check"></i><b>36.7.1</b> 3.9.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="37" data-path="appendix-11.html"><a href="appendix-11.html"><i class="fa fa-check"></i><b>37</b> Appendix</a><ul>
+<li class="chapter" data-level="37.1" data-path="appendix-11.html"><a href="appendix-11.html#extension-1"><i class="fa fa-check"></i><b>37.1</b> 3.7.1.1 extension</a></li>
+<li class="chapter" data-level="37.2" data-path="appendix-11.html"><a href="appendix-11.html#position-adustments-1"><i class="fa fa-check"></i><b>37.2</b> 3.8: Position adustments</a></li>
+<li class="chapter" data-level="37.3" data-path="appendix-11.html"><a href="appendix-11.html#coordinate-systems-3"><i class="fa fa-check"></i><b>37.3</b> 3.9: Coordinate systems</a></li>
+<li class="chapter" data-level="37.4" data-path="appendix-11.html"><a href="appendix-11.html#add-in-table-of-contents-and-other-details-1"><i class="fa fa-check"></i><b>37.4</b> add in table of contents and other details…</a></li>
+</ul></li>
+<li class="chapter" data-level="38" data-path="ch-5-1.html"><a href="ch-5-1.html"><i class="fa fa-check"></i><b>38</b> ch. 5</a><ul>
+<li class="chapter" data-level="38.1" data-path="ch-5-1.html"><a href="ch-5-1.html#filter-rows-1"><i class="fa fa-check"></i><b>38.1</b> 5.2: Filter rows</a></li>
+<li class="chapter" data-level="38.2" data-path="ch-5-1.html"><a href="ch-5-1.html#section-105"><i class="fa fa-check"></i><b>38.2</b> 5.2.4.</a><ul>
+<li class="chapter" data-level="38.2.1" data-path="ch-5-1.html"><a href="ch-5-1.html#section-106"><i class="fa fa-check"></i><b>38.2.1</b> 5.3.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="38.3" data-path="ch-5-1.html"><a href="ch-5-1.html#grouped-summaries-1"><i class="fa fa-check"></i><b>38.3</b> 5.6: Grouped summaries</a><ul>
+<li class="chapter" data-level="38.3.1" data-path="ch-5-1.html"><a href="ch-5-1.html#section-107"><i class="fa fa-check"></i><b>38.3.1</b> 5.6.7.</a></li>
+</ul></li>
+<li class="chapter" data-level="38.4" data-path="ch-5-1.html"><a href="ch-5-1.html#grouped-mutates-and-filters-1"><i class="fa fa-check"></i><b>38.4</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="38.4.1" data-path="ch-5-1.html"><a href="ch-5-1.html#section-108"><i class="fa fa-check"></i><b>38.4.1</b> 5.7.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="39" data-path="appendix-12.html"><a href="appendix-12.html"><i class="fa fa-check"></i><b>39</b> Appendix</a><ul>
+<li class="chapter" data-level="39.1" data-path="appendix-12.html"><a href="appendix-12.html#section-109"><i class="fa fa-check"></i><b>39.1</b> 5.4.1.3.</a></li>
+<li class="chapter" data-level="39.2" data-path="appendix-12.html"><a href="appendix-12.html#section-110"><i class="fa fa-check"></i><b>39.2</b> 5.5.2.1.</a></li>
+<li class="chapter" data-level="39.3" data-path="appendix-12.html"><a href="appendix-12.html#section-111"><i class="fa fa-check"></i><b>39.3</b> 5.5.2.2</a><ul>
+<li class="chapter" data-level="39.3.1" data-path="appendix-12.html"><a href="appendix-12.html#closer-look-at-air_time-1"><i class="fa fa-check"></i><b>39.3.1</b> Closer look at <code>air_time</code></a></li>
+<li class="chapter" data-level="39.3.2" data-path="appendix-12.html"><a href="appendix-12.html#other-plots-with-air_time-1"><i class="fa fa-check"></i><b>39.3.2</b> Other plots with <code>air_time</code></a></li>
+</ul></li>
+<li class="chapter" data-level="39.4" data-path="appendix-12.html"><a href="appendix-12.html#section-112"><i class="fa fa-check"></i><b>39.4</b> 5.6.7.1.</a></li>
+<li class="chapter" data-level="39.5" data-path="appendix-12.html"><a href="appendix-12.html#section-113"><i class="fa fa-check"></i><b>39.5</b> 5.6.7.4.</a></li>
+<li class="chapter" data-level="39.6" data-path="appendix-12.html"><a href="appendix-12.html#section-114"><i class="fa fa-check"></i><b>39.6</b> 5.6.7.5.</a><ul>
+<li class="chapter" data-level="39.6.1" data-path="appendix-12.html"><a href="appendix-12.html#modeling-approach-1"><i class="fa fa-check"></i><b>39.6.1</b> Modeling approach</a></li>
+</ul></li>
+<li class="chapter" data-level="39.7" data-path="appendix-12.html"><a href="appendix-12.html#section-115"><i class="fa fa-check"></i><b>39.7</b> 5.6.7.6.</a></li>
+<li class="chapter" data-level="39.8" data-path="appendix-12.html"><a href="appendix-12.html#section-116"><i class="fa fa-check"></i><b>39.8</b> 5.7.1.6.</a></li>
+<li class="chapter" data-level="39.9" data-path="appendix-12.html"><a href="appendix-12.html#section-117"><i class="fa fa-check"></i><b>39.9</b> 5.7.1.5</a></li>
+<li class="chapter" data-level="39.10" data-path="appendix-12.html"><a href="appendix-12.html#section-118"><i class="fa fa-check"></i><b>39.10</b> 5.7.1.8.</a></li>
+<li class="chapter" data-level="39.11" data-path="appendix-12.html"><a href="appendix-12.html#other-1"><i class="fa fa-check"></i><b>39.11</b> Other</a><ul>
+<li class="chapter" data-level="39.11.1" data-path="appendix-12.html"><a href="appendix-12.html#on-piping-dots-1"><i class="fa fa-check"></i><b>39.11.1</b> On piping dots</a></li>
+</ul></li>
+<li class="chapter" data-level="39.12" data-path="appendix-12.html"><a href="appendix-12.html#plotly-1"><i class="fa fa-check"></i><b>39.12</b> plotly</a></li>
+</ul></li>
+<li class="chapter" data-level="40" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html"><i class="fa fa-check"></i><b>40</b> ch. 7, data exploration</a><ul>
+<li class="chapter" data-level="40.1" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#variation-1"><i class="fa fa-check"></i><b>40.1</b> 7.3. Variation</a><ul>
+<li class="chapter" data-level="40.1.1" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#section-119"><i class="fa fa-check"></i><b>40.1.1</b> 7.3.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="40.2" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#missing-values-2"><i class="fa fa-check"></i><b>40.2</b> 7.4. Missing values</a><ul>
+<li class="chapter" data-level="40.2.1" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#section-120"><i class="fa fa-check"></i><b>40.2.1</b> 7.4.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="40.3" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#covariation-1"><i class="fa fa-check"></i><b>40.3</b> 7.5. Covariation</a><ul>
+<li class="chapter" data-level="40.3.1" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#section-121"><i class="fa fa-check"></i><b>40.3.1</b> 7.5.1.1.</a></li>
+<li class="chapter" data-level="40.3.2" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#section-122"><i class="fa fa-check"></i><b>40.3.2</b> 7.5.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="40.4" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#two-continuous-variables-1"><i class="fa fa-check"></i><b>40.4</b> 7.5.3 Two continuous variables</a><ul>
+<li class="chapter" data-level="40.4.1" data-path="ch-7-data-exploration-1.html"><a href="ch-7-data-exploration-1.html#section-123"><i class="fa fa-check"></i><b>40.4.1</b> 7.5.3.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="41" data-path="appendix-13.html"><a href="appendix-13.html"><i class="fa fa-check"></i><b>41</b> Appendix</a><ul>
+<li class="chapter" data-level="41.1" data-path="appendix-13.html"><a href="appendix-13.html#section-124"><i class="fa fa-check"></i><b>41.1</b> 7.5.2.1.2.</a></li>
+<li class="chapter" data-level="41.2" data-path="appendix-13.html"><a href="appendix-13.html#section-125"><i class="fa fa-check"></i><b>41.2</b> 7.5.3.1.4.</a></li>
+</ul></li>
+<li class="chapter" data-level="42" data-path="ch-10-tibbles-1.html"><a href="ch-10-tibbles-1.html"><i class="fa fa-check"></i><b>42</b> ch. 10: Tibbles</a><ul>
+<li class="chapter" data-level="42.1" data-path="ch-10-tibbles-1.html"><a href="ch-10-tibbles-1.html#section-126"><i class="fa fa-check"></i><b>42.1</b> 10.5</a></li>
+</ul></li>
+<li class="chapter" data-level="43" data-path="ch-11-data-import-1.html"><a href="ch-11-data-import-1.html"><i class="fa fa-check"></i><b>43</b> ch. 11: Data import</a><ul>
+<li class="chapter" data-level="43.1" data-path="ch-11-data-import-1.html"><a href="ch-11-data-import-1.html#section-127"><i class="fa fa-check"></i><b>43.1</b> 11.2.2.</a></li>
+<li class="chapter" data-level="43.2" data-path="ch-11-data-import-1.html"><a href="ch-11-data-import-1.html#section-128"><i class="fa fa-check"></i><b>43.2</b> 11.3.5.</a></li>
+</ul></li>
+<li class="chapter" data-level="44" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html"><i class="fa fa-check"></i><b>44</b> ch. 12: Tidy data</a><ul>
+<li class="chapter" data-level="44.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#tidy-data-1"><i class="fa fa-check"></i><b>44.1</b> 12.2: Tidy data</a><ul>
+<li class="chapter" data-level="44.1.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#section-129"><i class="fa fa-check"></i><b>44.1.1</b> 12.2.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="44.2" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#spreading-and-gathering-1"><i class="fa fa-check"></i><b>44.2</b> 12.3: Spreading and gathering</a><ul>
+<li class="chapter" data-level="44.2.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#section-130"><i class="fa fa-check"></i><b>44.2.1</b> 12.3.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="44.3" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#separating-and-uniting-1"><i class="fa fa-check"></i><b>44.3</b> 12.4: Separating and uniting</a><ul>
+<li class="chapter" data-level="44.3.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#section-131"><i class="fa fa-check"></i><b>44.3.1</b> 12.4.3.</a></li>
+</ul></li>
+<li class="chapter" data-level="44.4" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#missing-values-3"><i class="fa fa-check"></i><b>44.4</b> 12.5: missing values</a><ul>
+<li class="chapter" data-level="44.4.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#section-132"><i class="fa fa-check"></i><b>44.4.1</b> 12.5.1.</a></li>
+</ul></li>
+<li class="chapter" data-level="44.5" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#case-study-1"><i class="fa fa-check"></i><b>44.5</b> 12.6 Case Study</a><ul>
+<li class="chapter" data-level="44.5.1" data-path="ch-12-tidy-data-1.html"><a href="ch-12-tidy-data-1.html#section-133"><i class="fa fa-check"></i><b>44.5.1</b> 12.6.1.</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="45" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html"><i class="fa fa-check"></i><b>45</b> ch. 13: Relational data</a><ul>
+<li class="chapter" data-level="45.1" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#nycflights13-1"><i class="fa fa-check"></i><b>45.1</b> 13.2 nycflights13</a><ul>
+<li class="chapter" data-level="45.1.1" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#section-134"><i class="fa fa-check"></i><b>45.1.1</b> 13.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="45.2" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#keys-1"><i class="fa fa-check"></i><b>45.2</b> 13.3 Keys</a><ul>
+<li class="chapter" data-level="45.2.1" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#section-135"><i class="fa fa-check"></i><b>45.2.1</b> 13.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="45.3" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#mutating-joins-1"><i class="fa fa-check"></i><b>45.3</b> 13.4 Mutating joins</a><ul>
+<li class="chapter" data-level="45.3.1" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#section-136"><i class="fa fa-check"></i><b>45.3.1</b> 13.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="45.4" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#filtering-joins-1"><i class="fa fa-check"></i><b>45.4</b> 13.5 Filtering joins</a><ul>
+<li class="chapter" data-level="45.4.1" data-path="ch-13-relational-data-1.html"><a href="ch-13-relational-data-1.html#section-137"><i class="fa fa-check"></i><b>45.4.1</b> 13.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="46" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html"><i class="fa fa-check"></i><b>46</b> ch. 14: Strings</a><ul>
+<li class="chapter" data-level="46.1" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#string-basics-1"><i class="fa fa-check"></i><b>46.1</b> 14.2: String basics</a><ul>
+<li class="chapter" data-level="46.1.1" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-138"><i class="fa fa-check"></i><b>46.1.1</b> 14.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="46.2" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#matching-patterns-w-regex-1"><i class="fa fa-check"></i><b>46.2</b> 14.3: Matching patterns w/ regex</a><ul>
+<li class="chapter" data-level="46.2.1" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-139"><i class="fa fa-check"></i><b>46.2.1</b> 14.3.1.1</a></li>
+<li class="chapter" data-level="46.2.2" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-140"><i class="fa fa-check"></i><b>46.2.2</b> 14.3.2.1</a></li>
+<li class="chapter" data-level="46.2.3" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-141"><i class="fa fa-check"></i><b>46.2.3</b> 14.3.3.1</a></li>
+<li class="chapter" data-level="46.2.4" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-142"><i class="fa fa-check"></i><b>46.2.4</b> 14.3.4.1</a></li>
+<li class="chapter" data-level="46.2.5" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-143"><i class="fa fa-check"></i><b>46.2.5</b> 14.3.5.1</a></li>
+</ul></li>
+<li class="chapter" data-level="46.3" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#tools-1"><i class="fa fa-check"></i><b>46.3</b> 14.4 Tools</a><ul>
+<li class="chapter" data-level="46.3.1" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-144"><i class="fa fa-check"></i><b>46.3.1</b> 14.4.2</a></li>
+<li class="chapter" data-level="46.3.2" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-145"><i class="fa fa-check"></i><b>46.3.2</b> 14.4.3.1</a></li>
+<li class="chapter" data-level="46.3.3" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-146"><i class="fa fa-check"></i><b>46.3.3</b> 14.4.4.1</a></li>
+<li class="chapter" data-level="46.3.4" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-147"><i class="fa fa-check"></i><b>46.3.4</b> 14.4.5.1</a></li>
+<li class="chapter" data-level="46.3.5" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-148"><i class="fa fa-check"></i><b>46.3.5</b> 14.4.6.1</a></li>
+</ul></li>
+<li class="chapter" data-level="46.4" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#other-types-of-patterns-1"><i class="fa fa-check"></i><b>46.4</b> 14.5: Other types of patterns</a><ul>
+<li class="chapter" data-level="46.4.1" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-149"><i class="fa fa-check"></i><b>46.4.1</b> 14.5.1</a></li>
+<li class="chapter" data-level="46.4.2" data-path="ch-14-strings-1.html"><a href="ch-14-strings-1.html#section-150"><i class="fa fa-check"></i><b>46.4.2</b> 14.7.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="47" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html"><i class="fa fa-check"></i><b>47</b> ch. 15: Factors</a><ul>
+<li class="chapter" data-level="47.1" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#modifying-factor-order-2"><i class="fa fa-check"></i><b>47.1</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="47.1.1" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#section-151"><i class="fa fa-check"></i><b>47.1.1</b> 15.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="47.2" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#modifying-factor-order-3"><i class="fa fa-check"></i><b>47.2</b> 15.4: Modifying factor order</a><ul>
+<li class="chapter" data-level="47.2.1" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#section-152"><i class="fa fa-check"></i><b>47.2.1</b> 15.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="47.3" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#modifying-factor-levels-1"><i class="fa fa-check"></i><b>47.3</b> 15.5: Modifying factor levels</a><ul>
+<li class="chapter" data-level="47.3.1" data-path="ch-15-factors-1.html"><a href="ch-15-factors-1.html#section-153"><i class="fa fa-check"></i><b>47.3.1</b> 15.5.1</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="48" data-path="appendix-14.html"><a href="appendix-14.html"><i class="fa fa-check"></i><b>48</b> Appendix</a><ul>
+<li class="chapter" data-level="48.1" data-path="appendix-14.html"><a href="appendix-14.html#viewing-all-levels-1"><i class="fa fa-check"></i><b>48.1</b> Viewing all levels</a></li>
+<li class="chapter" data-level="48.2" data-path="appendix-14.html"><a href="appendix-14.html#percentage-na-each-level-1"><i class="fa fa-check"></i><b>48.2</b> Percentage NA each level</a></li>
+<li class="chapter" data-level="48.3" data-path="appendix-14.html"><a href="appendix-14.html#print-all-levels-of-tibble-1"><i class="fa fa-check"></i><b>48.3</b> Print all levels of tibble</a></li>
+</ul></li>
+<li class="chapter" data-level="49" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html"><i class="fa fa-check"></i><b>49</b> ch. 16: Dates and times</a><ul>
+<li class="chapter" data-level="49.1" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#creating-datetimes-1"><i class="fa fa-check"></i><b>49.1</b> 16.2: Creating date/times</a><ul>
+<li class="chapter" data-level="49.1.1" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#section-154"><i class="fa fa-check"></i><b>49.1.1</b> 16.2.4</a></li>
+</ul></li>
+<li class="chapter" data-level="49.2" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#date-time-components-1"><i class="fa fa-check"></i><b>49.2</b> 16.3: Date-time components</a><ul>
+<li class="chapter" data-level="49.2.1" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#section-155"><i class="fa fa-check"></i><b>49.2.1</b> 16.3.4</a></li>
+</ul></li>
+<li class="chapter" data-level="49.3" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#time-spans-1"><i class="fa fa-check"></i><b>49.3</b> 16.4: Time spans</a><ul>
+<li class="chapter" data-level="49.3.1" data-path="ch-16-dates-and-times-1.html"><a href="ch-16-dates-and-times-1.html#section-156"><i class="fa fa-check"></i><b>49.3.1</b> 16.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="50" data-path="appendix-15.html"><a href="appendix-15.html"><i class="fa fa-check"></i><b>50</b> Appendix</a><ul>
+<li class="chapter" data-level="50.1" data-path="appendix-15.html"><a href="appendix-15.html#section-157"><i class="fa fa-check"></i><b>50.1</b> 16.3.4.1</a></li>
+<li class="chapter" data-level="50.2" data-path="appendix-15.html"><a href="appendix-15.html#section-158"><i class="fa fa-check"></i><b>50.2</b> 16.3.4.3</a></li>
+<li class="chapter" data-level="50.3" data-path="appendix-15.html"><a href="appendix-15.html#section-159"><i class="fa fa-check"></i><b>50.3</b> 16.3.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="51" data-path="ch-18-pipes-notes-only-1.html"><a href="ch-18-pipes-notes-only-1.html"><i class="fa fa-check"></i><b>51</b> ch. 18: Pipes (notes only)</a></li>
+<li class="chapter" data-level="52" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html"><i class="fa fa-check"></i><b>52</b> ch. 19: Functions</a><ul>
+<li class="chapter" data-level="52.1" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#when-should-you-write-a-function-1"><i class="fa fa-check"></i><b>52.1</b> 19.2: When should you write a function?</a><ul>
+<li class="chapter" data-level="52.1.1" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#section-160"><i class="fa fa-check"></i><b>52.1.1</b> 19.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="52.2" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#functions-are-for-humans-and-computers-1"><i class="fa fa-check"></i><b>52.2</b> 19.3: Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="52.2.1" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#section-161"><i class="fa fa-check"></i><b>52.2.1</b> 19.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="52.3" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#conditional-execution-1"><i class="fa fa-check"></i><b>52.3</b> 19.4: Conditional execution</a><ul>
+<li class="chapter" data-level="52.3.1" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#section-162"><i class="fa fa-check"></i><b>52.3.1</b> 19.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="52.4" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#function-arguments-1"><i class="fa fa-check"></i><b>52.4</b> 19.5: Function arguments</a><ul>
+<li class="chapter" data-level="52.4.1" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#section-163"><i class="fa fa-check"></i><b>52.4.1</b> 19.5.5</a></li>
+</ul></li>
+<li class="chapter" data-level="52.5" data-path="ch-19-functions-1.html"><a href="ch-19-functions-1.html#return-values-1"><i class="fa fa-check"></i><b>52.5</b> 19.6: Return values</a></li>
+</ul></li>
+<li class="chapter" data-level="53" data-path="appendix-16.html"><a href="appendix-16.html"><i class="fa fa-check"></i><b>53</b> Appendix</a><ul>
+<li class="chapter" data-level="53.1" data-path="appendix-16.html"><a href="appendix-16.html#section-164"><i class="fa fa-check"></i><b>53.1</b> 19.2.1.4</a></li>
+<li class="chapter" data-level="53.2" data-path="appendix-16.html"><a href="appendix-16.html#changing-values-with-indexes-1"><i class="fa fa-check"></i><b>53.2</b> Changing values with indexes</a><ul>
+<li class="chapter" data-level="53.2.1" data-path="appendix-16.html"><a href="appendix-16.html#applying-indexing-to-dfs-1"><i class="fa fa-check"></i><b>53.2.1</b> Applying indexing to dfs</a></li>
+</ul></li>
+<li class="chapter" data-level="53.3" data-path="appendix-16.html"><a href="appendix-16.html#better-than-ifelse-1"><i class="fa fa-check"></i><b>53.3</b> Better than <code>ifelse()</code>?</a></li>
+<li class="chapter" data-level="53.4" data-path="appendix-16.html"><a href="appendix-16.html#dplyr-and-functions-1"><i class="fa fa-check"></i><b>53.4</b> Dplyr and functions</a></li>
+<li class="chapter" data-level="53.5" data-path="appendix-16.html"><a href="appendix-16.html#section-165"><i class="fa fa-check"></i><b>53.5</b> 19.2.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="54" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html"><i class="fa fa-check"></i><b>54</b> ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="54.0.1" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#section-166"><i class="fa fa-check"></i><b>54.0.1</b> 20.3.5</a></li>
+<li class="chapter" data-level="54.1" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#using-atomic-vectors-1"><i class="fa fa-check"></i><b>54.1</b> 20.4: Using atomic vectors</a><ul>
+<li class="chapter" data-level="54.1.1" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#section-167"><i class="fa fa-check"></i><b>54.1.1</b> 20.4.6</a></li>
+</ul></li>
+<li class="chapter" data-level="54.2" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#recursive-vectors-lists-1"><i class="fa fa-check"></i><b>54.2</b> 20.5: Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="54.2.1" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#section-168"><i class="fa fa-check"></i><b>54.2.1</b> 20.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="54.3" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#augmented-vectors-1"><i class="fa fa-check"></i><b>54.3</b> 20.7: Augmented vectors</a><ul>
+<li class="chapter" data-level="54.3.1" data-path="ch-20-vectors-1.html"><a href="ch-20-vectors-1.html#section-169"><i class="fa fa-check"></i><b>54.3.1</b> 20.7.4</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="55" data-path="appendix-17.html"><a href="appendix-17.html"><i class="fa fa-check"></i><b>55</b> Appendix</a><ul>
+<li class="chapter" data-level="55.1" data-path="appendix-17.html"><a href="appendix-17.html#subsetting-nested-lists-1"><i class="fa fa-check"></i><b>55.1</b> subsetting nested lists</a></li>
+</ul></li>
+<li class="chapter" data-level="56" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html"><i class="fa fa-check"></i><b>56</b> ch. 21: Iteration</a><ul>
+<li class="chapter" data-level="56.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#for-loops-1"><i class="fa fa-check"></i><b>56.1</b> 21.2: For loops</a><ul>
+<li class="chapter" data-level="56.1.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#section-170"><i class="fa fa-check"></i><b>56.1.1</b> 21.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="56.2" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#for-loop-variations-1"><i class="fa fa-check"></i><b>56.2</b> 21.3 For loop variations</a><ul>
+<li class="chapter" data-level="56.2.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#section-171"><i class="fa fa-check"></i><b>56.2.1</b> 21.3.5</a></li>
+</ul></li>
+<li class="chapter" data-level="56.3" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#for-loops-vs.-functionals-1"><i class="fa fa-check"></i><b>56.3</b> 21.4: For loops vs. functionals</a><ul>
+<li class="chapter" data-level="56.3.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#section-172"><i class="fa fa-check"></i><b>56.3.1</b> 21.4.1</a></li>
+</ul></li>
+<li class="chapter" data-level="56.4" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#the-map-functions-1"><i class="fa fa-check"></i><b>56.4</b> 21.5: The map functions</a><ul>
+<li class="chapter" data-level="56.4.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#section-173"><i class="fa fa-check"></i><b>56.4.1</b> 21.5.3</a></li>
+</ul></li>
+<li class="chapter" data-level="56.5" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#other-patterns-of-for-loops-1"><i class="fa fa-check"></i><b>56.5</b> 21.9 Other patterns of for loops</a><ul>
+<li class="chapter" data-level="56.5.1" data-path="ch-21-iteration-1.html"><a href="ch-21-iteration-1.html#section-174"><i class="fa fa-check"></i><b>56.5.1</b> 21.9.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="57" data-path="appendix-18.html"><a href="appendix-18.html"><i class="fa fa-check"></i><b>57</b> Appendix</a><ul>
+<li class="chapter" data-level="57.1" data-path="appendix-18.html"><a href="appendix-18.html#section-175"><i class="fa fa-check"></i><b>57.1</b> 21.3.5.1</a><ul>
+<li class="chapter" data-level="57.1.1" data-path="appendix-18.html"><a href="appendix-18.html#using-map-1"><i class="fa fa-check"></i><b>57.1.1</b> Using map</a></li>
+<li class="chapter" data-level="57.1.2" data-path="appendix-18.html"><a href="appendix-18.html#plot-of-names-1"><i class="fa fa-check"></i><b>57.1.2</b> Plot of names</a></li>
+<li class="chapter" data-level="57.1.3" data-path="appendix-18.html"><a href="appendix-18.html#csv-other-example-1"><i class="fa fa-check"></i><b>57.1.3</b> csv other example</a></li>
+</ul></li>
+<li class="chapter" data-level="57.2" data-path="appendix-18.html"><a href="appendix-18.html#with-purrr-1"><i class="fa fa-check"></i><b>57.2</b> 21.3.5.2 with purrr</a></li>
+<li class="chapter" data-level="57.3" data-path="appendix-18.html"><a href="appendix-18.html#mirroring-keep-1"><i class="fa fa-check"></i><b>57.3</b> 21.9 mirroring keep</a></li>
+<li class="chapter" data-level="57.4" data-path="appendix-18.html"><a href="appendix-18.html#invoke-examples-1"><i class="fa fa-check"></i><b>57.4</b> invoke examples</a></li>
+<li class="chapter" data-level="57.5" data-path="appendix-18.html"><a href="appendix-18.html#indexing-nms-caution-1"><i class="fa fa-check"></i><b>57.5</b> indexing nms caution</a></li>
+<li class="chapter" data-level="57.6" data-path="appendix-18.html"><a href="appendix-18.html#in-class-notes-1"><i class="fa fa-check"></i><b>57.6</b> in class notes</a></li>
+</ul></li>
+<li class="chapter" data-level="58" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html"><i class="fa fa-check"></i><b>58</b> ch. 23: Model basics</a><ul>
+<li class="chapter" data-level="58.1" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#a-simple-model-1"><i class="fa fa-check"></i><b>58.1</b> 23.2: A simple model</a><ul>
+<li class="chapter" data-level="58.1.1" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#section-176"><i class="fa fa-check"></i><b>58.1.1</b> 23.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="58.2" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#visualising-models-1"><i class="fa fa-check"></i><b>58.2</b> 23.3: Visualising models</a><ul>
+<li class="chapter" data-level="58.2.1" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#section-177"><i class="fa fa-check"></i><b>58.2.1</b> 23.3.3</a></li>
+</ul></li>
+<li class="chapter" data-level="58.3" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#formulas-and-model-families-1"><i class="fa fa-check"></i><b>58.3</b> 23.4: Formulas and model families</a><ul>
+<li class="chapter" data-level="58.3.1" data-path="ch-23-model-basics-1.html"><a href="ch-23-model-basics-1.html#section-178"><i class="fa fa-check"></i><b>58.3.1</b> 23.4.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="59" data-path="appendix-19.html"><a href="appendix-19.html"><i class="fa fa-check"></i><b>59</b> Appendix</a><ul>
+<li class="chapter" data-level="59.1" data-path="appendix-19.html"><a href="appendix-19.html#other-model-families-1"><i class="fa fa-check"></i><b>59.1</b> Other model families</a></li>
+<li class="chapter" data-level="59.2" data-path="appendix-19.html"><a href="appendix-19.html#book-example-1"><i class="fa fa-check"></i><b>59.2</b> 23.2 book example</a><ul>
+<li class="chapter" data-level="59.2.1" data-path="appendix-19.html"><a href="appendix-19.html#tidy-grid_space-1"><i class="fa fa-check"></i><b>59.2.1</b> tidy grid_space</a></li>
+</ul></li>
+<li class="chapter" data-level="59.3" data-path="appendix-19.html"><a href="appendix-19.html#section-179"><i class="fa fa-check"></i><b>59.3</b> 23.4.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="60" data-path="ch-24-model-building-1.html"><a href="ch-24-model-building-1.html"><i class="fa fa-check"></i><b>60</b> ch. 24: Model building</a><ul>
+<li class="chapter" data-level="60.1" data-path="ch-24-model-building-1.html"><a href="ch-24-model-building-1.html#why-are-low-quality-diamonds-more-expensive-1"><i class="fa fa-check"></i><b>60.1</b> 24.2: Why are low quality diamonds more expensive?</a><ul>
+<li class="chapter" data-level="60.1.1" data-path="ch-24-model-building-1.html"><a href="ch-24-model-building-1.html#section-180"><i class="fa fa-check"></i><b>60.1.1</b> 24.2.3</a></li>
+</ul></li>
+<li class="chapter" data-level="60.2" data-path="ch-24-model-building-1.html"><a href="ch-24-model-building-1.html#what-affects-the-number-of-daily-flights-1"><i class="fa fa-check"></i><b>60.2</b> 24.3 What affects the number of daily flights?</a><ul>
+<li class="chapter" data-level="60.2.1" data-path="ch-24-model-building-1.html"><a href="ch-24-model-building-1.html#section-181"><i class="fa fa-check"></i><b>60.2.1</b> 24.3.5</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="61" data-path="appendix-20.html"><a href="appendix-20.html"><i class="fa fa-check"></i><b>61</b> Appendix</a><ul>
+<li class="chapter" data-level="61.1" data-path="appendix-20.html"><a href="appendix-20.html#section-182"><i class="fa fa-check"></i><b>61.1</b> 24.2.3.3</a></li>
+<li class="chapter" data-level="61.2" data-path="appendix-20.html"><a href="appendix-20.html#section-183"><i class="fa fa-check"></i><b>61.2</b> 24.2.3.4</a><ul>
+<li class="chapter" data-level="61.2.1" data-path="appendix-20.html"><a href="appendix-20.html#heteroskedasticity-1"><i class="fa fa-check"></i><b>61.2.1</b> heteroskedasticity</a></li>
+<li class="chapter" data-level="61.2.2" data-path="appendix-20.html"><a href="appendix-20.html#rsquared-on-logged-values-1"><i class="fa fa-check"></i><b>61.2.2</b> rsquared on logged values</a></li>
+</ul></li>
+<li class="chapter" data-level="61.3" data-path="appendix-20.html"><a href="appendix-20.html#section-184"><i class="fa fa-check"></i><b>61.3</b> 24.2.3.1</a><ul>
+<li class="chapter" data-level="61.3.1" data-path="appendix-20.html"><a href="appendix-20.html#more-notes-on-logs-1"><i class="fa fa-check"></i><b>61.3.1</b> More notes on logs</a></li>
+<li class="chapter" data-level="61.3.2" data-path="appendix-20.html"><a href="appendix-20.html#carat-more-clumped-than-price-1"><i class="fa fa-check"></i><b>61.3.2</b> carat more clumped than price</a></li>
+</ul></li>
+<li class="chapter" data-level="61.4" data-path="appendix-20.html"><a href="appendix-20.html#logs-simulated-examples-1"><i class="fa fa-check"></i><b>61.4</b> Logs (simulated examples)</a><ul>
+<li class="chapter" data-level="61.4.1" data-path="appendix-20.html"><a href="appendix-20.html#exponential-relationship-1"><i class="fa fa-check"></i><b>61.4.1</b> Exponential relationship</a></li>
+<li class="chapter" data-level="61.4.2" data-path="appendix-20.html"><a href="appendix-20.html#log-log-relationship-1"><i class="fa fa-check"></i><b>61.4.2</b> Log log relationship</a></li>
+</ul></li>
+<li class="chapter" data-level="61.5" data-path="appendix-20.html"><a href="appendix-20.html#diamonds-data-review-1"><i class="fa fa-check"></i><b>61.5</b> Diamonds data review</a><ul>
+<li class="chapter" data-level="61.5.1" data-path="appendix-20.html"><a href="appendix-20.html#carat-by-mean-table-value-1"><i class="fa fa-check"></i><b>61.5.1</b> carat by mean <code>table</code> value</a></li>
+<li class="chapter" data-level="61.5.2" data-path="appendix-20.html"><a href="appendix-20.html#cutoff-part-1-1"><i class="fa fa-check"></i><b>61.5.2</b> Cutoff, Part 1</a></li>
+<li class="chapter" data-level="61.5.3" data-path="appendix-20.html"><a href="appendix-20.html#cutoff-part-2-1"><i class="fa fa-check"></i><b>61.5.3</b> Cutoff, Part 2</a></li>
+</ul></li>
+<li class="chapter" data-level="61.6" data-path="appendix-20.html"><a href="appendix-20.html#section-185"><i class="fa fa-check"></i><b>61.6</b> 25.3.5.4</a></li>
+</ul></li>
+<li class="chapter" data-level="62" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html"><i class="fa fa-check"></i><b>62</b> ch. 25: Many models</a><ul>
+<li class="chapter" data-level="62.1" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#gapminder-1"><i class="fa fa-check"></i><b>62.1</b> 25.2: gapminder</a><ul>
+<li class="chapter" data-level="62.1.1" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#section-186"><i class="fa fa-check"></i><b>62.1.1</b> 25.2.5</a></li>
+</ul></li>
+<li class="chapter" data-level="62.2" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#creating-list-columns-1"><i class="fa fa-check"></i><b>62.2</b> 25.4: Creating list-columns</a><ul>
+<li class="chapter" data-level="62.2.1" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#section-187"><i class="fa fa-check"></i><b>62.2.1</b> 25.4.5</a></li>
+</ul></li>
+<li class="chapter" data-level="62.3" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#simplifying-list-columns-1"><i class="fa fa-check"></i><b>62.3</b> 25.5: Simplifying list-columns</a><ul>
+<li class="chapter" data-level="62.3.1" data-path="ch-25-many-models-1.html"><a href="ch-25-many-models-1.html#section-188"><i class="fa fa-check"></i><b>62.3.1</b> 25.5.3</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="63" data-path="appendix-21.html"><a href="appendix-21.html"><i class="fa fa-check"></i><b>63</b> Appendix</a><ul>
+<li class="chapter" data-level="63.1" data-path="appendix-21.html"><a href="appendix-21.html#models-in-lists-1"><i class="fa fa-check"></i><b>63.1</b> models in lists</a></li>
+<li class="chapter" data-level="63.2" data-path="appendix-21.html"><a href="appendix-21.html#list-columns-for-sampling-1"><i class="fa fa-check"></i><b>63.2</b> list-columns for sampling</a></li>
+<li class="chapter" data-level="63.3" data-path="appendix-21.html"><a href="appendix-21.html#section-189"><i class="fa fa-check"></i><b>63.3</b> 25.2.5.1</a><ul>
+<li class="chapter" data-level="63.3.1" data-path="appendix-21.html"><a href="appendix-21.html#include-cubic-term-1"><i class="fa fa-check"></i><b>63.3.1</b> Include cubic term</a></li>
+</ul></li>
+<li class="chapter" data-level="63.4" data-path="appendix-21.html"><a href="appendix-21.html#multiple-graphs-in-chunk-1"><i class="fa fa-check"></i><b>63.4</b> Multiple graphs in chunk</a></li>
+<li class="chapter" data-level="63.5" data-path="appendix-21.html"><a href="appendix-21.html#listquantile-examples-1"><i class="fa fa-check"></i><b>63.5</b> list(quantile()) examples</a></li>
+<li class="chapter" data-level="63.6" data-path="appendix-21.html"><a href="appendix-21.html#extracting-row-names-1"><i class="fa fa-check"></i><b>63.6</b> extracting row names</a></li>
+<li class="chapter" data-level="63.7" data-path="appendix-21.html"><a href="appendix-21.html#invoke_map-example-book-1"><i class="fa fa-check"></i><b>63.7</b> <code>invoke_map</code> example (book)</a></li>
+<li class="chapter" data-level="63.8" data-path="appendix-21.html"><a href="appendix-21.html#named-list-example-book-1"><i class="fa fa-check"></i><b>63.8</b> named list example (book)</a></li>
+</ul></li>
+<li class="chapter" data-level="64" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html"><i class="fa fa-check"></i><b>64</b> ch. 27: R Markdown</a><ul>
+<li class="chapter" data-level="64.1" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#r-markdown-basics-1"><i class="fa fa-check"></i><b>64.1</b> 27.2 R Markdown basics</a><ul>
+<li class="chapter" data-level="64.1.1" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#section-190"><i class="fa fa-check"></i><b>64.1.1</b> 27.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="64.2" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#text-formatting-with-markdown-1"><i class="fa fa-check"></i><b>64.2</b> 27.3: Text formatting with Markdown</a><ul>
+<li class="chapter" data-level="64.2.1" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#section-191"><i class="fa fa-check"></i><b>64.2.1</b> 27.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="64.3" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#cv-of-bryan-shalloway-1"><i class="fa fa-check"></i><b>64.3</b> <strong>CV of Bryan Shalloway</strong></a></li>
+<li class="chapter" data-level="64.4" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#experience-1"><i class="fa fa-check"></i><b>64.4</b> Experience</a></li>
+<li class="chapter" data-level="64.5" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#education-1"><i class="fa fa-check"></i><b>64.5</b> Education</a></li>
+<li class="chapter" data-level="64.6" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#code-chunks-1"><i class="fa fa-check"></i><b>64.6</b> 27.4: Code chunks</a><ul>
+<li class="chapter" data-level="64.6.1" data-path="ch-27-r-markdown-1.html"><a href="ch-27-r-markdown-1.html#section-192"><i class="fa fa-check"></i><b>64.6.1</b> 27.4.7</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="65" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html"><i class="fa fa-check"></i><b>65</b> ch. 28: Graphics for communication</a><ul>
+<li class="chapter" data-level="65.1" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#label-1"><i class="fa fa-check"></i><b>65.1</b> 28.2: Label</a><ul>
+<li class="chapter" data-level="65.1.1" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#section-193"><i class="fa fa-check"></i><b>65.1.1</b> 28.2.1</a></li>
+</ul></li>
+<li class="chapter" data-level="65.2" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#annotations-1"><i class="fa fa-check"></i><b>65.2</b> 28.3: Annotations</a><ul>
+<li class="chapter" data-level="65.2.1" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#section-194"><i class="fa fa-check"></i><b>65.2.1</b> 28.3.1</a></li>
+</ul></li>
+<li class="chapter" data-level="65.3" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#scales-1"><i class="fa fa-check"></i><b>65.3</b> 28.4: Scales</a><ul>
+<li class="chapter" data-level="65.3.1" data-path="ch-28-graphics-for-communication-1.html"><a href="ch-28-graphics-for-communication-1.html#section-195"><i class="fa fa-check"></i><b>65.3.1</b> 28.4.4</a></li>
+</ul></li>
+</ul></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Another set of solutions and notes to ‘R for Data Science’</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="ch.-19-functions-1" class="section level1">
+<h1><span class="header-section-number">Chapter 52</span> ch. 19: Functions</h1>
+<ul>
+<li><code>function_name &lt;- function(input1, input2) {}</code></li>
+<li><code>if () {}</code></li>
+<li><code>else if () {}</code></li>
+<li><code>else {}</code></li>
+<li><code>||</code> (or) , <code>&amp;&amp;</code> (and) – used to combine multiple logical expressions</li>
+<li><code>|</code> and <code>&amp;</code> are vectorized operations not to be used with <code>if</code> statements</li>
+<li><code>any</code> checks if any values in vector are <code>TRUE</code></li>
+<li><code>all</code> checks if all values in vector are <code>TRUE</code></li>
+<li><code>identical</code> strict check for if values are the same</li>
+<li><code>dplyr::near</code> for more lenient comparison and typically better than <code>identical</code> as unaffected by floating point numbers and fine with different types</li>
+<li><code>switch</code> evaluate selected code based on position or name (good for replacing long chain of <code>if</code> statements). e.g. </li>
+</ul>
+<div class="sourceCode" id="cb2278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2278-1" title="1">Operation_Times2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){</a>
+<a class="sourceLine" id="cb2278-2" title="2">   first_op &lt;-<span class="st"> </span><span class="cf">switch</span>(op,</a>
+<a class="sourceLine" id="cb2278-3" title="3">     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2278-4" title="4">     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2278-5" title="5">     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2278-6" title="6">     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2278-7" title="7">     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)</a>
+<a class="sourceLine" id="cb2278-8" title="8">   )</a>
+<a class="sourceLine" id="cb2278-9" title="9">   </a>
+<a class="sourceLine" id="cb2278-10" title="10">   first_op <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb2278-11" title="11">  }</a>
+<a class="sourceLine" id="cb2278-12" title="12"></a>
+<a class="sourceLine" id="cb2278-13" title="13"><span class="kw">Operation_Times2</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&quot;plus&quot;</span>)</a></code></pre></div>
+<pre><code>## [1] 24</code></pre>
+<ul>
+<li><code>stop</code> stops expression and executes error action, note that <code>.call</code> default is <code>FALSE</code></li>
+<li><code>warning</code> generates a warning that corresponds with arguments, <code>suppressWarnings</code> may also be useful to no</li>
+<li><code>stopifnot</code> test multiple args and will produce error message if any are not true – compromise that prevents you from tedious work of putting multiple <code>if(){} else stop()</code> statements</li>
+<li><code>...</code> useful catch-all if your function primarily wraps another function (note that misspelled arguments will not raise an error), e.g. </li>
+</ul>
+<div class="sourceCode" id="cb2280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2280-1" title="1">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a>
+<a class="sourceLine" id="cb2280-2" title="2"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a></code></pre></div>
+<pre><code>## [1] &quot;a, b, c, d, e, f, g, h, i, j&quot;</code></pre>
+<ul>
+<li><code>cut</code> can be used to discretize continuous variables (also saves long <code>if</code> statements)</li>
+<li><code>return</code> allows you to return the function early, typically reserve use for when the function can return early with a simpler function</li>
+<li><code>cat</code> function to print label in output</li>
+<li><code>invisible</code> input does not get printed out</li>
+</ul>
+<div id="when-should-you-write-a-function-1" class="section level2">
+<h2><span class="header-section-number">52.1</span> 19.2: When should you write a function?</h2>
+<div id="section-160" class="section level3">
+<h3><span class="header-section-number">52.1.1</span> 19.2.1</h3>
+<ol style="list-style-type: decimal">
+<li><p>Why is <code>TRUE</code> not a parameter to <code>rescale01()</code>? What would happen if
+<code>x</code> contained a single missing value, and <code>na.rm</code> was <code>FALSE</code>?</p>
+<ul>
+<li><code>TRUE</code> doesn’t change between uses.</li>
+<li>The output would be <code>NA</code></li>
+</ul></li>
+<li><p>In the second variant of <code>rescale01()</code>, infinite values are left
+unchanged. Rewrite <code>rescale01()</code> so that <code>-Inf</code> is mapped to 0, and
+<code>Inf</code> is mapped to 1.</p>
+<div class="sourceCode" id="cb2282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2282-1" title="1">rescale01_inf &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb2282-2" title="2"></a>
+<a class="sourceLine" id="cb2282-3" title="3">  rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">finite =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2282-4" title="4">  x_scaled &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb2282-5" title="5">  is_inf &lt;-<span class="st"> </span><span class="kw">is.infinite</span>(x)</a>
+<a class="sourceLine" id="cb2282-6" title="6">  is_less0 &lt;-<span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb2282-7" title="7">  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>is_less0] &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb2282-8" title="8">  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>is_less0)] &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb2282-9" title="9">  x_scaled</a>
+<a class="sourceLine" id="cb2282-10" title="10">}</a>
+<a class="sourceLine" id="cb2282-11" title="11"></a>
+<a class="sourceLine" id="cb2282-12" title="12">x &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">-5</span>)</a>
+<a class="sourceLine" id="cb2282-13" title="13"><span class="kw">rescale01_inf</span>(x)</a></code></pre></div>
+<pre><code>## [1] 1.000 0.000 0.625 1.000 0.000</code></pre></li>
+<li><p>Practice turning the following code snippets into functions. Think about
+what each function does. What would you call it? How many arguments does it
+need? Can you rewrite it to be more expressive or less duplicative?</p>
+<div class="sourceCode" id="cb2284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2284-1" title="1"><span class="kw">mean</span>(<span class="kw">is.na</span>(x))</a>
+<a class="sourceLine" id="cb2284-2" title="2"></a>
+<a class="sourceLine" id="cb2284-3" title="3">x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2284-4" title="4"></a>
+<a class="sourceLine" id="cb2284-5" title="5"><span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<ul>
+<li>See solutions below:</li>
+</ul>
+<div class="sourceCode" id="cb2285"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2285-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="ot">NA</span>, <span class="dv">3</span>, <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb2285-2" title="2"></a>
+<a class="sourceLine" id="cb2285-3" title="3"><span class="co">#mean(is.na(x))</span></a>
+<a class="sourceLine" id="cb2285-4" title="4">perc_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2285-5" title="5">  <span class="kw">is.na</span>(x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>()</a>
+<a class="sourceLine" id="cb2285-6" title="6">}</a>
+<a class="sourceLine" id="cb2285-7" title="7"></a>
+<a class="sourceLine" id="cb2285-8" title="8"><span class="kw">perc_na</span>(x)</a></code></pre></div>
+<pre><code>## [1] 0.2857143</code></pre>
+<div class="sourceCode" id="cb2287"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2287-1" title="1"><span class="co">#x / sum(x, na.rm = TRUE)</span></a>
+<a class="sourceLine" id="cb2287-2" title="2">prop_weighted &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2287-3" title="3">  x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2287-4" title="4">}</a>
+<a class="sourceLine" id="cb2287-5" title="5"><span class="kw">prop_weighted</span>(x)</a></code></pre></div>
+<pre><code>## [1] 0.1 0.4 0.2 0.0  NA 0.3  NA</code></pre>
+<div class="sourceCode" id="cb2289"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2289-1" title="1"><span class="co">#sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)</span></a>
+<a class="sourceLine" id="cb2289-2" title="2">CoefficientOfVariation &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2289-3" title="3">  <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb2289-4" title="4">}</a>
+<a class="sourceLine" id="cb2289-5" title="5"></a>
+<a class="sourceLine" id="cb2289-6" title="6"><span class="kw">CoefficientOfVariation</span>(x)</a></code></pre></div>
+<pre><code>## [1] 0.7905694</code></pre></li>
+<li><p>Follow <a href="http://nicercode.github.io/intro/writing-functions.html" class="uri">http://nicercode.github.io/intro/writing-functions.html</a> to
+write your own functions to compute the variance and skew of a numeric
+vector.</p>
+<ul>
+<li>Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)</li>
+</ul>
+<div class="sourceCode" id="cb2291"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2291-1" title="1">var_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb2291-2" title="2">  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb2291-3" title="3">}</a>
+<a class="sourceLine" id="cb2291-4" title="4"></a>
+<a class="sourceLine" id="cb2291-5" title="5">skewness_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2291-6" title="6">  <span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">/</span><span class="st"> </span><span class="kw">var_bry</span>(x) <span class="op">^</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb2291-7" title="7">}</a></code></pre></div>
+<p>Let’s create some samples of distributions – normal, t (with 7 degrees of freedom), unifrom, poisson (with lambda of 2).</p>
+<p>Note that an example with a cauchy distribution and looking at difference in kurtosis between that and a normal distribution has been moved to the <a href="appendix-21.html#appendix-21">Appendix</a> section <a href="appendix-16.html#section-164">19.2.1.4</a>.</p>
+<div class="sourceCode" id="cb2292"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2292-1" title="1">nd &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb2292-2" title="2">td_df7 &lt;-<span class="st"> </span><span class="kw">rt</span>(<span class="dv">10000</span>, <span class="dt">df =</span> <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb2292-3" title="3">ud &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb2292-4" title="4">pd_l2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">10000</span>, <span class="dv">2</span>)</a></code></pre></div>
+<p>Verify that these functions match with established functions</p>
+<div class="sourceCode" id="cb2293"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2293-1" title="1">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">skewness_bry</span>(pd_l2), e1071<span class="op">::</span><span class="kw">skewness</span>(pd_l2, <span class="dt">type =</span> <span class="dv">3</span>))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb2295"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2295-1" title="1">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">var_bry</span>(pd_l2), <span class="kw">var</span>(pd_l2))</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p>Let’s look at the distributions as well as their variance an skewness</p>
+<div class="sourceCode" id="cb2297"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2297-1" title="1">distributions_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">normal_dist =</span> nd,</a>
+<a class="sourceLine" id="cb2297-2" title="2">       <span class="dt">t_7df_dist =</span> td_df7,</a>
+<a class="sourceLine" id="cb2297-3" title="3">       <span class="dt">uniform_dist =</span> ud,</a>
+<a class="sourceLine" id="cb2297-4" title="4">       <span class="dt">poisson_dist =</span> pd_l2)</a>
+<a class="sourceLine" id="cb2297-5" title="5"></a>
+<a class="sourceLine" id="cb2297-6" title="6">distributions_df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2297-7" title="7"><span class="st">  </span><span class="kw">gather</span>(normal_dist<span class="op">:</span>poisson_dist, <span class="dt">value =</span> <span class="st">&quot;sample&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;dist_type&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2297-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dist_type =</span> <span class="kw">factor</span>(forcats<span class="op">::</span><span class="kw">fct_inorder</span>(dist_type))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2297-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sample))<span class="op">+</span></a>
+<a class="sourceLine" id="cb2297-10" title="10"><span class="st">  </span><span class="kw">geom_histogram</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb2297-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>dist_type, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="R4DS_Solutions_files/figure-html/unnamed-chunk-423-1.png" width="672" /></p>
+<div class="sourceCode" id="cb2299"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2299-1" title="1"><span class="kw">tibble</span>(<span class="dt">dist_type =</span> <span class="kw">names</span>(distributions_df),</a>
+<a class="sourceLine" id="cb2299-2" title="2"><span class="dt">skewness =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, skewness_bry), </a>
+<a class="sourceLine" id="cb2299-3" title="3"><span class="dt">variance =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, var_bry))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##   dist_type    skewness variance
+##   &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
+## 1 normal_dist    0.0509   1.01  
+## 2 t_7df_dist    -0.0253   1.42  
+## 3 uniform_dist  -0.0311   0.0823
+## 4 poisson_dist   0.686    2.01</code></pre>
+<ul>
+<li>excellent video explaining intuition behind skewness: <a href="https://www.youtube.com/watch?v=z3XaFUP1rAM" class="uri">https://www.youtube.com/watch?v=z3XaFUP1rAM</a></li>
+</ul></li>
+<li><p>Write <code>both_na()</code>, a function that takes two vectors of the same length
+and returns the number of positions that have an <code>NA</code> in both vectors.</p>
+<div class="sourceCode" id="cb2301"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2301-1" title="1">both_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb2301-2" title="2">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(y)) {</a>
+<a class="sourceLine" id="cb2301-3" title="3">  <span class="kw">sum</span>(<span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(y))</a>
+<a class="sourceLine" id="cb2301-4" title="4">  } <span class="cf">else</span></a>
+<a class="sourceLine" id="cb2301-5" title="5">  <span class="kw">stop</span>(<span class="st">&quot;Vectors are not equal length&quot;</span>)</a>
+<a class="sourceLine" id="cb2301-6" title="6">}</a>
+<a class="sourceLine" id="cb2301-7" title="7"></a>
+<a class="sourceLine" id="cb2301-8" title="8">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="ot">NA</span>, <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb2301-9" title="9">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb2301-10" title="10">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb2301-11" title="11"></a>
+<a class="sourceLine" id="cb2301-12" title="12"><span class="kw">both_na</span>(x, y)</a></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<div class="sourceCode" id="cb2303"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2303-1" title="1"><span class="kw">both_na</span>(x, z)</a></code></pre></div>
+<pre><code>## Error in both_na(x, z): Vectors are not equal length</code></pre></li>
+<li><p>What do the following functions do? Why are they useful even though they
+are so short?</p>
+<div class="sourceCode" id="cb2305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2305-1" title="1">is_directory &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.info</span>(x)<span class="op">$</span>isdir</a>
+<a class="sourceLine" id="cb2305-2" title="2">is_readable &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.access</span>(x, <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<ul>
+<li>first checks if what is being referred to is actually a directory</li>
+<li>second checks if a specific file is readable</li>
+</ul></li>
+<li><p>Read the <a href="https://en.wikipedia.org/wiki/Little_Bunny_Foo_Foo">complete lyrics</a>
+to “Little Bunny Foo Foo”. There’s a lot of duplication in this song.
+Extend the initial piping example to recreate the complete song, and use
+functions to reduce the duplication.</p>
+<ul>
+<li>Do later…</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="functions-are-for-humans-and-computers-1" class="section level2">
+<h2><span class="header-section-number">52.2</span> 19.3: Functions are for humans and computers</h2>
+<ul>
+<li>Recommends snake_case over camelCase, but just choose one and be consistent</li>
+<li>When functions have a link, common prefix over suffix (i.e. input_select, input_text over, select_input, text_input)</li>
+<li>ctrl + shift + r creates section breaks in R scripts like below<br />
+<code># test label --------------------------------------------------------------</code>
+<ul>
+<li>(though these cannot be made in markdown documents)</li>
+</ul></li>
+</ul>
+<div id="section-161" class="section level3">
+<h3><span class="header-section-number">52.2.1</span> 19.3.1</h3>
+<ol style="list-style-type: decimal">
+<li><p>Read the source code for each of the following three functions, puzzle out
+what they do, and then brainstorm better names.</p>
+<div class="sourceCode" id="cb2306"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2306-1" title="1">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(string, prefix) {</a>
+<a class="sourceLine" id="cb2306-2" title="2">  <span class="kw">substr</span>(string, <span class="dv">1</span>, <span class="kw">nchar</span>(prefix)) <span class="op">==</span><span class="st"> </span>prefix</a>
+<a class="sourceLine" id="cb2306-3" title="3">}</a>
+<a class="sourceLine" id="cb2306-4" title="4">f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2306-5" title="5">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
+<a class="sourceLine" id="cb2306-6" title="6">  x[<span class="op">-</span><span class="kw">length</span>(x)]</a>
+<a class="sourceLine" id="cb2306-7" title="7">}</a>
+<a class="sourceLine" id="cb2306-8" title="8">f3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
+<a class="sourceLine" id="cb2306-9" title="9">  <span class="kw">rep</span>(y, <span class="dt">length.out =</span> <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb2306-10" title="10">}</a></code></pre></div>
+<ul>
+<li><code>f1</code>: <code>check_prefix</code></li>
+<li><code>f2</code>: <code>return_not_last</code></li>
+<li><code>f3</code>: <code>repeat_for_length</code></li>
+</ul></li>
+<li><p>Take a function that you’ve written recently and spend 5 minutes
+brainstorming a better name for it and its arguments.</p>
+<ul>
+<li>Do later, consider doing for the airpline fix time functions, or for the CaseAnalysis data</li>
+</ul></li>
+<li><p>Compare and contrast <code>rnorm()</code> and <code>MASS::mvrnorm()</code>. How could you make
+them more consistent?</p>
+<ul>
+<li>uses mu = and Sigma = instead of mean = and sd = , and has extra parameters like tol, empirical, EISPACK</li>
+<li>Similar in that both are pulling samples from gaussian distribution</li>
+<li><code>mvrnorm</code> is multivariate though, could change name to <code>rnorm_mv</code></li>
+</ul></li>
+<li><p>Make a case for why <code>norm_r()</code>, <code>norm_d()</code> etc would be better than
+<code>rnorm()</code>, <code>dnorm()</code>. Make a case for the opposite.</p>
+<ul>
+<li><code>norm_*</code> would show the commonality of them being from the same distribution. One could argue the important commonality though may be more related to it being either a random sample or a density distribution, in which case the <code>r*</code> or <code>d*</code> coming first may make more sense. To me, the fact that the help pages has all of the ‘normal distribution’ functions on the same page suggests the former may make more sense. However, I actually like having it be set-up the way it is, because I am more likely to forget the name of the distribution type I want over the fact that I want a random sample, so it’s easier to type <code>r</code> and then do ctrl + space and have autocomplete help me find the specific distribution I want, e.g. <code>rnorm</code>, <code>runif</code>, <code>rpois</code>, <code>rbinom</code>…</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="conditional-execution-1" class="section level2">
+<h2><span class="header-section-number">52.3</span> 19.4: Conditional execution</h2>
+<ul>
+<li>Function example that uses <code>if</code> statement. I though this was a tricky function and added some notes below…</li>
+</ul>
+<div class="sourceCode" id="cb2307"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2307-1" title="1">has_name &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb2307-2" title="2">  nms &lt;-<span class="st"> </span><span class="kw">names</span>(x) </a>
+<a class="sourceLine" id="cb2307-3" title="3">  <span class="cf">if</span> (<span class="kw">is.null</span>(nms)) { </a>
+<a class="sourceLine" id="cb2307-4" title="4">    <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb2307-5" title="5">  } <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2307-6" title="6">    <span class="op">!</span><span class="kw">is.na</span>(nms) <span class="op">&amp;</span><span class="st"> </span>nms <span class="op">!=</span><span class="st"> &quot;&quot;</span></a>
+<a class="sourceLine" id="cb2307-7" title="7">  }</a>
+<a class="sourceLine" id="cb2307-8" title="8">}</a></code></pre></div>
+<ul>
+<li>note that if all names are blank, it returns the one-unit vector value NULL, hence the need for the <code>if</code> statement here…</li>
+<li><code>is.null</code> is not vectorized in the way that <code>is.na</code> is – an exmpale of base R not being perfectly consistent. E.g. it’s job is to return <code>TRUE</code> if given a <code>NULL</code> input, if you give it a list of <code>NULL</code> inputs it will return <code>FALSE</code>, e.g. <code>is.null(list(NULL, NULL))</code></li>
+</ul>
+<div id="section-162" class="section level3">
+<h3><span class="header-section-number">52.3.1</span> 19.4.4</h3>
+<ol style="list-style-type: decimal">
+<li><p>What’s the difference between <code>if</code> and <code>ifelse()</code>? Carefully read the help
+and construct three examples that illustrate the key differences.</p>
+<ul>
+<li><code>ifelse</code> is vectorized, <code>if</code> is not
+<ul>
+<li>Typically use <code>if</code> in functions when giving conditional options for how to evaluate</li>
+<li>Typically use <code>ifelse</code> when changing specific values in a vector</li>
+</ul></li>
+<li>If you supply <code>if</code> with a vector of length &gt; 1, it will use the first value</li>
+</ul>
+<div class="sourceCode" id="cb2308"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2308-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>)</a>
+<a class="sourceLine" id="cb2308-2" title="2">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;5&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;9&quot;</span>)</a>
+<a class="sourceLine" id="cb2308-3" title="3"></a>
+<a class="sourceLine" id="cb2308-4" title="4"><span class="co"># Use ifelse simple transformations of values like example below</span></a>
+<a class="sourceLine" id="cb2308-5" title="5"><span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">0</span>, x)</a></code></pre></div>
+<pre><code>## [1] 0 0 6</code></pre>
+<div class="sourceCode" id="cb2310"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2310-1" title="1">cutoff_make0 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">cutoff =</span> <span class="dv">0</span>){</a>
+<a class="sourceLine" id="cb2310-2" title="2">  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x)){</a>
+<a class="sourceLine" id="cb2310-3" title="3">    <span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>cutoff, <span class="dv">0</span>, x)</a>
+<a class="sourceLine" id="cb2310-4" title="4">  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;The input provided is not a numeric vector&quot;</span>)</a>
+<a class="sourceLine" id="cb2310-5" title="5">}</a>
+<a class="sourceLine" id="cb2310-6" title="6"></a>
+<a class="sourceLine" id="cb2310-7" title="7"><span class="kw">cutoff_make0</span>(x, <span class="dt">cutoff =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>## [1] 0 4 6</code></pre>
+<div class="sourceCode" id="cb2312"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2312-1" title="1"><span class="kw">cutoff_make0</span>(y, <span class="dt">cutoff =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre><code>## Error in cutoff_make0(y, cutoff = 4): The input provided is not a numeric vector</code></pre></li>
+<li><p>Write a greeting function that says “good morning”, “good afternoon”,
+or “good evening”, depending on the time of day. (Hint: use a time
+argument that defaults to <code>lubridate::now()</code>. That will make it
+easier to test your function.)</p>
+<div class="sourceCode" id="cb2314"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2314-1" title="1">greeting &lt;-<span class="st"> </span><span class="cf">function</span>(when) {</a>
+<a class="sourceLine" id="cb2314-2" title="2"></a>
+<a class="sourceLine" id="cb2314-3" title="3">  time &lt;-<span class="st"> </span><span class="kw">hour</span>(when)</a>
+<a class="sourceLine" id="cb2314-4" title="4"></a>
+<a class="sourceLine" id="cb2314-5" title="5">  <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>) {</a>
+<a class="sourceLine" id="cb2314-6" title="6">    greating &lt;-<span class="st"> &quot;good morning&quot;</span></a>
+<a class="sourceLine" id="cb2314-7" title="7">  } <span class="cf">else</span> <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">17</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;=</span><span class="st"> </span><span class="dv">12</span>) {</a>
+<a class="sourceLine" id="cb2314-8" title="8">    greeting &lt;-<span class="st"> &quot;good afternoon&quot;</span></a>
+<a class="sourceLine" id="cb2314-9" title="9">  } <span class="cf">else</span> greeting &lt;-<span class="st"> &quot;good evening&quot;</span></a>
+<a class="sourceLine" id="cb2314-10" title="10"></a>
+<a class="sourceLine" id="cb2314-11" title="11">  when_char &lt;-<span class="st"> </span><span class="kw">as.character</span>(when)</a>
+<a class="sourceLine" id="cb2314-12" title="12">  mid &lt;-<span class="st"> &quot;, it is: &quot;</span></a>
+<a class="sourceLine" id="cb2314-13" title="13">  <span class="kw">cat</span>(greeting, mid, when_char, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2314-14" title="14">}</a>
+<a class="sourceLine" id="cb2314-15" title="15"></a>
+<a class="sourceLine" id="cb2314-16" title="16"><span class="kw">greeting</span>(<span class="kw">now</span>())</a></code></pre></div>
+<pre><code>## good evening, it is: 2019-05-13 17:50:45</code></pre></li>
+<li><p>Implement a <code>fizzbuzz</code> function. It takes a single number as input. If
+the number is divisible by three, it returns “fizz”. If it’s divisible by
+five it returns “buzz”. If it’s divisible by three and five, it returns
+“fizzbuzz”. Otherwise, it returns the number. Make sure you first write
+working code before you create the function.</p>
+<div class="sourceCode" id="cb2316"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2316-1" title="1">fizzbuzz &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb2316-2" title="2">  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){</a>
+<a class="sourceLine" id="cb2316-3" title="3">    y &lt;-<span class="st"> &quot;&quot;</span></a>
+<a class="sourceLine" id="cb2316-4" title="4">    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;fizz&quot;</span>)</a>
+<a class="sourceLine" id="cb2316-5" title="5">    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;buzz&quot;</span>)</a>
+<a class="sourceLine" id="cb2316-6" title="6">    <span class="cf">if</span> (<span class="kw">str_length</span>(y) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb2316-7" title="7">      <span class="kw">print</span>(x)</a>
+<a class="sourceLine" id="cb2316-8" title="8">    } <span class="cf">else</span> <span class="kw">print</span>(y)</a>
+<a class="sourceLine" id="cb2316-9" title="9">  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;Input is not a numeric vector with length 1&quot;</span>)</a>
+<a class="sourceLine" id="cb2316-10" title="10">}</a>
+<a class="sourceLine" id="cb2316-11" title="11"></a>
+<a class="sourceLine" id="cb2316-12" title="12"><span class="kw">fizzbuzz</span>(<span class="dv">4</span>)</a></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode" id="cb2318"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2318-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;fizz&quot;</code></pre>
+<div class="sourceCode" id="cb2320"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2320-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">6</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;buzz&quot;</code></pre>
+<div class="sourceCode" id="cb2322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2322-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">30</span>)</a></code></pre></div>
+<pre><code>## [1] &quot;fizzbuzz&quot;</code></pre>
+<div class="sourceCode" id="cb2324"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2324-1" title="1"><span class="kw">fizzbuzz</span>(<span class="kw">c</span>(<span class="dv">34</span>, <span class="dv">21</span>))</a></code></pre></div>
+<pre><code>## Error in fizzbuzz(c(34, 21)): Input is not a numeric vector with length 1</code></pre></li>
+<li><p>How could you use <code>cut()</code> to simplify this set of nested if-else statements?</p>
+<div class="sourceCode" id="cb2326"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2326-1" title="1"><span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb2326-2" title="2">  <span class="st">&quot;freezing&quot;</span></a>
+<a class="sourceLine" id="cb2326-3" title="3">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
+<a class="sourceLine" id="cb2326-4" title="4">  <span class="st">&quot;cold&quot;</span></a>
+<a class="sourceLine" id="cb2326-5" title="5">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) {</a>
+<a class="sourceLine" id="cb2326-6" title="6">  <span class="st">&quot;cool&quot;</span></a>
+<a class="sourceLine" id="cb2326-7" title="7">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>) {</a>
+<a class="sourceLine" id="cb2326-8" title="8">  <span class="st">&quot;warm&quot;</span></a>
+<a class="sourceLine" id="cb2326-9" title="9">} <span class="cf">else</span> {</a>
+<a class="sourceLine" id="cb2326-10" title="10">  <span class="st">&quot;hot&quot;</span></a>
+<a class="sourceLine" id="cb2326-11" title="11">}</a></code></pre></div>
+<ul>
+<li>Below is example of fix</li>
+</ul>
+<div class="sourceCode" id="cb2327"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2327-1" title="1">temp &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb2327-2" title="2"><span class="kw">cut</span>(temp, </a>
+<a class="sourceLine" id="cb2327-3" title="3">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span></a>
+<a class="sourceLine" id="cb2327-4" title="4">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),</a>
+<a class="sourceLine" id="cb2327-5" title="5">    <span class="dt">right =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb2327-6" title="6">    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] freezing freezing freezing cold     cold     cool     cool    
+##  [8] warm     warm     hot      hot      hot      hot     
+## Levels: freezing cold cool warm hot</code></pre>
+<p>How would you change the call to <code>cut()</code> if I’d used <code>&lt;</code> instead of <code>&lt;=</code>?
+What is the other chief advantage of <code>cut()</code> for this problem? (Hint:
+what happens if you have many values in <code>temp</code>?)</p>
+<ul>
+<li>See below change to <code>right</code> argument</li>
+</ul>
+<div class="sourceCode" id="cb2329"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2329-1" title="1"><span class="kw">cut</span>(temp, </a>
+<a class="sourceLine" id="cb2329-2" title="2">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span></a>
+<a class="sourceLine" id="cb2329-3" title="3">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),</a>
+<a class="sourceLine" id="cb2329-4" title="4">    <span class="dt">right =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb2329-5" title="5">    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre><code>##  [1] freezing freezing cold     cold     cool     cool     warm    
+##  [8] warm     hot      hot      hot      hot      hot     
+## Levels: freezing cold cool warm hot</code></pre></li>
+<li><p>What happens if you use <code>switch()</code> with numeric values?</p>
+<ul>
+<li>It will return the index of the argument.
+<ul>
+<li>In example below, I input ‘3’ into <code>switch</code> value so it does the <code>times</code> argument</li>
+</ul></li>
+</ul>
+<div class="sourceCode" id="cb2331"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2331-1" title="1">math_operation &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){</a>
+<a class="sourceLine" id="cb2331-2" title="2">   <span class="cf">switch</span>(op,</a>
+<a class="sourceLine" id="cb2331-3" title="3">     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2331-4" title="4">     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2331-5" title="5">     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2331-6" title="6">     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb2331-7" title="7">     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)</a>
+<a class="sourceLine" id="cb2331-8" title="8">   )</a>
+<a class="sourceLine" id="cb2331-9" title="9">  }</a>
+<a class="sourceLine" id="cb2331-10" title="10"></a>
+<a class="sourceLine" id="cb2331-11" title="11"><span class="kw">math_operation</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</a></code></pre></div>
+<pre><code>## [1] 20</code></pre></li>
+<li><p>What does this <code>switch()</code> call do? What happens if <code>x</code> is “e”?</p>
+<div class="sourceCode" id="cb2333"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2333-1" title="1">x &lt;-<span class="st"> &quot;e&quot;</span></a>
+<a class="sourceLine" id="cb2333-2" title="2"></a>
+<a class="sourceLine" id="cb2333-3" title="3"><span class="cf">switch</span>(x, </a>
+<a class="sourceLine" id="cb2333-4" title="4">  <span class="dt">a =</span> ,</a>
+<a class="sourceLine" id="cb2333-5" title="5">  <span class="dt">b =</span> <span class="st">&quot;ab&quot;</span>,</a>
+<a class="sourceLine" id="cb2333-6" title="6">  <span class="dt">c =</span> ,</a>
+<a class="sourceLine" id="cb2333-7" title="7">  <span class="dt">d =</span> <span class="st">&quot;cd&quot;</span></a>
+<a class="sourceLine" id="cb2333-8" title="8">)</a></code></pre></div>
+<p>Experiment, then carefully read the documentation.</p>
+<ul>
+<li>If <code>x</code> is ‘e’ nothing will be outputted. If <code>x</code> is ‘c’ or ‘d’ then ‘cd’ is outputted. If ‘a’ or ‘b’ then ‘ab’ is outputeed. If blank it will continue down list until reaching an argument to output.</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="function-arguments-1" class="section level2">
+<h2><span class="header-section-number">52.4</span> 19.5: Function arguments</h2>
+<p><em>Common non-descriptive short argument names: </em></p>
+<ul>
+<li><code>x</code>, <code>y</code>, <code>z</code>: vectors.</li>
+<li><code>w</code>: a vector of weights.</li>
+<li><code>df</code>: a data frame.</li>
+<li><code>i</code>, <code>j</code>: numeric indices (typically rows and columns).</li>
+<li><code>n</code>: length, or number of rows.</li>
+<li><code>p</code>: number of columns.</li>
+</ul>
+<div id="section-163" class="section level3">
+<h3><span class="header-section-number">52.4.1</span> 19.5.5</h3>
+<ol style="list-style-type: decimal">
+<li><p>What does <code>commas(letters, collapse = "-")</code> do? Why?</p>
+<ul>
+<li><code>commas</code> function is below</li>
+</ul>
+<div class="sourceCode" id="cb2334"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2334-1" title="1">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a>
+<a class="sourceLine" id="cb2334-2" title="2"></a>
+<a class="sourceLine" id="cb2334-3" title="3"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a></code></pre></div>
+<pre><code>## [1] &quot;a, b, c, d, e, f, g, h, i, j&quot;</code></pre>
+<div class="sourceCode" id="cb2336"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2336-1" title="1"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">collapse =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre><code>## Error in stringr::str_c(..., collapse = &quot;, &quot;): formal argument &quot;collapse&quot; matched by multiple actual arguments</code></pre>
+<ul>
+<li><p>The above fails because are essentially specifying two different values for the <code>collapse</code> argument</p></li>
+<li>Takes in vector of mulitple strings and outputs one-unit character string with items concatenated together and seperated by columns</li>
+<li><p>Is able to do this via use of <code>...</code> that turns this into a wrapper on <code>stringr::str_c</code> with the <code>collapse</code> value specified</p></li>
+</ul></li>
+<li><p>It’d be nice if you could supply multiple characters to the <code>pad</code> argument,
+e.g. <code>rule("Title", pad = "-+")</code>. Why doesn’t this currently work? How
+could you fix it?</p>
+<ul>
+<li>current <code>rule</code> function is below</li>
+</ul>
+<div class="sourceCode" id="cb2338"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2338-1" title="1">rule &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {</a>
+<a class="sourceLine" id="cb2338-2" title="2">  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)</a>
+<a class="sourceLine" id="cb2338-3" title="3">  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb2338-4" title="4">  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2338-5" title="5">}</a>
+<a class="sourceLine" id="cb2338-6" title="6"></a>
+<a class="sourceLine" id="cb2338-7" title="7"><span class="co"># Note that `cat` is used instead of `paste` because paste would output it as a character vector, whereas `cat` is focused on just ouptut, could also have used `print`, though print does more conversion than cat does (apparently)</span></a>
+<a class="sourceLine" id="cb2338-8" title="8"></a>
+<a class="sourceLine" id="cb2338-9" title="9"><span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>)</a></code></pre></div>
+<pre><code>## Tis the season to be jolly --------------------------------------------</code></pre>
+<ul>
+<li>doesn’t work because pad ends-up being too many characters in this situation</li>
+</ul>
+<div class="sourceCode" id="cb2340"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2340-1" title="1"><span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</a></code></pre></div>
+<pre><code>## Tis the season to be jolly +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-</code></pre>
+<ul>
+<li>instead would need to make the number of times <code>pad</code> is duplicated dependent on its length, see below for fix</li>
+</ul>
+<div class="sourceCode" id="cb2342"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2342-1" title="1">rule_pad_fix &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {</a>
+<a class="sourceLine" id="cb2342-2" title="2">  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)</a>
+<a class="sourceLine" id="cb2342-3" title="3">  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb2342-4" title="4">  width_fix &lt;-<span class="st"> </span>width <span class="op">%/%</span><span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_length</span>(pad)</a>
+<a class="sourceLine" id="cb2342-5" title="5">  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width_fix), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2342-6" title="6">}</a>
+<a class="sourceLine" id="cb2342-7" title="7"></a>
+<a class="sourceLine" id="cb2342-8" title="8"><span class="kw">rule_pad_fix</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</a></code></pre></div>
+<pre><code>## Tis the season to be jolly +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-</code></pre></li>
+<li><p>What does the <code>trim</code> argument to <code>mean()</code> do? When might you use it?</p>
+<ul>
+<li><code>trim</code> specifies proportion of data to take off from both ends, good with outliers</li>
+</ul>
+<div class="sourceCode" id="cb2344"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2344-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100000</span>), <span class="dt">trim =</span> <span class="fl">.025</span>) </a></code></pre></div>
+<pre><code>## [1] 50.5</code></pre></li>
+<li><p>The default value for the <code>method</code> argument to <code>cor()</code> is
+<code>c("pearson", "kendall", "spearman")</code>. What does that mean? What
+value is used by default?</p>
+<ul>
+<li>is showing that you can choose from any of these, will default to use <code>pearson</code> (value in first position)</li>
+</ul></li>
+</ol>
+</div>
+</div>
+<div id="return-values-1" class="section level2">
+<h2><span class="header-section-number">52.5</span> 19.6: Return values</h2>
+<div class="sourceCode" id="cb2346"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2346-1" title="1">show_missings &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb2346-2" title="2">  n &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(df))</a>
+<a class="sourceLine" id="cb2346-3" title="3">  <span class="kw">cat</span>(<span class="st">&quot;Missing values: &quot;</span>, n, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
+<a class="sourceLine" id="cb2346-4" title="4">  <span class="kw">invisible</span>(df)</a>
+<a class="sourceLine" id="cb2346-5" title="5">}</a>
+<a class="sourceLine" id="cb2346-6" title="6"></a>
+<a class="sourceLine" id="cb2346-7" title="7">x &lt;-<span class="st"> </span><span class="kw">show_missings</span>(mtcars)</a></code></pre></div>
+<pre><code>## Missing values: 0</code></pre>
+<div class="sourceCode" id="cb2348"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2348-1" title="1"><span class="kw">str</span>(x)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
+##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
+##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
+##  $ disp: num  160 160 108 258 360 ...
+##  $ hp  : num  110 110 93 110 175 105 245 62 95 123 ...
+##  $ drat: num  3.9 3.9 3.85 3.08 3.15 2.76 3.21 3.69 3.92 3.92 ...
+##  $ wt  : num  2.62 2.88 2.32 3.21 3.44 ...
+##  $ qsec: num  16.5 17 18.6 19.4 17 ...
+##  $ vs  : num  0 0 1 1 0 1 0 1 1 1 ...
+##  $ am  : num  1 1 1 0 0 0 0 0 0 0 ...
+##  $ gear: num  4 4 4 3 3 3 3 4 4 4 ...
+##  $ carb: num  4 4 1 1 2 1 4 2 2 4 ...</code></pre>
+<ul>
+<li>can still use in pipes</li>
+</ul>
+<div class="sourceCode" id="cb2350"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2350-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2350-2" title="2"><span class="st">  </span><span class="kw">show_missings</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2350-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mpg =</span> <span class="kw">ifelse</span>(mpg <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2350-4" title="4"><span class="st">  </span><span class="kw">show_missings</span>() </a></code></pre></div>
+<pre><code>## Missing values: 0
+## Missing values: 18</code></pre>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch-18-pipes-notes-only-1.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="appendix-16.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
