@@ -82,12 +82,13 @@ treatment %>%
 ### 12.2.1.
 
 *1. Using prose, describe how the variables and observations are organised in each of the sample tables.*  
-* `table1`: each country-year is a row with cases and pop as values
-* `table2`: each country-year-type is a row
-* `table3`: each country-year is a row with rate containing values for both `cases` and `population`
-* `table4a` and `table4b`: a represents cases, b population, each row is a country and then column are the year for the value 
 
-*2. Compute the rate for table2, and table4a + table4b. You will need to perform four operations:*  
+* `table1`: each country-year is a row with cases and pop as values  
+* `table2`: each country-year-type is a row  
+* `table3`: each country-year is a row with rate containing values for both `cases` and `population`  
+* `table4a` and `table4b`: a represents cases, b population, each row is a country and then column are the year for the value  
+
+*2. Compute the `rate` for `table2`, and `table4a` + `table4b`. You will need to perform four operations:*  
   
 a. Extract the number of TB cases per country per year.  
 b. Extract the matching population per country per year.  
@@ -141,7 +142,7 @@ table4a %>%
 
 * between these, `table2` was easier, though `table1` would have been easiest -- is fewer steps to get 1 row = 1 observation (if we define an observation as a country in a year with certain attributes)
 
-*3. Recreate the plot showing change in cases over time using table2 instead of table1. What do you need to do first?*  
+*3. Recreate the plot showing change in cases over time using `table2` instead of `table1`. What do you need to do first?*  
 
 ```r
 table2 %>% 
@@ -159,7 +160,7 @@ table2 %>%
 
 ### 12.3.3.
 
-*1. Why are gather() and spread() not perfectly symmetrical?*  
+*1. Why are `gather()` and `spread()` not perfectly symmetrical?*  
 Carefully consider the following example:  
 
 
@@ -270,8 +271,6 @@ people %>%
 ## 5 Phillip Woods       3    50     NA
 ```
 
-
-
 *4. Tidy the simple tibble below. Do you need to spread or gather it? What are the variables?*  
 
 
@@ -305,7 +304,7 @@ preg %>%
 
 ### 12.4.3.
 
-*1. What do the extra and fill arguments do in separate()? Experiment with the various options for the following two toy datasets.*  
+*1. What do the `extra` and `fill` arguments do in `separate()`? Experiment with the various options for the following two toy datasets.*  
 
 
 ```r
@@ -377,7 +376,7 @@ tribble(~a,~b,
 ```
 
 
-*2. Both unite() and separate() have a remove argument. What does it do? Why would you set it to FALSE?*  
+*2. Both `unite()` and `separate()` have a `remove` argument. What does it do? Why would you set it to `FALSE`?*  
 
 `remove = FALSE` allows you to specify to keep the input column(s)
 
@@ -397,10 +396,9 @@ tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>%
 ## 4 k,l,m k,l,m k     l     m
 ```
 
-
-*3. Compare and contrast separate() and extract(). Why are there three variations of separation (by position, by separator, and with groups), but only one unite?*  
+*3. Compare and contrast `separate()` and `extract()`. Why are there three variations of separation (by position, by separator, and with groups), but only one unite?*  
   
-`extract` is like `separate` but provide what to capture rather than what to split by as in `regex` instead of `sep`.
+`extract()` is like `separate()` but provide what to capture rather than what to split by as in `regex` instead of `sep`.
 
 ```r
 df <- data.frame(x = c("a-b", "a-d", "b-c", "d&e", NA), y = 1)
@@ -432,9 +430,7 @@ df %>%
 ## 5 <NA> <NA> 1
 ```
 
-
 Because there are many ways to split something up, but only one way to bring multiple things together...  
-
 
 ## 12.5: missing values
 
@@ -483,8 +479,7 @@ treatment2 %>%
 ## 2 Katherine Burke      4     0     0
 ```
 
-
-*2. What does the direction argument to fill() do?*  
+*2. What does the `.direction` argument to `fill()` do?*  
   
 Let's you fill either up or down. E.g. below is filling up example.
 
@@ -516,17 +511,17 @@ treatment %>%
 
 ### 12.6.1. 
 
-*1. In this case study I set na.rm = TRUE just to make it easier to check that we had the correct values. Is this reasonable? Think about how missing values are represented in this dataset. Are there implicit missing values? What's the difference between an NA and zero?*  
+*1. In this case study I set `na.rm = TRUE` just to make it easier to check that we had the correct values. Is this reasonable? Think about how missing values are represented in this dataset. Are there implicit missing values? What's the difference between an `NA` and zero?*  
   
 In this case it's reasonable, an `NA` perhaps means the metric wasn't recorded in that year, whereas 0 means it was recorded but there were 0 cases.  
 
 Implicit missing values represented by say Afghanistan not having any reported cases for females.
   
-*2. What happens if you neglect the mutate() step? (mutate(key = stringr::str_replace(key, "newrel", "new_rel")))*  
+*2. What happens if you neglect the `mutate()` step? (`mutate(key = stringr::str_replace(key, "newrel", "new_rel"))`)*  
   
 You would have had one less column, so 'newtype' would have been on column, rather than these splitting.  
 
-*3. I claimed that iso2 and iso3 were redundant with country. Confirm this claim.*  
+*3. I claimed that `iso2` and `iso3` were redundant with `country`. Confirm this claim.*  
 
 
 ```r
@@ -665,4 +660,3 @@ who_present %>%
 ```
 
 <img src="12-tidy-data_files/figure-html/unnamed-chunk-22-6.png" width="672" />
-

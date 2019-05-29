@@ -136,8 +136,7 @@ weather
     ## # ... with 4 variables: playerID <chr>, yearID <int>, stint <int>, n <int>
     ```
     
-    
-    1.  `babynames::babynames`: name, sex, year
+    2.  `babynames::babynames`: name, sex, year
     
     ```r
     babynames::babynames %>% 
@@ -150,9 +149,7 @@ weather
     ## # ... with 4 variables: name <chr>, sex <chr>, year <dbl>, n <int>
     ```
     
-    
-    1.  `nasaweather::atmos`: lat, long, year, month
-    
+    3.  `nasaweather::atmos`: lat, long, year, month
     
     ```r
     nasaweather::atmos %>% 
@@ -166,8 +163,7 @@ weather
     ## #   n <int>
     ```
     
-    1.  `fueleconomy::vehicles`: id
-    
+    4.  `fueleconomy::vehicles`: id
     
     ```r
     fueleconomy::vehicles %>% 
@@ -180,8 +176,7 @@ weather
     ## # ... with 2 variables: id <int>, n <int>
     ```
     
-    1.  `ggplot2::diamonds`: needs surrogate
-    
+    5.  `ggplot2::diamonds`: needs surrogate
     
     ```r
     diamonds %>% 
@@ -228,11 +223,8 @@ weather
     ## # ... with 53,930 more rows, and 1 more variable: surrogate_id <int>
     ```
     
-    
 
-1.  *Draw a diagram illustrating the connections between the `Batting`,*
-    *`Master`, and `Salaries` tables in the Lahman package. Draw another diagram*
-    *that shows the relationship between `Master`, `Managers`, `AwardsManagers`.*  
+1.  *Draw a diagram illustrating the connections between the `Batting`,`Master`, and `Salaries` tables in the Lahman package. Draw another diagram that shows the relationship between `Master`, `Managers`, `AwardsManagers`.*  
     
     For each dataset show just the `head(1)`
     
@@ -483,6 +475,7 @@ weather
     
     * There are weaknesses to using anova, but according to this test arrival delay does not appear to be randomly distributed across age
     * The reason for such a difference may be trivial or may be confounded by a more interesting pattern... but these are deeper questions
+    
 
 1.  *What weather conditions make it more likely to see a delay?*
 
@@ -611,11 +604,9 @@ weather
     ## 16 YV                   601   601        1
     ```
 
-    Some carriers do not have many of their tailnums data in the `planes` table. Anyone have more insight here?
+    Some carriers do not have many of their tailnums data in the `planes` table. (Come back.)
 
-
-1.  *Filter flights to only show flights with planes that have flown at least 100*
-    *flights.*
+1.  *Filter flights to only show flights with planes that have flown at least 100 flights.*
     
     
     ```r
@@ -646,8 +637,7 @@ weather
     ## #   minute <dbl>, time_hour <dttm>
     ```
 
-1.  *Combine `fueleconomy::vehicles` and `fueleconomy::common` to find only the*
-    *records for the most common models.*
+1.  *Combine `fueleconomy::vehicles` and `fueleconomy::common` to find only the records for the most common models.*
     
     
     ```r
@@ -671,12 +661,8 @@ weather
     ## 10  6443 Acura Integ~  1990 Subc~ Manu~ Fron~     4   1.8 Regu~    26    21
     ## # ... with 14,521 more rows
     ```
-    
 
-1.  *Find the 48 hours (over the course of the whole year) that have the worst*
-    *delays. Cross-reference it with the `weather` data. Can you see any*
-    *patterns?*
-    
+1.  *Find the 48 hours (over the course of the whole year) that have the worst delays. Cross-reference it with the `weather` data. Can you see any patterns?*
     
     First: Create two variables that together capture all 48 hour time windows across the year, at the day window of granularity (e.g. the time of day the flight takes off does not matter in establishing time windows for this example, only the day).
     Second: Gather these time windows into a single dataframe (note that this will increase the length of your data by ~364/365 * 100 %)
@@ -736,7 +722,6 @@ weather
       summarise_all(mean, na.rm = TRUE) %>% 
       ungroup()
     ```
-    
     
     Filtering join to just times weather for worst 2 days
     
@@ -820,15 +805,12 @@ weather
 
     I show plots and models of 48 hour time windows in a variety of other contexts and detail in [Appendix]
 
-1.  *What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you?*
-    *What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you?*
+1.  *What does `anti_join(flights, airports, by = c("dest" = "faa"))` tell you? What does `anti_join(airports, flights, by = c("faa" = "dest"))` tell you?*
 
-    `anti_join(flights, airports, by = c("dest" = "faa"))` --tells me the flight dests missing an airport
-    `anti_join(airports, flights, by = c("faa" = "dest"))` -- tells me the airports with no flights coming to them
+    * `anti_join(flights, airports, by = c("dest" = "faa"))` -- tells me the flight dests missing an airport
+    * `anti_join(airports, flights, by = c("faa" = "dest"))` -- tells me the airports with no flights coming to them
 
-1.  *You might expect that there's an implicit relationship between plane*
-    *and airline, because each plane is flown by a single airline. Confirm*
-    *or reject this hypothesis using the tools you've learned above.*
+1.  *You might expect that there's an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you've learned above.*
 
     
     ```r

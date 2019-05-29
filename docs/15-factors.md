@@ -32,45 +32,11 @@ gss_cat %>%
 # Is there a similar way to do this with count?
 ```
 
-## 15.4: Modifying factor order
-
-Example with `fct_recode`
-
-
-```r
-gss_cat %>%
-  mutate(partyid = fct_recode(partyid,
-    "Republican, strong"    = "Strong republican",
-    "Republican, weak"      = "Not str republican",
-    "Independent, near rep" = "Ind,near rep",
-    "Independent, near dem" = "Ind,near dem",
-    "Democrat, weak"        = "Not str democrat",
-    "Democrat, strong"      = "Strong democrat"
-  )) %>%
-  count(partyid)
-```
-
-```
-## # A tibble: 10 x 2
-##    partyid                   n
-##    <fct>                 <int>
-##  1 No answer               154
-##  2 Don't know                1
-##  3 Other party             393
-##  4 Republican, strong     2314
-##  5 Republican, weak       3032
-##  6 Independent, near rep  1791
-##  7 Independent            4119
-##  8 Independent, near dem  2499
-##  9 Democrat, weak         3690
-## 10 Democrat, strong       3490
-```
-
+## 15.4: General Social Survey
 
 ### 15.3.1 
 
-1.  Explore the distribution of `rincome` (reported income). What makes the
-    default bar chart hard to understand? How could you improve the plot?
+1.  Explore the distribution of `rincome` (reported income). What makes the default bar chart hard to understand? How could you improve the plot?
     
     
     ```r
@@ -79,7 +45,7 @@ gss_cat %>%
       geom_bar()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-2-1.png" width="672" />
     
     
     * Default bar chart has categories across the x-asix, I flipped these to be across the y-axis 
@@ -102,11 +68,10 @@ gss_cat %>%
       coord_flip()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 
-1.  What is the most common `relig` in this survey? What's the most
-    common `partyid`?
+1.  What is the most common `relig` in this survey? What's the most common `partyid`?
 
     
     ```r
@@ -159,8 +124,7 @@ gss_cat %>%
     * `relig` most common -- Protestant, 10846,
     * `partyid` most common -- Independent, 4119
 
-1.  Which `relig` does `denom` (denomination) apply to? How can you find
-    out with a table? How can you find out with a visualisation?
+1.  Which `relig` does `denom` (denomination) apply to? How can you find out with a table? How can you find out with a visualisation?
     
     *With visualization:*
     
@@ -171,7 +135,7 @@ gss_cat %>%
       coord_flip()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-5-1.png" width="672" />
     
     * Notice which have the widest variety of colours -- are protestant, and Christian slightly
     
@@ -209,8 +173,7 @@ gss_cat %>%
 
 ### 15.4.1
 	
-1.  There are some suspiciously high numbers in `tvhours`. Is the mean a good
-    summary?
+1.  There are some suspiciously high numbers in `tvhours`. Is the mean a good summary?
     
     
     ```r
@@ -220,13 +183,12 @@ gss_cat %>%
       geom_bar()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-7-1.png" width="672" />
    
-   * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
-   * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
+    * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
+    * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
 
-1.  For each factor in `gss_cat` identify whether the order of the levels is
-    arbitrary or principled.
+1.  For each factor in `gss_cat` identify whether the order of the levels is arbitrary or principled.
     
     
     ```r
@@ -280,18 +242,47 @@ gss_cat %>%
     
     * `rincome` is principaled, rest are arbitrary
 
-
-1.  Why did moving "Not applicable" to the front of the levels move it to the
-    bottom of the plot?
+1.  Why did moving "Not applicable" to the front of the levels move it to the bottom of the plot?
     
     * Becuase is moving this factor to be first in order
 	
 ## 	15.5: Modifying factor levels
 
+Example with `fct_recode`
+
+
+```r
+gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong"    = "Strong republican",
+    "Republican, weak"      = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak"        = "Not str democrat",
+    "Democrat, strong"      = "Strong democrat"
+  )) %>%
+  count(partyid)
+```
+
+```
+## # A tibble: 10 x 2
+##    partyid                   n
+##    <fct>                 <int>
+##  1 No answer               154
+##  2 Don't know                1
+##  3 Other party             393
+##  4 Republican, strong     2314
+##  5 Republican, weak       3032
+##  6 Independent, near rep  1791
+##  7 Independent            4119
+##  8 Independent, near dem  2499
+##  9 Democrat, weak         3690
+## 10 Democrat, strong       3490
+```
+
 ### 15.5.1
 
-1.  How have the proportions of people identifying as Democrat, Republican, and
-    Independent changed over time?
+1.  How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?
 
     *As a line plot: * 
     
@@ -377,8 +368,6 @@ gss_cat %>%
     ## 3 med       970
     ## 4 low      1183
     ```
-
-
 
 ## Appendix 
 

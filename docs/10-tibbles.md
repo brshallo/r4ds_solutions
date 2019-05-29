@@ -4,12 +4,8 @@
 
 # Ch. 10: Tibbles
 
-
-```r
-vignette("tibble")
-```
-
 * `tibble`: produces a dataframe w/ some other helpful qualities that have advantages over `data.frame`
+    * see `vignette("tibble")`
 * `as_tibble`: convert to a tibble
 * `tribble`: transposed tibble - set-up for data entry into a tibble in code
 * `print`: can use print to set how the tibble will print
@@ -101,7 +97,7 @@ df %>%
   geom_point()
 ```
 
-<img src="10-tibbles_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="10-tibbles_files/figure-html/unnamed-chunk-5-1.png" width="672" />
  
 *c. Creating a new column called 3 which is 2 divided by 1.*  
   
@@ -154,7 +150,7 @@ df %>%
 ```
   
 
-*5. What does tibble::enframe() do? When might you use it?*  
+*5. What does `tibble::enframe()` do? When might you use it?*  
 
 Let's you encode "name" and "value"
 

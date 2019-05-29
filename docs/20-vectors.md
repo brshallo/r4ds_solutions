@@ -1,25 +1,15 @@
 *Make sure the following packages are installed:*  
 
 
-```r
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
-
-library(tidyverse)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(nycflights13)
-library(babynames)
-library(nasaweather)
-library(lubridate)
-library(purrr)
-library(readr)
-```
 
 # Ch. 20: Vectors
+
+* types of vectors
+
 ![Types of vectors, not including augmented types](data-structures-overview.png)
 
 * `is.finite`, `is.infinite`, `is.na`, `is.nan`
+
 ![Check special values](check-special.png)
 
 * `typeof` retruns type of vector
@@ -45,83 +35,20 @@ library(readr)
 
 ```r
 as.Date
-```
-
-```
-## function (x, ...) 
-## UseMethod("as.Date")
-## <bytecode: 0x000000001c4b0bf8>
-## <environment: namespace:base>
-```
-
-```r
 methods("as.Date")
-```
-
-```
-## [1] as.Date.character as.Date.default   as.Date.factor    as.Date.numeric  
-## [5] as.Date.POSIXct   as.Date.POSIXlt  
-## see '?methods' for accessing help and source code
-```
-
-```r
 getS3method("as.Date", "default")
-```
-
-```
-## function (x, ...) 
-## {
-##     if (inherits(x, "Date")) 
-##         x
-##     else if (is.logical(x) && all(is.na(x))) 
-##         .Date(as.numeric(x))
-##     else stop(gettextf("do not know how to convert '%s' to class %s", 
-##         deparse(substitute(x)), dQuote("Date")), domain = NA)
-## }
-## <bytecode: 0x000000001c63da58>
-## <environment: namespace:base>
 ```
 
 * Unfortunately, tidyverse functions are not particularly easy to unpack/understand this way...
 
 ```r
 select
-```
-
-```
-## function (.data, ...) 
-## {
-##     UseMethod("select")
-## }
-## <bytecode: 0x000000001889fbb8>
-## <environment: namespace:dplyr>
-```
-
-```r
 methods("select")
-```
-
-```
-## [1] select.data.frame* select.default*    select.grouped_df*
-## [4] select.list        select.tbl_cube*  
-## see '?methods' for accessing help and source code
-```
-
-```r
 getS3method("select", "default")
 ```
 
-```
-## function (.data, ...) 
-## {
-##     select_(.data, .dots = compat_as_lazy_dots(...))
-## }
-## <bytecode: 0x000000001cfd1770>
-## <environment: namespace:dplyr>
-```
-
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
-  + data.frames only have class data.frame, whereas tibbles have tbl_df, and tbl as well
+  + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
 
 ```r
 a <- list(a = 1:3, b = "a string", c = pi, d = list(c(-1,-2), -5))
@@ -161,38 +88,32 @@ a[[4]][[1]]
     ```
 
 
-1.  Read the source code for `dplyr::near()` (Hint: to see the source code,
-    drop the `()`). How does it work? 
+1.  Read the source code for `dplyr::near()` (Hint: to see the source code, drop the `()`). How does it work? 
 
-1.  A logical vector can take 3 possible values. How many possible
-    values can an integer vector take? How many possible values can
-    a double take? Use google to do some research.
+    * safer way to test equality of floating point numbers (as has some tolerance for differences caused by rounding)
+
+1.  A logical vector can take 3 possible values. How many possible values can an integer vector take? How many possible values can a double take? Use google to do some research.
+
     * it checks if the difference between the value is within `tol` which by default is `.Machine$double.eps^0.5`
 
-1.  Brainstorm at least four functions that allow you to convert a double to an
-    integer. How do they differ? Be precise.
+1.  Brainstorm at least four functions that allow you to convert a double to an integer. How do they differ? Be precise.
     
     * `as.integer`, `as.factor` (technically is going to a factor), `round(, 0)`, `floor`, `ceiling`, these last 3 though do not change the type, which would remain an integer
     
-1.  What functions from the readr package allow you to turn a string
-    into logical, integer, and double vector?
+1.  What functions from the readr package allow you to turn a string into logical, integer, and double vector?
     
     * `parse_*` or `col_*`
 
-    
 ## 20.4: Using atomic vectors
 
 ### 20.4.6
 
-1.  What does `mean(is.na(x))` tell you about a vector `x`? What about
-    `sum(!is.finite(x))`?
+1.  What does `mean(is.na(x))` tell you about a vector `x`? What about `sum(!is.finite(x))`?
 
     * percentage that are `NA` or `NaN`
     * number that are either `Inf`, `-Inf`, `NA` or `NaN`
 
-1.  Carefully read the documentation of `is.vector()`. What does it actually
-    test for? Why does `is.atomic()` not agree with the definition of 
-    atomic vectors above?
+1.  Carefully read the documentation of `is.vector()`. What does it actually test for? Why does `is.atomic()` not agree with the definition of atomic vectors above?
     
     * `is.vector` tests if it is a specific type of vector with no attributes other than names. This second requirement means that any augmented vectors such as factors, dates, tibbles all would return false.
     * `is.atomic` returns TRUE to `is.atomic(NULL)` despite this representing the empty set.
@@ -304,9 +225,7 @@ a[[4]][[1]]
 
     * in the 2nd instance, `NaN`s will get converted to `NA`
 
-1.  What happens when you subset with a positive integer that's bigger
-    than the length of the vector? What happens when you subset with a 
-    name that doesn't exist?
+1.  What happens when you subset with a positive integer that's bigger than the length of the vector? What happens when you subset with a name that doesn't exist?
     
     * you get back an `NA` though it seems to take longer in the case when subsetting by a name that doesn't exist.
     
@@ -320,7 +239,6 @@ a[[4]][[1]]
 a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
 ```
 
-
 1.  Draw the following lists as nested sets:
 
     1.  `list(a, b, list(c, d), list(e, f))`
@@ -330,8 +248,7 @@ a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
     
     ![drawings 1 and 2 for 20.5.4.](nested-lists.png)
     
-1.  What happens if you subset a tibble as if you're subsetting a list?
-    What are the key differences between a list and a tibble?
+1.  What happens if you subset a tibble as if you're subsetting a list? What are the key differences between a list and a tibble?
     
     * dataframe is just a list of columns, so behaves similarly
     * dataframe has restriction that each column has the same number of elements whereas lists do not have this requirement
@@ -383,8 +300,7 @@ a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
     ```
 
     
-1.  Try and make a tibble that has columns with different lengths. What
-    happens?
+1.  Try and make a tibble that has columns with different lengths. What happens?
     
     * if the column is length one it will repeat for the length of the other column(s), otherwise if it is not the same length it will return an error
     

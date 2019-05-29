@@ -1,18 +1,5 @@
 
-*Make sure the following packages are installed:*  
 
-
-```r
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
-
-library(ggplot2)
-library(dplyr)
-library(nycflights13)
-library(Lahman)
-library(gapminder)
-library(tidyr)
-library(plotly) 
-```
 
 # Ch. 5 Data transformations
   
@@ -65,10 +52,10 @@ last(x)
 
 ## 5.2: Filter rows
 
-## 5.2.4.
+### 5.2.4.
 
 **1.Find all flights that...**  
-(key question)  
+  
 *1.1.Find flights that had an arrival delay of 2 + hrs*
 
 ```r
@@ -100,7 +87,6 @@ filter(flights, arr_delay >= 120) %>%
 ## $ time_hour      <dttm> 2013-01-01 06:00:00, 2013-01-01 18:00:00, 2013...
 ```
 
-
 *1.2.flew to Houston IAH or HOU*
 
 ```r
@@ -126,7 +112,6 @@ filter(flights, dest %in% c("IAH","HOU"))
 ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
 ## #   minute <dbl>, time_hour <dttm>
 ```
-
 
 *1.3.flew through American, United or Delta*  
 
@@ -208,7 +193,6 @@ filter(flights, arr_delay > 120, dep_delay >= 0)
 
 *1.6. were delayed at least an hour, but made up over 30 mins in flight*  
 
-
 ```r
 filter(flights, (arr_delay-dep_delay)<=-30, dep_delay>=60)
 ```
@@ -235,7 +219,6 @@ filter(flights, (arr_delay-dep_delay)<=-30, dep_delay>=60)
 
 *Equivalent solution:*  
 `filter(flights, (arr_delay-dep_delay)<=-30 & dep_delay>=60)`  
-  
 *1.7. departed between midnight and 6am (inclusive)*  
 
 ```r
@@ -286,7 +269,7 @@ filter(flights, dep_time>=0, dep_time<=600)
 ## #   minute <dbl>, time_hour <dttm>
 ```
 
-**2. Another useful dplyr filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?**  
+**2. Another useful `dplyr` filtering helper is `between()`. What does it do? Can you use it to simplify the code needed to answer the previous challenges?**  
   
 This is a shortcut for `x >= left & x <= right`  
   
@@ -298,7 +281,7 @@ filter(flights, between(dep_time, 0, 600))
 
 
 **3. How many flights have a missing `dep_time`? What other variables are missing? What might these rows represent?**  
-(key question)
+
 
 ```r
 filter(flights,is.na(dep_time))
@@ -326,7 +309,7 @@ filter(flights,is.na(dep_time))
 
 8255, perhaps these are canceled flights.  
   
-**4. Why is NA ^ 0 not missing? Why is NA | TRUE not missing? Why is FALSE & NA not missing? Can you figure out the general rule? (NA `*` 0 is a tricky counterexample!)**
+**4. Why is `NA ^ 0` not missing? Why is `NA | TRUE` not missing? Why is `FALSE & NA` not missing? Can you figure out the general rule? (`NA * 0` is a tricky counterexample!)**
 
 
 ```r
@@ -787,7 +770,7 @@ mutate(flights,
 ```
 
 **4. Find the 10 most delayed flights using a ranking function. How do you want to handle ties? Carefully read the documentation for `min_rank()`.**  
-(key question)
+
 
 
 ```r
@@ -853,7 +836,7 @@ cume_dist(x)
 
 
 **5. What does `1:3 + 1:10` return? Why?**  
-(key question)
+
 
 
 ```r
@@ -878,8 +861,7 @@ This is returned because `1:3` is being recycled as each element is added to an 
 ```
 
 
-## 5.6: Grouped summaries
-
+## 5.6: Grouped summaries...
 
 
 ```r
@@ -895,7 +877,7 @@ not_cancelled %>%
 
 ### 5.6.7.
 
-**1. Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. (key question)**  
+**1. Brainstorm at least 5 different ways to assess the typical delay characteristics of a group of flights. **  
   
 *90th percentile for delays for flights by destination*  
 
@@ -1172,7 +1154,7 @@ flights %>%
 Arrival delay.
 
 **3. Come up with another approach that will give you the same output as `not_cancelled %>% count(dest)` and `not_cancelled %>% count(tailnum, wt = distance)` (without using `count()`).**  
-(key question)
+
 
 
 ```r
@@ -1273,7 +1255,7 @@ identical(check_1, check_2)
 
 
 **5. Look at the number of cancelled flights per day. Is there a pattern?**   
-(key question)  
+  
 
 Number of canceled flights:
 
@@ -1326,7 +1308,7 @@ I liked Vincent's appraoch to this problem better than my own and would recommen
   
 
 **6. Which carrier has the worst delays? Challenge: can you disentangle the effects of bad airports vs. bad carriers? Why/why not? (Hint: think about flights %>% group_by(carrier, dest) %>% summarise(n()))**  
-(key question)  
+  
 
 
 ```r
@@ -1438,7 +1420,7 @@ To get at the question of 'best carrier', you may consider doing a grouped compa
 `sort` orders by `n`, you may want to use it when you 
 
 
-## Grouped mutates (and filters)
+## 5.7. Grouped mutates...
 
 ### 5.7.1.
 

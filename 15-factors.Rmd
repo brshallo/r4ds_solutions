@@ -1,7 +1,7 @@
 *Make sure the following packages are installed:*  
 
-```{r setup15, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+```{r setup15, include=FALSE, cache = TRUE, message = FALSE}
+knitr::opts_chunk$set(echo = TRUE)
 
 library(ggplot2)
 library(dplyr)
@@ -36,28 +36,11 @@ gss_cat %>%
 # Is there a similar way to do this with count?
 ```
 
-## 15.4: Modifying factor order
-
-Example with `fct_recode`
-
-```{r}
-gss_cat %>%
-  mutate(partyid = fct_recode(partyid,
-    "Republican, strong"    = "Strong republican",
-    "Republican, weak"      = "Not str republican",
-    "Independent, near rep" = "Ind,near rep",
-    "Independent, near dem" = "Ind,near dem",
-    "Democrat, weak"        = "Not str democrat",
-    "Democrat, strong"      = "Strong democrat"
-  )) %>%
-  count(partyid)
-```
-
+## 15.4: General Social Survey
 
 ### 15.3.1 
 
-1.  Explore the distribution of `rincome` (reported income). What makes the
-    default bar chart hard to understand? How could you improve the plot?
+1.  Explore the distribution of `rincome` (reported income). What makes the default bar chart hard to understand? How could you improve the plot?
     
     ```{r}
     gss_cat %>% 
@@ -87,8 +70,7 @@ gss_cat %>%
     ```
 
 
-1.  What is the most common `relig` in this survey? What's the most
-    common `partyid`?
+1.  What is the most common `relig` in this survey? What's the most common `partyid`?
 
     ```{r}
     gss_cat %>%
@@ -102,8 +84,7 @@ gss_cat %>%
     * `relig` most common -- Protestant, 10846,
     * `partyid` most common -- Independent, 4119
 
-1.  Which `relig` does `denom` (denomination) apply to? How can you find
-    out with a table? How can you find out with a visualisation?
+1.  Which `relig` does `denom` (denomination) apply to? How can you find out with a table? How can you find out with a visualisation?
     
     *With visualization:*
     ```{r}
@@ -127,8 +108,7 @@ gss_cat %>%
 
 ### 15.4.1
 	
-1.  There are some suspiciously high numbers in `tvhours`. Is the mean a good
-    summary?
+1.  There are some suspiciously high numbers in `tvhours`. Is the mean a good summary?
     
     ```{r}
     gss_cat %>%
@@ -138,33 +118,43 @@ gss_cat %>%
     
     ```
    
-   * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
-   * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
+    * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
+    * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
 
-1.  For each factor in `gss_cat` identify whether the order of the levels is
-    arbitrary or principled.
+1.  For each factor in `gss_cat` identify whether the order of the levels is arbitrary or principled.
     
     ```{r}
     gss_cat %>% 
       purrr::keep(is.factor) %>% 
       purrr::map(levels)
-    
     ```
     
     * `rincome` is principaled, rest are arbitrary
 
-
-1.  Why did moving "Not applicable" to the front of the levels move it to the
-    bottom of the plot?
+1.  Why did moving "Not applicable" to the front of the levels move it to the bottom of the plot?
     
     * Becuase is moving this factor to be first in order
 	
 ## 	15.5: Modifying factor levels
 
+Example with `fct_recode`
+
+```{r}
+gss_cat %>%
+  mutate(partyid = fct_recode(partyid,
+    "Republican, strong"    = "Strong republican",
+    "Republican, weak"      = "Not str republican",
+    "Independent, near rep" = "Ind,near rep",
+    "Independent, near dem" = "Ind,near dem",
+    "Democrat, weak"        = "Not str democrat",
+    "Democrat, strong"      = "Strong democrat"
+  )) %>%
+  count(partyid)
+```
+
 ### 15.5.1
 
-1.  How have the proportions of people identifying as Democrat, Republican, and
-    Independent changed over time?
+1.  How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?
 
     *As a line plot: * 
     ```{r}
@@ -233,10 +223,7 @@ gss_cat %>%
            low = low
            )) %>%
            count(rincome)
-    
     ```
-
-
 
 ## Appendix 
 
@@ -254,7 +241,6 @@ gss_cat %>%
 gss_cat %>% 
   purrr::map(table) %>% 
   purrr::map(plot)
-
 ```
 
 ### Percentage NA each level

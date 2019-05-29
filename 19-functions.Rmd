@@ -1,10 +1,6 @@
-
-```{r}
+```{r setup19, warning = FALSE, message = FALSE, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
-```
 
-*Make sure the following packages are installed:*  
-```{r, warning = FALSE}
 library(nycflights13)
 library(ggplot2)
 library(dplyr)
@@ -64,15 +60,12 @@ commas(letters[1:10])
 
 ### 19.2.1
 
-1.  Why is `TRUE` not a parameter to `rescale01()`? What would happen if
-    `x` contained a single missing value, and `na.rm` was `FALSE`?
+1.  Why is `TRUE` not a parameter to `rescale01()`? What would happen if `x` contained a single missing value, and `na.rm` was `FALSE`?
     
     * `TRUE` doesn't change between uses.
     * The output would be `NA`
 
-1.  In the second variant of `rescale01()`, infinite values are left
-    unchanged. Rewrite `rescale01()` so that `-Inf` is mapped to 0, and 
-    `Inf` is mapped to 1.
+1.  In the second variant of `rescale01()`, infinite values are left unchanged. Rewrite `rescale01()` so that `-Inf` is mapped to 0, and `Inf` is mapped to 1.
 
     ```{r}
     rescale01_inf <- function(x){
@@ -90,9 +83,7 @@ commas(letters[1:10])
     rescale01_inf(x)
     ```
     
-1.  Practice turning the following code snippets into functions. Think about 
-    what each function does. What would you call it? How many arguments does it
-    need? Can you rewrite it to be more expressive or less duplicative?
+1.  Practice turning the following code snippets into functions. Think about what each function does. What would you call it? How many arguments does it need? Can you rewrite it to be more expressive or less duplicative?
 
     ```{r, eval = FALSE}
     mean(is.na(x))
@@ -129,9 +120,7 @@ commas(letters[1:10])
     ```
 
 
-1.  Follow <http://nicercode.github.io/intro/writing-functions.html> to 
-    write your own functions to compute the variance and skew of a numeric 
-    vector.
+1.  Follow <http://nicercode.github.io/intro/writing-functions.html> to write your own functions to compute the variance and skew of a numeric vector.
     
     * Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)  
     
@@ -188,8 +177,7 @@ commas(letters[1:10])
     
     * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
     
-1.  Write `both_na()`, a function that takes two vectors of the same length 
-    and returns the number of positions that have an `NA` in both vectors.
+1.  Write `both_na()`, a function that takes two vectors of the same length and returns the number of positions that have an `NA` in both vectors.
     
     ```{r, error = TRUE}
     both_na <- function(x, y) {
@@ -207,8 +195,7 @@ commas(letters[1:10])
     both_na(x, z)
     ```
 
-1.  What do the following functions do? Why are they useful even though they
-    are so short?
+1.  What do the following functions do? Why are they useful even though they are so short?
     
     ```{r}
     is_directory <- function(x) file.info(x)$isdir
@@ -219,9 +206,7 @@ commas(letters[1:10])
     * second checks if a specific file is readable
 
 1.  Read the [complete lyrics](https://en.wikipedia.org/wiki/Little_Bunny_Foo_Foo) 
-    to "Little Bunny Foo Foo". There's a lot of duplication in this song. 
-    Extend the initial piping example to recreate the complete song, and use 
-    functions to reduce the duplication.
+    to "Little Bunny Foo Foo". There's a lot of duplication in this song. Extend the initial piping example to recreate the complete song, and use functions to reduce the duplication.
     
     * Do later...
 
@@ -230,15 +215,13 @@ commas(letters[1:10])
 * Recommends snake_case over camelCase, but just choose one and be consistent
 * When functions have a link, common prefix over suffix (i.e. input_select, input_text over, select_input, text_input) 
 * ctrl + shift + r creates section breaks in R scripts like below  
+
 `# test label --------------------------------------------------------------`
     + (though these cannot be made in markdown documents)
 
-
-
 ### 19.3.1
 
-1.  Read the source code for each of the following three functions, puzzle out
-    what they do, and then brainstorm better names.
+1.  Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
     
     ```{r}
     f1 <- function(string, prefix) {
@@ -257,20 +240,17 @@ commas(letters[1:10])
     * `f2`: `return_not_last`
     * `f3`: `repeat_for_length`
     
-1.  Take a function that you've written recently and spend 5 minutes 
-    brainstorming a better name for it and its arguments.
+1.  Take a function that you've written recently and spend 5 minutes brainstorming a better name for it and its arguments.
     
     * Do later, consider doing for the airpline fix time functions, or for the CaseAnalysis data
 
-1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make
-    them more consistent? 
+1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make them more consistent? 
     
     * uses mu = and Sigma = instead of mean = and sd = , and has extra parameters like tol, empirical, EISPACK
     * Similar in that both are pulling samples from gaussian distribution
     * `mvrnorm` is multivariate though, could change name to `rnorm_mv`
     
-1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than
-    `rnorm()`, `dnorm()`. Make a case for the opposite.
+1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than `rnorm()`, `dnorm()`. Make a case for the opposite.
     
     * `norm_*` would show the commonality of them being from the same distribution. One could argue the important commonality though may be more related to it being either a random sample or a density distribution, in which case the `r*` or `d*` coming first may make more sense. To me, the fact that the help pages has all of the 'normal distribution' functions on the same page suggests the former may make more sense. However, I actually like having it be set-up the way it is, because I am more likely to forget the name of the distribution type I want over the fact that I want a random sample, so it's easier to type `r` and then do ctrl + space and have autocomplete help me find the specific distribution I want, e.g. `rnorm`, `runif`, `rpois`, `rbinom`...
     
@@ -294,8 +274,7 @@ has_name <- function(x) {
 
 ### 19.4.4
 
-1.  What's the difference between `if` and `ifelse()`? Carefully read the help
-    and construct three examples that illustrate the key differences.
+1.  What's the difference between `if` and `ifelse()`? Carefully read the help and construct three examples that illustrate the key differences.
     
     * `ifelse` is vectorized, `if` is not
         + Typically use `if` in functions when giving conditional options for how to evaluate
@@ -320,10 +299,7 @@ has_name <- function(x) {
     
     ```
     
-1.  Write a greeting function that says "good morning", "good afternoon",
-    or "good evening", depending on the time of day. (Hint: use a time
-    argument that defaults to `lubridate::now()`. That will make it 
-    easier to test your function.)
+1.  Write a greeting function that says "good morning", "good afternoon", or "good evening", depending on the time of day. (Hint: use a time argument that defaults to `lubridate::now()`. That will make it easier to test your function.)
 
     ```{r}
     greeting <- function(when) {
@@ -345,11 +321,7 @@ has_name <- function(x) {
     
     ```
 
-1.  Implement a `fizzbuzz` function. It takes a single number as input. If
-    the number is divisible by three, it returns "fizz". If it's divisible by
-    five it returns "buzz". If it's divisible by three and five, it returns
-    "fizzbuzz". Otherwise, it returns the number. Make sure you first write 
-    working code before you create the function.
+1.  Implement a `fizzbuzz` function. It takes a single number as input. If the number is divisible by three, it returns "fizz". If it's divisible by five it returns "buzz". If it's divisible by three and five, it returns "fizzbuzz". Otherwise, it returns the number. Make sure you first write working code before you create the function.
     
     ```{r, error = TRUE}
     fizzbuzz <- function(x){
@@ -396,12 +368,9 @@ has_name <- function(x) {
         labels = c("freezing", "cold", "cool", "warm", "hot"),
         right = TRUE,
         oredered_result = TRUE)
-    
     ```
     
-    How would you change the call to `cut()` if I'd used `<` instead of `<=`?
-    What is the other chief advantage of `cut()` for this problem? (Hint:
-    what happens if you have many values in `temp`?)
+    How would you change the call to `cut()` if I'd used `<` instead of `<=`? What is the other chief advantage of `cut()` for this problem? (Hint: what happens if you have many values in `temp`?)
     
     * See below change to `right` argument
     ```{r}
@@ -410,7 +379,6 @@ has_name <- function(x) {
         labels = c("freezing", "cold", "cool", "warm", "hot"),
         right = FALSE,
         oredered_result = TRUE)
-    
     ```
 
 1.  What happens if you use `switch()` with numeric values?
@@ -430,7 +398,6 @@ has_name <- function(x) {
       }
     
     math_operation(5, 4, 3)
-    
     ```
 
 1.  What does this `switch()` call do? What happens if `x` is "e"?
@@ -480,9 +447,7 @@ has_name <- function(x) {
     * Takes in vector of mulitple strings and outputs one-unit character string with items concatenated together and seperated by columns
     * Is able to do this via use of `...` that turns this into a wrapper on `stringr::str_c` with the `collapse` value specified
 
-1.  It'd be nice if you could supply multiple characters to the `pad` argument, 
-    e.g. `rule("Title", pad = "-+")`. Why doesn't this currently work? How 
-    could you fix it?
+1.  It'd be nice if you could supply multiple characters to the `pad` argument, e.g. `rule("Title", pad = "-+")`. Why doesn't this currently work? How could you fix it?
     
     * current `rule` function is below
     ```{r}
@@ -523,12 +488,12 @@ has_name <- function(x) {
     ```
 
 1.  The default value for the `method` argument to `cor()` is 
-    `c("pearson", "kendall", "spearman")`. What does that mean? What 
-    value is used by default?
+    `c("pearson", "kendall", "spearman")`. What does that mean? What value is used by default?
   
     * is showing that you can choose from any of these, will default to use `pearson` (value in first position)
     
 ## 19.6: Return values
+
 ```{r}
 show_missings <- function(df) {
   n <- sum(is.na(df))
@@ -548,7 +513,6 @@ mtcars %>%
   mutate(mpg = ifelse(mpg < 20, NA, mpg)) %>% 
   show_missings() 
 ```
-
 
 ## Appendix
 

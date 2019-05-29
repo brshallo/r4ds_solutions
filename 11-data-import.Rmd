@@ -95,10 +95,10 @@ Non-digits
     + `write_csv`, `write_tsv`, `write_excel_csv`, `write_rds`^[base R version is `saveRDS`], * `feather::read_feather`
 * other packages for reading-in / writing data: `haven`, `readxl`, `DBI`, `odbc`, `jsonlite`, `xml2`, `rio`
 
+## 11.2: Getting started
 
-## 11.2.2.  
+### 11.2.2.  
 
-  
 *1. What function would you use to read a file where fields were separated with "|"?*  
 `read_delim`  for example:
 ```{r}
@@ -139,7 +139,9 @@ read_delim("x,y\n1,'a,b'", delim = ",", quote = "'")
 * `read_csv("a;b\n1;3")`
     + need to make read_csv2() because is seperated by semicolons, corrected: `read_csv2("a;b\n1;3")`
 
-## 11.3.5.
+## 11.3: Parsing a vector
+
+### 11.3.5.
 
 *1. What are the most important arguments to `locale()`?*  
 
@@ -161,7 +163,7 @@ parse_number("$123'456'789", locale = locale(grouping_mark = "'"))#used in Switz
 ```
   
 
-*2. What happens if you try and set `decimal_mark` and `grouping_mark` to the same character? What happens to the default value of grouping_mark when you set decimal_mark to ","? What happens to the default value of decimal_mark when you set the grouping_mark to "."?*  
+*2. What happens if you try and set `decimal_mark` and `grouping_mark` to the same character? What happens to the default value of `grouping_mark` when you set `decimal_mark` to ","? What happens to the default value of decimal_mark when you set the grouping_mark to "."?*  
 
 * can't set both to be same--if you change one, other automatically changes
 ```{r}
@@ -171,22 +173,20 @@ parse_number("$135.435,45", locale = locale(grouping_mark = "."))
 ```
   
 
-*3. I didn't discuss the date_format and time_format options to `locale()`. What do they do? Construct an example that shows when they might be useful.*
+*3. I didn't discuss the `date_format` and `time_format` options to `locale()`. What do they do? Construct an example that shows when they might be useful.*
 
-* date_format and time_format in locale() let you set the default date and time formats
+* `date_format` and `time_format` in `locale()` let you set the default date and time formats
 ```{r}
 parse_date("31 january 2015", format = "%d %B %Y")
 parse_date("31 january 2015", locale = locale(date_format = "%d %B %Y"))
 #let's you change it in locale()
 ```
-  
 
 *4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.*  
 
 * I live in the US.  
 
-*5. What's the difference between read_csv() and read_csv2()?*  
-
+*5. What's the difference between `read_csv()` and `read_csv2()`?*  
 * Second expects semicolons  
 
 *6. What are the most common encodings used in Europe? What are the most common encodings used in Asia? Do some googling to find out.*  
@@ -207,7 +207,7 @@ t2 <- "11:15:10.12 PM"
 t3 <- "11:::15:10.12 PM"
 ```
 
-Solutions:
+*Solutions:*
 ```{r}
 parse_date(d1, "%B %d, %Y")
 parse_date(d2, "%Y-%b-%d")
@@ -218,5 +218,4 @@ parse_date(d5, "%m/%d/%y")
 parse_time(t1, "%H%M")
 parse_time(t2, "%I:%M:%OS %p")
 parse_time(t3, "%I%*%M:%OS %p")
-
 ```

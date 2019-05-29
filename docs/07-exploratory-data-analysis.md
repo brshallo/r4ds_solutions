@@ -171,6 +171,7 @@ The difference may be caused by jewlers rounding-up because people want to buy '
 ### 7.4.1.
 
 *1. What happens to missing values in a histogram? What happens to missing values in a bar chart? Why is there a difference?*  
+
 With numeric data they both filter out NAs, though for categorical / character variables the `barplot` will create a seperate olumn with the category. This is because `NA` can just be thought of as another category though it is difficulty to place it within a distribution of values.
 
 Treats these the same.
@@ -223,6 +224,7 @@ Filters it out of the vector of values.
 ### 7.5.1.1.
 
 *1. Use what you've learned to improve the visualisation of the departure times of cancelled vs. non-cancelled flights.*  
+
 Looks like while non-cancelled flights happen at similar frequency in mornings and evenings, cancelled flights happen at a greater frequency in the evenings.
 
 
@@ -274,7 +276,6 @@ nycflights13::flights %>%
 *2.What variable in the diamonds dataset is most important for predicting the price of a diamond? How is that variable correlated with cut? Why does the combination of those two relationships lead to lower quality diamonds being more expensive?*  
   
 carat is the most important for predicting price.
-
 
 ```r
 cor(diamonds$price, select(diamonds, carat, depth, table, x, y, z))
@@ -356,7 +357,6 @@ diamonds %>%
 
 Letters represent 'median', 'fourths', 'eights'...
 
-
 *5. Compare and contrast geom_violin() with a facetted geom_histogram(), or a coloured geom_freqpoly(). What are the pros and cons of each method?*  
 
 
@@ -393,9 +393,7 @@ ggplot(diamonds, aes(x = carat, y = ..density..))+
 I like how `geom_freqpoly` has points directly overlaying but it can also be tough to read some, and the lines can overlap and be tough to tell apart, you also have to specify `density` for this and `geom_histogram` whereas for `geom_violin` it is the default. The tails in `geom_violin` can be easy to read but they also pull these for each of the of the values whereas by faceting `geomo_histogram` and setting `scales = "free"` you can have independent scales. I think the biggest advantage of the histogram is that it is the most familiar so people will know what you're looking at.
 
 
-*6. If you have a small dataset, it's sometimes useful to use geom_jitter() to see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to geom_jitter(). List them and briefly describe what each one does.*  
-
-(Come back to)
+*6. If you have a small dataset, it's sometimes useful to use `geom_jitter()` to see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to `geom_jitter()`. List them and briefly describe what each one does.*  
 
 
 ```r
@@ -464,8 +462,7 @@ gridExtra::grid.arrange(plot_orig, plot_bees, plot_quasi, ncol = 1)
 
 *1. How could you rescale the count dataset above to more clearly show the distribution of cut within colour, or colour within cut?*  
   
-Proportion cut in color:  
-(change `group_by` to `group_by(cut, color)` to set-up the converse)
+Proportion cut in color:  (change `group_by()` to `group_by(cut, color)` to set-up the converse)
 
 ```r
 cut_in_color_graph <- diamonds %>% 
@@ -517,7 +514,7 @@ flights %>%
 Another way to improve it may be to group the destinations into regions. This also will prevent you from filtering out data. We aren't given region information, but we do have lat and long points in the `airports` dataset. See appendix for ntoes.  
   
 
-*3. Why is it slightly better to use aes(x = color, y = cut) rather than aes(x = cut, y = color) in the example above?*  
+*3. Why is it slightly better to use `aes(x = color, y = cut)` rather than `aes(x = cut, y = color)` in the example above?*  
 
 If you're comparing the proportion of cut in color and want to be looking at how the specific cut proportion is changing, it may easier to view this while looking left to right vs. down to up. Compare the two plots below.
 
@@ -536,7 +533,7 @@ cut_in_color_graph+
 <img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-24-2.png" width="672" />
 
 
-## 7.5.3 Two continuous variables
+### 7.5.3
 
 Two-d histograms
 
@@ -617,8 +614,8 @@ ggplot(smaller, aes(x = carat, y = price))+
 
 <img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-27-4.png" width="672" />
 
-
 But that may be because there is not enough information in each bin, they may be more effective with smaller bin sizes... Interested if anyone found more effective methods for using things other than boxplots with this binning style?
+
 
 ```r
 ggplot(smaller, aes(x = carat, y = price))+
@@ -627,14 +624,12 @@ ggplot(smaller, aes(x = carat, y = price))+
 
 <img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
-
 ### 7.5.3.1.
 
 *1. Instead of summarising the conditional distribution with a boxplot, you could use a frequency polygon. What do you need to consider when using cut_width() vs cut_number()? How does that impact a visualisation of the 2d distribution of carat and price?*  
   
 You should keep in mind how many lines you are going to create, they may overlap each other and look busy if you're not careful.  
   
-
 For the visualization below i wrapped it in the funciton `ggplotly`. This funciton wraps your ggplot in html so that you can do things like hover over the points
 
 ```r

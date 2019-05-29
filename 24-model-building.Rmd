@@ -41,7 +41,6 @@ mod_diamond2 <- lm(lprice ~ lcarat + color + cut + clarity, data = diamonds2)
 
 diamonds2 <- diamonds2 %>% 
   add_residuals(mod_diamond2, "resid_lg")
-
 ```
 
 ### 24.2.3
@@ -87,7 +86,6 @@ diamonds2 <- diamonds2 %>%
     * this article also found similar spikes: https://www.diamdb.com/carat-weight-vs-face-up-size/  as did this: https://www.pricescope.com/wiki/diamonds/diamond-carat-weight , which use different data sets (though they do not explain the spike at 0.9 but no spike at 1.4)
         
 1.  If `log(price) = a_0 + a_1 * log(carat)`, what does that say about the relationship between `price` and `carat`?
-
 
     * because we're using a natural log it means that an a_1 percentage change in carat corresponds with an a_1 percentage increase in the price
     * if you had used a log base 2 it has a different interpretation that can be thought of in terms of relationship of doubling

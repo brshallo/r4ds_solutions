@@ -486,12 +486,12 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_jitter()
 ```
 
-**2. What parameters to geom_jitter() control the amount of jittering?**  
+**2. What parameters to `geom_jitter()` control the amount of jittering?**  
 `height` and `width`
 
-**3. Compare and contrast geom_jitter() with geom_count().**  
+**3. Compare and contrast `geom_jitter()` with `geom_count()`.**  
 
-Take the above chart and instead use `geom_count`
+Take the above chart and instead use `geom_count`.
 ```{r}
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
   geom_count()
@@ -531,10 +531,10 @@ ggplot(data=mpg, mapping=aes(x=class, y=hwy))+
 
 ## 3.9: Coordinate systems
 
-`coord_flip` is helpful, especially for quickly tackling issues with axis labels
-`coord_quickmap` is important to remember if plotting spatial data.
-`coord_polar` is important to remember if plotting spatial coordinates.
-`map_data` for extracting data on maps of locations
+* `coord_flip` is helpful, especially for quickly tackling issues with axis labels  
+* `coord_quickmap` is important to remember if plotting spatial data.  
+* `coord_polar` is important to remember if plotting spatial coordinates.  
+* `map_data` for extracting data on maps of locations
 
 ### 3.9.1.
 

@@ -1,22 +1,5 @@
 
 
-```r
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
-```
-
-*Make sure the following packages are installed:*  
-
-```r
-library(nycflights13)
-library(ggplot2)
-library(dplyr)
-library(forcats)
-library(tidyr)
-library(lubridate)
-library(stringr)
-library(e1071)
-```
-
 # Ch. 19: Functions
 
 * `function_name <- function(input1, input2) {}`
@@ -76,15 +59,12 @@ commas(letters[1:10])
 
 ### 19.2.1
 
-1.  Why is `TRUE` not a parameter to `rescale01()`? What would happen if
-    `x` contained a single missing value, and `na.rm` was `FALSE`?
+1.  Why is `TRUE` not a parameter to `rescale01()`? What would happen if `x` contained a single missing value, and `na.rm` was `FALSE`?
     
     * `TRUE` doesn't change between uses.
     * The output would be `NA`
 
-1.  In the second variant of `rescale01()`, infinite values are left
-    unchanged. Rewrite `rescale01()` so that `-Inf` is mapped to 0, and 
-    `Inf` is mapped to 1.
+1.  In the second variant of `rescale01()`, infinite values are left unchanged. Rewrite `rescale01()` so that `-Inf` is mapped to 0, and `Inf` is mapped to 1.
 
     
     ```r
@@ -107,9 +87,7 @@ commas(letters[1:10])
     ## [1] 1.000 0.000 0.625 1.000 0.000
     ```
     
-1.  Practice turning the following code snippets into functions. Think about 
-    what each function does. What would you call it? How many arguments does it
-    need? Can you rewrite it to be more expressive or less duplicative?
+1.  Practice turning the following code snippets into functions. Think about what each function does. What would you call it? How many arguments does it need? Can you rewrite it to be more expressive or less duplicative?
 
     
     ```r
@@ -163,9 +141,7 @@ commas(letters[1:10])
     ```
 
 
-1.  Follow <http://nicercode.github.io/intro/writing-functions.html> to 
-    write your own functions to compute the variance and skew of a numeric 
-    vector.
+1.  Follow <http://nicercode.github.io/intro/writing-functions.html> to write your own functions to compute the variance and skew of a numeric vector.
     
     * Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)  
     
@@ -226,7 +202,7 @@ commas(letters[1:10])
       facet_wrap(~ dist_type, scales = "free")
     ```
     
-    <img src="19-functions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+    <img src="19-functions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
     
     ```r
     tibble(dist_type = names(distributions_df),
@@ -238,16 +214,15 @@ commas(letters[1:10])
     ## # A tibble: 4 x 3
     ##   dist_type    skewness variance
     ##   <chr>           <dbl>    <dbl>
-    ## 1 normal_dist   -0.0110   1.01  
-    ## 2 t_7df_dist     0.0597   1.41  
-    ## 3 uniform_dist  -0.0219   0.0833
-    ## 4 poisson_dist   0.707    1.97
+    ## 1 normal_dist   -0.0206   0.990 
+    ## 2 t_7df_dist    -0.0799   1.42  
+    ## 3 uniform_dist  -0.0207   0.0833
+    ## 4 poisson_dist   0.678    1.99
     ```
     
     * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
     
-1.  Write `both_na()`, a function that takes two vectors of the same length 
-    and returns the number of positions that have an `NA` in both vectors.
+1.  Write `both_na()`, a function that takes two vectors of the same length and returns the number of positions that have an `NA` in both vectors.
     
     
     ```r
@@ -277,8 +252,7 @@ commas(letters[1:10])
     ## Error in both_na(x, z): Vectors are not equal length
     ```
 
-1.  What do the following functions do? Why are they useful even though they
-    are so short?
+1.  What do the following functions do? Why are they useful even though they are so short?
     
     
     ```r
@@ -290,9 +264,7 @@ commas(letters[1:10])
     * second checks if a specific file is readable
 
 1.  Read the [complete lyrics](https://en.wikipedia.org/wiki/Little_Bunny_Foo_Foo) 
-    to "Little Bunny Foo Foo". There's a lot of duplication in this song. 
-    Extend the initial piping example to recreate the complete song, and use 
-    functions to reduce the duplication.
+    to "Little Bunny Foo Foo". There's a lot of duplication in this song. Extend the initial piping example to recreate the complete song, and use functions to reduce the duplication.
     
     * Do later...
 
@@ -301,15 +273,13 @@ commas(letters[1:10])
 * Recommends snake_case over camelCase, but just choose one and be consistent
 * When functions have a link, common prefix over suffix (i.e. input_select, input_text over, select_input, text_input) 
 * ctrl + shift + r creates section breaks in R scripts like below  
+
 `# test label --------------------------------------------------------------`
     + (though these cannot be made in markdown documents)
 
-
-
 ### 19.3.1
 
-1.  Read the source code for each of the following three functions, puzzle out
-    what they do, and then brainstorm better names.
+1.  Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
     
     
     ```r
@@ -329,20 +299,17 @@ commas(letters[1:10])
     * `f2`: `return_not_last`
     * `f3`: `repeat_for_length`
     
-1.  Take a function that you've written recently and spend 5 minutes 
-    brainstorming a better name for it and its arguments.
+1.  Take a function that you've written recently and spend 5 minutes brainstorming a better name for it and its arguments.
     
     * Do later, consider doing for the airpline fix time functions, or for the CaseAnalysis data
 
-1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make
-    them more consistent? 
+1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make them more consistent? 
     
     * uses mu = and Sigma = instead of mean = and sd = , and has extra parameters like tol, empirical, EISPACK
     * Similar in that both are pulling samples from gaussian distribution
     * `mvrnorm` is multivariate though, could change name to `rnorm_mv`
     
-1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than
-    `rnorm()`, `dnorm()`. Make a case for the opposite.
+1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than `rnorm()`, `dnorm()`. Make a case for the opposite.
     
     * `norm_*` would show the commonality of them being from the same distribution. One could argue the important commonality though may be more related to it being either a random sample or a density distribution, in which case the `r*` or `d*` coming first may make more sense. To me, the fact that the help pages has all of the 'normal distribution' functions on the same page suggests the former may make more sense. However, I actually like having it be set-up the way it is, because I am more likely to forget the name of the distribution type I want over the fact that I want a random sample, so it's easier to type `r` and then do ctrl + space and have autocomplete help me find the specific distribution I want, e.g. `rnorm`, `runif`, `rpois`, `rbinom`...
     
@@ -366,8 +333,7 @@ has_name <- function(x) {
 
 ### 19.4.4
 
-1.  What's the difference between `if` and `ifelse()`? Carefully read the help
-    and construct three examples that illustrate the key differences.
+1.  What's the difference between `if` and `ifelse()`? Carefully read the help and construct three examples that illustrate the key differences.
     
     * `ifelse` is vectorized, `if` is not
         + Typically use `if` in functions when giving conditional options for how to evaluate
@@ -409,10 +375,7 @@ has_name <- function(x) {
     ## Error in cutoff_make0(y, cutoff = 4): The input provided is not a numeric vector
     ```
     
-1.  Write a greeting function that says "good morning", "good afternoon",
-    or "good evening", depending on the time of day. (Hint: use a time
-    argument that defaults to `lubridate::now()`. That will make it 
-    easier to test your function.)
+1.  Write a greeting function that says "good morning", "good afternoon", or "good evening", depending on the time of day. (Hint: use a time argument that defaults to `lubridate::now()`. That will make it easier to test your function.)
 
     
     ```r
@@ -435,14 +398,10 @@ has_name <- function(x) {
     ```
     
     ```
-    ## good afternoon, it is: 2019-05-28 16:42:31
+    ## good evening, it is: 2019-05-28 23:20:32
     ```
 
-1.  Implement a `fizzbuzz` function. It takes a single number as input. If
-    the number is divisible by three, it returns "fizz". If it's divisible by
-    five it returns "buzz". If it's divisible by three and five, it returns
-    "fizzbuzz". Otherwise, it returns the number. Make sure you first write 
-    working code before you create the function.
+1.  Implement a `fizzbuzz` function. It takes a single number as input. If the number is divisible by three, it returns "fizz". If it's divisible by five it returns "buzz". If it's divisible by three and five, it returns "fizzbuzz". Otherwise, it returns the number. Make sure you first write working code before you create the function.
     
     
     ```r
@@ -532,9 +491,7 @@ has_name <- function(x) {
     ## Levels: freezing cold cool warm hot
     ```
     
-    How would you change the call to `cut()` if I'd used `<` instead of `<=`?
-    What is the other chief advantage of `cut()` for this problem? (Hint:
-    what happens if you have many values in `temp`?)
+    How would you change the call to `cut()` if I'd used `<` instead of `<=`? What is the other chief advantage of `cut()` for this problem? (Hint: what happens if you have many values in `temp`?)
     
     * See below change to `right` argument
     
@@ -634,9 +591,7 @@ has_name <- function(x) {
     * Takes in vector of mulitple strings and outputs one-unit character string with items concatenated together and seperated by columns
     * Is able to do this via use of `...` that turns this into a wrapper on `stringr::str_c` with the `collapse` value specified
 
-1.  It'd be nice if you could supply multiple characters to the `pad` argument, 
-    e.g. `rule("Title", pad = "-+")`. Why doesn't this currently work? How 
-    could you fix it?
+1.  It'd be nice if you could supply multiple characters to the `pad` argument, e.g. `rule("Title", pad = "-+")`. Why doesn't this currently work? How could you fix it?
     
     * current `rule` function is below
     
@@ -697,12 +652,12 @@ has_name <- function(x) {
     ```
 
 1.  The default value for the `method` argument to `cor()` is 
-    `c("pearson", "kendall", "spearman")`. What does that mean? What 
-    value is used by default?
+    `c("pearson", "kendall", "spearman")`. What does that mean? What value is used by default?
   
     * is showing that you can choose from any of these, will default to use `pearson` (value in first position)
     
 ## 19.6: Return values
+
 
 ```r
 show_missings <- function(df) {
@@ -750,7 +705,6 @@ mtcars %>%
 ## Missing values: 0
 ## Missing values: 18
 ```
-
 
 ## Appendix
 
@@ -801,13 +755,13 @@ cauchy_exp <- rcauchy(10000)
 hist(norm_exp)
 ```
 
-<img src="19-functions_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="19-functions_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 ```r
 hist(cauchy_exp)
 ```
 
-<img src="19-functions_files/figure-html/unnamed-chunk-33-2.png" width="672" />
+<img src="19-functions_files/figure-html/unnamed-chunk-31-2.png" width="672" />
 
 ```r
 kurtosis_type3(norm_exp)
@@ -906,9 +860,9 @@ microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
 
 ```
 ## Unit: microseconds
-##    expr    min     lq      mean  median       uq      max neval cld
-##  ifelse 51.601 58.201 106.93400 102.151 109.6510 3626.601   500   b
-##   index 20.801 23.400  37.64304  32.251  35.6505 3019.201   500  a
+##    expr  min   lq    mean median     uq    max neval cld
+##  ifelse 52.2 57.6 98.0376   62.6 107.35 3934.8   500   b
+##   index 20.8 23.3 36.0700   25.0  34.95 3035.8   500  a
 ```
 
 The index methods tends to be faster.
@@ -1014,10 +968,14 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 
 ```
 ## Unit: milliseconds
-##   expr      min       lq      mean    median        uq       max neval cld
-##  index  77.4948  79.7458  145.1785  171.1561  183.4362  225.6832    10  a 
-##  dplyr  76.5561  84.7772  142.3876  173.7605  182.4485  199.8846    10  a 
-##  purrr 920.6055 961.1599 1060.8513 1016.2543 1059.3168 1601.4627    10   b
+##   expr      min        lq      mean    median        uq       max neval
+##  index  89.1601  121.0648  168.2646  185.2267  208.6874  213.5574    10
+##  dplyr  75.2822   80.1137  159.1202  197.8696  209.2413  230.4108    10
+##  purrr 975.9623 1018.3998 1142.0509 1107.0543 1190.6203 1597.3577    10
+##  cld
+##   a 
+##   a 
+##    b
 ```
 
 
@@ -1032,10 +990,10 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 
 ```
 ## Unit: milliseconds
-##   expr       min        lq      mean    median        uq       max neval
-##  index   76.4143  108.5001  195.4987  214.5160  222.3934  319.3723    10
-##  dplyr   76.3414   77.8325  141.4804  121.5022  192.6553  258.9295    10
-##  purrr 1103.8537 1209.7316 1424.7291 1313.7910 1426.7856 2205.4433    10
+##   expr      min        lq      mean     median        uq       max neval
+##  index  65.0266   76.9131  114.4757   85.71250  185.5297  208.0703    10
+##  dplyr  56.6531   75.6265  111.6817   82.19685  187.9728  201.3058    10
+##  purrr 993.0742 1064.4889 1127.3745 1110.42285 1202.7541 1286.3952    10
 ##  cld
 ##   a 
 ##   a 

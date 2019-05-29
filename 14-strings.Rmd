@@ -106,20 +106,19 @@ x
 str_pad("the dogs come for you.", width = 40, pad = ",", side = "both") #must specify width =, side = default is left
 ```
 
-
 ### 14.2.5
 
-1.  *In code that doesn't use stringr, you'll often see `paste()` and `paste0()`.*
-    *What's the difference between the two functions?*  
+1.  *In code that doesn't use stringr, you'll often see `paste()` and `paste0()`. What's the difference between the two functions?*  
 
-    `paste0` has no `sep` argument and just appends any value provided like another string vector. 
-    They differs from `str_c` in that they  automatically convert NA values to character. Also, they do not return output 
+    * `paste0()` has no `sep` argument and just appends any value provided like another string vector. 
+    * They differ from `str_c()` in that they  automatically convert `NA` values to character. 
     ```{r}
     paste("a", "b", "c", c("x", "y"), sep = "-")
     paste0("a", "b", "c", c("x", "y"), sep = "-")
     ```
     
-    *What stringr function are they equivalent to?*  
+    *What `stringr` function are they equivalent to?*  
+    
     `paste()` and `paste0()` are similar to `str_c()` though are different in how they handle NAs (see below). They also will return a warning when recycling vectors whose legth do not have a common factor.  
     ```{r}
     paste(c("a", "b", "x"), c("x", "y"), sep = "-")
@@ -133,20 +132,18 @@ str_pad("the dogs come for you.", width = 40, pad = ",", side = "both") #must sp
     ```
      
      
-1.  *In your own words, describe the difference between the `sep` and `collapse`*
-    *arguments to `str_c()`.*
+1.  *In your own words, describe the difference between the `sep` and `collapse` arguments to `str_c()`.*
     
-    sep puts characters between items within a vector, collapse puts a character between vectors being collapsed
+    `sep` puts characters between items within a vector, collapse puts a character between vectors being collapsed
 
-1.  *Use `str_length()` and `str_sub()` to extract the middle character from *
-    *a string.* 
+1.  *Use `str_length()` and `str_sub()` to extract the middle character from a string.* 
     ```{r}
     x <- "world"
     str_sub(x, start = ceiling(str_length(x) / 2), end = ceiling(str_length(x) / 2))
     ```
 
-
     *What will you do if the string has an even number of characters?*
+    
     In this circumstance the above solution would take the anterior middle value, below is a solution that would return both middle values.
     ```{r}
     x <- "worlds"
@@ -159,8 +156,9 @@ str_pad("the dogs come for you.", width = 40, pad = ",", side = "both") #must sp
     ```
 
 1.  *What does `str_wrap()` do? When might you want to use it?*
-    indent = for first line, exdent = others  
-    * could use `str_wrap()` for editing of documents etc., setting width=1 will give each word its own line
+    
+    * Use `indent` for first line, `exdent` for others  
+    * could use `str_wrap()` for editing of documents etc., setting `width = 1` will give each word its own line
     
     ```{r}
     str_wrap("Tonight, we dine in Hell.", width = 10, indent = 0, exdent = 3) %>% 
@@ -168,15 +166,12 @@ str_pad("the dogs come for you.", width = 40, pad = ",", side = "both") #must sp
     ```
     
 1.  *What does `str_trim()` do? What's the opposite of `str_trim()`?*
-    Removes whitespace from beginning and end of character, side = specifies which side 
+    Removes whitespace from beginning and end of character, `side` argument specifies which side 
     ```{r}
     str_trim("   so much white space   ", side = "right") # (default is 'both')
     ```
 
-
-1.  *Write a function that turns (e.g.) a vector `c("a", "b", "c")` into* 
-    *the string `a, b, and c`. Think carefully about what it should do if*
-    *given a vector of length 0, 1, or 2.*
+1.  *Write a function that turns (e.g.) a vector `c("a", "b", "c")` into the string `a, b, and c`. Think carefully about what it should do if given a vector of length 0, 1, or 2.*
     ```{r}
     vec_to_string <- function(x) {
       
@@ -208,9 +203,40 @@ To match a literal `\` need `\\\\` because both string and regex will escape it.
 x <- "a\\b"
 writeLines(x)
 str_view(x,"\\\\")
-
 ```
 
+Using `\b` to set boundary between words (not used often)
+
+```{r}
+apropos("\\bsum\\b")
+apropos("^(sum)$")
+```
+
+Other special characters:  
+
+* `\d`: matches any digit.
+* `\s`: matches any whitespace (e.g. space, tab, newline).
+* `[abc]`: matches a, b, or c.
+* `[^abc]`: matches anything except a, b, or c.
+
+
+Controlling number of times:  
+  
+* `?`: 0 or 1
+* `+`: 1 or more
+* `*`: 0 or more
+* `{n}`: exactly n
+* `{n,}`: n or more
+* `{,m}`: at most m
+* `{n,m}`: between n and m
+
+By default these matches are "greedy": they will match the longest string possible. You can make them "lazy", matching the shortest string possible by putting a `?` after them. This is an advanced feature of regular expressions, but it's useful to know that it exists:
+
+```{r}
+x <- "1888 is the longest year in Roman numerals: MDCCCLXXXVIII"
+str_view(x, 'C{2,3}')
+str_view(x, 'C{2,3}?')
+```
 
 ### 14.3.1.1
 
@@ -227,8 +253,7 @@ str_view(x,"\\\\")
     str_view(x, "\\\"'\\\\")
     ```
 
-
-1.  *What patterns will the regular expression `\..\..\..` match? *
+1.  *What patterns will the regular expression `\..\..\..` match?*
 
     Would match 6 character string of following form "(dot)(anychar)(dot)(anychar)(dot)(anychar)"
     ```{r}
@@ -243,13 +268,6 @@ str_view(x,"\\\\")
     ```
 
 ### 14.3.2.1
-Using `\b` to set boundary between words (not used often)
-
-```{r}
-apropos("\\bsum\\b")
-apropos("^(sum)$")
-```
-
 
 1.  *How would you match the literal string `"$^$"`?*
 
@@ -259,8 +277,7 @@ apropos("^(sum)$")
     ```
 
 
-1.  *Given the corpus of common words in `stringr::words`, create regular*
-    *expressions that find all words that:*
+1.  *Given the corpus of common words in `stringr::words`, create regular expressions that find all words that:*
     
     1. *Start with "y".*
     ```{r}
@@ -282,16 +299,9 @@ apropos("^(sum)$")
     str_view(stringr::words, ".......", match = TRUE)
     ```
 
-    Since this list is long, you might want to use the `match` argument to
-    `str_view()` to show only the matching or non-matching words.
+    Since this list is long, you might want to use the `match` argument to `str_view()` to show only the matching or non-matching words.
 
 ### 14.3.3.1
-
-Other special characters  
-* `\d`: matches any digit.
-* `\s`: matches any whitespace (e.g. space, tab, newline).
-* `[abc]`: matches a, b, or c.
-* `[^abc]`: matches anything except a, b, or c.
 
 1.  *Create regular expressions to find all words that:*
 
@@ -301,13 +311,11 @@ Other special characters
     str_view(stringr::words, "^[aeiou]", match = TRUE)
     ```
 
-    2. *That only contain consonants. (Hint: thinking about matching *
-       *"not"-vowels.)*
+    2. *That only contain consonants. (Hint: thinking about matching "not"-vowels.)*
     
     ```{r}
     str_view(stringr::words, "^[^aeiou]*[^aeiouy]$", match = TRUE)
     ```
-       
 
     3. *End with `ed`, but not with `eed`.*
     ```{r}
@@ -333,14 +341,12 @@ Other special characters
      
      of the words in list, yes.
 
-1.  *Write a regular expression that matches a word if it's probably written*
-    *in British English, not American English.*
+1.  *Write a regular expression that matches a word if it's probably written in British English, not American English.*
     ```{r}
     str_view(stringr::words, "(l|b)our|parat", match = TRUE)
     ```
 
-1.  *Create a regular expression that will match telephone numbers as commonly*
-    *written in your country.*
+1.  *Create a regular expression that will match telephone numbers as commonly written in your country.*
     ```{r}
     x <- c("dkl kls. klk. _", "(425) 591-6020", "her number is (581) 434-3242", "442", "  dsi")
     str_view(x, "\\(\\d\\d\\d\\)\\s\\d\\d\\d-\\d\\d\\d\\d")
@@ -350,32 +356,13 @@ Other special characters
 
 
 ### 14.3.4.1
-Controlling number of times:  
-  
-* `?`: 0 or 1
-* `+`: 1 or more
-* `*`: 0 or more
-* `{n}`: exactly n
-* `{n,}`: n or more
-* `{,m}`: at most m
-* `{n,m}`: between n and m
-
-By default these matches are "greedy": they will match the longest string possible. You can make them "lazy", matching the shortest string possible by putting a `?` after them. This is an advanced feature of regular expressions, but it's useful to know that it exists:
-
-```{r}
-x <- "1888 is the longest year in Roman numerals: MDCCCLXXXVIII"
-str_view(x, 'C{2,3}')
-str_view(x, 'C{2,3}?')
-```
 
 1.  *Describe the equivalents of `?`, `+`, `*` in `{m,n}` form.*
     `?` : `{0,1}`
     `+` : `{1, }`
     `*` : `{0, }`
 
-1.  *Describe in words what these regular expressions match:*
-    *(read carefully to see if I'm using a regular expression or a string*
-    *that defines a regular expression.)*
+1.  *Describe in words what these regular expressions match: (read carefully to see if I'm using a regular expression or a string that defines a regular expression.)*
 
     1. `^.*$`   : starts with anything, and ends with anything--matches whole thing
     
@@ -383,21 +370,21 @@ str_view(x, 'C{2,3}?')
     str_view(x, "^.*$")
     ```
     
-    2.   `"\\{.+\\}"`    : match text in brackets greater than nothing
+    2. `"\\{.+\\}"` : match text in brackets greater than nothing
     
     ```{r}
     x <- c("test", "some in {brackets}", "just {} no match")
     str_view(x, "\\{.+\\}")
     ```
     
-    3. `\d{4}-\d{2}-\d{2}`   : 4 numbers - 2 numbers - 2 numbers
+    3. `\d{4}-\d{2}-\d{2}`: 4 numbers - 2 numbers - 2 numbers
     
     ```{r}
     x <- c("4444-22-22", "test", "333-4444-22")
     str_view(x, "\\d{4}-\\d{2}-\\d{2}")
     ```
     
-    4. `"\\\\{4}"`   :  4 brackets
+    4. `"\\\\{4}"`:  4 brackets
     
     ```{r}
     x <- c("\\\\\\\\", "\\\\\\", "\\\\", "\\")
@@ -406,7 +393,6 @@ str_view(x, 'C{2,3}?')
     x <- c("\\\\\\\\", "\\\\\\", "\\\\", "\\")
     str_view(x, "\\\\\\\\")
     ```
-
 
 1.  *Create regular expressions to find all words that:*
 
@@ -731,22 +717,23 @@ Alternatives to `regex()`:
       head(5)
     ```
 
-
-### 14.7.1
+## 14.7: stringi
 
 Other functions:
-`apropos` searches all objects available from the global environment--useful if you can't remember fun name. E.g. below checks those that start with `replace` and then those that start with `str`, but not `stri`
+
+* `apropos` searches all objects available from the global environment--useful if you can't remember fun name. E.g. below checks those that start with `replace` and then those that start with `str`, but not `stri`
 ```{r}
 apropos("^(replace)")
 apropos("^(str)[^i]")
 ```
+
+### 14.7.1
 
 1.  *Find the stringi functions that:*
     1. *Count the number of words.* -- `stri_count`
     2. *Find duplicated strings.* -- `stri_duplicated`
     3. *Generate random text.* -- `str_rand_strings`
 
-1.  *How do you control the language that `stri_sort()` uses for *
-    *sorting?*
+1.  *How do you control the language that `stri_sort()` uses for sorting?*
     
-    `decreasing = `
+    `decreasing` argument

@@ -2,23 +2,6 @@
 
 
 
-*Make sure the following packages are installed:*  
-
-```r
-library(tidyverse)
-library(ggplot2)
-library(dplyr)
-library(tidyr)
-library(nycflights13)
-library(babynames)
-library(nasaweather)
-library(lubridate)
-library(purrr)
-library(readr)
-library(stringr)
-```
-
-
 # Ch. 21: Iteration
 
 * Common `for` loop template:
@@ -72,21 +55,12 @@ models %>%
   map_dbl("r.squared")
 ```
 
-```
-##         4         6         8 
-## 0.5086326 0.4645102 0.4229655
-```
-
 * extracting by positions from `map`
 
 ```r
 x <- list(list(1, 2, 3), list(4, 5, 6), list(7, 8, 9))
 x %>% 
   map_dbl(2)
-```
-
-```
-## [1] 2 5 8
 ```
 
 * `map2` let's you iterate through two components at once
@@ -107,13 +81,6 @@ param <- list(
 )
 
 invoke_map(f, param, n = 5) %>% str()
-```
-
-```
-## List of 3
-##  $ : num [1:5] -0.1761 -0.0787 -0.7205 0.0929 0.9988
-##  $ : num [1:5] -7.88 1.99 1.41 -2.43 -7.31
-##  $ : int [1:5] 16 11 6 9 14
 ```
 
 * `walk` is alternative to `map` that you call for side effects. Also have `walk2` and `pwalk` that are generally more useful 
@@ -148,8 +115,6 @@ invoke_map(f, param, n = 5) %>% str()
     ##  [7]  17.848750   0.437500   0.406250   3.687500   2.812500
     ```
     
-
-    
     1. Determine the type of each column in `nycflights13::flights`.
     
     
@@ -182,7 +147,6 @@ invoke_map(f, param, n = 5) %>% str()
     ```
     ## [1] 35 23 43 22  3
     ```
-    
 
     1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
     
@@ -197,25 +161,24 @@ invoke_map(f, param, n = 5) %>% str()
     
     ```
     ## [[1]]
-    ##  [1] -10.311709 -10.335774 -10.517159 -10.260997 -10.809342  -8.836729
-    ##  [7]  -9.294160 -10.770651 -10.845858  -9.499905
+    ##  [1] -10.174520 -11.008009  -9.247300 -11.138066  -8.805587 -10.324403
+    ##  [7]  -9.515424  -9.961071  -9.744484 -10.785667
     ## 
     ## [[2]]
-    ##  [1] -0.019415159  1.544686102 -2.113386729  0.955420206 -0.106706008
-    ##  [6] -0.817433173 -0.187196073 -1.542412960 -0.241838086  0.005541146
+    ##  [1] -0.002214255 -0.312770289 -0.961899438 -2.449740611 -0.334696622
+    ##  [6] -0.279974394 -0.428823842 -0.812920952  0.389087673 -0.959699845
     ## 
     ## [[3]]
-    ##  [1] 10.516705 10.600592  9.907797 11.480449 10.441187  9.742468  8.518721
-    ##  [8]  9.741670  9.820275  8.750050
+    ##  [1]  9.519066  8.873692  9.614193 10.119066  8.589857  9.819801  7.972170
+    ##  [8] 10.781076  9.587259  9.551362
     ## 
     ## [[4]]
-    ##  [1] 101.30229  99.47463  99.43430  99.84299 101.70021 100.21481  98.80919
-    ##  [8]  99.70907 100.87717 102.62446
+    ##  [1] 101.01425  99.46386  99.32526  99.22012  99.35944  98.54662 100.10029
+    ##  [8]  99.87573 101.38025  99.45735
     ```
     
 
-1.  Eliminate the for loop in each of the following examples by taking 
-    advantage of an existing function that works with vectors:
+1.  Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:
     
     *example:*
     
@@ -276,23 +239,21 @@ invoke_map(f, param, n = 5) %>% str()
     ```
     
     ```
-    ##   [1]  0.7036665  1.2972162  1.7226273  2.5221608  3.3313829  3.5801573
-    ##   [7]  4.4360105  5.4001855  5.9753645  6.3035970  7.1684919  7.5815168
-    ##  [13]  8.2698741  8.5434533  8.7085927  8.9940826  9.7268344 10.0622596
-    ##  [19] 10.4464202 11.4369491 11.9880489 12.2195869 12.6648157 13.4984736
-    ##  [25] 14.0735851 14.8589831 15.6996972 16.3661058 17.1332180 17.7941628
-    ##  [31] 17.8201877 17.8486169 18.0194437 18.2325103 18.7527930 18.8764141
-    ##  [37] 19.4541832 19.4629318 19.6986302 19.9240806 19.9249502 20.0487377
-    ##  [43] 20.4962838 20.9484495 21.4659150 22.0819711 23.0697793 23.5037486
-    ##  [49] 24.1459488 24.6826115 25.3489537 25.7912648 26.5586439 27.2712570
-    ##  [55] 27.5014853 28.0579528 28.1481961 28.5043260 28.6087866 28.7307337
-    ##  [61] 29.4021474 30.1504439 30.7255906 31.0338316 32.0267258 32.5100917
-    ##  [67] 32.9604961 33.5384627 33.8876460 33.9689433 34.9649839 35.4948959
-    ##  [73] 36.1655287 36.2713416 36.5355682 37.1852559 38.1706184 38.9362428
-    ##  [79] 39.3698957 39.8722632 39.8835719 40.8422551 40.8572466 41.3851442
-    ##  [85] 41.9101644 42.0944277 42.6396187 43.4487258 43.8711065 44.3761589
-    ##  [91] 44.7265922 45.4367032 45.9140781 46.7311117 46.9643849 47.3802085
-    ##  [97] 48.2710155 48.7162050 49.5477657 49.9342378
+    ##   [1]  0.877678  1.287870  1.846135  1.928082  2.645998  2.975122  3.517562
+    ##   [8]  3.976137  4.761680  5.741317  5.886675  5.917545  6.584044  7.394211
+    ##  [15]  7.416340  8.271408  8.692554  9.571803 10.153228 10.844357 11.234503
+    ##  [22] 12.161129 13.078830 13.759673 13.872585 14.757811 15.211071 15.428231
+    ##  [29] 16.101560 16.580593 17.510063 17.997707 18.429224 18.588311 19.527829
+    ##  [36] 20.147364 20.804868 21.605124 22.557555 23.029146 23.496467 23.717856
+    ##  [43] 24.127465 24.306040 24.373268 24.617538 25.513578 25.628648 25.929375
+    ##  [50] 26.121190 26.455226 26.958908 26.997661 27.918811 28.228677 28.313836
+    ##  [57] 28.883623 28.935551 29.261716 29.779616 30.700132 31.141626 31.662194
+    ##  [64] 32.622947 33.020113 33.235492 33.472338 33.531767 34.458300 34.662849
+    ##  [71] 34.876954 34.934023 35.036539 35.240553 35.428637 35.435799 35.862283
+    ##  [78] 35.915386 36.569867 36.764171 37.625292 38.285033 39.004397 39.450479
+    ##  [85] 40.076766 40.201841 40.723791 40.944739 41.267520 42.145224 42.973265
+    ##  [92] 43.423604 43.441222 44.070397 44.671570 45.609667 45.994034 46.683707
+    ##  [99] 46.809740 47.245474
     ```
     
     * calculate cumulative sum
@@ -302,23 +263,21 @@ invoke_map(f, param, n = 5) %>% str()
     ```
     
     ```
-    ##   [1]  0.7036665  1.2972162  1.7226273  2.5221608  3.3313829  3.5801573
-    ##   [7]  4.4360105  5.4001855  5.9753645  6.3035970  7.1684919  7.5815168
-    ##  [13]  8.2698741  8.5434533  8.7085927  8.9940826  9.7268344 10.0622596
-    ##  [19] 10.4464202 11.4369491 11.9880489 12.2195869 12.6648157 13.4984736
-    ##  [25] 14.0735851 14.8589831 15.6996972 16.3661058 17.1332180 17.7941628
-    ##  [31] 17.8201877 17.8486169 18.0194437 18.2325103 18.7527930 18.8764141
-    ##  [37] 19.4541832 19.4629318 19.6986302 19.9240806 19.9249502 20.0487377
-    ##  [43] 20.4962838 20.9484495 21.4659150 22.0819711 23.0697793 23.5037486
-    ##  [49] 24.1459488 24.6826115 25.3489537 25.7912648 26.5586439 27.2712570
-    ##  [55] 27.5014853 28.0579528 28.1481961 28.5043260 28.6087866 28.7307337
-    ##  [61] 29.4021474 30.1504439 30.7255906 31.0338316 32.0267258 32.5100917
-    ##  [67] 32.9604961 33.5384627 33.8876460 33.9689433 34.9649839 35.4948959
-    ##  [73] 36.1655287 36.2713416 36.5355682 37.1852559 38.1706184 38.9362428
-    ##  [79] 39.3698957 39.8722632 39.8835719 40.8422551 40.8572466 41.3851442
-    ##  [85] 41.9101644 42.0944277 42.6396187 43.4487258 43.8711065 44.3761589
-    ##  [91] 44.7265922 45.4367032 45.9140781 46.7311117 46.9643849 47.3802085
-    ##  [97] 48.2710155 48.7162050 49.5477657 49.9342378
+    ##   [1]  0.877678  1.287870  1.846135  1.928082  2.645998  2.975122  3.517562
+    ##   [8]  3.976137  4.761680  5.741317  5.886675  5.917545  6.584044  7.394211
+    ##  [15]  7.416340  8.271408  8.692554  9.571803 10.153228 10.844357 11.234503
+    ##  [22] 12.161129 13.078830 13.759673 13.872585 14.757811 15.211071 15.428231
+    ##  [29] 16.101560 16.580593 17.510063 17.997707 18.429224 18.588311 19.527829
+    ##  [36] 20.147364 20.804868 21.605124 22.557555 23.029146 23.496467 23.717856
+    ##  [43] 24.127465 24.306040 24.373268 24.617538 25.513578 25.628648 25.929375
+    ##  [50] 26.121190 26.455226 26.958908 26.997661 27.918811 28.228677 28.313836
+    ##  [57] 28.883623 28.935551 29.261716 29.779616 30.700132 31.141626 31.662194
+    ##  [64] 32.622947 33.020113 33.235492 33.472338 33.531767 34.458300 34.662849
+    ##  [71] 34.876954 34.934023 35.036539 35.240553 35.428637 35.435799 35.862283
+    ##  [78] 35.915386 36.569867 36.764171 37.625292 38.285033 39.004397 39.450479
+    ##  [85] 40.076766 40.201841 40.723791 40.944739 41.267520 42.145224 42.973265
+    ##  [92] 43.423604 43.441222 44.070397 44.671570 45.609667 45.994034 46.683707
+    ##  [99] 46.809740 47.245474
     ```
     
 
@@ -337,7 +296,6 @@ invoke_map(f, param, n = 5) %>% str()
         writeLines()
       
       writeLines("So go, Alice, go.\n")
-      
     }
     ```
     
@@ -373,7 +331,7 @@ invoke_map(f, param, n = 5) %>% str()
     ## So go, Alice, go.
     ```
 
-    1. Convert the nursery rhyme "ten in the bed" to a function. Generalise it to any number of people in any sleeping structure.
+    2. Convert the nursery rhyme "ten in the bed" to a function. Generalise it to any number of people in any sleeping structure.
 
     
     ```r
@@ -410,10 +368,7 @@ invoke_map(f, param, n = 5) %>% str()
     ##  one fell out.
     ```
     
-    
-    1. Convert the song "99 bottles of beer on the wall" to a function.
-       Generalise to any number of any vessel containing any liquid on 
-       any surface.  
+    3. Convert the song "99 bottles of beer on the wall" to a function. Generalise to any number of any vessel containing any liquid on any surface.  
        
     * This is a little bit of a lazy version...
        
@@ -449,7 +404,6 @@ invoke_map(f, param, n = 5) %>% str()
     ## No more bottles...
     ```
     
-
 1.  It's common to see for loops that don't preallocate the output and instead increase the length of a vector at each step. How does this affect performance? Design and execute an experiment.
     
     
@@ -477,13 +431,12 @@ invoke_map(f, param, n = 5) %>% str()
     
     ```
     ## Unit: microseconds
-    ##      expr     min      lq    mean  median      uq      max neval cld
-    ##     space 149.701 161.451 379.416 224.651 268.551 3446.001    20   a
-    ##  no_space 180.801 231.401 437.466 288.551 291.301 3677.501    20   a
+    ##      expr   min     lq    mean median     uq    max neval cld
+    ##     space 186.8 207.55 758.390 381.45 483.55 8286.1    20   a
+    ##  no_space 215.6 346.25 758.695 427.20 622.90 6729.1    20   a
     ```
 
     * see roughly 35% better performance when creating ahead of time
-        
     * note: if you can do these operations with vectorized approach though -- they're often much faster
     
     
@@ -498,10 +451,10 @@ invoke_map(f, param, n = 5) %>% str()
     
     ```
     ## Unit: microseconds
-    ##      expr     min       lq     mean   median      uq     max neval cld
-    ##     space 174.301 184.2010 251.0308 189.8510 333.001 445.001    20   b
-    ##  no_space 216.401 219.5010 314.9110 245.2015 389.751 741.401    20   b
-    ##    vector  10.101  10.9015  17.8960  17.6005  20.501  58.201    20  a
+    ##      expr   min     lq    mean median     uq   max neval cld
+    ##     space 150.7 157.55 178.590  163.6 180.65 304.5    20  b 
+    ##  no_space 180.8 185.45 203.365  193.3 201.60 318.9    20   c
+    ##    vector   8.6   9.10   9.480    9.4   9.90  10.9    20 a
     ```
     
     * vectorized was > 10x faster
@@ -512,11 +465,11 @@ invoke_map(f, param, n = 5) %>% str()
 
 1.  Imagine you have a directory full of CSV files that you want to read in. You have their paths in a vector, `files <- dir("data/", pattern = "\\.csv$", full.names = TRUE)`, and now want to read each one with `read_csv()`. Write the for loop that will load them into a single data frame. 
     
-* To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter[^WalkExample].
-* Next I read these into a single dataframe with a for loop
-    
-[^WalkExample]: 
-  Below is the code that accomplished this. I used `walk2` and methods we learn later in the chapter.
+    * To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter[^WalkExample].
+    * Next I read these into a single dataframe with a for loop
+        
+    [^WalkExample]: 
+        Below is the code that accomplished this. I used `walk2` and methods we learn later in the chapter.
 
     
     ```r
@@ -534,178 +487,174 @@ invoke_map(f, param, n = 5) %>% str()
             )
     ```
 
+    
+    ```r
+    append_csvs <- function(dir){
+      #input vector of file paths name and output appended file
+      
+      out <- vector("list", length(dir))
+      for (i in seq_along(out)){
+        out[[i]] <- read_csv(dir[[i]], col_types = cols(.default = "c"))
+      }
+      out <-  bind_rows(out) %>% 
+        type_convert()
+      out
+    }
+    
+    dir_examp <- dir("ch21_csvs_example", 
+        pattern = "csv$",
+        full.names = TRUE)
+    
+    names_appended <- append_csvs(dir_examp)
+    names_appended
+    ```
+    
+    ```
+    ## # A tibble: 3,514 x 6
+    ##     year sex   name      n   prop first_letter
+    ##    <dbl> <chr> <chr> <int>  <dbl> <chr>       
+    ##  1  1880 F     Anna   2604 0.0267 A           
+    ##  2  1881 F     Anna   2698 0.0273 A           
+    ##  3  1882 F     Anna   3143 0.0272 A           
+    ##  4  1883 F     Anna   3306 0.0275 A           
+    ##  5  1884 F     Anna   3860 0.0281 A           
+    ##  6  1885 F     Anna   3994 0.0281 A           
+    ##  7  1886 F     Anna   4283 0.0279 A           
+    ##  8  1887 F     Anna   4227 0.0272 A           
+    ##  9  1888 F     Anna   4982 0.0263 A           
+    ## 10  1889 F     Anna   5062 0.0268 A           
+    ## # ... with 3,504 more rows
+    ```
 
-```r
-append_csvs <- function(dir){
-  #input vector of file paths name and output appended file
-  
-  out <- vector("list", length(dir))
-  for (i in seq_along(out)){
-    out[[i]] <- read_csv(dir[[i]], col_types = cols(.default = "c"))
-  }
-  out <-  bind_rows(out) %>% 
-    type_convert()
-  out
-}
-
-dir_examp <- dir("ch21_csvs_example", 
-    pattern = "csv$",
-    full.names = TRUE)
-
-names_appended <- append_csvs(dir_examp)
-names_appended
-```
-
-```
-## # A tibble: 3,514 x 6
-##     year sex   name      n   prop first_letter
-##    <dbl> <chr> <chr> <int>  <dbl> <chr>       
-##  1  1880 F     Anna   2604 0.0267 A           
-##  2  1881 F     Anna   2698 0.0273 A           
-##  3  1882 F     Anna   3143 0.0272 A           
-##  4  1883 F     Anna   3306 0.0275 A           
-##  5  1884 F     Anna   3860 0.0281 A           
-##  6  1885 F     Anna   3994 0.0281 A           
-##  7  1886 F     Anna   4283 0.0279 A           
-##  8  1887 F     Anna   4227 0.0272 A           
-##  9  1888 F     Anna   4982 0.0263 A           
-## 10  1889 F     Anna   5062 0.0268 A           
-## # ... with 3,504 more rows
-```
-
-
-* See [Using map] for example of how this could be accomplished using `map` and `map(safely(read_csv))`.
-
-
+    * See [Using map] for example of how this could be accomplished using `map` and `map(safely(read_csv))`.
 
 2.  *What happens if you use `for (nm in names(x))` and `x` has no names?*
 
-
-```r
-x <- list(1:10, 11:18, 19:25)
-for (nm in names(x)) {
-  print(x[[nm]])
-}
-```
-
-* each iteration produces an error, so nothing is written
+    
+    ```r
+    x <- list(1:10, 11:18, 19:25)
+    for (nm in names(x)) {
+      print(x[[nm]])
+    }
+    ```
+    
+    * each iteration produces an error, so nothing is written
   
 *What if only some of the elements are named? *
 
-
-```r
-x <- list(a = 1:10, 11:18, c = 19:25)
-for (nm in names(x)) {
-  print(x[[nm]])
-}
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## NULL
-## [1] 19 20 21 22 23 24 25
-```
-
-* you have output for those with names and NULL for those without
+    
+    ```r
+    x <- list(a = 1:10, 11:18, c = 19:25)
+    for (nm in names(x)) {
+      print(x[[nm]])
+    }
+    ```
+    
+    ```
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+    ## NULL
+    ## [1] 19 20 21 22 23 24 25
+    ```
+    
+    * you have output for those with names and NULL for those without
   
 *What if the names are not unique?*
-
-```r
-x <- list(a = 1:10, a = 11:18, c = 19:25)
-for (nm in names(x)) {
-  print(x[[nm]])
-}
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## [1] 19 20 21 22 23 24 25
-```
-
-* it prints the first position with the name
-      
+    
+    ```r
+    x <- list(a = 1:10, a = 11:18, c = 19:25)
+    for (nm in names(x)) {
+      print(x[[nm]])
+    }
+    ```
+    
+    ```
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+    ##  [1]  1  2  3  4  5  6  7  8  9 10
+    ## [1] 19 20 21 22 23 24 25
+    ```
+    
+    * it prints the first position with the name
+    
 3.  Write a function that prints the mean of each numeric column in a data frame, along with its name. For example, `show_mean(iris)` would print:
-
-```r
-show_mean(iris)
-#> Sepal.Length: 5.84
-#> Sepal.Width:  3.06
-#> Petal.Length: 3.76
-#> Petal.Width:  1.20
-```
+    
+    ```r
+    show_mean(iris)
+    #> Sepal.Length: 5.84
+    #> Sepal.Width:  3.06
+    #> Petal.Length: 3.76
+    #> Petal.Width:  1.20
+    ```
 
 (Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)
 
-
-```r
-show_mean <- function(df){
-  # select just cols that are numeric
-  out <- vector("logical", length(df))
-  for (i in seq_along(df)) {
-    out[[i]] <- is.numeric(df[[i]])
-  } 
-  df_select <- df[out]
-  # keep/discard funs would have made this easy
-  
-  # make list of values w/ mean
-  means <- vector("list", length(df_select))
-  names(means) <- names(df_select)
-  for (i in seq_along(df_select)){
-    means[[i]] <- mean(df_select[[i]], na.rm = TRUE) %>%
-      round(digits = 2)
-  }
-  
-  # print out, use method to identify max chars for vars printed
-  means_names <- names(means)
-  chars_max <- (str_count(means_names) + str_count(as.character(means))) %>% max()
-  chars_pad <- chars_max - (str_count(means_names) + str_count(as.character(means)))
-  names(chars_pad) <- means_names
-  
-
-str_c(means_names, ": ", str_dup(" ", chars_pad), means) %>% 
-  writeLines()
-}
-
-show_mean(flights)
-```
-
-```
-## year:              2013
-## month:             6.55
-## day:              15.71
-## dep_time:       1349.11
-## sched_dep_time: 1344.25
-## dep_delay:        12.64
-## arr_time:       1502.05
-## sched_arr_time: 1536.38
-## arr_delay:          6.9
-## flight:         1971.92
-## air_time:        150.69
-## distance:       1039.91
-## hour:             13.18
-## minute:           26.23
-```
-
+    
+    ```r
+    show_mean <- function(df){
+      # select just cols that are numeric
+      out <- vector("logical", length(df))
+      for (i in seq_along(df)) {
+        out[[i]] <- is.numeric(df[[i]])
+      } 
+      df_select <- df[out]
+      # keep/discard funs would have made this easy
+      
+      # make list of values w/ mean
+      means <- vector("list", length(df_select))
+      names(means) <- names(df_select)
+      for (i in seq_along(df_select)){
+        means[[i]] <- mean(df_select[[i]], na.rm = TRUE) %>%
+          round(digits = 2)
+      }
+      
+      # print out, use method to identify max chars for vars printed
+      means_names <- names(means)
+      chars_max <- (str_count(means_names) + str_count(as.character(means))) %>% max()
+      chars_pad <- chars_max - (str_count(means_names) + str_count(as.character(means)))
+      names(chars_pad) <- means_names
+      
+    
+    str_c(means_names, ": ", str_dup(" ", chars_pad), means) %>% 
+      writeLines()
+    }
+    
+    show_mean(flights)
+    ```
+    
+    ```
+    ## year:              2013
+    ## month:             6.55
+    ## day:              15.71
+    ## dep_time:       1349.11
+    ## sched_dep_time: 1344.25
+    ## dep_delay:        12.64
+    ## arr_time:       1502.05
+    ## sched_arr_time: 1536.38
+    ## arr_delay:          6.9
+    ## flight:         1971.92
+    ## air_time:        150.69
+    ## distance:       1039.91
+    ## hour:             13.18
+    ## minute:           26.23
+    ```
 
 4.  What does this code do? How does it work?
 
+    
+    ```r
+    trans <- list( 
+      disp = function(x) x * 0.0163871,
+      am = function(x) {
+        factor(x, labels = c("auto", "manual"))
+      }
+    )
+    for (var in names(trans)) {
+      mtcars[[var]] <- trans[[var]](mtcars[[var]])
+    }
+    mtcars
+    ```
 
-```r
-trans <- list( 
-  disp = function(x) x * 0.0163871,
-  am = function(x) {
-    factor(x, labels = c("auto", "manual"))
-  }
-)
-for (var in names(trans)) {
-  mtcars[[var]] <- trans[[var]](mtcars[[var]])
-}
-mtcars
-```
-
-* first part builds list of functions, 2nd applies those to a dataset
-* are storing the data transformations as a function and then applying this to a dataframe ^[This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized -- go and use this for documenting your work / transformations]
+    * first part builds list of functions, 2nd applies those to a dataset
+    * are storing the data transformations as a function and then applying this to a dataframe ^[This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized -- go and use this for documenting your work / transformations]
     
 ## 21.4: For loops vs. functionals
 
@@ -715,9 +664,7 @@ mtcars
     
     * It allows you to input either 1 or 2 for the `MARGIN` argument, which corresponds with looping over either the rows or the columns.
   
-1.  Adapt `col_summary()` so that it only applies to numeric columns
-    You might want to start with an `is_numeric()` function that returns
-    a logical vector that has a TRUE corresponding to each numeric column.
+1.  Adapt `col_summary()` so that it only applies to numeric columns You might want to start with an `is_numeric()` function that returns a logical vector that has a TRUE corresponding to each numeric column.
     
     
     ```r
@@ -832,7 +779,6 @@ mtcars
     ##       distance           hour         minute      time_hour 
     ##    0.000000000    0.000000000    0.000000000    0.000000000
     ```
-    
 
 1.  How can you create a single vector that for each column in a data frame indicates whether or not it's a factor?
     
@@ -870,19 +816,19 @@ mtcars
     
     ```
     ## [[1]]
-    ## [1] 0.4381849
+    ## [1] -0.1494444
     ## 
     ## [[2]]
-    ## [1] -0.9574765 -0.9277343
+    ## [1] -0.7915988 -0.6355096
     ## 
     ## [[3]]
-    ## [1]  0.06254569  0.62112584 -1.45031206
+    ## [1] -0.01239288  0.59242583  1.05346198
     ## 
     ## [[4]]
-    ## [1] -0.70930750 -0.27261728  0.29530337  0.01922859
+    ## [1] -1.1638320  0.6798597  0.5449361  0.2940840
     ## 
     ## [[5]]
-    ## [1] -0.3389914  0.2212014 -0.9260056  0.3687344  1.4042915
+    ## [1]  1.13447632 -0.49628614  0.04456946 -2.16214067  0.10714577
     ```
     
     * it runs on each item in the vector. In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of `rnorm`, hence pattern above.
@@ -896,19 +842,19 @@ mtcars
     
     ```
     ## [[1]]
-    ## [1] -1.2541084 -2.0079233 -0.5461033 -3.1190714 -1.1275664
+    ## [1]  0.1112557 -1.1244532 -2.2276769 -3.5318014 -0.6970038
     ## 
     ## [[2]]
-    ## [1] -0.75579140 -0.68593107 -2.12586070 -2.42905287  0.07793288
+    ## [1] -0.4888524 -2.1605676 -1.7464588 -1.6741271 -0.3501601
     ## 
     ## [[3]]
-    ## [1] -0.2815880 -0.2699949  0.1250097  0.7499056  0.7818973
+    ## [1] -2.7276108 -0.4850892  0.2529060 -0.9062519  0.1440410
     ## 
     ## [[4]]
-    ## [1]  1.2374722 -1.9705756 -0.2610177  0.9636913  0.4503814
+    ## [1]  1.40031489 -0.23394487  1.88443961 -0.02591221  2.29585292
     ## 
     ## [[5]]
-    ## [1] 1.865752 3.711818 1.927985 1.630352 1.849412
+    ## [1] 2.92571195 2.93179846 0.07373154 0.76754648 1.18798994
     ```
 
     * It makes 5 vectors each of length 5 with the values centered at the means of -2,-1, 0, 1, 2 respectively. 
@@ -921,7 +867,6 @@ mtcars
 mtcars %>% 
   purrr::map( ~ lm(mpg ~ wt, data = .))
 ```
-    
     
 ## 21.9 Other patterns of for loops
 
@@ -993,7 +938,6 @@ mtcars %>%
     ##    gear    carb 
     ##   4.000   2.000
     ```
-    
 
 1.  A possible base R equivalent of `col_sum()` is:
     
@@ -1043,6 +987,7 @@ mtcars %>%
 ```
 
 #### Plot of names
+
 * Below is a plot of the proportion of individuals named the most popular letter in each year. This suggests that the top names by letter do not have as large of a proportion of the population ocmpared to historically.
 
 
@@ -1052,7 +997,7 @@ names_appended %>%
   geom_line()
 ```
 
-<img src="21-iteration_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="21-iteration_files/figure-html/unnamed-chunk-45-1.png" width="672" />
 
 #### csv other example
 
@@ -1081,6 +1026,7 @@ read_dir(files_example$file_paths)
 
 
 ### 21.3.5.2 (with purrr)
+
 Slightly less attractive printing
 
 ```r
@@ -1168,6 +1114,7 @@ flights %>%
 
 
 ### 21.9 mirroring `keep`
+
 * below is one method for passing multiple, more complex arguments through keep, though you can also use function shortcuts (`~`) in `keep` and `discard`
     
     ```r
@@ -1207,8 +1154,8 @@ invoke(runif, n = 10)
 ```
 
 ```
-##  [1] 0.87303459 0.18087753 0.70736151 0.33974499 0.80868221 0.99812469
-##  [7] 0.46116966 0.08744731 0.64998722 0.81720052
+##  [1] 0.2350312 0.3831304 0.5757946 0.6193758 0.3839942 0.6897169 0.3352890
+##  [8] 0.6809977 0.9376681 0.6595481
 ```
 
 ```r
@@ -1361,14 +1308,12 @@ select(iris, -Species) %>%
 ```
 
 
-
 ```r
 mean.and.median <- function(x){
   list(mean = mean(x, na.rm = TRUE), 
        median = median(x, na.rm = TRUE))
 }
 ```
-
 
 Difference between dfr and dfc, taken from here: https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html 
 
@@ -1421,6 +1366,7 @@ iris %>%
 ```
 
 ### indexing nms caution
+
 When creating your empty list, use indexes rather than names if you are creating values, otherwise you are creating new values on the list. E.g. in the example below I the output ends up being length 6 because you have the 3 `NULL` values plus the 3 newly created named positions.
 
 ```r
@@ -1580,9 +1526,7 @@ tibble(type = map_chr(mtcars, typeof),
 ## 11 double   2.81    2    carb
 ```
 
-
 *Provide the number of unique values for all columns excluding columns with numeric types or date types.*
-
 
 
 ```r

@@ -11,11 +11,8 @@ library(readr)
 
 # Ch. 10: Tibbles
 
-```{r, eval = FALSE}
-vignette("tibble")
-```
-
 * `tibble`: produces a dataframe w/ some other helpful qualities that have advantages over `data.frame`
+    * see `vignette("tibble")`
 * `as_tibble`: convert to a tibble
 * `tribble`: transposed tibble - set-up for data entry into a tibble in code
 * `print`: can use print to set how the tibble will print
@@ -88,7 +85,7 @@ df %>%
 ```
   
 
-*5. What does tibble::enframe() do? When might you use it?*  
+*5. What does `tibble::enframe()` do? When might you use it?*  
 
 Let's you encode "name" and "value"
 ```{r}

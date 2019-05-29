@@ -80,7 +80,6 @@ diamonds2 <- diamonds2 %>%
         
 1.  If `log(price) = a_0 + a_1 * log(carat)`, what does that say about the relationship between `price` and `carat`?
 
-
     * because we're using a natural log it means that an a_1 percentage change in carat corresponds with an a_1 percentage increase in the price
     * if you had used a log base 2 it has a different interpretation that can be thought of in terms of relationship of doubling
 

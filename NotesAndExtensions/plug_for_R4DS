@@ -1,0 +1,15 @@
+## Plug for R4DS
+
+Although reading a book three times in three years may seem excessive, R4DS is excellent on repeat engagements. After the first read, I felt comfortable doing most common types of data manipulation. On the second, functional programming methods and elegant iteration methods like those demonstrated in [Chapter 25: many models](https://r4ds.had.co.nz/many-models.html) felt easy and intuitive. 
+
+See a lightning talk I gave on "managing many models" ___
+
+On the third R4DS reading, various functions or options I'd forgotten, or not inuited the utility of suddenly popped-out to me as useful things I needed to add to my tool belt to replace less effective methods I'd been using (e.g. `tidyr::enframe()`, `cache.extra` chunk option, ...).
+
+## Plug for R4DS
+
+R4DS is very much a nuts and bolts book. It focuses more on data "tidying" and visualization than on some of the sexy topics 
+
+My Master's program had provided me with a broad overview and strong foundation of knowledge on a wide range of analytic methods. However, having bounced between python, R, SQL, and SAS on different projects, the nuts and bolts of my coding skills had yet to mature. 
+
+Job interviews were coming-up and I was nervous my lack of fluency in coding would come through either in code submissions or reviews.

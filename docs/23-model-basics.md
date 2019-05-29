@@ -128,10 +128,7 @@
 
 ### 23.2.1
 
-1.  One downside of the linear model is that it is sensitive to unusual values
-    because the distance incorporates a squared term. Fit a linear model to 
-    the simulated data below, and visualise the results. Rerun a few times to
-    generate different simulated datasets. What do you notice about the model? 
+1.  One downside of the linear model is that it is sensitive to unusual values because the distance incorporates a squared term. Fit a linear model to the simulated data below, and visualise the results. Rerun a few times to generate different simulated datasets. What do you notice about the model? 
     
     
     ```r
@@ -141,7 +138,7 @@
     )
     ```
 
-    generate n number of datasets that fit characteristics of sim1a
+    generate n number of datasets that fit characteristics of `sim1a`
     
     
     ```r
@@ -179,9 +176,7 @@
     * as a metric it tends to be more suseptible to outliers, than say mae
 
 
-1.  One way to make linear models more robust is to use a different distance
-    measure. For example, instead of root-mean-squared distance, you could use
-    mean-absolute distance:
+1.  One way to make linear models more robust is to use a different distance measure. For example, instead of root-mean-squared distance, you could use mean-absolute distance:
     
     
     ```r
@@ -191,8 +186,7 @@
     }
     ```
     
-    Use `optim()` to fit this model to the simulated data above and compare it 
-    to the linear model.
+    Use `optim()` to fit this model to the simulated data above and compare it to the linear model.
     
     
     ```r
@@ -295,9 +289,7 @@
     <img src="23-model-basics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
     
-1.  One challenge with performing numerical optimisation is that it's only
-    guaranteed to find one local optima. What's the problem with optimising
-    a three parameter model like this?
+1.  One challenge with performing numerical optimisation is that it's only guaranteed to find one local optima. What's the problem with optimising a three parameter model like this?
     
     
     ```r
@@ -378,11 +370,7 @@
 
 ### 23.3.3
 
-1.  Instead of using `lm()` to fit a straight line, you can use `loess()`
-    to fit a smooth curve. Repeat the process of model fitting, 
-    grid generation, predictions, and visualisation on `sim1` using 
-    `loess()` instead of `lm()`. How does the result compare to 
-    `geom_smooth()`?
+1.  Instead of using `lm()` to fit a straight line, you can use `loess()` to fit a smooth curve. Repeat the process of model fitting, grid generation, predictions, and visualisation on `sim1` using `loess()` instead of `lm()`. How does the result compare to `geom_smooth()`?
         
     
     ```r
@@ -405,7 +393,7 @@
     
     * For sim1, the default value for `geom_smooth` is to use loess, os it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
     * this relationship looks pretty solidly linear
-      * below are some plots of the resids, just for kicks
+        + below are some plots of the resids, just for kicks
     
     
     ```r
@@ -435,8 +423,7 @@
     <img src="23-model-basics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
     
-1.  `add_predictions()` is paired with `gather_predictions()` and 
-    `spread_predictions()`. How do these three functions differ?
+1.  `add_predictions()` is paired with `gather_predictions()` and `spread_predictions()`. How do these three functions differ?
 
     * `spread_predictions()` adds a new `pred` for each model included
     * `gather_predictions()` adds 2 columns `model` and `pred` for each model and repeats the input rows for each model (seems like it would work well with facets)
@@ -465,7 +452,8 @@
     ```
     
     ```r
-    #How can I add a prefix when using spread_predictions() ? -- could use the method below
+    #How can I add a prefix when using spread_predictions() ? -- could use the
+    #method below
     sim1 %>% 
       gather_predictions(sim1_mod, sim1_mod_loess) %>%
       mutate(model = str_c(model, "_pred")) %>% 
@@ -502,15 +490,11 @@
     
     <img src="23-model-basics_files/figure-html/23.3.3 2-1.png" width="672" />
     
-    
-1.  What does `geom_ref_line()` do? What package does it come from?
-    Why is displaying a reference line in plots showing residuals
-    useful and important?
+1.  What does `geom_ref_line()` do? What package does it come from? Why is displaying a reference line in plots showing residuals useful and important?
     
     * It comes from ggplot2 and shows either a geom_hline or a geom_vline, depending on whether you specify h or v.  `ggplot2::geom_ref_line`
     
-1.  Why might you want to look at a frequency polygon of absolute residuals?
-    What are the pros and cons compared to looking at the raw residuals?
+1.  Why might you want to look at a frequency polygon of absolute residuals? What are the pros and cons compared to looking at the raw residuals?
     
     * may be good for situations when you have TONS of residuals, and is hard to look at?...
     * pros are it may be easier to get sense of count, cons are that you can't plot it against something like x so patterns associated with residuals will not be picked-up, e.g. heteroskedasticity, or more simply, signs that the model could be improved by incorporating other vars in the model
@@ -519,9 +503,7 @@
 
 ### 23.4.5
 
-1.  What happens if you repeat the analysis of `sim2` using a model without
-    an intercept. What happens to the model equation? What happens to the
-    predictions?
+1.  What happens if you repeat the analysis of `sim2` using a model without an intercept. What happens to the model equation? What happens to the predictions?
     
     
     ```r
@@ -557,8 +539,7 @@
     
     * you have an ANOVA analysis, one of the variables takes on the value of the intercept, the others all have the value of the intercept added to them.
       
-1.  Use `model_matrix()` to explore the equations generated for the models
-    I fit to `sim3` and `sim4`. Why is `*` a good shorthand for interaction?
+1.  Use `model_matrix()` to explore the equations generated for the models I fit to `sim3` and `sim4`. Why is `*` a good shorthand for interaction?
     
     ```r
     model_matrix(y ~ x1*x2, data = sim3)
@@ -671,45 +652,45 @@
     * the values near where x2 and x1 are most near 0 should be where the residuals are most similar
     
     *Plot difference in residuals*
-
-
-```r
-sim4 %>% 
-  spread_residuals(mod1, mod2) %>% 
-  mutate(mod2_less_mod1 = mod2 - mod1) %>% 
-  group_by(x1, x2) %>% 
-  summarise(mod2_less_mod1 = mean(mod2_less_mod1) ) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = x1, y = x2))+
-  geom_tile(aes(fill = mod2_less_mod1))+
-  geom_text(aes(label = round(mod2_less_mod1, 1)), size = 3)+
-  scale_fill_gradient2()
-```
-
-<img src="23-model-basics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
-
-* This shows how `mod2` has higher valued predictions when x1 and x2 are opposite signs compared to the predictions from `mod1`
-
-*Plot difference in distance from 0 between `mod1` and `mod1` resids*
-
-```r
-sim4 %>% 
-  spread_residuals(mod1, mod2) %>% 
-  mutate_at(c("mod1", "mod2"), abs) %>%
-  mutate(mod2_less_mod1 = mod2 - mod1) %>% 
-  group_by(x1, x2) %>% 
-  summarise(mod2_less_mod1 = mean(mod2_less_mod1) ) %>% 
-  ungroup() %>% 
-  ggplot(aes(x = x1, y = x2))+
-  geom_tile(aes(fill = mod2_less_mod1))+
-  geom_text(aes(label = round(mod2_less_mod1, 1)), size = 3)+
-  scale_fill_gradient2()
-```
-
-<img src="23-model-basics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
-
-* see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
-  * however very little difference, and I might lean more towards `mod1` for simplicities sake
+    
+    
+    ```r
+    sim4 %>% 
+      spread_residuals(mod1, mod2) %>% 
+      mutate(mod2_less_mod1 = mod2 - mod1) %>% 
+      group_by(x1, x2) %>% 
+      summarise(mod2_less_mod1 = mean(mod2_less_mod1) ) %>% 
+      ungroup() %>% 
+      ggplot(aes(x = x1, y = x2))+
+      geom_tile(aes(fill = mod2_less_mod1))+
+      geom_text(aes(label = round(mod2_less_mod1, 1)), size = 3)+
+      scale_fill_gradient2()
+    ```
+    
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+    
+    * This shows how `mod2` has higher valued predictions when x1 and x2 are opposite signs compared to the predictions from `mod1`
+    
+    *Plot difference in distance from 0 between `mod1` and `mod1` resids*
+    
+    ```r
+    sim4 %>% 
+      spread_residuals(mod1, mod2) %>% 
+      mutate_at(c("mod1", "mod2"), abs) %>%
+      mutate(mod2_less_mod1 = mod2 - mod1) %>% 
+      group_by(x1, x2) %>% 
+      summarise(mod2_less_mod1 = mean(mod2_less_mod1) ) %>% 
+      ungroup() %>% 
+      ggplot(aes(x = x1, y = x2))+
+      geom_tile(aes(fill = mod2_less_mod1))+
+      geom_text(aes(label = round(mod2_less_mod1, 1)), size = 3)+
+      scale_fill_gradient2()
+    ```
+    
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+    
+    * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
+      * however very little difference, and I might lean more towards `mod1` for simplicities sake
 
 ## Appendix
 
