@@ -158,7 +158,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#geometric-objects"><i class="fa fa-check"></i>3.6: Geometric Objects</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-3"><i class="fa fa-check"></i>3.6.1</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: Statistical transformations</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-4"><i class="fa fa-check"></i>3.7.1.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i>3.8: Position Adjjustment</a><ul>
@@ -313,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="18-pipes.html"><a href="18-pipes.html"><i class="fa fa-check"></i>Ch. 18: Pipes (notes only)</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>ch. 19: Functions</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>Ch. 19: Functions</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i>19.2: When should you write a function?</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-63"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
@@ -327,15 +327,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-66"><i class="fa fa-check"></i>19.5.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-6"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1.4</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#applying-indexing-to-dfs"><i class="fa fa-check"></i>Applying indexing to dfs</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a></li>
 <li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.2.3.5</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-69"><i class="fa fa-check"></i>20.3.5</a></li>
@@ -482,7 +480,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>geom_jitter</code>: like <code>geom_point()</code> but with randomness added, use <code>width</code> and <code>height</code> args to control (could also use <code>geom_point()</code> with <code>position = "jitter"</code>)</li>
 <li><code>geom_boxplot</code>: box and whiskers plot</li>
 <li><code>geom_polygon</code>: Can use to plot points – use with objects created from <code>map_data()</code></li>
-<li><code>geom_abline</code>:</li>
+<li><code>geom_abline</code>: use args <code>intercept</code> and <code>slope</code> to create line</li>
 <li><code>facet_wrap</code>: Facet multiple charts by one variable; <code>scales = "free_x"</code> (or “free”, or “free_y” are helpful)</li>
 <li><code>facet_grid</code>: Facet multiple by charts by one or two variables: <code>space</code> is helpful arg (not within <code>facet_wrap()</code>)</li>
 <li><code>stat_count</code>: Like <code>geom_bar()</code></li>
@@ -522,12 +520,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Inverse relationship.</p>
 <p><strong>5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?</strong><br />
-<em>(key question)</em></p>
+**</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> class, <span class="dt">y =</span> drv))</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/3.2.4.5-1.png" width="672" /></p>
 <p>The points stack-up on top of one another so you don’t get a sense of how many are on each point.</p>
 <p><em>Any ideas for what methods could you use to improve the view of this data?</em></p>
+<p>Jitter points so that they don’t</p>
 </div>
 </div>
 <div id="aesthetic-mappings" class="section level2">
@@ -604,7 +603,7 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> cyl))</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>They represent the locations where there is no point on the above graph (could be made more clear by giving consistent order to axes).</p>
-<p><strong>3. What plots does the following code make? What does . do?</strong></p>
+<p><strong>3. What plots does the following code make? What does <code>.</code> do?</strong></p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb20-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
@@ -727,7 +726,7 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 </div>
 </div>
 <div id="statistical-transformations" class="section level2">
-<h2>3.7: statistical transformations</h2>
+<h2>3.7: Statistical transformations</h2>
 <div id="section-4" class="section level3">
 <h3>3.7.1.</h3>
 <p><strong>1. What is the default <code>geom</code> associated with <code>stat_summary()</code>? How could you rewrite the previous plot to use that geom function instead of the stat function?</strong></p>
@@ -758,15 +757,14 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <a class="sourceLine" id="cb53-5" title="5">                  <span class="dt">fun.ymax =</span> <span class="st">&quot;max&quot;</span>, </a>
 <a class="sourceLine" id="cb53-6" title="6">                  <span class="dt">fun.y =</span> <span class="st">&quot;median&quot;</span>)</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<p><strong>2. What does geom_col() do? How is it different to geom_bar()?</strong><br />
+<p><strong>2. What does <code>geom_col()</code> do? How is it different to <code>geom_bar()</code>?</strong><br />
 <code>geom_col</code> has <code>"identity" as the default</code>stat<code>, so it expects to receive a variable that already has the value aggregated^[I often use this over</code>geom_bar` and do the aggregation with dplyr rather than ggplot2]</p>
 <p><strong>3.Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?</strong></p>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1">?ggplot2</a></code></pre></div>
-<p><strong>4.What variables does stat_smooth() compute? What parameters control its behaviour?</strong><br />
+<p><strong>4.What variables does <code>stat_smooth()</code> compute? What parameters control its behaviour?</strong><br />
 See here: <a href="http://ggplot2.tidyverse.org/reference/#section-layer-stats" class="uri">http://ggplot2.tidyverse.org/reference/#section-layer-stats</a> for a helpful resource.
 Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/geom" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/geom</a><a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
-<p><strong>5. In our proportion bar chart, we need to set group = 1. Why? In other words what is the problem with these two graphs?</strong><br />
-(key question)</p>
+<p><strong>5. In our proportion bar chart, we need to set <code>group = 1</code>. Why? In other words what is the problem with these two graphs?</strong></p>
 <div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb55-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop..))</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
@@ -776,7 +774,7 @@ Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-
 <div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb57-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
-<p>This is a solution, but still seems off as prop becomes out of a value greater than 1</p>
+<p>This is a solution, though not perfect as <code>prop</code> becomes out of a value greater than 1</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> color))</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
@@ -810,8 +808,7 @@ Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <div id="section-5" class="section level3">
 <h3>3.8.1.</h3>
-<p><strong>1.What is the problem with this plot? How could you improve it?</strong>
-(key question)</p>
+<p><strong>1.What is the problem with this plot? How could you improve it?</strong></p>
 <div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb64-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
@@ -821,9 +818,8 @@ Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p><strong>2. What parameters to geom_jitter() control the amount of jittering?</strong><br />
 <code>height</code> and <code>width</code></p>
-<p><strong>3. Compare and contrast geom_jitter() with geom_count().</strong><br />
-(key question)
-Take the above chart and instead use <code>geom_count</code></p>
+<p><strong>3. Compare and contrast geom_jitter() with geom_count().</strong></p>
+<p>Take the above chart and instead use <code>geom_count</code></p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb66-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>()</a></code></pre></div>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
@@ -887,7 +883,7 @@ The first is an approximation, useful for smaller regions to be proected. For th
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-49-2.png" width="672" /></p>
 <p><strong>4. What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?</strong><br />
 <code>geom_abline()</code> adds a line with a given intercept and slope (either given by <code>aes</code> or by <code>intercept</code> and <code>slope</code> args)<br />
-<code>coord_fixed</code> ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.</p>
+<code>coord_fixed()</code> ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.</p>
 <div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb78-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb78-3" title="3"><span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span></a>
@@ -936,7 +932,7 @@ The first is an approximation, useful for smaller regions to be proected. For th
 <div class="footnotes">
 <hr />
 <ol start="2">
-<li id="fn2"><p>See <a href="03-data-visualization.html#extension">3.7.1.1 extension</a> for notes on how to relate this to dplyr code.<a href="03-data-visualization.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>See <a href="03-data-visualization.html#extension">3.7.1.1 extension</a> for notes on how to relate this to <code>dplyr</code> code.<a href="03-data-visualization.html#fnref2" class="footnote-back">↩</a></p></li>
 <li id="fn3"><p>Though it’s missing some very common ones like <code>geom_col</code> and <code>geom_bar</code>.<a href="03-data-visualization.html#fnref3" class="footnote-back">↩</a></p></li>
 </ol>
 </div>

@@ -17,7 +17,7 @@ library(stringr)
 library(e1071)
 ```
 
-# ch. 19: Functions
+# Ch. 19: Functions
 
 * `function_name <- function(input1, input2) {}`
 * `if () {}`
@@ -752,12 +752,11 @@ mtcars %>%
 ```
 
 
-# Appendix
+## Appendix
 
-## 19.2.1.4
+### 19.2.1.4
 
-*Function for Standard Error* 
-
+*Function for Standard Error:* 
 
     
     ```r
@@ -781,8 +780,7 @@ mtcars %>%
     ## [1] 2.162175
     ```
 
-
-*Function for kurtosis*
+*Function for kurtosis:*
 
 ```r
 kurtosis_type3 <- function(x){
@@ -827,10 +825,7 @@ kurtosis_type3(cauchy_exp)
 ## [1] 1197.052
 ```
 
-
-
-
-## Changing values with indexes
+### Changing values with indexes
 
 *In this section I use the word 'indexes' to refer to any base R method for specifying position ^[I am using the word loosely to mean both either the situation when you specify postions by a series of `TRUE` / `FALSE` values or a series of numeric indexes E.g. x[c(TRUE, TRUE, FALSE, FALSE, TRUE)] or x[c(1, 2, 5)] , 'index' obviously sounds more like the later, but I mean it generally to cover just 'base R method of specifying positoin'.].
 
@@ -911,14 +906,14 @@ microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
 
 ```
 ## Unit: microseconds
-##    expr    min      lq      mean median       uq      max neval cld
-##  ifelse 53.701 57.3015 103.93380 64.351 107.1505 4448.601   500   b
-##   index 21.500 23.4510  37.10377 26.001  34.7010 3061.202   500  a
+##    expr    min     lq      mean  median       uq      max neval cld
+##  ifelse 51.601 58.201 106.93400 102.151 109.6510 3626.601   500   b
+##   index 20.801 23.400  37.64304  32.251  35.6505 3019.201   500  a
 ```
 
 The index methods tends to be faster.
 
-### Applying indexing to dfs
+#### Applying indexing to dfs
 
 I have a high preference for using tidyverse style approaches when applying transformations to dataframes, though there are instances when it's easier to use indexing methods. A common example of this is say we want to replace all of the `NA` values across multiple columns in a dataframe.
 
@@ -1019,14 +1014,10 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 
 ```
 ## Unit: milliseconds
-##   expr       min        lq      mean    median        uq       max neval
-##  index   76.4143  108.5001  195.4987  214.5160  222.3934  319.3723    10
-##  dplyr   76.3414   77.8325  141.4804  121.5022  192.6553  258.9295    10
-##  purrr 1103.8537 1209.7316 1424.7291 1313.7910 1426.7856 2205.4433    10
-##  cld
-##   a 
-##   a 
-##    b
+##   expr      min       lq      mean    median        uq       max neval cld
+##  index  77.4948  79.7458  145.1785  171.1561  183.4362  225.6832    10  a 
+##  dplyr  76.5561  84.7772  142.3876  173.7605  182.4485  199.8846    10  a 
+##  purrr 920.6055 961.1599 1060.8513 1016.2543 1059.3168 1601.4627    10   b
 ```
 
 
@@ -1041,10 +1032,10 @@ microbenchmark::microbenchmark(index = df_na0_index(flights),
 
 ```
 ## Unit: milliseconds
-##   expr       min        lq      mean     median       uq       max neval
-##  index   78.9846   95.7065  101.6078   97.13825  114.364  130.3182    10
-##  dplyr   61.0618   82.6142  126.2712  115.14610  171.070  222.4850    10
-##  purrr 1173.6570 1194.9358 1231.8845 1219.70455 1267.879 1350.9402    10
+##   expr       min        lq      mean    median        uq       max neval
+##  index   76.4143  108.5001  195.4987  214.5160  222.3934  319.3723    10
+##  dplyr   76.3414   77.8325  141.4804  121.5022  192.6553  258.9295    10
+##  purrr 1103.8537 1209.7316 1424.7291 1313.7910 1426.7856 2205.4433    10
 ##  cld
 ##   a 
 ##   a 
@@ -1055,20 +1046,21 @@ You should see that the index and dplyr method are pretty consistent on time, wh
 
 I also wonder if there may be a better alternative to `ifelse` in this situation.
 
-## Better than `ifelse()`?
+### Better than `ifelse()`?
 
-I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style...
+I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style... 
 
 * I learned about dplyr's functions `dplyr::recode` which is similar to `forcats::fct_recode` and can be used for replacing multiple character values. 
 * `dplyr::case_when` can be used for more complex criteria
+* `dplyr::if_else` is similar to `base::ifelse` but more strict on types
 
-## Dplyr and functions
+### Dplyr and functions
 
 As was mentioned, dplyr uses non-standard evaluation. This means that when referring to column names form within a function, dplyr will require some slightly different syntax... I typically find ways around this by deploying tricks with the `*_` verbs or taking advantage of the `vars` functions and `*_at` or by messing with the names, though am interested to hear other methods...
 
 Say you want to write a function that takes in a dataframe and a list of column names and you want to return a sum of these into a new column with the name corresponding with the name of the spliced together columns. What would be the most elegant way of doing this with tidyverse style?
 
-## 19.2.3.5
+### 19.2.3.5
 
     
     ```r

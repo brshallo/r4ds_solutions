@@ -11,7 +11,7 @@
 * `geom_jitter`: like `geom_point()` but with randomness added, use `width` and `height` args to control (could also use `geom_point()` with `position = "jitter"`)
 * `geom_boxplot`: box and whiskers plot
 * `geom_polygon`: Can use to plot points -- use with objects created from `map_data()`
-* `geom_abline`: 
+* `geom_abline`: use args `intercept` and `slope` to create line
 * `facet_wrap`: Facet multiple charts by one variable; `scales = "free_x"` (or "free", or "free_y" are helpful)
 * `facet_grid`: Facet multiple by charts by one or two variables: `space` is helpful arg (not within `facet_wrap()`)
 * `stat_count`: Like `geom_bar()`
@@ -88,7 +88,7 @@ ggplot(mpg)+
 Inverse relationship.  
   
 **5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?**  
-*(key question)*
+**
 
 ```r
 ggplot(mpg)+
@@ -100,6 +100,8 @@ ggplot(mpg)+
 The points stack-up on top of one another so you don't get a sense of how many are on each point.  
 
 *Any ideas for what methods could you use to improve the view of this data?*
+
+Jitter points so that they don't
 
 ## 3.3: Aesthetic mappings
 ### 3.3.1.
@@ -237,7 +239,7 @@ ggplot(data = mpg) +
 
 They represent the locations where there is no point on the above graph (could be made more clear by giving consistent order to axes).
 
-**3. What plots does the following code make? What does . do?**
+**3. What plots does the following code make? What does `.` do?**
 
 
 ```r
@@ -494,7 +496,7 @@ ggplot(mpg, aes(displ, hwy)) +
 
 <img src="03-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
-## 3.7: statistical transformations
+## 3.7: Statistical transformations
 
 ### 3.7.1.
 
@@ -513,7 +515,7 @@ ggplot(mpg) +
 
 <img src="03-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
-*Rewritten with geom^[See [3.7.1.1 extension] for notes on how to relate this to dplyr code.]:*
+*Rewritten with geom^[See [3.7.1.1 extension] for notes on how to relate this to `dplyr` code.]:*
 
 
 ```r
@@ -555,7 +557,7 @@ ggplot(data = diamonds)+
 
 <img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
-**2. What does geom_col() do? How is it different to geom_bar()?**  
+**2. What does `geom_col()` do? How is it different to `geom_bar()`?**  
 `geom_col` has `"identity" as the default `stat`, so it expects to receive a variable that already has the value aggregated^[I often use this over `geom_bar` and do the aggregation with dplyr rather than ggplot2]
 
 
@@ -567,13 +569,13 @@ ggplot(data = diamonds)+
 ```
 
 
-**4.What variables does stat_smooth() compute? What parameters control its behaviour?**  
+**4.What variables does `stat_smooth()` compute? What parameters control its behaviour?**  
 See here: http://ggplot2.tidyverse.org/reference/#section-layer-stats for a helpful resource.
 Also, someone who aggregated some online: http://sape.inf.usi.ch/quick-reference/ggplot2/geom ^[Though it's missing some very common ones like `geom_col` and `geom_bar`.]
 
 
-**5. In our proportion bar chart, we need to set group = 1. Why? In other words what is the problem with these two graphs?**  
-(key question)
+**5. In our proportion bar chart, we need to set `group = 1`. Why? In other words what is the problem with these two graphs?**  
+
 
 ```r
 ggplot(data = diamonds) + 
@@ -599,7 +601,7 @@ ggplot(data = diamonds) +
 
 <img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
-This is a solution, but still seems off as prop becomes out of a value greater than 1
+This is a solution, though not perfect as `prop` becomes out of a value greater than 1
 
 ```r
 ggplot(data = diamonds) + 
@@ -660,7 +662,7 @@ ggplot(data = mpg, mapping = aes(x = drv, y = hwy))+
 ### 3.8.1.
 
 **1.What is the problem with this plot? How could you improve it?**
-(key question)
+
 
 ```r
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) + 
@@ -683,7 +685,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
 `height` and `width`
 
 **3. Compare and contrast geom_jitter() with geom_count().**  
-(key question)
+
 Take the above chart and instead use `geom_count`
 
 ```r
@@ -807,7 +809,7 @@ ggplot(nz,aes(long,lat,group=group))+
 
 **4. What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?**  
 `geom_abline()` adds a line with a given intercept and slope (either given by `aes` or by `intercept` and `slope` args)  
-`coord_fixed` ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.  
+`coord_fixed()` ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.  
 
 
 ```r

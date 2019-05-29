@@ -158,7 +158,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#geometric-objects"><i class="fa fa-check"></i>3.6: Geometric Objects</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-3"><i class="fa fa-check"></i>3.6.1</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: statistical transformations</a><ul>
+<li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#statistical-transformations"><i class="fa fa-check"></i>3.7: Statistical transformations</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#section-4"><i class="fa fa-check"></i>3.7.1.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#position-adjjustment"><i class="fa fa-check"></i>3.8: Position Adjjustment</a><ul>
@@ -313,7 +313,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="18-pipes.html"><a href="18-pipes.html"><i class="fa fa-check"></i>Ch. 18: Pipes (notes only)</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>ch. 19: Functions</a><ul>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html"><i class="fa fa-check"></i>Ch. 19: Functions</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i>19.2: When should you write a function?</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-63"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
@@ -327,15 +327,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-66"><i class="fa fa-check"></i>19.5.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
-</ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-6"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1.4</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#applying-indexing-to-dfs"><i class="fa fa-check"></i>Applying indexing to dfs</a></li>
-</ul></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a></li>
 <li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.2.3.5</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-69"><i class="fa fa-check"></i>20.3.5</a></li>
@@ -484,7 +482,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb851-8" title="8"><span class="kw">library</span>(e1071)</a></code></pre></div>
 </div>
 <div id="ch.-19-functions" class="section level1">
-<h1>ch. 19: Functions</h1>
+<h1>Ch. 19: Functions</h1>
 <ul>
 <li><code>function_name &lt;- function(input1, input2) {}</code></li>
 <li><code>if () {}</code></li>
@@ -1000,12 +998,11 @@ value is used by default?</p>
 <pre><code>## Missing values: 0
 ## Missing values: 18</code></pre>
 </div>
-</div>
-<div id="appendix-6" class="section level1">
-<h1>Appendix</h1>
-<div id="section-67" class="section level2">
-<h2>19.2.1.4</h2>
-<p><em>Function for Standard Error</em></p>
+<div id="appendix-6" class="section level2">
+<h2>Appendix</h2>
+<div id="section-67" class="section level3">
+<h3>19.2.1.4</h3>
+<p><em>Function for Standard Error:</em></p>
 <pre><code>```r
 x &lt;- c(5, -2, 8, 6, 9)
 sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))
@@ -1026,7 +1023,7 @@ sample_se(x)
 ```
 ## [1] 2.162175
 ```</code></pre>
-<p><em>Function for kurtosis</em></p>
+<p><em>Function for kurtosis:</em></p>
 <div class="sourceCode" id="cb926"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb926-1" title="1">kurtosis_type3 &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
 <a class="sourceLine" id="cb926-2" title="2">  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">4</span>) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x) <span class="op">^</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span></a>
 <a class="sourceLine" id="cb926-3" title="3">}</a></code></pre></div>
@@ -1046,8 +1043,8 @@ sample_se(x)
 <div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb931-1" title="1"><span class="kw">kurtosis_type3</span>(cauchy_exp)</a></code></pre></div>
 <pre><code>## [1] 1197.052</code></pre>
 </div>
-<div id="changing-values-with-indexes" class="section level2">
-<h2>Changing values with indexes</h2>
+<div id="changing-values-with-indexes" class="section level3">
+<h3>Changing values with indexes</h3>
 <p>*In this section I use the word ‘indexes’ to refer to any base R method for specifying position.<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></p>
 <p>My solution to building the new function in 19.2.1.2 shows another way of replacing values over re-writing a new vector, namely by specifying indexes and then forcing those to be a new value.</p>
 <p>For example, say we have a vector <code>c(1:20)</code> and we want to make all even values equal to 0. below is how you could do that by simply re-writing this to a new vector</p>
@@ -1093,12 +1090,12 @@ sample_se(x)
 <a class="sourceLine" id="cb940-2" title="2">                               <span class="dt">index =</span> <span class="kw">method_index</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>),</a>
 <a class="sourceLine" id="cb940-3" title="3">                               <span class="dt">times =</span> <span class="dv">500</span>)</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##    expr    min      lq      mean median       uq      max neval cld
-##  ifelse 53.701 57.3015 103.93380 64.351 107.1505 4448.601   500   b
-##   index 21.500 23.4510  37.10377 26.001  34.7010 3061.202   500  a</code></pre>
+##    expr    min     lq      mean  median       uq      max neval cld
+##  ifelse 51.601 58.201 106.93400 102.151 109.6510 3626.601   500   b
+##   index 20.801 23.400  37.64304  32.251  35.6505 3019.201   500  a</code></pre>
 <p>The index methods tends to be faster.</p>
-<div id="applying-indexing-to-dfs" class="section level3">
-<h3>Applying indexing to dfs</h3>
+<div id="applying-indexing-to-dfs" class="section level4">
+<h4>Applying indexing to dfs</h4>
 <p>I have a high preference for using tidyverse style approaches when applying transformations to dataframes, though there are instances when it’s easier to use indexing methods. A common example of this is say we want to replace all of the <code>NA</code> values across multiple columns in a dataframe.</p>
 <div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb942-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">3</span>, <span class="dv">4</span>),</a>
 <a class="sourceLine" id="cb942-2" title="2">       <span class="dt">y =</span> <span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="ot">NA</span>))</a></code></pre></div>
@@ -1158,6 +1155,16 @@ sample_se(x)
 <a class="sourceLine" id="cb951-3" title="3">                               <span class="dt">purrr =</span> <span class="kw">df_na0_purrr</span>(flights),</a>
 <a class="sourceLine" id="cb951-4" title="4">                               <span class="dt">times =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## Unit: milliseconds
+##   expr      min       lq      mean    median        uq       max neval cld
+##  index  77.4948  79.7458  145.1785  171.1561  183.4362  225.6832    10  a 
+##  dplyr  76.5561  84.7772  142.3876  173.7605  182.4485  199.8846    10  a 
+##  purrr 920.6055 961.1599 1060.8513 1016.2543 1059.3168 1601.4627    10   b</code></pre>
+<p>Then on larger dataset:</p>
+<div class="sourceCode" id="cb953"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb953-1" title="1">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(<span class="dt">index =</span> <span class="kw">df_na0_index</span>(flights),</a>
+<a class="sourceLine" id="cb953-2" title="2">                               <span class="dt">dplyr =</span> <span class="kw">df_na0_index</span>(flights),</a>
+<a class="sourceLine" id="cb953-3" title="3">                               <span class="dt">purrr =</span> <span class="kw">df_na0_purrr</span>(flights),</a>
+<a class="sourceLine" id="cb953-4" title="4">                               <span class="dt">times =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>## Unit: milliseconds
 ##   expr       min        lq      mean    median        uq       max neval
 ##  index   76.4143  108.5001  195.4987  214.5160  222.3934  319.3723    10
 ##  dplyr   76.3414   77.8325  141.4804  121.5022  192.6553  258.9295    10
@@ -1166,39 +1173,26 @@ sample_se(x)
 ##   a 
 ##   a 
 ##    b</code></pre>
-<p>Then on larger dataset:</p>
-<div class="sourceCode" id="cb953"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb953-1" title="1">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(<span class="dt">index =</span> <span class="kw">df_na0_index</span>(flights),</a>
-<a class="sourceLine" id="cb953-2" title="2">                               <span class="dt">dplyr =</span> <span class="kw">df_na0_index</span>(flights),</a>
-<a class="sourceLine" id="cb953-3" title="3">                               <span class="dt">purrr =</span> <span class="kw">df_na0_purrr</span>(flights),</a>
-<a class="sourceLine" id="cb953-4" title="4">                               <span class="dt">times =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>## Unit: milliseconds
-##   expr       min        lq      mean     median       uq       max neval
-##  index   78.9846   95.7065  101.6078   97.13825  114.364  130.3182    10
-##  dplyr   61.0618   82.6142  126.2712  115.14610  171.070  222.4850    10
-##  purrr 1173.6570 1194.9358 1231.8845 1219.70455 1267.879 1350.9402    10
-##  cld
-##   a 
-##   a 
-##    b</code></pre>
 <p>You should see that the index and dplyr method are pretty consistent on time, whereas the purrr method will be slower. For this example and some problems like this then indexing may be the best option (generally though I lean more towards using dplyr where possible).</p>
 <p>I also wonder if there may be a better alternative to <code>ifelse</code> in this situation.</p>
 </div>
 </div>
-<div id="better-than-ifelse" class="section level2">
-<h2>Better than <code>ifelse()</code>?</h2>
+<div id="better-than-ifelse" class="section level3">
+<h3>Better than <code>ifelse()</code>?</h3>
 <p>I end-up using <code>ifelse</code> a lot for basic transformations, I’m curious if there is a more efficient alternative for use with dplyr style…</p>
 <ul>
 <li>I learned about dplyr’s functions <code>dplyr::recode</code> which is similar to <code>forcats::fct_recode</code> and can be used for replacing multiple character values.</li>
 <li><code>dplyr::case_when</code> can be used for more complex criteria</li>
+<li><code>dplyr::if_else</code> is similar to <code>base::ifelse</code> but more strict on types</li>
 </ul>
 </div>
-<div id="dplyr-and-functions" class="section level2">
-<h2>Dplyr and functions</h2>
+<div id="dplyr-and-functions" class="section level3">
+<h3>Dplyr and functions</h3>
 <p>As was mentioned, dplyr uses non-standard evaluation. This means that when referring to column names form within a function, dplyr will require some slightly different syntax… I typically find ways around this by deploying tricks with the <code>*_</code> verbs or taking advantage of the <code>vars</code> functions and <code>*_at</code> or by messing with the names, though am interested to hear other methods…</p>
 <p>Say you want to write a function that takes in a dataframe and a list of column names and you want to return a sum of these into a new column with the name corresponding with the name of the spliced together columns. What would be the most elegant way of doing this with tidyverse style?</p>
 </div>
-<div id="section-68" class="section level2">
-<h2>19.2.3.5</h2>
+<div id="section-68" class="section level3">
+<h3>19.2.3.5</h3>
 <pre><code>```r
 position_both_na &lt;- function(x, y) {
   if (length(x) == length(y)) {
