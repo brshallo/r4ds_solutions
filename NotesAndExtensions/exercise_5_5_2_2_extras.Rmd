@@ -1,0 +1,179 @@
+---
+title: "exercise 5.5.2.2 extras"
+author: "Bryan Shalloway"
+date: "5/29/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
+
+library(ggplot2)
+library(dplyr)
+library(nycflights13)
+library(Lahman)
+library(gapminder)
+library(tidyr)
+library(plotly) 
+```
+
+
+Add predictions from models of `air_time` to dataframe and take sample of 500 from entire `flights` dataset to visualise.
+```{r}
+flights_preds_mod <- flights_new2 %>% 
+  mutate(diff =  (air_time - air_calc)) %>% 
+  na.omit() %>% 
+  modelr::spread_predictions(mod_air_time, mod_air_time2) %>% 
+  select(diff, dep_delay, arr_delay, air_calc, air_time, mod_air_time, mod_air_time2) %>% 
+  sample_n(500) 
+```
+
+Looking at `dep_delay` on `arr_delay` with `diff` overlaid in colour.
+```{r}
+flights_preds_mod %>%
+  mutate(diff_group = cut(diff, 4)) %>% 
+  ggplot(aes(dep_delay, arr_delay))+
+  geom_point(aes(colour = diff_group))
+```
+
+I'm going to stop there though for now. Below are just some other plots I was messing aroun with.
+
+**Other plots with `air_time`:**
+
+These are mostly just me messing around. This section will be very tough to follow.
+  
+Produce 3-d plot with actuals in black and predictions in red and green (not evaluated in html document).
+```{r, eval = FALSE}
+a <- flights_preds_mod$arr_delay
+b <- flights_preds_mod$dep_delay
+c <- flights_preds_mod$diff
+rgl::plot3d(a, b, c)
+
+#one variabled model
+rgl::points3d(a, 0, flights_preds_mod$mod_air_time, color = "red")
+
+#two variabled model
+rgl::points3d(a, b, flights_preds_mod$mod_air_time2, color = "green")
+```
+
+Plot of median `air_time` vs. median `dist`.
+```{r}
+flights_new2 %>% 
+  select(dest, dep_time, arr_time, air_time, distance) %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  summarise(med_air = median(air_time, na.rm = TRUE),
+            med_dist = median(distance, na.rm = TRUE)) %>% 
+  ggplot(., aes(x = med_dist, y = med_air))+
+  geom_point()+
+  scale_y_continuous(breaks = seq(0, 660, 60))
+```
+
+Use linear regression to identify those points that were off from the relationship between `air_time` and `distance`.
+
+* First build model
+* Add residuals onto dataframe
+* Arrange df so that largest residuals are at the top.
+
+```{r}
+time_dist_mod <- lm(air_time ~ distance, data = flights)
+
+flights %>% 
+  select(dest, dep_time, arr_time, air_time, distance) %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  summarise(air_time = median(air_time, na.rm = TRUE),
+            distance = median(distance, na.rm = TRUE)) %>% 
+  modelr::add_predictions(time_dist_mod) %>% 
+  modelr::add_residuals(time_dist_mod) %>% 
+  arrange(desc(abs(resid)))
+```
+
+Looks like BQN, SJU, PSE, and STT are the closer of dests with the greatest departures (in addition to the higher leverage points ANC and HNL). (note the columns here are median values despite the 'med' not being in the column names)
+
+Let's do the samthing as above but just plot this output in a gpplot with our preds representing the line from our model.
+(are using our own specified model rather than just using `geom_smooth`.)
+```{r}
+flights %>% 
+  select(dest, dep_time, arr_time, air_time, distance) %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  summarise(air_time = median(air_time, na.rm = TRUE),
+            distance = median(distance, na.rm = TRUE)) %>% 
+  modelr::add_predictions(time_dist_mod) %>% 
+  modelr::add_residuals(time_dist_mod) %>% 
+  arrange(desc(abs(resid))) %>% 
+  ggplot(., aes(x = distance, y = air_time))+
+    geom_line(aes(y = pred), colour = "navy blue")+
+  geom_point()+
+  scale_y_continuous(breaks = seq(0, 660, 60))
+```
+
+For fun, select 6 random `dest` and plot the `dep_time` vs `air_calc` (true `air_time`) with a median line cutting through the ponits.
+```{r}
+set.seed(1234)
+flights_new2 %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  mutate(med_calc = median(air_calc, na.rm = TRUE)) %>% 
+  nest() %>% 
+  sample_n(6) %>% 
+  unnest() %>% 
+  ggplot(aes(x = dep_time, y = air_calc))+
+  geom_point(aes(colour = dest))+
+  geom_line(aes(y = med_calc))+
+  scale_x_continuous(breaks = seq(0, 24*60, 120), limits = c(0, 24*60))+
+  facet_wrap(~dest)
+```
+
+Do the same with the original `air_calc` values (would want to standardize access between these and above).
+```{r}
+set.seed(1234)
+flights %>% 
+  # select(dest, dep_time, arr_time, air_time, distance) %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  mutate(med_AirTime = median(air_time, na.rm = TRUE)) %>% 
+  nest() %>% 
+  sample_n(6) %>% 
+  unnest() %>% 
+  ggplot(aes(x = dep_time, y = air_time))+
+  geom_point(aes(colour = dest))+
+  geom_line(aes(y = med_AirTime))+
+  scale_x_continuous(breaks = seq(0, 24*60, 120), limits = c(0, 24*60))+
+  facet_wrap(~dest)
+```
+
+Explore the `air_time` var more.
+If you want to see how these may differ by different categories^[ Linear regression is used here which aren't learned until later in the book though.]. 
+
+Select 6 random `dest`s and plot all points for `distance` and `air_time`
+```{r}
+flights %>% 
+  select(dest, dep_time, arr_time, air_time, distance) %>% 
+  mutate_at(.vars = c("dep_time", "arr_time"), 
+            .funs = funs(time_to_mins)) %>% 
+  group_by(dest) %>% 
+  nest() %>% 
+  sample_n(6) %>% 
+  unnest() %>% 
+  ggplot(aes(x = distance, y = air_time))+
+  geom_point(aes(colour = dest))
+```
+
+Distribution of times each flight number runs in window.
+```{r}
+
+flights %>% 
+  group_by(flight) %>% 
+  summarise(n = n()) %>%
+  ungroup() %>% 
+  filter(n <100) %>% 
+  ggplot(aes(x = n))+
+  geom_histogram(bins = 100)
+```

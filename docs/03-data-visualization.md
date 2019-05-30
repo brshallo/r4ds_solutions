@@ -631,7 +631,7 @@ diamonds %>%
   geom_col()
 ```
 
-## 3.8: Position Adjjustment
+## 3.8: Position Adjustment
 
 *Some "dodge"" examples:*
 
