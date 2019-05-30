@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -1221,7 +1221,7 @@ You would expect that: <span class="math inline">\(dep\_delay = dep\_time - sche
 <pre><code>## # A tibble: 0 x 4
 ## # ... with 4 variables: flight &lt;int&gt;, ontime &lt;dbl&gt;, late.120 &lt;dbl&gt;,
 ## #   n &lt;int&gt;</code></pre>
-<p>Looks like this exact proportion doesn’t happen. But let’s look at those flights that have the greatest differences in proportion on-time vs. 2 hours late while still having values in both categories<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>.</p>
+<p>Looks like this exact proportion doesn’t happen. But let’s look at those flights that have the greatest differences in proportion on-time vs. 2 hours late while still having values in both categories<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p>
 <div class="sourceCode" id="cb187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb187-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb187-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(flight) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb187-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">ontime =</span> <span class="kw">sum</span>(arr_delay <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)<span class="op">/</span><span class="kw">n</span>(),</a>
@@ -1650,7 +1650,7 @@ Arrival delay.</p>
 </div>
 <div id="section-12" class="section level3">
 <h3>5.5.2.1.</h3>
-<p>Other, more sophisticated method<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a></p>
+<p>Other, more sophisticated method<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
 <div class="sourceCode" id="cb235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb235-1" title="1"><span class="kw">mutate_at</span>(<span class="dt">.tbl =</span> flights, </a>
 <a class="sourceLine" id="cb235-2" title="2">          <span class="dt">.vars =</span> <span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;sched_dep_time&quot;</span>), </a>
 <a class="sourceLine" id="cb235-3" title="3">          <span class="dt">.funs =</span> <span class="kw">funs</span>(<span class="dt">new =</span> time_to_mins)) </a></code></pre></div>
@@ -1880,7 +1880,7 @@ These are mostly just me messing around. This section will be very tough to foll
 <pre><code>## Warning: Removed 101 rows containing missing values (geom_path).</code></pre>
 <p><img src="05-data-transformations_files/figure-html/unnamed-chunk-78-1.png" width="672" /></p>
 <p>Explore the <code>air_time</code> var more.
-If you want to see how these may differ by different categories<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a>.</p>
+If you want to see how these may differ by different categories<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>.</p>
 <p>Select 6 random <code>dest</code>s and plot all points for <code>distance</code> and <code>air_time</code></p>
 <div class="sourceCode" id="cb262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb262-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb262-2" title="2"><span class="st">  </span><span class="kw">select</span>(dest, dep_time, arr_time, air_time, distance) <span class="op">%&gt;%</span><span class="st"> </span></a>
@@ -1994,7 +1994,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 ##  9 BGR           -21.8          -9            19.8
 ## 10 BHM           -20            -2            34  
 ## # ... with 95 more rows</code></pre>
-<p>Let’s plot our unnested (but not unspread) data to see roughly the distribution of the delays for each destination at our quantiles of interest<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a>.</p>
+<p>Let’s plot our unnested (but not unspread) data to see roughly the distribution of the delays for each destination at our quantiles of interest<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</p>
 <div class="sourceCode" id="cb277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb277-1" title="1">flights_quantiles <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb277-2" title="2"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb277-3" title="3"><span class="st">  </span><span class="co"># mutate(delays_q = forcats::fct_reorder(f = delays_q, x = delays_val, fun = mean, na.rm = TRUE)) %&gt;%</span></a>
@@ -2024,7 +2024,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 ##  9 BGR   &lt;dbl [5]&gt;  &lt;chr [5]&gt; &lt;chr [5]&gt;
 ## 10 BHM   &lt;dbl [5]&gt;  &lt;chr [5]&gt; &lt;chr [5]&gt;
 ## # ... with 95 more rows</code></pre>
-<p>And then let’s <code>unnest</code> the data<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a>.</p>
+<p>And then let’s <code>unnest</code> the data<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>.</p>
 <div class="sourceCode" id="cb281"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb281-1" title="1">flights_quantiles2 <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb281-2" title="2"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 525 x 4
@@ -2177,7 +2177,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 <a class="sourceLine" id="cb297-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> cancelled_mod1), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb297-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> cancelled_mod2), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p><img src="05-data-transformations_files/figure-html/unnamed-chunk-99-1.png" width="672" /></p>
-<p><a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a></p>
+<p><a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
 </div>
 <div id="section-17" class="section level3">
 <h3>5.6.7.6.</h3>
@@ -2239,7 +2239,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 ## Residual standard error: 45.48 on 9979 degrees of freedom
 ## Multiple R-squared:  0.01692,    Adjusted R-squared:  0.01672 
 ## F-statistic: 85.86 on 2 and 9979 DF,  p-value: &lt; 2.2e-16</code></pre>
-<p>This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a>. The carrier accouts for ~1.6% of the variation in arrival… etc….</p>
+<p>This shows the mean delay for DL is ~6.3, FL is ~20.7, MQ is ~14 and FL and MQ are significantly different from DL (and DL is significantly different from 0)<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>. The carrier accouts for ~1.6% of the variation in arrival… etc….</p>
 </div>
 <div id="section-18" class="section level3">
 <h3>5.7.1.6.</h3>
@@ -2261,7 +2261,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 <a class="sourceLine" id="cb304-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb304-7" title="7"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">colour =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="05-data-transformations_files/figure-html/unnamed-chunk-104-1.png" width="672" /></p>
-<p><em>Rather than the fastest 20, let’s look at the mean <code>dist</code> and <code>air_time</code> for each<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a>.</em></p>
+<p><em>Rather than the fastest 20, let’s look at the mean <code>dist</code> and <code>air_time</code> for each<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</em></p>
 <p>First using the <code>air_time</code> value.</p>
 <div class="sourceCode" id="cb305"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb305-1" title="1">flights_new2 <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb305-2" title="2"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="dt">.vars =</span> <span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;arr_time&quot;</span>), </a>
@@ -2333,7 +2333,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 ## 2 JFK    109079
 ## 3 LGA    101140</code></pre>
 <p>Functions in dplyr, etc. expect dataframes in the first argument, so the default piping behavior works fine you don’t end-up using the dot in this way. However functions outside of the tidyverse are not always so consistent and may expect the dataframe (or w/e your output from the prior step is) in a different location of the function, hence the need to use the dot to specify where it should go.</p>
-<p>The example below uses base R’s <code>lm</code> (linear models) function to regress <code>arr_delay</code> on <code>dep_delay</code> and <code>distance</code><a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a>. The first argument expects a function, the second argument the data, hence the need for the dot.</p>
+<p>The example below uses base R’s <code>lm</code> (linear models) function to regress <code>arr_delay</code> on <code>dep_delay</code> and <code>distance</code><a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a>. The first argument expects a function, the second argument the data, hence the need for the dot.</p>
 <div class="sourceCode" id="cb315"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb315-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb315-2" title="2"><span class="st">  </span><span class="kw">filter</span>(., <span class="op">!</span><span class="kw">is.na</span>(arr_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb315-3" title="3"><span class="st">  </span><span class="kw">lm</span>(arr_delay <span class="op">~</span><span class="st"> </span>dep_delay <span class="op">+</span><span class="st"> </span>distance, .) </a></code></pre></div>
@@ -2362,7 +2362,7 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 <a class="sourceLine" id="cb320-3" title="3"><span class="st">  </span><span class="kw">with</span>(<span class="kw">quantile</span>(arr_delay, <span class="dt">probs =</span> <span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">1</span>, <span class="dt">by =</span> <span class="fl">0.10</span>)))</a></code></pre></div>
 <pre><code>##   0%  10%  20%  30%  40%  50%  60%  70%  80%  90% 100% 
 ##  -86  -26  -19  -14  -10   -5    1    9   21   52 1272</code></pre>
-<p>This method also makes it easy to input multiple field names in this style. Let’s look at this with the <code>table</code> function<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a></p>
+<p>This method also makes it easy to input multiple field names in this style. Let’s look at this with the <code>table</code> function<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a></p>
 <div class="sourceCode" id="cb322"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb322-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb322-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(arr_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb322-3" title="3"><span class="st">  </span><span class="kw">with</span>(<span class="kw">table</span>(origin, carrier))</a></code></pre></div>
@@ -2407,17 +2407,17 @@ If you want to see how these may differ by different categories<a href="#fn8" cl
 </div>
 <div class="footnotes">
 <hr />
-<ol start="6">
-<li id="fn6"><p>The output below is actually just maximizing difference in proportion 2 hrs late vs on time, it does not matter whether the higher proportion is on-time or late. It just happens in practice that the higher proprotion is generally the on-time<a href="05-data-transformations.html#fnref6" class="footnote-back">↩</a></p></li>
-<li id="fn7"><p>This method is helpful for if you have more than ust a couple variables you are applying a transformation to.<a href="05-data-transformations.html#fnref7" class="footnote-back">↩</a></p></li>
-<li id="fn8"><p> Linear regression is used here which aren’t learned until later in the book though.<a href="05-data-transformations.html#fnref8" class="footnote-back">↩</a></p></li>
-<li id="fn9"><p>The mutate step that is commented-out would reorder the <code>delays_q</code> variable according to the mean value of the <code>delays_val</code>, but this is not necessary here so I commented it out. You will learn more about this in the factors chapter.lm<a href="05-data-transformations.html#fnref9" class="footnote-back">↩</a></p></li>
-<li id="fn10"><p>The names assigned by the <code>quantile</code> function are a little different from those I supplied.<a href="05-data-transformations.html#fnref10" class="footnote-back">↩</a></p></li>
-<li id="fn11"><p>Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix…<a href="05-data-transformations.html#fnref11" class="footnote-back">↩</a></p></li>
-<li id="fn12"><p>Repeated t-test methods could be used for comparing MQ and FL, see function <code>pairwise.t.test</code><a href="05-data-transformations.html#fnref12" class="footnote-back">↩</a></p></li>
-<li id="fn13"><p>Each colour corresponds with a <code>dest</code> though I excluded the legend.<a href="05-data-transformations.html#fnref13" class="footnote-back">↩</a></p></li>
-<li id="fn14"><p>You may want to add a step to pipe this into <code>summary()</code> after the <code>lm</code> step as well.<a href="05-data-transformations.html#fnref14" class="footnote-back">↩</a></p></li>
-<li id="fn15"><p><code>table</code> produces contingency tables.<a href="05-data-transformations.html#fnref15" class="footnote-back">↩</a></p></li>
+<ol start="10">
+<li id="fn10"><p>The output below is actually just maximizing difference in proportion 2 hrs late vs on time, it does not matter whether the higher proportion is on-time or late. It just happens in practice that the higher proprotion is generally the on-time<a href="05-data-transformations.html#fnref10" class="footnote-back">↩</a></p></li>
+<li id="fn11"><p>This method is helpful for if you have more than ust a couple variables you are applying a transformation to.<a href="05-data-transformations.html#fnref11" class="footnote-back">↩</a></p></li>
+<li id="fn12"><p> Linear regression is used here which aren’t learned until later in the book though.<a href="05-data-transformations.html#fnref12" class="footnote-back">↩</a></p></li>
+<li id="fn13"><p>The mutate step that is commented-out would reorder the <code>delays_q</code> variable according to the mean value of the <code>delays_val</code>, but this is not necessary here so I commented it out. You will learn more about this in the factors chapter.lm<a href="05-data-transformations.html#fnref13" class="footnote-back">↩</a></p></li>
+<li id="fn14"><p>The names assigned by the <code>quantile</code> function are a little different from those I supplied.<a href="05-data-transformations.html#fnref14" class="footnote-back">↩</a></p></li>
+<li id="fn15"><p>Another approach may be to try and identify the individual risk of having a flight cancelled based on the average delay. If this is the case, you may want to use model evaluation techniques that seperate models based on the assigned probabilities in which case MAE may actually not be the most appropriate evaluation technique. You could try using logistic regression for this. You may also consider taking into account the weight of each of the points. I had discussions on these, but decided they were too in the weeds so deleted them even from the appendix…<a href="05-data-transformations.html#fnref15" class="footnote-back">↩</a></p></li>
+<li id="fn16"><p>Repeated t-test methods could be used for comparing MQ and FL, see function <code>pairwise.t.test</code><a href="05-data-transformations.html#fnref16" class="footnote-back">↩</a></p></li>
+<li id="fn17"><p>Each colour corresponds with a <code>dest</code> though I excluded the legend.<a href="05-data-transformations.html#fnref17" class="footnote-back">↩</a></p></li>
+<li id="fn18"><p>You may want to add a step to pipe this into <code>summary()</code> after the <code>lm</code> step as well.<a href="05-data-transformations.html#fnref18" class="footnote-back">↩</a></p></li>
+<li id="fn19"><p><code>table</code> produces contingency tables.<a href="05-data-transformations.html#fnref19" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -2453,14 +2453,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

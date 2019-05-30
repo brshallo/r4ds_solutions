@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -561,7 +561,7 @@ copy the YAML header from one to the other?</p>
 <li>Both by default have code chunks display ‘in-line’ while working, though with RMD can force to not output in-line.</li>
 <li>When rendering, default of notebooks will be to render whichever chunks have been rendered during interactive session, whereas RMD document needs directions from code chunk options
 <ul>
-<li>I generally prefer .Rmd files to notebooks.<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></li>
+<li>I generally prefer .Rmd files to notebooks.<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a></li>
 </ul></li>
 </ul></li>
 <li><p>Create one new R Markdown document for each of the three built-in
@@ -595,7 +595,7 @@ jobs/degrees. Highlight the year in bold.</li>
 <li>Add a footnote.</li>
 </ol></li>
 </ol>
-<p>Here is a foonote reference<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a> and another<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a> and a 3rd<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a> and an in-line one<a href="#fn42" class="footnote-ref" id="fnref42"><sup>42</sup></a></p>
+<p>Here is a foonote reference<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a> and another<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a> and a 3rd<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a> and an in-line one<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></p>
 <hr />
 <p>A <a href="http://example.com/" title="Title">linked phrase</a>.</p>
 <hr />
@@ -882,13 +882,13 @@ set <code>cache = TRUE</code>, then verify your understanding of caching.</p></l
 </div>
 <div class="footnotes">
 <hr />
-<ol start="38">
-<li id="fn38"><p>I’ve found some of my company’s security software sometimes acts-up when working interactively if I have my chunk output in-line (just slows down). Hence, I ‘uncheck’ <code>Show output inline for all Rmarkdown documents</code> from <code>Tools</code>–&gt;<code>Global Options</code> –&gt;<code>Appearance</code>.<a href="27-r-markdown.html#fnref38" class="footnote-back">↩</a></p></li>
-<li id="fn39"><p>Here is the foonote.<a href="27-r-markdown.html#fnref39" class="footnote-back">↩</a></p></li>
-<li id="fn40"><p>here’s one with multiple blocks.<br />
+<ol start="42">
+<li id="fn42"><p>I’ve found some of my company’s security software sometimes acts-up when working interactively if I have my chunk output in-line (just slows down). Hence, I ‘uncheck’ <code>Show output inline for all Rmarkdown documents</code> from <code>Tools</code>–&gt;<code>Global Options</code> –&gt;<code>Appearance</code>.<a href="27-r-markdown.html#fnref42" class="footnote-back">↩</a></p></li>
+<li id="fn43"><p>Here is the foonote.<a href="27-r-markdown.html#fnref43" class="footnote-back">↩</a></p></li>
+<li id="fn44"><p>here’s one with multiple blocks.<br />
 boo ya this is an awesome foonote.<br />
-don’t you believe it!<a href="27-r-markdown.html#fnref40" class="footnote-back">↩</a></p></li>
-<li id="fn42"><p>Superb fourth footnote.<a href="27-r-markdown.html#fnref42" class="footnote-back">↩</a></p></li>
+don’t you believe it!<a href="27-r-markdown.html#fnref44" class="footnote-back">↩</a></p></li>
+<li id="fn46"><p>Superb fourth footnote.<a href="27-r-markdown.html#fnref46" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -924,14 +924,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

@@ -4,6 +4,13 @@
 
 # Ch 3: Data visualization
 
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 3.6.1. #6
+* 3.8.1. #8</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
+
 * `geom_point`: Add points to plot, key args: `x`, `y`, `size`, `stroke`, `colour`, `alpha`, `shape`
 * `geom_smooth`: Add line and confidence intervals to x-y plot, can use `se` to turn off standard errors, can use `method` to change algorithm to make line. `linetype` to make dotted line.
 * `geom_bar`: Stack values on top of each to make bars (default `stat = "count"`, can also change to `"identity"`. May want to make `y = ..prop..` to show y as proportion of values). `postion = "stacked"` may take on values of "`identity"`, "`dodge"`, "`fill"`
@@ -21,45 +28,40 @@
 * `position` adjustments:
     + `identity`: ; `dodge`: ; `fill`: ;
     + `position_dodge` ; `position_fill` ; `position_identiy` ; `position_jitter` ; `position_stack` ; 
-* 3 ways to override default mapping
-* `coord_quickmap`: Set aspect ratio for maps
-* `coord_flip`: Flip x and y coordinates
-* `coord_polar`: Use polar coordinates -- don't use much (should set `theme(aspect.ratio = 1) +labs(x = NULL, y = NULL))`
-* `coord_fixed`: Fix x and y to be same size distance between tickmarks
+* ways to override default mapping
+    * `coord_quickmap`: Set aspect ratio for maps
+    * `coord_flip`: Flip x and y coordinates
+    * `coord_polar`: Use polar coordinates -- don't use much (should set `theme(aspect.ratio = 1) +labs(x = NULL, y = NULL))`
+    * `coord_fixed`: Fix x and y to be same size distance between tickmarks
 
-`ggplot(data = <DATA>) + 
+```
+ggplot(data = <DATA>) + 
   <GEOM_FUNCTION>(
      mapping = aes(<MAPPINGS>),
      stat = <STAT>, 
      position = <POSITION>
   ) +
   <COORDINATE_FUNCTION> +
-  <FACET_FUNCTION>`
-  
+  <FACET_FUNCTION>
+```
 
 ## 3.2: First steps
+
 ### 3.2.4
-**1. Run ggplot(data = mpg). What do you see?**
+
+**1. Run `ggplot(data = mpg)`. What do you see?**
 
 
 ```r
 ggplot(data = mpg)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 A blank grey space.
 
-**2. How many rows are in mpg? How many columns?**
+**2. How many rows are in `mpg`? How many columns?**
 
-
-```r
-ncol(mtcars)
-```
-
-```
-## [1] 11
-```
 
 ```r
 nrow(mtcars)
@@ -69,13 +71,19 @@ nrow(mtcars)
 ## [1] 32
 ```
 
+```r
+ncol(mtcars)
+```
 
-**3. What does the drv variable describe? Read the help for ?mpg to find out.**  
+```
+## [1] 11
+```
+
+**3. What does the `drv` variable describe? Read the help for `?mpg` to find out.**  
 
 Front wheel, rear wheel or 4 wheel drive.  
 
-  
-**4. Make a scatterplot of hwy vs cyl.**
+**4. Make a scatterplot of `hwy` vs `cyl`.**
 
 
 ```r
@@ -83,12 +91,10 @@ ggplot(mpg)+
   geom_point(aes(x = hwy, y = cyl))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
-Inverse relationship.  
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" />
   
-**5. What happens if you make a scatterplot of class vs drv? Why is the plot not useful?**  
-**
+**5. What happens if you make a scatterplot of `class` vs `drv`? Why is the plot not useful?**  
+
 
 ```r
 ggplot(mpg)+
@@ -101,10 +107,12 @@ The points stack-up on top of one another so you don't get a sense of how many a
 
 *Any ideas for what methods could you use to improve the view of this data?*
 
-Jitter points so that they don't
+Jitter points so they don't line-up, or make point size represent number of points that are stacked.
 
 ## 3.3: Aesthetic mappings
+
 ### 3.3.1.
+
 **1. What’s gone wrong with this code? Why are the points not blue?**
 
 ```r
@@ -112,11 +120,11 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = displ, y = hwy, color = "blue"))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" />
   
 The `color` field is in the `aes` function so it is expecting a character or factor variable. By inputting "blue" here, ggplot reads this as a character field with the value "blue" that it then supplies it's default color schemes to (1st: salmon, 2nd: teal)
 
-**2. Which variables in mpg are categorical? Which variables are continuous? (Hint: type ?mpg to read the documentation for the dataset). How can you see this information when you run mpg?**  
+**2. Which variables in `mpg` are categorical? Which variables are continuous? (Hint: type `?mpg` to read the documentation for the dataset). How can you see this information when you run mpg?**  
 
 
 ```r
@@ -143,14 +151,14 @@ mpg
 The data is in tibble form already so just printing it shows the type, but could also use the `glimpse` and `str` functions.
 
 
-**3. Map a continuous variable to color, size, and shape. How do these aesthetics behave differently for categorical vs. continuous variables?**
+**3. Map a continuous variable to `color`, `size`, and `shape.` How do these aesthetics behave differently for categorical vs. continuous variables?**
 
 ```r
 ggplot(data = mpg) + 
   geom_point(mapping = aes(x = cty, y = hwy, color = cyl, size = displ, shape = fl))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-8-1.png" width="672" />
   
 `color`: For continuous applies a gradient, for categorical it applies distinct colors based on the number of categories.  
 `size`: For continuous, applies in order, for categorical will apply in an order that may be arbitrary if there is not an order provided.  
@@ -164,10 +172,10 @@ ggplot(data = mpg)+
   geom_point(mapping = aes(x = cty, y = hwy, color = fl, shape = fl))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
 
 
-**5. What does the stroke aesthetic do? What shapes does it work with? (Hint: use ?geom_point)**
+**5. What does the `stroke` aesthetic do? What shapes does it work with? (Hint: use `?geom_point`)**
 
 ```r
 ?geom_point
@@ -179,25 +187,25 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 5)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 ```r
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point(shape = 21, colour = "black", fill = "white", size = 5, stroke = 3)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-9-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-11-2.png" width="672" />
 
-For shapes that have a border (like 21), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border.   
+For shapes that have a border (like `shape = 21`), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border (can get similar effects by layering small point on bigger point).
 
-**6. What happens if you map an aesthetic to something other than a variable name, like aes(colour = displ < 5)?**
+**6. What happens if you map an aesthetic to something other than a variable name, like `aes(colour = displ < 5)`?**
 
 ```r
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = displ < 5)) +
   geom_point()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
 The field becomes a logical operator in this case.
 
@@ -214,9 +222,9 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy))+
   facet_wrap(~cyl)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" />
 
-It will facet along all of the possible values.  
+It will facet along all of the unique values.  
 
 **2. What do the empty cells in plot with `facet_grid(drv ~ cyl)` mean?**  
 
@@ -226,7 +234,7 @@ ggplot(data = mpg) +
   facet_grid(drv ~ cyl)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" />
 
 **How do they relate to this plot?**
 
@@ -235,7 +243,7 @@ ggplot(data = mpg) +
   geom_point(mapping = aes(x = drv, y = cyl))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
 They represent the locations where there is no point on the above graph (could be made more clear by giving consistent order to axes).
 
@@ -248,7 +256,7 @@ ggplot(data = mpg) +
   facet_grid(drv ~ .)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" />
 
 ```r
 ggplot(data = mpg) + 
@@ -256,7 +264,7 @@ ggplot(data = mpg) +
   facet_grid(. ~ cyl)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-14-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-16-2.png" width="672" />
 
 
 Can use to specify if to facet by rows or columns.  
@@ -270,19 +278,19 @@ ggplot(data = mpg) +
   facet_wrap(~ class, nrow = 2)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-17-1.png" width="672" />
 
 **What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?**  
   
 Faceting prevents overlapping points in the data. A disadvantage is that you have to move your eye to look at different graphs. Some groups you don't have much data on as well so those don't present much information. If there is more data, you may be more comfortable using facetting as each group should have points that you can view.
 
 
-**5. Read ?facet_wrap. What does nrow do? What does ncol do? What other options control the layout of the individual panels? Why doesn't facet_grid() have nrow and ncol argument?**  
+**5. Read `?facet_wrap`. What does `nrow` do? What does `ncol` do? What other options control the layout of the individual panels? Why doesn't `facet_grid()` have `nrow` and `ncol` argument?**  
   
 `nrow` and `ncol` specify the number of columns or rows to facet by, `facet_grid` does not have this option because the splits are defined by the number of unique values in each variable. Other important options are `scales` which let you define if the scales are able to change between each plot.
 
 
-**6. When using facet_grid() you should usually put the variable with more unique levels in the columns. Why?**  
+**6. When using `facet_grid()` you should usually put the variable with more unique levels in the columns. Why?**  
   
 I'm not sure why exactly, if I compare these, it's not completely unclear.
 
@@ -293,7 +301,7 @@ ggplot(data = mpg) +
   facet_grid(year ~ class)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-18-1.png" width="672" />
 
 ```r
 #more unique levels on rows
@@ -302,7 +310,7 @@ ggplot(data = mpg) +
   facet_grid(class ~ year)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-16-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-18-2.png" width="672" />
 
 My guess though would be that it's because our computer screens are generally wider than they are tall. Hence there will be more space for viewing a higher number of attributes going across columns than by rows.  
 
@@ -327,13 +335,13 @@ h <- ggplot(huron, aes(year))
 h + geom_ribbon(aes(ymin = 0, ymax = level))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" />
 
 ```r
 h + geom_area(aes(y = level))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-17-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-19-2.png" width="672" />
 
 ```r
 # Add aesthetic mappings
@@ -342,7 +350,7 @@ h +
   geom_line(aes(y = level))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-17-3.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-19-3.png" width="672" />
 
 ```r
 h +
@@ -350,7 +358,7 @@ h +
   geom_line(aes(y = level))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-17-4.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-19-4.png" width="672" />
 
 
 
@@ -366,10 +374,10 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy, color = drv)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" />
 
 
-**3. What does show.legend = FALSE do? What happens if you remove it? Why do you think I used it earlier in the chapter?**  
+**3. What does `show.legend = FALSE` do? What happens if you remove it? Why do you think I used it earlier in the chapter?**  
 
 ```r
 ggplot(data = mpg) +
@@ -383,7 +391,7 @@ ggplot(data = mpg) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-21-1.png" width="672" />
 
 It get's rid of the legend that would be assogiated with this geom. You removed it previously to keep it consistent with your other graphs that did not include them to specify the `drv`.  
 
@@ -403,7 +411,7 @@ ggplot(data = mpg, mapping = aes(x = displ, y = hwy)) +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" />
 
 ```r
 ggplot() + 
@@ -415,7 +423,7 @@ ggplot() +
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-20-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-22-2.png" width="672" />
 
 No, because local mappings for each geom are the same as the global mappings in the other.  
 
@@ -432,7 +440,7 @@ ggplot(mpg, aes(displ, hwy))+
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-21-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" />
 
 
 ```r
@@ -445,7 +453,7 @@ ggplot(mpg, aes(displ, hwy, group = drv))+
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 
 ```r
@@ -458,7 +466,7 @@ ggplot(mpg, aes(displ, hwy, colour = drv))+
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 
 ```r
@@ -471,7 +479,7 @@ ggplot(mpg, aes(displ, hwy))+
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 
 
@@ -485,7 +493,7 @@ ggplot(mpg, aes(displ, hwy))+
 ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 
 ```r
@@ -494,7 +502,7 @@ ggplot(mpg, aes(displ, hwy)) +
   geom_point(aes(colour = drv))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" />
 
 ## 3.7: Statistical transformations
 
@@ -513,7 +521,7 @@ ggplot(mpg) +
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 *Rewritten with geom^[See [3.7.1.1 extension] for notes on how to relate this to `dplyr` code.]:*
 
@@ -527,7 +535,7 @@ ggplot(mpg)+
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 The specific example though is actually not the default:
 
@@ -542,7 +550,7 @@ ggplot(data = diamonds) +
   )
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 *Rewritten with geom:*
 
@@ -555,10 +563,10 @@ ggplot(data = diamonds)+
                   fun.y = "median")
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 **2. What does `geom_col()` do? How is it different to `geom_bar()`?**  
-`geom_col` has `"identity" as the default `stat`, so it expects to receive a variable that already has the value aggregated^[I often use this over `geom_bar` and do the aggregation with dplyr rather than ggplot2]
+`geom_col` has `"identity"` as the default `stat`, so it expects to receive a variable that already has the value aggregated^[I often use this over `geom_bar` and do the aggregation with `dplyr` rather than `ggplot2`.]
 
 
 **3.Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?**  
@@ -568,11 +576,10 @@ ggplot(data = diamonds)+
 ?ggplot2
 ```
 
-
 **4.What variables does `stat_smooth()` compute? What parameters control its behaviour?**  
-See here: http://ggplot2.tidyverse.org/reference/#section-layer-stats for a helpful resource.
-Also, someone who aggregated some online: http://sape.inf.usi.ch/quick-reference/ggplot2/geom ^[Though it's missing some very common ones like `geom_col` and `geom_bar`.]
 
+* See here: http://ggplot2.tidyverse.org/reference/#section-layer-stats for a helpful resource.
+* Also, someone who aggregated some online: http://sape.inf.usi.ch/quick-reference/ggplot2/geom ^[Though it's missing some very common ones like `geom_col` and `geom_bar`.]
 
 **5. In our proportion bar chart, we need to set `group = 1`. Why? In other words what is the problem with these two graphs?**  
 
@@ -582,7 +589,7 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, y = ..prop..))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 
 ```r
@@ -590,36 +597,30 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, fill = color, y = ..prop..))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-33-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
+**Fixed graphs:**
 
+1.
 
 ```r
 ggplot(data = diamonds) + 
   geom_bar(mapping = aes(x = cut, y = ..prop.., group = 1))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" />
-
-This is a solution, though not perfect as `prop` becomes out of a value greater than 1
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = color, y = ..prop.., group = color))
-```
-
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" />
-
-For this second graph though, I would think you would want something more like the following:
-
-```r
-ggplot(data = diamonds) + 
-  geom_bar(mapping = aes(x = cut, fill = color), position = "fill")
-```
-
 <img src="03-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="672" />
 
-Which could be generated by this code as well
+2. For this second graph though, I would think you would want something more like the following:
+
+```r
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = color), position = "fill")+
+  ylab("prop") # ylab would say "count" w/o this
+```
+
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+
+(Which could be generated by this code as well, using `geom_count()`)
 
 ```r
 diamonds %>% 
@@ -639,7 +640,7 @@ ggplot(data = diamonds) +
   geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 ```r
 diamonds %>% 
@@ -648,7 +649,9 @@ diamonds %>%
   geom_col(position = "dodge")
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-38-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-39-2.png" width="672" />
+
+* the `interaction()` function can also sometimes be helpful for these types of charts
 
 Looking of `geom_jitter` and only changing width.
 
@@ -657,7 +660,7 @@ ggplot(data = mpg, mapping = aes(x = drv, y = hwy))+
   geom_jitter(height = 0, width = .2)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 ### 3.8.1.
 
@@ -669,7 +672,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_point()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" />
 
 The points overlap, could use `geom_jitter` instead
 
@@ -679,7 +682,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_jitter()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-42-1.png" width="672" />
 
 **2. What parameters to `geom_jitter()` control the amount of jittering?**  
 `height` and `width`
@@ -693,7 +696,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   geom_count()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-42-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-43-1.png" width="672" />
 
 Can also use `geom_count` with `color`, and can use "jitter" in `position` arg.
 
@@ -702,21 +705,21 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = drv)) +
   geom_count()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-43-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-44-1.png" width="672" />
 
 ```r
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = drv)) + 
   geom_count(position = "jitter")
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-43-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-44-2.png" width="672" />
 
 ```r
 ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = drv)) + 
   geom_jitter(size = 3, alpha = 0.3)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-43-3.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-44-3.png" width="672" />
 
 One problem with `geom_count` is that the shapes can still block-out other shapes at that same point of different colors. You can flip the orderof the stacking order of the colors with `position` = "dodge". Still this seems limited.
 
@@ -730,11 +733,12 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy, colour = drv)) +
 ## Warning: Width not defined. Set with `position_dodge(width = ?)`
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-45-1.png" width="672" />
 
 
-**4. What’s the default position adjustment for geom_boxplot()? Create a visualisation of the mpg dataset that demonstrates it.**  
-`dodge`, but seems like `identity` is the same
+**4. What’s the default position adjustment for `geom_boxplot()`? Create a visualisation of the mpg dataset that demonstrates it.**  
+
+`dodge` (but seems like changing to `identity` is the same)
 
 
 ```r
@@ -742,7 +746,7 @@ ggplot(data=mpg, mapping=aes(x=class, y=hwy))+
   geom_boxplot()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-46-1.png" width="672" />
 
 ## 3.9: Coordinate systems
 
@@ -754,6 +758,7 @@ ggplot(data=mpg, mapping=aes(x=class, y=hwy))+
 ### 3.9.1.
 
 **1.Turn a stacked bar chart into a pie chart using `coord_polar()`.**  
+
 These are more illustrative than anything, here is a note from the documetantion:  
 *NOTE: Use these plots with caution - polar coordinates has major perceptual problems. The main point of these examples is to demonstrate how these common plots can be described in the grammar.  Use with EXTREME caution.*
 
@@ -764,7 +769,7 @@ ggplot(mpg, aes(x = 1, fill = class))+
   scale_x_continuous(labels = NULL)
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-46-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-47-1.png" width="672" />
 
 If I want to make multiple levels:
 
@@ -774,18 +779,18 @@ ggplot(mpg, aes(x = as.factor(cyl), fill = class))+
   coord_polar(theta = "y")
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-47-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-48-1.png" width="672" />
 
+**2. What does `labs()` do? Read the documentation.**  
 
-**2. What does labs() do? Read the documentation.**  
 Used for giving labels.
 
 ```r
 ?labs
 ```
 
-
 **3. What’s the difference between `coord_quickmap()` and `coord_map()`?**  
+
 The first is an approximation, useful for smaller regions to be proected. For this example, do not see substantial differences.
 
 ```r
@@ -796,7 +801,7 @@ ggplot(nz,aes(long,lat,group=group))+
   coord_quickmap()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-49-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-50-1.png" width="672" />
 
 ```r
 ggplot(nz,aes(long,lat,group=group))+
@@ -804,12 +809,12 @@ ggplot(nz,aes(long,lat,group=group))+
   coord_map()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-49-2.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-50-2.png" width="672" />
 
+**4. What does the plot below tell you about the relationship between city and highway in `mpg`? Why is `coord_fixed()` important? What does `geom_abline()` do?**  
 
-**4. What does the plot below tell you about the relationship between city and highway mpg? Why is coord_fixed() important? What does geom_abline() do?**  
-`geom_abline()` adds a line with a given intercept and slope (either given by `aes` or by `intercept` and `slope` args)  
-`coord_fixed()` ensures that the ratios between the x and y axis stay at a specified relationship (default = 1). This is important for easily seeing the magnitude of the relationship between variables.  
+* `geom_abline()` adds a line with a given intercept and slope (either given by `aes` or by `intercept` and `slope` args)  
+* `coord_fixed()` ensures that the ratios between the x and y axis stay at a specified relationship (default: 1). This is important for easily seeing the magnitude of the relationship between variables.  
 
 
 ```r
@@ -819,7 +824,7 @@ ggplot(data = mpg, mapping = aes(x = cty, y = hwy)) +
   coord_fixed()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-50-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-51-1.png" width="672" />
 
 ## Appendix
 
@@ -834,7 +839,7 @@ ggplot(mpg, aes(x = cyl, y = cty, group = cyl))+
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-51-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-52-1.png" width="672" />
 
 This seems to be the same as what you would get by doing the following with dplyr:
 
@@ -851,7 +856,7 @@ mpg %>%
   geom_pointrange(aes(ymin = lower, ymax = upper))
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-52-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-53-1.png" width="672" />
 
 Other geoms you could have set stat_summary to:  
 
@@ -866,7 +871,7 @@ ggplot(mpg) +
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-53-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-54-1.png" width="672" />
 
 `errorbar`: 
 
@@ -879,7 +884,7 @@ ggplot(mpg) +
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-54-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-55-1.png" width="672" />
 
 `linerange`:
 
@@ -892,4 +897,4 @@ ggplot(mpg) +
 ## No summary function supplied, defaulting to `mean_se()
 ```
 
-<img src="03-data-visualization_files/figure-html/unnamed-chunk-55-1.png" width="672" />
+<img src="03-data-visualization_files/figure-html/unnamed-chunk-56-1.png" width="672" />

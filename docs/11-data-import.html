@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -510,7 +510,7 @@ of <code>read_log()</code> and provides many more helpful tools.)</li>
 <ul>
 <li><code>parse_*()</code>: take character vector and return more specialized vector
 <ul>
-<li><code>parse_logical</code>, <code>parse_integer</code>, <code>parse_double</code>, <code>parse_number</code><a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>, <code>parse_character</code>, <code>parse_factor</code>(has <code>levels</code> as an argument), <code>parse_datetime</code>, <code>parse_date</code>, <code>parse_time</code> (these last three have an arg of<code></code>format`)</li>
+<li><code>parse_logical</code>, <code>parse_integer</code>, <code>parse_double</code>, <code>parse_number</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>, <code>parse_character</code>, <code>parse_factor</code>(has <code>levels</code> as an argument), <code>parse_datetime</code>, <code>parse_date</code>, <code>parse_time</code> (these last three have an arg of<code></code>format`)</li>
 </ul></li>
 <li><code>locale</code> argument for use in parse functions to affect formatting and to pass into argument <code>locale = locale(&lt;arg&gt; = "&lt;value&gt;"))</code>
 <ul>
@@ -520,7 +520,7 @@ of <code>read_log()</code> and provides many more helpful tools.)</li>
 <li>for dates, e.g. <code>locale = locale(lang = "fr")</code> (to see built-in language options use <code>date_name_langs</code> and can create own with <code>date_names</code>)</li>
 </ul></li>
 <li><code>problems</code>: returns problems on import</li>
-<li><code>charToRaw</code> will show underlying representation of a character<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a></li>
+<li><code>charToRaw</code> will show underlying representation of a character<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></li>
 <li><code>guess_encoding</code>: can guess encoding – generally would use this with <code>charToRaw</code> and helps avoid figuring out encoding by hand</li>
 </ul>
 <div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" title="1">x1 &lt;-<span class="st"> &quot;El Ni</span><span class="ch">\xf1</span><span class="st">o was particularly bad this year&quot;</span></a>
@@ -588,11 +588,11 @@ come back to this [time zones].
 <li>Recommend always input <code>cols</code>, if you want to be strict when loading in data set <code>stop_for_problems</code></li>
 <li><code>read_lines</code> read into character vector of lines (use when having major issues)</li>
 <li><code>read_file</code> read in as character vector of length 1 (use when having major issues)</li>
-<li><code>read_rds</code> reads in R’s custom binary format<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a></li>
-<li><code>feather::read_feather</code>: fast binary file format shared across languages<a href="#fn23" class="footnote-ref" id="fnref23"><sup>23</sup></a></li>
+<li><code>read_rds</code> reads in R’s custom binary format<a href="#fn26" class="footnote-ref" id="fnref26"><sup>26</sup></a></li>
+<li><code>feather::read_feather</code>: fast binary file format shared across languages<a href="#fn27" class="footnote-ref" id="fnref27"><sup>27</sup></a></li>
 <li>writing files^[readr functions will encodes strings in UTF-8 and saves dates and date-times in ISO8601):
 <ul>
-<li><code>write_csv</code>, <code>write_tsv</code>, <code>write_excel_csv</code>, <code>write_rds</code><a href="#fn24" class="footnote-ref" id="fnref24"><sup>24</sup></a>, * <code>feather::read_feather</code></li>
+<li><code>write_csv</code>, <code>write_tsv</code>, <code>write_excel_csv</code>, <code>write_rds</code><a href="#fn28" class="footnote-ref" id="fnref28"><sup>28</sup></a>, * <code>feather::read_feather</code></li>
 </ul></li>
 <li>other packages for reading-in / writing data: <code>haven</code>, <code>readxl</code>, <code>DBI</code>, <code>odbc</code>, <code>jsonlite</code>, <code>xml2</code>, <code>rio</code></li>
 </ul>
@@ -607,7 +607,7 @@ come back to this [time zones].
 ##       a     b     c
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;
 ## 1     1     2     3</code></pre>
-<p><em>2. Apart from <code>file</code>, <code>skip</code>, and <code>comment</code>, what other arguments do <code>read_csv()</code> and <code>read_tsv()</code> have in common?</em><a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></p>
+<p><em>2. Apart from <code>file</code>, <code>skip</code>, and <code>comment</code>, what other arguments do <code>read_csv()</code> and <code>read_tsv()</code> have in common?</em><a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a></p>
 <p>col_names, col_types, locale, na, quoted_na, quote, trim_ws, skip, n_max, guess_max, progress</p>
 <p><em>3. What are the most important arguments to <code>read_fwf()</code>?</em></p>
 <p>widths</p>
@@ -736,13 +736,13 @@ come back to this [time zones].
 </div>
 <div class="footnotes">
 <hr />
-<ol start="20">
-<li id="fn20"><p>can be helpful for dealing with parsing currencies or percentages for example…<a href="11-data-import.html#fnref20" class="footnote-back">↩</a></p></li>
-<li id="fn21"><p>e.g. helpful for use w/ <code>parse_char</code><a href="11-data-import.html#fnref21" class="footnote-back">↩</a></p></li>
-<li id="fn22"><p><code>readRDS</code> is base R version<a href="11-data-import.html#fnref22" class="footnote-back">↩</a></p></li>
-<li id="fn23"><p>though does not support list-cols<a href="11-data-import.html#fnref23" class="footnote-back">↩</a></p></li>
-<li id="fn24"><p>base R version is <code>saveRDS</code><a href="11-data-import.html#fnref24" class="footnote-back">↩</a></p></li>
-<li id="fn25"><p>* <code>skip = n</code>, <code>comment = #</code> any line that starts w/ input to comment will be skipped, <code>col_names = FALSE</code> or perhaps <code>c("x", "y", "z")</code>, <code>na = "."</code><a href="11-data-import.html#fnref25" class="footnote-back">↩</a></p></li>
+<ol start="24">
+<li id="fn24"><p>can be helpful for dealing with parsing currencies or percentages for example…<a href="11-data-import.html#fnref24" class="footnote-back">↩</a></p></li>
+<li id="fn25"><p>e.g. helpful for use w/ <code>parse_char</code><a href="11-data-import.html#fnref25" class="footnote-back">↩</a></p></li>
+<li id="fn26"><p><code>readRDS</code> is base R version<a href="11-data-import.html#fnref26" class="footnote-back">↩</a></p></li>
+<li id="fn27"><p>though does not support list-cols<a href="11-data-import.html#fnref27" class="footnote-back">↩</a></p></li>
+<li id="fn28"><p>base R version is <code>saveRDS</code><a href="11-data-import.html#fnref28" class="footnote-back">↩</a></p></li>
+<li id="fn29"><p>* <code>skip = n</code>, <code>comment = #</code> any line that starts w/ input to comment will be skipped, <code>col_names = FALSE</code> or perhaps <code>c("x", "y", "z")</code>, <code>na = "."</code><a href="11-data-import.html#fnref29" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -778,14 +778,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

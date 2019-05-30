@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -648,7 +648,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>Use your Google sleuthing skills to brainstorm why there were fewer than expected flights on Jan 20, May 26, and Sep 1. (Hint: they all have the same explanation.) How would these days generalise to another year?</p>
 <ul>
-<li>January 20th was the day for MLK day<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></li>
+<li>January 20th was the day for MLK day<a href="#fn38" class="footnote-ref" id="fnref38"><sup>38</sup></a></li>
 <li>May 26th was the day before Memorial Day weekend</li>
 <li>September 1st was the day before labor day</li>
 </ul>
@@ -735,7 +735,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>when just including <code>wkday</code> you don’t see this differentiation</li>
 <li>when including <code>wkday</code> and <code>term</code> you see differentiation in the summer, though this difference is the same across all <code>wday</code>s, hence the increased number for Saturday’s is less than it shows-up as as compared to either the example (where the term is only interacted with for Saturday) or the <code>wkday_term_interaction</code> chart where the interaciton is allowed for each day of the week</li>
-<li>you see increases in flights across pretty much all <code>wday</code>s in summer, though you see the biggest difference in Saturday<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a></li>
+<li>you see increases in flights across pretty much all <code>wday</code>s in summer, though you see the biggest difference in Saturday<a href="#fn39" class="footnote-ref" id="fnref39"><sup>39</sup></a></li>
 </ul></li>
 </ul>
 <p><em>Residuals of these models</em></p>
@@ -749,7 +749,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <ul>
 <li>The graphs with saturday term and interaction across terms do not show gross changes in residuals varying by season the way the models that included just weekday or weekday and term without an interaction do.</li>
-<li>note that you have a few days with large negative residuals<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a>
+<li>note that you have a few days with large negative residuals<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a>
 <ul>
 <li>these likely correspond with holidays</li>
 </ul></li>
@@ -1258,10 +1258,10 @@ This is what I did initially. Below I calculate the R^2 on the log values. Withi
 </div>
 <div class="footnotes">
 <hr />
-<ol start="34">
-<li id="fn34"><p>it was also the 2nd inauguration for Obama<a href="24-model-building.html#fnref34" class="footnote-back">↩</a></p></li>
-<li id="fn35"><p>Interactions facilitate encoding these types of conditional relationships, i.e. the impact of summer depends on the day of the week (/ vice versa)<a href="24-model-building.html#fnref35" class="footnote-back">↩</a></p></li>
-<li id="fn36"><p>Remember this corresponds with days where the predictions are higher than the actuals.<a href="24-model-building.html#fnref36" class="footnote-back">↩</a></p></li>
+<ol start="38">
+<li id="fn38"><p>it was also the 2nd inauguration for Obama<a href="24-model-building.html#fnref38" class="footnote-back">↩</a></p></li>
+<li id="fn39"><p>Interactions facilitate encoding these types of conditional relationships, i.e. the impact of summer depends on the day of the week (/ vice versa)<a href="24-model-building.html#fnref39" class="footnote-back">↩</a></p></li>
+<li id="fn40"><p>Remember this corresponds with days where the predictions are higher than the actuals.<a href="24-model-building.html#fnref40" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1297,14 +1297,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

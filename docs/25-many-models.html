@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -499,7 +499,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1251-11" title="11"><span class="st">  </span><span class="kw">unnest</span>(test1) </a></code></pre></div>
 <ul>
 <li>if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all (if not possible)</li>
-<li>when unnesting a single column but multiple list-cols exist, the default behavior is that if unnesting caused no change in row number than keep other list-cols, but if unnesting caused a change in row-number drop other columns. To override the former use <code>.drop = TRUE</code> to override the latter use <code>.drop = FALSE</code>.<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a></li>
+<li>when unnesting a single column but multiple list-cols exist, the default behavior is that if unnesting caused no change in row number than keep other list-cols, but if unnesting caused a change in row-number drop other columns. To override the former use <code>.drop = TRUE</code> to override the latter use <code>.drop = FALSE</code>.<a href="#fn41" class="footnote-ref" id="fnref41"><sup>41</sup></a></li>
 </ul>
 <div class="sourceCode" id="cb1252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1252-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1252-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)),</a>
@@ -1278,8 +1278,8 @@ vector columns from list-columns?</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="37">
-<li id="fn37"><p>Note that if using <code>.drop = FALSE</code> in the latter case that you are creating replicated rows for list-col values<a href="25-many-models.html#fnref37" class="footnote-back">↩</a></p></li>
+<ol start="41">
+<li id="fn41"><p>Note that if using <code>.drop = FALSE</code> in the latter case that you are creating replicated rows for list-col values<a href="25-many-models.html#fnref41" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1315,14 +1315,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

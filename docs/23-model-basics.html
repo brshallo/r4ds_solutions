@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -479,10 +479,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>geom_abline</code> create line or lines given intercept and slopes, e.g. <code>geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)</code></li>
 <li><code>optim</code> general purpose function for optimization using Newton-Raphson search</li>
 <li><code>coef</code> function for extracting coefficients from a linear model</li>
-<li><code>modelr::data_grid</code>, can be used to generate an evenly spaced grid of values that covers region where data lies<a href="#fn31" class="footnote-ref" id="fnref31"><sup>31</sup></a>
+<li><code>modelr::data_grid</code>, can be used to generate an evenly spaced grid of values that covers region where data lies<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>
 <ul>
 <li>First arg is dataframe, next args are variable names to build grid from</li>
-<li>when using with continuous data, <code>seq_range</code> or similar can be a good complement, see<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a> for an example where this is used.</li>
+<li>when using with continuous data, <code>seq_range</code> or similar can be a good complement, see<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a> for an example where this is used.</li>
 </ul></li>
 <li><code>seq_range(x1, 5)</code> takes 5 values evenly spaced within this set. Two other useful args:
 <ul>
@@ -498,7 +498,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>To include <em>all</em> 2-way interactions can do something like this <code>model_matrix(sim3, y ~ (x1 + x2 + x3)^2)</code> or <code>model_matrix(sim3, y ~ (.)^2)</code></li>
 <li>Use <code>I()</code> in <code>I(x2^2)</code> to incorporate squared term or any transformation that includes <code>+</code>, <code>-</code>, <code>*</code>, or <code>^</code></li>
 <li>Use <code>poly</code> to include 1, 2, … n order terms associated with a variable, e.g. <code>model_matrix(df, y ~ poly(x, 3))</code></li>
-<li><code>splines::ns()</code> represent safer alternative to <code>poly</code> that is less likely to become extreme, e.g.Interesting spline note<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>.</li>
+<li><code>splines::ns()</code> represent safer alternative to <code>poly</code> that is less likely to become extreme, e.g.Interesting spline note<a href="#fn37" class="footnote-ref" id="fnref37"><sup>37</sup></a>.</li>
 </ul>
 <ul>
 <li><code>nobs(mod)</code> see how many observations were used in model building (assuming ‘mod’ represents a model)</li>
@@ -1126,8 +1126,8 @@ by models like <strong>random forests</strong> (e.g. <code>randomForest::random
 
 <div class="footnotes">
 <hr />
-<ol start="31">
-<li id="fn31"><p><code>expand.grid</code> is very similar to <code>data_grid</code><a href="23-model-basics.html#fnref31" class="footnote-back">↩</a></p></li>
+<ol start="35">
+<li id="fn35"><p><code>expand.grid</code> is very similar to <code>data_grid</code><a href="23-model-basics.html#fnref35" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1163,14 +1163,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

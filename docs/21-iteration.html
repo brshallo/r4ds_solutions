@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -849,7 +849,7 @@ the loop):</p>
 <ol style="list-style-type: decimal">
 <li><p>Imagine you have a directory full of CSV files that you want to read in. You have their paths in a vector, <code>files &lt;- dir("data/", pattern = "\\.csv$", full.names = TRUE)</code>, and now want to read each one with <code>read_csv()</code>. Write the for loop that will load them into a single data frame.</p>
 <ul>
-<li>To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter<a href="#fn29" class="footnote-ref" id="fnref29"><sup>29</sup></a>.</li>
+<li>To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a>.</li>
 <li>Next I read these into a single dataframe with a for loop</li>
 </ul>
 <div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1026-1" title="1"><span class="kw">dir.create</span>(<span class="st">&quot;ch21_csvs_example&quot;</span>)</a>
@@ -1009,7 +1009,7 @@ show_mean(flights)
 <a class="sourceLine" id="cb1034-10" title="10">mtcars</a></code></pre></div>
 <ul>
 <li>first part builds list of functions, 2nd applies those to a dataset</li>
-<li>are storing the data transformations as a function and then applying this to a dataframe<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></li>
+<li>are storing the data transformations as a function and then applying this to a dataframe<a href="#fn34" class="footnote-ref" id="fnref34"><sup>34</sup></a></li>
 </ul></li>
 </ol>
 </div>
@@ -1661,9 +1661,9 @@ show_mean(flights)
 </div>
 <div class="footnotes">
 <hr />
-<ol start="29">
-<li id="fn29"><p>Below is the code that accomplished this. I used <code>walk2</code> and methods we learn later in the chapter.<a href="21-iteration.html#fnref29" class="footnote-back">↩</a></p></li>
-<li id="fn30"><p>This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized – go and use this for documenting your work / transformations<a href="21-iteration.html#fnref30" class="footnote-back">↩</a></p></li>
+<ol start="33">
+<li id="fn33"><p>Below is the code that accomplished this. I used <code>walk2</code> and methods we learn later in the chapter.<a href="21-iteration.html#fnref33" class="footnote-back">↩</a></p></li>
+<li id="fn34"><p>This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized – go and use this for documenting your work / transformations<a href="21-iteration.html#fnref34" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1699,14 +1699,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

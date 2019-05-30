@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -474,31 +474,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">Yet another study guide to ‘R for Data Science’</h1>
+<h1 class="title">Yet another study guide for ‘R for Data Science’</h1>
 <h4 class="author"><em>Bryan Shalloway</em></h4>
-<h4 class="date"><em>2019-05-28</em></h4>
+<h4 class="date"><em>2019-05-29</em></h4>
 </div>
-<div id="purpose-of-this-book" class="section level1">
-<h1>Purpose of this book</h1>
-<p>This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham’s book, <em>R for Data Science</em> (R4DS). First and foremost my book is set-up as a resource and refresher for myself.</p>
-<p>If you are looking for a place to check your solutions for R4DS I would recommend using Jrnold’s solutions ___ as a source. Jrnold has done a great job of getting community feedback and well vetted solutions. Though feel free to use this book as another point of reference.</p>
-<div id="features-of-this-book" class="section level2">
-<h2>Features of this book</h2>
-<p>Most chapters contain the following:
-* list of functions and notes from the chapter<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
-* Solutions to exercises<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>
-* “Appendices” contaiing alternative solutions to problems, or random notes/thoughts related to specific problems or the chapter more generally
-* I use the numbering scheme {chapter}.{section}.{subsection}.{problem number}</p>
+<div id="purpose-of-book" class="section level1">
+<h1>Purpose of book</h1>
+<p>This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham’s, (R for Data Science)[<a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a>]. <em>R for Data Science</em> (R4DS) is my go-to recommendation for getting started in R programming, “data science”, or the “tidyverse”.</p>
+<p>First and foremost, this book was set-up as a resource and refresher for myself<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. To check your work as you go through R4DS, I would recommend using the solutions located (here)[<a href="https://jrnold.github.io/r4ds-exercise-solutions/" class="uri">https://jrnold.github.io/r4ds-exercise-solutions/</a>]. Jeffrey Arnold, the creator and mantainer of this site, has done an excellent job of getting community feedback<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> and well vetted solutions. Though feel free to use this book as another point of reference<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
+<div id="organization-and-features-of-book" class="section level2">
+<h2>Organization and features of book</h2>
+<p><em>Most chapters contain the following:</em></p>
+<ul>
+<li>A list of functions (and sometimes notes) from the chapter<a href="#fn4" class="footnote-ref" id="fnref4"><sup>4</sup></a></li>
+<li>A list of “Key exercises” I deemed good for discussion in a study group</li>
+<li>Solutions to exercises
+<ul>
+<li>Exercise subsections are arranged in the same chapter –&gt; section –&gt; subsection as the original book. Chapters, sections, and subsections without exercises are usually not included.</li>
+<li>The beginning of sections may occassionally contain additional notes, e.g. [3.8: Position Adjustment]</li>
+</ul></li>
+<li>The “Appendix” sections in chapters typically containg alternative solutions to problems or additional notes/thoughts pertaining to the chapter more generally
+<ul>
+<li>I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in “Appendix” sections</li>
+</ul></li>
+<li>There are a few minor cautions with using this book<a href="#fn5" class="footnote-ref" id="fnref5"><sup>5</sup></a></li>
+</ul>
 </div>
 <div id="origin-of-this-book" class="section level2">
 <h2>Origin of this book</h2>
-<p><em>R for Data Science</em> (R4DS) is my go-to recommendation for getting started in “data science”, R programming, or the “tidyverse”.</p>
-<p>I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master’s in Analytics program. My second time going through R4DS came in early 2018 when myself and a colleague (<em>Stephen Kimel</em>) organized an internal study group in our company at NetApp<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>.</p>
-<p>The study group provided me a chance to clean-up my solutions, organize my notes, and pursue a vague ambition to publish my solutions and notes online into a book. After stumbling into Jrnold’s online R4DS solutions this ambition no longer felt useful… but, roughly a year later, I got around to publishing it.</p>
+<p>I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master’s in Analytics program. My second time going through R4DS came in early 2018 when myself and a colleague, Stephen Kimel, organized an internal “R for Data Science” study group within NetApp<a href="#fn6" class="footnote-ref" id="fnref6"><sup>6</sup></a>. Roughly a year later, I got around to publishing these solutions and notes into this book.</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2>Acknowledgements</h2>
-<p>Hadley Wickham and Garrett Grolemund for their amazing book as well as the entire team at RStudio for producing outstanding packages, products, and learning materials. Stephen Kimel and my colleagues at NetApp for going through our study group together. The (R4DS community)[] and rstats communities for creating such welcoming and inspiring environments for learning.</p>
+<p><em>Thank you:</em></p>
+<ul>
+<li>(Garrett Grolemund)[<a href="https://twitter.com/StatGarrett" class="uri">https://twitter.com/StatGarrett</a>] and (Hadely Wickham)[<a href="https://twitter.com/hadleywickham" class="uri">https://twitter.com/hadleywickham</a>] for their amazing book!</li>
+<li>The various (tidyverse)[<a href="https://www.tidyverse.org/" class="uri">https://www.tidyverse.org/</a>] and (RStudio)[<a href="https://www.rstudio.com/" class="uri">https://www.rstudio.com/</a>] developers for producing outstanding packages, products, as well as resources for learning</li>
+<li>(R for Data Science Online Learning Community)[<a href="https://www.rfordatasci.com/" class="uri">https://www.rfordatasci.com/</a>] and (#rstats)[<a href="https://twitter.com/hashtag/rstats?src=hash&amp;lang=en" class="uri">https://twitter.com/hashtag/rstats?src=hash&amp;lang=en</a>] communities for creating such inspiring, safe, places to post ideas, ask questions, and grow your R skills</li>
+<li>Stephen Kimel, and my colleagues in the “data science” study group at NetApp</li>
+</ul>
 
 <p><em>Make sure the following packages are installed:</em></p>
 </div>
@@ -506,9 +520,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="footnotes">
 <hr />
 <ol start="1">
-<li id="fn1"><p>When functions show up in multiple locations I typically only note them the first time they appear.<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
-<li id="fn2"><p>Chapters without exercises are generally not included.<a href="index.html#fnref2" class="footnote-back">↩</a></p></li>
-<li id="fn3"><p>You can see my part of an internal talk I gave plugging “tidy” data science workflows (and implicitly the R4DS study group) here: __.<a href="index.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn1"><p>And as a chance to experiment with using (bookdown)[<a href="https://bookdown.org/" class="uri">https://bookdown.org/</a>].<a href="index.html#fnref1" class="footnote-back">↩</a></p></li>
+<li id="fn2"><p>See more about his project (here)[<a href="https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science" class="uri">https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science</a>].<a href="index.html#fnref2" class="footnote-back">↩</a></p></li>
+<li id="fn3"><p>I worked through the problems independently, so for open-ended questions you’ll likely see slightly different solutions.<a href="index.html#fnref3" class="footnote-back">↩</a></p></li>
+<li id="fn4"><p>When functions show up in multiple locations I typically only note them the first time they appear.<a href="index.html#fnref4" class="footnote-back">↩</a></p></li>
+<li id="fn5"><p>Here is the foonote.<a href="index.html#fnref5" class="footnote-back">↩</a></p></li>
+<li id="fn6"><p>(Here)[<a href="https://youtu.be/eeCELJNWEuw" class="uri">https://youtu.be/eeCELJNWEuw</a>] is part of an internal talk I gave plugging “tidy” data science – and implicitly, the R4DS study group.<a href="index.html#fnref6" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -544,14 +561,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",

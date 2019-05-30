@@ -5,11 +5,11 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
+  <title>Yet another study guide for ‘R for Data Science’</title>
   <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
@@ -17,7 +17,7 @@
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
   
   <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
   
@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-28">
+<meta name="date" content="2019-05-29">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -138,8 +138,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">Chapter contents</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of this book</a><ul>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#features-of-this-book"><i class="fa fa-check"></i>Features of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
 </ul></li>
@@ -465,7 +465,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide to ‘R for Data Science’</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Yet another study guide for ‘R for Data Science’</a>
           </h1>
         </div>
 
@@ -574,9 +574,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb341-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x=</span>carat), <span class="dt">binwidth=</span>.<span class="dv">01</span>)<span class="op">+</span></a>
 <a class="sourceLine" id="cb341-3" title="3"><span class="st">  </span><span class="kw">coord_cartesian</span>(<span class="dt">xlim=</span><span class="kw">c</span>(.<span class="dv">99</span>,<span class="dv">1</span>))</a></code></pre></div>
 <p><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>The difference may be caused by jewlers rounding-up because people want to buy ‘1’ carat diamonds not 0.99 carat diamonds. It could also be that some listings are simpoly only in integers<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a>.</p>
+<p>The difference may be caused by jewlers rounding-up because people want to buy ‘1’ carat diamonds not 0.99 carat diamonds. It could also be that some listings are simpoly only in integers<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a>.</p>
 <p><em>4.Compare and contrast <code>coord_cartesian()</code> vs <code>xlim()</code> or <code>ylim()</code> when zooming in on a histogram. What happens if you leave binwidth unset? What happens if you try and zoom so only half a bar shows?</em></p>
-<p><code>coord_cartesian</code> does not change data ust window view where as <code>xlim</code> and <code>ylim</code> will get rid of data outside of domain<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a>.</p>
+<p><code>coord_cartesian</code> does not change data ust window view where as <code>xlim</code> and <code>ylim</code> will get rid of data outside of domain<a href="#fn21" class="footnote-ref" id="fnref21"><sup>21</sup></a>.</p>
 </div>
 </div>
 <div id="missing-values" class="section level2">
@@ -715,7 +715,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## on y-axis. Please set grouponX=TRUE/FALSE to avoid this warning and ensure
 ## proper axis choice.</code></pre>
 <p><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-4.png" width="672" /></p>
-<p><code>geom_jitter</code> is similar to <code>geom_point</code> but it provides random noise to the points. You can control these with the <code>width</code> and <code>height</code> arguments. This is valuable as it allows you to better see points that may overlap one another. <code>geom_beeswarm</code> adds variation in a uniform pattern by default across only the x-axis. <code>geom-quasirandom</code> also defaults to distributing the points across the x-axis however it produces quasi-random variation, <span style="color:green">‘quasi’</span> because it looks as though points follow some interrelationship<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a> and if you run the plot multiple times you will get the exact same plot whereas for <code>geom_jitter</code> you will get a slightly different plot each time. To see the differences between <code>geom_beeswarm</code> and geom_quasirandom` it’s helpful to look at the plots above, but holding the y value constant at 1.</p>
+<p><code>geom_jitter</code> is similar to <code>geom_point</code> but it provides random noise to the points. You can control these with the <code>width</code> and <code>height</code> arguments. This is valuable as it allows you to better see points that may overlap one another. <code>geom_beeswarm</code> adds variation in a uniform pattern by default across only the x-axis. <code>geom-quasirandom</code> also defaults to distributing the points across the x-axis however it produces quasi-random variation, <span style="color:green">‘quasi’</span> because it looks as though points follow some interrelationship<a href="#fn22" class="footnote-ref" id="fnref22"><sup>22</sup></a> and if you run the plot multiple times you will get the exact same plot whereas for <code>geom_jitter</code> you will get a slightly different plot each time. To see the differences between <code>geom_beeswarm</code> and geom_quasirandom` it’s helpful to look at the plots above, but holding the y value constant at 1.</p>
 <div class="sourceCode" id="cb372"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb372-1" title="1">plot_orig &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> cty, <span class="dt">color =</span> drv))<span class="op">+</span></a>
 <a class="sourceLine" id="cb372-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a>
 <a class="sourceLine" id="cb372-3" title="3"></a>
@@ -979,10 +979,10 @@ Binned plots give less precise value estimates at each point (constrained by the
 </div>
 <div class="footnotes">
 <hr />
-<ol start="16">
-<li id="fn16"><p>not necessarily rounding one way or the other.<a href="07-exploratory-data-analysis.html#fnref16" class="footnote-back">↩</a></p></li>
-<li id="fn17"><p>This is especially important when building things like boxplots whose graphs depend on all points in the graph.<a href="07-exploratory-data-analysis.html#fnref17" class="footnote-back">↩</a></p></li>
-<li id="fn18"><p>Would need to read documentation for details.<a href="07-exploratory-data-analysis.html#fnref18" class="footnote-back">↩</a></p></li>
+<ol start="20">
+<li id="fn20"><p>not necessarily rounding one way or the other.<a href="07-exploratory-data-analysis.html#fnref20" class="footnote-back">↩</a></p></li>
+<li id="fn21"><p>This is especially important when building things like boxplots whose graphs depend on all points in the graph.<a href="07-exploratory-data-analysis.html#fnref21" class="footnote-back">↩</a></p></li>
+<li id="fn22"><p>Would need to read documentation for details.<a href="07-exploratory-data-analysis.html#fnref22" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1018,14 +1018,15 @@ gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
 "sharing": {
 "github": false,
-"facebook": true,
+"facebook": false,
 "twitter": true,
 "google": false,
 "linkedin": true,
 "weibo": false,
 "instapper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
+"instapaper": false
 },
 "fontsettings": {
 "theme": "white",
