@@ -29,7 +29,7 @@
 * `case_when`: create new variable that relies on complex combination of existing variables
     + often use when you have complex or multiple `ifelse` statements accruing
 
-## 7.3. Variation
+## 7.3: Variation
 
 ### 7.3.4.
 
@@ -66,11 +66,7 @@ diamonds %>%
   ggplot()+
   geom_point(aes(x, y))+
   coord_fixed()
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-4-1.png" width="50%" />
-
-```r
 diamonds %>% 
   sample_n(1000) %>% 
   ggplot()+
@@ -78,7 +74,7 @@ diamonds %>%
   coord_fixed()
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-4-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-4-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-4-2.png" width="50%" />
 
 *2. Explore the distribution of price. Do you discover anything unusual or surprising? (Hint: Carefully think about the binwidth and make sure you try a wide range of values.)*  
 
@@ -146,7 +142,7 @@ The difference may be caused by jewlers rounding-up because people want to buy '
 `coord_cartesian` does not change data ust window view where as `xlim` and `ylim` will get rid of data outside of domain^[This is especially important when building things like boxplots whose graphs depend on all points in the graph.].
 
 
-## 7.4. Missing values
+## 7.4: Missing values
 
 ### 7.4.1.
 
@@ -194,12 +190,11 @@ mutate(diamonds, carattest=ifelse(carat<1.5 & carat>.7, NA, color)) %>%
 
 <img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
-
 *2. What does na.rm = TRUE do in `mean()` and `sum()`?*  
   
 Filters it out of the vector of values.  
 
-## 7.5. Covariation
+## 7.5: Covariation
 
 ### 7.5.1.1.
 
@@ -270,13 +265,12 @@ fair `cut` seem to associate with a higher `carat` thus while lower quality diam
 
 
 ```r
-ggplot(data=diamonds, aes(x=cut, y=carat))+
+ggplot(data = diamonds, aes(x = cut, y = carat))+
   geom_boxplot()+
   coord_flip()
 ```
 
 <img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-14-1.png" width="672" />
-
 
 *3.Install the `ggstance` package, and create a horizontal boxplot. How does this compare to using `coord_flip()`?*  
 
@@ -284,19 +278,15 @@ ggplot(data=diamonds, aes(x=cut, y=carat))+
 ```r
 ggplot(diamonds)+
   ggstance::geom_boxploth(aes(x = carat, y = cut))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-15-1.png" width="50%" />
-
-```r
 ggplot(diamonds)+
   geom_boxplot(aes(x = cut, y = carat))+
   coord_flip()
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-15-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-15-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-15-2.png" width="50%" />
 
-* Looks like it does the same thing as flipping `x` and `y` and using `coord_flip()`
+* Looks like it does the exact same thing as flipping `x` and `y` and using `coord_flip()`
 
 *4. One problem with boxplots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of "outlying values". One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using `geom_lv()` to display the distribution of `price` vs `cut`. What do you learn? How do you interpret the plots?*  
 
@@ -333,15 +323,13 @@ diamonds %>%
 ## Warning: Using alpha for a discrete variable is not advised.
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-17-1.png" width="50%" />
-
 ```r
 diamonds %>% 
   ggplot()+
   lvplot::geom_lv(aes(x = cut, y = price, fill = ..LV..))
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-17-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-17-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-17-2.png" width="50%" />
 
 Letters represent 'median', 'fourths', 'eights'...
 
@@ -351,11 +339,7 @@ Letters represent 'median', 'fourths', 'eights'...
 ```r
 ggplot(diamonds,aes(x = cut, y = carat))+
   geom_violin()
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-1.png" width="33%" />
-
-```r
 ggplot(diamonds,aes(colour = cut, x = carat, y = ..density..))+
   geom_freqpoly()
 ```
@@ -363,8 +347,6 @@ ggplot(diamonds,aes(colour = cut, x = carat, y = ..density..))+
 ```
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
-
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-2.png" width="33%" />
 
 ```r
 ggplot(diamonds, aes(x = carat, y = ..density..))+
@@ -376,7 +358,7 @@ ggplot(diamonds, aes(x = carat, y = ..density..))+
 ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-3.png" width="33%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-1.png" width="33%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-2.png" width="33%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-18-3.png" width="33%" />
 
 I like how `geom_freqpoly` has points directly overlaying but it can also be tough to read some, and the lines can overlap and be tough to tell apart, you also have to specify `density` for this and `geom_histogram` whereas for `geom_violin` it is the default. The tails in `geom_violin` can be easy to read but they also pull these for each of the of the values whereas by faceting `geomo_histogram` and setting `scales = "free"` you can have independent scales. I think the biggest advantage of the histogram is that it is the most familiar so people will know what you're looking at.
 
@@ -386,18 +368,10 @@ I like how `geom_freqpoly` has points directly overlaying but it can also be tou
 ```r
 ggplot(mpg, aes(x = displ, y = cty, color = drv))+
   geom_point()    
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-1.png" width="25%" />
-
-```r
 ggplot(mpg, aes(x = displ, y = cty, color = drv))+
   geom_jitter()
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-2.png" width="25%" />
-
-```r
 ggplot(mpg, aes(x = displ, y = cty, color = drv))+
   geom_beeswarm()
 ```
@@ -409,8 +383,6 @@ ggplot(mpg, aes(x = displ, y = cty, color = drv))+
 ## on y-axis. Please set grouponX=TRUE/FALSE to avoid this warning and ensure
 ## proper axis choice.
 ```
-
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-3.png" width="25%" />
 
 ```r
 ggplot(mpg, aes(x = displ, y = cty, color = drv))+
@@ -425,7 +397,7 @@ ggplot(mpg, aes(x = displ, y = cty, color = drv))+
 ## proper axis choice.
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-4.png" width="25%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-1.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-2.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-3.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-19-4.png" width="25%" />
 
 `geom_jitter` is similar to `geom_point` but it provides random noise to the points. You can control these with the `width` and `height` arguments. This is valuable as it allows you to better see points that may overlap one another. `geom_beeswarm` adds variation in a uniform pattern by default across only the x-axis. `geom-quasirandom` also defaults to distributing the points across the x-axis however it produces quasi-random variation, <span style="color:green">'quasi'</span> because it looks as though points follow some interrelationship^[Would need to read documentation for details.] and if you run the plot multiple times you will get the exact same plot whereas for `geom_jitter` you will get a slightly different plot each time. To see the differences between `geom_beeswarm` and geom_quasirandom` it's helpful to look at the plots above, but holding the y value constant at 1.
 
@@ -497,19 +469,15 @@ If you're comparing the proportion of cut in color and want to be looking at how
 
 ```r
 cut_in_color_graph
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-23-1.png" width="50%" />
-
-```r
 cut_in_color_graph+
   coord_flip()
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-23-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-23-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-23-2.png" width="50%" />
 
 
-### 7.5.3
+### 7.5.3.
 
 Two-d histograms
 
@@ -519,23 +487,17 @@ smaller <- diamonds %>%
 
 ggplot(data = smaller) +
   geom_hex(mapping = aes(x = carat, y = price))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-24-1.png" width="50%" />
-
-```r
 #can change bin number
 ggplot(data = smaller) +
   geom_bin2d(mapping = aes(x = carat, y = price), bins = c(30, 30))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-24-2.png" width="50%" />
-
-```r
 # #or binwidth (roughly equivalent chart would be created)
 # ggplot(data = smaller) +
 #   geom_bin2d(mapping = aes(x = carat, y = price), binwidth = c(.1, 1000))
 ```
+
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-24-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-24-2.png" width="50%" />
 
 Binned boxplots, violins, and lvs
 
@@ -544,17 +506,13 @@ Binned boxplots, violins, and lvs
 #split by width
 ggplot(smaller, aes(x = carat, y = price))+
   geom_boxplot(aes(group = cut_width(carat, 0.1)))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-25-1.png" width="50%" />
-
-```r
 #split to get approximately same number in each box with cut_number()
 ggplot(smaller, aes(x = carat, y = price))+
   geom_boxplot(aes(group = cut_number(carat, 20)))
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-25-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-25-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-25-2.png" width="50%" />
 
 These methods don't seem to work quite as well with violin plots or letter value plots:
 
@@ -562,31 +520,19 @@ These methods don't seem to work quite as well with violin plots or letter value
 ##violin
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_width(carat, 0.1)))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-1.png" width="25%" />
-
-```r
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_number(carat, 20)))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-2.png" width="25%" />
-
-```r
 ##letter value
 ggplot(smaller, aes(x = carat, y = price))+
   lvplot::geom_lv(aes(group = cut_width(carat, 0.1)))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-3.png" width="25%" />
-
-```r
 ggplot(smaller, aes(x = carat, y = price))+
   lvplot::geom_lv(aes(group = cut_number(carat, 20)))
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-4.png" width="25%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-1.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-2.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-3.png" width="25%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-26-4.png" width="25%" />
 
 They look a little bit improved if you allow for fewer values per bin compared to the examples with `geom_boxplot()`
 
@@ -594,16 +540,12 @@ They look a little bit improved if you allow for fewer values per bin compared t
 ```r
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_number(carat, 10)))
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-27-1.png" width="50%" />
-
-```r
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_width(carat, 0.25)))
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-27-2.png" width="50%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-27-1.png" width="50%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-27-2.png" width="50%" />
 
 ### 7.5.3.1.
 
@@ -680,17 +622,11 @@ ggplot(diamonds, aes(x = carat, y = price))+
 ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-1.png" width="33%" />
-
 ```r
 ggplot(diamonds, aes(x = carat, y = price))+
   geom_boxplot(aes(group = cut_width(carat, 0.5), colour = cut))+
   facet_grid(. ~ cut)
-```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-2.png" width="33%" />
-
-```r
 ##I think this gives a better visualization, but is a little more complicated to produce, I also have the github version of ggplot and do not know whether the `preserve` arg is available in current CRAN installation.
 diamonds %>% 
   mutate(carat = cut(carat, 5)) %>% 
@@ -698,7 +634,7 @@ diamonds %>%
   geom_boxplot(aes(group = interaction(cut_width(carat, 0.5), cut), fill = cut), position = position_dodge(preserve = "single"))
 ```
 
-<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-3.png" width="33%" />
+<img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-1.png" width="33%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-2.png" width="33%" /><img src="07-exploratory-data-analysis_files/figure-html/unnamed-chunk-32-3.png" width="33%" />
   
   
 *5.Two dimensional plots reveal outliers that are not visible in one dimensional plots. For example, some points in the plot below have an unusual combination of x and y values, which makes the points outliers even though their x and y values appear normal when examined separately.*  

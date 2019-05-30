@@ -1,8 +1,14 @@
-*Make sure the following packages are installed:*  
+
 
 
 
 # Ch. 11: Data import
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 11.2.2 # 1, 5</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
+
 * `read_csv()` reads comma delimited files, `read_csv2()` reads semicolon
   separated files (common in countries where `,` is used as the decimal place),
   `read_tsv()` reads tab delimited files, and `read_delim()` reads in files
@@ -140,12 +146,11 @@ read_delim("a|b|c\n1|2|3", delim = "|")
   
 *2. Apart from `file`, `skip`, and `comment`, what other arguments do `read_csv()` and `read_tsv()` have in common?*^[* `skip = n`, `comment = #` any line that starts w/ input to comment will be skipped, `col_names = FALSE` or perhaps `c("x", "y", "z")`, `na = "."`]
 
-col_names, col_types, locale, na, quoted_na, quote, trim_ws, skip, n_max, guess_max, progress  
-  
+`col_names`, `col_types`, `locale`, `na`, `quoted_na`, `quote`, `trim_ws`, `skip`, `n_max`, `guess_max`, `progress`  
 
 *3. What are the most important arguments to `read_fwf()`?*  
 
-widths
+`widths`
 
 *4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or '.* By convention, `read_csv()` assumes that the quoting character will be ", and if you want to change it you'll need to use `read_delim()` instead. *What arguments do you need to specify to read the following text into a data frame?*
   

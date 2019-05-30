@@ -48,8 +48,8 @@ library(plotly)
 * `<`, `<=`, `>`, `>=`, `!=`: Logical operators
 * `min_rank`, `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`: common ranking functions
 * Location: `mean`; `median`
-* Spread: `sd`: standard deviation; `IQR()`: Interquartile range; `mad()`: median absolute deviaiton
-```{r, eval = FALSE}
+* Measures of spread: `sd`: standard deviation; `IQR()`: Interquartile range; `mad()`: median absolute deviaiton
+```{r}
 x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
 IQR(x)
 mad(x)
@@ -58,7 +58,7 @@ sd(x)
 
 * Rank: `min`; `quantile`; `max`
 * Position: `first(x)`, `nth(x, 2)`, `last(x)`. These work similarly to `x[1]`, `x[2]`, and `x[length(x)]` but let you set a default value if that position does not exist
-```{r, eval = FALSE}
+```{r}
 first(x)
 nth(x, 5)
 last(x)
@@ -203,9 +203,9 @@ arrange(flights, distance) %>%
   glimpse()
 ```
 
-# 5.4: Select columns
+## 5.4: Select columns
 
-# 5.4.1.
+### 5.4.1.
 
 **1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.**
 
@@ -527,7 +527,7 @@ flights %>%
 **Is the proportion of cancelled flights related to the average delay?**  
 
 Proporton of canceled flights and then average delay of flights by day:
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -610,7 +610,7 @@ To get at the question of 'best carrier', you may consider doing a grouped compa
   
 `sort` orders by `n`, you may want to use it when you want to see the highest frequency levels.
 
-## 5.7. Grouped mutates...
+## 5.7: Grouped mutates...
 
 ### 5.7.1.
 

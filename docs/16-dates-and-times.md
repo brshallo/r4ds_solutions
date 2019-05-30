@@ -1,9 +1,14 @@
-*Make sure the following packages are installed:*  
-
-
 
 
 # Ch. 16: Dates and times
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 16.2.4. #3
+* 16.3.4. #1, 4, 5
+* 16.4.5. #4</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `today` get current date
 * `now` get current date-time
@@ -64,7 +69,7 @@ flights_dt %>%
   geom_freqpoly(binwidth = 86400)
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ### 16.2.4
 
@@ -95,7 +100,7 @@ flights_dt %>%
     ```
     
     ```
-    ## [1] "2019-05-28"
+    ## [1] "2019-05-30"
     ```
     
     ```r
@@ -103,7 +108,7 @@ flights_dt %>%
     ```
     
     ```
-    ## [1] "2019-05-28 13:41:49 MST"
+    ## [1] "2019-05-30 11:20:19 MST"
     ```
     
 
@@ -172,7 +177,7 @@ flights_dt %>%
     geom_line()
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 
 ### 16.3.4
@@ -197,7 +202,7 @@ flights_dt %>%
       geom_vline(xintercept = ymd("20131103"), linetype = 2)
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-9-1.png" width="672" />
     
     * First couple and last couple months tend to have slightly earlier start times
     
@@ -215,7 +220,7 @@ flights_dt %>%
       geom_boxplot()
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-8-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-10-1.png" width="672" />
     
     * Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day
     
@@ -236,7 +241,7 @@ flights_dt %>%
       geom_col(aes(fill = hour_dep_4hrs))
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     * Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights
 
@@ -353,7 +358,7 @@ flights_dt %>%
       geom_point()
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-13-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-1.png" width="672" />
       
     * It goes-up throughout the day
     * Use `sched_dep_time` because it has the correct day
@@ -394,7 +399,7 @@ flights_dt %>%
       labs(title = "Distribution of carat in diamonds dataset")
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-1.png" width="672" />
     
     ```r
     ggplot(flights, aes(x = as.hms(sched_dep_time))) +
@@ -402,7 +407,7 @@ flights_dt %>%
       labs(title = "Distribution of scheduled departure times in flights dataset")
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-2.png" width="672" />
     
     * Both have gaps and peaks at 'attractive' values
 
@@ -423,7 +428,7 @@ flights_dt %>%
       geom_line()
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-18-1.png" width="672" />
     
     * Consistent with above hypothesis
     
@@ -463,6 +468,12 @@ To find out how many periods fall in an interval, need to use integer division
 
 ```r
 (today() %--% next_year) %/% days(1)
+```
+
+```
+## Note: method with signature 'Timespan#Timespan' chosen for function '%/%',
+##  target signature 'Interval#Period'.
+##  "Interval#ANY", "ANY#Period" would also be valid
 ```
 
 ```
@@ -550,7 +561,7 @@ flights_dt %>%
   geom_line(aes(colour = quarter_dep, group = 1)) 
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-23-1.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
 *Proportion of flights in each hour, by quarter* 
 
@@ -567,7 +578,7 @@ flights_dt %>%
     geom_line(aes(colour = quarter_dep))
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-24-1.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 * Q1 seems to be a little more extreme at the local maximas
 
@@ -587,8 +598,7 @@ flights_dt %>%
   facet_wrap( ~ month_dep)
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-25-1.png" width="672" />
-
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
 ### 16.3.4.3
 
@@ -646,7 +656,7 @@ mutate(flights_dt,
   labs(title = "Proportion of early flights by minute scheduled v. minute departed")
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-1.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-29-1.png" width="672" />
 
 ```r
   mutate(flights_dt,
@@ -668,4 +678,4 @@ mutate(flights_dt,
   labs(title = "proportion of early flights that were scheduled to leave within 10 mins of when they did")
 ```
 
-<img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-2.png" width="672" />
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-29-2.png" width="672" />

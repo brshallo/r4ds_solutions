@@ -1,7 +1,13 @@
 
 
-
 # Ch. 15: Factors
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 15.3.1. #1, 3 (make the visualization and table)
+* 15.5.1. #1</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `factor` make variable a factor based on `levels` provided
 * `fct_rev` reverses order of factors
@@ -25,11 +31,7 @@ gss_cat %>%
   scale_x_discrete(drop = FALSE)
 ```
 
-<img src="15-factors_files/figure-html/unnamed-chunk-1-1.png" width="672" />
-
-```r
-# Is there a similar way to do this with count?
-```
+<img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" />
 
 ## 15.4: General Social Survey
 
@@ -37,20 +39,10 @@ gss_cat %>%
 
 1.  Explore the distribution of `rincome` (reported income). What makes the default bar chart hard to understand? How could you improve the plot?
     
-    
-    ```r
-    gss_cat %>% 
-      ggplot(aes(x = rincome)) +
-      geom_bar()
-    ```
-    
-    <img src="15-factors_files/figure-html/unnamed-chunk-2-1.png" width="672" />
-    
-    
     * Default bar chart has categories across the x-asix, I flipped these to be across the y-axis 
     * Also, have highest values at the bottom rather than at the top and have different version of NA showing-up at both top and bottom, all should be on one side
     * In `bar_prep`, I used reg expressions to extract the numeric values, arrange by that, and then set factor levels according to the new order
-        + Solution is probably unnecessarily complicated...^[Also had issue with not rendering for book.]
+        + Solution is probably unnecessarily complicated...
 
     
     ```r
@@ -67,8 +59,8 @@ gss_cat %>%
       coord_flip()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" />
-
+    <img src="15-factors_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+    
 
 1.  What is the most common `relig` in this survey? What's the most common `partyid`?
 
@@ -122,7 +114,7 @@ gss_cat %>%
 
     * `relig` most common -- Protestant, 10846,
     * `partyid` most common -- Independent, 4119
-
+    
 1.  Which `relig` does `denom` (denomination) apply to? How can you find out with a table? How can you find out with a visualisation?
     
     *With visualization:*
@@ -134,7 +126,7 @@ gss_cat %>%
       coord_flip()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-6-1.png" width="672" />
     
     * Notice which have the widest variety of colours -- are protestant, and Christian slightly
     
@@ -182,10 +174,11 @@ gss_cat %>%
       geom_bar()
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-8-1.png" width="672" />
    
-    * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of na values, this may skew results
-    * Given high number of missing values, `tvhours` may also just not be reliable, do NA's associate with other variables? -- Perhaps could try and impute these NAs
+    * Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of `NA` values, this may skew results
+    * Given high number of missing values, `tvhours` may also just not be reliable, do `NA`s associate with other variables? -- Perhaps could try and impute these `NA`s
+    
 
 1.  For each factor in `gss_cat` identify whether the order of the levels is arbitrary or principled.
     
@@ -240,7 +233,7 @@ gss_cat %>%
     ```
     
     * `rincome` is principaled, rest are arbitrary
-
+    
 1.  Why did moving "Not applicable" to the front of the levels move it to the bottom of the plot?
     
     * Becuase is moving this factor to be first in order
@@ -307,7 +300,7 @@ gss_cat %>%
       labs(colour = "partyid")
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     *As a bar plot: * 
     
@@ -334,9 +327,10 @@ gss_cat %>%
       labs(colour = "partyid")
     ```
     
-    <img src="15-factors_files/figure-html/unnamed-chunk-11-1.png" width="672" />
+    <img src="15-factors_files/figure-html/unnamed-chunk-12-1.png" width="672" />
 
     * Suggests proportion of republicans has gone down with independents and other going up.
+    
 
 1.  How could you collapse `rincome` into a small set of categories?
 
@@ -349,13 +343,13 @@ gss_cat %>%
     
     mutate(gss_cat,
            rincome = fct_collapse(
-           rincome,
-           other = other,
-           high = high,
-           med = med,
-           low = low
+             rincome,
+             other = other,
+             high = high,
+             med = med,
+             low = low
            )) %>%
-           count(rincome)
+      count(rincome)
     ```
     
     ```
@@ -378,288 +372,36 @@ A few ways to get an initial look at the levels or counts across a dataset
 ```r
 gss_cat %>% 
   purrr::map(unique)
-```
 
-```
-## $year
-## [1] 2000 2002 2004 2006 2008 2010 2012 2014
-## 
-## $marital
-## [1] Never married Divorced      Widowed       Married       Separated    
-## [6] No answer    
-## Levels: No answer Never married Separated Divorced Widowed Married
-## 
-## $age
-##  [1] 26 48 67 39 25 36 44 47 53 52 51 40 77 45 49 19 54 82 83 89 88 72 34
-## [24] 55 37 22 33 43 29 57 31 46 65 56 66 20 64 59 23 21 27 78 61 84 69 32
-## [47] 76 41 70 75 80 24 50 30 62 60 28 35 38 73 87 58 63 42 85 NA 79 18 71
-## [70] 68 74 81 86
-## 
-## $race
-## [1] White Black Other
-## Levels: Other Black White Not applicable
-## 
-## $rincome
-##  [1] $8000 to 9999  Not applicable $20000 - 24999 $25000 or more
-##  [5] $7000 to 7999  $10000 - 14999 Refused        $15000 - 19999
-##  [9] $3000 to 3999  $5000 to 5999  Don't know     $1000 to 2999 
-## [13] Lt $1000       No answer      $6000 to 6999  $4000 to 4999 
-## 16 Levels: No answer Don't know Refused $25000 or more ... Not applicable
-## 
-## $partyid
-##  [1] Ind,near rep       Not str republican Independent       
-##  [4] Not str democrat   Strong democrat    Ind,near dem      
-##  [7] Strong republican  Other party        No answer         
-## [10] Don't know        
-## 10 Levels: No answer Don't know Other party ... Strong democrat
-## 
-## $relig
-##  [1] Protestant              Orthodox-christian     
-##  [3] None                    Christian              
-##  [5] Jewish                  Catholic               
-##  [7] Other                   Inter-nondenominational
-##  [9] Hinduism                Native american        
-## [11] No answer               Buddhism               
-## [13] Moslem/islam            Other eastern          
-## [15] Don't know             
-## 16 Levels: No answer Don't know ... Not applicable
-## 
-## $denom
-##  [1] Southern baptist     Baptist-dk which     No denomination     
-##  [4] Not applicable       Lutheran-mo synod    Other               
-##  [7] United methodist     Episcopal            Other lutheran      
-## [10] Afr meth ep zion     Am bapt ch in usa    Other methodist     
-## [13] Presbyterian c in us Methodist-dk which   Nat bapt conv usa   
-## [16] Am lutheran          Nat bapt conv of am  Am baptist asso     
-## [19] Evangelical luth     Afr meth episcopal   Lutheran-dk which   
-## [22] Luth ch in america   Presbyterian, merged No answer           
-## [25] Wi evan luth synod   Other baptists       Other presbyterian  
-## [28] United pres ch in us Presbyterian-dk wh   Don't know          
-## 30 Levels: No answer Don't know No denomination Other ... Not applicable
-## 
-## $tvhours
-##  [1] 12 NA  2  4  1  3  0  7  5  8 10  6 15 11 24 20 13 14 21  9 16 22 18
-## [24] 17 23
-```
-
-```r
 gss_cat %>% 
   purrr::map(table)
-```
 
-```
-## $year
-## 
-## 2000 2002 2004 2006 2008 2010 2012 2014 
-## 2817 2765 2812 4510 2023 2044 1974 2538 
-## 
-## $marital
-## 
-##     No answer Never married     Separated      Divorced       Widowed 
-##            17          5416           743          3383          1807 
-##       Married 
-##         10117 
-## 
-## $age
-## 
-##  18  19  20  21  22  23  24  25  26  27  28  29  30  31  32  33  34  35 
-##  91 249 251 278 298 361 344 396 400 385 387 376 433 407 445 425 425 417 
-##  36  37  38  39  40  41  42  43  44  45  46  47  48  49  50  51  52  53 
-## 428 438 426 415 452 434 405 448 432 404 422 435 424 417 430 390 400 396 
-##  54  55  56  57  58  59  60  61  62  63  64  65  66  67  68  69  70  71 
-## 387 365 384 321 326 323 338 307 310 292 253 259 231 271 205 201 213 206 
-##  72  73  74  75  76  77  78  79  80  81  82  83  84  85  86  87  88  89 
-## 189 152 180 179 171 137 150 135 127 119 105  99 100  75  74  54  57 148 
-## 
-## $race
-## 
-##          Other          Black          White Not applicable 
-##           1959           3129          16395              0 
-## 
-## $rincome
-## 
-##      No answer     Don't know        Refused $25000 or more $20000 - 24999 
-##            183            267            975           7363           1283 
-## $15000 - 19999 $10000 - 14999  $8000 to 9999  $7000 to 7999  $6000 to 6999 
-##           1048           1168            340            188            215 
-##  $5000 to 5999  $4000 to 4999  $3000 to 3999  $1000 to 2999       Lt $1000 
-##            227            226            276            395            286 
-## Not applicable 
-##           7043 
-## 
-## $partyid
-## 
-##          No answer         Don't know        Other party 
-##                154                  1                393 
-##  Strong republican Not str republican       Ind,near rep 
-##               2314               3032               1791 
-##        Independent       Ind,near dem   Not str democrat 
-##               4119               2499               3690 
-##    Strong democrat 
-##               3490 
-## 
-## $relig
-## 
-##               No answer              Don't know Inter-nondenominational 
-##                      93                      15                     109 
-##         Native american               Christian      Orthodox-christian 
-##                      23                     689                      95 
-##            Moslem/islam           Other eastern                Hinduism 
-##                     104                      32                      71 
-##                Buddhism                   Other                    None 
-##                     147                     224                    3523 
-##                  Jewish                Catholic              Protestant 
-##                     388                    5124                   10846 
-##          Not applicable 
-##                       0 
-## 
-## $denom
-## 
-##            No answer           Don't know      No denomination 
-##                  117                   52                 1683 
-##                Other            Episcopal   Presbyterian-dk wh 
-##                 2534                  397                  244 
-## Presbyterian, merged   Other presbyterian United pres ch in us 
-##                   67                   47                  110 
-## Presbyterian c in us    Lutheran-dk which     Evangelical luth 
-##                  104                  267                  122 
-##       Other lutheran   Wi evan luth synod    Lutheran-mo synod 
-##                   30                   71                  212 
-##   Luth ch in america          Am lutheran   Methodist-dk which 
-##                   71                  146                  239 
-##      Other methodist     United methodist     Afr meth ep zion 
-##                   33                 1067                   32 
-##   Afr meth episcopal     Baptist-dk which       Other baptists 
-##                   77                 1457                  213 
-##     Southern baptist    Nat bapt conv usa  Nat bapt conv of am 
-##                 1536                   40                   76 
-##    Am bapt ch in usa      Am baptist asso       Not applicable 
-##                  130                  237                10072 
-## 
-## $tvhours
-## 
-##    0    1    2    3    4    5    6    7    8    9   10   11   12   13   14 
-##  675 2345 3040 1959 1408  695  478  119  262   19  122    9   96    9   24 
-##   15   16   17   18   20   21   22   23   24 
-##   17   10    2    7   14    2    2    1   22
-```
-
-```r
 gss_cat %>% 
   purrr::map(table) %>% 
   purrr::map(plot)
+
+gss_cat %>% 
+  mutate_if(is.factor, ~fct_lump(., 14)) %>% 
+  sample_n(1000) %>% 
+  GGally::ggpairs()
 ```
 
-<img src="15-factors_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-3.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-4.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-5.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-6.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-7.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-8.png" width="672" /><img src="15-factors_files/figure-html/unnamed-chunk-13-9.png" width="672" />
-
-```
-## $year
-## [1] 2000 2002 2004 2006 2008 2010 2012 2014
-## 
-## $marital
-## [1] 1 2 3 4 5 6
-## 
-## $age
-##  [1] 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40
-## [24] 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63
-## [47] 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86
-## [70] 87 88 89
-## 
-## $race
-## [1] 1 2 3 4
-## 
-## $rincome
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
-## 
-## $partyid
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## 
-## $relig
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16
-## 
-## $denom
-##  [1]  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
-## [24] 24 25 26 27 28 29 30
-## 
-## $tvhours
-##  [1]  0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 20 21 22 23
-## [24] 24
-```
-
-### Percentage NA each level
-
+*Percentage NA each level*:
 
 ```r
 gss_cat %>% 
-  purrr::map(~(sum(is.na(.x)) / length(.x)))
+  purrr::map(~(sum(is.na(.x)) / length(.x))) %>% 
+  as_tibble()
+
+# essentially equivalent...
+gss_cat %>% 
+  summarise_all(~(sum(is.na(.)) / length(.)))
 ```
 
-```
-## $year
-## [1] 0
-## 
-## $marital
-## [1] 0
-## 
-## $age
-## [1] 0.003537681
-## 
-## $race
-## [1] 0
-## 
-## $rincome
-## [1] 0
-## 
-## $partyid
-## [1] 0
-## 
-## $relig
-## [1] 0
-## 
-## $denom
-## [1] 0
-## 
-## $tvhours
-## [1] 0.4722804
-```
-
-### Print all levels of tibble
-
+*Print all levels of tibble*:
 
 ```r
 gss_cat %>% 
-  count(tvhours) %>% 
+  count(age) %>% 
   print(n = Inf)
 ```
-
-```
-## # A tibble: 25 x 2
-##    tvhours     n
-##      <int> <int>
-##  1       0   675
-##  2       1  2345
-##  3       2  3040
-##  4       3  1959
-##  5       4  1408
-##  6       5   695
-##  7       6   478
-##  8       7   119
-##  9       8   262
-## 10       9    19
-## 11      10   122
-## 12      11     9
-## 13      12    96
-## 14      13     9
-## 15      14    24
-## 16      15    17
-## 17      16    10
-## 18      17     2
-## 19      18     7
-## 20      20    14
-## 21      21     2
-## 22      22     2
-## 23      23     1
-## 24      24    22
-## 25      NA 10146
-```
-

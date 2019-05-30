@@ -1,8 +1,13 @@
-*Make sure the following packages are installed:*  
 
 
 
 # Ch. 10: Tibbles
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+*none*</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `tibble`: produces a dataframe w/ some other helpful qualities that have advantages over `data.frame`
     * see `vignette("tibble")`
@@ -31,13 +36,12 @@ nycflights13::flights %>%
 ## 2     1416     5     29 2013-01-01 05:00:00
 ## # ... with 3.368e+05 more rows
 ```
-
-    + Also can convert with `as.data.frame` or use `options`, see 10.5.6 below
-* `enframe`: let's you encode name and value, see 10.5.5 below
+    * Also can convert with `as.data.frame` or use `options`, see [10.5. (exercises)], problem 6
+* `enframe`: let's you encode name and value, see [10.5. (exercises)], problem 5 below
 * `class`: for checking the class of the object
     + Though is not fully accurate, in that the actual object class of vectors is "base", not double, etc., so kind of lies...
 
-## 10.5
+## 10.5: (exercises)
 
 *1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).*  
   
@@ -45,8 +49,10 @@ Could look at printing, e.g. only prints first 15 rows and enough variables wher
 
 *2. Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?*  
   
-Dataframes can't do list-cols. Never changes type of input e.g. from strings to factors, never changes names of variables, never creates row names. Also, you can do list-cols with tibbles.  
-  
+* Tibbles never change type of input e.g. from strings to factors 
+* Tibbles never change names of variables, never creates row names
+* Tibbles print in a more concise and readable format
+    * This difference is made more stark if working with list-columns
 
 *3. If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?*  
   
@@ -97,7 +103,7 @@ df %>%
   geom_point()
 ```
 
-<img src="10-tibbles_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="10-tibbles_files/figure-html/unnamed-chunk-7-1.png" width="672" />
  
 *c. Creating a new column called 3 which is 2 divided by 1.*  
   
@@ -152,20 +158,7 @@ df %>%
 
 *5. What does `tibble::enframe()` do? When might you use it?*  
 
-Let's you encode "name" and "value"
-
-```r
-tibble::enframe(1:3)
-```
-
-```
-## # A tibble: 3 x 2
-##    name value
-##   <int> <int>
-## 1     1     1
-## 2     2     2
-## 3     3     3
-```
+Let's you encode "name" and "value" as a tibble from a named vector
 
 ```r
 tibble::enframe(c(a = 5, b = 8))
@@ -195,28 +188,6 @@ tibble::enframe(c(a = 5:8, b = 7:10))
 ## 6 b2        8
 ## 7 b3        9
 ## 8 b4       10
-```
-
-```r
-tibble::enframe(c(a = 5:8, b = 7:10, d = 9:12))
-```
-
-```
-## # A tibble: 12 x 2
-##    name  value
-##    <chr> <int>
-##  1 a1        5
-##  2 a2        6
-##  3 a3        7
-##  4 a4        8
-##  5 b1        7
-##  6 b2        8
-##  7 b3        9
-##  8 b4       10
-##  9 d1        9
-## 10 d2       10
-## 11 d3       11
-## 12 d4       12
 ```
 
 *6. What option controls how many additional column names are printed at the footer of a tibble?*  

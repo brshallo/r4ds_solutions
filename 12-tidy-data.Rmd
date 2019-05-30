@@ -1,6 +1,5 @@
-*Make sure the following packages are installed:*  
 
-```{r setup12, include=FALSE}
+```{r setup12, include=FALSE, warning=FALSE, message=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
@@ -9,6 +8,18 @@ library(tidyr)
 ```
 
 # ch. 12: Tidy data
+
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 12.3.3. #4
+* 12.4.3. #1
+* 12.6.1 #4
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
 * `spread`: pivot, e.g. `spread(iris, Species)`
 * `gather`: unpivot, e.g. `gather(mpg, drv, class, key = "drive_or_class", value = "value")`
@@ -25,7 +36,6 @@ tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>%
   tidyr::separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 
   tidyr::unite(one, two, three, col = "x2", sep = ",", remove = FALSE) %>% 
   tidyr::extract(x2, into = c("a", "b", "c"), regex = "([a-z]+),([a-z]+),([a-z]+)", remove = FALSE)
-
 ```
 
 * `complete()` takes a set of columns, and finds all unique combinations. It then ensures the original dataset contains all those values, filling in explicit NAs where necessary.
@@ -213,12 +223,12 @@ tribble(~a,~b,
 ```
 
 `extra` determines what to do when you have more splits than you do `into` spaces.  Default is to drop extra  
-Can change to limit num of splits to length of `into` with value "merge"
+Can change to limit num of splits to length of `into` with `extra = "merge"`
 
 ```{r}
 tribble(~a,~b,
         "so it goes","hello,you,are") %>% 
-  separate(b, into=c("e","f"), sep=",", extra="merge")
+  separate(b, into = c("e", "f"), sep = ",", extra = "merge")
 ```
 
 
@@ -246,11 +256,11 @@ df %>%
 
 Because there are many ways to split something up, but only one way to bring multiple things together...  
 
-## 12.5: missing values
+## 12.5: Missing values
 
 ### 12.5.1. 
 
-*1. Compare and contrast the fill arguments to spread() and complete().*  
+*1. Compare and contrast the fill arguments to `spread()` and `complete()`.*  
 
 Both create open cells by filling out those that are not currently in the dataset, `complete` though does it by adding rows of iterations not included, whereas `spread` does it by the process of spreading out fields and naturally generating values that did not have row values previously. The`fill` in each specifies what value should go into these created cells.
 

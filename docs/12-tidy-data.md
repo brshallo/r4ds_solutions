@@ -1,8 +1,15 @@
-*Make sure the following packages are installed:*  
 
 
 
 # ch. 12: Tidy data
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 12.3.3. #4
+* 12.4.3. #1
+* 12.6.1 #4</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `spread`: pivot, e.g. `spread(iris, Species)`
 * `gather`: unpivot, e.g. `gather(mpg, drv, class, key = "drive_or_class", value = "value")`
@@ -152,7 +159,7 @@ table2 %>%
   geom_point(aes(colour = country))
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-7-1.png" width="672" />
 
 * first had to spread data
 
@@ -359,13 +366,13 @@ tribble(~a,~b,
 ```
 
 `extra` determines what to do when you have more splits than you do `into` spaces.  Default is to drop extra  
-Can change to limit num of splits to length of `into` with value "merge"
+Can change to limit num of splits to length of `into` with `extra = "merge"`
 
 
 ```r
 tribble(~a,~b,
         "so it goes","hello,you,are") %>% 
-  separate(b, into=c("e","f"), sep=",", extra="merge")
+  separate(b, into = c("e", "f"), sep = ",", extra = "merge")
 ```
 
 ```
@@ -432,11 +439,11 @@ df %>%
 
 Because there are many ways to split something up, but only one way to bring multiple things together...  
 
-## 12.5: missing values
+## 12.5: Missing values
 
 ### 12.5.1. 
 
-*1. Compare and contrast the fill arguments to spread() and complete().*  
+*1. Compare and contrast the fill arguments to `spread()` and `complete()`.*  
 
 Both create open cells by filling out those that are not currently in the dataset, `complete` though does it by adding rows of iterations not included, whereas `spread` does it by the process of spreading out fields and naturally generating values that did not have row values previously. The`fill` in each specifies what value should go into these created cells.
 
@@ -577,7 +584,7 @@ who_present %>%
   geom_jitter()
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-1.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 ```r
 #ratio of female tb cases over time
@@ -594,7 +601,7 @@ who_present %>%
   geom_line()
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-2.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-2.png" width="672" />
 
 ```r
 #countries with the most outbreaks
@@ -609,7 +616,7 @@ who_present %>%
   geom_line()
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-3.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-3.png" width="672" />
 
 ```r
 #countries with the most split by gender as well
@@ -625,7 +632,7 @@ who_present %>%
   facet_wrap(~country)
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-4.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-4.png" width="672" />
 
 ```r
 #take log and summarise
@@ -640,7 +647,7 @@ who_present %>%
   geom_line(show.legend=TRUE)
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-5.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-5.png" width="672" />
 
 ```r
 #average # of countries with more female TB cases
@@ -659,4 +666,4 @@ who_present %>%
   geom_line()
 ```
 
-<img src="12-tidy-data_files/figure-html/unnamed-chunk-22-6.png" width="672" />
+<img src="12-tidy-data_files/figure-html/unnamed-chunk-24-6.png" width="672" />

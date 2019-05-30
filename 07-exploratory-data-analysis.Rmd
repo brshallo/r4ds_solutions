@@ -49,7 +49,7 @@ library(maps)
 * `case_when`: create new variable that relies on complex combination of existing variables
     + often use when you have complex or multiple `ifelse` statements accruing
 
-## 7.3. Variation
+## 7.3: Variation
 
 ### 7.3.4.
 
@@ -77,7 +77,7 @@ gridExtra::grid.arrange(x_hist, y_hist, z_hist, ncol = 1)
 * All three have peaks and troughs on even points. X and y have more similar distributions than z.
 
 I would say that x and y are likely length and width and z depth because diamonds are typically circular on the face so will have the same ratio of length and width and we see this is the case for the x and y dimensions, whereas z tends to be more shallow.
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 diamonds %>% 
   sample_n(1000) %>% 
   ggplot()+
@@ -134,7 +134,7 @@ The difference may be caused by jewlers rounding-up because people want to buy '
 `coord_cartesian` does not change data ust window view where as `xlim` and `ylim` will get rid of data outside of domain^[This is especially important when building things like boxplots whose graphs depend on all points in the graph.].
 
 
-## 7.4. Missing values
+## 7.4: Missing values
 
 ### 7.4.1.
 
@@ -160,12 +160,11 @@ mutate(diamonds, carattest=ifelse(carat<1.5 & carat>.7, NA, color)) %>%
   geom_bar(aes(x = as.character(carattest)))
 ```
 
-
 *2. What does na.rm = TRUE do in `mean()` and `sum()`?*  
   
 Filters it out of the vector of values.  
 
-## 7.5. Covariation
+## 7.5: Covariation
 
 ### 7.5.1.1.
 
@@ -212,15 +211,14 @@ cor(diamonds$price, select(diamonds, carat, depth, table, x, y, z))
 fair `cut` seem to associate with a higher `carat` thus while lower quality diamonds may be selling for more that is being driven by the `carat` of the diamond (the most important factor in `price`) and the quality simply cannot offset this.
 
 ```{r}
-ggplot(data=diamonds, aes(x=cut, y=carat))+
+ggplot(data = diamonds, aes(x = cut, y = carat))+
   geom_boxplot()+
   coord_flip()
 ```
 
-
 *3.Install the `ggstance` package, and create a horizontal boxplot. How does this compare to using `coord_flip()`?*  
 
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 ggplot(diamonds)+
   ggstance::geom_boxploth(aes(x = carat, y = cut))
 
@@ -229,7 +227,7 @@ ggplot(diamonds)+
   coord_flip()
 ```
 
-* Looks like it does the same thing as flipping `x` and `y` and using `coord_flip()`
+* Looks like it does the exact same thing as flipping `x` and `y` and using `coord_flip()`
 
 *4. One problem with boxplots is that they were developed in an era of much smaller datasets and tend to display a prohibitively large number of "outlying values". One approach to remedy this problem is the letter value plot. Install the lvplot package, and try using `geom_lv()` to display the distribution of `price` vs `cut`. What do you learn? How do you interpret the plots?*  
 
@@ -253,7 +251,7 @@ Perhaps a helpful way to understand this is to see what it looks like at differe
 
 You can see the letters when you add `fill = ..LV..` to the aesthetic.
 
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 diamonds %>% 
   ggplot()+
   lvplot::geom_lv(aes(x = cut, y = price, alpha = ..LV..), fill = "blue")+
@@ -268,7 +266,7 @@ Letters represent 'median', 'fourths', 'eights'...
 
 *5. Compare and contrast `geom_violin()` with a facetted `geom_histogram()`, or a coloured `geom_freqpoly()`. What are the pros and cons of each method?*  
 
-```{r, fig.align = "default", out.width = "33%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "33%"}
 ggplot(diamonds,aes(x = cut, y = carat))+
   geom_violin()
 
@@ -284,7 +282,7 @@ I like how `geom_freqpoly` has points directly overlaying but it can also be tou
 
 *6. If you have a small dataset, it's sometimes useful to use `geom_jitter()` to see the relationship between a continuous and categorical variable. The ggbeeswarm package provides a number of methods similar to `geom_jitter()`. List them and briefly describe what each one does.*  
 
-```{r, fig.align = "default", out.width = "25%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "25%"}
 ggplot(mpg, aes(x = displ, y = cty, color = drv))+
   geom_point()    
 
@@ -357,7 +355,7 @@ Another way to improve it may be to group the destinations into regions. This al
 
 If you're comparing the proportion of cut in color and want to be looking at how the specific cut proportion is changing, it may easier to view this while looking left to right vs. down to up. Compare the two plots below.
 
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 cut_in_color_graph
 
 cut_in_color_graph+
@@ -365,10 +363,10 @@ cut_in_color_graph+
 ```
 
 
-### 7.5.3
+### 7.5.3.
 
 Two-d histograms
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 smaller <- diamonds %>% 
   filter(carat < 3)
 
@@ -386,7 +384,7 @@ ggplot(data = smaller) +
 
 Binned boxplots, violins, and lvs
 
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 #split by width
 ggplot(smaller, aes(x = carat, y = price))+
   geom_boxplot(aes(group = cut_width(carat, 0.1)))
@@ -397,7 +395,7 @@ ggplot(smaller, aes(x = carat, y = price))+
 ```
 
 These methods don't seem to work quite as well with violin plots or letter value plots:
-```{r, fig.align = "default", out.width = "25%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "25%"}
 ##violin
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_width(carat, 0.1)))
@@ -415,7 +413,7 @@ ggplot(smaller, aes(x = carat, y = price))+
 
 They look a little bit improved if you allow for fewer values per bin compared to the examples with `geom_boxplot()`
 
-```{r, fig.align = "default", out.width = "50%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
 ggplot(smaller, aes(x = carat, y = price))+
   geom_violin(aes(group = cut_number(carat, 10)))
 
@@ -466,7 +464,7 @@ Small diamonds have a left-skewed `price` distribution, large diamonds have a ri
   
 *4. Combine two of the techniques you've learned to visualise the combined distribution of cut, carat, and price.*  
 
-```{r, fig.align = "default", out.width = "33%"}
+```{r, fig.align = "default", fig.show='hold', out.width = "33%"}
 ggplot(diamonds, aes(x = carat, y = price))+
   geom_jitter(aes(colour = cut), alpha = 0.2)+
   geom_smooth(aes(colour = cut))

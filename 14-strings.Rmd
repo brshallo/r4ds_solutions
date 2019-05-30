@@ -1,6 +1,5 @@
-*Make sure the following packages are installed:*  
 
-```{r setup14, include=FALSE}
+```{r setup14, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
@@ -12,6 +11,17 @@ library(stringi)
 
 # Ch. 14: Strings
 
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 14.2.5. #3, 6
+* 14.3.2.1. #2
+* 14.3.3.1 #1, #2
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 * `writeLines`: see raw contents of a string (prints each string in a vector on a new line)
 * `str_length`: number of characters in a string
 * `str_c`: combine two or more strings
@@ -402,7 +412,7 @@ str_view(x, 'C{2,3}?')
     str_view(stringr::words, "^[^aeoiouy]{3}", match = TRUE)
     ```
     
-    Include `y` because when it shows up otherwise, is in vowel form.
+    * Include `y` because when it shows up otherwise, is in vowel form.
     
     2. have three or more vowels in a row
     
@@ -425,7 +435,7 @@ str_view(x, 'C{2,3}?')
 
 1.  *Describe, in words, what these expressions will match:*
 
-    *I change questions 1 and 3 to what I think they were meant to be written as `(.)\\1\\1` and `(.)\\1` respectively.
+    * I change questions 1 and 3 to what I think they were meant to be written as `(.)\\1\\1` and `(.)\\1` respectively.
 
     1. `(.)\\1\\1` : repeat the char in the first group, and then repeat that char again
     1. `"(.)(.)\\2\\1"` : 1st char, 2nd char followed by 2nd char, first char
@@ -465,7 +475,26 @@ str_view(x, 'C{2,3}?')
 
 ## 14.4 Tools
 
-Switch point with Stephen. Will take 30 minutes to go through the main points from exercises / solutions up to here.
+```{r, eval = FALSE}
+noun <- "(a|the) ([^ \\.]+)"
+
+has_noun <- sentences %>%
+  str_subset(noun) %>%
+  head(10) 
+
+has_noun %>% 
+  str_extract_all(noun, simplify = TRUE)
+
+#creates split into seperate pieces
+has_noun %>% 
+  str_match_all(noun)
+
+#Can make dataframe with, but need to name all
+tibble(has_noun = has_noun) %>% 
+  extract(has_noun, into = c("article", "noun"), regex = noun)
+```
+
+* When using `boundary()` with `str_split` can set to  "character", "line", "sentence", and "word" and gives alternative to splitting by pattern.
 
 ### 14.4.2
 
@@ -480,13 +509,11 @@ Switch point with Stephen. Will take 30 minutes to go through the main points fr
     2.  *Find all words that start with a vowel and end with a consonant.*
     ```{r}
     str_subset(words, "^[aeiou].*[^aeiouy]$")
-    
     ```
     
     Counted `y` as a vowel if ending with, but not to start. This does not work perfect. For example words like `ygritte` would still be included even though `y` is activng as a vowel there whereas words like `boy` would be excluded even though acting as a consonant there. From here on out I am going to always exclude `y`.
     
-    3.  *Are there any words that contain at least one of each different*
-        *vowel?*
+    3.  *Are there any words that contain at least one of each different vowel?*
     ```{r}
     vowels <- c("a","e","i","o","u")
     words[str_detect(words, "a") &
@@ -494,22 +521,9 @@ Switch point with Stephen. Will take 30 minutes to go through the main points fr
             str_detect(words, "i") &
             str_detect(words, "o") & 
             str_detect(words, "u")]
-            
     ```
     
-    No. More elgant way of doing this using iteration methods we'll learn later is below.
-    ```{r}
-    vowels <- c("a","e","i","o","u")
-    
-    tibble(vowels = vowels, words = list(words)) %>% 
-      mutate(detect_vowels = purrr::map2(words, vowels, str_detect)) %>% 
-      spread(key = vowels, value = detect_vowels) %>% 
-      unnest() %>% 
-      mutate(unique_vowels = rowSums(.[2:6])) %>% 
-      arrange(desc(unique_vowels))
-    #seems that nothing gets over 4
-    ```
-
+    No. 
 
 1.  *What word has the highest number of vowels? What word has the highest*
     *proportion of vowels? (Hint: what is the denominator?)*
@@ -532,13 +546,23 @@ Switch point with Stephen. Will take 30 minutes to go through the main points fr
       arrange(desc(prop_vowel))
     ```
 
-
 ### 14.4.3.1
 
 1.  *In the previous example, you might have noticed that the regular*
     *expression matched "flickered", which is not a colour. Modify the *
     *regex to fix the problem.*
-
+    
+    Add space in front of colors:
+    ```{r}
+    colours <- c("red", "orange", "yellow", "green", "blue", "purple") %>% 
+      paste0(" ", .)
+    
+    colour_match <- str_c(colours, collapse = "|")
+    
+    more <- sentences[str_count(sentences, colour_match) > 1]
+    str_view_all(more, colour_match)
+    ```
+    
 1.  *From the Harvard sentences data, extract:*
 
     1. *The first word from each sentence.*
@@ -568,75 +592,61 @@ Switch point with Stephen. Will take 30 minutes to go through the main points fr
 
 ### 14.4.4.1
 
-```{r, eval = FALSE}
-noun <- "(a|the) ([^ \\.]+)"
-
-has_noun <- sentences %>%
-  str_subset(noun) %>%
-  head(10) 
-
-has_noun %>% 
-  str_extract_all(noun, simplify = TRUE)
-
-#creates split into seperate pieces
-has_noun %>% 
-  str_match_all(noun)
-
-#Can make dataframe with, but need to name all
-tibble(has_noun = has_noun) %>% 
-  extract(has_noun, into = c("article", "noun"), regex = noun)
-```
-
-
 1. *Find all words that come after a "number" like "one", "two", "three" etc.*
    *Pull out both the number and the word.*
-    ```{r, eval = FALSE}
+    ```{r}
     #Create regex expression
     nums <- c("one", "two", "three", "four", "five", "six", "seven", "eight", "nine")
-    nums <- str_c("\\b", nums)
-    nums_c <- str_c(nums, collapse = "|")
-    re <- str_c("(",nums_c,")", " ", "([^ \\.]+)", sep = "")
-    re
-
-    sentences_with_nums <- sentences %>% 
-      str_subset(regex(re, ignore_case = TRUE))
     
-    #SAME THING, but in a DF
-    tibble(sentences_var = sentences_with_nums) %>% 
-      extract(sentences_var, into = c("num", "following"), regex = re, remove = FALSE)
+    nums_c <- str_c(nums, collapse = "|")
+    
+    # see stringr cheatsheet: "(?<![:alpha:])" means not preceded by
+    re <- str_c("(", "(?<![:alpha:])", "(", nums_c, "))", " ", "([^ \\.]+)", 
+                sep = "")
+    
+    sentences %>% 
+      str_subset(regex(re, ignore_case = TRUE)) %>% 
+      str_extract_all(regex(re, ignore_case = TRUE)) %>% 
+      unlist() %>% 
+      tibble::enframe(name = NULL) %>% 
+      separate(col = "value", 
+               into = c("num", "following"),
+               remove = FALSE)
     ```
+    
+    * I'd initially appended `"\\b"` in front of each number to prevent things like "someone" being captured -- however this didn't work with cases where a sentence started with a number -- hence switched to using the *not preceded by* method in the [stringr cheatsheet](https://www.rstudio.com/resources/cheatsheets/).
 
 1. *Find all contractions. Separate out the pieces before and after the *
    *apostrophe.*
 
-    ```{r, eval = FALSE}
-    contr <- "([^ \\.]+)'([^ \\.]*)"  #note the () facilitate the split with functions
+    ```{r}
+    #note the () facilitate the split with functions
+    contr <- "([^ \\.]+)'([^ \\.]*)"
     sentences %>% 
-      str_subset(contr) %>% #note the improvement this word definition is to the above [^ ]+ 
+      #note the improvement this word definition is to the above [^ ]+ 
+      str_subset(contr) %>% 
       str_match_all(contr)
     ```
 
 ### 14.4.5.1
 
-1.   *Replace all forward slashes in a string with backslashes.*
+1.  *Replace all forward slashes in a string with backslashes.*
 
     ```{r}
     x <- c("test/dklsk/")
     str_replace_all(x, "/", "\\\\") %>% 
       writeLines()
     ```
-
-
-1.   *Implement a simple version of `str_to_lower()` using `replace_all()`.*
+    
+1.  *Implement a simple version of `str_to_lower()` using `replace_all()`.*
 
     ```{r}
     x <- c("BIdklsKOS")
     str_replace_all(x, "([A-Z])", tolower)
     ```
 
-
-1.   *Switch the first and last letters in `words`. Which of those strings*
-     *are still words?*
+1.  *Switch the first and last letters in `words`. Which of those strings*
+    *are still words?*
 
     ```{r, eval = FALSE}
     str_replace(words, "(^.)(.*)(.$)", "\\3\\2\\1")
@@ -644,10 +654,7 @@ tibble(has_noun = has_noun) %>%
     
     Any words that start and end with the same letter, e.g. 'treat', as well as a few other examples like, war --> raw .
 
-
 ### 14.4.6.1
-
-When using `boundary()` with `str_split` can set to  "character", "line", "sentence", and "word" and gives alternative to splitting by pattern.
 
 1.  *Split up a string like `"apples, pears, and bananas"` into individual*
     *components.*
@@ -660,7 +667,7 @@ When using `boundary()` with `str_split` can set to  "character", "line", "sente
     
 1.  *Why is it better to split up by `boundary("word")` than `" "`?*
 
-    Handles commas and punctuation, I though still would prefer to use patterns where possible over `boundary` function.  regex is more generally applicabale as well outside of R.
+    Handles commas and punctuation^[I still sometimes prefer to use patterns where possible over `boundary` function. Regex is more generally applicabale as well outside of R.].
     ```{r}
     str_split(x, boundary("word"))
     ```
@@ -671,7 +678,8 @@ When using `boundary()` with `str_split` can set to  "character", "line", "sente
     ```{r}
     str_split(x,"")
     ```
-
+    
+    * splits each character into an individual element (and creates elements for spaces between strings)
 
 ## 14.5: Other types of patterns
 
@@ -721,9 +729,15 @@ Alternatives to `regex()`:
 
 Other functions:
 
-* `apropos` searches all objects available from the global environment--useful if you can't remember fun name. E.g. below checks those that start with `replace` and then those that start with `str`, but not `stri`
+* `apropos` searches all objects available from the global environment--useful if you can't remember fun name. 
+
+Check those that start with `replace`:
 ```{r}
 apropos("^(replace)")
+```
+
+Check those that start with `str`, but not `stri`
+```{r}
 apropos("^(str)[^i]")
 ```
 
@@ -736,4 +750,21 @@ apropos("^(str)[^i]")
 
 1.  *How do you control the language that `stri_sort()` uses for sorting?*
     
-    `decreasing` argument
+    The `decreasing` argument
+    
+## Appendix
+
+### 14.4.2.3
+
+One way of doing this using iteration methods:
+```{r}
+vowels <- c("a","e","i","o","u")
+
+tibble(vowels = vowels, words = list(words)) %>% 
+  mutate(detect_vowels = purrr::map2(words, vowels, str_detect)) %>% 
+  spread(key = vowels, value = detect_vowels) %>% 
+  unnest() %>% 
+  mutate(unique_vowels = rowSums(.[2:6])) %>% 
+  arrange(desc(unique_vowels))
+#seems that nothing gets over 4
+```

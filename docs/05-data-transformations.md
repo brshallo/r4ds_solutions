@@ -34,13 +34,31 @@
 * `<`, `<=`, `>`, `>=`, `!=`: Logical operators
 * `min_rank`, `row_number`, `dense_rank`, `percent_rank`, `cume_dist`, `ntile`: common ranking functions
 * Location: `mean`; `median`
-* Spread: `sd`: standard deviation; `IQR()`: Interquartile range; `mad()`: median absolute deviaiton
+* Measures of spread: `sd`: standard deviation; `IQR()`: Interquartile range; `mad()`: median absolute deviaiton
 
 ```r
 x <- c(1, 2, 3, 4, 6, 7, 8, 8, 10, 100)
 IQR(x)
+```
+
+```
+## [1] 4.75
+```
+
+```r
 mad(x)
+```
+
+```
+## [1] 4.4478
+```
+
+```r
 sd(x)
+```
+
+```
+## [1] 30.04238
 ```
 
 * Rank: `min`; `quantile`; `max`
@@ -48,8 +66,26 @@ sd(x)
 
 ```r
 first(x)
+```
+
+```
+## [1] 1
+```
+
+```r
 nth(x, 5)
+```
+
+```
+## [1] 6
+```
+
+```r
 last(x)
+```
+
+```
+## [1] 100
 ```
 
 * measures of rank: `min`, `max`, `rank`, `quantile(x, 0.25)` is just 0.25 value (generalization of median, but allows you to specify)  
@@ -503,9 +539,9 @@ arrange(flights, distance) %>%
 ## $ time_hour      <dttm> 2013-07-27 01:00:00, 2013-01-03 21:00:00, 2013...
 ```
 
-# 5.4: Select columns
+## 5.4: Select columns
 
-# 5.4.1.
+### 5.4.1.
 
 **1. Brainstorm as many ways as possible to select `dep_time`, `dep_delay`, `arr_time`, and `arr_delay` from `flights`.**
 
@@ -1189,11 +1225,7 @@ flights %>%
             cancelled_perc = cancelled / num) %>% 
   ggplot(aes(x = day, y = cancelled_perc))+
   geom_line()
-```
 
-<img src="05-data-transformations_files/figure-html/unnamed-chunk-52-1.png" width="50%" />
-
-```r
 flights %>% 
   group_by(day) %>% 
   summarise(cancelled = sum(is.na(arr_delay)),
@@ -1204,7 +1236,7 @@ flights %>%
   geom_line()
 ```
 
-<img src="05-data-transformations_files/figure-html/unnamed-chunk-52-2.png" width="50%" />
+<img src="05-data-transformations_files/figure-html/unnamed-chunk-52-1.png" width="50%" /><img src="05-data-transformations_files/figure-html/unnamed-chunk-52-2.png" width="50%" />
 
 * Looks roughly like there is some overlap.  
 
@@ -1342,7 +1374,7 @@ To get at the question of 'best carrier', you may consider doing a grouped compa
   
 `sort` orders by `n`, you may want to use it when you want to see the highest frequency levels.
 
-## 5.7. Grouped mutates...
+## 5.7: Grouped mutates...
 
 ### 5.7.1.
 

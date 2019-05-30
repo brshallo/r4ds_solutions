@@ -34,7 +34,7 @@ nycflights13::flights %>%
 * `class`: for checking the class of the object
     + Though is not fully accurate, in that the actual object class of vectors is "base", not double, etc., so kind of lies...
 
-## 10.5 (exercises)
+## 10.5: (exercises)
 
 *1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).*  
   
@@ -42,7 +42,10 @@ Could look at printing, e.g. only prints first 15 rows and enough variables wher
 
 *2. Compare and contrast the following operations on a data.frame and equivalent tibble. What is different? Why might the default data frame behaviours cause you frustration?*  
   
-Dataframes can't effectively print list-cols. Tibbles never change type of input e.g. from strings to factors and tibbles never change names of variables, never creates row names. Also, you can do list-cols with tibbles.
+* Tibbles never change type of input e.g. from strings to factors 
+* Tibbles never change names of variables, never creates row names
+* Tibbles print in a more concise and readable format
+    * This difference is made more stark if working with list-columns
 
 *3. If you have the name of a variable stored in an object, e.g. var <- "mpg", how can you extract the reference variable from a tibble?*  
   

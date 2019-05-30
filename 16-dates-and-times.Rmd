@@ -1,7 +1,5 @@
-*Make sure the following packages are installed:*  
-
-```{r setup16, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+```{r setup16, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
 library(dplyr)
@@ -12,8 +10,19 @@ library(lubridate)
 library(hms)
 ```
 
-
 # Ch. 16: Dates and times
+
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 16.2.4. #3
+* 16.3.4. #1, 4, 5
+* 16.4.5. #4
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
 * `today` get current date
 * `now` get current date-time
@@ -400,9 +409,7 @@ flights_dt %>%
   ggplot(aes(x = hour_dep, y = month_prop)) +
   geom_line() +
   facet_wrap( ~ month_dep)
-
 ```
-
 
 ### 16.3.4.3
 

@@ -1,12 +1,18 @@
-*Make sure the following packages are installed:*  
 
 
 
 # Ch. 13: Relational data
 
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 13.4.6 , #1, 3, 4
+* 13.5.1, #2, 4</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
+
 > "The relations of three or more tables are always a property of the relations between each pairs."  
 
-* Three families of verbs in relational data: *
+*Three families of verbs in relational data:*
 
 * __Mutating joins__, which add new variables to one data frame from matching
   observations in another.
@@ -52,7 +58,6 @@ planes
 weather
 ```
 
-
 ### 13.2.1
 
 1.  *Imagine you wanted to draw (approximately) the route each plane flies from*
@@ -61,13 +66,11 @@ weather
     
     To draw a line from origin to destination, I need the lat lon points from airports` as well as the dest and origin variables from `flights`.
     
-    
 1.  *I forgot to draw the relationship between `weather` and `airports`.*
     *What is the relationship and how should it appear in the diagram?*
     
     `origin` from `weather connects to `faa` from `airports` in a many to one relationship
     
-
 1.  *`weather` only contains information for the origin (NYC) airports. If*
     *it contained weather records for all airports in the USA, what additional*
     *relation would it define with `flights`?*  
@@ -226,125 +229,16 @@ weather
 
 1.  *Draw a diagram illustrating the connections between the `Batting`,`Master`, and `Salaries` tables in the Lahman package. Draw another diagram that shows the relationship between `Master`, `Managers`, `AwardsManagers`.*  
     
-    For each dataset show just the `head(1)`
-    
-    Combine by playerid
-    
-    ```
-    ##    playerID yearID stint teamID lgID G AB R H X2B X3B HR RBI SB CS BB SO
-    ## 1 abercda01   1871     1    TRO   NA 1  4 0 0   0   0  0   0  0  0  0  0
-    ##   IBB HBP SH SF GIDP
-    ## 1  NA  NA NA NA   NA
-    ```
-    
-    ```
-    ##    playerID birthYear birthMonth birthDay birthCountry birthState
-    ## 1 aardsda01      1981         12       27          USA         CO
-    ##   birthCity deathYear deathMonth deathDay deathCountry deathState
-    ## 1    Denver        NA         NA       NA         <NA>       <NA>
-    ##   deathCity nameFirst nameLast   nameGiven weight height bats throws
-    ## 1      <NA>     David  Aardsma David Allan    215     75    R      R
-    ##        debut  finalGame  retroID   bbrefID deathDate  birthDate
-    ## 1 2004-04-06 2015-08-23 aardd001 aardsda01      <NA> 1981-12-27
-    ```
-    
-    
-    Combine by playerID, yearID
-    
-    ```
-    ##    playerID yearID stint teamID lgID G AB R H X2B X3B HR RBI SB CS BB SO
-    ## 1 abercda01   1871     1    TRO   NA 1  4 0 0   0   0  0   0  0  0  0  0
-    ##   IBB HBP SH SF GIDP
-    ## 1  NA  NA NA NA   NA
-    ```
-    
-    ```
-    ##   yearID teamID lgID  playerID salary
-    ## 1   1985    ATL   NL barkele01 870000
-    ```
-    
-    Combine by playerID
-    
-    ```
-    ##    playerID birthYear birthMonth birthDay birthCountry birthState
-    ## 1 aardsda01      1981         12       27          USA         CO
-    ##   birthCity deathYear deathMonth deathDay deathCountry deathState
-    ## 1    Denver        NA         NA       NA         <NA>       <NA>
-    ##   deathCity nameFirst nameLast   nameGiven weight height bats throws
-    ## 1      <NA>     David  Aardsma David Allan    215     75    R      R
-    ##        debut  finalGame  retroID   bbrefID deathDate  birthDate
-    ## 1 2004-04-06 2015-08-23 aardd001 aardsda01      <NA> 1981-12-27
-    ```
-    
-    ```
-    ##   yearID teamID lgID  playerID salary
-    ## 1   1985    ATL   NL barkele01 870000
-    ```
-    
-    Connect by playerID
-    
-    ```
-    ##    playerID birthYear birthMonth birthDay birthCountry birthState
-    ## 1 aardsda01      1981         12       27          USA         CO
-    ##   birthCity deathYear deathMonth deathDay deathCountry deathState
-    ## 1    Denver        NA         NA       NA         <NA>       <NA>
-    ##   deathCity nameFirst nameLast   nameGiven weight height bats throws
-    ## 1      <NA>     David  Aardsma David Allan    215     75    R      R
-    ##        debut  finalGame  retroID   bbrefID deathDate  birthDate
-    ## 1 2004-04-06 2015-08-23 aardd001 aardsda01      <NA> 1981-12-27
-    ```
-    
-    ```
-    ##    playerID yearID teamID lgID inseason  G  W  L rank plyrMgr
-    ## 1 wrighha01   1871    BS1   NA        1 31 20 10    3       Y
-    ```
-    
-    Connect by playerID 
-    
-    ```
-    ##    playerID birthYear birthMonth birthDay birthCountry birthState
-    ## 1 aardsda01      1981         12       27          USA         CO
-    ##   birthCity deathYear deathMonth deathDay deathCountry deathState
-    ## 1    Denver        NA         NA       NA         <NA>       <NA>
-    ##   deathCity nameFirst nameLast   nameGiven weight height bats throws
-    ## 1      <NA>     David  Aardsma David Allan    215     75    R      R
-    ##        debut  finalGame  retroID   bbrefID deathDate  birthDate
-    ## 1 2004-04-06 2015-08-23 aardd001 aardsda01      <NA> 1981-12-27
-    ```
-    
-    ```
-    ##    playerID                   awardID yearID lgID  tie notes
-    ## 1 larusto01 BBWAA Manager of the Year   1983   AL <NA>    NA
-    ```
+    * `Lahman::Batting` and `Lahman::Master` combine by `playerID`
+    * `Lahman::Batting` and `Lahman::Salaries` combine by `playerID`, `yearID`
+    * `Lahman::Master` and `Lahman::Salaries` combine by `playerID`
+    * `Lahman::Master` and `Lahman::Managers` combine by `playerID`
+    * `Lahman::Master` and `Lahman::AwardsManagers` combine by `playerID`
 
-    *How would you characterise the relationship between the `Batting`,*
-    *`Pitching`, and `Fielding` tables?*
+    *How would you characterise the relationship between the `Batting`, `Pitching`, and `Fielding` tables?*
 
-    All connect by playerID, yearID, stint
+   * All connect by `playerID`, `yearID`, `stint`
     
-    
-    ```
-    ##    playerID yearID stint teamID lgID G AB R H X2B X3B HR RBI SB CS BB SO
-    ## 1 abercda01   1871     1    TRO   NA 1  4 0 0   0   0  0   0  0  0  0  0
-    ##   IBB HBP SH SF GIDP
-    ## 1  NA  NA NA NA   NA
-    ```
-    
-    ```
-    ##    playerID yearID stint teamID lgID W L G GS CG SHO SV IPouts  H ER HR BB
-    ## 1 bechtge01   1871     1    PH1   NA 1 2 3  3  2   0  0     78 43 23  0 11
-    ##   SO BAOpp  ERA IBB WP HBP BK BFP GF  R SH SF GIDP
-    ## 1  1    NA 7.96  NA NA  NA  0  NA NA 42 NA NA   NA
-    ```
-    
-    ```
-    ##    playerID yearID stint teamID lgID POS G GS InnOuts PO A E DP PB WP SB
-    ## 1 abercda01   1871     1    TRO   NA  SS 1 NA      NA  1 3 2  0 NA NA NA
-    ##   CS ZR
-    ## 1 NA NA
-    ```
-  
-  
 ## 13.4 Mutating joins
 
 > The most commonly used join is the left join: you use this whenever you look up additional data from another table, because it preserves the original observations even when there isn't a match.
@@ -357,18 +251,6 @@ weather
 
     
     ```r
-    airports %>%
-      semi_join(flights, c("faa" = "dest")) %>%
-      ggplot(aes(lon, lat)) +
-      borders("state") +
-      geom_point() +
-      coord_quickmap()
-    ```
-  
-    Now adding in colour by average delay.
-  
-    
-    ```r
     flights %>% 
       semi_join(airports, c("dest" = "faa")) %>%
       group_by(dest) %>% 
@@ -378,12 +260,12 @@ weather
       borders("state") +
       geom_point(aes(colour = delay)) +
       coord_quickmap()+
-      scale_color_gradientn(colours = rainbow(3))
+      # see chapter 28 for information on scales
+      scale_color_gradient2(low = "blue", high = "red")
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-10-1.png" width="672" />
     
-
 1.  *Add the location of the origin _and_ destination (i.e. the `lat` and `lon`)*
     *to `flights`.*
     
@@ -391,7 +273,7 @@ weather
     ```r
     flights %>% 
       left_join(airports, by = c("dest" = "faa")) %>% 
-      left_join(airports, by = c("origin" = "faa"), suffix=c("_dest", "_origin")) %>%
+      left_join(airports, by = c("origin" = "faa"), suffix = c("_dest", "_origin")) %>%
       select(flight, carrier, dest, lat_dest, lon_dest, origin, lat_origin, lon_origin)
     ```
     
@@ -429,7 +311,11 @@ weather
       geom_smooth()
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+    ```
+    ## `geom_smooth()` using method = 'gam' and formula 'y ~ s(x, bs = "cs")'
+    ```
+    
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-12-1.png" width="672" />
     
     Looks as though planes that are roughly 5 to 10 years old have higher delays... Let's look at same thing using boxplots.
     
@@ -446,11 +332,11 @@ weather
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-13-1.png" width="672" />
     
     Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern -- though this may just be me seeing things... perhaps worth exploring more...
     
-    A simple way to test for a non-linear relationship would be to discretize age and then pass it through an anova
+    A simple way to test for a non-linear relationship would be to discretize age and then pass it through an anova...
     
     
     ```r
@@ -473,10 +359,9 @@ weather
     ## 53493 observations deleted due to missingness
     ```
     
-    * There are weaknesses to using anova, but according to this test arrival delay does not appear to be randomly distributed across age
+    * There are weaknesses to using anova, but the low p-value above suggests test arrival delay is not randomly distributed across age
     * The reason for such a difference may be trivial or may be confounded by a more interesting pattern... but these are deeper questions
     
-
 1.  *What weather conditions make it more likely to see a delay?*
 
     There are a lot of ways you could have approached this problem. Below, I look at the average weather value for each of the groups `FALSE`, `TRUE` and `Canceled` -- `FALSE` corresponding with non-delayed flights, `TRUE` with delayed flights and `Canceled` with flights that were canceled. If I were feeling fancy, I would have also added the standard errors on these...
@@ -513,7 +398,7 @@ weather
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-20-1.png" width="672" />
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-15-1.png" width="672" />
 
     While precipitation is the largest difference, my guess is that the standard error on this would be much greater day to day because as you can see the values are very low, so it could be that a few cases with a lot of rain may tick it up, but it may be tough to actually use this as a predictor... 
 
@@ -618,6 +503,10 @@ weather
     ```
     
     ```
+    ## Joining, by = "tailnum"
+    ```
+    
+    ```
     ## # A tibble: 229,202 x 19
     ##     year month   day dep_time sched_dep_time dep_delay arr_time
     ##    <int> <int> <int>    <int>          <int>     <dbl>    <int>
@@ -636,6 +525,8 @@ weather
     ## #   origin <chr>, dest <chr>, air_time <dbl>, distance <dbl>, hour <dbl>,
     ## #   minute <dbl>, time_hour <dttm>
     ```
+
+    * `add_count()` is another helpful function that could have been used here
 
 1.  *Combine `fueleconomy::vehicles` and `fueleconomy::common` to find only the records for the most common models.*
     
@@ -731,6 +622,10 @@ weather
       semi_join(WorstDates)
     ```
     
+    ```
+    ## Joining, by = "dates"
+    ```
+    
     Plot of hourly weather values across 48 hour time windows.
     
     ```r
@@ -743,12 +638,12 @@ weather
       labs(title = 'Hourly weather values across worst 48 hours of delays')
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
     Patterns:  
       
     * `wind_gust` and `wind_speed` are the same.
-    * See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`
+    * See high level of colinearity in spikes and changes, e.g. increase in `precip` corresponds with decrease in `visib` and perhaps uptick in `wind_spee`  
     
     Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.
     
@@ -771,7 +666,7 @@ weather
            caption = "Note that delays are based on mean(arr_delay, na.rm = TRUE)")
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
     For this to be the worst 48 hour period, the weather doesn't actually seem to be as extreme as I would have guessed.
     
@@ -799,7 +694,11 @@ weather
       labs(title = 'Hourly weather and delay values across worst 48 hours of delays')
     ```
     
-    <img src="13-relational-data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
+    ```
+    ## Joining, by = "dates"
+    ```
+    
+    <img src="13-relational-data_files/figure-html/unnamed-chunk-27-1.png" width="672" />
 
     Maybe that first uptick in precipitation corresponded with the increase in delay... but still, looks extreme like an incident caused this. I cheched the news and it looks like a plane was crash landed onto the tarmac at one of the airports on this day https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4 , I checked the incident time and it occurred at 17:45 Jul 22, looks like it overlaps with the time we see the uptick in delays.  
 
@@ -896,7 +795,7 @@ delays_windows %>%
   labs(title = 'Measures of delay across 48 hour time windows')
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-35-1.png" width="672" />
+<img src="13-relational-data_files/figure-html/unnamed-chunk-30-1.png" width="672" />
 
 Create 48 hour windows for weather data. Follow exact same steps as above.
 
@@ -937,7 +836,7 @@ weather_windows %>%
   labs(title = 'Measures of weather across 48 hour time windows')
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-37-1.png" width="672" />
+<img src="13-relational-data_files/figure-html/unnamed-chunk-32-1.png" width="672" />
 
 Connect delays and weather data
 
@@ -963,7 +862,7 @@ weather_delay_joined %>%
   labs(colour = "Weather value", title = "Mean delay and weather value in 2-day rolling window")
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+<img src="13-relational-data_files/figure-html/unnamed-chunk-34-1.png" width="672" />
 
 Plot of mean_delay against weather type, each point representing a different 'window'
 
@@ -976,7 +875,11 @@ weather_delay_joined %>%
   facet_wrap(~weather_type, scales = "free_x")
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-40-1.png" width="672" />
+```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+<img src="13-relational-data_files/figure-html/unnamed-chunk-35-1.png" width="672" />
 
 In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below... This is often ignored and we can also ignore it for now as it gets into time series and things we don't need to worry about for now... but somthing to be aware...
 
@@ -1063,7 +966,7 @@ weather_delay_joined %>%
 ## F-statistic: 25.42 on 7 and 356 DF,  p-value: < 2.2e-16
 ```
 
-For a variety of reasons, especially in cases where your observations are not independent, you may want to evaluate how the change in an attribute relates to the change in another attribute. In the cases below I plot the diffs for example:  
+There a variety of reasons^[Especially in cases where your observations are not independent] you may want to evaluate how the change in an attribute relates to the change in another attribute. In the cases below I plot the diffs for example:  
   
 *(average value on 2013-02-07 to 2013-02-08) - (average value on 2013-02-08 to 2013-02-09)*  
   
@@ -1089,7 +992,7 @@ weather_delay_joined %>%
 ## Warning: Removed 2 rows containing missing values (geom_path).
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-44-1.png" width="672" />
+<img src="13-relational-data_files/figure-html/unnamed-chunk-39-1.png" width="672" />
 
 Let's plot these diffs as a scatter plot now (no longer looking at the order in which the observations emerged)
 
@@ -1108,6 +1011,10 @@ weather_delay_joined %>%
 ```
 
 ```
+## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
+```
+
+```
 ## Warning: Removed 7 rows containing non-finite values (stat_smooth).
 ```
 
@@ -1115,7 +1022,7 @@ weather_delay_joined %>%
 ## Warning: Removed 7 rows containing missing values (geom_point).
 ```
 
-<img src="13-relational-data_files/figure-html/unnamed-chunk-45-1.png" width="672" />
+<img src="13-relational-data_files/figure-html/unnamed-chunk-40-1.png" width="672" />
 
 Let's look at the correlatioin and regression against these diffs
 
