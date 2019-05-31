@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-30">
+<meta name="date" content="2019-05-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -330,30 +330,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#function-arguments"><i class="fa fa-check"></i>19.5: Function arguments</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-70"><i class="fa fa-check"></i>19.5.5</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-70"><i class="fa fa-check"></i>19.5.5.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-7"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-71"><i class="fa fa-check"></i>19.2.1.4</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a></li>
-<li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-72"><i class="fa fa-check"></i>19.2.3.5</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#important-types-of-atomic-vector"><i class="fa fa-check"></i>20.3: Important types of atomic vector</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-73"><i class="fa fa-check"></i>20.3.5</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i>20.4: Using atomic vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-74"><i class="fa fa-check"></i>20.4.6</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i>20.5: Recursive vectors (lists)</a><ul>
-<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-75"><i class="fa fa-check"></i>20.5.4</a></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-75"><i class="fa fa-check"></i>20.5.4.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#augmented-vectors"><i class="fa fa-check"></i>20.7: Augmented vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-76"><i class="fa fa-check"></i>20.7.4</a></li>
@@ -482,17 +481,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>, <span class="dt">message =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
-<p><em>Make sure the following packages are installed:</em></p>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" title="1"><span class="kw">library</span>(ggplot2)</a></code></pre></div>
-<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.5.2</code></pre>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1"><span class="kw">library</span>(dplyr)</a></code></pre></div>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1"><span class="kw">library</span>(forcats)</a>
-<a class="sourceLine" id="cb792-2" title="2"><span class="kw">library</span>(tidyr)</a></code></pre></div>
-<pre><code>## Warning: package &#39;tidyr&#39; was built under R version 3.5.3</code></pre>
-<div class="sourceCode" id="cb794"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb794-1" title="1"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb794-2" title="2"><span class="kw">library</span>(stringr)</a></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb784-2" title="2"></a>
+<a class="sourceLine" id="cb784-3" title="3"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb784-4" title="4"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb784-5" title="5"><span class="kw">library</span>(forcats)</a>
+<a class="sourceLine" id="cb784-6" title="6"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb784-7" title="7"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb784-8" title="8"><span class="kw">library</span>(stringr)</a></code></pre></div>
 </div>
 </div>
 </div>
@@ -505,27 +501,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If you want to use <code>assign</code> with the pipe, you must be explicit about the environment</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" title="1">env &lt;-<span class="st"> </span><span class="kw">environment</span>()</a>
-<a class="sourceLine" id="cb795-2" title="2"><span class="st">&quot;x&quot;</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">assign</span>(<span class="dv">100</span>, <span class="dt">envir =</span> env)</a>
-<a class="sourceLine" id="cb795-3" title="3">x</a></code></pre></div>
-<pre><code>## [1] 100</code></pre>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1">env &lt;-<span class="st"> </span><span class="kw">environment</span>()</a>
+<a class="sourceLine" id="cb785-2" title="2"><span class="kw">assign</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">100</span>, <span class="dt">envir =</span> env)</a></code></pre></div>
 <ul>
 <li><code>try</code>, <code>tryCatch</code>, <code>suppressMessages</code>, and <code>suppressWarnings</code> from base R all also do not work well</li>
 </ul>
-<p>Other pipes = ‘T pipe’, <code>%T&gt;%</code> that returns left-hand side rather than right. Will let the plot output, but then continues. Notice that this doesn’t work for ggplot as ggplot does output something</p>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb797-1" title="1"><span class="kw">library</span>(magrittr)</a>
-<a class="sourceLine" id="cb797-2" title="2"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb797-3" title="3"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
-<a class="sourceLine" id="cb797-4" title="4"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb797-5" title="5"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
-<p><img src="18-pipes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
-<pre><code>##  num [1:50, 1:2] -0.682 -1.389 -0.429 -0.124 -1.372 ...</code></pre>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb799-2" title="2"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb799-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb799-4" title="4"><span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb799-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
-<p><img src="18-pipes_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<p>Other pipes = ‘T pipe’, <code>%T&gt;%</code> that returns left-hand side rather than right. Will let the plot output, but then continues. Notice that this doesn’t work quite the same way for ggplot as ggplot does output something</p>
+<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" title="1"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb786-2" title="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
+<a class="sourceLine" id="cb786-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb786-4" title="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<p><img src="18-pipes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre><code>##  num [1:50, 1:2] -0.933 0.742 1.117 -0.761 1.034 ...</code></pre>
+<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb788-2" title="2"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb788-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb788-4" title="4"><span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb788-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
+<p><img src="18-pipes_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre><code>##    Sepal.Length
 ## 1           5.1
 ## 2           4.9
@@ -538,16 +531,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 9           4.4
 ## 10          4.9</code></pre>
 <ul>
-<li><code>%$%</code> allows you to blow out the names of the arguments, I personally prefer using the <code>with</code> function for this instead as I find it to be a little more readable…
+<li><code>%$%</code> allows you to blow out the names of the arguments, I personally prefer using the <code>with()</code> function for this instead as I find it to be a little more readable…
 <ul>
 <li>The two examples below are equivalent</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb801"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb801-1" title="1">mtcars <span class="op">%$%</span></a>
-<a class="sourceLine" id="cb801-2" title="2"><span class="st">  </span><span class="kw">cor</span>(disp, mpg)</a></code></pre></div>
+<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1">mtcars <span class="op">%$%</span></a>
+<a class="sourceLine" id="cb790-2" title="2"><span class="st">  </span><span class="kw">cor</span>(disp, mpg)</a></code></pre></div>
 <pre><code>## [1] -0.8475514</code></pre>
-<div class="sourceCode" id="cb803"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb803-1" title="1">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb803-2" title="2"><span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</a></code></pre></div>
+<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1">mtcars <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb792-2" title="2"><span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</a></code></pre></div>
 <pre><code>## [1] -0.8475514</code></pre>
 
 </div>

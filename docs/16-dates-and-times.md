@@ -47,23 +47,9 @@ make_datetime_100 <- function(year, month, day, time) {
 
 flights_dt <- flights %>% 
   filter(!is.na(dep_time), !is.na(arr_time)) %>% 
-  mutate_at(c("dep_time", "arr_time", "sched_dep_time", "sched_arr_time"), funs(make_datetime_100(year, month, day, .))) %>% 
+  mutate_at(c("dep_time", "arr_time", "sched_dep_time", "sched_arr_time"), ~make_datetime_100(year, month, day, .)) %>% 
   select(origin, dest, ends_with("delay"), ends_with("time"))
-```
 
-```
-## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## please use list() instead
-## 
-## # Before:
-## funs(name = f(.)
-## 
-## # After: 
-## list(name = ~f(.))
-## This warning is displayed once per session.
-```
-
-```r
 flights_dt %>% 
   ggplot(aes(dep_time)) + 
   geom_freqpoly(binwidth = 86400)
@@ -87,9 +73,10 @@ flights_dt %>%
     ```
     ## [1] "2010-10-10" NA
     ```
-
+    
     * Outputs an NA and sends warning of number that failed to parse
-
+    
+    
 1.  What does the `tzone` argument to `today()` do? Why is it important?
 
     * Let's you specify timezones, may be different days depending on location
@@ -224,24 +211,6 @@ flights_dt %>%
     
     * Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day
     
-    *Weekly flight proportions by 4 hour blocks*
-    
-    ```r
-    flights_dt %>%
-      transmute(month_dep = month(dep_time, label = TRUE),
-                wk_dep = week(dep_time),
-                dep_time_4hrs = floor_date(dep_time, "4 hours"),
-                hour_dep_4hrs = hour(dep_time_4hrs) %>% factor) %>% 
-      count(wk_dep, hour_dep_4hrs) %>%
-      group_by(wk_dep) %>% 
-      mutate(wk_tot = sum(n), 
-             wk_prop = round(n / wk_tot, 3)) %>% 
-      ungroup() %>% 
-      ggplot(aes(x = wk_dep, y = wk_prop)) +
-      geom_col(aes(fill = hour_dep_4hrs))
-    ```
-    
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     * Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights
 
@@ -279,6 +248,7 @@ flights_dt %>%
     ```
     
     * They are except in the case when it goes over a day, the day is not pushed forward so it counts it as being 24 hours off
+    
 
 1.  Compare `air_time` with the duration between the departure and arrival.
     Explain your findings. (Hint: consider the location of the airport.)
@@ -342,6 +312,7 @@ flights_dt %>%
     * Is closer but still off. In chapter 5, problem 5.5.2.1 I go further into this
     * In [Appendix] section [16.3.4.3] filter to NAs
     
+
 1.  How does the average delay time change over the course of a day?
     Should you use `dep_time` or `sched_dep_time`? Why?
     
@@ -358,10 +329,11 @@ flights_dt %>%
       geom_point()
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-14-1.png" width="672" />
       
     * It goes-up throughout the day
     * Use `sched_dep_time` because it has the correct day
+    
 
 1.  On what day of the week should you leave if you want to minimise the
     chance of a delay?
@@ -389,6 +361,7 @@ flights_dt %>%
     
     * wknd has a slightly lower proportion of flights delayed (Thursday has the worst)
 
+
 1.  What makes the distribution of `diamonds$carat` and 
     `flights$sched_dep_time` similar?
     
@@ -397,17 +370,13 @@ flights_dt %>%
     ggplot(diamonds, aes(x = carat)) +
       geom_histogram(bins = 500)+
       labs(title = "Distribution of carat in diamonds dataset")
-    ```
-    
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-1.png" width="672" />
-    
-    ```r
+      
     ggplot(flights, aes(x = as.hms(sched_dep_time))) +
       geom_histogram(bins = 24*6)+
       labs(title = "Distribution of scheduled departure times in flights dataset")
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-2.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-1.png" width="50%" /><img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-2.png" width="50%" />
     
     * Both have gaps and peaks at 'attractive' values
 
@@ -428,7 +397,7 @@ flights_dt %>%
       geom_line()
     ```
     
-    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+    <img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-1.png" width="672" />
     
     * Consistent with above hypothesis
     
@@ -487,10 +456,12 @@ To find out how many periods fall in an interval, need to use integer division
 
     * the duration varies from month to month
 
+
 1.  Explain `days(overnight * 1)` to someone who has just started 
     learning R. How does it work?
     
     * this used in the example above makes it such that if `overnight` is TRUE, it will return the same time period but one day ahead, if false, does not change (as is adding 0 days)
+
 
 1.  a. Create a vector of dates giving the first day of every month in 2015.
 
@@ -544,6 +515,25 @@ To find out how many periods fall in an interval, need to use integer division
 ## Appendix
 
 ### 16.3.4.1
+
+*Weekly flight proportions by 4 hour blocks*
+
+```r
+flights_dt %>%
+  transmute(month_dep = month(dep_time, label = TRUE),
+            wk_dep = week(dep_time),
+            dep_time_4hrs = floor_date(dep_time, "4 hours"),
+            hour_dep_4hrs = hour(dep_time_4hrs) %>% factor) %>% 
+  count(wk_dep, hour_dep_4hrs) %>%
+  group_by(wk_dep) %>% 
+  mutate(wk_tot = sum(n), 
+         wk_prop = round(n / wk_tot, 3)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = wk_dep, y = wk_prop)) +
+  geom_col(aes(fill = hour_dep_4hrs))
+```
+
+<img src="16-dates-and-times_files/figure-html/unnamed-chunk-24-1.png" width="672" />
 
 *Weekly median fight time*
 
@@ -631,7 +621,7 @@ flights_dt %>%
 
 ### 16.3.4.4
 
-*Below started looking at proportions...
+Below started looking at proportions...
 
 ```r
 mutate(flights_dt,

@@ -1,7 +1,7 @@
 --- 
 title: "Yet another study guide for 'R for Data Science'"
 author: "Bryan Shalloway"
-date: "2019-05-30"
+date: "2019-05-31"
 site: bookdown::bookdown_site
 url: https\://brshallo.github.io/R4DS_Solutions/
 github-repo: https\://github.com/brshallo/R4DS_Solutions
@@ -53,7 +53,7 @@ First and foremost, this book was set-up as a resource and refresher for myself^
     * I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in "Appendix" sections
 * There are a few cautions with using this book[^cautions]
 
-[^cautions]: 
+[^cautions]: Cautions with book
     * Beyond basic formatting clean-up, I did not substantially update the solutions from my first time going through the book. Therefore, some of the solutions and syntax may be different from how I would approach a problem now (with a couple more years coding experience).
         * "Appendix" sections in particular received only cursory edits.
     * Occassionally I use slightly different (or newer), methods than are shared in the book (e.g. using `mutate_at()`, `mutate_if()`, `mutate_all()` and not just `mutate()`), this is mostly confined to "Appendix" sections.
@@ -62,6 +62,7 @@ First and foremost, this book was set-up as a resource and refresher for myself^
     * Formatting is not always consistent between chapters, e.g. the first 14 chapters italicize or bold questions, whereas later chapters do not.
         * Notes containing functions are usually highlighted solely with backticks, e.g. `foo`, though occassionally also have parentheses, e.g. `foo()` -- there is no logic to these differences.
         * More formatting differences can be seen if inspecting the specific .Rmd files for each chapter.
+
 
 ## Origin of this book
 
@@ -74,4 +75,4 @@ I first read and completed the exercises to R4DS in early 2017 on the tail-end o
 * [Garrett Grolemund](https://twitter.com/StatGarrett) and [Hadley Wickham](https://twitter.com/hadleywickham) for writing an absolutely phenomenal book!
 * The various [tidyverse](https://www.tidyverse.org/) and [RStudio](https://www.rstudio.com/) developers for producing outstanding packages, products, as well as resources for learning
 * [R for Data Science Online Learning Community](https://www.rfordatasci.com/) and [#rstats](https://twitter.com/hashtag/rstats?src=hash&lang=en) communities for creating inspiring, safe places to post ideas, ask questions, and grow your R skills
-* Stephen Kimel, and my colleagues in the "data science" study group at NetApp
+* Stephen Kimel, who has co-organized a "data science" study group with me at NetApp. Stephen also provided feedback on many of my solutions and in other cases inspired me to change my solutions to mirror his approach.

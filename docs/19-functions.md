@@ -1,6 +1,15 @@
 
 
+
 # Ch. 19: Functions
+
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 19.3.1. #1
+* 19.4.4. #2, 3
+* 19.5.5. #2 (actually make a function that fixes this)</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `function_name <- function(input1, input2) {}`
 * `if () {}`
@@ -202,7 +211,11 @@ commas(letters[1:10])
       facet_wrap(~ dist_type, scales = "free")
     ```
     
-    <img src="19-functions_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+    ```
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+    ```
+    
+    <img src="19-functions_files/figure-html/unnamed-chunk-11-1.png" width="672" />
     
     ```r
     tibble(dist_type = names(distributions_df),
@@ -214,10 +227,10 @@ commas(letters[1:10])
     ## # A tibble: 4 x 3
     ##   dist_type    skewness variance
     ##   <chr>           <dbl>    <dbl>
-    ## 1 normal_dist   -0.0206   0.990 
-    ## 2 t_7df_dist    -0.0799   1.42  
-    ## 3 uniform_dist  -0.0207   0.0833
-    ## 4 poisson_dist   0.678    1.99
+    ## 1 normal_dist   0.00447   1.01  
+    ## 2 t_7df_dist    0.0447    1.43  
+    ## 3 uniform_dist  0.00595   0.0837
+    ## 4 poisson_dist  0.706     2.00
     ```
     
     * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
@@ -262,11 +275,11 @@ commas(letters[1:10])
 
     * first checks if what is being referred to is actually a directory
     * second checks if a specific file is readable
+    
 
 1.  Read the [complete lyrics](https://en.wikipedia.org/wiki/Little_Bunny_Foo_Foo) 
     to "Little Bunny Foo Foo". There's a lot of duplication in this song. Extend the initial piping example to recreate the complete song, and use functions to reduce the duplication.
     
-    * Do later...
 
 ## 19.3: Functions are for humans and computers
 
@@ -275,9 +288,11 @@ commas(letters[1:10])
 * ctrl + shift + r creates section breaks in R scripts like below  
 
 `# test label --------------------------------------------------------------`
-    + (though these cannot be made in markdown documents)
 
-### 19.3.1
+* (though these cannot be made in markdown documents)
+
+
+### 19.3.1.
 
 1.  Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
     
@@ -299,9 +314,10 @@ commas(letters[1:10])
     * `f2`: `return_not_last`
     * `f3`: `repeat_for_length`
     
+    
 1.  Take a function that you've written recently and spend 5 minutes brainstorming a better name for it and its arguments.
     
-    * Do later, consider doing for the airpline fix time functions, or for the CaseAnalysis data
+    * done seperately
 
 1.  Compare and contrast `rnorm()` and `MASS::mvrnorm()`. How could you make them more consistent? 
     
@@ -309,13 +325,14 @@ commas(letters[1:10])
     * Similar in that both are pulling samples from gaussian distribution
     * `mvrnorm` is multivariate though, could change name to `rnorm_mv`
     
+    
 1.  Make a case for why `norm_r()`, `norm_d()` etc would be better than `rnorm()`, `dnorm()`. Make a case for the opposite.
     
     * `norm_*` would show the commonality of them being from the same distribution. One could argue the important commonality though may be more related to it being either a random sample or a density distribution, in which case the `r*` or `d*` coming first may make more sense. To me, the fact that the help pages has all of the 'normal distribution' functions on the same page suggests the former may make more sense. However, I actually like having it be set-up the way it is, because I am more likely to forget the name of the distribution type I want over the fact that I want a random sample, so it's easier to type `r` and then do ctrl + space and have autocomplete help me find the specific distribution I want, e.g. `rnorm`, `runif`, `rpois`, `rbinom`...
     
 ## 19.4: Conditional execution
 
-* Function example that uses `if` statement.  I though this was a tricky function and added some notes below...
+Function example that uses `if` statement:
 
 ```r
 has_name <- function(x) {
@@ -328,10 +345,9 @@ has_name <- function(x) {
 }
 ```
 
-* note that if all names are blank, it returns the one-unit vector value NULL, hence the need for the `if` statement here...
-* `is.null` is not vectorized in the way that `is.na` is -- an exmpale of base R not being perfectly consistent. E.g. it's job is to return `TRUE` if given a `NULL` input, if you give it a list of `NULL` inputs it will return `FALSE`, e.g. `is.null(list(NULL, NULL))`
+* note that if all names are blank, it returns the one-unit vector value `NULL`, hence the need for the `if` statement here...^[`NULL` types are not vectors but only single length elements of a different type. `is.null` is not vectorized in the way that `is.na`. E.g. it's job is to return `TRUE` if given a `NULL`. For example, a list of `NULL`s is a `list` type (not a `NULL` type) therefore the following: `is.null(list(NULL, NULL))` would be `FALSE` -- to return a list of `TRUE` values you would need to run `map(list(NULL, NULL), is.null)`.]
 
-### 19.4.4
+### 19.4.4.
 
 1.  What's the difference between `if` and `ifelse()`? Carefully read the help and construct three examples that illustrate the key differences.
     
@@ -345,7 +361,7 @@ has_name <- function(x) {
     x <- c(3, 4, 6)
     y <- c("5", "c", "9")
     
-    # Use ifelse simple transformations of values like example below
+    # Use `ifelse` simple transformations of values
     ifelse(x < 5, 0, x)
     ```
     
@@ -354,6 +370,7 @@ has_name <- function(x) {
     ```
     
     ```r
+    # Use `if` for single condition tests
     cutoff_make0 <- function(x, cutoff = 0){
       if(is.numeric(x)){
         ifelse(x < cutoff, 0, x)
@@ -398,7 +415,7 @@ has_name <- function(x) {
     ```
     
     ```
-    ## good evening, it is: 2019-05-28 23:20:32
+    ## good evening, it is: 2019-05-31 01:20:18
     ```
 
 1.  Implement a `fizzbuzz` function. It takes a single number as input. If the number is divisible by three, it returns "fizz". If it's divisible by five it returns "buzz". If it's divisible by three and five, it returns "fizzbuzz". Otherwise, it returns the number. Make sure you first write working code before you create the function.
@@ -562,7 +579,7 @@ has_name <- function(x) {
 * `n`: length, or number of rows.
 * `p`: number of columns.
 
-### 19.5.5
+### 19.5.5.
 
 1.  What does `commas(letters, collapse = "-")` do? Why?
 
@@ -587,7 +604,6 @@ has_name <- function(x) {
     ```
     
     * The above fails because are essentially specifying two different values for the `collapse` argument
-    
     * Takes in vector of mulitple strings and outputs one-unit character string with items concatenated together and seperated by columns
     * Is able to do this via use of `...` that turns this into a wrapper on `stringr::str_c` with the `collapse` value specified
 
@@ -712,27 +728,28 @@ mtcars %>%
 
 *Function for Standard Error:* 
 
-    
-    ```r
-    x <- c(5, -2, 8, 6, 9)
-    sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))
-    ```
-    
-    ```
-    ## [1] 1.933908
-    ```
-    
-    ```r
-    sample_se <- function(x) {
-      sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)) - 1)
-    }    #sqrt(var(x)/sum(!is.na(x)))
-    
-    sample_se(x)
-    ```
-    
-    ```
-    ## [1] 2.162175
-    ```
+
+```r
+x <- c(5, -2, 8, 6, 9)
+sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)))
+```
+
+```
+## [1] 1.933908
+```
+
+```r
+sample_se <- function(x) {
+  sd(x, na.rm = TRUE) / sqrt(sum(!is.na(x)) - 1)
+}    
+#sqrt(var(x)/sum(!is.na(x)))
+
+sample_se(x)
+```
+
+```
+## [1] 2.162175
+```
 
 *Function for kurtosis:*
 
@@ -751,17 +768,17 @@ norm_exp <- rnorm(10000)
 
 set.seed(1235)
 cauchy_exp <- rcauchy(10000)
-
-hist(norm_exp)
 ```
 
-<img src="19-functions_files/figure-html/unnamed-chunk-31-1.png" width="672" />
 
 ```r
+hist(norm_exp)
 hist(cauchy_exp)
 ```
 
-<img src="19-functions_files/figure-html/unnamed-chunk-31-2.png" width="672" />
+<img src="19-functions_files/figure-html/unnamed-chunk-34-1.png" width="50%" /><img src="19-functions_files/figure-html/unnamed-chunk-34-2.png" width="50%" />
+
+kurtosis
 
 ```r
 kurtosis_type3(norm_exp)
@@ -779,273 +796,34 @@ kurtosis_type3(cauchy_exp)
 ## [1] 1197.052
 ```
 
-### Changing values with indexes
-
-*In this section I use the word 'indexes' to refer to any base R method for specifying position ^[I am using the word loosely to mean both either the situation when you specify postions by a series of `TRUE` / `FALSE` values or a series of numeric indexes E.g. x[c(TRUE, TRUE, FALSE, FALSE, TRUE)] or x[c(1, 2, 5)] , 'index' obviously sounds more like the later, but I mean it generally to cover just 'base R method of specifying positoin'.].
-
-My solution to building the new function in 19.2.1.2 shows another way of replacing values over re-writing a new vector, namely by specifying indexes and then forcing those to be a new value.  
-
-For example, say we have a vector `c(1:20)` and we want to make all even values equal to 0.  below is how you could do that by simply re-writing this to a new vector
-
-```r
-x <- c(1:20)
-
-x_0_even <- ifelse((x %% 2) == 0, 0, x)
-
-x_0_even
-```
-
-```
-##  [1]  1  0  3  0  5  0  7  0  9  0 11  0 13  0 15  0 17  0 19  0
-```
-
-Alternatively, you could do this by simply overwriting the values in a specified index with a value (like I did in question 19.2.1.2)
-
-```r
-x <- c(1:20)
-
-x[(x %% 2) == 0] <- 0
-
-x
-```
-
-```
-##  [1]  1  0  3  0  5  0  7  0  9  0 11  0 13  0 15  0 17  0 19  0
-```
-
-Both the indexing and the ifelse method give the same output. I have a slight preference for the `ifelse` method as I think it is a little easier to read. Also, it doesn't force you to overwrite your data -- to save against this second problem I will often save a copy before applying the indexed approach (though if it's in a function don't need to worry about this as changes will default to occur within function not global environment). e.g.
-
-
-```r
-x <- c(1:20)
-x_0_even <- x
-
-x_0_even[(x %% 2) == 0] <- 0
-
-x_0_even
-```
-
-```
-##  [1]  1  0  3  0  5  0  7  0  9  0 11  0 13  0 15  0 17  0 19  0
-```
-
-If you're curious about speed of each, you can see the index method tends to be faster on this dataset.  
-
-*Build functions (necessary for measuring speed): *
-
-```r
-method_ifelse <- function(vector = c(1:20)){
-  x <- vector
-  
-  x_0_even <- ifelse((x %% 2) == 0, 0, x)
-  
-  x_0_even
-}
-
-method_index <- function(vector = c(1:20)){
-  x <- vector
-  x[(x %% 2) == 0] <- 0
-  
-  x
-}
-```
-
-*Measure time it takes to run: *
-
-```r
-microbenchmark::microbenchmark(ifelse = method_ifelse(1:1000),
-                               index = method_index(1:1000),
-                               times = 500)
-```
-
-```
-## Unit: microseconds
-##    expr  min   lq    mean median     uq    max neval cld
-##  ifelse 52.2 57.6 98.0376   62.6 107.35 3934.8   500   b
-##   index 20.8 23.3 36.0700   25.0  34.95 3035.8   500  a
-```
-
-The index methods tends to be faster.
-
-#### Applying indexing to dfs
-
-I have a high preference for using tidyverse style approaches when applying transformations to dataframes, though there are instances when it's easier to use indexing methods. A common example of this is say we want to replace all of the `NA` values across multiple columns in a dataframe.
-
-
-```r
-df <- tibble(x = c(NA, 3, 4),
-       y = c(4, NA, NA))
-```
-
-The code below uses an indexing method to replace all `NA` values in the df with 0
-
-```r
-df_cleanNA <- df
-df_cleanNA[is.na(df)] <- 0
-
-df_cleanNA
-```
-
-```
-## # A tibble: 3 x 2
-##       x     y
-##   <dbl> <dbl>
-## 1     0     4
-## 2     3     0
-## 3     4     0
-```
-
-Below is the dplyr approach (requires knowledge of `mutate_all` and `funs`)
-
-```r
-mutate_all(df, funs(ifelse(is.na(.), 0, .)))
-```
-
-```
-## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## please use list() instead
-## 
-## # Before:
-## funs(name = f(.)
-## 
-## # After: 
-## list(name = ~f(.))
-## This warning is displayed once per session.
-```
-
-```
-## # A tibble: 3 x 2
-##       x     y
-##   <dbl> <dbl>
-## 1     0     4
-## 2     3     0
-## 3     4     0
-```
-
-With a purrr function you could have done:
-
-```r
-purrr::map_df(df, ~ifelse(is.na(.x), 0, .x))
-```
-
-```
-## # A tibble: 3 x 2
-##       x     y
-##   <dbl> <dbl>
-## 1     0     4
-## 2     3     0
-## 3     4     0
-```
-
-If you're curious of speed of each, below is microbenchmark test
-
-
-```r
-df_na0_index <- function(df){
-  df[is.na(df)] <- 0
-  df
-}
-
-df_na0_dplyr <- function(df){
-  mutate_all(df, funs(ifelse(is.na(.), 0, .)))
-}
-
-df_na0_purrr <- function(df){
-  purrr::map_df(df, ~ifelse(is.na(.x), 0, .x))
-}
-```
-
-*Measure time it takes to run: *  
-
-First on tiny dataset:
-
-```r
-microbenchmark::microbenchmark(index = df_na0_index(flights),
-                               dplyr = df_na0_index(flights),
-                               purrr = df_na0_purrr(flights),
-                               times = 10)
-```
-
-```
-## Unit: milliseconds
-##   expr      min        lq      mean    median        uq       max neval
-##  index  89.1601  121.0648  168.2646  185.2267  208.6874  213.5574    10
-##  dplyr  75.2822   80.1137  159.1202  197.8696  209.2413  230.4108    10
-##  purrr 975.9623 1018.3998 1142.0509 1107.0543 1190.6203 1597.3577    10
-##  cld
-##   a 
-##   a 
-##    b
-```
-
-
-Then on larger dataset:
-
-```r
-microbenchmark::microbenchmark(index = df_na0_index(flights),
-                               dplyr = df_na0_index(flights),
-                               purrr = df_na0_purrr(flights),
-                               times = 10)
-```
-
-```
-## Unit: milliseconds
-##   expr      min        lq      mean     median        uq       max neval
-##  index  65.0266   76.9131  114.4757   85.71250  185.5297  208.0703    10
-##  dplyr  56.6531   75.6265  111.6817   82.19685  187.9728  201.3058    10
-##  purrr 993.0742 1064.4889 1127.3745 1110.42285 1202.7541 1286.3952    10
-##  cld
-##   a 
-##   a 
-##    b
-```
-
-You should see that the index and dplyr method are pretty consistent on time, whereas the purrr method will be slower. For this example and some problems like this then indexing may be the best option (generally though I lean more towards using dplyr where possible).  
-
-I also wonder if there may be a better alternative to `ifelse` in this situation.
-
-### Better than `ifelse()`?
-
-I end-up using `ifelse` a lot for basic transformations, I'm curious if there is a more efficient alternative for use with dplyr style... 
-
-* I learned about dplyr's functions `dplyr::recode` which is similar to `forcats::fct_recode` and can be used for replacing multiple character values. 
-* `dplyr::case_when` can be used for more complex criteria
-* `dplyr::if_else` is similar to `base::ifelse` but more strict on types
-
-### Dplyr and functions
-
-As was mentioned, dplyr uses non-standard evaluation. This means that when referring to column names form within a function, dplyr will require some slightly different syntax... I typically find ways around this by deploying tricks with the `*_` verbs or taking advantage of the `vars` functions and `*_at` or by messing with the names, though am interested to hear other methods...
-
-Say you want to write a function that takes in a dataframe and a list of column names and you want to return a sum of these into a new column with the name corresponding with the name of the spliced together columns. What would be the most elegant way of doing this with tidyverse style?
-
 ### 19.2.3.5
 
-    
-    ```r
-    position_both_na <- function(x, y) {
-      if (length(x) == length(y)) {
-      (c(1:length(x)))[(is.na(x) & is.na(y))]
-      } else
-      stop("Vectors are not equal length")
-    }
-    
-    x <- c(4, NA, 7, NA, 3)
-    y <- c(NA, NA, 5, NA, 0)
-    z <- c(NA, 4)
-    both_na(x, y)
-    ```
-    
-    ```
-    ## [1] 2
-    ```
-    
-    ```r
-    both_na(x, z)
-    ```
-    
-    ```
-    ## Error in both_na(x, z): Vectors are not equal length
-    ```
+
+```r
+position_both_na <- function(x, y) {
+  if (length(x) == length(y)) {
+  (c(1:length(x)))[(is.na(x) & is.na(y))]
+  } else
+  stop("Vectors are not equal length")
+}
+
+x <- c(4, NA, 7, NA, 3)
+y <- c(NA, NA, 5, NA, 0)
+z <- c(NA, 4)
+both_na(x, y)
+```
+
+```
+## [1] 2
+```
+
+```r
+both_na(x, z)
+```
+
+```
+## Error in both_na(x, z): Vectors are not equal length
+```
 
 * specifies position where both are `NA`
 * second example shows returning of 'stop' argument

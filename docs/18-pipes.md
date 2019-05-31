@@ -1,41 +1,15 @@
 
 
 ```r
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
-```
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
-*Make sure the following packages are installed:*  
-
-```r
 library(ggplot2)
-```
-
-```
-## Warning: package 'ggplot2' was built under R version 3.5.2
-```
-
-```r
 library(dplyr)
-```
-
-```
-## Warning: package 'dplyr' was built under R version 3.5.3
-```
-
-```r
 library(forcats)
 library(tidyr)
-```
-
-```
-## Warning: package 'tidyr' was built under R version 3.5.3
-```
-
-```r
 library(lubridate)
 library(stringr)
 ```
-
 
 # Ch. 18: Pipes (notes only)
 
@@ -46,31 +20,25 @@ library(stringr)
 
 ```r
 env <- environment()
-"x" %>% assign(100, envir = env)
-x
-```
-
-```
-## [1] 100
+assign("x", 100, envir = env)
 ```
 
 * `try`, `tryCatch`, `suppressMessages`, and `suppressWarnings` from base R all also do not work well
 
-Other pipes = 'T pipe', `%T>%` that returns left-hand side rather than right.  Will let the plot output, but then continues.  Notice that this doesn't work for ggplot as ggplot does output something
+Other pipes = 'T pipe', `%T>%` that returns left-hand side rather than right.  Will let the plot output, but then continues.  Notice that this doesn't work quite the same way for ggplot as ggplot does output something
 
 
 ```r
-library(magrittr)
 rnorm(100) %>%
   matrix(ncol = 2) %T>%
   plot() %>% 
   str()
 ```
 
-<img src="18-pipes_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+<img src="18-pipes_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 ```
-##  num [1:50, 1:2] -0.682 -1.389 -0.429 -0.124 -1.372 ...
+##  num [1:50, 1:2] -0.933 0.742 1.117 -0.761 1.034 ...
 ```
 
 ```r
@@ -81,7 +49,7 @@ iris %>%
   head(10)
 ```
 
-<img src="18-pipes_files/figure-html/unnamed-chunk-3-2.png" width="672" />
+<img src="18-pipes_files/figure-html/unnamed-chunk-2-2.png" width="672" />
 
 ```
 ##    Sepal.Length
@@ -97,8 +65,9 @@ iris %>%
 ## 10          4.9
 ```
 
-* `%$%` allows you to blow out the names of the arguments, I personally prefer using the `with` function for this instead as I find it to be a little more readable...
-  + The two examples below are equivalent
+* `%$%` allows you to blow out the names of the arguments, I personally prefer using the `with()` function for this instead as I find it to be a little more readable...
+    * The two examples below are equivalent
+  
 
 ```r
 mtcars %$%

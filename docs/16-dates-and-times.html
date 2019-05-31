@@ -25,7 +25,7 @@
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-30">
+<meta name="date" content="2019-05-31">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -330,30 +330,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#function-arguments"><i class="fa fa-check"></i>19.5: Function arguments</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-70"><i class="fa fa-check"></i>19.5.5</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-70"><i class="fa fa-check"></i>19.5.5.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#return-values"><i class="fa fa-check"></i>19.6: Return values</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#appendix-7"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-71"><i class="fa fa-check"></i>19.2.1.4</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#changing-values-with-indexes"><i class="fa fa-check"></i>Changing values with indexes</a></li>
-<li><a href="19-functions.html#better-than-ifelse">Better than <code>ifelse()</code>?</a></li>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#dplyr-and-functions"><i class="fa fa-check"></i>Dplyr and functions</a></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-72"><i class="fa fa-check"></i>19.2.3.5</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html"><i class="fa fa-check"></i>Ch. 20: Vectors</a><ul>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#important-types-of-atomic-vector"><i class="fa fa-check"></i>20.3: Important types of atomic vector</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-73"><i class="fa fa-check"></i>20.3.5</a></li>
+</ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#using-atomic-vectors"><i class="fa fa-check"></i>20.4: Using atomic vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-74"><i class="fa fa-check"></i>20.4.6</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i>20.5: Recursive vectors (lists)</a><ul>
-<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-75"><i class="fa fa-check"></i>20.5.4</a></li>
+<li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-75"><i class="fa fa-check"></i>20.5.4.</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#augmented-vectors"><i class="fa fa-check"></i>20.7: Augmented vectors</a><ul>
 <li class="chapter" data-level="" data-path="20-vectors.html"><a href="20-vectors.html#section-76"><i class="fa fa-check"></i>20.7.4</a></li>
@@ -547,26 +546,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb731-4" title="4"></a>
 <a class="sourceLine" id="cb731-5" title="5">flights_dt &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb731-6" title="6"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(dep_time), <span class="op">!</span><span class="kw">is.na</span>(arr_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb731-7" title="7"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;arr_time&quot;</span>, <span class="st">&quot;sched_dep_time&quot;</span>, <span class="st">&quot;sched_arr_time&quot;</span>), <span class="kw">funs</span>(<span class="kw">make_datetime_100</span>(year, month, day, .))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb731-8" title="8"><span class="st">  </span><span class="kw">select</span>(origin, dest, <span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a></code></pre></div>
-<pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
-## please use list() instead
-## 
-## # Before:
-## funs(name = f(.)
-## 
-## # After: 
-## list(name = ~f(.))
-## This warning is displayed once per session.</code></pre>
-<div class="sourceCode" id="cb733"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb733-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb733-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(dep_time)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb733-3" title="3"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">86400</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb731-7" title="7"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;dep_time&quot;</span>, <span class="st">&quot;arr_time&quot;</span>, <span class="st">&quot;sched_dep_time&quot;</span>, <span class="st">&quot;sched_arr_time&quot;</span>), <span class="op">~</span><span class="kw">make_datetime_100</span>(year, month, day, .)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb731-8" title="8"><span class="st">  </span><span class="kw">select</span>(origin, dest, <span class="kw">ends_with</span>(<span class="st">&quot;delay&quot;</span>), <span class="kw">ends_with</span>(<span class="st">&quot;time&quot;</span>))</a>
+<a class="sourceLine" id="cb731-9" title="9"></a>
+<a class="sourceLine" id="cb731-10" title="10">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb731-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(dep_time)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb731-12" title="12"><span class="st">  </span><span class="kw">geom_freqpoly</span>(<span class="dt">binwidth =</span> <span class="dv">86400</span>)</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div id="section-61" class="section level3">
 <h3>16.2.4</h3>
 <ol style="list-style-type: decimal">
 <li><p>What happens if you parse a string that contains invalid dates?</p>
-<div class="sourceCode" id="cb734"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb734-1" title="1"><span class="kw">ymd</span>(<span class="kw">c</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb732"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb732-1" title="1"><span class="kw">ymd</span>(<span class="kw">c</span>(<span class="st">&quot;2010-10-10&quot;</span>, <span class="st">&quot;bananas&quot;</span>))</a></code></pre></div>
 <pre><code>## Warning: 1 failed to parse.</code></pre>
 <pre><code>## [1] &quot;2010-10-10&quot; NA</code></pre>
 <ul>
@@ -576,25 +567,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Let’s you specify timezones, may be different days depending on location</li>
 </ul>
-<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" title="1"><span class="kw">today</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb735"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb735-1" title="1"><span class="kw">today</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;2019-05-30&quot;</code></pre>
-<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb739-1" title="1"><span class="kw">now</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb737"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb737-1" title="1"><span class="kw">now</span>(<span class="dt">tzone =</span> <span class="st">&quot;MST&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;2019-05-30 11:20:19 MST&quot;</code></pre></li>
 <li><p>Use the appropriate lubridate function to parse each of the following dates:</p>
-<div class="sourceCode" id="cb741"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb741-1" title="1">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span></a>
-<a class="sourceLine" id="cb741-2" title="2">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
-<a class="sourceLine" id="cb741-3" title="3">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
-<a class="sourceLine" id="cb741-4" title="4">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)</a>
-<a class="sourceLine" id="cb741-5" title="5">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span></a></code></pre></div>
-<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb742-1" title="1"><span class="kw">mdy</span>(d1)</a></code></pre></div>
+<div class="sourceCode" id="cb739"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb739-1" title="1">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span></a>
+<a class="sourceLine" id="cb739-2" title="2">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
+<a class="sourceLine" id="cb739-3" title="3">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
+<a class="sourceLine" id="cb739-4" title="4">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)</a>
+<a class="sourceLine" id="cb739-5" title="5">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span></a></code></pre></div>
+<div class="sourceCode" id="cb740"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb740-1" title="1"><span class="kw">mdy</span>(d1)</a></code></pre></div>
 <pre><code>## [1] &quot;2010-01-01&quot;</code></pre>
-<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" title="1"><span class="kw">ymd</span>(d2)</a></code></pre></div>
+<div class="sourceCode" id="cb742"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb742-1" title="1"><span class="kw">ymd</span>(d2)</a></code></pre></div>
 <pre><code>## [1] &quot;2015-03-07&quot;</code></pre>
-<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb746-1" title="1"><span class="kw">dmy</span>(d3)</a></code></pre></div>
+<div class="sourceCode" id="cb744"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb744-1" title="1"><span class="kw">dmy</span>(d3)</a></code></pre></div>
 <pre><code>## [1] &quot;2017-06-06&quot;</code></pre>
-<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb748-1" title="1"><span class="kw">mdy</span>(d4)</a></code></pre></div>
+<div class="sourceCode" id="cb746"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb746-1" title="1"><span class="kw">mdy</span>(d4)</a></code></pre></div>
 <pre><code>## [1] &quot;2015-08-19&quot; &quot;2015-07-01&quot;</code></pre>
-<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" title="1"><span class="kw">mdy</span>(d5)</a></code></pre></div>
+<div class="sourceCode" id="cb748"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb748-1" title="1"><span class="kw">mdy</span>(d5)</a></code></pre></div>
 <pre><code>## [1] &quot;2014-12-30&quot;</code></pre></li>
 </ol>
 </div>
@@ -602,10 +593,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="date-time-components" class="section level2">
 <h2>16.3: Date-time components</h2>
 <p>This allows you to plot the number of flights per week</p>
-<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb752-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb752-2" title="2"><span class="st">  </span><span class="kw">count</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;week&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb752-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(week, n)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb752-4" title="4"><span class="st">    </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb750"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb750-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb750-2" title="2"><span class="st">  </span><span class="kw">count</span>(<span class="dt">week =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;week&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb750-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(week, n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb750-4" title="4"><span class="st">    </span><span class="kw">geom_line</span>()</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <div id="section-62" class="section level3">
 <h3>16.3.4</h3>
@@ -613,61 +604,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>How does the distribution of flight times within a day change over the
 course of the year?</p>
 <p><em>Median flight time by day</em></p>
-<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb753-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
-<a class="sourceLine" id="cb753-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
-<a class="sourceLine" id="cb753-4" title="4">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb753-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, day_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb753-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">day_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb753-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb753-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_dep, <span class="dt">y =</span> day_median)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb753-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb753-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Median flight times by day, coloured by quarter&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Typical flight times change with daylight savings times&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb753-11" title="11"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20130310&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb753-12" title="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20131103&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb751"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb751-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb751-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb751-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
+<a class="sourceLine" id="cb751-4" title="4">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb751-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, day_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb751-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">day_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb751-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb751-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> day_dep, <span class="dt">y =</span> day_median)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb751-9" title="9"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb751-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Median flight times by day, coloured by quarter&quot;</span>, <span class="dt">subtitle =</span> <span class="st">&quot;Typical flight times change with daylight savings times&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb751-11" title="11"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20130310&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb751-12" title="12"><span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept =</span> <span class="kw">ymd</span>(<span class="st">&quot;20131103&quot;</span>), <span class="dt">linetype =</span> <span class="dv">2</span>)</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <ul>
 <li>First couple and last couple months tend to have slightly earlier start times</li>
 </ul>
 <p><em>Quantiles of flight times by month</em></p>
-<div class="sourceCode" id="cb754"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb754-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb754-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb754-3" title="3">            <span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
-<a class="sourceLine" id="cb754-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
-<a class="sourceLine" id="cb754-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb754-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(month_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb754-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb754-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> month_dep, <span class="dt">y =</span> dep_time, <span class="dt">group =</span> month_dep)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb754-9" title="9"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb752"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb752-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb752-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb752-3" title="3">            <span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb752-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
+<a class="sourceLine" id="cb752-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb752-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(month_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb752-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb752-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> month_dep, <span class="dt">y =</span> dep_time, <span class="dt">group =</span> month_dep)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb752-9" title="9"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <ul>
-<li>Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day</li>
-</ul>
-<p><em>Weekly flight proportions by 4 hour blocks</em></p>
-<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb755-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb755-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb755-3" title="3">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
-<a class="sourceLine" id="cb755-4" title="4">            <span class="dt">dep_time_4hrs =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;4 hours&quot;</span>),</a>
-<a class="sourceLine" id="cb755-5" title="5">            <span class="dt">hour_dep_4hrs =</span> <span class="kw">hour</span>(dep_time_4hrs) <span class="op">%&gt;%</span><span class="st"> </span>factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb755-6" title="6"><span class="st">  </span><span class="kw">count</span>(wk_dep, hour_dep_4hrs) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb755-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb755-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_tot =</span> <span class="kw">sum</span>(n), </a>
-<a class="sourceLine" id="cb755-9" title="9">         <span class="dt">wk_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>wk_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb755-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb755-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_prop)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb755-12" title="12"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> hour_dep_4hrs))</a></code></pre></div>
-<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<ul>
-<li>Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights</li>
+<li><p>Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day</p></li>
+<li><p>Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights</p></li>
 </ul>
 <p>See <a href="16-dates-and-times.html#section-64">16.3.4.1</a> for a few other plots I looked at.</p></li>
 <li><p>Compare <code>dep_time</code>, <code>sched_dep_time</code> and <code>dep_delay</code>. Are they consistent?
 Explain your findings.</p>
-<div class="sourceCode" id="cb756"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb756-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb756-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dep_delay_check =</span> (dep_time <span class="op">-</span><span class="st"> </span>sched_dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb756-3" title="3">         <span class="dt">same =</span> dep_delay <span class="op">==</span><span class="st"> </span>dep_delay_check,</a>
-<a class="sourceLine" id="cb756-4" title="4">         <span class="dt">difference =</span> dep_delay_check <span class="op">-</span><span class="st"> </span>dep_delay) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb756-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">abs</span>(difference) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb753"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb753-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb753-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dep_delay_check =</span> (dep_time <span class="op">-</span><span class="st"> </span>sched_dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb753-3" title="3">         <span class="dt">same =</span> dep_delay <span class="op">==</span><span class="st"> </span>dep_delay_check,</a>
+<a class="sourceLine" id="cb753-4" title="4">         <span class="dt">difference =</span> dep_delay_check <span class="op">-</span><span class="st"> </span>dep_delay) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb753-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">abs</span>(difference) <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)</a></code></pre></div>
 <pre><code>## # A tibble: 1,205 x 12
 ##    origin dest  dep_delay arr_delay dep_time            sched_dep_time     
 ##    &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;             
@@ -689,9 +664,9 @@ Explain your findings.</p>
 </ul></li>
 <li><p>Compare <code>air_time</code> with the duration between the departure and arrival.
 Explain your findings. (Hint: consider the location of the airport.)</p>
-<div class="sourceCode" id="cb758"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb758-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb758-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_check =</span> (arr_time <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb758-3" title="3"><span class="st">  </span><span class="kw">select</span>(air_time_check, air_time, dep_time, arr_time, <span class="kw">everything</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb755"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb755-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb755-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_check =</span> (arr_time <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb755-3" title="3"><span class="st">  </span><span class="kw">select</span>(air_time_check, air_time, dep_time, arr_time, <span class="kw">everything</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 328,063 x 10
 ##    air_time_check air_time dep_time            arr_time            origin
 ##             &lt;dbl&gt;    &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;              &lt;chr&gt; 
@@ -711,12 +686,12 @@ Explain your findings. (Hint: consider the location of the airport.)</p>
 <ul>
 <li>Initial check is off, so need to take into account the time-zone and difference from NYC, so join timezone document</li>
 </ul>
-<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb760-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">select</span>(nycflights13<span class="op">::</span>airports, <span class="dt">dest =</span> faa, tz), <span class="dt">by =</span> <span class="st">&quot;dest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb760-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_time_new =</span> arr_time <span class="op">-</span><span class="st"> </span><span class="kw">dhours</span>(tz <span class="op">+</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb760-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_tz =</span> (arr_time_new <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb760-5" title="5">         <span class="dt">diff_Airtime =</span> air_time_tz <span class="op">-</span><span class="st"> </span>air_time) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb760-6" title="6"><span class="st">  </span><span class="kw">select</span>( origin, dest, tz, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>), <span class="op">-</span>(<span class="kw">contains</span>(<span class="st">&quot;sched&quot;</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb757"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb757-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb757-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(<span class="kw">select</span>(nycflights13<span class="op">::</span>airports, <span class="dt">dest =</span> faa, tz), <span class="dt">by =</span> <span class="st">&quot;dest&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb757-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_time_new =</span> arr_time <span class="op">-</span><span class="st"> </span><span class="kw">dhours</span>(tz <span class="op">+</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb757-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">air_time_tz =</span> (arr_time_new <span class="op">-</span><span class="st"> </span>dep_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb757-5" title="5">         <span class="dt">diff_Airtime =</span> air_time_tz <span class="op">-</span><span class="st"> </span>air_time) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb757-6" title="6"><span class="st">  </span><span class="kw">select</span>( origin, dest, tz, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>), <span class="op">-</span>(<span class="kw">contains</span>(<span class="st">&quot;sched&quot;</span>)))</a></code></pre></div>
 <pre><code>## # A tibble: 328,063 x 9
 ##    origin dest     tz dep_time            arr_time            air_time
 ##    &lt;chr&gt;  &lt;chr&gt; &lt;dbl&gt; &lt;dttm&gt;              &lt;dttm&gt;                 &lt;dbl&gt;
@@ -738,26 +713,26 @@ Explain your findings. (Hint: consider the location of the airport.)</p>
 </ul></li>
 <li><p>How does the average delay time change over the course of a day?
 Should you use <code>dep_time</code> or <code>sched_dep_time</code>? Why?</p>
-<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb762-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sched_dep_time =</span> <span class="kw">as.hms</span>(<span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;30 mins&quot;</span>))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb762-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sched_dep_time) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb762-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay_mean =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb762-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb762-6" title="6">            <span class="dt">n_na =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(arr_delay)) <span class="op">/</span><span class="st"> </span>n,</a>
-<a class="sourceLine" id="cb762-7" title="7">            <span class="dt">delay_median =</span> <span class="kw">median</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb762-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sched_dep_time, <span class="dt">y =</span> delay_mean, <span class="dt">size =</span> n)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb762-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
-<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb759"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb759-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb759-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sched_dep_time =</span> <span class="kw">as.hms</span>(<span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;30 mins&quot;</span>))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb759-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(sched_dep_time) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb759-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay_mean =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb759-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb759-6" title="6">            <span class="dt">n_na =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(arr_delay)) <span class="op">/</span><span class="st"> </span>n,</a>
+<a class="sourceLine" id="cb759-7" title="7">            <span class="dt">delay_median =</span> <span class="kw">median</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb759-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sched_dep_time, <span class="dt">y =</span> delay_mean, <span class="dt">size =</span> n)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb759-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
 <li>It goes-up throughout the day</li>
 <li>Use <code>sched_dep_time</code> because it has the correct day</li>
 </ul></li>
 <li><p>On what day of the week should you leave if you want to minimise the
 chance of a delay?</p>
-<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb763-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb763-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(sched_dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb763-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weekday) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb763-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delay =</span> <span class="kw">sum</span>(dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb760"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb760-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb760-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weekday =</span> <span class="kw">wday</span>(sched_dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb760-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weekday) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb760-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delay =</span> <span class="kw">sum</span>(dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>())</a></code></pre></div>
 <pre><code>## # A tibble: 7 x 2
 ##   weekday prop_delay
 ##   &lt;ord&gt;        &lt;dbl&gt;
@@ -773,14 +748,14 @@ chance of a delay?</p>
 </ul></li>
 <li><p>What makes the distribution of <code>diamonds$carat</code> and
 <code>flights$sched_dep_time</code> similar?</p>
-<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb765-1" title="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> carat)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb765-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">500</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb765-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of carat in diamonds dataset&quot;</span>)</a></code></pre></div>
-<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb766"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb766-1" title="1"><span class="kw">ggplot</span>(flights, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.hms</span>(sched_dep_time))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb766-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">24</span><span class="op">*</span><span class="dv">6</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb766-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of scheduled departure times in flights dataset&quot;</span>)</a></code></pre></div>
-<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<div class="sourceCode" id="cb762"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb762-1" title="1"><span class="kw">ggplot</span>(diamonds, <span class="kw">aes</span>(<span class="dt">x =</span> carat)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb762-2" title="2"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">500</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb762-3" title="3"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of carat in diamonds dataset&quot;</span>)</a>
+<a class="sourceLine" id="cb762-4" title="4"></a>
+<a class="sourceLine" id="cb762-5" title="5"><span class="kw">ggplot</span>(flights, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.hms</span>(sched_dep_time))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb762-6" title="6"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">bins =</span> <span class="dv">24</span><span class="op">*</span><span class="dv">6</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb762-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Distribution of scheduled departure times in flights dataset&quot;</span>)</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-1.png" width="50%" /><img src="16-dates-and-times_files/figure-html/unnamed-chunk-16-2.png" width="50%" /></p>
 <ul>
 <li>Both have gaps and peaks at ‘attractive’ values</li>
 </ul></li>
@@ -788,15 +763,15 @@ chance of a delay?</p>
 20-30 and 50-60 are caused by scheduled flights that leave early.
 Hint: create a binary variable that tells you whether or not a flight
 was delayed.</p>
-<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
-<a class="sourceLine" id="cb767-2" title="2">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
-<a class="sourceLine" id="cb767-3" title="3">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
-<a class="sourceLine" id="cb767-4" title="4">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delayed =</span> <span class="kw">sum</span>(delayed) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb767-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_delayed)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb767-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
-<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb763"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb763-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb763-2" title="2">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb763-3" title="3">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb763-4" title="4">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb763-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb763-6" title="6"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">prop_delayed =</span> <span class="kw">sum</span>(delayed) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb763-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_delayed)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb763-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <ul>
 <li>Consistent with above hypothesis</li>
 </ul></li>
@@ -815,18 +790,18 @@ was delayed.</p>
 <p class="caption">Permitted arithmetic operations between different data types</p>
 </div>
 <p>Periods example, using durations to fix oddity of problem when flight arrives overnight</p>
-<div class="sourceCode" id="cb768"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb768-1" title="1">flights_dt &lt;-<span class="st"> </span>flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb768-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb768-3" title="3">    <span class="dt">overnight =</span> arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time,</a>
-<a class="sourceLine" id="cb768-4" title="4">    <span class="dt">arr_time =</span> arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb768-5" title="5">    <span class="dt">sched_arr_time =</span> sched_arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb768-6" title="6">  )</a></code></pre></div>
+<div class="sourceCode" id="cb764"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb764-1" title="1">flights_dt &lt;-<span class="st"> </span>flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb764-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb764-3" title="3">    <span class="dt">overnight =</span> arr_time <span class="op">&lt;</span><span class="st"> </span>dep_time,</a>
+<a class="sourceLine" id="cb764-4" title="4">    <span class="dt">arr_time =</span> arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb764-5" title="5">    <span class="dt">sched_arr_time =</span> sched_arr_time <span class="op">+</span><span class="st"> </span><span class="kw">days</span>(overnight <span class="op">*</span><span class="st"> </span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb764-6" title="6">  )</a></code></pre></div>
 <p>Intervals example to get precise number of days dependent on specific time</p>
-<div class="sourceCode" id="cb769"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb769-1" title="1">next_year &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb769-2" title="2">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">/</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb765"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb765-1" title="1">next_year &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">+</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb765-2" title="2">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">/</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## [1] 366</code></pre>
 <p>To find out how many periods fall in an interval, need to use integer division</p>
-<div class="sourceCode" id="cb771"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb771-1" title="1">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">%/%</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb767"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb767-1" title="1">(<span class="kw">today</span>() <span class="op">%--%</span><span class="st"> </span>next_year) <span class="op">%/%</span><span class="st"> </span><span class="kw">days</span>(<span class="dv">1</span>)</a></code></pre></div>
 <pre><code>## Note: method with signature &#39;Timespan#Timespan&#39; chosen for function &#39;%/%&#39;,
 ##  target signature &#39;Interval#Period&#39;.
 ##  &quot;Interval#ANY&quot;, &quot;ANY#Period&quot; would also be valid</code></pre>
@@ -846,26 +821,26 @@ learning R. How does it work?</p>
 <li><ol style="list-style-type: lower-alpha">
 <li>Create a vector of dates giving the first day of every month in 2015.</li>
 </ol>
-<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb774-1" title="1">x &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;2015-01-01&quot;</span>)</a>
-<a class="sourceLine" id="cb774-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb774-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb770"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb770-1" title="1">x &lt;-<span class="st"> </span><span class="kw">ymd</span>(<span class="st">&quot;2015-01-01&quot;</span>)</a>
+<a class="sourceLine" id="cb770-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb770-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##  [1] Thu Sun Sun Wed Fri Mon Wed Sat Tue Thu Sun Tue
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Create a vector of dates giving the first day of every month
 in the <em>current</em> year.</li>
 </ol>
-<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb776-1" title="1">x &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">update</span>(<span class="dt">month =</span> <span class="dv">1</span>, <span class="dt">mday =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb776-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
-<a class="sourceLine" id="cb776-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb772"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb772-1" title="1">x &lt;-<span class="st"> </span><span class="kw">today</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">update</span>(<span class="dt">month =</span> <span class="dv">1</span>, <span class="dt">mday =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb772-2" title="2">mons &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span><span class="op">:</span><span class="dv">11</span>)</a>
+<a class="sourceLine" id="cb772-3" title="3">(x <span class="op">+</span><span class="st"> </span><span class="kw">months</span>(mons)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">wday</span>(<span class="dt">label=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <pre><code>##  [1] Tue Fri Fri Mon Wed Sat Mon Thu Sun Tue Fri Sun
 ## Levels: Sun &lt; Mon &lt; Tue &lt; Wed &lt; Thu &lt; Fri &lt; Sat</code></pre></li>
 <li><p>Write a function that given your birthday (as a date), returns
 how old you are in years.</p>
-<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb778-1" title="1">birthday_age &lt;-<span class="st"> </span><span class="cf">function</span>(birthday) {</a>
-<a class="sourceLine" id="cb778-2" title="2">  (<span class="kw">ymd</span>(birthday) <span class="op">%--%</span><span class="st"> </span><span class="kw">today</span>()) <span class="op">%/%</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb778-3" title="3">}</a>
-<a class="sourceLine" id="cb778-4" title="4"><span class="kw">birthday_age</span>(<span class="st">&quot;1989-09-07&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb774"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb774-1" title="1">birthday_age &lt;-<span class="st"> </span><span class="cf">function</span>(birthday) {</a>
+<a class="sourceLine" id="cb774-2" title="2">  (<span class="kw">ymd</span>(birthday) <span class="op">%--%</span><span class="st"> </span><span class="kw">today</span>()) <span class="op">%/%</span><span class="st"> </span><span class="kw">years</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb774-3" title="3">}</a>
+<a class="sourceLine" id="cb774-4" title="4"><span class="kw">birthday_age</span>(<span class="st">&quot;1989-09-07&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] 29</code></pre></li>
 <li>Why can’t <code>(today() %--% (today() + years(1)) / months(1)</code> work?
 <ul>
@@ -878,46 +853,60 @@ how old you are in years.</p>
 <h2>Appendix</h2>
 <div id="section-64" class="section level3">
 <h3>16.3.4.1</h3>
+<p><em>Weekly flight proportions by 4 hour blocks</em></p>
+<div class="sourceCode" id="cb776"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb776-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb776-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb776-3" title="3">            <span class="dt">wk_dep =</span> <span class="kw">week</span>(dep_time),</a>
+<a class="sourceLine" id="cb776-4" title="4">            <span class="dt">dep_time_4hrs =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;4 hours&quot;</span>),</a>
+<a class="sourceLine" id="cb776-5" title="5">            <span class="dt">hour_dep_4hrs =</span> <span class="kw">hour</span>(dep_time_4hrs) <span class="op">%&gt;%</span><span class="st"> </span>factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb776-6" title="6"><span class="st">  </span><span class="kw">count</span>(wk_dep, hour_dep_4hrs) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb776-7" title="7"><span class="st">  </span><span class="kw">group_by</span>(wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb776-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb776-9" title="9">         <span class="dt">wk_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>wk_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb776-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb776-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb776-12" title="12"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">fill =</span> hour_dep_4hrs))</a></code></pre></div>
+<p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p><em>Weekly median fight time</em></p>
-<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb780-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
-<a class="sourceLine" id="cb780-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
-<a class="sourceLine" id="cb780-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;1 week&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>as_date,</a>
-<a class="sourceLine" id="cb780-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb780-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb780-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wk_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb780-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb780-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_median =</span> <span class="kw">as.hms</span>(wk_median)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb780-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_median)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb780-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) </a></code></pre></div>
+<div class="sourceCode" id="cb777"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb777-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb777-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb777-3" title="3">            <span class="dt">day_dep =</span> <span class="kw">as_date</span>(dep_time),</a>
+<a class="sourceLine" id="cb777-4" title="4">            <span class="dt">wk_dep =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;1 week&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>as_date,</a>
+<a class="sourceLine" id="cb777-5" title="5">            <span class="dt">dep_time =</span> <span class="kw">as.hms</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep, wk_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-7" title="7"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">wk_median =</span> <span class="kw">median</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wk_median =</span> <span class="kw">as.hms</span>(wk_median)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb777-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> wk_dep, <span class="dt">y =</span> wk_median)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb777-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep, <span class="dt">group =</span> <span class="dv">1</span>)) </a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p><em>Proportion of flights in each hour, by quarter</em></p>
-<div class="sourceCode" id="cb781"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb781-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb781-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
-<a class="sourceLine" id="cb781-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb781-4" title="4"><span class="st">  </span><span class="kw">count</span>(quarter_dep, hour_dep) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb781-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb781-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quarter_tot =</span> <span class="kw">sum</span>(n), </a>
-<a class="sourceLine" id="cb781-7" title="7">         <span class="dt">quarter_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>quarter_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb781-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb781-9" title="9"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> quarter_prop)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb781-10" title="10"><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep))</a></code></pre></div>
+<div class="sourceCode" id="cb778"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb778-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb778-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">quarter_dep =</span> <span class="kw">quarter</span>(dep_time) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">factor</span>(),</a>
+<a class="sourceLine" id="cb778-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb778-4" title="4"><span class="st">  </span><span class="kw">count</span>(quarter_dep, hour_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb778-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(quarter_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb778-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quarter_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb778-7" title="7">         <span class="dt">quarter_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>quarter_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb778-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb778-9" title="9"><span class="st">    </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> quarter_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb778-10" title="10"><span class="st">    </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> quarter_dep))</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <ul>
 <li>Q1 seems to be a little more extreme at the local maximas</li>
 </ul>
 <p><em>Look at proportion of flights by hour faceted by each month</em></p>
-<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb782-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb782-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb782-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb782-4" title="4"><span class="st">  </span><span class="kw">count</span>(month_dep, hour_dep) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb782-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(month_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb782-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month_tot =</span> <span class="kw">sum</span>(n), </a>
-<a class="sourceLine" id="cb782-7" title="7">         <span class="dt">month_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>month_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb782-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb782-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> month_prop)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb782-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb782-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>month_dep)</a></code></pre></div>
+<div class="sourceCode" id="cb779"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb779-1" title="1">flights_dt <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb779-2" title="2"><span class="st">  </span><span class="kw">transmute</span>(<span class="dt">month_dep =</span> <span class="kw">month</span>(dep_time, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb779-3" title="3">            <span class="dt">hour_dep =</span> <span class="kw">hour</span>(dep_time)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-4" title="4"><span class="st">  </span><span class="kw">count</span>(month_dep, hour_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb779-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(month_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month_tot =</span> <span class="kw">sum</span>(n), </a>
+<a class="sourceLine" id="cb779-7" title="7">         <span class="dt">month_prop =</span> <span class="kw">round</span>(n <span class="op">/</span><span class="st"> </span>month_tot, <span class="dv">3</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb779-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hour_dep, <span class="dt">y =</span> month_prop)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb779-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb779-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>( <span class="op">~</span><span class="st"> </span>month_dep)</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="section-65" class="section level3">
@@ -925,10 +914,10 @@ how old you are in years.</p>
 <ul>
 <li>Perhaps these are flights where landed in different location…</li>
 </ul>
-<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb783-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_delay_test =</span> (arr_time <span class="op">-</span><span class="st"> </span>sched_arr_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb783-3" title="3"><span class="st">  </span><span class="kw">select</span>( origin, dest, dep_delay, arr_delay, arr_delay_test, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb783-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(arr_delay))</a></code></pre></div>
+<div class="sourceCode" id="cb780"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb780-1" title="1">flights_dt <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb780-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">arr_delay_test =</span> (arr_time <span class="op">-</span><span class="st"> </span>sched_arr_time) <span class="op">/</span><span class="st"> </span><span class="kw">dminutes</span>(<span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb780-3" title="3"><span class="st">  </span><span class="kw">select</span>( origin, dest, dep_delay, arr_delay, arr_delay_test, <span class="kw">contains</span>(<span class="st">&quot;time&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb780-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">is.na</span>(arr_delay))</a></code></pre></div>
 <pre><code>## # A tibble: 717 x 10
 ##    origin dest  dep_delay arr_delay arr_delay_test dep_time           
 ##    &lt;chr&gt;  &lt;chr&gt;     &lt;dbl&gt;     &lt;dbl&gt;          &lt;dbl&gt; &lt;dttm&gt;             
@@ -947,45 +936,45 @@ how old you are in years.</p>
 </div>
 <div id="section-66" class="section level3">
 <h3>16.3.4.4</h3>
-<p>*Below started looking at proportions…</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
-<a class="sourceLine" id="cb785-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
-<a class="sourceLine" id="cb785-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
-<a class="sourceLine" id="cb785-4" title="4">       <span class="dt">dep_time =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
-<a class="sourceLine" id="cb785-5" title="5">       <span class="dt">sched_dep_time =</span> <span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
-<a class="sourceLine" id="cb785-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
-<a class="sourceLine" id="cb785-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
-<a class="sourceLine" id="cb785-8" title="8">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb785-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(mins_dep, mins_sched) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb785-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num_delayed =</span> <span class="kw">sum</span>(delayed),</a>
-<a class="sourceLine" id="cb785-11" title="11">            <span class="dt">num =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb785-12" title="12">            <span class="dt">prop_delayed =</span> num_delayed <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb785-13" title="13"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb785-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">num_tot =</span> <span class="kw">sum</span>(num),</a>
-<a class="sourceLine" id="cb785-15" title="15">         <span class="dt">prop_sched =</span> num <span class="op">/</span><span class="st"> </span>num_tot,</a>
-<a class="sourceLine" id="cb785-16" title="16">         <span class="dt">sched_dep_diff =</span> mins_dep <span class="op">-</span><span class="st"> </span>mins_sched) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb785-17" title="17"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb785-18" title="18"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_sched, <span class="dt">fill =</span> <span class="kw">factor</span>(mins_sched))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb785-19" title="19"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb785-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Proportion of early flights by minute scheduled v. minute departed&quot;</span>)</a></code></pre></div>
+<p>Below started looking at proportions…</p>
+<div class="sourceCode" id="cb782"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb782-1" title="1"><span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb782-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
+<a class="sourceLine" id="cb782-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
+<a class="sourceLine" id="cb782-4" title="4">       <span class="dt">dep_time =</span> <span class="kw">floor_date</span>(dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
+<a class="sourceLine" id="cb782-5" title="5">       <span class="dt">sched_dep_time =</span> <span class="kw">floor_date</span>(sched_dep_time, <span class="st">&quot;5 minutes&quot;</span>),</a>
+<a class="sourceLine" id="cb782-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb782-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb782-8" title="8">       <span class="dt">delayed =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb782-9" title="9"><span class="st">  </span><span class="kw">group_by</span>(mins_dep, mins_sched) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb782-10" title="10"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num_delayed =</span> <span class="kw">sum</span>(delayed),</a>
+<a class="sourceLine" id="cb782-11" title="11">            <span class="dt">num =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb782-12" title="12">            <span class="dt">prop_delayed =</span> num_delayed <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb782-13" title="13"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb782-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">num_tot =</span> <span class="kw">sum</span>(num),</a>
+<a class="sourceLine" id="cb782-15" title="15">         <span class="dt">prop_sched =</span> num <span class="op">/</span><span class="st"> </span>num_tot,</a>
+<a class="sourceLine" id="cb782-16" title="16">         <span class="dt">sched_dep_diff =</span> mins_dep <span class="op">-</span><span class="st"> </span>mins_sched) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb782-17" title="17"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb782-18" title="18"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_sched, <span class="dt">fill =</span> <span class="kw">factor</span>(mins_sched))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb782-19" title="19"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb782-20" title="20"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Proportion of early flights by minute scheduled v. minute departed&quot;</span>)</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" title="1">  <span class="kw">mutate</span>(flights_dt,</a>
-<a class="sourceLine" id="cb786-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
-<a class="sourceLine" id="cb786-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
-<a class="sourceLine" id="cb786-4" title="4">       <span class="co"># dep_time = floor_date(dep_time, &quot;5 minutes&quot;),</span></a>
-<a class="sourceLine" id="cb786-5" title="5">       <span class="co"># sched_dep_time = floor_date(sched_dep_time, &quot;5 minutes&quot;),</span></a>
-<a class="sourceLine" id="cb786-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
-<a class="sourceLine" id="cb786-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
-<a class="sourceLine" id="cb786-8" title="8">       <span class="dt">early_less10 =</span> dep_delay <span class="op">&gt;=</span><span class="st"> </span><span class="dv">-10</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb786-9" title="9"><span class="st">  </span><span class="kw">filter</span>(dep_delay <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb786-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb786-11" title="11"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb786-12" title="12">            <span class="dt">sum_recent10 =</span> <span class="kw">sum</span>(early_less10),</a>
-<a class="sourceLine" id="cb786-13" title="13">            <span class="dt">prop_recent10 =</span> sum_recent10 <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb786-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb786-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_recent10)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb786-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb786-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;proportion of early flights that were scheduled to leave within 10 mins of when they did&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb783"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb783-1" title="1">  <span class="kw">mutate</span>(flights_dt,</a>
+<a class="sourceLine" id="cb783-2" title="2">       <span class="dt">dep_old =</span> dep_time,</a>
+<a class="sourceLine" id="cb783-3" title="3">       <span class="dt">sched_old =</span> sched_dep_time,</a>
+<a class="sourceLine" id="cb783-4" title="4">       <span class="co"># dep_time = floor_date(dep_time, &quot;5 minutes&quot;),</span></a>
+<a class="sourceLine" id="cb783-5" title="5">       <span class="co"># sched_dep_time = floor_date(sched_dep_time, &quot;5 minutes&quot;),</span></a>
+<a class="sourceLine" id="cb783-6" title="6">       <span class="dt">mins_dep =</span> <span class="kw">minute</span>(dep_time),</a>
+<a class="sourceLine" id="cb783-7" title="7">       <span class="dt">mins_sched =</span> <span class="kw">minute</span>(sched_dep_time),</a>
+<a class="sourceLine" id="cb783-8" title="8">       <span class="dt">early_less10 =</span> dep_delay <span class="op">&gt;=</span><span class="st"> </span><span class="dv">-10</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb783-9" title="9"><span class="st">  </span><span class="kw">filter</span>(dep_delay <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb783-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(mins_dep) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb783-11" title="11"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num =</span> <span class="kw">n</span>(),</a>
+<a class="sourceLine" id="cb783-12" title="12">            <span class="dt">sum_recent10 =</span> <span class="kw">sum</span>(early_less10),</a>
+<a class="sourceLine" id="cb783-13" title="13">            <span class="dt">prop_recent10 =</span> sum_recent10 <span class="op">/</span><span class="st"> </span>num) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb783-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb783-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> mins_dep, <span class="dt">y =</span> prop_recent10)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb783-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb783-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;proportion of early flights that were scheduled to leave within 10 mins of when they did&quot;</span>)</a></code></pre></div>
 <p><img src="16-dates-and-times_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 
 <div id="disqus_thread"></div>

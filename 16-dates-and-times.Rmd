@@ -60,7 +60,7 @@ make_datetime_100 <- function(year, month, day, time) {
 
 flights_dt <- flights %>% 
   filter(!is.na(dep_time), !is.na(arr_time)) %>% 
-  mutate_at(c("dep_time", "arr_time", "sched_dep_time", "sched_arr_time"), funs(make_datetime_100(year, month, day, .))) %>% 
+  mutate_at(c("dep_time", "arr_time", "sched_dep_time", "sched_arr_time"), ~make_datetime_100(year, month, day, .)) %>% 
   select(origin, dest, ends_with("delay"), ends_with("time"))
 
 flights_dt %>% 
@@ -75,9 +75,10 @@ flights_dt %>%
     ```{r}
     ymd(c("2010-10-10", "bananas"))
     ```
-
+    
     * Outputs an NA and sends warning of number that failed to parse
-
+    
+    
 1.  What does the `tzone` argument to `today()` do? Why is it important?
 
     * Let's you specify timezones, may be different days depending on location
@@ -159,22 +160,6 @@ flights_dt %>%
     
     * Reinforces prior plot, shows that first couple and last couple months of year tend to have slightly higher proportion of flights earlier in day
     
-    *Weekly flight proportions by 4 hour blocks*
-    ```{r}
-    flights_dt %>%
-      transmute(month_dep = month(dep_time, label = TRUE),
-                wk_dep = week(dep_time),
-                dep_time_4hrs = floor_date(dep_time, "4 hours"),
-                hour_dep_4hrs = hour(dep_time_4hrs) %>% factor) %>% 
-      count(wk_dep, hour_dep_4hrs) %>%
-      group_by(wk_dep) %>% 
-      mutate(wk_tot = sum(n), 
-             wk_prop = round(n / wk_tot, 3)) %>% 
-      ungroup() %>% 
-      ggplot(aes(x = wk_dep, y = wk_prop)) +
-      geom_col(aes(fill = hour_dep_4hrs))
-    
-    ```
     
     * Last week of the year have a lower proportion of late flights, and a higher proportion of morning flights
 
@@ -192,6 +177,7 @@ flights_dt %>%
     ```
     
     * They are except in the case when it goes over a day, the day is not pushed forward so it counts it as being 24 hours off
+    
 
 1.  Compare `air_time` with the duration between the departure and arrival.
     Explain your findings. (Hint: consider the location of the airport.)
@@ -200,7 +186,6 @@ flights_dt %>%
     flights_dt %>% 
       mutate(air_time_check = (arr_time - dep_time) / dminutes(1)) %>%
       select(air_time_check, air_time, dep_time, arr_time, everything())
-    
     ```
     
     * Initial check is off, so need to take into account the time-zone and difference from NYC, so join timezone document
@@ -212,12 +197,12 @@ flights_dt %>%
       mutate(air_time_tz = (arr_time_new - dep_time) / dminutes(1),
              diff_Airtime = air_time_tz - air_time) %>% 
       select( origin, dest, tz, contains("time"), -(contains("sched")))
-    
     ```
     
     * Is closer but still off. In chapter 5, problem 5.5.2.1 I go further into this
     * In [Appendix] section [16.3.4.3] filter to NAs
     
+
 1.  How does the average delay time change over the course of a day?
     Should you use `dep_time` or `sched_dep_time`? Why?
     
@@ -236,6 +221,7 @@ flights_dt %>%
       
     * It goes-up throughout the day
     * Use `sched_dep_time` because it has the correct day
+    
 
 1.  On what day of the week should you leave if you want to minimise the
     chance of a delay?
@@ -249,10 +235,11 @@ flights_dt %>%
     
     * wknd has a slightly lower proportion of flights delayed (Thursday has the worst)
 
+
 1.  What makes the distribution of `diamonds$carat` and 
     `flights$sched_dep_time` similar?
     
-    ```{r}
+    ```{r, fig.align = "default", fig.show='hold', out.width = "50%"}
     ggplot(diamonds, aes(x = carat)) +
       geom_histogram(bins = 500)+
       labs(title = "Distribution of carat in diamonds dataset")
@@ -321,10 +308,12 @@ To find out how many periods fall in an interval, need to use integer division
 
     * the duration varies from month to month
 
+
 1.  Explain `days(overnight * 1)` to someone who has just started 
     learning R. How does it work?
     
     * this used in the example above makes it such that if `overnight` is TRUE, it will return the same time period but one day ahead, if false, does not change (as is adding 0 days)
+
 
 1.  a. Create a vector of dates giving the first day of every month in 2015.
 
@@ -363,9 +352,24 @@ To find out how many periods fall in an interval, need to use integer division
 
 ### 16.3.4.1
 
+*Weekly flight proportions by 4 hour blocks*
+```{r}
+flights_dt %>%
+  transmute(month_dep = month(dep_time, label = TRUE),
+            wk_dep = week(dep_time),
+            dep_time_4hrs = floor_date(dep_time, "4 hours"),
+            hour_dep_4hrs = hour(dep_time_4hrs) %>% factor) %>% 
+  count(wk_dep, hour_dep_4hrs) %>%
+  group_by(wk_dep) %>% 
+  mutate(wk_tot = sum(n), 
+         wk_prop = round(n / wk_tot, 3)) %>% 
+  ungroup() %>% 
+  ggplot(aes(x = wk_dep, y = wk_prop)) +
+  geom_col(aes(fill = hour_dep_4hrs))
+```
+
 *Weekly median fight time*
 ```{r}
-  
 flights_dt %>%
   transmute(quarter_dep = quarter(dep_time) %>% factor(),
             day_dep = as_date(dep_time),
@@ -423,7 +427,7 @@ flights_dt %>%
 
 ### 16.3.4.4
 
-*Below started looking at proportions...
+Below started looking at proportions...
 ```{r}
 mutate(flights_dt,
        dep_old = dep_time,

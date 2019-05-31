@@ -1,7 +1,6 @@
-*Make sure the following packages are installed:*  
 
 ```{r setup20, message = FALSE, warning = FALSE, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(tidyverse)
 library(ggplot2)
@@ -17,13 +16,26 @@ library(readr)
 
 # Ch. 20: Vectors
 
-* types of vectors
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 20.3.5, #1
 
-![Types of vectors, not including augmented types](data-structures-overview.png)
+* 20.4.6. #1, 4, 5
+```
 
-* `is.finite`, `is.infinite`, `is.na`, `is.nan`
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
-![Check special values](check-special.png)
+*Types of vectors, not including augmented types:*
+```{r}
+knitr::include_graphics("data-structures-overview.png")
+```
+
+* Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`
+
+![](check-special.png)
 
 * `typeof` retruns type of vector
 * `length` returns length of vector
@@ -40,23 +52,28 @@ library(readr)
 * `str` checks structure (excellent for use with lists)
 * `attr` and `attributes` get and set attributes
   + main types of attributes: **Names**, **Dimensions/dims**, **Class**. Class is important for object oriented programming which is covered in more detail here: http://adv-r.had.co.nz/OO-essentials.html#s3 
-* `useMethod` in function syntax indicates it is a generic function
-* `methods` lists all methods within a generic
-* `getS3method` to show specific implementation of a method
-* Above are used together to investigate details of code for functions
-
-```{r, eval = FALSE}
+* Used together to investigate details of code for functions
+    * `useMethod` in function syntax indicates it is a generic function
+    * `methods` lists all methods within a generic
+    * `getS3method` to show specific implementation of a method
+```{r}
 as.Date
 methods("as.Date")
 getS3method("as.Date", "default")
 ```
 
-* Unfortunately, tidyverse functions are not particularly easy to unpack/understand this way...
-```{r, eval = FALSE}
-select
-methods("select")
-getS3method("select", "default")
-```
+* Some tidyverse functions are not always easy to unpack with just the above[^tidy]
+
+[^tidy]: For example:
+    ```{r, eval = FALSE}
+    select
+    methods("select")
+    getS3method("select", "data.frame")
+    dplyr:::select_impl
+    ```
+    
+    * Unless you are experienced, these details may not illuminate how `select()` works
+    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)
 
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
   + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
@@ -68,36 +85,39 @@ a[[4]][[1]]
 
 * `class` get or set class attribute
 * `unclass` returns copy with 'class' attribute removed
+
 ## 20.3: Important types of atomic vector
 
 ### 20.3.5
 
 1.  Describe the difference between `is.finite(x)` and  `!is.infinite(x)`.
 
-    * both `is.infinite` and `!is.infinite` return `FALSE` for `NA` or `NaN` values, therefore these values will become `TRUE` when negated, e.g. see example below:
+    * `is.finite` and `is.infinite` return `FALSE` for `NA` or `NaN` values, therefore these values become `TRUE` when negated as in the latter case, e.g.:
 
     ```{r}
     is.finite(c(6,11,-Inf, NA, NaN))
     !is.infinite(c(6,11,-Inf, NA, NaN))
-    
     ```
 
 
 1.  Read the source code for `dplyr::near()` (Hint: to see the source code, drop the `()`). How does it work? 
 
     * safer way to test equality of floating point numbers (as has some tolerance for differences caused by rounding)
+    * it checks if the difference between the value is within `tol` which by default is `.Machine$double.eps^0.5`
 
 1.  A logical vector can take 3 possible values. How many possible values can an integer vector take? How many possible values can a double take? Use google to do some research.
 
-    * it checks if the difference between the value is within `tol` which by default is `.Machine$double.eps^0.5`
+    * Part of the point here is that it's not 'infinite' like someone may be tempted to answer -- it's constrained by memory of the machine
+    * For integer it is 2 * 2 * 10^9
+    * For double it is 2 * 2 * 10^308
 
 1.  Brainstorm at least four functions that allow you to convert a double to an integer. How do they differ? Be precise.
     
-    * `as.integer`, `as.factor` (technically is going to a factor), `round(, 0)`, `floor`, `ceiling`, these last 3 though do not change the type, which would remain an integer
+    * `as.integer`, `as.factor` (technically is going to a factor -- but this class is built on top of integers), `round`, `floor`, `ceiling`, these last 3 though do not change the type, which would remain a type double
     
-1.  What functions from the readr package allow you to turn a string into logical, integer, and double vector?
+1.  What functions from the `readr` package allow you to turn a string into logical, integer, and double vector?
     
-    * `parse_*` or `col_*`
+    * The appropriate `parse_*` or `col_*` functions
 
 ## 20.4: Using atomic vectors
 
@@ -107,16 +127,18 @@ a[[4]][[1]]
 
     * percentage that are `NA` or `NaN`
     * number that are either `Inf`, `-Inf`, `NA` or `NaN`
+    
 
 1.  Carefully read the documentation of `is.vector()`. What does it actually test for? Why does `is.atomic()` not agree with the definition of atomic vectors above?
     
     * `is.vector` tests if it is a specific type of vector with no attributes other than names. This second requirement means that any augmented vectors such as factors, dates, tibbles all would return false.
     * `is.atomic` returns TRUE to `is.atomic(NULL)` despite this representing the empty set.
+      
     
 1.  Compare and contrast `setNames()` with `purrr::set_names()`.
 
     * both assign names after fact
-    * `purrr::set_names` is stricter and returns an error in situations like the following where as `setNames` does not
+    * `purrr::set_names` is stricter and returns an error in situations like the following where as `setNames` does not:
     
     ```{r, error = TRUE}
     setNames(1:4, c("a"))
@@ -172,16 +194,17 @@ a[[4]][[1]]
     ```
 
     * in the 2nd instance, `NaN`s will get converted to `NA`
+    
 
 1.  What happens when you subset with a positive integer that's bigger than the length of the vector? What happens when you subset with a name that doesn't exist?
     
-    * you get back an `NA` though it seems to take longer in the case when subsetting by a name that doesn't exist.
+    * In both cases you get back an `NA` (though it seems to take longer in the case when subsetting by a name that doesn't exist).
     
 ## 20.5: Recursive vectors (lists)
 
 * 3 ways of subsetting `[]`, `[[]]`, `$`
 
-### 20.5.4
+### 20.5.4.
 ```{r}
 a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
 ```
@@ -197,9 +220,8 @@ a <- list(a = 1:3, b = "a string", c = pi, d = list(-1, -5))
     
 1.  What happens if you subset a tibble as if you're subsetting a list? What are the key differences between a list and a tibble?
     
-    * dataframe is just a list of columns, so behaves similarly
-    * dataframe has restriction that each column has the same number of elements whereas lists do not have this requirement
-
+    * Dataframe is just a list of vectors (columns) -- with the restriction that each column has the same number of elements whereas lists do not have this requirement
+    * Dataframe structure better connects elements by row structure, making subsetting by the qualities of these values much easier
     
 ## 20.7: Augmented vectors
 
