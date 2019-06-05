@@ -1,8 +1,6 @@
 
-*Make sure the following packages are installed:*  
-
-```{r setup23, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE) 
+```{r setup23, include=FALSE, message = FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE) 
 
 library(ggplot2)
 library(dplyr)

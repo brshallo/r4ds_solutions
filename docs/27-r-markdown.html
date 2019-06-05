@@ -222,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html"><i class="fa fa-check"></i>Ch. 10: Tibbles</a><ul>
-<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#exercises"><i class="fa fa-check"></i>10.5: (exercises)</a></li>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#exercises"><i class="fa fa-check"></i>10.5: Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html"><i class="fa fa-check"></i>Ch. 11: Data import</a><ul>
 <li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#getting-started"><i class="fa fa-check"></i>11.2: Getting started</a><ul>
@@ -504,7 +504,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>cache.extra</code> if output from function changes, will re-render – useful for if you only want to update if for example a file changes, e.g.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb1260"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1260-1" title="1">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1265-1" title="1">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</a></code></pre></div>
 <ul>
 <li>good idea to name code chunks after main object created</li>
 <li><code>knitr::clean_cache</code> clear out your caches</li>
@@ -512,17 +512,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1261-1" title="1"><span class="co"># when writing books and tutorials</span></a>
-<a class="sourceLine" id="cb1261-2" title="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1261-3" title="3">  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,</a>
-<a class="sourceLine" id="cb1261-4" title="4">  <span class="dt">collapse =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb1261-5" title="5">)</a>
-<a class="sourceLine" id="cb1261-6" title="6"></a>
-<a class="sourceLine" id="cb1261-7" title="7"><span class="co"># hiding code for report</span></a>
-<a class="sourceLine" id="cb1261-8" title="8">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1261-9" title="9">  <span class="dt">echo =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb1261-10" title="10">)</a>
-<a class="sourceLine" id="cb1261-11" title="11"><span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb1266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1266-1" title="1"><span class="co"># when writing books and tutorials</span></a>
+<a class="sourceLine" id="cb1266-2" title="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
+<a class="sourceLine" id="cb1266-3" title="3">  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,</a>
+<a class="sourceLine" id="cb1266-4" title="4">  <span class="dt">collapse =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1266-5" title="5">)</a>
+<a class="sourceLine" id="cb1266-6" title="6"></a>
+<a class="sourceLine" id="cb1266-7" title="7"><span class="co"># hiding code for report</span></a>
+<a class="sourceLine" id="cb1266-8" title="8">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
+<a class="sourceLine" id="cb1266-9" title="9">  <span class="dt">echo =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1266-10" title="10">)</a>
+<a class="sourceLine" id="cb1266-11" title="11"><span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></a></code></pre></div></li>
 <li><code>rmarkdown::render</code> programmatically knit documents
 <ul>
 <li>e.g. <code>rmarkdown::render("27-r-markdown.Rmd", output_format = "all")</code> to render all formats in YAML header</li>
@@ -533,10 +533,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>format</code> helpful when inserting numbers into texts, e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1262"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1262-1" title="1">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb1262-2" title="2"><span class="kw">comma</span>(<span class="dv">3452345</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1267-1" title="1">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb1267-2" title="2"><span class="kw">comma</span>(<span class="dv">3452345</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3,452,345&quot;</code></pre>
-<div class="sourceCode" id="cb1264"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1264-1" title="1"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1269-1" title="1"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;0.12&quot;</code></pre>
 <ul>
 <li>Use <code>params:</code> in YAML header to add in specific values or create parameterized reports, e.g.</li>
@@ -584,7 +584,7 @@ prompt you if this is necessary.)</p>
 <div id="text-formatting-with-markdown" class="section level2">
 <h2>27.3: Text formatting with Markdown</h2>
 <p><em>Print file from Hadley’s github page with commmon formatting:</em></p>
-<div class="sourceCode" id="cb1267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1267-1" title="1"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" title="1"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</a></code></pre></div>
 <p><em>Other notes</em>
 The following will actually run in the console when knitted (and not in the knitted document):</p>
 <pre><code>summary(mpg)</code></pre>
@@ -643,10 +643,10 @@ option.</p>
 <a href="https://github.com/hadley/r4ds/tree/master/rmarkdown" class="uri">https://github.com/hadley/r4ds/tree/master/rmarkdown</a>. Add a section
 that describes the largest 20 diamonds, including a table that displays
 their most important attributes.</p>
-<div class="sourceCode" id="cb1271"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1271-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1271-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1271-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1271-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1276-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1276-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1276-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1276-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</a></code></pre></div>
 <table>
 <caption><span id="tab:unnamed-chunk-6">Table 1: </span>The four C’s of the 20 biggest diamonds</caption>
 <thead>
@@ -855,10 +855,10 @@ their most important attributes.</p>
 <li><p>Modify <code>diamonds-sizes.Rmd</code> to use <code>comma()</code> to produce nicely
 formatted output. Also include the percentage of diamonds that are
 larger than 2.5 carats.</p>
-<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1272-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1272-3" title="3"><span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1272-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1277-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1277-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1277-3" title="3"><span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1277-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -875,14 +875,14 @@ larger than 2.5 carats.</p>
 both <code>b</code> and <code>c</code> depend on <code>a</code>. Have each chunk print <code>lubridate::now()</code>,
 set <code>cache = TRUE</code>, then verify your understanding of caching.</p></li>
 </ol>
-<div class="sourceCode" id="cb1273"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1273-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-28 16:46:47 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1275"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1275-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-28 16:46:47 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1277-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-28 16:46:47 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1279"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1279-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-28 16:46:47 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1278-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1280-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1282-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1284-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
 
 <p><em>Make sure the following packages are installed:</em></p>
 </div>

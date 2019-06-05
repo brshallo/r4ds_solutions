@@ -8,6 +8,7 @@ library(forcats)
 library(tidyr)
 library(lubridate)
 library(stringr)
+library(magrittr)
 ```
 
 # Ch. 18: Pipes (notes only)

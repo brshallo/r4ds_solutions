@@ -1,15 +1,5 @@
 
 
-```r
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
-
-library(ggplot2)
-library(dplyr)
-library(forcats)
-library(tidyr)
-library(lubridate)
-library(stringr)
-```
 
 # Ch. 18: Pipes (notes only)
 
@@ -38,7 +28,7 @@ rnorm(100) %>%
 <img src="18-pipes_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
 ```
-##  num [1:50, 1:2] -0.933 0.742 1.117 -0.761 1.034 ...
+##  num [1:50, 1:2] 0.1796 0.4229 1.4833 0.0556 -1.5761 ...
 ```
 
 ```r

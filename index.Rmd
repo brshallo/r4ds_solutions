@@ -35,25 +35,30 @@ output:
 
 # Purpose of book
 
-This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham's, [R for Data Science](https://r4ds.had.co.nz/). *R for Data Science* (R4DS) is my go-to recommendation for people getting started in R programming, "data science", or the "tidyverse".
+This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham's phenomenal book, [R for Data Science](https://r4ds.had.co.nz/). *R for Data Science* (R4DS) is my go-to recommendation for people getting started in R programming, "data science", or the "tidyverse".
 
-First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. To check your work as you go through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold located [here](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide for 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
+First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. To check your answers as you work through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold, [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide for 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
 
 ## Organization and features of book
 
 *Most chapters contain the following:*
 
-* A list of "Key exercises" I deemed good for discussion in a study group
-* A list of functions (and sometimes notes) from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]
+```{block2, type='rmdimportant'}
+* A list of "Key exercises" I deemed good for discussion in a study group  
+```  
+```{block2, type='rmdtip'}
+* A list of functions (and sometimes notes) from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]  
+```  
 * Solutions to exercises 
     * Exercise subsections are arranged in the same chapter --> section --> subsection as the original book
     * Chapters, sections, and subsections without exercises are usually not included
     * The beginning of sections may occassionally contain additional notes, e.g. [3.8: Position Adjustment]
 * The "Appendix" sections in chapters typically contain alternative solutions to problems or additional notes/thoughts pertaining to the chapter or a related topic
     * I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in "Appendix" sections
-* There are a few cautions with using this book[^cautions]
+* There are a few cautions with using this book[^caution]
 
-[^cautions]: Cautions with book
+[^cautions]: Cautions with book:
+    
     * Beyond basic formatting clean-up, I did not substantially update the solutions from my first time going through the book. Therefore, some of the solutions and syntax may be different from how I would approach a problem now (with a couple more years coding experience).
         * "Appendix" sections in particular received only cursory edits.
     * Occassionally I use slightly different (or newer), methods than are shared in the book (e.g. using `mutate_at()`, `mutate_if()`, `mutate_all()` and not just `mutate()`), this is mostly confined to "Appendix" sections.

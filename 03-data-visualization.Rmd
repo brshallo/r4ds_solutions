@@ -1,6 +1,5 @@
-*Make sure the following packages are installed:*  
 
-```{r setup03, include=FALSE}
+```{r setup03, include=FALSE, message=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)

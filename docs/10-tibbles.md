@@ -36,12 +36,12 @@ nycflights13::flights %>%
 ## 2     1416     5     29 2013-01-01 05:00:00
 ## # ... with 3.368e+05 more rows
 ```
-    * Also can convert with `as.data.frame` or use `options`, see [10.5. (exercises)], problem 6
-* `enframe`: let's you encode name and value, see [10.5. (exercises)], problem 5 below
+    * Also can convert with `as.data.frame` or use `options`, see [10.5: Exercises], problem 6
+* `enframe`: let's you encode name and value, see [10.5: Exercises], problem 5 below
 * `class`: for checking the class of the object
     + Though is not fully accurate, in that the actual object class of vectors is "base", not double, etc., so kind of lies...
 
-## 10.5: (exercises)
+## 10.5: Exercises
 
 *1. How can you tell if an object is a tibble? (Hint: try printing mtcars, which is a regular data frame).*  
   

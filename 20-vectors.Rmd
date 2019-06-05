@@ -20,7 +20,6 @@ library(readr)
 **Key questions:**  
   
 * 20.3.5, #1
-
 * 20.4.6. #1, 4, 5
 ```
 
@@ -29,7 +28,7 @@ library(readr)
 ```
 
 *Types of vectors, not including augmented types:*
-```{r}
+```{r, echo=FALSE, fig.align = "default", fig.show='hold', out.width = "50%"}
 knitr::include_graphics("data-structures-overview.png")
 ```
 
@@ -62,27 +61,21 @@ methods("as.Date")
 getS3method("as.Date", "default")
 ```
 
-* Some tidyverse functions are not always easy to unpack with just the above[^tidy]
+* Some tidyverse functions are not always easy to unpack with just the above[^tidyfuns]
 
-[^tidy]: For example:
-    ```{r, eval = FALSE}
+[^tidyfuns]: For example:  
+    
+    ```{r}
     select
     methods("select")
     getS3method("select", "data.frame")
     dplyr:::select_impl
-    ```
-    
+    ```  
     * Unless you are experienced, these details may not illuminate how `select()` works
-    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)
+    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
 
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
   + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
-```{r}
-a <- list(a = 1:3, b = "a string", c = pi, d = list(c(-1,-2), -5))
-
-a[[4]][[1]]
-```
-
 * `class` get or set class attribute
 * `unclass` returns copy with 'class' attribute removed
 
@@ -201,6 +194,17 @@ a[[4]][[1]]
     * In both cases you get back an `NA` (though it seems to take longer in the case when subsetting by a name that doesn't exist).
     
 ## 20.5: Recursive vectors (lists)
+
+Example of subsetting items from a list:
+```{r}
+a <- list(a = 1:3, b = "a string", c = pi, d = list(c(-1,-2), -5))
+
+a[[4]][[1]]
+
+# equivalent alternatives:
+# a$d[[1]]
+# a[4][[1]][[1]]
+```
 
 * 3 ways of subsetting `[]`, `[[]]`, `$`
 

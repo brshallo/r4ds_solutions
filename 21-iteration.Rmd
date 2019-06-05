@@ -1,7 +1,6 @@
 
-
-```{r setup21, message = FALSE, warning = FALSE, include = FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+```{r setup21, include = FALSE, message = FALSE,  warning = FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(tidyverse)
 library(ggplot2)
@@ -17,6 +16,18 @@ library(stringr)
 ```
 
 # Ch. 21: Iteration
+
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 7.3.4. #1
+* 7.5.1.1 #2
+* 7.5.3.1. #2, 4
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
 * Common `for` loop template:
 ```{r, eval = FALSE}
@@ -104,13 +115,11 @@ invoke_map(f, param, n = 5) %>% str()
 
 ### 21.2.1
 
-1.  Write for loops to (think about the output, sequence, and body __before__ you start writing
-    the loop):
-
+1.  Write for loops to (think about the output, sequence, and body __before__ you start writing the loop):
+    
     1. Compute the mean of every column in `mtcars`.
     
     ```{r}
-    
     output <- vector("double", length(mtcars))
     for (i in seq_along(mtcars)){
       output[[i]] <- mean(mtcars[[i]])
@@ -138,7 +147,7 @@ invoke_map(f, param, n = 5) %>% str()
     }
     output
     ```
-
+    
     1. Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.
     ```{r}
     output <- vector("list", 4)
@@ -201,9 +210,9 @@ invoke_map(f, param, n = 5) %>% str()
     
 
 1.  Combine your function writing and for loop skills:
-
+    
     1. Write a for loop that `prints()` the lyrics to the children's song "Alice the camel".
-
+    
     ```{r}
     num_humps <- c("five", "four", "three", "two", "one", "no")
     
@@ -216,9 +225,9 @@ invoke_map(f, param, n = 5) %>% str()
       writeLines("So go, Alice, go.\n")
     }
     ```
-
+    
     2. Convert the nursery rhyme "ten in the bed" to a function. Generalise it to any number of people in any sleeping structure.
-
+    
     ```{r}
     nursery_bed <- function(num, y) {
       output <- vector("character", num)
@@ -291,7 +300,6 @@ invoke_map(f, param, n = 5) %>% str()
       vector = rnorm(100),
       times = 20
     )
-    
     ```
     
     * vectorized was > 10x faster
@@ -307,7 +315,7 @@ invoke_map(f, param, n = 5) %>% str()
         
     [^WalkExample]: 
         Below is the code that accomplished this. I used `walk2` and methods we learn later in the chapter.
-
+    
     ```{r, eval = FALSE}
     dir.create("ch21_csvs_example")
     
@@ -322,7 +330,7 @@ invoke_map(f, param, n = 5) %>% str()
                        paste0("ch21_csvs_example/", "letter_", .y, ".csv"))
             )
     ```
-
+    
     ```{r}
     append_csvs <- function(dir){
       #input vector of file paths name and output appended file
@@ -343,11 +351,12 @@ invoke_map(f, param, n = 5) %>% str()
     names_appended <- append_csvs(dir_examp)
     names_appended
     ```
-
-    * See [Using map] for example of how this could be accomplished using `map` and `map(safely(read_csv))`.
-
+    
+    * See [Using map] for example of how this could be accomplished using `map()` and `map(safely(read_csv))`.
+    
+    
 2.  *What happens if you use `for (nm in names(x))` and `x` has no names?*
-
+    
     ```{r}
     x <- list(1:10, 11:18, 19:25)
     for (nm in names(x)) {
@@ -356,9 +365,9 @@ invoke_map(f, param, n = 5) %>% str()
     ```
     
     * each iteration produces an error, so nothing is written
-  
-*What if only some of the elements are named? *
-
+    
+    *What if only some of the elements are named?*
+    
     ```{r}
     x <- list(a = 1:10, 11:18, c = 19:25)
     for (nm in names(x)) {
@@ -367,8 +376,8 @@ invoke_map(f, param, n = 5) %>% str()
     ```
     
     * you have output for those with names and NULL for those without
-  
-*What if the names are not unique?*
+    
+    *What if the names are not unique?*
     ```{r}
     x <- list(a = 1:10, a = 11:18, c = 19:25)
     for (nm in names(x)) {
@@ -379,6 +388,7 @@ invoke_map(f, param, n = 5) %>% str()
     * it prints the first position with the name
     
 3.  Write a function that prints the mean of each numeric column in a data frame, along with its name. For example, `show_mean(iris)` would print:
+    
     ```{r, eval = FALSE}
     show_mean(iris)
     #> Sepal.Length: 5.84
@@ -386,9 +396,9 @@ invoke_map(f, param, n = 5) %>% str()
     #> Petal.Length: 3.76
     #> Petal.Width:  1.20
     ```
-
-(Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)
-
+    
+    (Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)
+    
     ```{r}
     show_mean <- function(df){
       # select just cols that are numeric
@@ -409,11 +419,13 @@ invoke_map(f, param, n = 5) %>% str()
       
       # print out, use method to identify max chars for vars printed
       means_names <- names(means)
-      chars_max <- (str_count(means_names) + str_count(as.character(means))) %>% max()
+      chars_max <- (str_count(means_names) + str_count(as.character(means))) %>%
+        max()
+      
       chars_pad <- chars_max - (str_count(means_names) + str_count(as.character(means)))
+      
       names(chars_pad) <- means_names
       
-    
     str_c(means_names, ": ", str_dup(" ", chars_pad), means) %>% 
       writeLines()
     }
@@ -435,7 +447,7 @@ invoke_map(f, param, n = 5) %>% str()
     }
     mtcars
     ```
-
+    
     * first part builds list of functions, 2nd applies those to a dataset
     * are storing the data transformations as a function and then applying this to a dataframe ^[This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized -- go and use this for documenting your work / transformations]
     
@@ -446,7 +458,8 @@ invoke_map(f, param, n = 5) %>% str()
 1.  Read the documentation for `apply()`. In the 2d case, what two for loops does it generalise?
     
     * It allows you to input either 1 or 2 for the `MARGIN` argument, which corresponds with looping over either the rows or the columns.
-  
+    
+    
 1.  Adapt `col_summary()` so that it only applies to numeric columns You might want to start with an `is_numeric()` function that returns a logical vector that has a TRUE corresponding to each numeric column.
     
     ```{r}
@@ -501,18 +514,16 @@ invoke_map(f, param, n = 5) %>% str()
     *Generate 10 random normals for each of $\mu = -10$, $0$, $10$, and $100$.*
     
     ```{r}
-    purrr::map_dbl(flights, ~mean(is.na(.x)))
+    purrr::map(c(-10, 0, 10, 100), rnorm, n = 10)
+    # purrr::map_dbl(flights, ~mean(is.na(.x)))
     ```
 
 1.  How can you create a single vector that for each column in a data frame indicates whether or not it's a factor?
     
     ```{r}
-    purrr::map_lgl(iris, is.factor) %>% 
-      as_tibble() %>% 
-      mutate(column_names = row.names(.))
+    purrr::map_lgl(iris, is.factor)
     ```
     
-    * for this example, I added in a simple extra little trick to convert to a tibble and include original column names as a field
 
 1.  What happens when you use the map functions on vectors that aren't lists? What does `map(1:5, runif)` do? Why?
     
@@ -520,23 +531,25 @@ invoke_map(f, param, n = 5) %>% str()
     purrr::map(1:5, rnorm)
     ```
     
-    * it runs on each item in the vector. In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of `rnorm`, hence pattern above.
+    * It runs on each item in the vector. 
+    * `map()` runs on each element item within the input, i.e .x[[1]], .x[[2]], .x[[n]]. The elements of a numeric vector are scalars (or technically length 1 numeric vectors)
+    * In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of `rnorm` for each run, hence pattern above.
       
 1.  What does `map(-2:2, rnorm, n = 5)` do? Why?
-
+    
     ```{r}
     map(-2:2, rnorm, n = 5)
     ```
-
+    
     * It makes 5 vectors each of length 5 with the values centered at the means of -2,-1, 0, 1, 2 respectively. 
     * The reason is that the default filling of the first argument is already named by the defined input of 'n = 5', therefore, the inputs are instead going to the 2nd argument, and hence become the mean of the different rnorm calls.
     
 1.  Rewrite `map(x, function(df) lm(mpg ~ wt, data = df))` to eliminate the anonymous function. 
     
-```{r, eval = FALSE}
-mtcars %>% 
-  purrr::map( ~ lm(mpg ~ wt, data = .))
-```
+    ```{r, eval = FALSE}
+    mtcars %>% 
+      purrr::map( ~ lm(mpg ~ wt, data = .))
+    ```
     
 ## 21.9 Other patterns of for loops
 
@@ -545,7 +558,6 @@ mtcars %>%
 1.  Implement your own version of `every()` using a for loop. Compare it with `purrr::every()`. What does purrr's version do that your version doesn't?
     
     ```{r}
-
     every_loop <- function(x, fun, ...) {
       output <- vector("list", length(x))
       for (i in seq_along(x)) {
@@ -561,18 +573,6 @@ mtcars %>%
     
     ```
     
-    * mine can't handle shortcut formulas or new functions    
-    ```{r}
-    z <- sample(10)
-    z %>% 
-      every( ~ . < 11)
-    
-    # e.g. below would fail
-    # z %>%
-    #   every_loop( ~ . < 11)
-    ```
-    
-
 1.  Create an enhanced `col_sum()` that applies a summary function to every numeric column in a data frame.
     
     ```{r}
@@ -640,9 +640,8 @@ names_appended %>%
 
 #### csv other example
 
-This is some code I used to read csvs from a shared drive. I added on the 'file_path_pull' and 'files_example' components to add in information on the file paths and other details that were relevant... you might also add this data into a new column on the output...
+The code below might be used to read csvs from a shared drive. I added on the 'file_path_pull' and 'files_example' components to add in information on the file paths and other details that were relevant. You might also add this data into a new column on the output...
 ```{r, eval = FALSE}
-
 files_path_pull <- dir("//companydomain.com/directory/", 
                        pattern = "csv$",
                        full.names = TRUE)
@@ -661,11 +660,16 @@ read_dir <- function(dir){
 }
 
 read_dir(files_example$file_paths)
-
 ```
 
 
 ### 21.3.5.2 (with purrr)
+
+```{r}
+purrr::map_lgl(iris, is.factor) %>% 
+  tibble::enframe()
+```
+
 
 Slightly less attractive printing
 ```{r}
@@ -691,7 +695,7 @@ show_mean3 <- function(df){
 show_mean3(flights)
 ```
 
-Other method is to take advantage of the gather function
+Other method is to take advantage of the `gather()` function
 ```{r}
 flights %>% 
   keep(is.numeric) %>% 
@@ -700,6 +704,17 @@ flights %>%
   gather()
 ```
 
+### 21.9.3.1.
+* mine can't handle shortcut formulas or new functions    
+```{r}
+z <- sample(10)
+z %>% 
+  every( ~ . < 11)
+
+# e.g. below would fail
+# z %>%
+#   every_loop( ~ . < 11)
+```
 
 ### 21.9 mirroring `keep`
 
@@ -728,7 +743,6 @@ set.seed(123)
 invoke_map(list(runif, rnorm), list(list(n = 10), list(n = 5)))
 set.seed(123)
 invoke_map(list(runif, rnorm), list(list(n = 10), list(5, 50)))
-
 ```
 
 ```{r}
@@ -744,7 +758,6 @@ set.seed(123)
 tibble(funs = list(rn = "rnorm", rp = "rpois", ru = "runif"),
        params = list(list(n = 20, mean = 10), list(n = 20, lambda = 3), list(n = 20, min = -1, max = 1))) %>% 
   with(invoke_map_df(funs, params))
-
 ```
 
 ```{r}
@@ -801,10 +814,8 @@ the `map_*` functions are essentially like running a `flatten_*` after running `
 map(flights, typeof) %>% 
   flatten_chr()
 
-
 map_chr(flights, typeof)
 ```
-
 
 Calculate the number of unique values for each level
 ```{r, eval = FALSE}
@@ -824,15 +835,12 @@ map2(.x = min_params, .y = max_params, ~runif(n = 10, min = .x, max = .y))
 
 When using `pmap` it's often best to keep the parameters in a dataframe
 ```{r}
-
 min_df_params <- tibble(n = c(10, 15, 20, 50 ), 
                         min = c(-1, 0, 1, 2), 
                         max = c(0, 1, 2, 3))
 
 pmap(min_df_params, runif)
-
 ```
-
 
 You can often use `map` a bunch of output that can then be stored in a tibble
 ```{r}

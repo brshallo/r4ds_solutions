@@ -222,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html"><i class="fa fa-check"></i>Ch. 10: Tibbles</a><ul>
-<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#exercises"><i class="fa fa-check"></i>10.5: (exercises)</a></li>
+<li class="chapter" data-level="" data-path="10-tibbles.html"><a href="10-tibbles.html#exercises"><i class="fa fa-check"></i>10.5: Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html"><i class="fa fa-check"></i>Ch. 11: Data import</a><ul>
 <li class="chapter" data-level="" data-path="11-data-import.html"><a href="11-data-import.html#getting-started"><i class="fa fa-check"></i>11.2: Getting started</a><ul>
@@ -481,17 +481,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" title="1">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(<span class="dt">echo =</span> <span class="ot">TRUE</span>, <span class="dt">cache =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb784-2" title="2"></a>
-<a class="sourceLine" id="cb784-3" title="3"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb784-4" title="4"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb784-5" title="5"><span class="kw">library</span>(forcats)</a>
-<a class="sourceLine" id="cb784-6" title="6"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb784-7" title="7"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb784-8" title="8"><span class="kw">library</span>(stringr)</a></code></pre></div>
-</div>
-</div>
-</div>
 <div id="ch.-18-pipes-notes-only" class="section level1">
 <h1>Ch. 18: Pipes (notes only)</h1>
 <ul>
@@ -501,23 +490,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If you want to use <code>assign</code> with the pipe, you must be explicit about the environment</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1">env &lt;-<span class="st"> </span><span class="kw">environment</span>()</a>
-<a class="sourceLine" id="cb785-2" title="2"><span class="kw">assign</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">100</span>, <span class="dt">envir =</span> env)</a></code></pre></div>
+<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" title="1">env &lt;-<span class="st"> </span><span class="kw">environment</span>()</a>
+<a class="sourceLine" id="cb784-2" title="2"><span class="kw">assign</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">100</span>, <span class="dt">envir =</span> env)</a></code></pre></div>
 <ul>
 <li><code>try</code>, <code>tryCatch</code>, <code>suppressMessages</code>, and <code>suppressWarnings</code> from base R all also do not work well</li>
 </ul>
 <p>Other pipes = ‘T pipe’, <code>%T&gt;%</code> that returns left-hand side rather than right. Will let the plot output, but then continues. Notice that this doesn’t work quite the same way for ggplot as ggplot does output something</p>
-<div class="sourceCode" id="cb786"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb786-1" title="1"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb786-2" title="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
-<a class="sourceLine" id="cb786-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb786-4" title="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb785-2" title="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
+<a class="sourceLine" id="cb785-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb785-4" title="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
 <p><img src="18-pipes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<pre><code>##  num [1:50, 1:2] -0.933 0.742 1.117 -0.761 1.034 ...</code></pre>
-<div class="sourceCode" id="cb788"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb788-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb788-2" title="2"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb788-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb788-4" title="4"><span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb788-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  num [1:50, 1:2] 0.1796 0.4229 1.4833 0.0556 -1.5761 ...</code></pre>
+<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb787-2" title="2"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb787-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb787-4" title="4"><span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb787-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
 <p><img src="18-pipes_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre><code>##    Sepal.Length
 ## 1           5.1
@@ -536,11 +525,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The two examples below are equivalent</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb790"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb790-1" title="1">mtcars <span class="op">%$%</span></a>
-<a class="sourceLine" id="cb790-2" title="2"><span class="st">  </span><span class="kw">cor</span>(disp, mpg)</a></code></pre></div>
+<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" title="1">mtcars <span class="op">%$%</span></a>
+<a class="sourceLine" id="cb789-2" title="2"><span class="st">  </span><span class="kw">cor</span>(disp, mpg)</a></code></pre></div>
 <pre><code>## [1] -0.8475514</code></pre>
-<div class="sourceCode" id="cb792"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb792-1" title="1">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb792-2" title="2"><span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</a></code></pre></div>
+<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" title="1">mtcars <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb791-2" title="2"><span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</a></code></pre></div>
 <pre><code>## [1] -0.8475514</code></pre>
 
 </div>

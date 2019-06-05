@@ -6,18 +6,12 @@
 \BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
   
 * 20.3.5, #1
-
 * 20.4.6. #1, 4, 5</div>\EndKnitrBlock{rmdimportant}
 
 \BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 *Types of vectors, not including augmented types:*
-
-```r
-knitr::include_graphics("data-structures-overview.png")
-```
-
-<img src="data-structures-overview.png" width="677" />
+<img src="data-structures-overview.png" width="50%" />
 
 * Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`
 
@@ -50,7 +44,7 @@ as.Date
 ```
 ## function (x, ...) 
 ## UseMethod("as.Date")
-## <bytecode: 0x0000000017cdaf88>
+## <bytecode: 0x0000000017cd9d00>
 ## <environment: namespace:base>
 ```
 
@@ -78,19 +72,63 @@ getS3method("as.Date", "default")
 ##     else stop(gettextf("do not know how to convert '%s' to class %s", 
 ##         deparse(substitute(x)), dQuote("Date")), domain = NA)
 ## }
-## <bytecode: 0x0000000017922778>
+## <bytecode: 0x0000000017923128>
 ## <environment: namespace:base>
 ```
 
-* Some tidyverse functions are not always easy to unpack with just the above[^tidy]
+* Some tidyverse functions are not always easy to unpack with just the above[^tidyfuns]
 
-[^tidy]: For example:
+[^tidyfuns]: For example:
+
     
     ```r
     select
+    ```
+    
+    ```
+    ## function (.data, ...) 
+    ## {
+    ##     UseMethod("select")
+    ## }
+    ## <bytecode: 0x00000000175db628>
+    ## <environment: namespace:dplyr>
+    ```
+    
+    ```r
     methods("select")
+    ```
+    
+    ```
+    ## [1] select.data.frame* select.default*    select.grouped_df*
+    ## [4] select.list        select.tbl_cube*  
+    ## see '?methods' for accessing help and source code
+    ```
+    
+    ```r
     getS3method("select", "data.frame")
+    ```
+    
+    ```
+    ## function (.data, ...) 
+    ## {
+    ##     vars <- tidyselect::vars_select(sel_vars(.data), !!!quos(...))
+    ##     select_impl(.data, vars)
+    ## }
+    ## <bytecode: 0x000000001bc00058>
+    ## <environment: namespace:dplyr>
+    ```
+    
+    ```r
     dplyr:::select_impl
+    ```
+    
+    ```
+    ## function (df, vars) 
+    ## {
+    ##     .Call(`_dplyr_select_impl`, df, vars)
+    ## }
+    ## <bytecode: 0x000000001bc76c80>
+    ## <environment: namespace:dplyr>
     ```
     
     * Unless you are experienced, these details may not illuminate how `select()` works
@@ -98,17 +136,6 @@ getS3method("as.Date", "default")
 
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
   + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
-
-```r
-a <- list(a = 1:3, b = "a string", c = pi, d = list(c(-1,-2), -5))
-
-a[[4]][[1]]
-```
-
-```
-## [1] -1 -2
-```
-
 * `class` get or set class attribute
 * `unclass` returns copy with 'class' attribute removed
 
@@ -286,6 +313,24 @@ a[[4]][[1]]
     * In both cases you get back an `NA` (though it seems to take longer in the case when subsetting by a name that doesn't exist).
     
 ## 20.5: Recursive vectors (lists)
+
+Example of subsetting items from a list:
+
+```r
+a <- list(a = 1:3, b = "a string", c = pi, d = list(c(-1,-2), -5))
+
+a[[4]][[1]]
+```
+
+```
+## [1] -1 -2
+```
+
+```r
+# equivalent alternatives:
+# a$d[[1]]
+# a[4][[1]][[1]]
+```
 
 * 3 ways of subsetting `[]`, `[[]]`, `$`
 

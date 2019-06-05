@@ -913,7 +913,7 @@ grid_space
 ## # A tibble: 1 x 4
 ##   min_x min_y max_x max_y
 ##   <dbl> <dbl> <dbl> <dbl>
-## 1 -8.30 0.381  14.0  3.86
+## 1  2.01 0.280  14.9  2.54
 ```
 
 
