@@ -1,10 +1,10 @@
 --- 
-title: "Yet another study guide for 'R for Data Science'"
+title: "Yet another study guide to 'R for Data Science'"
 author: "Bryan Shalloway"
 date: "2019-06-06"
 site: bookdown::bookdown_site
-url: https\://brshallo.github.io/R4DS_Solutions/
-github-repo: https\://github.com/brshallo/R4DS_Solutions
+url: https\://brshallo.github.io/r4ds_solutions/
+github-repo: https\://github.com/brshallo/r4ds_solutions
 twitter-handle: brshallo
 documentclass: book
 bibliography: [book.bib]
@@ -22,7 +22,7 @@ output:
     download: no
     config:
       edit:
-        link: https\://github.com/brshallow/R4DS_Solutions/edit/master/%s
+        link: https\://github.com/brshallow/r4ds_solutions/edit/master/%s
         text: "Edit, fork"
       sharing:
         twitter: yes
@@ -42,7 +42,7 @@ output:
 
 This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham's excellent book, [R for Data Science](https://r4ds.had.co.nz/) [@WickhamGrolemund2017]. *R for Data Science* (R4DS) is my go-to recommendation for people getting started in R programming, "data science", or the "tidyverse".
 
-First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. To check your answers as you work through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold, [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide for 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
+First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. To check your answers as you work through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold, [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide to 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
 
 ## Organization and features of book
 

@@ -1,7 +1,5 @@
-
-Add license
-Name of URL of book (to be lower case)
 Index fix "cautions" bullet
 How to embed code in footnote (fix in index and chapter 20)
 Google analytics
-Enable editing
+Enable editing (hypothesis)
+Fix editing link
