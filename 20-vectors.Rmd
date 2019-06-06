@@ -71,12 +71,12 @@ getS3method("as.Date", "default")
 * `unclass` returns copy with 'class' attribute removed
 
 [^tidyfuns]: For example:  
-        ```{r}
-        select
-        methods("select")
-        getS3method("select", "data.frame")
-        dplyr:::select_impl
-        ```  
+    ```{r}
+    select
+    methods("select")
+    getS3method("select", "data.frame")
+    dplyr:::select_impl
+    ```  
     * These details may not illuminate for you how `select()` works  
     * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
     

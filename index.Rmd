@@ -55,23 +55,24 @@ First and foremost, this book was set-up as a resource and refresher for myself^
 * A list of functions (and sometimes notes) from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]  
 ```  
 * Solutions to exercises 
-    * Exercise subsections are arranged in the same chapter --> section --> subsection as the original book
-    * Chapters, sections, and subsections without exercises are usually not included
-    * The beginning of sections may occassionally contain additional notes, e.g. [3.8: Position Adjustment]
+  * Exercise subsections are arranged in the same chapter --> section --> subsection as the original book
+  * Chapters, sections, and subsections without exercises are usually not included
+  * The beginning of sections may occassionally contain additional notes, e.g. [3.8: Position Adjustment]
 * The "Appendix" sections in chapters typically contain alternative solutions to problems or additional notes/thoughts pertaining to the chapter or a related topic
-    * I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in "Appendix" sections
+  * I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in "Appendix" sections
 * There are a few cautions with using this book[^Caution]
 
 
 [^Caution]: *Cautions with book:*  
     * Beyond basic formatting clean-up, I did not substantially update the solutions from my first time going through the book. Therefore, some of the solutions and syntax may be different from how I would approach a problem now (with a couple more years coding experience). 
-        * "Appendix" sections in particular received only cursory edits.  
+      * "Appendix" sections in particular received only cursory edits.  
     * Occassionally I use slightly different (or newer), methods than are shared in the book (e.g. using `mutate_at()`, `mutate_if()`, `mutate_all()` and not just `mutate()`), this is mostly confined to "Appendix" sections.  
     * Some methods in functions may be (or may become) deprecated, e.g. using `fun()` within `mutate_at()` rather than `~`.  
     * The chapter and exercise numbers are hard-coded, so if R4DS exercise order changes, the exercise solutions will no longer correspond perfectly with the R4DS source.  
     * Formatting is not always consistent between chapters, e.g. the first 14 chapters italicize or bold questions, whereas later chapters do not.  
-        * Notes containing functions are usually highlighted solely with backticks, e.g. `foo`, though occassionally also have parentheses, e.g. `foo()` -- there is no logic to these differences.  
-        * More formatting differences can be seen if inspecting the specific .Rmd files for each chapter.  
+      * Notes containing functions are usually highlighted solely with backticks, e.g. `foo`, though occassionally also have parentheses, e.g. `foo()` -- there is no logic to these differences.  
+      * More formatting differences can be seen if inspecting the specific .Rmd files for each chapter.  
+
 
 ## Origin of book
 
