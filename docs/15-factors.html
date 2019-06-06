@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Yet another study guide for ‘R for Data Science’</title>
-  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
-  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta property="og:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
-  
-  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="twitter:site" content="@brshallo" />
+  <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-31">
+<meta name="date" content="2019-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,13 +135,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Chapter contents</a></li>
+<li><a href="./">Yet another study guide to R4DS</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-book"><i class="fa fa-check"></i>Origin of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
@@ -330,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
@@ -380,6 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-82"><i class="fa fa-check"></i>21.3.5.1</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-83"><i class="fa fa-check"></i>21.9.3.1</a></li>
 <li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
@@ -388,78 +390,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-83"><i class="fa fa-check"></i>23.2.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.3.3</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.3.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.4.5</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-87"><i class="fa fa-check"></i>23.2.1.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-88"><i class="fa fa-check"></i>23.3.3.2</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5.4</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-89"><i class="fa fa-check"></i>23.4.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>24.3.5</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.3.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-89"><i class="fa fa-check"></i>24.2.3.3</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3.4</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.2.3.1</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>25.3.5.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-93"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-94"><i class="fa fa-check"></i>24.3.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-93"><i class="fa fa-check"></i>25.2.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-94"><i class="fa fa-check"></i>25.4.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.5.3</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-97"><i class="fa fa-check"></i>25.5.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-12"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-98"><i class="fa fa-check"></i>25.2.5.1</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
-<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#listquantile-examples"><i class="fa fa-check"></i>list(quantile()) examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-names"><i class="fa fa-check"></i>Extracting names</a></li>
 <li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-97"><i class="fa fa-check"></i>27.2.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-98"><i class="fa fa-check"></i>27.3.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-100"><i class="fa fa-check"></i>27.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.4.7</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-101"><i class="fa fa-check"></i>27.4.7</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-100"><i class="fa fa-check"></i>28.2.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-101"><i class="fa fa-check"></i>28.3.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-103"><i class="fa fa-check"></i>28.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.4.4</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-104"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#appendix-13"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-105"><i class="fa fa-check"></i>28.3.1.5</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -869,8 +873,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https\://github.com/brshallow/R4DS_Solutions/edit/master/15-factors.Rmd",
+"text": "Edit, fork"
 },
 "download": null,
 "toc": {

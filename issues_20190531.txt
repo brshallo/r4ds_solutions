@@ -1,14 +1,7 @@
-Review section levels
-Verify section levels match R4DS
-Add note regarding Appendix
-Add note regarding numbering
-Fix-up references to groups of interest in "Purpose" section
-Adding block2 "notes formatting to "definitions" at top of chapter
-Hide warnings and messages from set-up chunks
+
 Add license
-Fix disqus (remove emojis)
-Enable editing
-Add "key questions"
 Name of URL of book (to be lower case)
 Index fix "cautions" bullet
 How to embed code in footnote (fix in index and chapter 20)
+Google analytics
+Enable editing

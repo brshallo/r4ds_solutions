@@ -1,9 +1,13 @@
 
-*Make sure the following packages are installed:*  
-
 
 
 # Ch. 25: Many models
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 25.2.5 #1, 2</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
+
 * `nest` creates a list-column with default key value `data`. Each row value becomes a dataframe with all non-grouping columns and all rows corresponding with a particular group
 
 ```r
@@ -15,39 +19,30 @@ iris %>%
 * `unnest` unnest any list-column in your dataframe. 
 
 Notes on `unnest` behavior:
-* if there are multiple rows in the list-col being unnested, the existing row values will be duplicated
+
+* if the atomic components of the elements of the list column are length > 1, the non-nested row columns will be duplicated when the list-column is unnested
 
 ```r
+# atomic components of elements of list-col == 3 --> (will see duplicates of `x`)
 tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2))) %>% 
+  mutate(test1 = list(tibble(a = c(1, 2, 3)))) %>% 
   unnest(test1) 
 
-# notice duplicated x values: 1,1,2,2,...100,100
-# Notice that in situations like the below one though, we get two new columns
-# however the row length does not change i.e. there are no duplicates created
-# (this is similar to the structure when using broom::glance)
+# atomic components of elements of list-col == 1 --> (will not see duplicates of `x`)
 tibble(x = 1:100) %>% 
   mutate(test1 = list(tibble(a = 1, b = 2))) %>% 
   unnest(test1) 
 ```
-  
-* if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all (if not possible)
-* when unnesting a single column but multiple list-cols exist, the default behavior is that if unnesting caused no change in row number than keep other list-cols, but if unnesting caused a change in row-number drop other columns. To override the former use `.drop = TRUE` to override the latter use `.drop = FALSE`. ^[Note that if using `.drop = FALSE` in the latter case that you are creating replicated rows for list-col values]
+  * if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all 
+* when unnesting a single column but multiple list-cols exist, the default behavior is to drop the other list columns. To override this use `.drop = FALSE`. ^[Note that if using `.drop = FALSE` in the latter case that you are creating replicated rows for list-col values]
 
 ```r
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2)),
-         test2 = list(c(3,4))) %>% 
-  unnest(test1) # use .drop = TRUE to drop test2 column
-
-# or to unnest both
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2)),
-         test2 = list(c(3,4))) %>% 
-  unnest()
+tibble(x = 1:100) %>%
+  mutate(test1 = list(c(1, 2)),
+         test2 = list(c(3, 4))) %>% 
+  unnest(test1, .drop = FALSE) # change to default, i.e. `.drop = TRUE` to drop `test2` column
 ```
-  
-* when unnesting multiple columns, all must be the same length or you will get an error, e.g. below would fail:
+* when unnesting multiple columns, all must be the same length or you will get an error, e.g. below fails:
 
 ```r
 tibble(x = 1:100) %>% 
@@ -56,17 +51,19 @@ tibble(x = 1:100) %>%
   unnest()
 ```
 
-* To unnest mulitple list-cols with different row-lengths, you should use multiple `unnest` statements, e.g. below would work:
-
-```r
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1)),
-         test2 = list(c(2,3))) %>% 
-  unnest(test1) %>% 
-  unnest(test2)
+```
+## Error: All nested columns must have the same number of elements.
 ```
 
-* Method for nesting individual vectors: `group_by` `%>%` `summarise`, e.g.:
+```r
+# # to successfully unnest this could have added another unnest, e.g.:
+# tibble(x = 1:100) %>% 
+#   mutate(test1 = list(c(1)),
+#          test2 = list(c(2,3))) %>% 
+#   unnest(test1) %>% 
+#   unnest(test2)
+```
+* Method for nesting individual vectors: `group_by() %>% summarise()`, e.g.:
 
 ```r
 iris %>% 
@@ -82,7 +79,6 @@ iris %>%
 ## 2 versicolor <dbl [50]>   <dbl [50]>  <dbl [50]>   <dbl [50]> 
 ## 3 virginica  <dbl [50]>   <dbl [50]>  <dbl [50]>   <dbl [50]>
 ```
-      
 * the above has the advantage of producing atomic vectors rather than dataframes as the types inside of the lists
 * `broom::glance` takes a model as input and outputs a one row tibble with columns for each of several model evalation statistics (note that these metrics are geared towards evaluating the training)
 * `broom::tidy` creates a tibble with columns `term`, `estimate`, `std.error`, `statistic` (t-statistic) and `p.value`. A new row is created for each `term` type, e.g. intercept, x1, x2, etc.
@@ -165,7 +161,7 @@ by_country2 %>%
 ## # ... with 132 more rows
 ```
 
-__unnesting__, dd another dataframe with the residuals included and then unnest
+__unnesting__, another dataframe with the residuals included and then unnest
 
 ```r
 by_country3 <- by_country2 %>%
@@ -245,11 +241,11 @@ resids
       facet_wrap(~order)
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
     
     * The quadratic trend seems to do better --> indicated by the distribution of the R^2 values being closer to one. The level of improvement seems especially pronounced for African countries.
     
-    Let's check this for sure by looking at percentage point improvement in R^2 in chart below
+    Let's check this closer by looking at percentage point improvement in R^2 in chart below
 
     
     ```r
@@ -267,7 +263,7 @@ resids
            subtitle = "(When adding a quadratic term to the linear regression model)")
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-16-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
     
     *View predictions from linear model with quadratic term*
     (of countries where linear trend did not capture relationship)
@@ -290,10 +286,11 @@ resids
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-17-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
     
     * while the quadratic model does a better job fitting the model than a linear term does, I wouldn't say it does a good job of fitting the model
     * it looks like the trends are generally consistent rates of improvement and then there is a sudden drop-off associated with some event, hence an intervention variable may be a more appropriate method for modeling this pattern
+    
     
     *Quadratic model parameters*
     
@@ -316,7 +313,7 @@ resids
     ## Warning: Using alpha for a discrete variable is not advised.
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-18-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
     
     * The quadratic term (in a linear function, trained with the x-value centered at the mean, as in this dataset) has a few important notes related to interpretation
         * If the coefficient is positive the output will be convex, if it is negative it will be concave (i.e. smile vs. frown shape)
@@ -338,7 +335,7 @@ resids
     labs(title = "Data and quadratic trend of predictions for Botswana")
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-19-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-20-1.png" width="672" />
     
     *(note that the centered value for year in the 'centered' dataset is 1979.5)*  
     In the model for Botswana, coefficents are:  
@@ -388,32 +385,12 @@ resids
       unnest(data_preds) %>% 
       ggplot(aes(x = year_cent))+
       geom_line(aes(x = year_cent, y = pred), colour = "red")+
-      # geom_line(aes(y = pred, colour = "prediction"))+
-    # labs(title = "Data and 2nd order model predictions for Botswana")+
-      geom_abline(intercept = tangent_lines[[2]][[1]], slope = tangent_lines[[1]][[1]])+
-        geom_abline(intercept = tangent_lines[[2]][[2]], slope = tangent_lines[[1]][[2]])+
-        geom_abline(intercept = tangent_lines[[2]][[3]], slope = tangent_lines[[1]][[3]])+
-        geom_abline(intercept = tangent_lines[[2]][[4]], slope = tangent_lines[[1]][[4]])+
-        geom_abline(intercept = tangent_lines[[2]][[5]], slope = tangent_lines[[1]][[5]])+
-      ylim(c(40, 70))+
-      coord_fixed()
-    ```
-    
-    <img src="25-many-models_files/figure-html/unnamed-chunk-22-1.png" width="672" />
-    
-    ```r
-        by_country3_quad %>% 
-      filter(country == "Botswana") %>% 
-      mutate(data_preds = purrr::map2(data_cent, mod_quad, add_predictions)) %>% 
-      unnest(data_preds) %>% 
-      ggplot(aes(x = year_cent))+
-      geom_line(aes(x = year_cent, y = pred), colour = "red")+
       geom_abline(aes(intercept = intercept, slope = slope), 
                   data = tangent_lines)+
       coord_fixed()
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-22-2.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-23-1.png" width="672" />
     
     Below is the relevant output in a table.  
     `x1`: represents the change in x value from 1979.5  
@@ -437,6 +414,7 @@ resids
     ```
     
     * notice that for every 10 year increase in `x1` we see the slope of the tangent line has decreased by 0.35. If we'd looked at just one year we would have seen the change was 0.035, this correspondig with 2 multiplied by the coefficient on the quadratic term of our model.
+    
 
 1.  Explore other methods for visualising the distribution of $R^2$ per continent. You might want to try the ggbeeswarm package, which provides similar methods for avoiding overlaps as jitter, but uses deterministic methods.
     
@@ -450,29 +428,10 @@ resids
       ggbeeswarm::geom_quasirandom()
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-24-1.png" width="672" />
-    
-    ```r
-    by_country3_quad %>% 
-      unnest(glance_mod) %>% 
-      ggplot(aes(x = continent, y = r.squared, colour = continent))+
-      geom_boxplot(alpha = 0.1, colour = "dark grey")+
-      geom_jitter()
-    ```
-    
-    <img src="25-many-models_files/figure-html/unnamed-chunk-24-2.png" width="672" />
-    
-    ```r
-    by_country3_quad %>% 
-      unnest(glance_mod) %>%  
-      ggplot(aes(x = continent, y = r.squared, colour = continent))+
-      geom_boxplot(alpha = 0.1, colour = "dark grey")+
-      ggbeeswarm::geom_beeswarm()
-    ```
-    
-    <img src="25-many-models_files/figure-html/unnamed-chunk-24-3.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
 
-    * I like `geom_quasirandom` the best as an overlay on boxplot, it keeps things centered and doesn't have the gravitational pull affect that makes `geom_beeswarm` become a little misaligned
+    * I like `geom_quasirandom()` the best as an overlay on boxplot, it keeps things centered and doesn't have the gravitational pull affect that makes `geom_beeswarm()` become a little misaligned, it also works well here over `geom_jitter()` as the points stay better around their true value
+    
 
 1.  To create the last plot (showing the data for the countries with the worst model fits), we needed two steps: we created a data frame with one row per country and then semi-joined it to the original dataset. It's possible to avoid this join if we use `unnest()` instead of `unnest(.drop = TRUE)`. How?
 
@@ -492,7 +451,7 @@ resids
       theme(axis.text.x = element_text(angle = 90, hjust = 1))
     ```
     
-    <img src="25-many-models_files/figure-html/unnamed-chunk-25-1.png" width="672" />
+    <img src="25-many-models_files/figure-html/unnamed-chunk-26-1.png" width="672" />
 
 ## 25.4: Creating list-columns
 
@@ -500,18 +459,19 @@ resids
 
 1.  List all the functions that you can think of that take an atomic vector and return a list.
 
-* `stringr::str_extract_all` + other `stringr` functions
-
-(however the below can also take types that are not atomic and are probably not really what is being looked for)
-* `list`
-* `tibble`
-* `map` / `lapply`
+    * `stringr::str_extract_all` + other `stringr` functions
+    
+    (however the below can also take types that are not atomic and are probably not really what is being looked for)
+    
+    * `list`
+    * `tibble`
+    * `map` / `lapply`
 
 1.  Brainstorm useful summary functions that, like `quantile()`, return multiple values.
 
-* `summary`
-* `range`
-* ...
+    * `summary`
+    * `range`
+    * ...
     
 1.  What's missing in the following data frame? How does `quantile()` return that missing piece? Why isn't that helpful here?
 
@@ -576,7 +536,7 @@ resids
     ## 15     8  0.99  19.1
     ```
     
-    * see [quantile example] for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)
+    * see [list(quantile()) examples] for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)
     
 1.  What does this code do? Why might it be useful?
 
@@ -588,7 +548,7 @@ resids
       summarise_all(funs(list))
     ```
 
-    * It turns each row into an atomic vector grouped by the particular `cyl` value.  It is different from `nest` in that each column creates a new list-column representing an atomic vector. If `nest` had been used, this woudl have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns...
+    * It turns each row into an atomic vector grouped by the particular `cyl` value.  It is different from `nest` in that each column creates a new list-column representing an atomic vector. If `nest` had been used, this would have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns...
     * e.g. let's say we want to find the number of unique items in each column for each grouping, we could do that like so
     
     
@@ -648,56 +608,35 @@ resids
 1.  Why might the `lengths()` function be useful for creating atomic
     vector columns from list-columns?
     
-    If all you wanted were the length (not the number of unique items), you would still need a `map function when using `length`
-        
+    * perhaps you want to measure the number of elements (or unique elements) in an individual element of a list column
     
-    ```r
-    mtcars %>% 
-      group_by(cyl) %>% 
-      select(1:5) %>% 
-      summarise_all(funs(list)) %>% 
-      mutate_all(funs(map_int(., length))) 
-    ```
+
+```r
+mpg %>% 
+  group_by(cyl) %>% 
+  summarise(displ_list = list(displ)) %>% 
+  mutate(num_unique = map_int(displ_list, ~unique(.x) %>% length()))
+```
+
+```
+## # A tibble: 4 x 3
+##     cyl displ_list num_unique
+##   <int> <list>          <int>
+## 1     4 <dbl [81]>          8
+## 2     5 <dbl [4]>           1
+## 3     6 <dbl [79]>         14
+## 4     8 <dbl [70]>         17
+```
     
-    ```
-    ## # A tibble: 3 x 5
-    ##     cyl   mpg  disp    hp  drat
-    ##   <int> <int> <int> <int> <int>
-    ## 1     1    11    11    11    11
-    ## 2     1     7     7     7     7
-    ## 3     1    14    14    14    14
-    ```
-    
-    for this problem, using `lengths` prevents the need to use a `map` function
-    
-    
-    ```r
-    mtcars %>% 
-      group_by(cyl) %>% 
-      select(1:5) %>% 
-      summarise_all(funs(list)) %>% 
-      mutate_all(lengths) 
-    ```
-    
-    ```
-    ## # A tibble: 3 x 5
-    ##     cyl   mpg  disp    hp  drat
-    ##   <int> <int> <int> <int> <int>
-    ## 1     1    11    11    11    11
-    ## 2     1     7     7     7     7
-    ## 3     1    14    14    14    14
-    ```
-    
-    * is there a more helpful use case...?
     
 1.  List the most common types of vector found in a data frame. What makes lists different?
 
-    * the atomic types: char, int, double, fact, date are all more common, they are atomic, whereas lists are not
+    * the atomic types: char, int, double, factor, date are all more common, they are atomic, whereas lists are not atomic vectors and can contain any type of data within them (e.g. a list of atomic vectors, list of lists, etc.).
 
 ## Appendix
 
 ### Models in lists
-this is the more traditional way you might store models
+This is the more traditional way you might store models in a list
 
 
 ```r
@@ -740,7 +679,7 @@ models_countries[1:3]
 ```
 
 ### List-columns for sampling
-say you want to sample all the flights on 50 days out of the year. List-cols can be helpful in generating a sample like this:
+say you want to sample all the flights on 50 days out of the year. List-cols can be used to generate a sample like this:
 
 ```r
 flights %>% 
@@ -753,23 +692,23 @@ flights %>%
 ```
 
 ```
-## # A tibble: 45,475 x 5
+## # A tibble: 45,640 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    <date>               <int>     <dbl>    <int>          <int>
-##  1 2013-05-02            1905       298      241           2224
-##  2 2013-05-02            2015       247      256           2308
-##  3 2013-05-02            2359        40      413            345
-##  4 2013-05-02            2130       348      541             22
-##  5 2013-05-02             500        -7      651            640
-##  6 2013-05-02             515        -8      747            811
-##  7 2013-05-02             540        -1      850            840
-##  8 2013-05-02             545        -6      806            827
-##  9 2013-05-02             600       -11      823            850
-## 10 2013-05-02             600       -10      732            755
-## # ... with 45,465 more rows
+##  1 2013-02-09             900         1     1242           1227
+##  2 2013-02-09            1130        30     1434           1430
+##  3 2013-02-09             900       186     1814           1540
+##  4 2013-02-09            1220         2     1545           1532
+##  5 2013-02-09            1240        -3     1414           1444
+##  6 2013-02-09            1245        -5     1528           1600
+##  7 2013-02-09            1250         0     1526           1550
+##  8 2013-02-09            1259        -4     1535           1555
+##  9 2013-02-09            1300        -2     1540           1605
+## 10 2013-02-09            1300         3     1626           1608
+## # ... with 45,630 more rows
 ```
 
-The alternative a join, e.g.
+Alternatively you could use a `semi_join()`, e.g.
 
 ```r
 flights_samp <- flights %>% 
@@ -784,29 +723,29 @@ flights %>%
 ```
 
 ```
-## # A tibble: 46,037 x 5
+## # A tibble: 46,640 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    <date>               <int>     <dbl>    <int>          <int>
-##  1 2013-01-05            2359        15      503            445
-##  2 2013-01-05            2230       127      341            131
-##  3 2013-01-05             500        -2      640            650
-##  4 2013-01-05             515         1      821            816
-##  5 2013-01-05             530         4      829            829
-##  6 2013-01-05             540        -3      831            850
-##  7 2013-01-05             600        -7      903            903
-##  8 2013-01-05             600        -6      739            759
-##  9 2013-01-05             600        -5      824            810
-## 10 2013-01-05             600        -5      818            837
-## # ... with 46,027 more rows
+##  1 2013-01-15             500        -7      645            648
+##  2 2013-01-15             525        -7      825            820
+##  3 2013-01-15             530         3      839            831
+##  4 2013-01-15             540        -6      829            850
+##  5 2013-01-15             540        -5     1014           1017
+##  6 2013-01-15             600       -17      710            715
+##  7 2013-01-15             600       -11      637            709
+##  8 2013-01-15             600        -8      934            910
+##  9 2013-01-15             600        -8      658            658
+## 10 2013-01-15             600        -7      851            859
+## # ... with 46,630 more rows
 ```
 
-* I find the `nest` - `unnest` method more elegant
-* I've found the `semi_join` method seems to run goes faster on large dataframes
+* In some situations I find the `nest`, `unnest` method more elegant though the `semi_join` method seems to run goes faster on large dataframes
+* There are also other more specialized functions in the tidyverse to help with various sampling strategies
 
 ### 25.2.5.1
 
 #### Include cubic term
-Let's look at this example if we had allowed year to be a 3rd order polynomial.  We're really stretching our degrees of freedom in this case -- these might be unlikely to generalize to other data well. 
+Let's look at this example if we had allowed year to be a 3rd order polynomial.  We're really stretching our degrees of freedom (in relation to our number of observations) in this case -- these might be less likely to generalize to other data well. 
 
 
 ```r
@@ -832,9 +771,12 @@ by_country3 %>%
 * interpretibility of coefficients beyond quadratic term becomes less strait forward to explain
 
 ### Multiple graphs in chunk
-My work flow for pulling multiple graphs into a single input has typically been either to build the graphs seperately and then add each to the function `gridExtra::grid.arrange()` or to use faceting as much as possible.  
 
-In 25.2 Hadley showed an example where he put all the graphs within a chunk into a single outputted figure by setting the code chunk options for this. The chunk below is that example.
+There are a variety of ways to have multiple graphs outputted and aligned side by side: 
+
+* build graphs separately and use `gridExtra::grid.arrange()` 
+* Ensure metrics have been gathered into a single column and then use `facet_wrap()`/`facet_grid()` (`ggforce` is a helpful extension package to ggplot2 that gives more functionality to these faceting functions)
+* manipulate chunk options, e.g. figures below have the following options set in the R code chunk: `out.width = "33%", fig.asp = 1, fig.width = 3, fig.show='hold',, fig.align='default'`
 
 
 ```r
@@ -843,22 +785,14 @@ nz %>%
   ggplot(aes(year, lifeExp)) + 
   geom_line() + 
   ggtitle("Full data = ")
-```
 
-<img src="25-many-models_files/figure-html/unnamed-chunk-36-1.png" width="33%" />
-
-```r
 nz_mod <- lm(lifeExp ~ year, data = nz)
 nz %>% 
   add_predictions(nz_mod) %>%
   ggplot(aes(year, pred)) + 
   geom_line() + 
   ggtitle("Linear trend + ")
-```
 
-<img src="25-many-models_files/figure-html/unnamed-chunk-36-2.png" width="33%" />
-
-```r
 nz %>% 
   add_residuals(nz_mod) %>% 
   ggplot(aes(year, resid)) + 
@@ -867,13 +801,11 @@ nz %>%
   ggtitle("Remaining pattern")
 ```
 
-<img src="25-many-models_files/figure-html/unnamed-chunk-36-3.png" width="33%" />
+<img src="25-many-models_files/figure-html/unnamed-chunk-36-1.png" width="33%" /><img src="25-many-models_files/figure-html/unnamed-chunk-36-2.png" width="33%" /><img src="25-many-models_files/figure-html/unnamed-chunk-36-3.png" width="33%" />
 
-* still printing as 3 individual plots, how to fix?
+### list(quantile()) examples
 
-### `list(quantile())` examples
-
-Not really best practice...
+Some of these examples may not represent best practices.
 
 
 ```r
@@ -938,33 +870,44 @@ iris %>%
 ## 15 virginica          7.9         3.8          6.9          2.5 100%
 ```
 
-### Extracting row names
-Don't know I'd do this...
+### Extracting names
+Maybe not best practice:
 
 ```r
 quantile(1:100) %>% 
-  as_tibble() %>% 
+  as.data.frame() %>% 
   rownames_to_column()
 ```
 
 ```
-## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
-## This warning is displayed once per session.
+##   rowname      .
+## 1      0%   1.00
+## 2     25%  25.75
+## 3     50%  50.50
+## 4     75%  75.25
+## 5    100% 100.00
+```
+
+Better would be to use `enframe()` here:
+
+```r
+quantile(1:100) %>% 
+  tibble::enframe()
 ```
 
 ```
 ## # A tibble: 5 x 2
-##   rowname value
-##   <chr>   <dbl>
-## 1 1         1  
-## 2 2        25.8
-## 3 3        50.5
-## 4 4        75.2
-## 5 5       100
+##   name  value
+##   <chr> <dbl>
+## 1 0%      1  
+## 2 25%    25.8
+## 3 50%    50.5
+## 4 75%    75.2
+## 5 100%  100
 ```
 
 ### `invoke_map` example (book)
-I liked Hadley's example with invoke_map and wanted to save it
+I liked Hadley's example with invoke_map and wanted to save it:
 
 ```r
 sim <- tribble(

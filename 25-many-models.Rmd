@@ -1,8 +1,6 @@
 
-*Make sure the following packages are installed:*  
-
-```{r setup25, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+```{r setup25, include=FALSE, message=FALSE, warning=FALSE}
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE)
 
 library(ggplot2)
 library(ggbeeswarm)
@@ -17,6 +15,16 @@ library(lubridate)
 ```
 
 # Ch. 25: Many models
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 25.2.5 #1, 2
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
+
 * `nest` creates a list-column with default key value `data`. Each row value becomes a dataframe with all non-grouping columns and all rows corresponding with a particular group
 ```{r, eval = FALSE}
 iris %>% 
@@ -27,60 +35,47 @@ iris %>%
 * `unnest` unnest any list-column in your dataframe. 
 
 Notes on `unnest` behavior:
-* if there are multiple rows in the list-col being unnested, the existing row values will be duplicated
+
+* if the atomic components of the elements of the list column are length > 1, the non-nested row columns will be duplicated when the list-column is unnested
 ```{r, eval = FALSE}
+# atomic components of elements of list-col == 3 --> (will see duplicates of `x`)
 tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2))) %>% 
+  mutate(test1 = list(tibble(a = c(1, 2, 3)))) %>% 
   unnest(test1) 
 
-# notice duplicated x values: 1,1,2,2,...100,100
-# Notice that in situations like the below one though, we get two new columns
-# however the row length does not change i.e. there are no duplicates created
-# (this is similar to the structure when using broom::glance)
+# atomic components of elements of list-col == 1 --> (will not see duplicates of `x`)
 tibble(x = 1:100) %>% 
   mutate(test1 = list(tibble(a = 1, b = 2))) %>% 
   unnest(test1) 
 ```
-  
-* if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all (if not possible)
-* when unnesting a single column but multiple list-cols exist, the default behavior is that if unnesting caused no change in row number than keep other list-cols, but if unnesting caused a change in row-number drop other columns. To override the former use `.drop = TRUE` to override the latter use `.drop = FALSE`. ^[Note that if using `.drop = FALSE` in the latter case that you are creating replicated rows for list-col values]
+  * if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all 
+* when unnesting a single column but multiple list-cols exist, the default behavior is to drop the other list columns. To override this use `.drop = FALSE`. ^[Note that if using `.drop = FALSE` in the latter case that you are creating replicated rows for list-col values]
 ```{r, eval = FALSE}
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2)),
-         test2 = list(c(3,4))) %>% 
-  unnest(test1) # use .drop = TRUE to drop test2 column
-
-# or to unnest both
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1,2)),
-         test2 = list(c(3,4))) %>% 
-  unnest()
+tibble(x = 1:100) %>%
+  mutate(test1 = list(c(1, 2)),
+         test2 = list(c(3, 4))) %>% 
+  unnest(test1, .drop = FALSE) # change to default, i.e. `.drop = TRUE` to drop `test2` column
 ```
-  
-* when unnesting multiple columns, all must be the same length or you will get an error, e.g. below would fail:
-```{r, error = TRUE, eval = FALSE}
+* when unnesting multiple columns, all must be the same length or you will get an error, e.g. below fails:
+```{r, error = TRUE}
 tibble(x = 1:100) %>% 
   mutate(test1 = list(c(1)),
          test2 = list(c(2,3))) %>% 
   unnest()
-```
 
-* To unnest mulitple list-cols with different row-lengths, you should use multiple `unnest` statements, e.g. below would work:
-```{r, error = TRUE, eval = FALSE}
-tibble(x = 1:100) %>% 
-  mutate(test1 = list(c(1)),
-         test2 = list(c(2,3))) %>% 
-  unnest(test1) %>% 
-  unnest(test2)
+# # to successfully unnest this could have added another unnest, e.g.:
+# tibble(x = 1:100) %>% 
+#   mutate(test1 = list(c(1)),
+#          test2 = list(c(2,3))) %>% 
+#   unnest(test1) %>% 
+#   unnest(test2)
 ```
-
-* Method for nesting individual vectors: `group_by` `%>%` `summarise`, e.g.:
+* Method for nesting individual vectors: `group_by() %>% summarise()`, e.g.:
 ```{r}
 iris %>% 
   group_by(Species) %>% 
   summarise_all(list)
 ```
-      
 * the above has the advantage of producing atomic vectors rather than dataframes as the types inside of the lists
 * `broom::glance` takes a model as input and outputs a one row tibble with columns for each of several model evalation statistics (note that these metrics are geared towards evaluating the training)
 * `broom::tidy` creates a tibble with columns `term`, `estimate`, `std.error`, `statistic` (t-statistic) and `p.value`. A new row is created for each `term` type, e.g. intercept, x1, x2, etc.
@@ -125,7 +120,7 @@ by_country2 %>%
 
 ```
 
-__unnesting__, dd another dataframe with the residuals included and then unnest
+__unnesting__, another dataframe with the residuals included and then unnest
 ```{r}
 by_country3 <- by_country2 %>%
   mutate(resids = purrr::map2(data, model, add_residuals))
@@ -187,7 +182,7 @@ resids
     
     * The quadratic trend seems to do better --> indicated by the distribution of the R^2 values being closer to one. The level of improvement seems especially pronounced for African countries.
     
-    Let's check this for sure by looking at percentage point improvement in R^2 in chart below
+    Let's check this closer by looking at percentage point improvement in R^2 in chart below
 
     ```{r}
     by_country3_quad %>% 
@@ -228,6 +223,7 @@ resids
     
     * while the quadratic model does a better job fitting the model than a linear term does, I wouldn't say it does a good job of fitting the model
     * it looks like the trends are generally consistent rates of improvement and then there is a sudden drop-off associated with some event, hence an intervention variable may be a more appropriate method for modeling this pattern
+    
     
     *Quadratic model parameters*
     ```{r}
@@ -302,27 +298,10 @@ resids
              intercept = find_intercept(x1, y1, slope),
              slope_change = x1*2*botswana_coefs[[3]]) %>% 
       select(slope, intercept, everything())
-    
     ```
     
     ```{r}
     by_country3_quad %>% 
-      filter(country == "Botswana") %>% 
-      mutate(data_preds = purrr::map2(data_cent, mod_quad, add_predictions)) %>% 
-      unnest(data_preds) %>% 
-      ggplot(aes(x = year_cent))+
-      geom_line(aes(x = year_cent, y = pred), colour = "red")+
-      # geom_line(aes(y = pred, colour = "prediction"))+
-    # labs(title = "Data and 2nd order model predictions for Botswana")+
-      geom_abline(intercept = tangent_lines[[2]][[1]], slope = tangent_lines[[1]][[1]])+
-        geom_abline(intercept = tangent_lines[[2]][[2]], slope = tangent_lines[[1]][[2]])+
-        geom_abline(intercept = tangent_lines[[2]][[3]], slope = tangent_lines[[1]][[3]])+
-        geom_abline(intercept = tangent_lines[[2]][[4]], slope = tangent_lines[[1]][[4]])+
-        geom_abline(intercept = tangent_lines[[2]][[5]], slope = tangent_lines[[1]][[5]])+
-      ylim(c(40, 70))+
-      coord_fixed()
-    
-        by_country3_quad %>% 
       filter(country == "Botswana") %>% 
       mutate(data_preds = purrr::map2(data_cent, mod_quad, add_predictions)) %>% 
       unnest(data_preds) %>% 
@@ -343,6 +322,7 @@ resids
     ```
     
     * notice that for every 10 year increase in `x1` we see the slope of the tangent line has decreased by 0.35. If we'd looked at just one year we would have seen the change was 0.035, this correspondig with 2 multiplied by the coefficient on the quadratic term of our model.
+    
 
 1.  Explore other methods for visualising the distribution of $R^2$ per continent. You might want to try the ggbeeswarm package, which provides similar methods for avoiding overlaps as jitter, but uses deterministic methods.
     
@@ -353,21 +333,10 @@ resids
       ggplot(aes(x = continent, y = r.squared, colour = continent))+
       geom_boxplot(alpha = 0.1, colour = "dark grey")+
       ggbeeswarm::geom_quasirandom()
-    
-    by_country3_quad %>% 
-      unnest(glance_mod) %>% 
-      ggplot(aes(x = continent, y = r.squared, colour = continent))+
-      geom_boxplot(alpha = 0.1, colour = "dark grey")+
-      geom_jitter()
-    
-    by_country3_quad %>% 
-      unnest(glance_mod) %>%  
-      ggplot(aes(x = continent, y = r.squared, colour = continent))+
-      geom_boxplot(alpha = 0.1, colour = "dark grey")+
-      ggbeeswarm::geom_beeswarm()
     ```
 
-    * I like `geom_quasirandom` the best as an overlay on boxplot, it keeps things centered and doesn't have the gravitational pull affect that makes `geom_beeswarm` become a little misaligned
+    * I like `geom_quasirandom()` the best as an overlay on boxplot, it keeps things centered and doesn't have the gravitational pull affect that makes `geom_beeswarm()` become a little misaligned, it also works well here over `geom_jitter()` as the points stay better around their true value
+    
 
 1.  To create the last plot (showing the data for the countries with the worst model fits), we needed two steps: we created a data frame with one row per country and then semi-joined it to the original dataset. It's possible to avoid this join if we use `unnest()` instead of `unnest(.drop = TRUE)`. How?
 
@@ -393,18 +362,19 @@ resids
 
 1.  List all the functions that you can think of that take an atomic vector and return a list.
 
-* `stringr::str_extract_all` + other `stringr` functions
-
-(however the below can also take types that are not atomic and are probably not really what is being looked for)
-* `list`
-* `tibble`
-* `map` / `lapply`
+    * `stringr::str_extract_all` + other `stringr` functions
+    
+    (however the below can also take types that are not atomic and are probably not really what is being looked for)
+    
+    * `list`
+    * `tibble`
+    * `map` / `lapply`
 
 1.  Brainstorm useful summary functions that, like `quantile()`, return multiple values.
 
-* `summary`
-* `range`
-* ...
+    * `summary`
+    * `range`
+    * ...
     
 1.  What's missing in the following data frame? How does `quantile()` return that missing piece? Why isn't that helpful here?
 
@@ -426,7 +396,7 @@ resids
     
     ```
     
-    * see [quantile example] for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)
+    * see [list(quantile()) examples] for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)
     
 1.  What does this code do? Why might it be useful?
 
@@ -437,7 +407,7 @@ resids
       summarise_all(funs(list))
     ```
 
-    * It turns each row into an atomic vector grouped by the particular `cyl` value.  It is different from `nest` in that each column creates a new list-column representing an atomic vector. If `nest` had been used, this woudl have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns...
+    * It turns each row into an atomic vector grouped by the particular `cyl` value.  It is different from `nest` in that each column creates a new list-column representing an atomic vector. If `nest` had been used, this would have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns...
     * e.g. let's say we want to find the number of unique items in each column for each grouping, we could do that like so
     
     ```{r}
@@ -464,36 +434,24 @@ resids
 1.  Why might the `lengths()` function be useful for creating atomic
     vector columns from list-columns?
     
-    If all you wanted were the length (not the number of unique items), you would still need a `map function when using `length`
-        
-    ```{r}
-    mtcars %>% 
-      group_by(cyl) %>% 
-      select(1:5) %>% 
-      summarise_all(funs(list)) %>% 
-      mutate_all(funs(map_int(., length))) 
-    ```
+    * perhaps you want to measure the number of elements (or unique elements) in an individual element of a list column
     
-    for this problem, using `lengths` prevents the need to use a `map` function
+```{r}
+mpg %>% 
+  group_by(cyl) %>% 
+  summarise(displ_list = list(displ)) %>% 
+  mutate(num_unique = map_int(displ_list, ~unique(.x) %>% length()))
+```
     
-    ```{r}
-    mtcars %>% 
-      group_by(cyl) %>% 
-      select(1:5) %>% 
-      summarise_all(funs(list)) %>% 
-      mutate_all(lengths) 
-    ```
-    
-    * is there a more helpful use case...?
     
 1.  List the most common types of vector found in a data frame. What makes lists different?
 
-    * the atomic types: char, int, double, fact, date are all more common, they are atomic, whereas lists are not
+    * the atomic types: char, int, double, factor, date are all more common, they are atomic, whereas lists are not atomic vectors and can contain any type of data within them (e.g. a list of atomic vectors, list of lists, etc.).
 
 ## Appendix
 
 ### Models in lists
-this is the more traditional way you might store models
+This is the more traditional way you might store models in a list
 
 ```{r}
 models_countries <- purrr::map(by_country$data, country_model)
@@ -504,7 +462,7 @@ models_countries[1:3]
 ```
 
 ### List-columns for sampling
-say you want to sample all the flights on 50 days out of the year. List-cols can be helpful in generating a sample like this:
+say you want to sample all the flights on 50 days out of the year. List-cols can be used to generate a sample like this:
 ```{r}
 flights %>% 
   mutate(create_date = make_date(year, month, day)) %>% 
@@ -515,7 +473,7 @@ flights %>%
   unnest()
 ```
 
-The alternative a join, e.g.
+Alternatively you could use a `semi_join()`, e.g.
 ```{r}
 flights_samp <- flights %>% 
   mutate(create_date = make_date(year, month, day)) %>% 
@@ -528,13 +486,13 @@ flights %>%
   semi_join(flights_samp, by = "create_date")
 ```
 
-* I find the `nest` - `unnest` method more elegant
-* I've found the `semi_join` method seems to run goes faster on large dataframes
+* In some situations I find the `nest`, `unnest` method more elegant though the `semi_join` method seems to run goes faster on large dataframes
+* There are also other more specialized functions in the tidyverse to help with various sampling strategies
 
 ### 25.2.5.1
 
 #### Include cubic term
-Let's look at this example if we had allowed year to be a 3rd order polynomial.  We're really stretching our degrees of freedom in this case -- these might be unlikely to generalize to other data well. 
+Let's look at this example if we had allowed year to be a 3rd order polynomial.  We're really stretching our degrees of freedom (in relation to our number of observations) in this case -- these might be less likely to generalize to other data well. 
 
 ```{r}
 by_country3 %>% 
@@ -557,11 +515,14 @@ by_country3 %>%
 * interpretibility of coefficients beyond quadratic term becomes less strait forward to explain
 
 ### Multiple graphs in chunk
-My work flow for pulling multiple graphs into a single input has typically been either to build the graphs seperately and then add each to the function `gridExtra::grid.arrange()` or to use faceting as much as possible.  
 
-In 25.2 Hadley showed an example where he put all the graphs within a chunk into a single outputted figure by setting the code chunk options for this. The chunk below is that example.
+There are a variety of ways to have multiple graphs outputted and aligned side by side: 
 
-```{r, out.width = "33%", fig.asp = 1, fig.width = 3, fig.align='default'}
+* build graphs separately and use `gridExtra::grid.arrange()` 
+* Ensure metrics have been gathered into a single column and then use `facet_wrap()`/`facet_grid()` (`ggforce` is a helpful extension package to ggplot2 that gives more functionality to these faceting functions)
+* manipulate chunk options, e.g. figures below have the following options set in the R code chunk: `out.width = "33%", fig.asp = 1, fig.width = 3, fig.show='hold',, fig.align='default'`
+
+```{r, out.width = "33%", fig.asp = 1, fig.width = 3, fig.show='hold',, fig.align='default'}
 
 nz <- filter(gapminder, country == "New Zealand")
 nz %>% 
@@ -584,11 +545,9 @@ nz %>%
   ggtitle("Remaining pattern")
 ```
 
-* still printing as 3 individual plots, how to fix?
+### list(quantile()) examples
 
-### `list(quantile())` examples
-
-Not really best practice...
+Some of these examples may not represent best practices.
 
 ```{r}
 prob_vals <- c(0, .25, .5, .75, 1)
@@ -609,16 +568,22 @@ iris %>%
   unnest()
 ```
 
-### Extracting row names
-Don't know I'd do this...
+### Extracting names
+Maybe not best practice:
 ```{r}
 quantile(1:100) %>% 
-  as_tibble() %>% 
+  as.data.frame() %>% 
   rownames_to_column()
 ```
 
+Better would be to use `enframe()` here:
+```{r}
+quantile(1:100) %>% 
+  tibble::enframe()
+```
+
 ### `invoke_map` example (book)
-I liked Hadley's example with invoke_map and wanted to save it
+I liked Hadley's example with invoke_map and wanted to save it:
 ```{r}
 sim <- tribble(
   ~f,      ~params,

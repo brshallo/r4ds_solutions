@@ -1,9 +1,16 @@
 
-*Make sure the following packages are installed:*  
-
 
 
 # Ch. 23: Model basics
+
+***WARNING* many of the solutions and notes in this chapter use various `modelr::sim*` datasets but do not explicitly refer to these coming from the `modelr` package.**
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
+  
+* 23.2.1. #2
+* 23.3.3. #1, 4
+* 23.4.5. #4</div>\EndKnitrBlock{rmdimportant}
+
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `geom_abline` create line or lines given intercept and slopes, e.g. `geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)`
 * `optim` general purpose function for optimization using Newton-Raphson search
@@ -12,10 +19,10 @@
   * First arg is dataframe, next args are variable names to build grid from
   * when using with continuous data, `seq_range` or similar can be a good complement, see [^SplineNote] for an example where this is used.
 * `seq_range(x1, 5)` takes 5 values evenly spaced within this set.  Two other useful args:  
-  + `pretty = TRUE ` : will generate a "pretty sequence"
-  ++ `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , 0, 0.2, 0.4, 0.6, 0.8, 1
-  + `trim = 0.1` will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
-  +`expand = 0.1 is kind of the opposite and expands the range by 10%
+  * `pretty = TRUE ` : will generate a "pretty sequence"
+  * `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , 0, 0.2, 0.4, 0.6, 0.8, 1
+  * `trim = 0.1` will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
+  *`expand = 0.1 is kind of the opposite and expands the range by 10%
 * `modelr::add_predictions` takes a data frame and modle an adds predictions from the model to a new column
 * `modelr::add_residuals` is similar to above but requires actual value be in dataframe so that residuals can be calculated
 * `modelr::spread_residuals` and `modelr::gather_residuals` allow you to do this for multiple models at once. equivalent are avaialble for `*_predictions` as well.
@@ -39,7 +46,7 @@
       geom_point()
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-3-1.png" width="672" />
     
     
     
@@ -60,7 +67,7 @@
       facet_wrap(~ model)
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" />
     
     *Notice that model with 5 degrees of freedom is able to now roughly approximate the model
     
@@ -86,7 +93,7 @@
       facet_wrap(~ model)
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-4-1.png" width="672" />
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-6-1.png" width="672" />
     
     * Notice 5 degrees of freedom only allows it to mirror up-down-up-down, representing behavior of 5th degree polynomial, extrapolating outside of this performance is poor  
       
@@ -113,7 +120,7 @@
       facet_wrap(~ model)
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
   
     * Performance on extrapolation becomes much worse for the polynomial though
     * Notice that the values cover a much larger codomain that is much farther from the actual data once extended.
@@ -121,7 +128,6 @@
 * `nobs(mod)` see how many observations were used in model building (assuming 'mod' represents a model)
 * make dropping of missing values explicit with `options(na.action = na.warn)`
   * to make silent in specific models use e.g. `mod <- lm(y ~ x, data = df, na.action = na.exclude)`
-
 
 
 ## 23.2: A simple model
@@ -158,20 +164,20 @@
              rmse = map2_dbl(mods, data, modelr::rmse),
              mae = map2_dbl(mods, data, modelr::mae))
     
-    plots_prep %>% 
-      ggplot(aes(x = "rmse", y = rmse))+
-      geom_violin()
-    ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-    
-    ```r
     plots_prep %>% 
       ggplot(aes(x = "rmse", y = rmse))+
       ggbeeswarm::geom_beeswarm()
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-8-2.png" width="672" />
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-10-1.png" width="672" />
+    
+    ```r
+    # # Other option for visualizing
+    # plots_prep %>% 
+    #   ggplot(aes(x = "rmse", y = rmse))+
+    #   geom_violin()
+    ```
     
     * as a metric it tends to be more suseptible to outliers, than say mae
 
@@ -227,15 +233,8 @@
       unnest() %>% 
       mutate(error_type = "rmse",
              row_n = row_number())
-    
-    bind_rows(rmse_df, mae_df) %>% 
-      ggplot(aes(x = row_n, colour = error_type))+
-      geom_point(aes(y = error))
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-    
-    * you can see the error for rmse seems to have more extreme examples
     
     
     ```r
@@ -245,49 +244,10 @@
       facet_wrap(~error_type, scales = "free_x")
     ```
     
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-12-1.png" width="672" />
-    
-    * let's look at differences in the coefficients produced
-    
-    ```r
-    mae_df <- best_mae_sims %>% 
-      map("par") %>% 
-      transpose() %>% 
-      set_names(c("bo", "b1")) %>% 
-      as_tibble() %>% 
-      unnest() %>% 
-      mutate(error_type = "mae", 
-             row_n = row_number())
-    
-    rmse_df <- best_rmse_sims %>% 
-      map("par") %>% 
-      transpose() %>% 
-      set_names(c("bo", "b1")) %>% 
-      as_tibble() %>% 
-      unnest() %>% 
-      mutate(error_type = "rmse",
-             row_n = row_number())
-    
-    bind_rows(rmse_df, mae_df) %>% 
-      ggplot(aes(x = bo, colour = error_type))+
-      geom_point(aes(y = b1))
-    ```
-    
-    <img src="23-model-basics_files/figure-html/unnamed-chunk-13-1.png" width="672" />
-        
-    * see more variability in the b1
-    * another way of visualizing the variability in coefficients is below
-    
-    
-    ```r
-    left_join(rmse_df, mae_df, by = "row_n", suffix = c("_rmse", "_mae")) %>%
-      ggplot(aes(x = b1_rmse, y = b1_mae))+
-      geom_point()+
-      coord_fixed()
-    ```
-    
     <img src="23-model-basics_files/figure-html/unnamed-chunk-14-1.png" width="672" />
-
+    
+    * you can see the error for rmse seems to have more extreme examples
+    
     
 1.  One challenge with performing numerical optimisation is that it's only guaranteed to find one local optima. What's the problem with optimising a three parameter model like this?
     
@@ -363,8 +323,7 @@
     ## NULL
     ```
 
-* a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)...
-* it would be nice if this spit out a warning of colinearity or something...
+* a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)...^[Would be nice perhaps if this spit out a message or warning...]
 
 ## 23.3: Visualising models
 
@@ -384,17 +343,22 @@
       add_residuals(sim1_mod_loess) %>%
       ggplot()+
       geom_point(aes(x = x, y = y))+
-      geom_line(aes(x = x, y = pred_lin), colour = "dark green", alpha = 0.3, size = 2.5)+
-      geom_line(aes(x = x, y = pred), colour = "red", alpha = 0.3, size = 2.5)+
-      geom_smooth(aes(x = x, y = y), se = FALSE)
+      geom_smooth(aes(x = x, y = y), se = FALSE)+
+      geom_line(aes(x = x, y = pred_lin, colour = "pred_lin"), alpha = 0.3, size = 2.5)+
+      geom_line(aes(x = x, y = pred, colour = "pred_loess"),  alpha = 0.3, size = 2.5)
+    ```
+    
+    ```
+    ## `geom_smooth()` using method = 'loess' and formula 'y ~ x'
     ```
     
     <img src="23-model-basics_files/figure-html/23.3.3 1-1.png" width="672" />
     
-    * For sim1, the default value for `geom_smooth` is to use loess, os it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
+    * For sim1, the default value for `geom_smooth` is to use loess, so it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
     * this relationship looks pretty solidly linear
-        + below are some plots of the resids, just for kicks
     
+    
+    *Plot of the resids:*
     
     ```r
     sim1 %>% 
@@ -405,19 +369,25 @@
       # mutate(row_n = row_number) %>% 
       ggplot()+
       geom_ref_line(h = 0)+
-      geom_point(aes(x = x, y = resid_loess), colour = "red")+
-      geom_point(aes(x = x, y = resid_lin), colour = "blue")
+      geom_point(aes(x = x, y = resid_lin, colour = "pred_lin"))+
+      geom_point(aes(x = x, y = resid_loess, colour = "pred_loess"))
     ```
     
     <img src="23-model-basics_files/figure-html/unnamed-chunk-16-1.png" width="672" />
     
+    *Distribution of residuals:*
     
     ```r
     sim1 %>% 
       gather_residuals(sim1_mod, sim1_mod_loess) %>% 
+      mutate(model = ifelse(model == "sim1_mod", "sim1_mod_lin", model)) %>% 
       ggplot()+
-      geom_histogram(aes(x = resid))+
+      geom_histogram(aes(x = resid, fill = model))+
       facet_wrap(~model)
+    ```
+    
+    ```
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
     ```
     
     <img src="23-model-basics_files/figure-html/unnamed-chunk-17-1.png" width="672" />
@@ -450,45 +420,6 @@
     ## 10     4 12.4     12.4           12.8 
     ## # ... with 20 more rows
     ```
-    
-    ```r
-    #How can I add a prefix when using spread_predictions() ? -- could use the
-    #method below
-    sim1 %>% 
-      gather_predictions(sim1_mod, sim1_mod_loess) %>%
-      mutate(model = str_c(model, "_pred")) %>% 
-      spread(key = model, value = pred)
-    ```
-    
-    ```
-    ## # A tibble: 30 x 4
-    ##        x     y sim1_mod_loess_pred sim1_mod_pred
-    ##    <int> <dbl>               <dbl>         <dbl>
-    ##  1     1  2.13                5.34          6.27
-    ##  2     1  4.20                5.34          6.27
-    ##  3     1  7.51                5.34          6.27
-    ##  4     2  8.99                8.27          8.32
-    ##  5     2 10.2                 8.27          8.32
-    ##  6     2 11.3                 8.27          8.32
-    ##  7     3  7.36               10.8          10.4 
-    ##  8     3 10.5                10.8          10.4 
-    ##  9     3 10.5                10.8          10.4 
-    ## 10     4 11.9                12.8          12.4 
-    ## # ... with 20 more rows
-    ```
-    
-    ```r
-    #now could add a spread_residuals() without it breaking...
-    
-    sim1 %>% 
-      gather_predictions(sim1_mod, sim1_mod_loess) %>% 
-      ggplot()+
-      geom_point(aes(x = x, y = y))+
-      geom_line(aes(x = x, y = pred))+
-      facet_wrap(~model)
-    ```
-    
-    <img src="23-model-basics_files/figure-html/23.3.3 2-1.png" width="672" />
     
 1.  What does `geom_ref_line()` do? What package does it come from? Why is displaying a reference line in plots showing residuals useful and important?
     
@@ -538,11 +469,12 @@
     ```
     
     * you have an ANOVA analysis, one of the variables takes on the value of the intercept, the others all have the value of the intercept added to them.
+    
       
 1.  Use `model_matrix()` to explore the equations generated for the models I fit to `sim3` and `sim4`. Why is `*` a good shorthand for interaction?
     
     ```r
-    model_matrix(y ~ x1*x2, data = sim3)
+    model_matrix(y ~ x1 * x2, data = sim3)
     ```
     
     ```
@@ -563,7 +495,7 @@
     ```
     
     ```r
-    model_matrix(y ~ x1*x2, data = sim4)
+    model_matrix(y ~ x1 * x2, data = sim4)
     ```
     
     ```
@@ -583,9 +515,9 @@
     ## # ... with 290 more rows
     ```
     
-    * because each of the levels are multiplied by one another (just don't have to write in the design variables)
-  
-
+    * because each of the levels are multiplied by one another (just don't have to write in the design variables)  
+    
+    
 1.  Using the basic principles, convert the formulas in the following two models into functions. (Hint: start by converting the categorical variable into 0-1 variables.)
     
     
@@ -594,10 +526,11 @@
     mod2 <- lm(y ~ x1 * x2, data = sim3)
     ```
     
-    * do later
-
+    * not completed
+    
+    
 1.   For `sim4`,  which of `mod1` and `mod2` is better? I think `mod2` does a slightly better job at removing patterns, but it's pretty subtle. Can you come up with a plot to support my claim? 
-         
+    
     
     ```r
     mod1 <- lm(y ~ x1 + x2, data = sim4)
@@ -653,7 +586,6 @@
     
     *Plot difference in residuals*
     
-    
     ```r
     sim4 %>% 
       spread_residuals(mod1, mod2) %>% 
@@ -690,7 +622,7 @@
     <img src="23-model-basics_files/figure-html/unnamed-chunk-22-1.png" width="672" />
     
     * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
-      * however very little difference, and I might lean more towards `mod1` for simplicities sake
+      * however little and `mod1` has advantage of simplicity
 
 ## Appendix
 
@@ -816,7 +748,7 @@ grid_models %>%
 
 <img src="23-model-basics_files/figure-html/grid search-1.png" width="672" />
 
-In the future add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.
+In the future could add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.
 
 Could instead use Newton-Raphson search with `optim`
 
@@ -847,7 +779,7 @@ best_rmse$value
 ## [1] 2.128181
 ```
 
-Above is equivalent to R's `lm` function
+Above produces roughly equal to R's `lm()` function
 
 ```r
 sim1_mod <- lm(y ~ x, data = sim1)
@@ -868,7 +800,7 @@ rmse(sim1_mod, sim1)
 ## [1] 2.128181
 ```
 
-* Notice are *slightly* different, perhaps due to number of steps optim will take
+* Notice are *slightly* different, perhaps due to number of steps `optim()` will take
 
 E.g. could build a function for optimizing upon MAE instead and still works
 
@@ -887,10 +819,95 @@ best_mae$par
 ## [1] 4.364852 2.048918
 ```
 
+### 23.2.1.1
+
+    *Let's look at differences in the coefficients produced:*
+    
+    ```r
+    mae_df <- best_mae_sims %>% 
+      map("par") %>% 
+      transpose() %>% 
+      set_names(c("bo", "b1")) %>% 
+      as_tibble() %>% 
+      unnest() %>% 
+      mutate(error_type = "mae", 
+             row_n = row_number())
+    
+    rmse_df <- best_rmse_sims %>% 
+      map("par") %>% 
+      transpose() %>% 
+      set_names(c("bo", "b1")) %>% 
+      as_tibble() %>% 
+      unnest() %>% 
+      mutate(error_type = "rmse",
+             row_n = row_number())
+    
+    bind_rows(rmse_df, mae_df) %>% 
+      ggplot(aes(x = bo, colour = error_type))+
+      geom_point(aes(y = b1))
+    ```
+    
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-29-1.png" width="672" />
+        
+    * see more variability in the b1
+    * another way of visualizing the variability in coefficients is below
+    
+    
+    ```r
+    left_join(rmse_df, mae_df, by = "row_n", suffix = c("_rmse", "_mae")) %>%
+      ggplot(aes(x = b1_rmse, y = b1_mae))+
+      geom_point()+
+      coord_fixed()
+    ```
+    
+    <img src="23-model-basics_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+
+### 23.3.3.2
+
+
+```r
+    #How can I add a prefix when using spread_predictions() ? -- could use the
+    #method below
+    sim1 %>% 
+      gather_predictions(sim1_mod, sim1_mod_loess) %>%
+      mutate(model = str_c(model, "_pred")) %>% 
+      spread(key = model, value = pred)
+```
+
+```
+## # A tibble: 30 x 4
+##        x     y sim1_mod_loess_pred sim1_mod_pred
+##    <int> <dbl>               <dbl>         <dbl>
+##  1     1  2.13                5.34          6.27
+##  2     1  4.20                5.34          6.27
+##  3     1  7.51                5.34          6.27
+##  4     2  8.99                8.27          8.32
+##  5     2 10.2                 8.27          8.32
+##  6     2 11.3                 8.27          8.32
+##  7     3  7.36               10.8          10.4 
+##  8     3 10.5                10.8          10.4 
+##  9     3 10.5                10.8          10.4 
+## 10     4 11.9                12.8          12.4 
+## # ... with 20 more rows
+```
+
+```r
+    #now could add a spread_residuals() without it breaking...
+    
+    sim1 %>% 
+      gather_predictions(sim1_mod, sim1_mod_loess) %>% 
+      ggplot()+
+      geom_point(aes(x = x, y = y))+
+      geom_line(aes(x = x, y = pred))+
+      facet_wrap(~model)
+```
+
+<img src="23-model-basics_files/figure-html/unnamed-chunk-31-1.png" width="672" />
+
 
 ### tidy grid_space
 
-Below is a pseudo-tidy way of creating the `grid_space` var from above, it actually took more effort to create this probably, so didn't use. However you could imagine if you had to do this across A LOT of values it could be worth doing it this way
+Below is a pseudo-tidy way of creating the `grid_space` var from above, it actually took more effort to create this probably, so didn't use. However you could imagine if you had to search across A LOT of values it could be worth doing something similar to this (note `caret` or `tidymodels` are resources for effectively building search spaces for hyper paramter tuning and other related modeling activities).
 
 ```r
 funs_names <- tibble(funs = c(rep("min", 2), rep("max", 2)),
@@ -913,7 +930,7 @@ grid_space
 ## # A tibble: 1 x 4
 ##   min_x min_y max_x max_y
 ##   <dbl> <dbl> <dbl> <dbl>
-## 1  2.01 0.280  14.9  2.54
+## 1 -7.10 0.319  14.9  3.89
 ```
 
 
@@ -928,5 +945,9 @@ sim4 %>%
   geom_histogram(position = "identity", alpha = 0.3)
 ```
 
-<img src="23-model-basics_files/figure-html/unnamed-chunk-30-1.png" width="672" />
+```
+## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+```
+
+<img src="23-model-basics_files/figure-html/unnamed-chunk-33-1.png" width="672" />
 

@@ -2,7 +2,7 @@
 *Make sure the following packages are installed:*  
 
 ```{r setup28, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
 
 library(ggplot2)
 library(dplyr)
@@ -17,6 +17,9 @@ library(scales)
 
 
 # Ch. 28: Graphics for communication
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
 * `labs()` to add labels
   * common args: `title`, `subtitle`, `caption`, `x`, `y`, `colour`, ...
@@ -85,7 +88,7 @@ library(scales)
     
     You could take into account the class of the car
     
-    ```{r}
+    ```{r, warning=FALSE}
     mpg %>% 
       ggplot(aes(x = hwy, displ, colour = class))+
       geom_count()+
@@ -93,7 +96,8 @@ library(scales)
            subtitle = "SUV and pickup classes` tend to be highest on disp",
            caption = "Data is for cars made in either 1999 or 2008",
            colour = "Car class")+
-      geom_smooth()
+      geom_smooth()+
+      facet_wrap(~class)
     ```
 
 1.  Take an exploratory graphic that you've created in the last month, and add
@@ -109,32 +113,6 @@ library(scales)
     four corners of the plot.
     
     ```{r}
-    data_label <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
-
-    mpg %>% 
-      ggplot(aes(x = hwy, displ))+
-      geom_count(aes(colour = class))+
-      labs(title = "Larger displacement has lower gas mileage efficiency",
-           subtitle = "SUV and pickup classes` tend to be highest on disp",
-           caption = "Data is for cars made in either 1999 or 2008",
-           colour = "Car class")+
-      geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
-    ```
-
-    You could technically create the lable w/o the tibble, though it will print multiple times for each row:
-    ```{r}
-    mpg %>% 
-      ggplot(aes(x = hwy, displ))+
-      geom_count(aes(colour = class))+
-      labs(title = "Larger displacement has lower gas mileage efficiency",
-           subtitle = "SUV and pickup classes` tend to be highest on disp",
-           caption = "Data is for cars made in either 1999 or 2008",
-           colour = "Car class")+
-      geom_text(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
-    ```
-    
-    Place label in each of four courners:
-```{r}
     data_label <- tibble(x = c(Inf, -Inf), 
            hjust = c("right", "left"), 
            y = c(Inf, -Inf),
@@ -151,11 +129,14 @@ library(scales)
            colour = "Car class")+
       geom_text(aes(x = x, y = y, label = label, hjust = hjust, vjust = vjust),
                 data = data_label)
-```
+    ```
+    
 
 1.  Read the documentation for `annotate()`. How can you use it to add a text
     label to a plot without having to create a tibble?
     
+    * function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
+
     ```{r}
     mpg %>% 
       ggplot(aes(x = hwy, displ))+
@@ -165,17 +146,14 @@ library(scales)
            caption = "Data is for cars made in either 1999 or 2008",
            colour = "Car class")+
       annotate("text", x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
-    
     ```
     
-    * function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
-    * can specify the geom type with annotate
-
+    
 1.  How do labels with `geom_text()` interact with faceting? How can you
     add a label to a single facet? How can you put a different label in
     each facet? (Hint: think about the underlying data.)
-
-    ```{r}
+    
+    ```{r, warning=FALSE}
     data_label_single <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
     
     data_label <- mpg %>% 
@@ -195,7 +173,8 @@ library(scales)
       geom_smooth()+
       geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
     ```
-
+    
+    
 1.  What arguments to `geom_label()` control the appearance of the background
     box?
     
@@ -215,24 +194,10 @@ library(scales)
     of plots that demonstrate the most important options.
     
     ```{r}
-    ggplot(mpg, aes(displ, hwy)) +
-      geom_point(aes(colour = class)) +
-      geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
-      
-    ```
-    
-    ```{r}
     b <- ggplot(mtcars, aes(wt, mpg)) +
       geom_point()
     
     df <- data.frame(x1 = 2.62, x2 = 3.57, y1 = 21.0, y2 = 15.0)
-    b +
-     geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "curve"), data = df) +
-     geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
-    
-    b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
-    
-    b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
     
     b + geom_curve(
       aes(x = x1, y = y1, xend = x2, yend = y2),
@@ -242,6 +207,7 @@ library(scales)
     ```
     
     * `angle` (in degrees), `length` (use `unit()` function to specify with number and type, e.g. "inches"), `ends` ("last", "first", or "both" -- specifying which end), `type` ("open" or "closed")
+    * See [28.3.1.5] for more notes on line options (not specific to `arrow()`)
     
 ## 28.4: Scales
 
@@ -249,7 +215,7 @@ library(scales)
 
 1.  Why doesn't the following code override the default scale?
 
-    ```{r fig.show = "hide"}
+    ```{r}
     df <- tibble(x = rnorm(100), y = rnorm(100))
     
     ggplot(df, aes(x, y)) +
@@ -260,17 +226,12 @@ library(scales)
 
     * `geom_hex` uses `fill`, not `colour`
 
-    ```{r fig.show = "hide"}
+    ```{r}
     df <- tibble(x = rnorm(100), y = rnorm(100))
     
     ggplot(df, aes(x, y)) +
       geom_hex() +
       scale_fill_gradient(low = "white", high = "red") +
-      coord_fixed()
-    
-    ggplot(df, aes(x, y)) +
-      geom_hex() +
-      # scale_fill_gradient(low = "white", high = "red") +
       coord_fixed()
     ```
 
@@ -286,27 +247,52 @@ library(scales)
     1. Adding informative plot labels.
     1. Placing breaks every 4 years (this is trickier than it seems!).
     
-```{r}
-presidential %>%
-  mutate(id = 33L + row_number()) %>%
-  ggplot(aes(start, id, colour = party)) +
-  geom_point() +
-  geom_segment(aes(xend = end, yend = id)) +
-  geom_text(aes(label = name), vjust = "bottom", nudge_y = 0.2)+
-  scale_colour_manual(values = c(Republican = "red", Democratic = "blue"))+
-  scale_x_date("Year in 20th and 21st century", date_breaks = "4 years", date_labels = "'%y")+
-  # scale_x_date(NULL, breaks = presidential$start, date_labels = "'%y")+
-  scale_y_continuous(breaks = c(36, 39, 42), labels = c("36th", "39th", "42nd"))+
-  labs(y = "President number", x = "Year")
-```
+    ```{r}
+    presidential %>%
+      mutate(id = 33L + row_number()) %>%
+      ggplot(aes(start, id, colour = party)) +
+      geom_point() +
+      geom_segment(aes(xend = end, yend = id)) +
+      geom_text(aes(label = name), vjust = "bottom", nudge_y = 0.2)+
+      scale_colour_manual(values = c(Republican = "red", Democratic = "blue"))+
+      scale_x_date("Year in 20th and 21st century", date_breaks = "4 years", date_labels = "'%y")+
+      # scale_x_date(NULL, breaks = presidential$start, date_labels = "'%y")+
+      scale_y_continuous(breaks = c(36, 39, 42), labels = c("36th", "39th", "42nd"))+
+      labs(y = "President number", x = "Year")
+    ```
     
 1.  Use `override.aes` to make the legend on the following plot easier to see.
 
-    ```{r, dev = "png", out.width = "50%"}
+    ```{r}
     diamonds %>% 
       ggplot(aes(carat, price)) +
       geom_point(aes(colour = cut), alpha = 1/20)+
       guides(colour = guide_legend(override.aes = list(alpha = 1)))
     ```
     
+## Appendix
 
+### 28.3.1.5
+
+Not `arrow()` function specifically, but other line end options
+```{r}
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
+  
+```
+
+```{r}
+b <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point()
+
+df <- data.frame(x1 = 2.62, x2 = 3.57, y1 = 21.0, y2 = 15.0)
+
+b +
+ geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "curve"), data = df) +
+ geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
+
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
+
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
+```

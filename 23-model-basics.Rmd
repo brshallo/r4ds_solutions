@@ -17,6 +17,19 @@ library(splines)
 
 # Ch. 23: Model basics
 
+***WARNING* many of the solutions and notes in this chapter use various `modelr::sim*` datasets but do not explicitly refer to these coming from the `modelr` package.**
+```{block2, type='rmdimportant'}
+**Key questions:**  
+  
+* 23.2.1. #2
+* 23.3.3. #1, 4
+* 23.4.5. #4
+```
+
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
+
 * `geom_abline` create line or lines given intercept and slopes, e.g. `geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)`
 * `optim` general purpose function for optimization using Newton-Raphson search
 * `coef` function for extracting coefficients from a linear model
@@ -24,10 +37,10 @@ library(splines)
   * First arg is dataframe, next args are variable names to build grid from
   * when using with continuous data, `seq_range` or similar can be a good complement, see [^SplineNote] for an example where this is used.
 * `seq_range(x1, 5)` takes 5 values evenly spaced within this set.  Two other useful args:  
-  + `pretty = TRUE ` : will generate a "pretty sequence"
-  ++ `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , `r modelr::seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)`
-  + `trim = 0.1` will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
-  +`expand = 0.1 is kind of the opposite and expands the range by 10%
+  * `pretty = TRUE ` : will generate a "pretty sequence"
+  * `seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)` , `r modelr::seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)`
+  * `trim = 0.1` will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
+  *`expand = 0.1 is kind of the opposite and expands the range by 10%
 * `modelr::add_predictions` takes a data frame and modle an adds predictions from the model to a new column
 * `modelr::add_residuals` is similar to above but requires actual value be in dataframe so that residuals can be calculated
 * `modelr::spread_residuals` and `modelr::gather_residuals` allow you to do this for multiple models at once. equivalent are avaialble for `*_predictions` as well.
@@ -89,7 +102,6 @@ library(splines)
       geom_point() +
       geom_line(data = grid, colour = "red") +
       facet_wrap(~ model)
-    
     ```
     
     * Notice 5 degrees of freedom only allows it to mirror up-down-up-down, representing behavior of 5th degree polynomial, extrapolating outside of this performance is poor  
@@ -125,7 +137,6 @@ library(splines)
   * to make silent in specific models use e.g. `mod <- lm(y ~ x, data = df, na.action = na.exclude)`
 
 
-
 ## 23.2: A simple model
 
 ### 23.2.1
@@ -158,13 +169,15 @@ library(splines)
              rmse = map2_dbl(mods, data, modelr::rmse),
              mae = map2_dbl(mods, data, modelr::mae))
     
-    plots_prep %>% 
-      ggplot(aes(x = "rmse", y = rmse))+
-      geom_violin()
     
     plots_prep %>% 
       ggplot(aes(x = "rmse", y = rmse))+
       ggbeeswarm::geom_beeswarm()
+    
+    # # Other option for visualizing
+    # plots_prep %>% 
+    #   ggplot(aes(x = "rmse", y = rmse))+
+    #   geom_violin()
     ```
     
     * as a metric it tends to be more suseptible to outliers, than say mae
@@ -177,7 +190,6 @@ library(splines)
       diff <- data$y - make_prediction(mod, data)
       mean(abs(diff))
     }
-
     ```
     
     Use `optim()` to fit this model to the simulated data above and compare it to the linear model.
@@ -220,13 +232,8 @@ library(splines)
       unnest() %>% 
       mutate(error_type = "rmse",
              row_n = row_number())
-    
-    bind_rows(rmse_df, mae_df) %>% 
-      ggplot(aes(x = row_n, colour = error_type))+
-      geom_point(aes(y = error))
     ```
     
-    * you can see the error for rmse seems to have more extreme examples
     
     ```{r}
     bind_rows(rmse_df, mae_df) %>% 
@@ -235,44 +242,8 @@ library(splines)
       facet_wrap(~error_type, scales = "free_x")
     ```
     
-    * let's look at differences in the coefficients produced
-    ```{r}
-        
-    mae_df <- best_mae_sims %>% 
-      map("par") %>% 
-      transpose() %>% 
-      set_names(c("bo", "b1")) %>% 
-      as_tibble() %>% 
-      unnest() %>% 
-      mutate(error_type = "mae", 
-             row_n = row_number())
+    * you can see the error for rmse seems to have more extreme examples
     
-    rmse_df <- best_rmse_sims %>% 
-      map("par") %>% 
-      transpose() %>% 
-      set_names(c("bo", "b1")) %>% 
-      as_tibble() %>% 
-      unnest() %>% 
-      mutate(error_type = "rmse",
-             row_n = row_number())
-    
-    bind_rows(rmse_df, mae_df) %>% 
-      ggplot(aes(x = bo, colour = error_type))+
-      geom_point(aes(y = b1))
-    
-    ```
-        
-    * see more variability in the b1
-    * another way of visualizing the variability in coefficients is below
-    
-    ```{r}
-    left_join(rmse_df, mae_df, by = "row_n", suffix = c("_rmse", "_mae")) %>%
-      ggplot(aes(x = b1_rmse, y = b1_mae))+
-      geom_point()+
-      coord_fixed()
-    
-    ```
-
     
 1.  One challenge with performing numerical optimisation is that it's only guaranteed to find one local optima. What's the problem with optimising a three parameter model like this?
     
@@ -304,8 +275,7 @@ library(splines)
     
     ```
 
-* a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)...
-* it would be nice if this spit out a warning of colinearity or something...
+* a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)...^[Would be nice perhaps if this spit out a message or warning...]
 
 ## 23.3: Visualising models
 
@@ -324,16 +294,17 @@ library(splines)
       add_residuals(sim1_mod_loess) %>%
       ggplot()+
       geom_point(aes(x = x, y = y))+
-      geom_line(aes(x = x, y = pred_lin), colour = "dark green", alpha = 0.3, size = 2.5)+
-      geom_line(aes(x = x, y = pred), colour = "red", alpha = 0.3, size = 2.5)+
-      geom_smooth(aes(x = x, y = y), se = FALSE)
+      geom_smooth(aes(x = x, y = y), se = FALSE)+
+      geom_line(aes(x = x, y = pred_lin, colour = "pred_lin"), alpha = 0.3, size = 2.5)+
+      geom_line(aes(x = x, y = pred, colour = "pred_loess"),  alpha = 0.3, size = 2.5)
     
     ```
     
-    * For sim1, the default value for `geom_smooth` is to use loess, os it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
+    * For sim1, the default value for `geom_smooth` is to use loess, so it is the exact same. `geom_smooth` will sometimes use gam or other methods depending on data, note that there is also a `weight` argument that can be useful
     * this relationship looks pretty solidly linear
-        + below are some plots of the resids, just for kicks
     
+    
+    *Plot of the resids:*
     ```{r}
     sim1 %>% 
       add_predictions(sim1_mod_loess, var = "pred_loess") %>% 
@@ -343,15 +314,18 @@ library(splines)
       # mutate(row_n = row_number) %>% 
       ggplot()+
       geom_ref_line(h = 0)+
-      geom_point(aes(x = x, y = resid_loess), colour = "red")+
-      geom_point(aes(x = x, y = resid_lin), colour = "blue")
+      geom_point(aes(x = x, y = resid_lin, colour = "pred_lin"))+
+      geom_point(aes(x = x, y = resid_loess, colour = "pred_loess"))
+    
     ```
     
+    *Distribution of residuals:*
     ```{r}
     sim1 %>% 
       gather_residuals(sim1_mod, sim1_mod_loess) %>% 
+      mutate(model = ifelse(model == "sim1_mod", "sim1_mod_lin", model)) %>% 
       ggplot()+
-      geom_histogram(aes(x = resid))+
+      geom_histogram(aes(x = resid, fill = model))+
       facet_wrap(~model)
     ```
 
@@ -365,20 +339,6 @@ library(splines)
     sim1 %>% 
       spread_predictions(sim1_mod, sim1_mod_loess)
     
-    #How can I add a prefix when using spread_predictions() ? -- could use the
-    #method below
-    sim1 %>% 
-      gather_predictions(sim1_mod, sim1_mod_loess) %>%
-      mutate(model = str_c(model, "_pred")) %>% 
-      spread(key = model, value = pred)
-    #now could add a spread_residuals() without it breaking...
-    
-    sim1 %>% 
-      gather_predictions(sim1_mod, sim1_mod_loess) %>% 
-      ggplot()+
-      geom_point(aes(x = x, y = y))+
-      geom_line(aes(x = x, y = pred))+
-      facet_wrap(~model)
     ```    
     
 1.  What does `geom_ref_line()` do? What package does it come from? Why is displaying a reference line in plots showing residuals useful and important?
@@ -406,16 +366,17 @@ library(splines)
     ```
     
     * you have an ANOVA analysis, one of the variables takes on the value of the intercept, the others all have the value of the intercept added to them.
+    
       
 1.  Use `model_matrix()` to explore the equations generated for the models I fit to `sim3` and `sim4`. Why is `*` a good shorthand for interaction?
     ```{r 23.4.5 2}
-    model_matrix(y ~ x1*x2, data = sim3)
-    model_matrix(y ~ x1*x2, data = sim4)
+    model_matrix(y ~ x1 * x2, data = sim3)
+    model_matrix(y ~ x1 * x2, data = sim4)
     ```
     
-    * because each of the levels are multiplied by one another (just don't have to write in the design variables)
-  
-
+    * because each of the levels are multiplied by one another (just don't have to write in the design variables)  
+    
+    
 1.  Using the basic principles, convert the formulas in the following two models into functions. (Hint: start by converting the categorical variable into 0-1 variables.)
     
     ```{r, eval = FALSE}
@@ -423,10 +384,11 @@ library(splines)
     mod2 <- lm(y ~ x1 * x2, data = sim3)
     ```
     
-    * do later
-
+    * not completed
+    
+    
 1.   For `sim4`,  which of `mod1` and `mod2` is better? I think `mod2` does a slightly better job at removing patterns, but it's pretty subtle. Can you come up with a plot to support my claim? 
-         
+    
     ```{r 23.4.5 4}
     mod1 <- lm(y ~ x1 + x2, data = sim4)
     mod2 <- lm(y ~ x1 * x2, data = sim4)
@@ -460,14 +422,12 @@ library(splines)
       geom_line()+
       geom_point(aes(y = y), alpha = 0.3)+
       facet_wrap(~model)
-    
     ```
     
     * notice subtle difference where for mod2 as x2 decreases, the predicted value for x1 also decreases, this is because the interaciton term between these is positive
     * the values near where x2 and x1 are most near 0 should be where the residuals are most similar
     
     *Plot difference in residuals*
-    
     ```{r}
     sim4 %>% 
       spread_residuals(mod1, mod2) %>% 
@@ -479,7 +439,6 @@ library(splines)
       geom_tile(aes(fill = mod2_less_mod1))+
       geom_text(aes(label = round(mod2_less_mod1, 1)), size = 3)+
       scale_fill_gradient2()
-    
     ```
     
     * This shows how `mod2` has higher valued predictions when x1 and x2 are opposite signs compared to the predictions from `mod1`
@@ -500,7 +459,7 @@ library(splines)
     ```
     
     * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
-      * however very little difference, and I might lean more towards `mod1` for simplicities sake
+      * however little and `mod1` has advantage of simplicity
 
 ## Appendix
 
@@ -614,7 +573,7 @@ grid_models %>%
   geom_point(aes(colour = -rmse))
 ```
 
-In the future add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.
+In the future could add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.
 
 Could instead use Newton-Raphson search with `optim`
 ```{r}
@@ -633,7 +592,7 @@ best_rmse$par
 best_rmse$value
 ```
 
-Above is equivalent to R's `lm` function
+Above produces roughly equal to R's `lm()` function
 ```{r}
 sim1_mod <- lm(y ~ x, data = sim1)
 
@@ -641,7 +600,7 @@ sim1_mod %>% coef
 rmse(sim1_mod, sim1)
 ```
 
-* Notice are *slightly* different, perhaps due to number of steps optim will take
+* Notice are *slightly* different, perhaps due to number of steps `optim()` will take
 
 E.g. could build a function for optimizing upon MAE instead and still works
 ```{r}
@@ -655,10 +614,67 @@ best_mae <- optim(c(0,0), measure_mae, data = sim1)
 best_mae$par
 ```
 
+### 23.2.1.1
+
+    *Let's look at differences in the coefficients produced:*
+    ```{r}
+    mae_df <- best_mae_sims %>% 
+      map("par") %>% 
+      transpose() %>% 
+      set_names(c("bo", "b1")) %>% 
+      as_tibble() %>% 
+      unnest() %>% 
+      mutate(error_type = "mae", 
+             row_n = row_number())
+    
+    rmse_df <- best_rmse_sims %>% 
+      map("par") %>% 
+      transpose() %>% 
+      set_names(c("bo", "b1")) %>% 
+      as_tibble() %>% 
+      unnest() %>% 
+      mutate(error_type = "rmse",
+             row_n = row_number())
+    
+    bind_rows(rmse_df, mae_df) %>% 
+      ggplot(aes(x = bo, colour = error_type))+
+      geom_point(aes(y = b1))
+    
+    ```
+        
+    * see more variability in the b1
+    * another way of visualizing the variability in coefficients is below
+    
+    ```{r}
+    left_join(rmse_df, mae_df, by = "row_n", suffix = c("_rmse", "_mae")) %>%
+      ggplot(aes(x = b1_rmse, y = b1_mae))+
+      geom_point()+
+      coord_fixed()
+    ```
+
+### 23.3.3.2
+
+```{r}
+    #How can I add a prefix when using spread_predictions() ? -- could use the
+    #method below
+    sim1 %>% 
+      gather_predictions(sim1_mod, sim1_mod_loess) %>%
+      mutate(model = str_c(model, "_pred")) %>% 
+      spread(key = model, value = pred)
+    #now could add a spread_residuals() without it breaking...
+    
+    sim1 %>% 
+      gather_predictions(sim1_mod, sim1_mod_loess) %>% 
+      ggplot()+
+      geom_point(aes(x = x, y = y))+
+      geom_line(aes(x = x, y = pred))+
+      facet_wrap(~model)
+```
+
 
 ### tidy grid_space
 
-Below is a pseudo-tidy way of creating the `grid_space` var from above, it actually took more effort to create this probably, so didn't use. However you could imagine if you had to do this across A LOT of values it could be worth doing it this way
+Below is a pseudo-tidy way of creating the `grid_space` var from above, it actually took more effort to create this probably, so didn't use. However you could imagine if you had to search across A LOT of values it could be worth doing something similar to this (note `caret` or `tidymodels` are resources for effectively building search spaces for hyper paramter tuning and other related modeling activities).
 ```{r}
 funs_names <- tibble(funs = c(rep("min", 2), rep("max", 2)),
                      coord = rep(c("x", "y"), 2),
@@ -685,6 +701,5 @@ sim4 %>%
   gather_residuals(mod1, mod2) %>% 
   ggplot(aes(x = resid, y = ..density.., fill = model))+
   geom_histogram(position = "identity", alpha = 0.3)
-
 ```
 

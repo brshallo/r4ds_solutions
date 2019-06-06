@@ -11,12 +11,11 @@
 \BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 *Types of vectors, not including augmented types:*
+
 <img src="data-structures-overview.png" width="50%" />
 
-* Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`
-
-![](check-special.png)
-
+* Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`  
+![](check-special.png)  
 * `typeof` retruns type of vector
 * `length` returns length of vector
 * `pryr::object_size` view size of object stored
@@ -25,7 +24,9 @@
 * explicit coersion functions: `as.logical`, `as.integer`, `as.double`, `as.character`, or use `col_[types]` when reading in so that coersion done at source
 * test functions from `purrr` package that are more consistent than base R's
 
-![Purrr versions for testing types](test-type.jpg)
+*Purrr versions for testing types:*
+
+<img src="test-type.jpg" width="50%" />
 
 * `set_names` lets you set names after the fact, e.g. `set_names(1:3, c("a", "b", "c"))`
 * For more details on subsetting: http://adv-r.had.co.nz/Subsetting.html#applications 
@@ -44,7 +45,7 @@ as.Date
 ```
 ## function (x, ...) 
 ## UseMethod("as.Date")
-## <bytecode: 0x0000000017cd9d00>
+## <bytecode: 0x000000001d6f1aa0>
 ## <environment: namespace:base>
 ```
 
@@ -72,72 +73,70 @@ getS3method("as.Date", "default")
 ##     else stop(gettextf("do not know how to convert '%s' to class %s", 
 ##         deparse(substitute(x)), dQuote("Date")), domain = NA)
 ## }
-## <bytecode: 0x0000000017923128>
+## <bytecode: 0x0000000019e1f0e8>
 ## <environment: namespace:base>
 ```
 
 * Some tidyverse functions are not always easy to unpack with just the above[^tidyfuns]
-
-[^tidyfuns]: For example:
-
-    
-    ```r
-    select
-    ```
-    
-    ```
-    ## function (.data, ...) 
-    ## {
-    ##     UseMethod("select")
-    ## }
-    ## <bytecode: 0x00000000175db628>
-    ## <environment: namespace:dplyr>
-    ```
-    
-    ```r
-    methods("select")
-    ```
-    
-    ```
-    ## [1] select.data.frame* select.default*    select.grouped_df*
-    ## [4] select.list        select.tbl_cube*  
-    ## see '?methods' for accessing help and source code
-    ```
-    
-    ```r
-    getS3method("select", "data.frame")
-    ```
-    
-    ```
-    ## function (.data, ...) 
-    ## {
-    ##     vars <- tidyselect::vars_select(sel_vars(.data), !!!quos(...))
-    ##     select_impl(.data, vars)
-    ## }
-    ## <bytecode: 0x000000001bc00058>
-    ## <environment: namespace:dplyr>
-    ```
-    
-    ```r
-    dplyr:::select_impl
-    ```
-    
-    ```
-    ## function (df, vars) 
-    ## {
-    ##     .Call(`_dplyr_select_impl`, df, vars)
-    ## }
-    ## <bytecode: 0x000000001bc76c80>
-    ## <environment: namespace:dplyr>
-    ```
-    
-    * Unless you are experienced, these details may not illuminate how `select()` works
-    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)
-
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
-  + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
+  * data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
 * `class` get or set class attribute
 * `unclass` returns copy with 'class' attribute removed
+
+[^tidyfuns]: For example:  
+        
+        ```r
+        select
+        ```
+        
+        ```
+        ## function (.data, ...) 
+        ## {
+        ##     UseMethod("select")
+        ## }
+        ## <bytecode: 0x0000000017acee90>
+        ## <environment: namespace:dplyr>
+        ```
+        
+        ```r
+        methods("select")
+        ```
+        
+        ```
+        ## [1] select.data.frame* select.default*    select.grouped_df*
+        ## [4] select.list        select.tbl_cube*  
+        ## see '?methods' for accessing help and source code
+        ```
+        
+        ```r
+        getS3method("select", "data.frame")
+        ```
+        
+        ```
+        ## function (.data, ...) 
+        ## {
+        ##     vars <- tidyselect::vars_select(sel_vars(.data), !!!quos(...))
+        ##     select_impl(.data, vars)
+        ## }
+        ## <bytecode: 0x000000001be146b0>
+        ## <environment: namespace:dplyr>
+        ```
+        
+        ```r
+        dplyr:::select_impl
+        ```
+        
+        ```
+        ## function (df, vars) 
+        ## {
+        ##     .Call(`_dplyr_select_impl`, df, vars)
+        ## }
+        ## <bytecode: 0x000000001bea3828>
+        ## <environment: namespace:dplyr>
+        ```
+    * These details may not illuminate for you how `select()` works  
+    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
+    
 
 ## 20.3: Important types of atomic vector
 
@@ -471,4 +470,6 @@ x
 
 It can be confusing how to subset items in a nested list, lists output helps tell you the subsetting needed to extract particular items. For example, to output `list("c", "d")` requires `x[[2]][[1]]`, to output just `d` requires `x[[2]][[1]][[2]]`
 
-![subset nested lists](subsetting-lists-note.png)
+*Subset nested lists:*
+
+<img src="subsetting-lists-note.png" width="414" />

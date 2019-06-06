@@ -28,14 +28,13 @@ library(readr)
 ```
 
 *Types of vectors, not including augmented types:*
+
 ```{r, echo=FALSE, fig.align = "default", fig.show='hold', out.width = "50%"}
 knitr::include_graphics("data-structures-overview.png")
 ```
 
-* Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`
-
-![](check-special.png)
-
+* Check special value types: `is.finite`, `is.infinite`, `is.na`, `is.nan`  
+![](check-special.png)  
 * `typeof` retruns type of vector
 * `length` returns length of vector
 * `pryr::object_size` view size of object stored
@@ -44,7 +43,11 @@ knitr::include_graphics("data-structures-overview.png")
 * explicit coersion functions: `as.logical`, `as.integer`, `as.double`, `as.character`, or use `col_[types]` when reading in so that coersion done at source
 * test functions from `purrr` package that are more consistent than base R's
 
-![Purrr versions for testing types](test-type.jpg)
+*Purrr versions for testing types:*
+
+```{r, echo=FALSE, fig.align = "default", fig.show='hold', out.width = "50%"}
+knitr::include_graphics("test-type.jpg")
+```
 
 * `set_names` lets you set names after the fact, e.g. `set_names(1:3, c("a", "b", "c"))`
 * For more details on subsetting: http://adv-r.had.co.nz/Subsetting.html#applications 
@@ -62,22 +65,21 @@ getS3method("as.Date", "default")
 ```
 
 * Some tidyverse functions are not always easy to unpack with just the above[^tidyfuns]
-
-[^tidyfuns]: For example:  
-    
-    ```{r}
-    select
-    methods("select")
-    getS3method("select", "data.frame")
-    dplyr:::select_impl
-    ```  
-    * Unless you are experienced, these details may not illuminate how `select()` works
-    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
-
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
-  + data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
+  * data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
 * `class` get or set class attribute
 * `unclass` returns copy with 'class' attribute removed
+
+[^tidyfuns]: For example:  
+        ```{r}
+        select
+        methods("select")
+        getS3method("select", "data.frame")
+        dplyr:::select_impl
+        ```  
+    * These details may not illuminate for you how `select()` works  
+    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
+    
 
 ## 20.3: Important types of atomic vector
 
@@ -277,4 +279,8 @@ x
 
 It can be confusing how to subset items in a nested list, lists output helps tell you the subsetting needed to extract particular items. For example, to output `list("c", "d")` requires `x[[2]][[1]]`, to output just `d` requires `x[[2]][[1]][[2]]`
 
-![subset nested lists](subsetting-lists-note.png)
+*Subset nested lists:*
+
+```{r, echo=FALSE, fig.align = "default", fig.show='hold'}
+knitr::include_graphics("subsetting-lists-note.png")
+```

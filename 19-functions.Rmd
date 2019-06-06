@@ -234,7 +234,7 @@ commas(letters[1:10])
 * (though these cannot be made in markdown documents)
 
 
-### 19.3.1.
+### 19.3.1
 
 1.  Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
     

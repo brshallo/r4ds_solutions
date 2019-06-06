@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Yet another study guide for ‘R for Data Science’</title>
-  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
-  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta property="og:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
-  
-  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="twitter:site" content="@brshallo" />
+  <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-31">
+<meta name="date" content="2019-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,13 +135,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Chapter contents</a></li>
+<li><a href="./">Yet another study guide to R4DS</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-book"><i class="fa fa-check"></i>Origin of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
@@ -330,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
@@ -380,6 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-82"><i class="fa fa-check"></i>21.3.5.1</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-83"><i class="fa fa-check"></i>21.9.3.1</a></li>
 <li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
@@ -388,78 +390,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-83"><i class="fa fa-check"></i>23.2.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.3.3</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.3.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.4.5</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-87"><i class="fa fa-check"></i>23.2.1.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-88"><i class="fa fa-check"></i>23.3.3.2</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5.4</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-89"><i class="fa fa-check"></i>23.4.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>24.3.5</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.3.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-89"><i class="fa fa-check"></i>24.2.3.3</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3.4</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.2.3.1</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>25.3.5.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-93"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-94"><i class="fa fa-check"></i>24.3.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-93"><i class="fa fa-check"></i>25.2.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-94"><i class="fa fa-check"></i>25.4.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.5.3</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-97"><i class="fa fa-check"></i>25.5.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-12"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-98"><i class="fa fa-check"></i>25.2.5.1</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
-<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#listquantile-examples"><i class="fa fa-check"></i>list(quantile()) examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-names"><i class="fa fa-check"></i>Extracting names</a></li>
 <li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-97"><i class="fa fa-check"></i>27.2.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-98"><i class="fa fa-check"></i>27.3.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-100"><i class="fa fa-check"></i>27.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.4.7</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-101"><i class="fa fa-check"></i>27.4.7</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-100"><i class="fa fa-check"></i>28.2.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-101"><i class="fa fa-check"></i>28.3.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-103"><i class="fa fa-check"></i>28.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.4.4</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-104"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#appendix-13"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-105"><i class="fa fa-check"></i>28.3.1.5</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -483,6 +487,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch.-27-r-markdown" class="section level1">
 <h1>Ch. 27: R Markdown</h1>
+
+<div class="rmdtip">
+<strong>Functions and notes:</strong>
+</div>
+
 <ul>
 <li>shortcut for inserting code chunk is cmd/ctrl+alt+i</li>
 <li>shortcut for running entire code chunks: cmd/ctrl+shift+enter</li>
@@ -504,7 +513,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>cache.extra</code> if output from function changes, will re-render – useful for if you only want to update if for example a file changes, e.g.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb1265"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1265-1" title="1">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1233-1" title="1">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</a></code></pre></div>
 <ul>
 <li>good idea to name code chunks after main object created</li>
 <li><code>knitr::clean_cache</code> clear out your caches</li>
@@ -512,17 +521,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1266"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1266-1" title="1"><span class="co"># when writing books and tutorials</span></a>
-<a class="sourceLine" id="cb1266-2" title="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1266-3" title="3">  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,</a>
-<a class="sourceLine" id="cb1266-4" title="4">  <span class="dt">collapse =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb1266-5" title="5">)</a>
-<a class="sourceLine" id="cb1266-6" title="6"></a>
-<a class="sourceLine" id="cb1266-7" title="7"><span class="co"># hiding code for report</span></a>
-<a class="sourceLine" id="cb1266-8" title="8">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1266-9" title="9">  <span class="dt">echo =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb1266-10" title="10">)</a>
-<a class="sourceLine" id="cb1266-11" title="11"><span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb1234"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1234-1" title="1"><span class="co"># when writing books and tutorials</span></a>
+<a class="sourceLine" id="cb1234-2" title="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
+<a class="sourceLine" id="cb1234-3" title="3">  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,</a>
+<a class="sourceLine" id="cb1234-4" title="4">  <span class="dt">collapse =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb1234-5" title="5">)</a>
+<a class="sourceLine" id="cb1234-6" title="6"></a>
+<a class="sourceLine" id="cb1234-7" title="7"><span class="co"># hiding code for report</span></a>
+<a class="sourceLine" id="cb1234-8" title="8">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
+<a class="sourceLine" id="cb1234-9" title="9">  <span class="dt">echo =</span> <span class="ot">FALSE</span></a>
+<a class="sourceLine" id="cb1234-10" title="10">)</a>
+<a class="sourceLine" id="cb1234-11" title="11"><span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></a></code></pre></div></li>
 <li><code>rmarkdown::render</code> programmatically knit documents
 <ul>
 <li>e.g. <code>rmarkdown::render("27-r-markdown.Rmd", output_format = "all")</code> to render all formats in YAML header</li>
@@ -533,10 +542,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>format</code> helpful when inserting numbers into texts, e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1267"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1267-1" title="1">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb1267-2" title="2"><span class="kw">comma</span>(<span class="dv">3452345</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1235"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1235-1" title="1">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb1235-2" title="2"><span class="kw">comma</span>(<span class="dv">3452345</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;3,452,345&quot;</code></pre>
-<div class="sourceCode" id="cb1269"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1269-1" title="1"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1237"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1237-1" title="1"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;0.12&quot;</code></pre>
 <ul>
 <li>Use <code>params:</code> in YAML header to add in specific values or create parameterized reports, e.g.</li>
@@ -549,7 +558,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="r-markdown-basics" class="section level2">
 <h2>27.2 R Markdown basics</h2>
-<div id="section-97" class="section level3">
+<div id="section-99" class="section level3">
 <h3>27.2.1</h3>
 <ol style="list-style-type: decimal">
 <li><p>Create a new notebook using <em>File &gt; New File &gt; R Notebook</em>. Read the
@@ -569,7 +578,7 @@ copy the YAML header from one to the other?</p>
 <li>Both by default have code chunks display ‘in-line’ while working, though with RMD can force to not output in-line.</li>
 <li>When rendering, default of notebooks will be to render whichever chunks have been rendered during interactive session, whereas RMD document needs directions from code chunk options
 <ul>
-<li>I generally prefer .Rmd files to notebooks.<a href="#fn44" class="footnote-ref" id="fnref44"><sup>44</sup></a></li>
+<li>I generally prefer .Rmd files to notebooks.<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a></li>
 </ul></li>
 </ul></li>
 <li><p>Create one new R Markdown document for each of the three built-in
@@ -584,11 +593,11 @@ prompt you if this is necessary.)</p>
 <div id="text-formatting-with-markdown" class="section level2">
 <h2>27.3: Text formatting with Markdown</h2>
 <p><em>Print file from Hadley’s github page with commmon formatting:</em></p>
-<div class="sourceCode" id="cb1272"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1272-1" title="1"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1240-1" title="1"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</a></code></pre></div>
 <p><em>Other notes</em>
 The following will actually run in the console when knitted (and not in the knitted document):</p>
 <pre><code>summary(mpg)</code></pre>
-<div id="section-98" class="section level3">
+<div id="section-100" class="section level3">
 <h3>27.3.1</h3>
 <ol style="list-style-type: decimal">
 <li>Practice what you’ve learned by creating a brief CV. The title should be
@@ -598,28 +607,31 @@ jobs/degrees. Highlight the year in bold.</li>
 </ol>
 <p><em>this is a weak example (see __ for better examples):</em></p>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Using the R Markdown quick reference, figure out how to:</p>
-<ol style="list-style-type: decimal">
-<li>Add a footnote.</li>
-</ol></li>
+<li><p>Using the R Markdown quick reference, figure out how to:</p></li>
+<li><p>Add a footnote.</p></li>
 </ol>
-<p>Here is a foonote reference<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a> and another<a href="#fn46" class="footnote-ref" id="fnref46"><sup>46</sup></a> and a 3rd<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> and an in-line one<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a></p>
+<p>Here is a foonote reference<a href="#fn47" class="footnote-ref" id="fnref47"><sup>47</sup></a> and another<a href="#fn48" class="footnote-ref" id="fnref48"><sup>48</sup></a> and a 3rd<a href="#fn49" class="footnote-ref" id="fnref49"><sup>49</sup></a> and an in-line one<a href="#fn50" class="footnote-ref" id="fnref50"><sup>50</sup></a></p>
+<ol start="2" style="list-style-type: decimal">
+<li>Add a horizontal rule.</li>
+</ol>
 <hr />
 <p>A <a href="http://example.com/" title="Title">linked phrase</a>.</p>
 <hr />
 <p>pagebreaks above and below (AKA horizontal rules)</p>
 <hr />
-<pre><code>3.  Add a block quote.</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Add a block quote.</li>
+</ol>
 <blockquote>
 <p>There is no spoon.<br />
--Matrix</p>
+-The Matrix</p>
 </blockquote>
 <ol start="3" style="list-style-type: decimal">
 <li><p>Copy and paste the contents of <code>diamond-sizes.Rmd</code> from
 <a href="https://github.com/hadley/r4ds/tree/master/rmarkdown" class="uri">https://github.com/hadley/r4ds/tree/master/rmarkdown</a> in to a local
 R markdown document. Check that you can run it, then add text after the
 frequency polygon that describes its most striking features.</p>
-<p><img src="27-r-markdown_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p></li>
+<p><img src="27-r-markdown_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p></li>
 </ol>
 <ul>
 <li>It’s interesting that the count of number of diamonds spikes at whole numbers…</li>
@@ -628,7 +640,7 @@ frequency polygon that describes its most striking features.</p>
 </div>
 <div id="code-chunks" class="section level2">
 <h2>27.4: Code chunks</h2>
-<div id="section-99" class="section level3">
+<div id="section-101" class="section level3">
 <h3>27.4.7</h3>
 <ol style="list-style-type: decimal">
 <li><p>Add a section that explores how diamond sizes vary by cut, colour,
@@ -643,12 +655,13 @@ option.</p>
 <a href="https://github.com/hadley/r4ds/tree/master/rmarkdown" class="uri">https://github.com/hadley/r4ds/tree/master/rmarkdown</a>. Add a section
 that describes the largest 20 diamonds, including a table that displays
 their most important attributes.</p>
-<div class="sourceCode" id="cb1276"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1276-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1276-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1276-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1276-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1243"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1243-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1243-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1243-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1243-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(carat)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1243-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</a></code></pre></div>
 <table>
-<caption><span id="tab:unnamed-chunk-6">Table 1: </span>The four C’s of the 20 biggest diamonds</caption>
+<caption><span id="tab:unnamed-chunk-7">Table 1: </span>The four C’s of the 20 biggest diamonds</caption>
 <thead>
 <tr class="header">
 <th align="right">carat</th>
@@ -659,45 +672,69 @@ their most important attributes.</p>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="right">3.01</td>
-<td align="left">Premium</td>
-<td align="left">I</td>
+<td align="right">5.01</td>
+<td align="left">Fair</td>
+<td align="left">J</td>
 <td align="left">I1</td>
 </tr>
 <tr class="even">
-<td align="right">3.11</td>
+<td align="right">4.50</td>
 <td align="left">Fair</td>
 <td align="left">J</td>
 <td align="left">I1</td>
 </tr>
 <tr class="odd">
-<td align="right">3.01</td>
-<td align="left">Premium</td>
-<td align="left">F</td>
+<td align="right">4.13</td>
+<td align="left">Fair</td>
+<td align="left">H</td>
 <td align="left">I1</td>
 </tr>
 <tr class="even">
-<td align="right">3.05</td>
+<td align="right">4.01</td>
 <td align="left">Premium</td>
-<td align="left">E</td>
+<td align="left">I</td>
 <td align="left">I1</td>
 </tr>
 <tr class="odd">
-<td align="right">3.02</td>
-<td align="left">Fair</td>
+<td align="right">4.01</td>
+<td align="left">Premium</td>
+<td align="left">J</td>
+<td align="left">I1</td>
+</tr>
+<tr class="even">
+<td align="right">4.00</td>
+<td align="left">Very Good</td>
+<td align="left">I</td>
+<td align="left">I1</td>
+</tr>
+<tr class="odd">
+<td align="right">3.67</td>
+<td align="left">Premium</td>
 <td align="left">I</td>
 <td align="left">I1</td>
 </tr>
 <tr class="even">
-<td align="right">3.01</td>
+<td align="right">3.65</td>
 <td align="left">Fair</td>
 <td align="left">H</td>
 <td align="left">I1</td>
 </tr>
 <tr class="odd">
-<td align="right">3.65</td>
-<td align="left">Fair</td>
+<td align="right">3.51</td>
+<td align="left">Premium</td>
+<td align="left">J</td>
+<td align="left">VS2</td>
+</tr>
+<tr class="even">
+<td align="right">3.50</td>
+<td align="left">Ideal</td>
 <td align="left">H</td>
+<td align="left">I1</td>
+</tr>
+<tr class="odd">
+<td align="right">3.40</td>
+<td align="left">Fair</td>
+<td align="left">D</td>
 <td align="left">I1</td>
 </tr>
 <tr class="even">
@@ -713,47 +750,59 @@ their most important attributes.</p>
 <td align="left">I1</td>
 </tr>
 <tr class="even">
-<td align="right">3.50</td>
-<td align="left">Ideal</td>
-<td align="left">H</td>
+<td align="right">3.11</td>
+<td align="left">Fair</td>
+<td align="left">J</td>
 <td align="left">I1</td>
 </tr>
 <tr class="odd">
+<td align="right">3.05</td>
+<td align="left">Premium</td>
+<td align="left">E</td>
+<td align="left">I1</td>
+</tr>
+<tr class="even">
+<td align="right">3.04</td>
+<td align="left">Very Good</td>
+<td align="left">I</td>
+<td align="left">SI2</td>
+</tr>
+<tr class="odd">
+<td align="right">3.04</td>
+<td align="left">Premium</td>
+<td align="left">I</td>
+<td align="left">SI2</td>
+</tr>
+<tr class="even">
+<td align="right">3.02</td>
+<td align="left">Fair</td>
+<td align="left">I</td>
+<td align="left">I1</td>
+</tr>
+<tr class="odd">
+<td align="right">3.01</td>
+<td align="left">Premium</td>
+<td align="left">I</td>
+<td align="left">I1</td>
+</tr>
+<tr class="even">
+<td align="right">3.01</td>
+<td align="left">Premium</td>
+<td align="left">F</td>
+<td align="left">I1</td>
+</tr>
+<tr class="odd">
+<td align="right">3.01</td>
+<td align="left">Fair</td>
+<td align="left">H</td>
+<td align="left">I1</td>
+</tr>
+<tr class="even">
 <td align="right">3.01</td>
 <td align="left">Premium</td>
 <td align="left">G</td>
 <td align="left">SI2</td>
 </tr>
-<tr class="even">
-<td align="right">4.01</td>
-<td align="left">Premium</td>
-<td align="left">I</td>
-<td align="left">I1</td>
-</tr>
-<tr class="odd">
-<td align="right">4.01</td>
-<td align="left">Premium</td>
-<td align="left">J</td>
-<td align="left">I1</td>
-</tr>
-<tr class="even">
-<td align="right">3.04</td>
-<td align="left">Very Good</td>
-<td align="left">I</td>
-<td align="left">SI2</td>
-</tr>
-<tr class="odd">
-<td align="right">3.40</td>
-<td align="left">Fair</td>
-<td align="left">D</td>
-<td align="left">I1</td>
-</tr>
-<tr class="even">
-<td align="right">4.00</td>
-<td align="left">Very Good</td>
-<td align="left">I</td>
-<td align="left">I1</td>
-</tr>
 <tr class="odd">
 <td align="right">3.01</td>
 <td align="left">Ideal</td>
@@ -761,41 +810,17 @@ their most important attributes.</p>
 <td align="left">SI2</td>
 </tr>
 <tr class="even">
-<td align="right">3.67</td>
-<td align="left">Premium</td>
-<td align="left">I</td>
-<td align="left">I1</td>
-</tr>
-<tr class="odd">
 <td align="right">3.01</td>
 <td align="left">Ideal</td>
 <td align="left">J</td>
 <td align="left">I1</td>
 </tr>
-<tr class="even">
-<td align="right">4.13</td>
-<td align="left">Fair</td>
-<td align="left">H</td>
-<td align="left">I1</td>
-</tr>
 <tr class="odd">
-<td align="right">5.01</td>
-<td align="left">Fair</td>
-<td align="left">J</td>
-<td align="left">I1</td>
-</tr>
-<tr class="even">
 <td align="right">3.01</td>
 <td align="left">Premium</td>
 <td align="left">I</td>
 <td align="left">SI2</td>
 </tr>
-<tr class="odd">
-<td align="right">3.01</td>
-<td align="left">Fair</td>
-<td align="left">I</td>
-<td align="left">SI2</td>
-</tr>
 <tr class="even">
 <td align="right">3.01</td>
 <td align="left">Fair</td>
@@ -804,7 +829,7 @@ their most important attributes.</p>
 </tr>
 <tr class="odd">
 <td align="right">3.01</td>
-<td align="left">Good</td>
+<td align="left">Fair</td>
 <td align="left">I</td>
 <td align="left">SI2</td>
 </tr>
@@ -815,28 +840,16 @@ their most important attributes.</p>
 <td align="left">SI2</td>
 </tr>
 <tr class="odd">
-<td align="right">4.50</td>
-<td align="left">Fair</td>
-<td align="left">J</td>
-<td align="left">I1</td>
-</tr>
-<tr class="even">
-<td align="right">3.04</td>
-<td align="left">Premium</td>
+<td align="right">3.01</td>
+<td align="left">Good</td>
 <td align="left">I</td>
 <td align="left">SI2</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="right">3.01</td>
 <td align="left">Good</td>
 <td align="left">H</td>
 <td align="left">SI2</td>
-</tr>
-<tr class="even">
-<td align="right">3.51</td>
-<td align="left">Premium</td>
-<td align="left">J</td>
-<td align="left">VS2</td>
 </tr>
 <tr class="odd">
 <td align="right">3.01</td>
@@ -855,10 +868,10 @@ their most important attributes.</p>
 <li><p>Modify <code>diamonds-sizes.Rmd</code> to use <code>comma()</code> to produce nicely
 formatted output. Also include the percentage of diamonds that are
 larger than 2.5 carats.</p>
-<div class="sourceCode" id="cb1277"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1277-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1277-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1277-3" title="3"><span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1277-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1244-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1244-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1244-3" title="3"><span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1244-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -873,16 +886,16 @@ larger than 2.5 carats.</p>
 </table></li>
 <li><p>Set up a network of chunks where <code>d</code> depends on <code>c</code> and <code>b</code>, and
 both <code>b</code> and <code>c</code> depend on <code>a</code>. Have each chunk print <code>lubridate::now()</code>,
-set <code>cache = TRUE</code>, then verify your understanding of caching.</p></li>
+set <code>cache = TRUE</code>, then verify your understanding of caching.</p>
+<div class="sourceCode" id="cb1245"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1245-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-06-05 19:31:49 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1247-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-06-05 19:31:49 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1249-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-06-05 19:31:50 EDT&quot;</code></pre>
+<div class="sourceCode" id="cb1251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1251-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre><code>## [1] &quot;2019-06-05 19:31:50 EDT&quot;</code></pre></li>
 </ol>
-<div class="sourceCode" id="cb1278"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1278-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1280"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1280-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1282"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1282-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1284"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1284-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
-<pre><code>## [1] &quot;2019-05-31 17:38:31 EDT&quot;</code></pre>
 
 <p><em>Make sure the following packages are installed:</em></p>
 </div>
@@ -890,13 +903,14 @@ set <code>cache = TRUE</code>, then verify your understanding of caching.</p></l
 </div>
 <div class="footnotes">
 <hr />
-<ol start="44">
-<li id="fn44"><p>I’ve found some of my company’s security software sometimes acts-up when working interactively if I have my chunk output in-line (just slows down). Hence, I ‘uncheck’ <code>Show output inline for all Rmarkdown documents</code> from <code>Tools</code>–&gt;<code>Global Options</code> –&gt;<code>Appearance</code>.<a href="27-r-markdown.html#fnref44" class="footnote-back">↩</a></p></li>
-<li id="fn45"><p>Here is the foonote.<a href="27-r-markdown.html#fnref45" class="footnote-back">↩</a></p></li>
-<li id="fn46"><p>here’s one with multiple blocks.<br />
+<ol start="46">
+<li id="fn46"><p>I’ve found some of my company’s security software sometimes acts-up when working interactively if I have my chunk output in-line (just slows down). Hence, I ‘uncheck’ <code>Show output inline for all Rmarkdown documents</code> from <code>Tools</code>–&gt;<code>Global Options</code> –&gt;<code>Appearance</code>.<a href="27-r-markdown.html#fnref46" class="footnote-back">↩</a></p></li>
+<li id="fn47"><p>Here is the foonote.<a href="27-r-markdown.html#fnref47" class="footnote-back">↩</a></p></li>
+<li id="fn48"><p>here’s one with multiple blocks.<br />
 boo ya this is an awesome foonote.<br />
-don’t you believe it!<a href="27-r-markdown.html#fnref46" class="footnote-back">↩</a></p></li>
-<li id="fn48"><p>Superb fourth footnote.<a href="27-r-markdown.html#fnref48" class="footnote-back">↩</a></p></li>
+don’t you believe it!<a href="27-r-markdown.html#fnref48" class="footnote-back">↩</a></p></li>
+<li id="fn49"><p>and the third<a href="27-r-markdown.html#fnref49" class="footnote-back">↩</a></p></li>
+<li id="fn50"><p>Superb fourth footnote.<a href="27-r-markdown.html#fnref50" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -948,8 +962,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https\://github.com/brshallow/R4DS_Solutions/edit/master/27-r-markdown.Rmd",
+"text": "Edit, fork"
 },
 "download": null,
 "toc": {

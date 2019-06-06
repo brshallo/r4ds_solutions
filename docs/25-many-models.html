@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Yet another study guide for ‘R for Data Science’</title>
-  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
-  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta property="og:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
-  
-  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="twitter:site" content="@brshallo" />
+  <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-31">
+<meta name="date" content="2019-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,13 +135,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Chapter contents</a></li>
+<li><a href="./">Yet another study guide to R4DS</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-book"><i class="fa fa-check"></i>Origin of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
@@ -330,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
@@ -380,6 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-82"><i class="fa fa-check"></i>21.3.5.1</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-83"><i class="fa fa-check"></i>21.9.3.1</a></li>
 <li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
@@ -388,78 +390,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-83"><i class="fa fa-check"></i>23.2.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.3.3</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.3.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.4.5</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-87"><i class="fa fa-check"></i>23.2.1.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-88"><i class="fa fa-check"></i>23.3.3.2</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5.4</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-89"><i class="fa fa-check"></i>23.4.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>24.3.5</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.3.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-89"><i class="fa fa-check"></i>24.2.3.3</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3.4</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.2.3.1</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>25.3.5.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-93"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-94"><i class="fa fa-check"></i>24.3.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-93"><i class="fa fa-check"></i>25.2.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-94"><i class="fa fa-check"></i>25.4.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.5.3</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-97"><i class="fa fa-check"></i>25.5.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-12"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-98"><i class="fa fa-check"></i>25.2.5.1</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
-<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#listquantile-examples"><i class="fa fa-check"></i>list(quantile()) examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-names"><i class="fa fa-check"></i>Extracting names</a></li>
 <li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-97"><i class="fa fa-check"></i>27.2.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-98"><i class="fa fa-check"></i>27.3.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-100"><i class="fa fa-check"></i>27.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.4.7</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-101"><i class="fa fa-check"></i>27.4.7</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-100"><i class="fa fa-check"></i>28.2.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-101"><i class="fa fa-check"></i>28.3.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-103"><i class="fa fa-check"></i>28.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.4.4</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-104"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#appendix-13"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-105"><i class="fa fa-check"></i>28.3.1.5</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -483,63 +487,68 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch.-25-many-models" class="section level1">
 <h1>Ch. 25: Many models</h1>
+
+<div class="rmdimportant">
+<p><strong>Key questions:</strong></p>
+<ul>
+<li>25.2.5 #1, 2
+</div></li>
+</ul>
+
+<div class="rmdtip">
+<strong>Functions and notes:</strong>
+</div>
+
 <ul>
 <li><code>nest</code> creates a list-column with default key value <code>data</code>. Each row value becomes a dataframe with all non-grouping columns and all rows corresponding with a particular group</li>
 </ul>
-<div class="sourceCode" id="cb1193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1193-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1193-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1193-3" title="3"><span class="st">  </span><span class="kw">nest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1166-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1166-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1166-3" title="3"><span class="st">  </span><span class="kw">nest</span>()</a></code></pre></div>
 <ul>
 <li><code>unnest</code> unnest any list-column in your dataframe.</li>
 </ul>
-<p>Notes on <code>unnest</code> behavior:
-* if there are multiple rows in the list-col being unnested, the existing row values will be duplicated</p>
-<div class="sourceCode" id="cb1194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1194-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1194-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1194-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(test1) </a>
-<a class="sourceLine" id="cb1194-4" title="4"></a>
-<a class="sourceLine" id="cb1194-5" title="5"><span class="co"># notice duplicated x values: 1,1,2,2,...100,100</span></a>
-<a class="sourceLine" id="cb1194-6" title="6"><span class="co"># Notice that in situations like the below one though, we get two new columns</span></a>
-<a class="sourceLine" id="cb1194-7" title="7"><span class="co"># however the row length does not change i.e. there are no duplicates created</span></a>
-<a class="sourceLine" id="cb1194-8" title="8"><span class="co"># (this is similar to the structure when using broom::glance)</span></a>
-<a class="sourceLine" id="cb1194-9" title="9"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1194-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1194-11" title="11"><span class="st">  </span><span class="kw">unnest</span>(test1) </a></code></pre></div>
+<p>Notes on <code>unnest</code> behavior:</p>
 <ul>
-<li>if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all (if not possible)</li>
-<li>when unnesting a single column but multiple list-cols exist, the default behavior is that if unnesting caused no change in row number than keep other list-cols, but if unnesting caused a change in row-number drop other columns. To override the former use <code>.drop = TRUE</code> to override the latter use <code>.drop = FALSE</code>.<a href="#fn43" class="footnote-ref" id="fnref43"><sup>43</sup></a></li>
+<li>if the atomic components of the elements of the list column are length &gt; 1, the non-nested row columns will be duplicated when the list-column is unnested</li>
 </ul>
-<div class="sourceCode" id="cb1195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1195-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1195-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)),</a>
-<a class="sourceLine" id="cb1195-3" title="3">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1195-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(test1) <span class="co"># use .drop = TRUE to drop test2 column</span></a>
-<a class="sourceLine" id="cb1195-5" title="5"></a>
-<a class="sourceLine" id="cb1195-6" title="6"><span class="co"># or to unnest both</span></a>
-<a class="sourceLine" id="cb1195-7" title="7"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1195-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)),</a>
-<a class="sourceLine" id="cb1195-9" title="9">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1195-10" title="10"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1167-1" title="1"><span class="co"># atomic components of elements of list-col == 3 --&gt; (will see duplicates of `x`)</span></a>
+<a class="sourceLine" id="cb1167-2" title="2"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1167-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">tibble</span>(<span class="dt">a =</span> <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1167-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(test1) </a>
+<a class="sourceLine" id="cb1167-5" title="5"></a>
+<a class="sourceLine" id="cb1167-6" title="6"><span class="co"># atomic components of elements of list-col == 1 --&gt; (will not see duplicates of `x`)</span></a>
+<a class="sourceLine" id="cb1167-7" title="7"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1167-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">tibble</span>(<span class="dt">a =</span> <span class="dv">1</span>, <span class="dt">b =</span> <span class="dv">2</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1167-9" title="9"><span class="st">  </span><span class="kw">unnest</span>(test1) </a></code></pre></div>
 <ul>
-<li>when unnesting multiple columns, all must be the same length or you will get an error, e.g. below would fail:</li>
+<li>if there are multiple list-cols, specify the column to unnest or default behavior will be to unnest all</li>
+<li>when unnesting a single column but multiple list-cols exist, the default behavior is to drop the other list columns. To override this use <code>.drop = FALSE</code>.<a href="#fn45" class="footnote-ref" id="fnref45"><sup>45</sup></a></li>
 </ul>
-<div class="sourceCode" id="cb1196"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1196-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1196-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>)),</a>
-<a class="sourceLine" id="cb1196-3" title="3">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1196-4" title="4"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1168-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1168-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>)),</a>
+<a class="sourceLine" id="cb1168-3" title="3">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1168-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(test1, <span class="dt">.drop =</span> <span class="ot">FALSE</span>) <span class="co"># change to default, i.e. `.drop = TRUE` to drop `test2` column</span></a></code></pre></div>
 <ul>
-<li>To unnest mulitple list-cols with different row-lengths, you should use multiple <code>unnest</code> statements, e.g. below would work:</li>
+<li>when unnesting multiple columns, all must be the same length or you will get an error, e.g. below fails:</li>
 </ul>
-<div class="sourceCode" id="cb1197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1197-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1197-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>)),</a>
-<a class="sourceLine" id="cb1197-3" title="3">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1197-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(test1) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1197-5" title="5"><span class="st">  </span><span class="kw">unnest</span>(test2)</a></code></pre></div>
+<div class="sourceCode" id="cb1169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1169-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1169-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">test1 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">1</span>)),</a>
+<a class="sourceLine" id="cb1169-3" title="3">         <span class="dt">test2 =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1169-4" title="4"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<pre><code>## Error: All nested columns must have the same number of elements.</code></pre>
+<div class="sourceCode" id="cb1171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1171-1" title="1"><span class="co"># # to successfully unnest this could have added another unnest, e.g.:</span></a>
+<a class="sourceLine" id="cb1171-2" title="2"><span class="co"># tibble(x = 1:100) %&gt;% </span></a>
+<a class="sourceLine" id="cb1171-3" title="3"><span class="co">#   mutate(test1 = list(c(1)),</span></a>
+<a class="sourceLine" id="cb1171-4" title="4"><span class="co">#          test2 = list(c(2,3))) %&gt;% </span></a>
+<a class="sourceLine" id="cb1171-5" title="5"><span class="co">#   unnest(test1) %&gt;% </span></a>
+<a class="sourceLine" id="cb1171-6" title="6"><span class="co">#   unnest(test2)</span></a></code></pre></div>
 <ul>
-<li>Method for nesting individual vectors: <code>group_by</code> <code>%&gt;%</code> <code>summarise</code>, e.g.:</li>
+<li>Method for nesting individual vectors: <code>group_by() %&gt;% summarise()</code>, e.g.:</li>
 </ul>
-<div class="sourceCode" id="cb1198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1198-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1198-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1198-3" title="3"><span class="st">  </span><span class="kw">summarise_all</span>(list)</a></code></pre></div>
+<div class="sourceCode" id="cb1172"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1172-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1172-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1172-3" title="3"><span class="st">  </span><span class="kw">summarise_all</span>(list)</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##   Species    Sepal.Length Sepal.Width Petal.Length Petal.Width
 ##   &lt;fct&gt;      &lt;list&gt;       &lt;list&gt;      &lt;list&gt;       &lt;list&gt;     
@@ -551,25 +560,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>broom::glance</code> takes a model as input and outputs a one row tibble with columns for each of several model evalation statistics (note that these metrics are geared towards evaluating the training)</li>
 <li><code>broom::tidy</code> creates a tibble with columns <code>term</code>, <code>estimate</code>, <code>std.error</code>, <code>statistic</code> (t-statistic) and <code>p.value</code>. A new row is created for each <code>term</code> type, e.g. intercept, x1, x2, etc.</li>
 <li><code>ggtitle()</code>, alternative to <code>labs(title = "type title here")</code></li>
-<li>see <a href="25-many-models.html#section-94">25.4.5</a> number 3 for a useful way of wrapping certain functions in <code>list</code> functions to take advantage of the list-col format</li>
+<li>see <a href="25-many-models.html#section-96">25.4.5</a> number 3 for a useful way of wrapping certain functions in <code>list</code> functions to take advantage of the list-col format</li>
 </ul>
 <div id="gapminder" class="section level2">
 <h2>25.2: gapminder</h2>
 <p>The set-up example Hadley goes through is important, below is a slightly altered copy of his example.</p>
 <p><strong>Nested Data</strong></p>
-<div class="sourceCode" id="cb1200"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1200-1" title="1">by_country &lt;-<span class="st"> </span>gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1200-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(country, continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1200-3" title="3"><span class="st">  </span><span class="kw">nest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1174"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1174-1" title="1">by_country &lt;-<span class="st"> </span>gapminder<span class="op">::</span>gapminder <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1174-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(country, continent) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1174-3" title="3"><span class="st">  </span><span class="kw">nest</span>()</a></code></pre></div>
 <p><strong>List-columns</strong></p>
-<div class="sourceCode" id="cb1201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1201-1" title="1">country_model &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
-<a class="sourceLine" id="cb1201-2" title="2">  <span class="kw">lm</span>(lifeExp <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> df)</a>
-<a class="sourceLine" id="cb1201-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb1175"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1175-1" title="1">country_model &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb1175-2" title="2">  <span class="kw">lm</span>(lifeExp <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb1175-3" title="3">}</a></code></pre></div>
 <p>Want to apply this function over every data frame, the dataframes are in a list, so do this by:</p>
-<div class="sourceCode" id="cb1202"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1202-1" title="1">by_country2 &lt;-<span class="st"> </span>by_country <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1202-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, country_model))</a></code></pre></div>
+<div class="sourceCode" id="cb1176"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1176-1" title="1">by_country2 &lt;-<span class="st"> </span>by_country <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1176-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, country_model))</a></code></pre></div>
 <p>Advantage with keeping things in the dataframe is that when you filter, or move things around, everything stays in sync, as do new summary values you might add.</p>
-<div class="sourceCode" id="cb1203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1203-1" title="1">by_country2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1203-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(continent, country)</a></code></pre></div>
+<div class="sourceCode" id="cb1177"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1177-1" title="1">by_country2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1177-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(continent, country)</a></code></pre></div>
 <pre><code>## # A tibble: 142 x 4
 ##    country                  continent data              model   
 ##    &lt;fct&gt;                    &lt;fct&gt;     &lt;list&gt;            &lt;list&gt;  
@@ -584,9 +593,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Chad                     Africa    &lt;tibble [12 x 4]&gt; &lt;S3: lm&gt;
 ## 10 Comoros                  Africa    &lt;tibble [12 x 4]&gt; &lt;S3: lm&gt;
 ## # ... with 132 more rows</code></pre>
-<div class="sourceCode" id="cb1205"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1205-1" title="1">by_country2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1205-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">summaries =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, summary)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1205-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">r_squared =</span> purrr<span class="op">::</span><span class="kw">map2_dbl</span>(model, data, rsquare))</a></code></pre></div>
+<div class="sourceCode" id="cb1179"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1179-1" title="1">by_country2 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1179-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">summaries =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, summary)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1179-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">r_squared =</span> purrr<span class="op">::</span><span class="kw">map2_dbl</span>(model, data, rsquare))</a></code></pre></div>
 <pre><code>## # A tibble: 142 x 6
 ##    country     continent data             model   summaries       r_squared
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;list&gt;           &lt;list&gt;  &lt;list&gt;              &lt;dbl&gt;
@@ -601,13 +610,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Bangladesh  Asia      &lt;tibble [12 x 4~ &lt;S3: l~ &lt;S3: summary.l~     0.989
 ## 10 Belgium     Europe    &lt;tibble [12 x 4~ &lt;S3: l~ &lt;S3: summary.l~     0.995
 ## # ... with 132 more rows</code></pre>
-<p><strong>unnesting</strong>, dd another dataframe with the residuals included and then unnest</p>
-<div class="sourceCode" id="cb1207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1207-1" title="1">by_country3 &lt;-<span class="st"> </span>by_country2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1207-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">resids =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data, model, add_residuals))</a></code></pre></div>
-<div class="sourceCode" id="cb1208"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1208-1" title="1">resids &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1208-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(resids)</a>
-<a class="sourceLine" id="cb1208-3" title="3"></a>
-<a class="sourceLine" id="cb1208-4" title="4">resids</a></code></pre></div>
+<p><strong>unnesting</strong>, another dataframe with the residuals included and then unnest</p>
+<div class="sourceCode" id="cb1181"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1181-1" title="1">by_country3 &lt;-<span class="st"> </span>by_country2 <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1181-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">resids =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data, model, add_residuals))</a></code></pre></div>
+<div class="sourceCode" id="cb1182"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1182-1" title="1">resids &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1182-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(resids)</a>
+<a class="sourceLine" id="cb1182-3" title="3"></a>
+<a class="sourceLine" id="cb1182-4" title="4">resids</a></code></pre></div>
 <pre><code>## # A tibble: 1,704 x 7
 ##    country     continent  year lifeExp      pop gdpPercap   resid
 ##    &lt;fct&gt;       &lt;fct&gt;     &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -622,96 +631,96 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 Afghanistan Asia       1992    41.7 16317921      649.  0.754 
 ## 10 Afghanistan Asia       1997    41.8 22227415      635. -0.534 
 ## # ... with 1,694 more rows</code></pre>
-<div id="section-93" class="section level3">
+<div id="section-95" class="section level3">
 <h3>25.2.5</h3>
 <ol style="list-style-type: decimal">
 <li><p>A linear trend seems to be slightly too simple for the overall trend. Can you do better with a quadratic polynomial? How can you interpret the coefficients of the quadratic? (Hint you might want to transform <code>year</code> so that it has mean zero.)</p>
 <p><em>Create functions</em></p>
-<div class="sourceCode" id="cb1210"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1210-1" title="1"><span class="co"># funciton to center value</span></a>
-<a class="sourceLine" id="cb1210-2" title="2">center_value &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
-<a class="sourceLine" id="cb1210-3" title="3">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1210-4" title="4"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year_cent =</span> year <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(year))</a>
-<a class="sourceLine" id="cb1210-5" title="5">}</a>
-<a class="sourceLine" id="cb1210-6" title="6"></a>
-<a class="sourceLine" id="cb1210-7" title="7"><span class="co"># this function allows me to input any text to &quot;var&quot; to customize the inputs</span></a>
-<a class="sourceLine" id="cb1210-8" title="8"><span class="co"># to the model, default are a linear and quadratic term for year (centered)</span></a>
-<a class="sourceLine" id="cb1210-9" title="9">lm_quad_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(df, <span class="dt">var =</span> <span class="st">&quot;year_cent + I(year_cent^2)&quot;</span>){</a>
-<a class="sourceLine" id="cb1210-10" title="10">  <span class="kw">lm</span>(<span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;lifeExp ~ &quot;</span>, var)), <span class="dt">data =</span> df)</a>
-<a class="sourceLine" id="cb1210-11" title="11">}</a></code></pre></div>
+<div class="sourceCode" id="cb1184"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1184-1" title="1"><span class="co"># funciton to center value</span></a>
+<a class="sourceLine" id="cb1184-2" title="2">center_value &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb1184-3" title="3">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1184-4" title="4"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">year_cent =</span> year <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(year))</a>
+<a class="sourceLine" id="cb1184-5" title="5">}</a>
+<a class="sourceLine" id="cb1184-6" title="6"></a>
+<a class="sourceLine" id="cb1184-7" title="7"><span class="co"># this function allows me to input any text to &quot;var&quot; to customize the inputs</span></a>
+<a class="sourceLine" id="cb1184-8" title="8"><span class="co"># to the model, default are a linear and quadratic term for year (centered)</span></a>
+<a class="sourceLine" id="cb1184-9" title="9">lm_quad_<span class="dv">2</span> &lt;-<span class="st"> </span><span class="cf">function</span>(df, <span class="dt">var =</span> <span class="st">&quot;year_cent + I(year_cent^2)&quot;</span>){</a>
+<a class="sourceLine" id="cb1184-10" title="10">  <span class="kw">lm</span>(<span class="kw">as.formula</span>(<span class="kw">paste</span>(<span class="st">&quot;lifeExp ~ &quot;</span>, var)), <span class="dt">data =</span> df)</a>
+<a class="sourceLine" id="cb1184-11" title="11">}</a></code></pre></div>
 <p><em>Create dataframe with evaluation metrics</em></p>
-<div class="sourceCode" id="cb1211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1211-1" title="1">by_country3_quad &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1211-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb1211-3" title="3">    <span class="co"># create centered data</span></a>
-<a class="sourceLine" id="cb1211-4" title="4">    <span class="dt">data_cent =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, center_value), </a>
-<a class="sourceLine" id="cb1211-5" title="5">    <span class="co"># create quadratic models</span></a>
-<a class="sourceLine" id="cb1211-6" title="6">    <span class="dt">mod_quad =</span> purrr<span class="op">::</span><span class="kw">map</span>(data_cent, lm_quad_<span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb1211-7" title="7">    <span class="co"># get model evaluation stats from original model</span></a>
-<a class="sourceLine" id="cb1211-8" title="8">    <span class="dt">glance_mod =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, broom<span class="op">::</span>glance), </a>
-<a class="sourceLine" id="cb1211-9" title="9">    <span class="co"># get model evaluation stats from quadratic model</span></a>
-<a class="sourceLine" id="cb1211-10" title="10">    <span class="dt">glance_quad =</span> purrr<span class="op">::</span><span class="kw">map</span>(mod_quad, broom<span class="op">::</span>glance)) </a></code></pre></div>
+<div class="sourceCode" id="cb1185"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1185-1" title="1">by_country3_quad &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1185-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb1185-3" title="3">    <span class="co"># create centered data</span></a>
+<a class="sourceLine" id="cb1185-4" title="4">    <span class="dt">data_cent =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, center_value), </a>
+<a class="sourceLine" id="cb1185-5" title="5">    <span class="co"># create quadratic models</span></a>
+<a class="sourceLine" id="cb1185-6" title="6">    <span class="dt">mod_quad =</span> purrr<span class="op">::</span><span class="kw">map</span>(data_cent, lm_quad_<span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb1185-7" title="7">    <span class="co"># get model evaluation stats from original model</span></a>
+<a class="sourceLine" id="cb1185-8" title="8">    <span class="dt">glance_mod =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, broom<span class="op">::</span>glance), </a>
+<a class="sourceLine" id="cb1185-9" title="9">    <span class="co"># get model evaluation stats from quadratic model</span></a>
+<a class="sourceLine" id="cb1185-10" title="10">    <span class="dt">glance_quad =</span> purrr<span class="op">::</span><span class="kw">map</span>(mod_quad, broom<span class="op">::</span>glance)) </a></code></pre></div>
 <p><em>Create plots</em></p>
-<div class="sourceCode" id="cb1212"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1212-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1212-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, glance_quad, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">.drop =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1212-3" title="3"><span class="st">  </span><span class="kw">gather</span>(glance_mod_r.squared, glance_quad_r.squared, </a>
-<a class="sourceLine" id="cb1212-4" title="4">         <span class="dt">key =</span> <span class="st">&quot;order&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;r.squared&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1212-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1212-6" title="6"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb1212-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>order)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1186"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1186-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1186-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, glance_quad, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>, <span class="dt">.drop =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1186-3" title="3"><span class="st">  </span><span class="kw">gather</span>(glance_mod_r.squared, glance_quad_r.squared, </a>
+<a class="sourceLine" id="cb1186-4" title="4">         <span class="dt">key =</span> <span class="st">&quot;order&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;r.squared&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1186-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1186-6" title="6"><span class="st">  </span><span class="kw">geom_boxplot</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1186-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>order)</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <ul>
 <li>The quadratic trend seems to do better –&gt; indicated by the distribution of the R^2 values being closer to one. The level of improvement seems especially pronounced for African countries.</li>
 </ul>
-<p>Let’s check this for sure by looking at percentage point improvement in R^2 in chart below</p>
-<div class="sourceCode" id="cb1213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1213-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1213-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quad_coefs =</span> <span class="kw">map</span>(mod_quad, broom<span class="op">::</span>tidy)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1213-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1213-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_quad) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1213-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> glance_mod_r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>,</a>
-<a class="sourceLine" id="cb1213-6" title="6">         <span class="dt">R.squ_ppt_increase =</span> r.squared <span class="op">-</span><span class="st"> </span>glance_mod_r.squared) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1213-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> R.squ_ppt_increase))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1213-8" title="8"><span class="st">  </span><span class="co"># geom_quasirandom(aes(alpha = bad_fit), colour = &quot;black&quot;)+</span></a>
-<a class="sourceLine" id="cb1213-9" title="9"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1213-10" title="10"><span class="st">  </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> continent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1213-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Percentage point (PPT) improvement in R squared value&quot;</span>, </a>
-<a class="sourceLine" id="cb1213-12" title="12">       <span class="dt">subtitle =</span> <span class="st">&quot;(When adding a quadratic term to the linear regression model)&quot;</span>)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Let’s check this closer by looking at percentage point improvement in R^2 in chart below</p>
+<div class="sourceCode" id="cb1187"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1187-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1187-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quad_coefs =</span> <span class="kw">map</span>(mod_quad, broom<span class="op">::</span>tidy)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1187-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1187-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_quad) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1187-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> glance_mod_r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>,</a>
+<a class="sourceLine" id="cb1187-6" title="6">         <span class="dt">R.squ_ppt_increase =</span> r.squared <span class="op">-</span><span class="st"> </span>glance_mod_r.squared) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1187-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> R.squ_ppt_increase))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1187-8" title="8"><span class="st">  </span><span class="co"># geom_quasirandom(aes(alpha = bad_fit), colour = &quot;black&quot;)+</span></a>
+<a class="sourceLine" id="cb1187-9" title="9"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1187-10" title="10"><span class="st">  </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> continent))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1187-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Percentage point (PPT) improvement in R squared value&quot;</span>, </a>
+<a class="sourceLine" id="cb1187-12" title="12">       <span class="dt">subtitle =</span> <span class="st">&quot;(When adding a quadratic term to the linear regression model)&quot;</span>)</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><em>View predictions from linear model with quadratic term</em>
 (of countries where linear trend did not capture relationship)</p>
-<div class="sourceCode" id="cb1214"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1214-1" title="1">bad_fit &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">glance =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, broom<span class="op">::</span>glance)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance, <span class="dt">.drop =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-4" title="4"><span class="st">  </span><span class="kw">filter</span>(r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>)</a>
-<a class="sourceLine" id="cb1214-5" title="5"></a>
-<a class="sourceLine" id="cb1214-6" title="6"><span class="co">#solve with join with bad_fit</span></a>
-<a class="sourceLine" id="cb1214-7" title="7">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-8" title="8"><span class="st">  </span><span class="kw">semi_join</span>(bad_fit, <span class="dt">by =</span> <span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-10" title="10"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1214-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1214-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1214-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1214-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1214-15" title="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1188"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1188-1" title="1">bad_fit &lt;-<span class="st"> </span>by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">glance =</span> purrr<span class="op">::</span><span class="kw">map</span>(model, broom<span class="op">::</span>glance)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance, <span class="dt">.drop =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-4" title="4"><span class="st">  </span><span class="kw">filter</span>(r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb1188-5" title="5"></a>
+<a class="sourceLine" id="cb1188-6" title="6"><span class="co">#solve with join with bad_fit</span></a>
+<a class="sourceLine" id="cb1188-7" title="7">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-8" title="8"><span class="st">  </span><span class="kw">semi_join</span>(bad_fit, <span class="dt">by =</span> <span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-10" title="10"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1188-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1188-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1188-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1188-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1188-15" title="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <ul>
 <li>while the quadratic model does a better job fitting the model than a linear term does, I wouldn’t say it does a good job of fitting the model</li>
 <li>it looks like the trends are generally consistent rates of improvement and then there is a sudden drop-off associated with some event, hence an intervention variable may be a more appropriate method for modeling this pattern</li>
 </ul>
 <p><em>Quadratic model parameters</em></p>
-<div class="sourceCode" id="cb1215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1215-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quad_coefs =</span> <span class="kw">map</span>(mod_quad, broom<span class="op">::</span>tidy)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_quad) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-5" title="5"><span class="st">  </span><span class="kw">unnest</span>(quad_coefs) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> glance_mod_r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1215-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> estimate, <span class="dt">alpha =</span> bad_fit))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1215-8" title="8"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1215-9" title="9"><span class="st">  </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> continent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1215-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>term, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1215-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;Note that &#39;bad fit&#39; represents a bad fit on the initial model </span><span class="ch">\n</span><span class="st">that did not contain a quadratic term)&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1215-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1189"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1189-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">quad_coefs =</span> <span class="kw">map</span>(mod_quad, broom<span class="op">::</span>tidy)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-3" title="3"><span class="st">  </span><span class="kw">unnest</span>(glance_mod, <span class="dt">.sep =</span> <span class="st">&quot;_&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_quad) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-5" title="5"><span class="st">  </span><span class="kw">unnest</span>(quad_coefs) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> glance_mod_r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1189-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> estimate, <span class="dt">alpha =</span> bad_fit))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1189-8" title="8"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1189-9" title="9"><span class="st">  </span><span class="kw">geom_quasirandom</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> continent))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1189-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>term, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1189-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">caption =</span> <span class="st">&quot;Note that &#39;bad fit&#39; represents a bad fit on the initial model </span><span class="ch">\n</span><span class="st">that did not contain a quadratic term)&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1189-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <pre><code>## Warning: Using alpha for a discrete variable is not advised.</code></pre>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <ul>
 <li>The quadratic term (in a linear function, trained with the x-value centered at the mean, as in this dataset) has a few important notes related to interpretation
 <ul>
@@ -722,15 +731,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>To better understand this, let’s look look at a specific example. Excluding Rwanda, Botswana was the <code>country</code> that the linear model without the quadratic term performed the worst on. We’ll use this as our example for interpreting the coefficients.</p>
 <p><em>Plots of predicted and actual values for Botswanian life expectancy by year</em></p>
-<div class="sourceCode" id="cb1217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1217-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1217-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1217-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1217-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1217-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1217-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1217-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> <span class="st">&quot;prediction&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1217-8" title="8"><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Data and quadratic trend of predictions for Botswana&quot;</span>)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1191"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1191-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1191-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1191-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1191-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1191-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1191-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1191-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> <span class="st">&quot;prediction&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1191-8" title="8"><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Data and quadratic trend of predictions for Botswana&quot;</span>)</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p><em>(note that the centered value for year in the ‘centered’ dataset is 1979.5)</em><br />
 In the model for Botswana, coefficents are:<br />
 Intercept: ~ 59.81<br />
@@ -738,60 +747,44 @@ year (centered): ~ 0.0607<br />
 year (centered)^2: ~ -0.0175</p>
 <p>Hence for every one year we move away from the central year (1979.5), the rate of change between year and price decreases by <em>~0.035</em>.</p>
 <p>Below I show this graphically by plotting the lines tangent to the models output.</p>
-<div class="sourceCode" id="cb1218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1218-1" title="1">botswana_coefs &lt;-<span class="st"> </span>by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1218-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1218-3" title="3"><span class="st">  </span><span class="kw">with</span>(<span class="kw">map</span>(mod_quad, coef)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1218-4" title="4"><span class="st">  </span><span class="kw">flatten_dbl</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1192"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1192-1" title="1">botswana_coefs &lt;-<span class="st"> </span>by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1192-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1192-3" title="3"><span class="st">  </span><span class="kw">with</span>(<span class="kw">map</span>(mod_quad, coef)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1192-4" title="4"><span class="st">  </span><span class="kw">flatten_dbl</span>()</a></code></pre></div>
 <p>Helper functions to find tangent points</p>
-<div class="sourceCode" id="cb1219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1219-1" title="1">find_slope &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb1219-2" title="2">  <span class="dv">2</span><span class="op">*</span>botswana_coefs[[<span class="dv">3</span>]]<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">2</span>]]</a>
-<a class="sourceLine" id="cb1219-3" title="3">}</a>
-<a class="sourceLine" id="cb1219-4" title="4"></a>
-<a class="sourceLine" id="cb1219-5" title="5">find_y1 &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb1219-6" title="6">  botswana_coefs[[<span class="dv">3</span>]]<span class="op">*</span>(x<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">2</span>]]<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">1</span>]]</a>
-<a class="sourceLine" id="cb1219-7" title="7">}</a>
-<a class="sourceLine" id="cb1219-8" title="8"></a>
-<a class="sourceLine" id="cb1219-9" title="9">find_intercept &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, m){</a>
-<a class="sourceLine" id="cb1219-10" title="10">  y <span class="op">-</span><span class="st"> </span>x<span class="op">*</span>m</a>
-<a class="sourceLine" id="cb1219-11" title="11">}</a>
-<a class="sourceLine" id="cb1219-12" title="12"></a>
-<a class="sourceLine" id="cb1219-13" title="13">tangent_lines &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x1 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1219-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">slope =</span> <span class="kw">find_slope</span>(x1),</a>
-<a class="sourceLine" id="cb1219-15" title="15">         <span class="dt">y1 =</span> <span class="kw">find_y1</span>(x1),</a>
-<a class="sourceLine" id="cb1219-16" title="16">         <span class="dt">intercept =</span> <span class="kw">find_intercept</span>(x1, y1, slope),</a>
-<a class="sourceLine" id="cb1219-17" title="17">         <span class="dt">slope_change =</span> x1<span class="op">*</span><span class="dv">2</span><span class="op">*</span>botswana_coefs[[<span class="dv">3</span>]]) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1219-18" title="18"><span class="st">  </span><span class="kw">select</span>(slope, intercept, <span class="kw">everything</span>())</a></code></pre></div>
-<div class="sourceCode" id="cb1220"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1220-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1220-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1220-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1220-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1220-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent, <span class="dt">y =</span> pred), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-7" title="7"><span class="st">  </span><span class="co"># geom_line(aes(y = pred, colour = &quot;prediction&quot;))+</span></a>
-<a class="sourceLine" id="cb1220-8" title="8"><span class="co"># labs(title = &quot;Data and 2nd order model predictions for Botswana&quot;)+</span></a>
-<a class="sourceLine" id="cb1220-9" title="9"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> tangent_lines[[<span class="dv">2</span>]][[<span class="dv">1</span>]], <span class="dt">slope =</span> tangent_lines[[<span class="dv">1</span>]][[<span class="dv">1</span>]])<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-10" title="10"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> tangent_lines[[<span class="dv">2</span>]][[<span class="dv">2</span>]], <span class="dt">slope =</span> tangent_lines[[<span class="dv">1</span>]][[<span class="dv">2</span>]])<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-11" title="11"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> tangent_lines[[<span class="dv">2</span>]][[<span class="dv">3</span>]], <span class="dt">slope =</span> tangent_lines[[<span class="dv">1</span>]][[<span class="dv">3</span>]])<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-12" title="12"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> tangent_lines[[<span class="dv">2</span>]][[<span class="dv">4</span>]], <span class="dt">slope =</span> tangent_lines[[<span class="dv">1</span>]][[<span class="dv">4</span>]])<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-13" title="13"><span class="st">    </span><span class="kw">geom_abline</span>(<span class="dt">intercept =</span> tangent_lines[[<span class="dv">2</span>]][[<span class="dv">5</span>]], <span class="dt">slope =</span> tangent_lines[[<span class="dv">1</span>]][[<span class="dv">5</span>]])<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-14" title="14"><span class="st">  </span><span class="kw">ylim</span>(<span class="kw">c</span>(<span class="dv">40</span>, <span class="dv">70</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1220-15" title="15"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb1221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1221-1" title="1">    by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1221-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1221-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1221-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1221-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1221-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent, <span class="dt">y =</span> pred), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1221-7" title="7"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> intercept, <span class="dt">slope =</span> slope), </a>
-<a class="sourceLine" id="cb1221-8" title="8">              <span class="dt">data =</span> tangent_lines)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1221-9" title="9"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1193"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1193-1" title="1">find_slope &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1193-2" title="2">  <span class="dv">2</span><span class="op">*</span>botswana_coefs[[<span class="dv">3</span>]]<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">2</span>]]</a>
+<a class="sourceLine" id="cb1193-3" title="3">}</a>
+<a class="sourceLine" id="cb1193-4" title="4"></a>
+<a class="sourceLine" id="cb1193-5" title="5">find_y1 &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1193-6" title="6">  botswana_coefs[[<span class="dv">3</span>]]<span class="op">*</span>(x<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">2</span>]]<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>botswana_coefs[[<span class="dv">1</span>]]</a>
+<a class="sourceLine" id="cb1193-7" title="7">}</a>
+<a class="sourceLine" id="cb1193-8" title="8"></a>
+<a class="sourceLine" id="cb1193-9" title="9">find_intercept &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, m){</a>
+<a class="sourceLine" id="cb1193-10" title="10">  y <span class="op">-</span><span class="st"> </span>x<span class="op">*</span>m</a>
+<a class="sourceLine" id="cb1193-11" title="11">}</a>
+<a class="sourceLine" id="cb1193-12" title="12"></a>
+<a class="sourceLine" id="cb1193-13" title="13">tangent_lines &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">x1 =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">20</span>, <span class="dv">20</span>, <span class="dv">10</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1193-14" title="14"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">slope =</span> <span class="kw">find_slope</span>(x1),</a>
+<a class="sourceLine" id="cb1193-15" title="15">         <span class="dt">y1 =</span> <span class="kw">find_y1</span>(x1),</a>
+<a class="sourceLine" id="cb1193-16" title="16">         <span class="dt">intercept =</span> <span class="kw">find_intercept</span>(x1, y1, slope),</a>
+<a class="sourceLine" id="cb1193-17" title="17">         <span class="dt">slope_change =</span> x1<span class="op">*</span><span class="dv">2</span><span class="op">*</span>botswana_coefs[[<span class="dv">3</span>]]) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1193-18" title="18"><span class="st">  </span><span class="kw">select</span>(slope, intercept, <span class="kw">everything</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb1194"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1194-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1194-2" title="2"><span class="st">  </span><span class="kw">filter</span>(country <span class="op">==</span><span class="st"> &quot;Botswana&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1194-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1194-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1194-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1194-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year_cent, <span class="dt">y =</span> pred), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1194-7" title="7"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> intercept, <span class="dt">slope =</span> slope), </a>
+<a class="sourceLine" id="cb1194-8" title="8">              <span class="dt">data =</span> tangent_lines)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1194-9" title="9"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Below is the relevant output in a table.<br />
 <code>x1</code>: represents the change in x value from 1979.5<br />
 <code>slope</code>: slope of the tangent line at particular <code>x1</code> value<br />
 <code>slope_diff_central</code>: the amount the slope is different from the slope of the tangent line at the central year</p>
-<div class="sourceCode" id="cb1222"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1222-1" title="1"><span class="kw">select</span>(tangent_lines, x1, slope, <span class="dt">slope_diff_central =</span> slope_change)</a></code></pre></div>
+<div class="sourceCode" id="cb1195"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1195-1" title="1"><span class="kw">select</span>(tangent_lines, x1, slope, <span class="dt">slope_diff_central =</span> slope_change)</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 3
 ##      x1   slope slope_diff_central
 ##   &lt;dbl&gt;   &lt;dbl&gt;              &lt;dbl&gt;
@@ -805,72 +798,58 @@ year (centered)^2: ~ -0.0175</p>
 </ul></li>
 <li><p>Explore other methods for visualising the distribution of <span class="math inline">\(R^2\)</span> per continent. You might want to try the ggbeeswarm package, which provides similar methods for avoiding overlaps as jitter, but uses deterministic methods.</p>
 <p><em>visualisations of linear model</em></p>
-<div class="sourceCode" id="cb1224"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1224-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1224-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1224-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1224-4" title="4"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1224-5" title="5"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_quasirandom</span>()</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb1225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1225-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1225-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1225-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1225-4" title="4"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1225-5" title="5"><span class="st">  </span><span class="kw">geom_jitter</span>()</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
-<div class="sourceCode" id="cb1226"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1226-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1226-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb1226-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1226-4" title="4"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1226-5" title="5"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_beeswarm</span>()</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
+<div class="sourceCode" id="cb1197"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1197-1" title="1">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1197-2" title="2"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1197-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> continent, <span class="dt">y =</span> r.squared, <span class="dt">colour =</span> continent))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1197-4" title="4"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">alpha =</span> <span class="fl">0.1</span>, <span class="dt">colour =</span> <span class="st">&quot;dark grey&quot;</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1197-5" title="5"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_quasirandom</span>()</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <ul>
-<li>I like <code>geom_quasirandom</code> the best as an overlay on boxplot, it keeps things centered and doesn’t have the gravitational pull affect that makes <code>geom_beeswarm</code> become a little misaligned</li>
+<li>I like <code>geom_quasirandom()</code> the best as an overlay on boxplot, it keeps things centered and doesn’t have the gravitational pull affect that makes <code>geom_beeswarm()</code> become a little misaligned, it also works well here over <code>geom_jitter()</code> as the points stay better around their true value</li>
 </ul></li>
 <li><p>To create the last plot (showing the data for the countries with the worst model fits), we needed two steps: we created a data frame with one row per country and then semi-joined it to the original dataset. It’s possible to avoid this join if we use <code>unnest()</code> instead of <code>unnest(.drop = TRUE)</code>. How?</p>
-<div class="sourceCode" id="cb1227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1227-1" title="1"><span class="co">#first filter by r.squared and then unnest</span></a>
-<a class="sourceLine" id="cb1227-2" title="2">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-6" title="6"><span class="st">  </span><span class="kw">filter</span>(bad_fit) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-7" title="7"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1227-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1227-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1227-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1227-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1227-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p></li>
+<div class="sourceCode" id="cb1198"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1198-1" title="1"><span class="co">#first filter by r.squared and then unnest</span></a>
+<a class="sourceLine" id="cb1198-2" title="2">by_country3_quad <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data_preds =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_quad, add_predictions)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-4" title="4"><span class="st">  </span><span class="kw">unnest</span>(glance_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">bad_fit =</span> r.squared <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.25</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-6" title="6"><span class="st">  </span><span class="kw">filter</span>(bad_fit) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-7" title="7"><span class="st">  </span><span class="kw">unnest</span>(data_preds) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1198-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1198-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1198-10" title="10"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1198-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1198-12" title="12"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p></li>
 </ol>
 </div>
 </div>
 <div id="creating-list-columns" class="section level2">
 <h2>25.4: Creating list-columns</h2>
-<div id="section-94" class="section level3">
+<div id="section-96" class="section level3">
 <h3>25.4.5</h3>
 <ol style="list-style-type: decimal">
-<li>List all the functions that you can think of that take an atomic vector and return a list.</li>
-</ol>
+<li><p>List all the functions that you can think of that take an atomic vector and return a list.</p>
 <ul>
 <li><code>stringr::str_extract_all</code> + other <code>stringr</code> functions</li>
 </ul>
-<p>(however the below can also take types that are not atomic and are probably not really what is being looked for)
-* <code>list</code>
-* <code>tibble</code>
-* <code>map</code> / <code>lapply</code></p>
-<ol style="list-style-type: decimal">
-<li>Brainstorm useful summary functions that, like <code>quantile()</code>, return multiple values.</li>
-</ol>
+<p>(however the below can also take types that are not atomic and are probably not really what is being looked for)</p>
+<ul>
+<li><code>list</code></li>
+<li><code>tibble</code></li>
+<li><code>map</code> / <code>lapply</code></li>
+</ul></li>
+<li><p>Brainstorm useful summary functions that, like <code>quantile()</code>, return multiple values.</p>
 <ul>
 <li><code>summary</code></li>
 <li><code>range</code></li>
 <li>…</li>
-</ul>
-<ol style="list-style-type: decimal">
+</ul></li>
 <li><p>What’s missing in the following data frame? How does <code>quantile()</code> return that missing piece? Why isn’t that helpful here?</p>
-<div class="sourceCode" id="cb1228"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1228-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1228-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1228-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(mpg))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1228-4" title="4"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1199"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1199-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1199-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1199-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(mpg))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1199-4" title="4"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 2
 ##      cyl     q
 ##    &lt;dbl&gt; &lt;dbl&gt;
@@ -892,12 +871,12 @@ year (centered)^2: ~ -0.0175</p>
 <ul>
 <li>need to capture probabilities of quantiles to make useful…</li>
 </ul>
-<div class="sourceCode" id="cb1230"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1230-1" title="1">probs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.99</span>)</a>
-<a class="sourceLine" id="cb1230-2" title="2"></a>
-<a class="sourceLine" id="cb1230-3" title="3">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1230-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1230-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> <span class="kw">list</span>(probs), <span class="dt">q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(mpg, probs))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1230-6" title="6"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1201"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1201-1" title="1">probs &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="fl">0.01</span>, <span class="fl">0.25</span>, <span class="fl">0.5</span>, <span class="fl">0.75</span>, <span class="fl">0.99</span>)</a>
+<a class="sourceLine" id="cb1201-2" title="2"></a>
+<a class="sourceLine" id="cb1201-3" title="3">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1201-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1201-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">p =</span> <span class="kw">list</span>(probs), <span class="dt">q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(mpg, probs))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1201-6" title="6"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 3
 ##      cyl     p     q
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -917,22 +896,22 @@ year (centered)^2: ~ -0.0175</p>
 ## 14     8  0.75  16.2
 ## 15     8  0.99  19.1</code></pre>
 <ul>
-<li>see [quantile example] for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)</li>
+<li>see <a href="25-many-models.html#listquantile-examples">list(quantile()) examples</a> for related method that captures names of quantiles (rather than requiring th user to manually input a vector of probabilities)</li>
 </ul></li>
 <li><p>What does this code do? Why might it be useful?</p>
-<div class="sourceCode" id="cb1232"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1232-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1232-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1232-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1232-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list))</a></code></pre></div>
+<div class="sourceCode" id="cb1203"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1203-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1203-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1203-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1203-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list))</a></code></pre></div>
 <ul>
-<li>It turns each row into an atomic vector grouped by the particular <code>cyl</code> value. It is different from <code>nest</code> in that each column creates a new list-column representing an atomic vector. If <code>nest</code> had been used, this woudl have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns…</li>
+<li>It turns each row into an atomic vector grouped by the particular <code>cyl</code> value. It is different from <code>nest</code> in that each column creates a new list-column representing an atomic vector. If <code>nest</code> had been used, this would have created a single dataframe that all the values woudl have been in. Could be useful for running purr through particular columns…</li>
 <li>e.g. let’s say we want to find the number of unique items in each column for each grouping, we could do that like so</li>
 </ul>
-<div class="sourceCode" id="cb1233"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1233-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1233-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1233-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1233-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1233-5" title="5"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="dt">unique =</span> <span class="kw">map_int</span>(., <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))))) </a></code></pre></div>
+<div class="sourceCode" id="cb1204"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1204-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1204-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1204-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1204-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1204-5" title="5"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="dt">unique =</span> <span class="kw">map_int</span>(., <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))))) </a></code></pre></div>
 <pre><code>## Warning: funs() is soft deprecated as of dplyr 0.8.0
 ## please use list() instead
 ## 
@@ -949,12 +928,12 @@ year (centered)^2: ~ -0.0175</p>
 ## 2     6 &lt;dbl~ &lt;dbl~ &lt;dbl~ &lt;dbl~          1          6           5         4
 ## 3     8 &lt;dbl~ &lt;dbl~ &lt;dbl~ &lt;dbl~          1         12          11         9
 ## # ... with 1 more variable: drat_unique &lt;int&gt;</code></pre>
-<div class="sourceCode" id="cb1236"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1236-1" title="1"><span class="co"># we could also simply overwrite the values (rather than make new columns)</span></a>
-<a class="sourceLine" id="cb1236-2" title="2">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1236-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1236-4" title="4"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1236-5" title="5"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1236-6" title="6"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">map_int</span>(., <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))))) </a></code></pre></div>
+<div class="sourceCode" id="cb1207"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1207-1" title="1"><span class="co"># we could also simply overwrite the values (rather than make new columns)</span></a>
+<a class="sourceLine" id="cb1207-2" title="2">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1207-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1207-4" title="4"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1207-5" title="5"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1207-6" title="6"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">map_int</span>(., <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))))) </a></code></pre></div>
 <pre><code>## # A tibble: 3 x 5
 ##     cyl   mpg  disp    hp  drat
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -966,41 +945,30 @@ year (centered)^2: ~ -0.0175</p>
 </div>
 <div id="simplifying-list-columns" class="section level2">
 <h2>25.5: Simplifying list-columns</h2>
-<div id="section-95" class="section level3">
+<div id="section-97" class="section level3">
 <h3>25.5.3</h3>
 <ol style="list-style-type: decimal">
 <li><p>Why might the <code>lengths()</code> function be useful for creating atomic
 vector columns from list-columns?</p>
-<p>If all you wanted were the length (not the number of unique items), you would still need a <code>map function when using</code>length`</p>
-<div class="sourceCode" id="cb1238"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1238-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1238-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1238-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1238-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1238-5" title="5"><span class="st">  </span><span class="kw">mutate_all</span>(<span class="kw">funs</span>(<span class="kw">map_int</span>(., length))) </a></code></pre></div>
-<pre><code>## # A tibble: 3 x 5
-##     cyl   mpg  disp    hp  drat
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-## 1     1    11    11    11    11
-## 2     1     7     7     7     7
-## 3     1    14    14    14    14</code></pre>
-<p>for this problem, using <code>lengths</code> prevents the need to use a <code>map</code> function</p>
-<div class="sourceCode" id="cb1240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1240-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1240-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1240-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1240-4" title="4"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(list)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1240-5" title="5"><span class="st">  </span><span class="kw">mutate_all</span>(lengths) </a></code></pre></div>
-<pre><code>## # A tibble: 3 x 5
-##     cyl   mpg  disp    hp  drat
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
-## 1     1    11    11    11    11
-## 2     1     7     7     7     7
-## 3     1    14    14    14    14</code></pre>
 <ul>
-<li>is there a more helpful use case…?</li>
+<li>perhaps you want to measure the number of elements (or unique elements) in an individual element of a list column</li>
 </ul></li>
+</ol>
+<div class="sourceCode" id="cb1209"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1209-1" title="1">mpg <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">displ_list =</span> <span class="kw">list</span>(displ)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1209-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">num_unique =</span> <span class="kw">map_int</span>(displ_list, <span class="op">~</span><span class="kw">unique</span>(.x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()))</a></code></pre></div>
+<pre><code>## # A tibble: 4 x 3
+##     cyl displ_list num_unique
+##   &lt;int&gt; &lt;list&gt;          &lt;int&gt;
+## 1     4 &lt;dbl [81]&gt;          8
+## 2     5 &lt;dbl [4]&gt;           1
+## 3     6 &lt;dbl [79]&gt;         14
+## 4     8 &lt;dbl [70]&gt;         17</code></pre>
+<ol style="list-style-type: decimal">
 <li><p>List the most common types of vector found in a data frame. What makes lists different?</p>
 <ul>
-<li>the atomic types: char, int, double, fact, date are all more common, they are atomic, whereas lists are not</li>
+<li>the atomic types: char, int, double, factor, date are all more common, they are atomic, whereas lists are not atomic vectors and can contain any type of data within them (e.g. a list of atomic vectors, list of lists, etc.).</li>
 </ul></li>
 </ol>
 </div>
@@ -1009,12 +977,12 @@ vector columns from list-columns?</p>
 <h2>Appendix</h2>
 <div id="models-in-lists" class="section level3">
 <h3>Models in lists</h3>
-<p>this is the more traditional way you might store models</p>
-<div class="sourceCode" id="cb1242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1242-1" title="1">models_countries &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map</span>(by_country<span class="op">$</span>data, country_model)</a>
-<a class="sourceLine" id="cb1242-2" title="2"></a>
-<a class="sourceLine" id="cb1242-3" title="3"><span class="kw">names</span>(models_countries) &lt;-<span class="st"> </span>by_country<span class="op">$</span>country</a>
-<a class="sourceLine" id="cb1242-4" title="4"></a>
-<a class="sourceLine" id="cb1242-5" title="5">models_countries[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
+<p>This is the more traditional way you might store models in a list</p>
+<div class="sourceCode" id="cb1211"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1211-1" title="1">models_countries &lt;-<span class="st"> </span>purrr<span class="op">::</span><span class="kw">map</span>(by_country<span class="op">$</span>data, country_model)</a>
+<a class="sourceLine" id="cb1211-2" title="2"></a>
+<a class="sourceLine" id="cb1211-3" title="3"><span class="kw">names</span>(models_countries) &lt;-<span class="st"> </span>by_country<span class="op">$</span>country</a>
+<a class="sourceLine" id="cb1211-4" title="4"></a>
+<a class="sourceLine" id="cb1211-5" title="5">models_countries[<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>]</a></code></pre></div>
 <pre><code>## $Afghanistan
 ## 
 ## Call:
@@ -1046,77 +1014,77 @@ vector columns from list-columns?</p>
 </div>
 <div id="list-columns-for-sampling" class="section level3">
 <h3>List-columns for sampling</h3>
-<p>say you want to sample all the flights on 50 days out of the year. List-cols can be helpful in generating a sample like this:</p>
-<div class="sourceCode" id="cb1244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1244-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-3" title="3"><span class="st">  </span><span class="kw">select</span>(create_date, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(create_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-5" title="5"><span class="st">  </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-6" title="6"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1244-7" title="7"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
-<pre><code>## # A tibble: 45,475 x 5
+<p>say you want to sample all the flights on 50 days out of the year. List-cols can be used to generate a sample like this:</p>
+<div class="sourceCode" id="cb1213"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1213-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-3" title="3"><span class="st">  </span><span class="kw">select</span>(create_date, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(create_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-5" title="5"><span class="st">  </span><span class="kw">nest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-6" title="6"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1213-7" title="7"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 45,640 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;date&gt;               &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-##  1 2013-05-02            1905       298      241           2224
-##  2 2013-05-02            2015       247      256           2308
-##  3 2013-05-02            2359        40      413            345
-##  4 2013-05-02            2130       348      541             22
-##  5 2013-05-02             500        -7      651            640
-##  6 2013-05-02             515        -8      747            811
-##  7 2013-05-02             540        -1      850            840
-##  8 2013-05-02             545        -6      806            827
-##  9 2013-05-02             600       -11      823            850
-## 10 2013-05-02             600       -10      732            755
-## # ... with 45,465 more rows</code></pre>
-<p>The alternative a join, e.g.</p>
-<div class="sourceCode" id="cb1246"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1246-1" title="1">flights_samp &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-3" title="3"><span class="st">  </span><span class="kw">distinct</span>(create_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-4" title="4"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb1246-5" title="5"></a>
-<a class="sourceLine" id="cb1246-6" title="6">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-8" title="8"><span class="st">  </span><span class="kw">select</span>(create_date, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1246-9" title="9"><span class="st">  </span><span class="kw">semi_join</span>(flights_samp, <span class="dt">by =</span> <span class="st">&quot;create_date&quot;</span>)</a></code></pre></div>
-<pre><code>## # A tibble: 46,037 x 5
+##  1 2013-02-09             900         1     1242           1227
+##  2 2013-02-09            1130        30     1434           1430
+##  3 2013-02-09             900       186     1814           1540
+##  4 2013-02-09            1220         2     1545           1532
+##  5 2013-02-09            1240        -3     1414           1444
+##  6 2013-02-09            1245        -5     1528           1600
+##  7 2013-02-09            1250         0     1526           1550
+##  8 2013-02-09            1259        -4     1535           1555
+##  9 2013-02-09            1300        -2     1540           1605
+## 10 2013-02-09            1300         3     1626           1608
+## # ... with 45,630 more rows</code></pre>
+<p>Alternatively you could use a <code>semi_join()</code>, e.g.</p>
+<div class="sourceCode" id="cb1215"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1215-1" title="1">flights_samp &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-3" title="3"><span class="st">  </span><span class="kw">distinct</span>(create_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-4" title="4"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb1215-5" title="5"></a>
+<a class="sourceLine" id="cb1215-6" title="6">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">create_date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-8" title="8"><span class="st">  </span><span class="kw">select</span>(create_date, <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1215-9" title="9"><span class="st">  </span><span class="kw">semi_join</span>(flights_samp, <span class="dt">by =</span> <span class="st">&quot;create_date&quot;</span>)</a></code></pre></div>
+<pre><code>## # A tibble: 46,640 x 5
 ##    create_date sched_dep_time dep_delay arr_time sched_arr_time
 ##    &lt;date&gt;               &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;          &lt;int&gt;
-##  1 2013-01-05            2359        15      503            445
-##  2 2013-01-05            2230       127      341            131
-##  3 2013-01-05             500        -2      640            650
-##  4 2013-01-05             515         1      821            816
-##  5 2013-01-05             530         4      829            829
-##  6 2013-01-05             540        -3      831            850
-##  7 2013-01-05             600        -7      903            903
-##  8 2013-01-05             600        -6      739            759
-##  9 2013-01-05             600        -5      824            810
-## 10 2013-01-05             600        -5      818            837
-## # ... with 46,027 more rows</code></pre>
+##  1 2013-01-15             500        -7      645            648
+##  2 2013-01-15             525        -7      825            820
+##  3 2013-01-15             530         3      839            831
+##  4 2013-01-15             540        -6      829            850
+##  5 2013-01-15             540        -5     1014           1017
+##  6 2013-01-15             600       -17      710            715
+##  7 2013-01-15             600       -11      637            709
+##  8 2013-01-15             600        -8      934            910
+##  9 2013-01-15             600        -8      658            658
+## 10 2013-01-15             600        -7      851            859
+## # ... with 46,630 more rows</code></pre>
 <ul>
-<li>I find the <code>nest</code> - <code>unnest</code> method more elegant</li>
-<li>I’ve found the <code>semi_join</code> method seems to run goes faster on large dataframes</li>
+<li>In some situations I find the <code>nest</code>, <code>unnest</code> method more elegant though the <code>semi_join</code> method seems to run goes faster on large dataframes</li>
+<li>There are also other more specialized functions in the tidyverse to help with various sampling strategies</li>
 </ul>
 </div>
-<div id="section-96" class="section level3">
+<div id="section-98" class="section level3">
 <h3>25.2.5.1</h3>
 <div id="include-cubic-term" class="section level4">
 <h4>Include cubic term</h4>
-<p>Let’s look at this example if we had allowed year to be a 3rd order polynomial. We’re really stretching our degrees of freedom in this case – these might be unlikely to generalize to other data well.</p>
-<div class="sourceCode" id="cb1248"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1248-1" title="1">by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1248-2" title="2"><span class="st">  </span><span class="kw">semi_join</span>(bad_fit, <span class="dt">by =</span> <span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1248-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb1248-4" title="4">    <span class="co"># create centered data</span></a>
-<a class="sourceLine" id="cb1248-5" title="5">    <span class="dt">data_cent =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, center_value), </a>
-<a class="sourceLine" id="cb1248-6" title="6">    <span class="co"># create cubic (3rd order) data</span></a>
-<a class="sourceLine" id="cb1248-7" title="7">    <span class="dt">mod_cubic =</span> purrr<span class="op">::</span><span class="kw">map</span>(data_cent, lm_quad_<span class="dv">2</span>, <span class="dt">var =</span> <span class="st">&quot;year_cent + I(year_cent^2) + I(year_cent^3)&quot;</span>), </a>
-<a class="sourceLine" id="cb1248-8" title="8">    <span class="co"># get predictions for 3rd order model</span></a>
-<a class="sourceLine" id="cb1248-9" title="9">    <span class="dt">data_cubic =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_cubic, add_predictions)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1248-10" title="10"><span class="st">  </span><span class="kw">unnest</span>(data_cubic) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1248-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1248-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1248-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1248-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1248-15" title="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<p>Let’s look at this example if we had allowed year to be a 3rd order polynomial. We’re really stretching our degrees of freedom (in relation to our number of observations) in this case – these might be less likely to generalize to other data well.</p>
+<div class="sourceCode" id="cb1217"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1217-1" title="1">by_country3 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-2" title="2"><span class="st">  </span><span class="kw">semi_join</span>(bad_fit, <span class="dt">by =</span> <span class="st">&quot;country&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb1217-4" title="4">    <span class="co"># create centered data</span></a>
+<a class="sourceLine" id="cb1217-5" title="5">    <span class="dt">data_cent =</span> purrr<span class="op">::</span><span class="kw">map</span>(data, center_value), </a>
+<a class="sourceLine" id="cb1217-6" title="6">    <span class="co"># create cubic (3rd order) data</span></a>
+<a class="sourceLine" id="cb1217-7" title="7">    <span class="dt">mod_cubic =</span> purrr<span class="op">::</span><span class="kw">map</span>(data_cent, lm_quad_<span class="dv">2</span>, <span class="dt">var =</span> <span class="st">&quot;year_cent + I(year_cent^2) + I(year_cent^3)&quot;</span>), </a>
+<a class="sourceLine" id="cb1217-8" title="8">    <span class="co"># get predictions for 3rd order model</span></a>
+<a class="sourceLine" id="cb1217-9" title="9">    <span class="dt">data_cubic =</span> purrr<span class="op">::</span><span class="kw">map2</span>(data_cent, mod_cubic, add_predictions)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1217-10" title="10"><span class="st">  </span><span class="kw">unnest</span>(data_cubic) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1217-11" title="11"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">group =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-12" title="12"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> lifeExp, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> pred, <span class="dt">colour =</span> country))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1217-15" title="15"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
 <p><img src="25-many-models_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <ul>
 <li>interpretibility of coefficients beyond quadratic term becomes less strait forward to explain</li>
@@ -1125,41 +1093,42 @@ vector columns from list-columns?</p>
 </div>
 <div id="multiple-graphs-in-chunk" class="section level3">
 <h3>Multiple graphs in chunk</h3>
-<p>My work flow for pulling multiple graphs into a single input has typically been either to build the graphs seperately and then add each to the function <code>gridExtra::grid.arrange()</code> or to use faceting as much as possible.</p>
-<p>In 25.2 Hadley showed an example where he put all the graphs within a chunk into a single outputted figure by setting the code chunk options for this. The chunk below is that example.</p>
-<div class="sourceCode" id="cb1249"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1249-1" title="1">nz &lt;-<span class="st"> </span><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;New Zealand&quot;</span>)</a>
-<a class="sourceLine" id="cb1249-2" title="2">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1249-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, lifeExp)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1249-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1249-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Full data = &quot;</span>)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-36-1.png" width="33%" /></p>
-<div class="sourceCode" id="cb1250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1250-1" title="1">nz_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(lifeExp <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> nz)</a>
-<a class="sourceLine" id="cb1250-2" title="2">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-3" title="3"><span class="st">  </span><span class="kw">add_predictions</span>(nz_mod) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1250-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, pred)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Linear trend + &quot;</span>)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-36-2.png" width="33%" /></p>
-<div class="sourceCode" id="cb1251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1251-1" title="1">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-2" title="2"><span class="st">  </span><span class="kw">add_residuals</span>(nz_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, resid)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-4" title="4"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-6" title="6"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Remaining pattern&quot;</span>)</a></code></pre></div>
-<p><img src="25-many-models_files/figure-html/unnamed-chunk-36-3.png" width="33%" /></p>
+<p>There are a variety of ways to have multiple graphs outputted and aligned side by side:</p>
 <ul>
-<li>still printing as 3 individual plots, how to fix?</li>
+<li>build graphs separately and use <code>gridExtra::grid.arrange()</code></li>
+<li>Ensure metrics have been gathered into a single column and then use <code>facet_wrap()</code>/<code>facet_grid()</code> (<code>ggforce</code> is a helpful extension package to ggplot2 that gives more functionality to these faceting functions)</li>
+<li>manipulate chunk options, e.g. figures below have the following options set in the R code chunk: <code>out.width = "33%", fig.asp = 1, fig.width = 3, fig.show='hold',, fig.align='default'</code></li>
 </ul>
+<div class="sourceCode" id="cb1218"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1218-1" title="1">nz &lt;-<span class="st"> </span><span class="kw">filter</span>(gapminder, country <span class="op">==</span><span class="st"> &quot;New Zealand&quot;</span>)</a>
+<a class="sourceLine" id="cb1218-2" title="2">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, lifeExp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-5" title="5"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Full data = &quot;</span>)</a>
+<a class="sourceLine" id="cb1218-6" title="6"></a>
+<a class="sourceLine" id="cb1218-7" title="7">nz_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(lifeExp <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> nz)</a>
+<a class="sourceLine" id="cb1218-8" title="8">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-9" title="9"><span class="st">  </span><span class="kw">add_predictions</span>(nz_mod) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1218-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, pred)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-12" title="12"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Linear trend + &quot;</span>)</a>
+<a class="sourceLine" id="cb1218-13" title="13"></a>
+<a class="sourceLine" id="cb1218-14" title="14">nz <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-15" title="15"><span class="st">  </span><span class="kw">add_residuals</span>(nz_mod) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-16" title="16"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, resid)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-17" title="17"><span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept =</span> <span class="dv">0</span>, <span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">3</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-18" title="18"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1218-19" title="19"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Remaining pattern&quot;</span>)</a></code></pre></div>
+<p><img src="25-many-models_files/figure-html/unnamed-chunk-36-1.png" width="33%" /><img src="25-many-models_files/figure-html/unnamed-chunk-36-2.png" width="33%" /><img src="25-many-models_files/figure-html/unnamed-chunk-36-3.png" width="33%" /></p>
 </div>
 <div id="listquantile-examples" class="section level3">
-<h3><code>list(quantile())</code> examples</h3>
-<p>Not really best practice…</p>
-<div class="sourceCode" id="cb1252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1252-1" title="1">prob_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb1252-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1252-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1252-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Petal.Length_q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(Petal.Length))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1252-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probs =</span> <span class="kw">list</span>(prob_vals)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1252-6" title="6"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<h3>list(quantile()) examples</h3>
+<p>Some of these examples may not represent best practices.</p>
+<div class="sourceCode" id="cb1219"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1219-1" title="1">prob_vals &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="fl">.25</span>, <span class="fl">.5</span>, <span class="fl">.75</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb1219-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">Petal.Length_q =</span> <span class="kw">list</span>(<span class="kw">quantile</span>(Petal.Length))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probs =</span> <span class="kw">list</span>(prob_vals)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1219-6" title="6"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 3
 ##    Species    Petal.Length_q probs
 ##    &lt;fct&gt;               &lt;dbl&gt; &lt;dbl&gt;
@@ -1180,11 +1149,11 @@ vector columns from list-columns?</p>
 ## 15 virginica            6.9   1</code></pre>
 <p><em>Example for using quantile across range of columns</em><br />
 <em>Also notice dynamic method for extracting names</em></p>
-<div class="sourceCode" id="cb1254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1254-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1254-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1254-3" title="3"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(<span class="kw">list</span>(<span class="kw">quantile</span>(., <span class="dt">probs =</span> prob_vals)))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1254-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probs =</span> <span class="kw">map</span>(Petal.Length, names)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1254-5" title="5"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1221"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1221-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1221-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1221-3" title="3"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="kw">funs</span>(<span class="kw">list</span>(<span class="kw">quantile</span>(., <span class="dt">probs =</span> prob_vals)))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1221-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">probs =</span> <span class="kw">map</span>(Petal.Length, names)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1221-5" title="5"><span class="st">  </span><span class="kw">unnest</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 15 x 6
 ##    Species    Sepal.Length Sepal.Width Petal.Length Petal.Width probs
 ##    &lt;fct&gt;             &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;
@@ -1204,35 +1173,42 @@ vector columns from list-columns?</p>
 ## 14 virginica          6.9         3.18         5.88         2.3 75%  
 ## 15 virginica          7.9         3.8          6.9          2.5 100%</code></pre>
 </div>
-<div id="extracting-row-names" class="section level3">
-<h3>Extracting row names</h3>
-<p>Don’t know I’d do this…</p>
-<div class="sourceCode" id="cb1256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1256-1" title="1"><span class="kw">quantile</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1256-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1256-3" title="3"><span class="st">  </span><span class="kw">rownames_to_column</span>()</a></code></pre></div>
-<pre><code>## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
-## This warning is displayed once per session.</code></pre>
+<div id="extracting-names" class="section level3">
+<h3>Extracting names</h3>
+<p>Maybe not best practice:</p>
+<div class="sourceCode" id="cb1223"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1223-1" title="1"><span class="kw">quantile</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-2" title="2"><span class="st">  </span><span class="kw">as.data.frame</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1223-3" title="3"><span class="st">  </span><span class="kw">rownames_to_column</span>()</a></code></pre></div>
+<pre><code>##   rowname      .
+## 1      0%   1.00
+## 2     25%  25.75
+## 3     50%  50.50
+## 4     75%  75.25
+## 5    100% 100.00</code></pre>
+<p>Better would be to use <code>enframe()</code> here:</p>
+<div class="sourceCode" id="cb1225"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1225-1" title="1"><span class="kw">quantile</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1225-2" title="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">enframe</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 2
-##   rowname value
-##   &lt;chr&gt;   &lt;dbl&gt;
-## 1 1         1  
-## 2 2        25.8
-## 3 3        50.5
-## 4 4        75.2
-## 5 5       100</code></pre>
+##   name  value
+##   &lt;chr&gt; &lt;dbl&gt;
+## 1 0%      1  
+## 2 25%    25.8
+## 3 50%    50.5
+## 4 75%    75.2
+## 5 100%  100</code></pre>
 </div>
 <div id="invoke_map-example-book" class="section level3">
 <h3><code>invoke_map</code> example (book)</h3>
-<p>I liked Hadley’s example with invoke_map and wanted to save it</p>
-<div class="sourceCode" id="cb1259"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1259-1" title="1">sim &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
-<a class="sourceLine" id="cb1259-2" title="2">  <span class="op">~</span>f,      <span class="op">~</span>params,</a>
-<a class="sourceLine" id="cb1259-3" title="3">  <span class="st">&quot;runif&quot;</span>, <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">-1</span>),</a>
-<a class="sourceLine" id="cb1259-4" title="4">  <span class="st">&quot;rnorm&quot;</span>, <span class="kw">list</span>(<span class="dt">sd =</span> <span class="dv">5</span>),</a>
-<a class="sourceLine" id="cb1259-5" title="5">  <span class="st">&quot;rpois&quot;</span>, <span class="kw">list</span>(<span class="dt">lambda =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1259-6" title="6">)</a>
-<a class="sourceLine" id="cb1259-7" title="7"></a>
-<a class="sourceLine" id="cb1259-8" title="8">sim <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1259-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sims =</span> <span class="kw">invoke_map</span>(f, params, <span class="dt">n =</span> <span class="dv">10</span>))</a></code></pre></div>
+<p>I liked Hadley’s example with invoke_map and wanted to save it:</p>
+<div class="sourceCode" id="cb1227"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1227-1" title="1">sim &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
+<a class="sourceLine" id="cb1227-2" title="2">  <span class="op">~</span>f,      <span class="op">~</span>params,</a>
+<a class="sourceLine" id="cb1227-3" title="3">  <span class="st">&quot;runif&quot;</span>, <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">-1</span>),</a>
+<a class="sourceLine" id="cb1227-4" title="4">  <span class="st">&quot;rnorm&quot;</span>, <span class="kw">list</span>(<span class="dt">sd =</span> <span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb1227-5" title="5">  <span class="st">&quot;rpois&quot;</span>, <span class="kw">list</span>(<span class="dt">lambda =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1227-6" title="6">)</a>
+<a class="sourceLine" id="cb1227-7" title="7"></a>
+<a class="sourceLine" id="cb1227-8" title="8">sim <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1227-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">sims =</span> <span class="kw">invoke_map</span>(f, params, <span class="dt">n =</span> <span class="dv">10</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   f     params     sims      
 ##   &lt;chr&gt; &lt;list&gt;     &lt;list&gt;    
@@ -1244,14 +1220,14 @@ vector columns from list-columns?</p>
 <h3>named list example (book)</h3>
 <p>I liked Hadley’s example where you have a list of named vectors that you need to iterate over both the values as well as the names and the use of enframe to facilitate this.</p>
 <p>Below is the copied example and notes:</p>
-<div class="sourceCode" id="cb1261"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1261-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb1261-2" title="2">  <span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</a>
-<a class="sourceLine" id="cb1261-3" title="3">  <span class="dt">b =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, </a>
-<a class="sourceLine" id="cb1261-4" title="4">  <span class="dt">c =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">6</span></a>
-<a class="sourceLine" id="cb1261-5" title="5">) </a>
-<a class="sourceLine" id="cb1261-6" title="6"></a>
-<a class="sourceLine" id="cb1261-7" title="7">df &lt;-<span class="st"> </span><span class="kw">enframe</span>(x)</a>
-<a class="sourceLine" id="cb1261-8" title="8">df</a></code></pre></div>
+<div class="sourceCode" id="cb1229"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1229-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb1229-2" title="2">  <span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>,</a>
+<a class="sourceLine" id="cb1229-3" title="3">  <span class="dt">b =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">4</span>, </a>
+<a class="sourceLine" id="cb1229-4" title="4">  <span class="dt">c =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">6</span></a>
+<a class="sourceLine" id="cb1229-5" title="5">) </a>
+<a class="sourceLine" id="cb1229-6" title="6"></a>
+<a class="sourceLine" id="cb1229-7" title="7">df &lt;-<span class="st"> </span><span class="kw">enframe</span>(x)</a>
+<a class="sourceLine" id="cb1229-8" title="8">df</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 2
 ##   name  value    
 ##   &lt;chr&gt; &lt;list&gt;   
@@ -1260,10 +1236,10 @@ vector columns from list-columns?</p>
 ## 3 c     &lt;int [2]&gt;</code></pre>
 <p>The advantage of this structure is that it generalises in a straightforward way - names are useful if you have character vector of metadata, but don’t help if you have other types of data, or multiple vectors.</p>
 <p>Now if you want to iterate over names and values in parallel, you can use <code>map2()</code>:</p>
-<div class="sourceCode" id="cb1263"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1263-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1263-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
-<a class="sourceLine" id="cb1263-3" title="3">    <span class="dt">smry =</span> <span class="kw">map2_chr</span>(name, value, <span class="op">~</span><span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_c</span>(.x, <span class="st">&quot;: &quot;</span>, .y[<span class="dv">1</span>]))</a>
-<a class="sourceLine" id="cb1263-4" title="4">  )</a></code></pre></div>
+<div class="sourceCode" id="cb1231"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1231-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1231-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(</a>
+<a class="sourceLine" id="cb1231-3" title="3">    <span class="dt">smry =</span> <span class="kw">map2_chr</span>(name, value, <span class="op">~</span><span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_c</span>(.x, <span class="st">&quot;: &quot;</span>, .y[<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb1231-4" title="4">  )</a></code></pre></div>
 <pre><code>## # A tibble: 3 x 3
 ##   name  value     smry 
 ##   &lt;chr&gt; &lt;list&gt;    &lt;chr&gt;
@@ -1277,8 +1253,8 @@ vector columns from list-columns?</p>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="43">
-<li id="fn43"><p>Note that if using <code>.drop = FALSE</code> in the latter case that you are creating replicated rows for list-col values<a href="25-many-models.html#fnref43" class="footnote-back">↩</a></p></li>
+<ol start="45">
+<li id="fn45"><p>Note that if using <code>.drop = FALSE</code> in the latter case that you are creating replicated rows for list-col values<a href="25-many-models.html#fnref45" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1330,8 +1306,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https\://github.com/brshallow/R4DS_Solutions/edit/master/25-many-models.Rmd",
+"text": "Edit, fork"
 },
 "download": null,
 "toc": {

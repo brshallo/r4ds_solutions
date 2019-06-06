@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Yet another study guide for ‘R for Data Science’</title>
-  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
-  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta property="og:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
-  
-  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="twitter:site" content="@brshallo" />
+  <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-31">
+<meta name="date" content="2019-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,13 +135,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Chapter contents</a></li>
+<li><a href="./">Yet another study guide to R4DS</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-book"><i class="fa fa-check"></i>Origin of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
@@ -330,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
@@ -380,6 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-82"><i class="fa fa-check"></i>21.3.5.1</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-83"><i class="fa fa-check"></i>21.9.3.1</a></li>
 <li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
@@ -388,78 +390,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-83"><i class="fa fa-check"></i>23.2.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.3.3</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.3.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.4.5</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-87"><i class="fa fa-check"></i>23.2.1.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-88"><i class="fa fa-check"></i>23.3.3.2</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5.4</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-89"><i class="fa fa-check"></i>23.4.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>24.3.5</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.3.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-89"><i class="fa fa-check"></i>24.2.3.3</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3.4</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.2.3.1</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>25.3.5.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-93"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-94"><i class="fa fa-check"></i>24.3.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-93"><i class="fa fa-check"></i>25.2.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-94"><i class="fa fa-check"></i>25.4.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.5.3</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-97"><i class="fa fa-check"></i>25.5.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-12"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-98"><i class="fa fa-check"></i>25.2.5.1</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
-<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#listquantile-examples"><i class="fa fa-check"></i>list(quantile()) examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-names"><i class="fa fa-check"></i>Extracting names</a></li>
 <li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-97"><i class="fa fa-check"></i>27.2.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-98"><i class="fa fa-check"></i>27.3.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-100"><i class="fa fa-check"></i>27.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.4.7</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-101"><i class="fa fa-check"></i>27.4.7</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-100"><i class="fa fa-check"></i>28.2.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-101"><i class="fa fa-check"></i>28.3.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-103"><i class="fa fa-check"></i>28.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.4.4</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-104"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#appendix-13"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-105"><i class="fa fa-check"></i>28.3.1.5</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -483,6 +487,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch.-23-model-basics" class="section level1">
 <h1>Ch. 23: Model basics</h1>
+<strong><em>WARNING</em> many of the solutions and notes in this chapter use various <code>modelr::sim*</code> datasets but do not explicitly refer to these coming from the <code>modelr</code> package.</strong>
+
+<div class="rmdimportant">
+<p><strong>Key questions:</strong></p>
+<ul>
+<li>23.2.1. #2</li>
+<li>23.3.3. #1, 4</li>
+<li>23.4.5. #4
+</div></li>
+</ul>
+
+<div class="rmdtip">
+<strong>Functions and notes:</strong>
+</div>
+
 <ul>
 <li><code>geom_abline</code> create line or lines given intercept and slopes, e.g. <code>geom_abline(aes(intercept = a1, slope = a2), data = models, alpha = 1/4)</code></li>
 <li><code>optim</code> general purpose function for optimization using Newton-Raphson search</li>
@@ -494,10 +513,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>seq_range(x1, 5)</code> takes 5 values evenly spaced within this set. Two other useful args:
 <ul>
-<li><code>pretty = TRUE</code> : will generate a “pretty sequence”
-++ <code>seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)</code> , 0, 0.2, 0.4, 0.6, 0.8, 1</li>
+<li><code>pretty = TRUE</code> : will generate a “pretty sequence”</li>
+<li><code>seq_range(c(0.0123, 0.923423), n = 5, pretty = TRUE)</code> , 0, 0.2, 0.4, 0.6, 0.8, 1</li>
 <li><code>trim = 0.1</code> will trim off 10% of tail values (useful if vars have long tailed distribution and you want to focus on values near center)
-+`expand = 0.1 is kind of the opposite and expands the range by 10%</li>
+*`expand = 0.1 is kind of the opposite and expands the range by 10%</li>
 </ul></li>
 <li><code>modelr::add_predictions</code> takes a data frame and modle an adds predictions from the model to a new column</li>
 <li><code>modelr::add_residuals</code> is similar to above but requires actual value be in dataframe so that residuals can be calculated</li>
@@ -517,151 +536,113 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="a-simple-model" class="section level2">
 <h2>23.2: A simple model</h2>
-<div id="section-83" class="section level3">
+<div id="section-84" class="section level3">
 <h3>23.2.1</h3>
 <ol style="list-style-type: decimal">
 <li><p>One downside of the linear model is that it is sensitive to unusual values because the distance incorporates a squared term. Fit a linear model to the simulated data below, and visualise the results. Rerun a few times to generate different simulated datasets. What do you notice about the model?</p>
-<div class="sourceCode" id="cb1075"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1075-1" title="1">sim1a &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1075-2" title="2">  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb1075-3" title="3">  <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">+</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="kw">rt</span>(<span class="kw">length</span>(x), <span class="dt">df =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1075-4" title="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb1076"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1076-1" title="1">sim1a &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1076-2" title="2">  <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb1076-3" title="3">  <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">+</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="kw">rt</span>(<span class="kw">length</span>(x), <span class="dt">df =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1076-4" title="4">)</a></code></pre></div>
 <p>generate n number of datasets that fit characteristics of <code>sim1a</code></p>
-<div class="sourceCode" id="cb1076"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1076-1" title="1">sim1a_mult &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">num =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1076-2" title="2"><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1076-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">list</span>(<span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1076-4" title="4">    <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">3</span>),</a>
-<a class="sourceLine" id="cb1076-5" title="5">    <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">+</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="kw">rt</span>(<span class="kw">length</span>(x), <span class="dt">df =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1076-6" title="6">  ))) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1076-7" title="7"><span class="st">  </span><span class="co">#undoes rowwise (used to have much more of workflow with rowwise, but have</span></a>
-<a class="sourceLine" id="cb1076-8" title="8"><span class="st">  </span><span class="co">#changed to use more of map)</span></a>
-<a class="sourceLine" id="cb1076-9" title="9"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb1076-10" title="10"></a>
-<a class="sourceLine" id="cb1076-11" title="11">plots_prep &lt;-<span class="st"> </span>sim1a_mult <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1076-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mods =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> .x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1076-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">preds =</span> <span class="kw">map2</span>(data, mods, modelr<span class="op">::</span>add_predictions),</a>
-<a class="sourceLine" id="cb1076-14" title="14">         <span class="dt">rmse =</span> <span class="kw">map2_dbl</span>(mods, data, modelr<span class="op">::</span>rmse),</a>
-<a class="sourceLine" id="cb1076-15" title="15">         <span class="dt">mae =</span> <span class="kw">map2_dbl</span>(mods, data, modelr<span class="op">::</span>mae))</a>
-<a class="sourceLine" id="cb1076-16" title="16"></a>
-<a class="sourceLine" id="cb1076-17" title="17">plots_prep <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1076-18" title="18"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;rmse&quot;</span>, <span class="dt">y =</span> rmse))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1076-19" title="19"><span class="st">  </span><span class="kw">geom_violin</span>()</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1077-1" title="1">plots_prep <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1077-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;rmse&quot;</span>, <span class="dt">y =</span> rmse))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1077-3" title="3"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_beeswarm</span>()</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<div class="sourceCode" id="cb1077"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1077-1" title="1">sim1a_mult &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">num =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">500</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1077-2" title="2"><span class="st">  </span><span class="kw">rowwise</span>() <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1077-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">data =</span> <span class="kw">list</span>(<span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1077-4" title="4">    <span class="dt">x =</span> <span class="kw">rep</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">each =</span> <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb1077-5" title="5">    <span class="dt">y =</span> x <span class="op">*</span><span class="st"> </span><span class="fl">1.5</span> <span class="op">+</span><span class="st"> </span><span class="dv">6</span> <span class="op">+</span><span class="st"> </span><span class="kw">rt</span>(<span class="kw">length</span>(x), <span class="dt">df =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1077-6" title="6">  ))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1077-7" title="7"><span class="st">  </span><span class="co">#undoes rowwise (used to have much more of workflow with rowwise, but have</span></a>
+<a class="sourceLine" id="cb1077-8" title="8"><span class="st">  </span><span class="co">#changed to use more of map)</span></a>
+<a class="sourceLine" id="cb1077-9" title="9"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb1077-10" title="10"></a>
+<a class="sourceLine" id="cb1077-11" title="11">plots_prep &lt;-<span class="st"> </span>sim1a_mult <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1077-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mods =</span> <span class="kw">map</span>(data, <span class="op">~</span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> .x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1077-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">preds =</span> <span class="kw">map2</span>(data, mods, modelr<span class="op">::</span>add_predictions),</a>
+<a class="sourceLine" id="cb1077-14" title="14">         <span class="dt">rmse =</span> <span class="kw">map2_dbl</span>(mods, data, modelr<span class="op">::</span>rmse),</a>
+<a class="sourceLine" id="cb1077-15" title="15">         <span class="dt">mae =</span> <span class="kw">map2_dbl</span>(mods, data, modelr<span class="op">::</span>mae))</a>
+<a class="sourceLine" id="cb1077-16" title="16"></a>
+<a class="sourceLine" id="cb1077-17" title="17"></a>
+<a class="sourceLine" id="cb1077-18" title="18">plots_prep <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1077-19" title="19"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">&quot;rmse&quot;</span>, <span class="dt">y =</span> rmse))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1077-20" title="20"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_beeswarm</span>()</a></code></pre></div>
+<p><img src="23-model-basics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1078"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1078-1" title="1"><span class="co"># # Other option for visualizing</span></a>
+<a class="sourceLine" id="cb1078-2" title="2"><span class="co"># plots_prep %&gt;% </span></a>
+<a class="sourceLine" id="cb1078-3" title="3"><span class="co">#   ggplot(aes(x = &quot;rmse&quot;, y = rmse))+</span></a>
+<a class="sourceLine" id="cb1078-4" title="4"><span class="co">#   geom_violin()</span></a></code></pre></div>
 <ul>
 <li>as a metric it tends to be more suseptible to outliers, than say mae</li>
 </ul></li>
 <li><p>One way to make linear models more robust is to use a different distance measure. For example, instead of root-mean-squared distance, you could use mean-absolute distance:</p>
-<div class="sourceCode" id="cb1078"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1078-1" title="1">measure_distance &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
-<a class="sourceLine" id="cb1078-2" title="2">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">make_prediction</span>(mod, data)</a>
-<a class="sourceLine" id="cb1078-3" title="3">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
-<a class="sourceLine" id="cb1078-4" title="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1079-1" title="1">measure_distance &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
+<a class="sourceLine" id="cb1079-2" title="2">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">make_prediction</span>(mod, data)</a>
+<a class="sourceLine" id="cb1079-3" title="3">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
+<a class="sourceLine" id="cb1079-4" title="4">}</a></code></pre></div>
 <p>Use <code>optim()</code> to fit this model to the simulated data above and compare it to the linear model.</p>
-<div class="sourceCode" id="cb1079"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1079-1" title="1">model_1df &lt;-<span class="st"> </span><span class="cf">function</span>(betas, <span class="dt">x1 =</span> sim1<span class="op">$</span>x) {</a>
-<a class="sourceLine" id="cb1079-2" title="2">  betas[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>betas[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb1079-3" title="3">}</a>
-<a class="sourceLine" id="cb1079-4" title="4"></a>
-<a class="sourceLine" id="cb1079-5" title="5">measure_mae &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
-<a class="sourceLine" id="cb1079-6" title="6">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
-<a class="sourceLine" id="cb1079-7" title="7">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
-<a class="sourceLine" id="cb1079-8" title="8">}</a>
-<a class="sourceLine" id="cb1079-9" title="9"></a>
-<a class="sourceLine" id="cb1079-10" title="10">measure_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
-<a class="sourceLine" id="cb1079-11" title="11">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
-<a class="sourceLine" id="cb1079-12" title="12">  <span class="kw">sqrt</span>(<span class="kw">mean</span>(diff<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb1079-13" title="13">}</a>
-<a class="sourceLine" id="cb1079-14" title="14"></a>
-<a class="sourceLine" id="cb1079-15" title="15">best_mae_sims &lt;-<span class="st"> </span><span class="kw">map</span>(sim1a_mult<span class="op">$</span>data, <span class="op">~</span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_mae, <span class="dt">data =</span> .x))</a>
-<a class="sourceLine" id="cb1079-16" title="16">best_rmse_sims &lt;-<span class="st"> </span><span class="kw">map</span>(sim1a_mult<span class="op">$</span>data, <span class="op">~</span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> .x))</a></code></pre></div>
-<div class="sourceCode" id="cb1080"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1080-1" title="1">mae_df &lt;-<span class="st"> </span>best_mae_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-2" title="2"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-3" title="3"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-4" title="4"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;error&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-6" title="6"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;mae&quot;</span>, </a>
-<a class="sourceLine" id="cb1080-8" title="8">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a>
+<div class="sourceCode" id="cb1080"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1080-1" title="1">model_1df &lt;-<span class="st"> </span><span class="cf">function</span>(betas, <span class="dt">x1 =</span> sim1<span class="op">$</span>x) {</a>
+<a class="sourceLine" id="cb1080-2" title="2">  betas[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>betas[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1080-3" title="3">}</a>
+<a class="sourceLine" id="cb1080-4" title="4"></a>
+<a class="sourceLine" id="cb1080-5" title="5">measure_mae &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
+<a class="sourceLine" id="cb1080-6" title="6">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb1080-7" title="7">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
+<a class="sourceLine" id="cb1080-8" title="8">}</a>
 <a class="sourceLine" id="cb1080-9" title="9"></a>
-<a class="sourceLine" id="cb1080-10" title="10">rmse_df &lt;-<span class="st"> </span>best_rmse_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-11" title="11"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-12" title="12"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-13" title="13"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;error&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-14" title="14"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-15" title="15"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-16" title="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;rmse&quot;</span>,</a>
-<a class="sourceLine" id="cb1080-17" title="17">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a>
-<a class="sourceLine" id="cb1080-18" title="18"></a>
-<a class="sourceLine" id="cb1080-19" title="19"><span class="kw">bind_rows</span>(rmse_df, mae_df) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1080-20" title="20"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> row_n, <span class="dt">colour =</span> error_type))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1080-21" title="21"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> error))</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<a class="sourceLine" id="cb1080-10" title="10">measure_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
+<a class="sourceLine" id="cb1080-11" title="11">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb1080-12" title="12">  <span class="kw">sqrt</span>(<span class="kw">mean</span>(diff<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb1080-13" title="13">}</a>
+<a class="sourceLine" id="cb1080-14" title="14"></a>
+<a class="sourceLine" id="cb1080-15" title="15">best_mae_sims &lt;-<span class="st"> </span><span class="kw">map</span>(sim1a_mult<span class="op">$</span>data, <span class="op">~</span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_mae, <span class="dt">data =</span> .x))</a>
+<a class="sourceLine" id="cb1080-16" title="16">best_rmse_sims &lt;-<span class="st"> </span><span class="kw">map</span>(sim1a_mult<span class="op">$</span>data, <span class="op">~</span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> .x))</a></code></pre></div>
+<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1081-1" title="1">mae_df &lt;-<span class="st"> </span>best_mae_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-2" title="2"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-3" title="3"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-4" title="4"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;error&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-6" title="6"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;mae&quot;</span>, </a>
+<a class="sourceLine" id="cb1081-8" title="8">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a>
+<a class="sourceLine" id="cb1081-9" title="9"></a>
+<a class="sourceLine" id="cb1081-10" title="10">rmse_df &lt;-<span class="st"> </span>best_rmse_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-11" title="11"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-12" title="12"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-13" title="13"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;error&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-14" title="14"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-15" title="15"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1081-16" title="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;rmse&quot;</span>,</a>
+<a class="sourceLine" id="cb1081-17" title="17">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a></code></pre></div>
+<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1082-1" title="1"><span class="kw">bind_rows</span>(rmse_df, mae_df) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1082-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> error_type, <span class="dt">colour =</span> error_type))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1082-3" title="3"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_beeswarm</span>(<span class="kw">aes</span>(<span class="dt">y =</span> error))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1082-4" title="4"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>error_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)</a></code></pre></div>
+<p><img src="23-model-basics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
 <li>you can see the error for rmse seems to have more extreme examples</li>
-</ul>
-<div class="sourceCode" id="cb1081"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1081-1" title="1"><span class="kw">bind_rows</span>(rmse_df, mae_df) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1081-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> error_type, <span class="dt">colour =</span> error_type))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1081-3" title="3"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_beeswarm</span>(<span class="kw">aes</span>(<span class="dt">y =</span> error))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1081-4" title="4"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>error_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<ul>
-<li>let’s look at differences in the coefficients produced</li>
-</ul>
-<div class="sourceCode" id="cb1082"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1082-1" title="1">mae_df &lt;-<span class="st"> </span>best_mae_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-2" title="2"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;par&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-3" title="3"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-4" title="4"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;bo&quot;</span>, <span class="st">&quot;b1&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-6" title="6"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;mae&quot;</span>, </a>
-<a class="sourceLine" id="cb1082-8" title="8">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a>
-<a class="sourceLine" id="cb1082-9" title="9"></a>
-<a class="sourceLine" id="cb1082-10" title="10">rmse_df &lt;-<span class="st"> </span>best_rmse_sims <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-11" title="11"><span class="st">  </span><span class="kw">map</span>(<span class="st">&quot;par&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-12" title="12"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-13" title="13"><span class="st">  </span><span class="kw">set_names</span>(<span class="kw">c</span>(<span class="st">&quot;bo&quot;</span>, <span class="st">&quot;b1&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-14" title="14"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-15" title="15"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-16" title="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">error_type =</span> <span class="st">&quot;rmse&quot;</span>,</a>
-<a class="sourceLine" id="cb1082-17" title="17">         <span class="dt">row_n =</span> <span class="kw">row_number</span>())</a>
-<a class="sourceLine" id="cb1082-18" title="18"></a>
-<a class="sourceLine" id="cb1082-19" title="19"><span class="kw">bind_rows</span>(rmse_df, mae_df) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1082-20" title="20"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> bo, <span class="dt">colour =</span> error_type))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1082-21" title="21"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">y =</span> b1))</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<ul>
-<li>see more variability in the b1</li>
-<li>another way of visualizing the variability in coefficients is below</li>
-</ul>
-<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1083-1" title="1"><span class="kw">left_join</span>(rmse_df, mae_df, <span class="dt">by =</span> <span class="st">&quot;row_n&quot;</span>, <span class="dt">suffix =</span> <span class="kw">c</span>(<span class="st">&quot;_rmse&quot;</span>, <span class="st">&quot;_mae&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1083-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> b1_rmse, <span class="dt">y =</span> b1_mae))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1083-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1083-4" title="4"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p></li>
+</ul></li>
 <li><p>One challenge with performing numerical optimisation is that it’s only guaranteed to find one local optima. What’s the problem with optimising a three parameter model like this?</p>
-<div class="sourceCode" id="cb1084"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1084-1" title="1">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
-<a class="sourceLine" id="cb1084-2" title="2">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>a[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb1084-3" title="3">}</a></code></pre></div>
+<div class="sourceCode" id="cb1083"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1083-1" title="1">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
+<a class="sourceLine" id="cb1083-2" title="2">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>a[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb1083-3" title="3">}</a></code></pre></div>
 <ul>
 <li>the problem is that is that there are multiple “best” solutions in this example. a[1] and a[3] together represent the intercept here.</li>
 </ul>
-<div class="sourceCode" id="cb1085"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1085-1" title="1">models_two &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb1085-2" title="2"></a>
-<a class="sourceLine" id="cb1085-3" title="3">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
-<a class="sourceLine" id="cb1085-4" title="4">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>a[<span class="dv">3</span>]</a>
-<a class="sourceLine" id="cb1085-5" title="5">}</a>
-<a class="sourceLine" id="cb1085-6" title="6"></a>
-<a class="sourceLine" id="cb1085-7" title="7">models_two[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1085-8" title="8">models_two[[<span class="dv">1</span>]]<span class="op">$</span>par</a></code></pre></div>
+<div class="sourceCode" id="cb1084"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1084-1" title="1">models_two &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1084-2" title="2"></a>
+<a class="sourceLine" id="cb1084-3" title="3">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
+<a class="sourceLine" id="cb1084-4" title="4">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>] <span class="op">+</span><span class="st"> </span>a[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb1084-5" title="5">}</a>
+<a class="sourceLine" id="cb1084-6" title="6"></a>
+<a class="sourceLine" id="cb1084-7" title="7">models_two[[<span class="dv">1</span>]] &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1084-8" title="8">models_two[[<span class="dv">1</span>]]<span class="op">$</span>par</a></code></pre></div>
 <pre><code>## [1]  4.219814  2.051678 -3.049197</code></pre>
-<div class="sourceCode" id="cb1087"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1087-1" title="1">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
-<a class="sourceLine" id="cb1087-2" title="2">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb1087-3" title="3">}</a>
-<a class="sourceLine" id="cb1087-4" title="4"></a>
-<a class="sourceLine" id="cb1087-5" title="5">models_two[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1087-6" title="6"></a>
-<a class="sourceLine" id="cb1087-7" title="7">models_two</a></code></pre></div>
+<div class="sourceCode" id="cb1086"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1086-1" title="1">model1 &lt;-<span class="st"> </span><span class="cf">function</span>(a, data) {</a>
+<a class="sourceLine" id="cb1086-2" title="2">  a[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>data<span class="op">$</span>x <span class="op">*</span><span class="st"> </span>a[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1086-3" title="3">}</a>
+<a class="sourceLine" id="cb1086-4" title="4"></a>
+<a class="sourceLine" id="cb1086-5" title="5">models_two[[<span class="dv">2</span>]] &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1086-6" title="6"></a>
+<a class="sourceLine" id="cb1086-7" title="7">models_two</a></code></pre></div>
 <pre><code>## [[1]]
 ## [[1]]$par
 ## [1]  4.219814  2.051678 -3.049197
@@ -698,38 +679,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## NULL</code></pre></li>
 </ol>
 <ul>
-<li>a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)…</li>
-<li>it would be nice if this spit out a warning of colinearity or something…</li>
+<li>a1 and a3 are essentially equivalent, so optimizes somewhat arbitrarily, in this case can see the a1+a3 in the 1st (when there are 3 parameters) is equal to a1 in the 2nd (when there are only two parameters)…<a href="#fn40" class="footnote-ref" id="fnref40"><sup>40</sup></a></li>
 </ul>
 </div>
 </div>
 <div id="visualising-models" class="section level2">
 <h2>23.3: Visualising models</h2>
-<div id="section-84" class="section level3">
+<div id="section-85" class="section level3">
 <h3>23.3.3</h3>
 <ol style="list-style-type: decimal">
 <li><p>Instead of using <code>lm()</code> to fit a straight line, you can use <code>loess()</code> to fit a smooth curve. Repeat the process of model fitting, grid generation, predictions, and visualisation on <code>sim1</code> using <code>loess()</code> instead of <code>lm()</code>. How does the result compare to <code>geom_smooth()</code>?</p>
-<div class="sourceCode" id="cb1089"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1089-1" title="1">sim1_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1089-2" title="2">sim1_mod_loess &lt;-<span class="st"> </span><span class="kw">loess</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1089-3" title="3"></a>
-<a class="sourceLine" id="cb1089-4" title="4"><span class="co">#Look at plot of points</span></a>
-<a class="sourceLine" id="cb1089-5" title="5">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1089-6" title="6"><span class="st">  </span><span class="kw">add_predictions</span>(sim1_mod, <span class="dt">var =</span> <span class="st">&quot;pred_lin&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1089-7" title="7"><span class="st">  </span><span class="kw">add_predictions</span>(sim1_mod_loess) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1089-8" title="8"><span class="st">  </span><span class="kw">add_residuals</span>(sim1_mod_loess) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1089-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1089-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1089-11" title="11"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred_lin), <span class="dt">colour =</span> <span class="st">&quot;dark green&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="fl">2.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1089-12" title="12"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="fl">2.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1089-13" title="13"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1088"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1088-1" title="1">sim1_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1088-2" title="2">sim1_mod_loess &lt;-<span class="st"> </span><span class="kw">loess</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1088-3" title="3"></a>
+<a class="sourceLine" id="cb1088-4" title="4"><span class="co">#Look at plot of points</span></a>
+<a class="sourceLine" id="cb1088-5" title="5">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1088-6" title="6"><span class="st">  </span><span class="kw">add_predictions</span>(sim1_mod, <span class="dt">var =</span> <span class="st">&quot;pred_lin&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1088-7" title="7"><span class="st">  </span><span class="kw">add_predictions</span>(sim1_mod_loess) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1088-8" title="8"><span class="st">  </span><span class="kw">add_residuals</span>(sim1_mod_loess) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1088-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1088-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1088-11" title="11"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y), <span class="dt">se =</span> <span class="ot">FALSE</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1088-12" title="12"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred_lin, <span class="dt">colour =</span> <span class="st">&quot;pred_lin&quot;</span>), <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="fl">2.5</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1088-13" title="13"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred, <span class="dt">colour =</span> <span class="st">&quot;pred_loess&quot;</span>),  <span class="dt">alpha =</span> <span class="fl">0.3</span>, <span class="dt">size =</span> <span class="fl">2.5</span>)</a></code></pre></div>
+<pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="23-model-basics_files/figure-html/23.3.3%201-1.png" width="672" /></p>
 <ul>
-<li>For sim1, the default value for <code>geom_smooth</code> is to use loess, os it is the exact same. <code>geom_smooth</code> will sometimes use gam or other methods depending on data, note that there is also a <code>weight</code> argument that can be useful</li>
-<li>this relationship looks pretty solidly linear
-<ul>
-<li>below are some plots of the resids, just for kicks</li>
-</ul></li>
+<li>For sim1, the default value for <code>geom_smooth</code> is to use loess, so it is the exact same. <code>geom_smooth</code> will sometimes use gam or other methods depending on data, note that there is also a <code>weight</code> argument that can be useful</li>
+<li>this relationship looks pretty solidly linear</li>
 </ul>
+<p><em>Plot of the resids:</em></p>
 <div class="sourceCode" id="cb1090"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1090-1" title="1">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1090-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(sim1_mod_loess, <span class="dt">var =</span> <span class="st">&quot;pred_loess&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1090-3" title="3"><span class="st">  </span><span class="kw">add_residuals</span>(sim1_mod_loess, <span class="dt">var =</span> <span class="st">&quot;resid_loess&quot;</span>) <span class="op">%&gt;%</span></a>
@@ -738,22 +717,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1090-6" title="6"><span class="st">  </span><span class="co"># mutate(row_n = row_number) %&gt;% </span></a>
 <a class="sourceLine" id="cb1090-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
 <a class="sourceLine" id="cb1090-8" title="8"><span class="st">  </span><span class="kw">geom_ref_line</span>(<span class="dt">h =</span> <span class="dv">0</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1090-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> resid_loess), <span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1090-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> resid_lin), <span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1090-9" title="9"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> resid_lin, <span class="dt">colour =</span> <span class="st">&quot;pred_lin&quot;</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1090-10" title="10"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> resid_loess, <span class="dt">colour =</span> <span class="st">&quot;pred_loess&quot;</span>))</a></code></pre></div>
 <p><img src="23-model-basics_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><em>Distribution of residuals:</em></p>
 <div class="sourceCode" id="cb1091"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1091-1" title="1">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb1091-2" title="2"><span class="st">  </span><span class="kw">gather_residuals</span>(sim1_mod, sim1_mod_loess) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1091-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1091-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> resid))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1091-5" title="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model)</a></code></pre></div>
+<a class="sourceLine" id="cb1091-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">ifelse</span>(model <span class="op">==</span><span class="st"> &quot;sim1_mod&quot;</span>, <span class="st">&quot;sim1_mod_lin&quot;</span>, model)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1091-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1091-5" title="5"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="kw">aes</span>(<span class="dt">x =</span> resid, <span class="dt">fill =</span> model))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1091-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model)</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="23-model-basics_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p></li>
 <li><p><code>add_predictions()</code> is paired with <code>gather_predictions()</code> and <code>spread_predictions()</code>. How do these three functions differ?</p>
 <ul>
 <li><code>spread_predictions()</code> adds a new <code>pred</code> for each model included</li>
 <li><code>gather_predictions()</code> adds 2 columns <code>model</code> and <code>pred</code> for each model and repeats the input rows for each model (seems like it would work well with facets)</li>
 </ul>
-<div class="sourceCode" id="cb1092"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1092-1" title="1">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1092-2" title="2"><span class="st">  </span><span class="kw">spread_predictions</span>(sim1_mod, sim1_mod_loess)</a></code></pre></div>
+<div class="sourceCode" id="cb1093"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1093-1" title="1">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1093-2" title="2"><span class="st">  </span><span class="kw">spread_predictions</span>(sim1_mod, sim1_mod_loess)</a></code></pre></div>
 <pre><code>## # A tibble: 30 x 4
 ##        x     y sim1_mod sim1_mod_loess
 ##    &lt;int&gt; &lt;dbl&gt;    &lt;dbl&gt;          &lt;dbl&gt;
@@ -767,36 +749,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  8     3 10.5     10.4           10.8 
 ##  9     3 10.5     10.4           10.8 
 ## 10     4 12.4     12.4           12.8 
-## # ... with 20 more rows</code></pre>
-<div class="sourceCode" id="cb1094"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1094-1" title="1"><span class="co">#How can I add a prefix when using spread_predictions() ? -- could use the</span></a>
-<a class="sourceLine" id="cb1094-2" title="2"><span class="co">#method below</span></a>
-<a class="sourceLine" id="cb1094-3" title="3">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1094-4" title="4"><span class="st">  </span><span class="kw">gather_predictions</span>(sim1_mod, sim1_mod_loess) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1094-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">str_c</span>(model, <span class="st">&quot;_pred&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1094-6" title="6"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> model, <span class="dt">value =</span> pred)</a></code></pre></div>
-<pre><code>## # A tibble: 30 x 4
-##        x     y sim1_mod_loess_pred sim1_mod_pred
-##    &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;         &lt;dbl&gt;
-##  1     1  2.13                5.34          6.27
-##  2     1  4.20                5.34          6.27
-##  3     1  7.51                5.34          6.27
-##  4     2  8.99                8.27          8.32
-##  5     2 10.2                 8.27          8.32
-##  6     2 11.3                 8.27          8.32
-##  7     3  7.36               10.8          10.4 
-##  8     3 10.5                10.8          10.4 
-##  9     3 10.5                10.8          10.4 
-## 10     4 11.9                12.8          12.4 
-## # ... with 20 more rows</code></pre>
-<div class="sourceCode" id="cb1096"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1096-1" title="1"><span class="co">#now could add a spread_residuals() without it breaking...</span></a>
-<a class="sourceLine" id="cb1096-2" title="2"></a>
-<a class="sourceLine" id="cb1096-3" title="3">sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1096-4" title="4"><span class="st">  </span><span class="kw">gather_predictions</span>(sim1_mod, sim1_mod_loess) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1096-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1096-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1096-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1096-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model)</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/23.3.3%202-1.png" width="672" /></p></li>
+## # ... with 20 more rows</code></pre></li>
 <li><p>What does <code>geom_ref_line()</code> do? What package does it come from? Why is displaying a reference line in plots showing residuals useful and important?</p>
 <ul>
 <li>It comes from ggplot2 and shows either a geom_hline or a geom_vline, depending on whether you specify h or v. <code>ggplot2::geom_ref_line</code></li>
@@ -811,14 +764,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="formulas-and-model-families" class="section level2">
 <h2>23.4: Formulas and model families</h2>
-<div id="section-85" class="section level3">
+<div id="section-86" class="section level3">
 <h3>23.4.5</h3>
 <ol style="list-style-type: decimal">
 <li><p>What happens if you repeat the analysis of <code>sim2</code> using a model without an intercept. What happens to the model equation? What happens to the predictions?</p>
-<div class="sourceCode" id="cb1097"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1097-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim2)</a>
-<a class="sourceLine" id="cb1097-2" title="2">mod2_NoInt &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim2)</a>
-<a class="sourceLine" id="cb1097-3" title="3"></a>
-<a class="sourceLine" id="cb1097-4" title="4">mod2</a></code></pre></div>
+<div class="sourceCode" id="cb1095"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1095-1" title="1">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim2)</a>
+<a class="sourceLine" id="cb1095-2" title="2">mod2_NoInt &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">data =</span> sim2)</a>
+<a class="sourceLine" id="cb1095-3" title="3"></a>
+<a class="sourceLine" id="cb1095-4" title="4">mod2</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x, data = sim2)
@@ -826,7 +779,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## Coefficients:
 ## (Intercept)           xb           xc           xd  
 ##      1.1522       6.9639       4.9750       0.7588</code></pre>
-<div class="sourceCode" id="cb1099"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1099-1" title="1">mod2_NoInt</a></code></pre></div>
+<div class="sourceCode" id="cb1097"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1097-1" title="1">mod2_NoInt</a></code></pre></div>
 <pre><code>## 
 ## Call:
 ## lm(formula = y ~ x - 1, data = sim2)
@@ -838,7 +791,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>you have an ANOVA analysis, one of the variables takes on the value of the intercept, the others all have the value of the intercept added to them.</li>
 </ul></li>
 <li><p>Use <code>model_matrix()</code> to explore the equations generated for the models I fit to <code>sim3</code> and <code>sim4</code>. Why is <code>*</code> a good shorthand for interaction?</p>
-<div class="sourceCode" id="cb1101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1101-1" title="1"><span class="kw">model_matrix</span>(y <span class="op">~</span><span class="st"> </span>x1<span class="op">*</span>x2, <span class="dt">data =</span> sim3)</a></code></pre></div>
+<div class="sourceCode" id="cb1099"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1099-1" title="1"><span class="kw">model_matrix</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> sim3)</a></code></pre></div>
 <pre><code>## # A tibble: 120 x 8
 ##    `(Intercept)`    x1   x2b   x2c   x2d `x1:x2b` `x1:x2c` `x1:x2d`
 ##            &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
@@ -853,7 +806,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9             1     1     0     1     0        0        1        0
 ## 10             1     1     0     0     1        0        0        1
 ## # ... with 110 more rows</code></pre>
-<div class="sourceCode" id="cb1103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1103-1" title="1"><span class="kw">model_matrix</span>(y <span class="op">~</span><span class="st"> </span>x1<span class="op">*</span>x2, <span class="dt">data =</span> sim4)</a></code></pre></div>
+<div class="sourceCode" id="cb1101"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1101-1" title="1"><span class="kw">model_matrix</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> sim4)</a></code></pre></div>
 <pre><code>## # A tibble: 300 x 4
 ##    `(Intercept)`    x1     x2 `x1:x2`
 ##            &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
@@ -872,10 +825,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>because each of the levels are multiplied by one another (just don’t have to write in the design variables)</li>
 </ul></li>
 <li><p>Using the basic principles, convert the formulas in the following two models into functions. (Hint: start by converting the categorical variable into 0-1 variables.)</p>
-<div class="sourceCode" id="cb1105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1105-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> sim3)</a>
-<a class="sourceLine" id="cb1105-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> sim3)</a></code></pre></div>
+<div class="sourceCode" id="cb1103"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1103-1" title="1">mod1 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">+</span><span class="st"> </span>x2, <span class="dt">data =</span> sim3)</a>
+<a class="sourceLine" id="cb1103-2" title="2">mod2 &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>x2, <span class="dt">data =</span> sim3)</a></code></pre></div>
 <ul>
-<li>do later</li>
+<li>not completed</li>
 </ul></li>
 <li><p>For <code>sim4</code>, which of <code>mod1</code> and <code>mod2</code> is better? I think <code>mod2</code> does a slightly better job at removing patterns, but it’s pretty subtle. Can you come up with a plot to support my claim?</p></li>
 </ol>
@@ -933,7 +886,6 @@ sim4 %&gt;%
 
 *Plot difference in residuals*
 
-
 ```r
 sim4 %&gt;% 
   spread_residuals(mod1, mod2) %&gt;% 
@@ -970,7 +922,7 @@ sim4 %&gt;%
 &lt;img src=&quot;23-model-basics_files/figure-html/unnamed-chunk-22-1.png&quot; width=&quot;672&quot; /&gt;
 
 * see slightly more red than blue indicating that `mod2` may, in general, have slightly smaller residuals on a wider range of locations
-  * however very little difference, and I might lean more towards `mod1` for simplicities sake</code></pre>
+  * however little and `mod1` has advantage of simplicity</code></pre>
 </div>
 </div>
 <div id="appendix-10" class="section level2">
@@ -1006,136 +958,216 @@ by models like <strong>random forests</strong> (e.g. <code>randomForest::random
 </div>
 <div id="book-example" class="section level3">
 <h3>23.2 book example</h3>
-<div class="sourceCode" id="cb1107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1107-1" title="1">models &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1107-2" title="2">  <span class="dt">a1 =</span> <span class="kw">runif</span>(<span class="dv">250</span>, <span class="dv">-20</span>, <span class="dv">40</span>),</a>
-<a class="sourceLine" id="cb1107-3" title="3">  <span class="dt">a2 =</span> <span class="kw">runif</span>(<span class="dv">250</span>, <span class="dv">-5</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb1107-4" title="4">)</a>
-<a class="sourceLine" id="cb1107-5" title="5"></a>
-<a class="sourceLine" id="cb1107-6" title="6"><span class="kw">ggplot</span>(sim1, <span class="kw">aes</span>(x,y))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1107-7" title="7"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> a1, <span class="dt">slope =</span> a2), <span class="dt">data =</span> models, <span class="dt">alpha =</span> <span class="fl">0.25</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1107-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1105"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1105-1" title="1">models &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1105-2" title="2">  <span class="dt">a1 =</span> <span class="kw">runif</span>(<span class="dv">250</span>, <span class="dv">-20</span>, <span class="dv">40</span>),</a>
+<a class="sourceLine" id="cb1105-3" title="3">  <span class="dt">a2 =</span> <span class="kw">runif</span>(<span class="dv">250</span>, <span class="dv">-5</span>, <span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb1105-4" title="4">)</a>
+<a class="sourceLine" id="cb1105-5" title="5"></a>
+<a class="sourceLine" id="cb1105-6" title="6"><span class="kw">ggplot</span>(sim1, <span class="kw">aes</span>(x,y))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1105-7" title="7"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> a1, <span class="dt">slope =</span> a2), <span class="dt">data =</span> models, <span class="dt">alpha =</span> <span class="fl">0.25</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb1105-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
 <p><img src="23-model-basics_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Next, lets set-up a way to calculate the distance between predicted value and each point.</p>
-<div class="sourceCode" id="cb1108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1108-1" title="1">models_error &lt;-<span class="st"> </span>models <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1108-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">preds =</span> <span class="kw">map2</span>(<span class="dt">.y =</span> a1, <span class="dt">.x =</span> a2, <span class="op">~</span><span class="kw">mutate</span>(sim1, </a>
-<a class="sourceLine" id="cb1108-3" title="3">                                                <span class="dt">pred =</span> .x<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>.y,</a>
-<a class="sourceLine" id="cb1108-4" title="4">                                                <span class="dt">resid =</span> y <span class="op">-</span><span class="st"> </span>pred,</a>
-<a class="sourceLine" id="cb1108-5" title="5">                                                <span class="dt">error_squared =</span> (y <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb1108-6" title="6">                                                <span class="dt">error_abs =</span> <span class="kw">abs</span>(y <span class="op">-</span><span class="st"> </span>pred))),</a>
-<a class="sourceLine" id="cb1108-7" title="7">         <span class="dt">rmse =</span> <span class="kw">map_dbl</span>(preds, <span class="op">~</span>(<span class="kw">with</span>(.x, <span class="kw">mean</span>(error_squared)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>(.))),</a>
-<a class="sourceLine" id="cb1108-8" title="8">         <span class="dt">mae =</span> <span class="kw">map_dbl</span>(preds, <span class="op">~</span><span class="kw">with</span>(.x, <span class="kw">mean</span>(error_abs))),</a>
-<a class="sourceLine" id="cb1108-9" title="9">         <span class="dt">rank_rmse =</span> <span class="kw">min_rank</span>(rmse))</a></code></pre></div>
-<div class="sourceCode" id="cb1109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1109-1" title="1"><span class="kw">ggplot</span>(sim1, <span class="kw">aes</span>(x, y))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1109-2" title="2"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> a1, <span class="dt">slope =</span> a2, <span class="dt">colour =</span> <span class="op">-</span>rmse), </a>
-<a class="sourceLine" id="cb1109-3" title="3">              <span class="dt">data =</span> <span class="kw">filter</span>(models_error, rank_rmse <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1109-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>()  </a></code></pre></div>
+<div class="sourceCode" id="cb1106"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1106-1" title="1">models_error &lt;-<span class="st"> </span>models <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1106-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">preds =</span> <span class="kw">map2</span>(<span class="dt">.y =</span> a1, <span class="dt">.x =</span> a2, <span class="op">~</span><span class="kw">mutate</span>(sim1, </a>
+<a class="sourceLine" id="cb1106-3" title="3">                                                <span class="dt">pred =</span> .x<span class="op">*</span>x <span class="op">+</span><span class="st"> </span>.y,</a>
+<a class="sourceLine" id="cb1106-4" title="4">                                                <span class="dt">resid =</span> y <span class="op">-</span><span class="st"> </span>pred,</a>
+<a class="sourceLine" id="cb1106-5" title="5">                                                <span class="dt">error_squared =</span> (y <span class="op">-</span><span class="st"> </span>pred)<span class="op">^</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb1106-6" title="6">                                                <span class="dt">error_abs =</span> <span class="kw">abs</span>(y <span class="op">-</span><span class="st"> </span>pred))),</a>
+<a class="sourceLine" id="cb1106-7" title="7">         <span class="dt">rmse =</span> <span class="kw">map_dbl</span>(preds, <span class="op">~</span>(<span class="kw">with</span>(.x, <span class="kw">mean</span>(error_squared)) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>(.))),</a>
+<a class="sourceLine" id="cb1106-8" title="8">         <span class="dt">mae =</span> <span class="kw">map_dbl</span>(preds, <span class="op">~</span><span class="kw">with</span>(.x, <span class="kw">mean</span>(error_abs))),</a>
+<a class="sourceLine" id="cb1106-9" title="9">         <span class="dt">rank_rmse =</span> <span class="kw">min_rank</span>(rmse))</a></code></pre></div>
+<div class="sourceCode" id="cb1107"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1107-1" title="1"><span class="kw">ggplot</span>(sim1, <span class="kw">aes</span>(x, y))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1107-2" title="2"><span class="st">  </span><span class="kw">geom_abline</span>(<span class="kw">aes</span>(<span class="dt">intercept =</span> a1, <span class="dt">slope =</span> a2, <span class="dt">colour =</span> <span class="op">-</span>rmse), </a>
+<a class="sourceLine" id="cb1107-3" title="3">              <span class="dt">data =</span> <span class="kw">filter</span>(models_error, rank_rmse <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1107-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>()  </a></code></pre></div>
 <p><img src="23-model-basics_files/figure-html/distance_graph-1.png" width="672" /></p>
 <p>Could instead plot this as a model of a1 vs a2 and whichever does the best</p>
-<div class="sourceCode" id="cb1110"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1110-1" title="1">models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1110-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a1, <span class="dt">y =</span> a2))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1110-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">data =</span> <span class="kw">filter</span>(models_error, rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1110-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="op">-</span>rmse))</a></code></pre></div>
+<div class="sourceCode" id="cb1108"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1108-1" title="1">models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1108-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a1, <span class="dt">y =</span> a2))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1108-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">data =</span> <span class="kw">filter</span>(models_error, rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1108-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="op">-</span>rmse))</a></code></pre></div>
 <p><img src="23-model-basics_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p><em>Could be more methodical and use Grid Search.</em> Let’s use the min and max points of the top 15 to set.</p>
-<div class="sourceCode" id="cb1111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1111-1" title="1"><span class="co">#need helper function because distance function expects the model as a numeric vector of length 2</span></a>
-<a class="sourceLine" id="cb1111-2" title="2">sim1_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(b0, b1, <span class="dt">df =</span> sim1, <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>){</a>
-<a class="sourceLine" id="cb1111-3" title="3">  ((b0 <span class="op">+</span><span class="st"> </span>b1<span class="op">*</span>df[[x]]) <span class="op">-</span><span class="st"> </span>df[[y]])<span class="op">^</span><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</a>
-<a class="sourceLine" id="cb1111-4" title="4">}</a>
-<a class="sourceLine" id="cb1111-5" title="5"></a>
-<a class="sourceLine" id="cb1111-6" title="6"><span class="kw">sim1_rmse</span>(<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1109"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1109-1" title="1"><span class="co">#need helper function because distance function expects the model as a numeric vector of length 2</span></a>
+<a class="sourceLine" id="cb1109-2" title="2">sim1_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(b0, b1, <span class="dt">df =</span> sim1, <span class="dt">x =</span> <span class="st">&quot;x&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;y&quot;</span>){</a>
+<a class="sourceLine" id="cb1109-3" title="3">  ((b0 <span class="op">+</span><span class="st"> </span>b1<span class="op">*</span>df[[x]]) <span class="op">-</span><span class="st"> </span>df[[y]])<span class="op">^</span><span class="dv">2</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sqrt</span>()</a>
+<a class="sourceLine" id="cb1109-4" title="4">}</a>
+<a class="sourceLine" id="cb1109-5" title="5"></a>
+<a class="sourceLine" id="cb1109-6" title="6"><span class="kw">sim1_rmse</span>(<span class="dv">2</span>,<span class="dv">3</span>)</a></code></pre></div>
 <pre><code>## [1] 4.574414</code></pre>
-<div class="sourceCode" id="cb1113"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1113-1" title="1">grid_space &lt;-<span class="st"> </span>models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1113-2" title="2"><span class="st">  </span><span class="kw">filter</span>(rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1113-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">min_x =</span> <span class="kw">min</span>(a1),</a>
-<a class="sourceLine" id="cb1113-4" title="4">            <span class="dt">max_x =</span> <span class="kw">max</span>(a1),</a>
-<a class="sourceLine" id="cb1113-5" title="5">            <span class="dt">min_y =</span> <span class="kw">min</span>(a2),</a>
-<a class="sourceLine" id="cb1113-6" title="6">            <span class="dt">max_y =</span> <span class="kw">max</span>(a2))</a>
-<a class="sourceLine" id="cb1113-7" title="7"></a>
-<a class="sourceLine" id="cb1113-8" title="8">grid_models &lt;-<span class="st"> </span><span class="kw">data_grid</span>(grid_space, </a>
-<a class="sourceLine" id="cb1113-9" title="9">  <span class="dt">a1 =</span> <span class="kw">seq</span>(min_x, max_x, <span class="dt">length =</span> <span class="dv">25</span>),</a>
-<a class="sourceLine" id="cb1113-10" title="10">  <span class="dt">a2 =</span> <span class="kw">seq</span>(min_y, max_y, <span class="dt">length =</span> <span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb1113-11" title="11">) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1113-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rmse =</span> <span class="kw">map2_dbl</span>(a1, a2, sim1_rmse, <span class="dt">df =</span> sim1))</a>
-<a class="sourceLine" id="cb1113-13" title="13"></a>
-<a class="sourceLine" id="cb1113-14" title="14">grid_models <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1113-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a1, <span class="dt">y =</span> a2))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1113-16" title="16"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">data =</span> <span class="kw">filter</span>(grid_models, <span class="kw">min_rank</span>(rmse) <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1113-17" title="17"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="op">-</span>rmse))</a></code></pre></div>
+<div class="sourceCode" id="cb1111"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1111-1" title="1">grid_space &lt;-<span class="st"> </span>models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1111-2" title="2"><span class="st">  </span><span class="kw">filter</span>(rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1111-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">min_x =</span> <span class="kw">min</span>(a1),</a>
+<a class="sourceLine" id="cb1111-4" title="4">            <span class="dt">max_x =</span> <span class="kw">max</span>(a1),</a>
+<a class="sourceLine" id="cb1111-5" title="5">            <span class="dt">min_y =</span> <span class="kw">min</span>(a2),</a>
+<a class="sourceLine" id="cb1111-6" title="6">            <span class="dt">max_y =</span> <span class="kw">max</span>(a2))</a>
+<a class="sourceLine" id="cb1111-7" title="7"></a>
+<a class="sourceLine" id="cb1111-8" title="8">grid_models &lt;-<span class="st"> </span><span class="kw">data_grid</span>(grid_space, </a>
+<a class="sourceLine" id="cb1111-9" title="9">  <span class="dt">a1 =</span> <span class="kw">seq</span>(min_x, max_x, <span class="dt">length =</span> <span class="dv">25</span>),</a>
+<a class="sourceLine" id="cb1111-10" title="10">  <span class="dt">a2 =</span> <span class="kw">seq</span>(min_y, max_y, <span class="dt">length =</span> <span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb1111-11" title="11">) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1111-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rmse =</span> <span class="kw">map2_dbl</span>(a1, a2, sim1_rmse, <span class="dt">df =</span> sim1))</a>
+<a class="sourceLine" id="cb1111-13" title="13"></a>
+<a class="sourceLine" id="cb1111-14" title="14">grid_models <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1111-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> a1, <span class="dt">y =</span> a2))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1111-16" title="16"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">data =</span> <span class="kw">filter</span>(grid_models, <span class="kw">min_rank</span>(rmse) <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1111-17" title="17"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> <span class="op">-</span>rmse))</a></code></pre></div>
 <p><img src="23-model-basics_files/figure-html/grid%20search-1.png" width="672" /></p>
-<p>In the future add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.</p>
+<p>In the future could add-in a grid-search that would have used PCA to first rotate axes and then do min and max values.</p>
 <p>Could instead use Newton-Raphson search with <code>optim</code></p>
-<div class="sourceCode" id="cb1114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1114-1" title="1">model_1df &lt;-<span class="st"> </span><span class="cf">function</span>(betas, <span class="dt">x1 =</span> sim1<span class="op">$</span>x) {</a>
-<a class="sourceLine" id="cb1114-2" title="2">  betas[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>betas[<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb1114-3" title="3">}</a>
-<a class="sourceLine" id="cb1114-4" title="4"></a>
-<a class="sourceLine" id="cb1114-5" title="5">measure_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
-<a class="sourceLine" id="cb1114-6" title="6">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
-<a class="sourceLine" id="cb1114-7" title="7">  <span class="kw">sqrt</span>(<span class="kw">mean</span>(diff<span class="op">^</span><span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb1114-8" title="8">}</a>
-<a class="sourceLine" id="cb1114-9" title="9"></a>
-<a class="sourceLine" id="cb1114-10" title="10">best_rmse &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1114-11" title="11"></a>
-<a class="sourceLine" id="cb1114-12" title="12">best_rmse<span class="op">$</span>par</a></code></pre></div>
+<div class="sourceCode" id="cb1112"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1112-1" title="1">model_1df &lt;-<span class="st"> </span><span class="cf">function</span>(betas, <span class="dt">x1 =</span> sim1<span class="op">$</span>x) {</a>
+<a class="sourceLine" id="cb1112-2" title="2">  betas[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x1 <span class="op">*</span><span class="st"> </span>betas[<span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb1112-3" title="3">}</a>
+<a class="sourceLine" id="cb1112-4" title="4"></a>
+<a class="sourceLine" id="cb1112-5" title="5">measure_rmse &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
+<a class="sourceLine" id="cb1112-6" title="6">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb1112-7" title="7">  <span class="kw">sqrt</span>(<span class="kw">mean</span>(diff<span class="op">^</span><span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb1112-8" title="8">}</a>
+<a class="sourceLine" id="cb1112-9" title="9"></a>
+<a class="sourceLine" id="cb1112-10" title="10">best_rmse &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_rmse, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1112-11" title="11"></a>
+<a class="sourceLine" id="cb1112-12" title="12">best_rmse<span class="op">$</span>par</a></code></pre></div>
 <pre><code>## [1] 4.222248 2.051204</code></pre>
-<div class="sourceCode" id="cb1116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1116-1" title="1">best_rmse<span class="op">$</span>value</a></code></pre></div>
+<div class="sourceCode" id="cb1114"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1114-1" title="1">best_rmse<span class="op">$</span>value</a></code></pre></div>
 <pre><code>## [1] 2.128181</code></pre>
-<p>Above is equivalent to R’s <code>lm</code> function</p>
-<div class="sourceCode" id="cb1118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1118-1" title="1">sim1_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1118-2" title="2"></a>
-<a class="sourceLine" id="cb1118-3" title="3">sim1_mod <span class="op">%&gt;%</span><span class="st"> </span>coef</a></code></pre></div>
+<p>Above produces roughly equal to R’s <code>lm()</code> function</p>
+<div class="sourceCode" id="cb1116"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1116-1" title="1">sim1_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(y <span class="op">~</span><span class="st"> </span>x, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1116-2" title="2"></a>
+<a class="sourceLine" id="cb1116-3" title="3">sim1_mod <span class="op">%&gt;%</span><span class="st"> </span>coef</a></code></pre></div>
 <pre><code>## (Intercept)           x 
 ##    4.220822    2.051533</code></pre>
-<div class="sourceCode" id="cb1120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1120-1" title="1"><span class="kw">rmse</span>(sim1_mod, sim1)</a></code></pre></div>
+<div class="sourceCode" id="cb1118"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1118-1" title="1"><span class="kw">rmse</span>(sim1_mod, sim1)</a></code></pre></div>
 <pre><code>## [1] 2.128181</code></pre>
 <ul>
-<li>Notice are <em>slightly</em> different, perhaps due to number of steps optim will take</li>
+<li>Notice are <em>slightly</em> different, perhaps due to number of steps <code>optim()</code> will take</li>
 </ul>
 <p>E.g. could build a function for optimizing upon MAE instead and still works</p>
-<div class="sourceCode" id="cb1122"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1122-1" title="1">measure_mae &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
-<a class="sourceLine" id="cb1122-2" title="2">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
-<a class="sourceLine" id="cb1122-3" title="3">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
-<a class="sourceLine" id="cb1122-4" title="4">}</a>
-<a class="sourceLine" id="cb1122-5" title="5"></a>
-<a class="sourceLine" id="cb1122-6" title="6">best_mae &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_mae, <span class="dt">data =</span> sim1)</a>
-<a class="sourceLine" id="cb1122-7" title="7"></a>
-<a class="sourceLine" id="cb1122-8" title="8">best_mae<span class="op">$</span>par</a></code></pre></div>
+<div class="sourceCode" id="cb1120"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1120-1" title="1">measure_mae &lt;-<span class="st"> </span><span class="cf">function</span>(mod, data) {</a>
+<a class="sourceLine" id="cb1120-2" title="2">  diff &lt;-<span class="st"> </span>data<span class="op">$</span>y <span class="op">-</span><span class="st"> </span><span class="kw">model_1df</span>(<span class="dt">betas =</span> mod, data<span class="op">$</span>x)</a>
+<a class="sourceLine" id="cb1120-3" title="3">  <span class="kw">mean</span>(<span class="kw">abs</span>(diff))</a>
+<a class="sourceLine" id="cb1120-4" title="4">}</a>
+<a class="sourceLine" id="cb1120-5" title="5"></a>
+<a class="sourceLine" id="cb1120-6" title="6">best_mae &lt;-<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">0</span>), measure_mae, <span class="dt">data =</span> sim1)</a>
+<a class="sourceLine" id="cb1120-7" title="7"></a>
+<a class="sourceLine" id="cb1120-8" title="8">best_mae<span class="op">$</span>par</a></code></pre></div>
 <pre><code>## [1] 4.364852 2.048918</code></pre>
+</div>
+<div id="section-87" class="section level3">
+<h3>23.2.1.1</h3>
+<pre><code>*Let&#39;s look at differences in the coefficients produced:*
+
+```r
+mae_df &lt;- best_mae_sims %&gt;% 
+  map(&quot;par&quot;) %&gt;% 
+  transpose() %&gt;% 
+  set_names(c(&quot;bo&quot;, &quot;b1&quot;)) %&gt;% 
+  as_tibble() %&gt;% 
+  unnest() %&gt;% 
+  mutate(error_type = &quot;mae&quot;, 
+         row_n = row_number())
+
+rmse_df &lt;- best_rmse_sims %&gt;% 
+  map(&quot;par&quot;) %&gt;% 
+  transpose() %&gt;% 
+  set_names(c(&quot;bo&quot;, &quot;b1&quot;)) %&gt;% 
+  as_tibble() %&gt;% 
+  unnest() %&gt;% 
+  mutate(error_type = &quot;rmse&quot;,
+         row_n = row_number())
+
+bind_rows(rmse_df, mae_df) %&gt;% 
+  ggplot(aes(x = bo, colour = error_type))+
+  geom_point(aes(y = b1))
+```
+
+&lt;img src=&quot;23-model-basics_files/figure-html/unnamed-chunk-29-1.png&quot; width=&quot;672&quot; /&gt;
+    
+* see more variability in the b1
+* another way of visualizing the variability in coefficients is below
+
+
+```r
+left_join(rmse_df, mae_df, by = &quot;row_n&quot;, suffix = c(&quot;_rmse&quot;, &quot;_mae&quot;)) %&gt;%
+  ggplot(aes(x = b1_rmse, y = b1_mae))+
+  geom_point()+
+  coord_fixed()
+```
+
+&lt;img src=&quot;23-model-basics_files/figure-html/unnamed-chunk-30-1.png&quot; width=&quot;672&quot; /&gt;</code></pre>
+</div>
+<div id="section-88" class="section level3">
+<h3>23.3.3.2</h3>
+<div class="sourceCode" id="cb1123"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1123-1" title="1">    <span class="co">#How can I add a prefix when using spread_predictions() ? -- could use the</span></a>
+<a class="sourceLine" id="cb1123-2" title="2">    <span class="co">#method below</span></a>
+<a class="sourceLine" id="cb1123-3" title="3">    sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1123-4" title="4"><span class="st">      </span><span class="kw">gather_predictions</span>(sim1_mod, sim1_mod_loess) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1123-5" title="5"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">str_c</span>(model, <span class="st">&quot;_pred&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1123-6" title="6"><span class="st">      </span><span class="kw">spread</span>(<span class="dt">key =</span> model, <span class="dt">value =</span> pred)</a></code></pre></div>
+<pre><code>## # A tibble: 30 x 4
+##        x     y sim1_mod_loess_pred sim1_mod_pred
+##    &lt;int&gt; &lt;dbl&gt;               &lt;dbl&gt;         &lt;dbl&gt;
+##  1     1  2.13                5.34          6.27
+##  2     1  4.20                5.34          6.27
+##  3     1  7.51                5.34          6.27
+##  4     2  8.99                8.27          8.32
+##  5     2 10.2                 8.27          8.32
+##  6     2 11.3                 8.27          8.32
+##  7     3  7.36               10.8          10.4 
+##  8     3 10.5                10.8          10.4 
+##  9     3 10.5                10.8          10.4 
+## 10     4 11.9                12.8          12.4 
+## # ... with 20 more rows</code></pre>
+<div class="sourceCode" id="cb1125"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1125-1" title="1">    <span class="co">#now could add a spread_residuals() without it breaking...</span></a>
+<a class="sourceLine" id="cb1125-2" title="2">    </a>
+<a class="sourceLine" id="cb1125-3" title="3">    sim1 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1125-4" title="4"><span class="st">      </span><span class="kw">gather_predictions</span>(sim1_mod, sim1_mod_loess) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1125-5" title="5"><span class="st">      </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb1125-6" title="6"><span class="st">      </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1125-7" title="7"><span class="st">      </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> pred))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1125-8" title="8"><span class="st">      </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model)</a></code></pre></div>
+<p><img src="23-model-basics_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 </div>
 <div id="tidy-grid_space" class="section level3">
 <h3>tidy grid_space</h3>
-<p>Below is a pseudo-tidy way of creating the <code>grid_space</code> var from above, it actually took more effort to create this probably, so didn’t use. However you could imagine if you had to do this across A LOT of values it could be worth doing it this way</p>
-<div class="sourceCode" id="cb1124"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1124-1" title="1">funs_names &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">funs =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;min&quot;</span>, <span class="dv">2</span>), <span class="kw">rep</span>(<span class="st">&quot;max&quot;</span>, <span class="dv">2</span>)),</a>
-<a class="sourceLine" id="cb1124-2" title="2">                     <span class="dt">coord =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dv">2</span>),</a>
-<a class="sourceLine" id="cb1124-3" title="3">                     <span class="dt">field_names =</span> <span class="kw">str_c</span>(funs, <span class="st">&quot;_&quot;</span>, coord))</a>
-<a class="sourceLine" id="cb1124-4" title="4"></a>
-<a class="sourceLine" id="cb1124-5" title="5">grid_space &lt;-<span class="st"> </span>models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1124-6" title="6"><span class="st">  </span><span class="kw">filter</span>(rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1124-7" title="7"><span class="st">  </span><span class="kw">select</span>(a1, a2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1124-8" title="8"><span class="st">  </span><span class="kw">rep</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1124-9" title="9"><span class="st">  </span><span class="kw">invoke_map</span>(<span class="dt">.f =</span> funs_names<span class="op">$</span>funs,</a>
-<a class="sourceLine" id="cb1124-10" title="10">             <span class="dt">.x =</span> .) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1124-11" title="11"><span class="st">  </span><span class="kw">set_names</span>(funs_names<span class="op">$</span>field_names) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1124-12" title="12"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb1124-13" title="13"></a>
-<a class="sourceLine" id="cb1124-14" title="14">grid_space</a></code></pre></div>
+<p>Below is a pseudo-tidy way of creating the <code>grid_space</code> var from above, it actually took more effort to create this probably, so didn’t use. However you could imagine if you had to search across A LOT of values it could be worth doing something similar to this (note <code>caret</code> or <code>tidymodels</code> are resources for effectively building search spaces for hyper paramter tuning and other related modeling activities).</p>
+<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1126-1" title="1">funs_names &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">funs =</span> <span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;min&quot;</span>, <span class="dv">2</span>), <span class="kw">rep</span>(<span class="st">&quot;max&quot;</span>, <span class="dv">2</span>)),</a>
+<a class="sourceLine" id="cb1126-2" title="2">                     <span class="dt">coord =</span> <span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb1126-3" title="3">                     <span class="dt">field_names =</span> <span class="kw">str_c</span>(funs, <span class="st">&quot;_&quot;</span>, coord))</a>
+<a class="sourceLine" id="cb1126-4" title="4"></a>
+<a class="sourceLine" id="cb1126-5" title="5">grid_space &lt;-<span class="st"> </span>models_error <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1126-6" title="6"><span class="st">  </span><span class="kw">filter</span>(rank_rmse <span class="op">&lt;</span><span class="st"> </span><span class="dv">15</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1126-7" title="7"><span class="st">  </span><span class="kw">select</span>(a1, a2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1126-8" title="8"><span class="st">  </span><span class="kw">rep</span>(<span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1126-9" title="9"><span class="st">  </span><span class="kw">invoke_map</span>(<span class="dt">.f =</span> funs_names<span class="op">$</span>funs,</a>
+<a class="sourceLine" id="cb1126-10" title="10">             <span class="dt">.x =</span> .) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1126-11" title="11"><span class="st">  </span><span class="kw">set_names</span>(funs_names<span class="op">$</span>field_names) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1126-12" title="12"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
+<a class="sourceLine" id="cb1126-13" title="13"></a>
+<a class="sourceLine" id="cb1126-14" title="14">grid_space</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 4
 ##   min_x min_y max_x max_y
 ##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
-## 1  2.01 0.280  14.9  2.54</code></pre>
+## 1 -7.10 0.319  14.9  3.89</code></pre>
 </div>
-<div id="section-86" class="section level3">
+<div id="section-89" class="section level3">
 <h3>23.4.5.4</h3>
 <p>Rather than <code>geom_density</code> or <code>geom_freqpoly</code> let’s look at histogram with values overlaid rather than stacked.</p>
-<div class="sourceCode" id="cb1126"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1126-1" title="1">sim4 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1126-2" title="2"><span class="st">  </span><span class="kw">gather_residuals</span>(mod1, mod2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1126-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> resid, <span class="dt">y =</span> ..density.., <span class="dt">fill =</span> model))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1126-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
-<p><img src="23-model-basics_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1128"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1128-1" title="1">sim4 <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1128-2" title="2"><span class="st">  </span><span class="kw">gather_residuals</span>(mod1, mod2) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1128-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> resid, <span class="dt">y =</span> ..density.., <span class="dt">fill =</span> model))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1128-4" title="4"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">position =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="23-model-basics_files/figure-html/unnamed-chunk-33-1.png" width="672" /></p>
 
+</div>
+</div>
+</div>
 <div class="footnotes">
 <hr />
 <ol start="37">
 <li id="fn37"><p><code>expand.grid</code> is very similar to <code>data_grid</code><a href="23-model-basics.html#fnref37" class="footnote-back">↩</a></p></li>
+<li id="fn40"><p>Would be nice perhaps if this spit out a message or warning…<a href="23-model-basics.html#fnref40" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
 <div id="disqus_thread"></div>
@@ -1187,8 +1219,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https\://github.com/brshallow/R4DS_Solutions/edit/master/23-model-basics.Rmd",
+"text": "Edit, fork"
 },
 "download": null,
 "toc": {

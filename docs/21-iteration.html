@@ -6,26 +6,26 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Yet another study guide for ‘R for Data Science’</title>
-  <meta name="description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham">
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
   <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
 
   <meta property="og:title" content="Yet another study guide for ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/R4DS_Solutions/" />
   
-  <meta property="og:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta property="og:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   <meta name="github-repo" content="https://github.com/brshallo/R4DS_Solutions" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Yet another study guide for ‘R for Data Science’" />
-  
-  <meta name="twitter:description" content="My notes and solutions to ‘R for Data Science’ by Garrett Grolemund and Hadley Wickham" />
+  <meta name="twitter:site" content="@brshallo" />
+  <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
 <meta name="author" content="Bryan Shalloway">
 
 
-<meta name="date" content="2019-05-31">
+<meta name="date" content="2019-06-06">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -135,13 +135,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       <nav role="navigation">
 
 <ul class="summary">
-<li><a href="./">Chapter contents</a></li>
+<li><a href="./">Yet another study guide to R4DS</a></li>
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Purpose of book</a><ul>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#organization-and-features-of-book"><i class="fa fa-check"></i>Organization and features of book</a></li>
-<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-this-book"><i class="fa fa-check"></i>Origin of this book</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#origin-of-book"><i class="fa fa-check"></i>Origin of book</a></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html#acknowledgements"><i class="fa fa-check"></i>Acknowledgements</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#license"><i class="fa fa-check"></i>License</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html"><i class="fa fa-check"></i>Ch 3: Data visualization</a><ul>
 <li class="chapter" data-level="" data-path="03-data-visualization.html"><a href="03-data-visualization.html#first-steps"><i class="fa fa-check"></i>3.2: First steps</a><ul>
@@ -330,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-67"><i class="fa fa-check"></i>19.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i>19.3: Functions are for humans and computers</a><ul>
-<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1.</a></li>
+<li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-68"><i class="fa fa-check"></i>19.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#conditional-execution"><i class="fa fa-check"></i>19.4: Conditional execution</a><ul>
 <li class="chapter" data-level="" data-path="19-functions.html"><a href="19-functions.html#section-69"><i class="fa fa-check"></i>19.4.4.</a></li>
@@ -380,6 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#appendix-9"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-82"><i class="fa fa-check"></i>21.3.5.1</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#with-purrr"><i class="fa fa-check"></i>21.3.5.2 (with purrr)</a></li>
+<li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#section-83"><i class="fa fa-check"></i>21.9.3.1</a></li>
 <li><a href="21-iteration.html#mirroring-keep">21.9 mirroring <code>keep</code></a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#invoke-examples"><i class="fa fa-check"></i>invoke examples</a></li>
 <li class="chapter" data-level="" data-path="21-iteration.html"><a href="21-iteration.html#indexing-nms-caution"><i class="fa fa-check"></i>indexing nms caution</a></li>
@@ -388,78 +390,80 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html"><i class="fa fa-check"></i>Ch. 23: Model basics</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#a-simple-model"><i class="fa fa-check"></i>23.2: A simple model</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-83"><i class="fa fa-check"></i>23.2.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#visualising-models"><i class="fa fa-check"></i>23.3: Visualising models</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-84"><i class="fa fa-check"></i>23.3.3</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.3.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#formulas-and-model-families"><i class="fa fa-check"></i>23.4: Formulas and model families</a><ul>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-85"><i class="fa fa-check"></i>23.4.5</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#appendix-10"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#other-model-families"><i class="fa fa-check"></i>Other model families</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#book-example"><i class="fa fa-check"></i>23.2 book example</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-87"><i class="fa fa-check"></i>23.2.1.1</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-88"><i class="fa fa-check"></i>23.3.3.2</a></li>
 <li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#tidy-grid_space"><i class="fa fa-check"></i>tidy grid_space</a></li>
-<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-86"><i class="fa fa-check"></i>23.4.5.4</a></li>
+<li class="chapter" data-level="" data-path="23-model-basics.html"><a href="23-model-basics.html#section-89"><i class="fa fa-check"></i>23.4.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html"><i class="fa fa-check"></i>Ch. 24: Model building</a><ul>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#why-are-low-quality-diamonds-more-expensive"><i class="fa fa-check"></i>24.2: Why are low quality diamonds more expensive?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-87"><i class="fa fa-check"></i>24.2.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#what-affects-the-number-of-daily-flights"><i class="fa fa-check"></i>24.3 What affects the number of daily flights?</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-88"><i class="fa fa-check"></i>24.3.5</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.3.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#appendix-11"><i class="fa fa-check"></i>Appendix</a><ul>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-89"><i class="fa fa-check"></i>24.2.3.3</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-90"><i class="fa fa-check"></i>24.2.3.4</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-91"><i class="fa fa-check"></i>24.2.3.1</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#logs-simulated-examples"><i class="fa fa-check"></i>Logs (simulated examples)</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#diamonds-data-review"><i class="fa fa-check"></i>Diamonds data review</a></li>
-<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>25.3.5.4</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-92"><i class="fa fa-check"></i>24.2.3.3</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-93"><i class="fa fa-check"></i>24.2.3.1</a></li>
+<li class="chapter" data-level="" data-path="24-model-building.html"><a href="24-model-building.html#section-94"><i class="fa fa-check"></i>24.3.5.4</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html"><i class="fa fa-check"></i>Ch. 25: Many models</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#gapminder"><i class="fa fa-check"></i>25.2: gapminder</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-93"><i class="fa fa-check"></i>25.2.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.2.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#creating-list-columns"><i class="fa fa-check"></i>25.4: Creating list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-94"><i class="fa fa-check"></i>25.4.5</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.4.5</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#simplifying-list-columns"><i class="fa fa-check"></i>25.5: Simplifying list-columns</a><ul>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-95"><i class="fa fa-check"></i>25.5.3</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-97"><i class="fa fa-check"></i>25.5.3</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#appendix-12"><i class="fa fa-check"></i>Appendix</a><ul>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#models-in-lists"><i class="fa fa-check"></i>Models in lists</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#list-columns-for-sampling"><i class="fa fa-check"></i>List-columns for sampling</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-96"><i class="fa fa-check"></i>25.2.5.1</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#section-98"><i class="fa fa-check"></i>25.2.5.1</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#multiple-graphs-in-chunk"><i class="fa fa-check"></i>Multiple graphs in chunk</a></li>
-<li><a href="25-many-models.html#listquantile-examples"><code>list(quantile())</code> examples</a></li>
-<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-row-names"><i class="fa fa-check"></i>Extracting row names</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#listquantile-examples"><i class="fa fa-check"></i>list(quantile()) examples</a></li>
+<li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#extracting-names"><i class="fa fa-check"></i>Extracting names</a></li>
 <li><a href="25-many-models.html#invoke_map-example-book"><code>invoke_map</code> example (book)</a></li>
 <li class="chapter" data-level="" data-path="25-many-models.html"><a href="25-many-models.html#named-list-example-book"><i class="fa fa-check"></i>named list example (book)</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html"><i class="fa fa-check"></i>Ch. 27: R Markdown</a><ul>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#r-markdown-basics"><i class="fa fa-check"></i>27.2 R Markdown basics</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-97"><i class="fa fa-check"></i>27.2.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#text-formatting-with-markdown"><i class="fa fa-check"></i>27.3: Text formatting with Markdown</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-98"><i class="fa fa-check"></i>27.3.1</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-100"><i class="fa fa-check"></i>27.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#code-chunks"><i class="fa fa-check"></i>27.4: Code chunks</a><ul>
-<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-99"><i class="fa fa-check"></i>27.4.7</a></li>
+<li class="chapter" data-level="" data-path="27-r-markdown.html"><a href="27-r-markdown.html#section-101"><i class="fa fa-check"></i>27.4.7</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html"><i class="fa fa-check"></i>Ch. 28: Graphics for communication</a><ul>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#label"><i class="fa fa-check"></i>28.2: Label</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-100"><i class="fa fa-check"></i>28.2.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.2.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#annotations"><i class="fa fa-check"></i>28.3: Annotations</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-101"><i class="fa fa-check"></i>28.3.1</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-103"><i class="fa fa-check"></i>28.3.1</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#scales"><i class="fa fa-check"></i>28.4: Scales</a><ul>
-<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-102"><i class="fa fa-check"></i>28.4.4</a></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-104"><i class="fa fa-check"></i>28.4.4</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#appendix-13"><i class="fa fa-check"></i>Appendix</a><ul>
+<li class="chapter" data-level="" data-path="28-graphics-for-communication.html"><a href="28-graphics-for-communication.html#section-105"><i class="fa fa-check"></i>28.3.1.5</a></li>
 </ul></li>
 </ul></li>
 <li class="divider"></li>
@@ -483,21 +487,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ch.-21-iteration" class="section level1">
 <h1>Ch. 21: Iteration</h1>
+
+<div class="rmdimportant">
+<p><strong>Key questions:</strong></p>
+<ul>
+<li>21.2.1. #1, 2</li>
+<li>21.3.5. #1, 3</li>
+<li>21.4.1. #2</li>
+<li>21.5.3. #1</li>
+<li>21.9.4. #2
+</div></li>
+</ul>
+
+<div class="rmdtip">
+<strong>Functions and notes:</strong>
+</div>
+
 <ul>
 <li>Common <code>for</code> loop template:</li>
 </ul>
-<div class="sourceCode" id="cb934"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb934-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="kw">ncol</span>(df)) <span class="co"># common for loop style  </span></a>
-<a class="sourceLine" id="cb934-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">length</span>(df))){</a>
-<a class="sourceLine" id="cb934-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">fun</span>(df[[i]])</a>
-<a class="sourceLine" id="cb934-4" title="4">  }  </a></code></pre></div>
+<div class="sourceCode" id="cb927"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb927-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="kw">ncol</span>(df)) <span class="co"># common for loop style  </span></a>
+<a class="sourceLine" id="cb927-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">length</span>(df))){</a>
+<a class="sourceLine" id="cb927-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">fun</span>(df[[i]])</a>
+<a class="sourceLine" id="cb927-4" title="4">  }  </a></code></pre></div>
 <ul>
 <li>Common <code>while</code> loop template:</li>
 </ul>
-<div class="sourceCode" id="cb935"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb935-1" title="1">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb935-2" title="2"><span class="cf">while</span> (i <span class="op">&lt;=</span><span class="st"> </span><span class="kw">length</span>(x)){</a>
-<a class="sourceLine" id="cb935-3" title="3">  <span class="co"># body</span></a>
-<a class="sourceLine" id="cb935-4" title="4">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb935-5" title="5">}  </a></code></pre></div>
+<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb928-1" title="1">i &lt;-<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb928-2" title="2"><span class="cf">while</span> (i <span class="op">&lt;=</span><span class="st"> </span><span class="kw">length</span>(x)){</a>
+<a class="sourceLine" id="cb928-3" title="3">  <span class="co"># body</span></a>
+<a class="sourceLine" id="cb928-4" title="4">  i &lt;-<span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb928-5" title="5">}  </a></code></pre></div>
 <ul>
 <li><code>seq_along(df)</code> does essentially same as <code>seq_len(length(df))</code></li>
 <li><code>unlist</code> flatten list of vectors into single vector
@@ -517,25 +537,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li>shortcuts for applying functions in <code>map</code>:</li>
 </ul>
-<div class="sourceCode" id="cb936"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb936-1" title="1">models &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb936-2" title="2"><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb936-3" title="3"><span class="st">  </span><span class="kw">map</span>(<span class="cf">function</span>(df) <span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> df))</a>
-<a class="sourceLine" id="cb936-4" title="4"></a>
-<a class="sourceLine" id="cb936-5" title="5">models &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb936-6" title="6"><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb936-7" title="7"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> .))</a></code></pre></div>
+<div class="sourceCode" id="cb929"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb929-1" title="1">models &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb929-2" title="2"><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb929-3" title="3"><span class="st">  </span><span class="kw">map</span>(<span class="cf">function</span>(df) <span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> df))</a>
+<a class="sourceLine" id="cb929-4" title="4"></a>
+<a class="sourceLine" id="cb929-5" title="5">models &lt;-<span class="st"> </span>mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb929-6" title="6"><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb929-7" title="7"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> .))</a></code></pre></div>
 <ul>
 <li>extracting by named elements from <code>map</code>:</li>
 </ul>
-<div class="sourceCode" id="cb937"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb937-1" title="1">models <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb937-2" title="2"><span class="st">  </span><span class="kw">map</span>(summary) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb937-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(<span class="st">&quot;r.squared&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb930"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb930-1" title="1">models <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb930-2" title="2"><span class="st">  </span><span class="kw">map</span>(summary) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb930-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(<span class="st">&quot;r.squared&quot;</span>)</a></code></pre></div>
 <ul>
 <li>extracting by positions from <code>map</code></li>
 </ul>
-<div class="sourceCode" id="cb938"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb938-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="kw">list</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="kw">list</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>))</a>
-<a class="sourceLine" id="cb938-2" title="2">x <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb938-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(<span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb931"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb931-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>), <span class="kw">list</span>(<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>), <span class="kw">list</span>(<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>))</a>
+<a class="sourceLine" id="cb931-2" title="2">x <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb931-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(<span class="dv">2</span>)</a></code></pre></div>
 <ul>
 <li><code>map2</code> let’s you iterate through two components at once</li>
 <li><code>pmap</code> allows you to iterate over p components – works well to hold inputs in a dataframe</li>
@@ -548,14 +568,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>purrr::transpose</code> allows you to do things like get all 2nd elements in list, e.g. show later</li>
 <li><code>invoke_map</code> let’s you iterate over both the functions and the parameters, have an <code>f</code> and a <code>param</code> input, e.g. </li>
 </ul>
-<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb939-1" title="1">f &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;runif&quot;</span>, <span class="st">&quot;rnorm&quot;</span>, <span class="st">&quot;rpois&quot;</span>)</a>
-<a class="sourceLine" id="cb939-2" title="2">param &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb939-3" title="3">  <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>), </a>
-<a class="sourceLine" id="cb939-4" title="4">  <span class="kw">list</span>(<span class="dt">sd =</span> <span class="dv">5</span>), </a>
-<a class="sourceLine" id="cb939-5" title="5">  <span class="kw">list</span>(<span class="dt">lambda =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb939-6" title="6">)</a>
-<a class="sourceLine" id="cb939-7" title="7"></a>
-<a class="sourceLine" id="cb939-8" title="8"><span class="kw">invoke_map</span>(f, param, <span class="dt">n =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb932-1" title="1">f &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;runif&quot;</span>, <span class="st">&quot;rnorm&quot;</span>, <span class="st">&quot;rpois&quot;</span>)</a>
+<a class="sourceLine" id="cb932-2" title="2">param &lt;-<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb932-3" title="3">  <span class="kw">list</span>(<span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>), </a>
+<a class="sourceLine" id="cb932-4" title="4">  <span class="kw">list</span>(<span class="dt">sd =</span> <span class="dv">5</span>), </a>
+<a class="sourceLine" id="cb932-5" title="5">  <span class="kw">list</span>(<span class="dt">lambda =</span> <span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb932-6" title="6">)</a>
+<a class="sourceLine" id="cb932-7" title="7"></a>
+<a class="sourceLine" id="cb932-8" title="8"><span class="kw">invoke_map</span>(f, param, <span class="dt">n =</span> <span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">str</span>()</a></code></pre></div>
 <ul>
 <li><code>walk</code> is alternative to <code>map</code> that you call for side effects. Also have <code>walk2</code> and <code>pwalk</code> that are generally more useful
 <ul>
@@ -575,26 +595,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="section-77" class="section level3">
 <h3>21.2.1</h3>
 <ol style="list-style-type: decimal">
-<li><p>Write for loops to (think about the output, sequence, and body <strong>before</strong> you start writing
-the loop):</p>
+<li><p>Write for loops to (think about the output, sequence, and body <strong>before</strong> you start writing the loop):</p>
 <ol style="list-style-type: decimal">
 <li>Compute the mean of every column in <code>mtcars</code>.</li>
 </ol>
-<div class="sourceCode" id="cb940"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb940-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="kw">length</span>(mtcars))</a>
-<a class="sourceLine" id="cb940-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(mtcars)){</a>
-<a class="sourceLine" id="cb940-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">mean</span>(mtcars[[i]])</a>
-<a class="sourceLine" id="cb940-4" title="4">}</a>
-<a class="sourceLine" id="cb940-5" title="5">output</a></code></pre></div>
+<div class="sourceCode" id="cb933"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb933-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="kw">length</span>(mtcars))</a>
+<a class="sourceLine" id="cb933-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(mtcars)){</a>
+<a class="sourceLine" id="cb933-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">mean</span>(mtcars[[i]])</a>
+<a class="sourceLine" id="cb933-4" title="4">}</a>
+<a class="sourceLine" id="cb933-5" title="5">output</a></code></pre></div>
 <pre><code>##  [1]  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250
 ##  [7]  17.848750   0.437500   0.406250   3.687500   2.812500</code></pre>
 <ol style="list-style-type: decimal">
 <li>Determine the type of each column in <code>nycflights13::flights</code>.</li>
 </ol>
-<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb942-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="kw">length</span>(flights))</a>
-<a class="sourceLine" id="cb942-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(flights)){</a>
-<a class="sourceLine" id="cb942-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">typeof</span>(flights[[i]])</a>
-<a class="sourceLine" id="cb942-4" title="4">}</a>
-<a class="sourceLine" id="cb942-5" title="5">output</a></code></pre></div>
+<div class="sourceCode" id="cb935"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb935-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, <span class="kw">length</span>(flights))</a>
+<a class="sourceLine" id="cb935-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(flights)){</a>
+<a class="sourceLine" id="cb935-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">typeof</span>(flights[[i]])</a>
+<a class="sourceLine" id="cb935-4" title="4">}</a>
+<a class="sourceLine" id="cb935-5" title="5">output</a></code></pre></div>
 <pre><code>##  [1] &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;  
 ##  [6] &quot;double&quot;    &quot;integer&quot;   &quot;integer&quot;   &quot;double&quot;    &quot;character&quot;
 ## [11] &quot;integer&quot;   &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;double&quot;   
@@ -602,122 +621,122 @@ the loop):</p>
 <ol style="list-style-type: decimal">
 <li>Compute the number of unique values in each column of <code>iris</code>.</li>
 </ol>
-<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb944-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="kw">length</span>(iris))</a>
-<a class="sourceLine" id="cb944-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(iris)){</a>
-<a class="sourceLine" id="cb944-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">unique</span>(iris[[i]]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()</a>
-<a class="sourceLine" id="cb944-4" title="4">}</a>
-<a class="sourceLine" id="cb944-5" title="5">output</a></code></pre></div>
+<div class="sourceCode" id="cb937"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb937-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="kw">length</span>(iris))</a>
+<a class="sourceLine" id="cb937-2" title="2"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(iris)){</a>
+<a class="sourceLine" id="cb937-3" title="3">  output[[i]] &lt;-<span class="st"> </span><span class="kw">unique</span>(iris[[i]]) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">length</span>()</a>
+<a class="sourceLine" id="cb937-4" title="4">}</a>
+<a class="sourceLine" id="cb937-5" title="5">output</a></code></pre></div>
 <pre><code>## [1] 35 23 43 22  3</code></pre>
 <ol style="list-style-type: decimal">
 <li>Generate 10 random normals for each of <span class="math inline">\(\mu = -10\)</span>, <span class="math inline">\(0\)</span>, <span class="math inline">\(10\)</span>, and <span class="math inline">\(100\)</span>.</li>
 </ol>
-<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb946-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb946-2" title="2">input_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb946-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)){</a>
-<a class="sourceLine" id="cb946-4" title="4">  output[[i]] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> input_means[[i]])</a>
-<a class="sourceLine" id="cb946-5" title="5">}</a>
-<a class="sourceLine" id="cb946-6" title="6">output</a></code></pre></div>
+<div class="sourceCode" id="cb939"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb939-1" title="1">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb939-2" title="2">input_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb939-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)){</a>
+<a class="sourceLine" id="cb939-4" title="4">  output[[i]] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10</span>, <span class="dt">mean =</span> input_means[[i]])</a>
+<a class="sourceLine" id="cb939-5" title="5">}</a>
+<a class="sourceLine" id="cb939-6" title="6">output</a></code></pre></div>
 <pre><code>## [[1]]
-##  [1]  -8.785447 -10.293334  -9.964542 -11.961963 -10.367496  -9.966689
-##  [7]  -9.872905 -10.122236  -9.680880 -10.624439
+##  [1] -11.371326 -10.118467 -10.582961 -10.324829  -7.604983  -9.300232
+##  [7]  -9.840124  -9.719733  -9.784274 -10.338814
 ## 
 ## [[2]]
-##  [1]  0.4470057 -0.9311754 -0.8643282 -0.3251063  0.4204115 -0.1076904
-##  [7]  0.8208670  2.5297311 -0.4647587 -0.1917760
+##  [1] -1.04951842 -0.68385670  0.17893523  0.07338463 -1.18028235
+##  [6] -1.00777188  0.91491408 -0.14041984 -0.25074297 -0.50055019
 ## 
 ## [[3]]
-##  [1] 10.048968  8.442432 11.754288 10.238710 10.336530 10.343382  9.665342
-##  [8]  8.151330  9.335686 10.920130
+##  [1] 11.013913  9.790495 10.631115 10.325991 10.608040  9.463515 11.265961
+##  [8] 10.630382 10.436201  8.907654
 ## 
 ## [[4]]
-##  [1] 100.03146  98.89348 101.76771  97.63465  99.39744  98.84070 100.42941
-##  [8]  98.64100 100.20938 100.31676</code></pre></li>
+##  [1]  99.37012 100.31396  99.06230  98.00350 100.31506  99.67347 101.02248
+##  [8]  98.32484  98.62669 100.28487</code></pre></li>
 <li><p>Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:</p>
 <p><em>example:</em></p>
-<div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb948-1" title="1">out &lt;-<span class="st"> &quot;&quot;</span></a>
-<a class="sourceLine" id="cb948-2" title="2"><span class="cf">for</span> (x <span class="cf">in</span> letters) {</a>
-<a class="sourceLine" id="cb948-3" title="3">  out &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_c</span>(out, x)</a>
-<a class="sourceLine" id="cb948-4" title="4">}</a>
-<a class="sourceLine" id="cb948-5" title="5">out</a></code></pre></div>
+<div class="sourceCode" id="cb941"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb941-1" title="1">out &lt;-<span class="st"> &quot;&quot;</span></a>
+<a class="sourceLine" id="cb941-2" title="2"><span class="cf">for</span> (x <span class="cf">in</span> letters) {</a>
+<a class="sourceLine" id="cb941-3" title="3">  out &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_c</span>(out, x)</a>
+<a class="sourceLine" id="cb941-4" title="4">}</a>
+<a class="sourceLine" id="cb941-5" title="5">out</a></code></pre></div>
 <ul>
 <li>collabse letters into length-one character vector with all characters concatenated</li>
 </ul>
-<div class="sourceCode" id="cb949"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb949-1" title="1"><span class="kw">str_c</span>(letters, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb942"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb942-1" title="1"><span class="kw">str_c</span>(letters, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;abcdefghijklmnopqrstuvwxyz&quot;</code></pre>
 <p><em>example:</em></p>
-<div class="sourceCode" id="cb951"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb951-1" title="1">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb951-2" title="2">sd &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb951-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {</a>
-<a class="sourceLine" id="cb951-4" title="4">  sd &lt;-<span class="st"> </span>sd <span class="op">+</span><span class="st"> </span>(x[i] <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb951-5" title="5">}</a>
-<a class="sourceLine" id="cb951-6" title="6">sd &lt;-<span class="st"> </span><span class="kw">sqrt</span>(sd <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb951-7" title="7">sd</a></code></pre></div>
+<div class="sourceCode" id="cb944"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb944-1" title="1">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb944-2" title="2">sd &lt;-<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb944-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {</a>
+<a class="sourceLine" id="cb944-4" title="4">  sd &lt;-<span class="st"> </span>sd <span class="op">+</span><span class="st"> </span>(x[i] <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span></a>
+<a class="sourceLine" id="cb944-5" title="5">}</a>
+<a class="sourceLine" id="cb944-6" title="6">sd &lt;-<span class="st"> </span><span class="kw">sqrt</span>(sd <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb944-7" title="7">sd</a></code></pre></div>
 <pre><code>## [1] 29.01149</code></pre>
 <ul>
 <li>calculate standard deviaiton of x</li>
 </ul>
-<div class="sourceCode" id="cb953"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb953-1" title="1"><span class="kw">sd</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb946"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb946-1" title="1"><span class="kw">sd</span>(x)</a></code></pre></div>
 <pre><code>## [1] 29.01149</code></pre>
 <p><em>example:</em></p>
-<div class="sourceCode" id="cb955"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb955-1" title="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb955-2" title="2">out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;numeric&quot;</span>, <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb955-3" title="3">out[<span class="dv">1</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb955-4" title="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(x)) {</a>
-<a class="sourceLine" id="cb955-5" title="5">  out[i] &lt;-<span class="st"> </span>out[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x[i]</a>
-<a class="sourceLine" id="cb955-6" title="6">}</a>
-<a class="sourceLine" id="cb955-7" title="7">out</a></code></pre></div>
-<pre><code>##   [1]  0.1507737  0.3819632  0.6190446  0.8712783  1.6611736  2.6142845
-##   [7]  2.7705236  2.8276411  3.3052075  3.7373471  4.1647731  4.6092924
-##  [13]  5.0712058  5.6332756  5.6412381  6.1453597  6.9894742  7.3962568
-##  [19]  7.9683878  7.9775943  8.5355966  9.3105778 10.0210178 10.8283078
-##  [25] 11.6774369 12.2769223 13.1744781 13.5807259 14.2414668 14.9237279
-##  [31] 15.0793143 15.3206245 15.6125462 15.7847346 16.4025312 16.5435509
-##  [37] 17.5336369 17.9557732 17.9978000 18.9842538 19.0724417 19.7118555
-##  [43] 20.1929384 21.0516417 21.7933057 22.5605165 22.5941937 22.8235250
-##  [49] 23.0230483 23.5756079 23.6979485 23.8287348 24.0399448 24.6032246
-##  [55] 25.4171866 26.2972757 26.5040229 27.3059268 27.8214695 28.4986734
-##  [61] 28.7962282 29.4559282 29.7051632 29.7354231 29.8331492 30.5732860
-##  [67] 31.4221682 32.0849093 32.9584508 33.0259334 33.7788410 33.9608278
-##  [73] 34.4482053 34.8517571 34.9063350 35.4285265 35.9518918 36.6849530
-##  [79] 36.7249350 37.0182335 37.5313990 38.4370851 39.4363856 39.5972196
-##  [85] 39.9071955 40.5816351 40.6212861 41.3229752 41.5610946 42.1284802
-##  [91] 43.0666150 43.9352343 44.1646167 44.3314841 45.2736909 46.0071531
-##  [97] 46.4010338 47.0237101 47.3602063 47.5998132</code></pre>
+<div class="sourceCode" id="cb948"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb948-1" title="1">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb948-2" title="2">out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;numeric&quot;</span>, <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb948-3" title="3">out[<span class="dv">1</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb948-4" title="4"><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(x)) {</a>
+<a class="sourceLine" id="cb948-5" title="5">  out[i] &lt;-<span class="st"> </span>out[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x[i]</a>
+<a class="sourceLine" id="cb948-6" title="6">}</a>
+<a class="sourceLine" id="cb948-7" title="7">out</a></code></pre></div>
+<pre><code>##   [1]  0.1543797  0.5168570  1.4323513  1.4861995  1.7440626  2.3503876
+##   [7]  2.7033856  3.4933038  3.8878801  4.8166162  4.8404351  5.0134399
+##  [13]  5.8128633  5.9002886  6.4672338  7.3249551  7.4813311  7.9067374
+##  [19]  7.9143362  8.6500421  9.4114592  9.8109883 10.6637337 11.5345437
+##  [25] 11.8881403 12.8609933 13.0060893 13.1121490 13.2820768 13.7832678
+##  [31] 14.0103818 14.8921300 15.8878166 16.3724888 17.2897726 17.6764167
+##  [37] 18.3759822 18.5914902 18.7581008 19.3126850 20.0314901 20.9729033
+##  [43] 21.5123325 22.1361972 22.9338153 23.9220106 23.9905409 24.1247463
+##  [49] 24.3690186 24.6778073 25.1676470 25.6649358 26.0152919 26.3936317
+##  [55] 26.6769802 26.7589431 27.4933689 28.3744835 28.8274173 29.5040112
+##  [61] 30.4625068 31.1908181 31.5785996 32.0691594 32.4015008 33.1859971
+##  [67] 34.0973779 34.4118215 34.6828655 34.9383821 35.5988994 35.9820211
+##  [73] 36.7825814 37.5402040 37.9568733 38.5686788 38.6336509 39.0451422
+##  [79] 39.1208101 39.8826954 40.4989736 41.2877620 41.4204198 41.8790701
+##  [85] 42.8085235 43.2102977 43.4620636 43.9427926 44.7306195 45.4886119
+##  [91] 46.0891834 46.4679661 47.0817039 47.6331389 48.1357901 48.3671822
+##  [97] 48.8290107 49.8198761 50.6520274 50.6527903</code></pre>
 <ul>
 <li>calculate cumulative sum</li>
 </ul>
-<div class="sourceCode" id="cb957"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb957-1" title="1"><span class="kw">cumsum</span>(x)</a></code></pre></div>
-<pre><code>##   [1]  0.1507737  0.3819632  0.6190446  0.8712783  1.6611736  2.6142845
-##   [7]  2.7705236  2.8276411  3.3052075  3.7373471  4.1647731  4.6092924
-##  [13]  5.0712058  5.6332756  5.6412381  6.1453597  6.9894742  7.3962568
-##  [19]  7.9683878  7.9775943  8.5355966  9.3105778 10.0210178 10.8283078
-##  [25] 11.6774369 12.2769223 13.1744781 13.5807259 14.2414668 14.9237279
-##  [31] 15.0793143 15.3206245 15.6125462 15.7847346 16.4025312 16.5435509
-##  [37] 17.5336369 17.9557732 17.9978000 18.9842538 19.0724417 19.7118555
-##  [43] 20.1929384 21.0516417 21.7933057 22.5605165 22.5941937 22.8235250
-##  [49] 23.0230483 23.5756079 23.6979485 23.8287348 24.0399448 24.6032246
-##  [55] 25.4171866 26.2972757 26.5040229 27.3059268 27.8214695 28.4986734
-##  [61] 28.7962282 29.4559282 29.7051632 29.7354231 29.8331492 30.5732860
-##  [67] 31.4221682 32.0849093 32.9584508 33.0259334 33.7788410 33.9608278
-##  [73] 34.4482053 34.8517571 34.9063350 35.4285265 35.9518918 36.6849530
-##  [79] 36.7249350 37.0182335 37.5313990 38.4370851 39.4363856 39.5972196
-##  [85] 39.9071955 40.5816351 40.6212861 41.3229752 41.5610946 42.1284802
-##  [91] 43.0666150 43.9352343 44.1646167 44.3314841 45.2736909 46.0071531
-##  [97] 46.4010338 47.0237101 47.3602063 47.5998132</code></pre></li>
+<div class="sourceCode" id="cb950"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb950-1" title="1"><span class="kw">cumsum</span>(x)</a></code></pre></div>
+<pre><code>##   [1]  0.1543797  0.5168570  1.4323513  1.4861995  1.7440626  2.3503876
+##   [7]  2.7033856  3.4933038  3.8878801  4.8166162  4.8404351  5.0134399
+##  [13]  5.8128633  5.9002886  6.4672338  7.3249551  7.4813311  7.9067374
+##  [19]  7.9143362  8.6500421  9.4114592  9.8109883 10.6637337 11.5345437
+##  [25] 11.8881403 12.8609933 13.0060893 13.1121490 13.2820768 13.7832678
+##  [31] 14.0103818 14.8921300 15.8878166 16.3724888 17.2897726 17.6764167
+##  [37] 18.3759822 18.5914902 18.7581008 19.3126850 20.0314901 20.9729033
+##  [43] 21.5123325 22.1361972 22.9338153 23.9220106 23.9905409 24.1247463
+##  [49] 24.3690186 24.6778073 25.1676470 25.6649358 26.0152919 26.3936317
+##  [55] 26.6769802 26.7589431 27.4933689 28.3744835 28.8274173 29.5040112
+##  [61] 30.4625068 31.1908181 31.5785996 32.0691594 32.4015008 33.1859971
+##  [67] 34.0973779 34.4118215 34.6828655 34.9383821 35.5988994 35.9820211
+##  [73] 36.7825814 37.5402040 37.9568733 38.5686788 38.6336509 39.0451422
+##  [79] 39.1208101 39.8826954 40.4989736 41.2877620 41.4204198 41.8790701
+##  [85] 42.8085235 43.2102977 43.4620636 43.9427926 44.7306195 45.4886119
+##  [91] 46.0891834 46.4679661 47.0817039 47.6331389 48.1357901 48.3671822
+##  [97] 48.8290107 49.8198761 50.6520274 50.6527903</code></pre></li>
 <li><p>Combine your function writing and for loop skills:</p>
 <ol style="list-style-type: decimal">
 <li>Write a for loop that <code>prints()</code> the lyrics to the children’s song “Alice the camel”.</li>
 </ol>
-<div class="sourceCode" id="cb959"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb959-1" title="1">num_humps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;five&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;one&quot;</span>, <span class="st">&quot;no&quot;</span>)</a>
-<a class="sourceLine" id="cb959-2" title="2"></a>
-<a class="sourceLine" id="cb959-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(num_humps)){</a>
-<a class="sourceLine" id="cb959-4" title="4"></a>
-<a class="sourceLine" id="cb959-5" title="5">  <span class="kw">paste0</span>(<span class="st">&quot;Alice the camel has &quot;</span>, num_humps[[i]], <span class="st">&quot; humps.&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb959-6" title="6"><span class="st">    </span><span class="kw">rep</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb959-7" title="7"><span class="st">    </span><span class="kw">writeLines</span>()</a>
-<a class="sourceLine" id="cb959-8" title="8"></a>
-<a class="sourceLine" id="cb959-9" title="9">  <span class="kw">writeLines</span>(<span class="st">&quot;So go, Alice, go.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb959-10" title="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb952"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb952-1" title="1">num_humps &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;five&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;one&quot;</span>, <span class="st">&quot;no&quot;</span>)</a>
+<a class="sourceLine" id="cb952-2" title="2"></a>
+<a class="sourceLine" id="cb952-3" title="3"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(num_humps)){</a>
+<a class="sourceLine" id="cb952-4" title="4"></a>
+<a class="sourceLine" id="cb952-5" title="5">  <span class="kw">paste0</span>(<span class="st">&quot;Alice the camel has &quot;</span>, num_humps[[i]], <span class="st">&quot; humps.&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb952-6" title="6"><span class="st">    </span><span class="kw">rep</span>(<span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb952-7" title="7"><span class="st">    </span><span class="kw">writeLines</span>()</a>
+<a class="sourceLine" id="cb952-8" title="8"></a>
+<a class="sourceLine" id="cb952-9" title="9">  <span class="kw">writeLines</span>(<span class="st">&quot;So go, Alice, go.</span><span class="ch">\n</span><span class="st">&quot;</span>)</a>
+<a class="sourceLine" id="cb952-10" title="10">}</a></code></pre></div>
 <pre><code>## Alice the camel has five humps.
 ## Alice the camel has five humps.
 ## Alice the camel has five humps.
@@ -750,17 +769,17 @@ the loop):</p>
 <ol start="2" style="list-style-type: decimal">
 <li>Convert the nursery rhyme “ten in the bed” to a function. Generalise it to any number of people in any sleeping structure.</li>
 </ol>
-<div class="sourceCode" id="cb961"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb961-1" title="1">nursery_bed &lt;-<span class="st"> </span><span class="cf">function</span>(num, y) {</a>
-<a class="sourceLine" id="cb961-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, num)</a>
-<a class="sourceLine" id="cb961-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)) {</a>
-<a class="sourceLine" id="cb961-4" title="4">    output[[i]] &lt;-<span class="st"> </span><span class="kw">str_replace_all</span>(</a>
-<a class="sourceLine" id="cb961-5" title="5">    <span class="st">&#39;There were x in the _y</span><span class="ch">\n</span><span class="st"> And the little one said, </span><span class="ch">\n</span><span class="st">&quot;Roll over! Roll over!&quot;</span><span class="ch">\n</span><span class="st"> So they all rolled over and</span><span class="ch">\n</span><span class="st"> one fell out.&#39;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span> =<span class="st"> </span>(<span class="kw">length</span>(output) <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="st">&quot;_y&quot;</span> =<span class="st"> </span>y))</a>
-<a class="sourceLine" id="cb961-6" title="6">  } </a>
-<a class="sourceLine" id="cb961-7" title="7">  <span class="kw">str_c</span>(output, <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb961-8" title="8"><span class="st">    </span><span class="kw">writeLines</span>()</a>
-<a class="sourceLine" id="cb961-9" title="9">}</a>
-<a class="sourceLine" id="cb961-10" title="10"></a>
-<a class="sourceLine" id="cb961-11" title="11"><span class="kw">nursery_bed</span>(<span class="dv">3</span>, <span class="st">&quot;asteroid&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb954"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb954-1" title="1">nursery_bed &lt;-<span class="st"> </span><span class="cf">function</span>(num, y) {</a>
+<a class="sourceLine" id="cb954-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, num)</a>
+<a class="sourceLine" id="cb954-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)) {</a>
+<a class="sourceLine" id="cb954-4" title="4">    output[[i]] &lt;-<span class="st"> </span><span class="kw">str_replace_all</span>(</a>
+<a class="sourceLine" id="cb954-5" title="5">    <span class="st">&#39;There were x in the _y</span><span class="ch">\n</span><span class="st"> And the little one said, </span><span class="ch">\n</span><span class="st">&quot;Roll over! Roll over!&quot;</span><span class="ch">\n</span><span class="st"> So they all rolled over and</span><span class="ch">\n</span><span class="st"> one fell out.&#39;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span> =<span class="st"> </span>(<span class="kw">length</span>(output) <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="st">&quot;_y&quot;</span> =<span class="st"> </span>y))</a>
+<a class="sourceLine" id="cb954-6" title="6">  } </a>
+<a class="sourceLine" id="cb954-7" title="7">  <span class="kw">str_c</span>(output, <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb954-8" title="8"><span class="st">    </span><span class="kw">writeLines</span>()</a>
+<a class="sourceLine" id="cb954-9" title="9">}</a>
+<a class="sourceLine" id="cb954-10" title="10"></a>
+<a class="sourceLine" id="cb954-11" title="11"><span class="kw">nursery_bed</span>(<span class="dv">3</span>, <span class="st">&quot;asteroid&quot;</span>)</a></code></pre></div>
 <pre><code>## There were 3 in the asteroid
 ##  And the little one said, 
 ## &quot;Roll over! Roll over!&quot;
@@ -784,22 +803,22 @@ the loop):</p>
 <ul>
 <li>This is a little bit of a lazy version…</li>
 </ul>
-<div class="sourceCode" id="cb963"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb963-1" title="1">beer_rhyme &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z){</a>
-<a class="sourceLine" id="cb963-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, x)</a>
-<a class="sourceLine" id="cb963-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)){</a>
-<a class="sourceLine" id="cb963-4" title="4">    output[i] &lt;-</a>
-<a class="sourceLine" id="cb963-5" title="5"><span class="st">      </span><span class="kw">str_replace_all</span>(<span class="st">&quot;x bottles of y on the z.</span><span class="ch">\n</span><span class="st"> One fell off...&quot;</span>, <span class="kw">c</span>(</a>
-<a class="sourceLine" id="cb963-6" title="6">      <span class="st">&quot;x&quot;</span> =<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb963-7" title="7">      <span class="st">&quot;y&quot;</span> =<span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb963-8" title="8">      <span class="st">&quot;z&quot;</span> =<span class="st"> </span>z</a>
-<a class="sourceLine" id="cb963-9" title="9">      ))</a>
-<a class="sourceLine" id="cb963-10" title="10">  }</a>
-<a class="sourceLine" id="cb963-11" title="11">  output &lt;-<span class="st"> </span>(<span class="kw">str_c</span>(output, <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb963-12" title="12"><span class="st">               </span><span class="kw">str_c</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">No more bottles...&quot;</span>, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>))</a>
-<a class="sourceLine" id="cb963-13" title="13">  <span class="kw">writeLines</span>(output)</a>
-<a class="sourceLine" id="cb963-14" title="14">}</a>
-<a class="sourceLine" id="cb963-15" title="15"></a>
-<a class="sourceLine" id="cb963-16" title="16"><span class="kw">beer_rhyme</span>(<span class="dv">4</span>, <span class="st">&quot;soda&quot;</span>, <span class="st">&quot;toilet&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb956"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb956-1" title="1">beer_rhyme &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, z){</a>
+<a class="sourceLine" id="cb956-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;character&quot;</span>, x)</a>
+<a class="sourceLine" id="cb956-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(output)){</a>
+<a class="sourceLine" id="cb956-4" title="4">    output[i] &lt;-</a>
+<a class="sourceLine" id="cb956-5" title="5"><span class="st">      </span><span class="kw">str_replace_all</span>(<span class="st">&quot;x bottles of y on the z.</span><span class="ch">\n</span><span class="st"> One fell off...&quot;</span>, <span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb956-6" title="6">      <span class="st">&quot;x&quot;</span> =<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>i <span class="op">+</span><span class="st"> </span><span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb956-7" title="7">      <span class="st">&quot;y&quot;</span> =<span class="st"> </span>y,</a>
+<a class="sourceLine" id="cb956-8" title="8">      <span class="st">&quot;z&quot;</span> =<span class="st"> </span>z</a>
+<a class="sourceLine" id="cb956-9" title="9">      ))</a>
+<a class="sourceLine" id="cb956-10" title="10">  }</a>
+<a class="sourceLine" id="cb956-11" title="11">  output &lt;-<span class="st"> </span>(<span class="kw">str_c</span>(output, <span class="dt">collapse =</span> <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb956-12" title="12"><span class="st">               </span><span class="kw">str_c</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">No more bottles...&quot;</span>, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>))</a>
+<a class="sourceLine" id="cb956-13" title="13">  <span class="kw">writeLines</span>(output)</a>
+<a class="sourceLine" id="cb956-14" title="14">}</a>
+<a class="sourceLine" id="cb956-15" title="15"></a>
+<a class="sourceLine" id="cb956-16" title="16"><span class="kw">beer_rhyme</span>(<span class="dv">4</span>, <span class="st">&quot;soda&quot;</span>, <span class="st">&quot;toilet&quot;</span>)</a></code></pre></div>
 <pre><code>## 4 bottles of soda on the toilet.
 ##  One fell off...
 ## 3 bottles of soda on the toilet.
@@ -810,44 +829,44 @@ the loop):</p>
 ##  One fell off...
 ## No more bottles...</code></pre></li>
 <li><p>It’s common to see for loops that don’t preallocate the output and instead increase the length of a vector at each step. How does this affect performance? Design and execute an experiment.</p>
-<div class="sourceCode" id="cb965"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb965-1" title="1">preallocate &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
-<a class="sourceLine" id="cb965-2" title="2">x &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb965-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)){</a>
-<a class="sourceLine" id="cb965-4" title="4">    x[i] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb965-5" title="5">  }</a>
-<a class="sourceLine" id="cb965-6" title="6">}</a>
-<a class="sourceLine" id="cb965-7" title="7"></a>
-<a class="sourceLine" id="cb965-8" title="8">growing &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
-<a class="sourceLine" id="cb965-9" title="9">  x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb965-10" title="10">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
-<a class="sourceLine" id="cb965-11" title="11">      x[i] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb965-12" title="12">  }</a>
-<a class="sourceLine" id="cb965-13" title="13">}</a>
-<a class="sourceLine" id="cb965-14" title="14"></a>
-<a class="sourceLine" id="cb965-15" title="15">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
-<a class="sourceLine" id="cb965-16" title="16">  <span class="dt">space =</span> <span class="kw">preallocate</span>(),</a>
-<a class="sourceLine" id="cb965-17" title="17">  <span class="dt">no_space =</span> <span class="kw">growing</span>(),</a>
-<a class="sourceLine" id="cb965-18" title="18">  <span class="dt">times =</span> <span class="dv">20</span></a>
-<a class="sourceLine" id="cb965-19" title="19">)  </a></code></pre></div>
+<div class="sourceCode" id="cb958"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb958-1" title="1">preallocate &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb958-2" title="2">x &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;double&quot;</span>, <span class="dv">100</span>)</a>
+<a class="sourceLine" id="cb958-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)){</a>
+<a class="sourceLine" id="cb958-4" title="4">    x[i] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb958-5" title="5">  }</a>
+<a class="sourceLine" id="cb958-6" title="6">}</a>
+<a class="sourceLine" id="cb958-7" title="7"></a>
+<a class="sourceLine" id="cb958-8" title="8">growing &lt;-<span class="st"> </span><span class="cf">function</span>(){</a>
+<a class="sourceLine" id="cb958-9" title="9">  x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb958-10" title="10">    <span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>){</a>
+<a class="sourceLine" id="cb958-11" title="11">      x[i] &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb958-12" title="12">  }</a>
+<a class="sourceLine" id="cb958-13" title="13">}</a>
+<a class="sourceLine" id="cb958-14" title="14"></a>
+<a class="sourceLine" id="cb958-15" title="15">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb958-16" title="16">  <span class="dt">space =</span> <span class="kw">preallocate</span>(),</a>
+<a class="sourceLine" id="cb958-17" title="17">  <span class="dt">no_space =</span> <span class="kw">growing</span>(),</a>
+<a class="sourceLine" id="cb958-18" title="18">  <span class="dt">times =</span> <span class="dv">20</span></a>
+<a class="sourceLine" id="cb958-19" title="19">)  </a></code></pre></div>
 <pre><code>## Unit: microseconds
-##      expr     min       lq     mean   median       uq      max neval cld
-##     space 127.801 134.2515 360.3713 205.9515 230.4515 3622.402    20   a
-##  no_space 151.701 214.5010 490.7660 245.9515 296.8505 3616.800    20   a</code></pre>
+##      expr   min    lq    mean median     uq    max neval cld
+##     space 178.0 183.6 523.665 308.05 342.65 4991.2    20   a
+##  no_space 213.6 222.2 531.440 344.50 429.05 4081.9    20   a</code></pre>
 <ul>
 <li>see roughly 35% better performance when creating ahead of time</li>
 <li>note: if you can do these operations with vectorized approach though – they’re often much faster</li>
 </ul>
-<div class="sourceCode" id="cb967"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb967-1" title="1">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
-<a class="sourceLine" id="cb967-2" title="2">  <span class="dt">space =</span> <span class="kw">preallocate</span>(),</a>
-<a class="sourceLine" id="cb967-3" title="3">  <span class="dt">no_space =</span> <span class="kw">growing</span>(),</a>
-<a class="sourceLine" id="cb967-4" title="4">  <span class="dt">vector =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>),</a>
-<a class="sourceLine" id="cb967-5" title="5">  <span class="dt">times =</span> <span class="dv">20</span></a>
-<a class="sourceLine" id="cb967-6" title="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb960"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb960-1" title="1">microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
+<a class="sourceLine" id="cb960-2" title="2">  <span class="dt">space =</span> <span class="kw">preallocate</span>(),</a>
+<a class="sourceLine" id="cb960-3" title="3">  <span class="dt">no_space =</span> <span class="kw">growing</span>(),</a>
+<a class="sourceLine" id="cb960-4" title="4">  <span class="dt">vector =</span> <span class="kw">rnorm</span>(<span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb960-5" title="5">  <span class="dt">times =</span> <span class="dv">20</span></a>
+<a class="sourceLine" id="cb960-6" title="6">)</a></code></pre></div>
 <pre><code>## Unit: microseconds
-##      expr     min       lq     mean  median      uq     max neval cld
-##     space 130.701 135.7515 160.3561 140.651 166.751 308.601    20  b 
-##  no_space 158.302 173.6510 236.4610 213.901 293.551 386.901    20   c
-##    vector   7.301   7.6005   9.0412   8.052   8.601  18.001    20 a</code></pre>
+##      expr   min     lq    mean median     uq   max neval cld
+##     space 155.8 161.45 177.075 163.50 166.20 349.6    20  b 
+##  no_space 185.8 193.65 202.390 199.55 205.25 234.5    20   c
+##    vector   8.8   9.45   9.795   9.70  10.10  11.0    20 a</code></pre>
 <ul>
 <li>vectorized was &gt; 10x faster</li>
 </ul></li>
@@ -863,136 +882,76 @@ the loop):</p>
 <ul>
 <li>To start this problem, I first created a file directory, and then wrote in 26 csvs each with the most popular name from each year since 1880 for a particular letter<a href="#fn35" class="footnote-ref" id="fnref35"><sup>35</sup></a>.</li>
 <li>Next I read these into a single dataframe with a for loop</li>
-</ul>
-<div class="sourceCode" id="cb969"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb969-1" title="1"><span class="kw">dir.create</span>(<span class="st">&quot;ch21_csvs_example&quot;</span>)</a>
-<a class="sourceLine" id="cb969-2" title="2"></a>
-<a class="sourceLine" id="cb969-3" title="3">babynames <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb969-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">first_letter =</span> <span class="kw">str_sub</span>(name, <span class="dv">1</span>, <span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb969-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(first_letter, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb969-6" title="6"><span class="st">  </span><span class="kw">filter</span>(dplyr<span class="op">::</span><span class="kw">min_rank</span>(<span class="op">-</span>prop) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb969-7" title="7"><span class="st">  </span><span class="kw">split</span>(.<span class="op">$</span>first_letter) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb969-8" title="8"><span class="st">  </span><span class="co"># map(~select(.x, -first_letter)) %&gt;% </span></a>
-<a class="sourceLine" id="cb969-9" title="9"><span class="st">  </span><span class="kw">walk2</span>(<span class="dt">.x =</span> ., <span class="dt">.y =</span> <span class="kw">names</span>(.), </a>
-<a class="sourceLine" id="cb969-10" title="10">        <span class="op">~</span><span class="kw">write_csv</span>(.x,</a>
-<a class="sourceLine" id="cb969-11" title="11">                   <span class="kw">paste0</span>(<span class="st">&quot;ch21_csvs_example/&quot;</span>, <span class="st">&quot;letter_&quot;</span>, .y, <span class="st">&quot;.csv&quot;</span>))</a>
-<a class="sourceLine" id="cb969-12" title="12">        )</a></code></pre></div>
-<div class="sourceCode" id="cb970"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb970-1" title="1">append_csvs &lt;-<span class="st"> </span><span class="cf">function</span>(dir){</a>
-<a class="sourceLine" id="cb970-2" title="2">  <span class="co">#input vector of file paths name and output appended file</span></a>
-<a class="sourceLine" id="cb970-3" title="3"></a>
-<a class="sourceLine" id="cb970-4" title="4">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(dir))</a>
-<a class="sourceLine" id="cb970-5" title="5">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(out)){</a>
-<a class="sourceLine" id="cb970-6" title="6">    out[[i]] &lt;-<span class="st"> </span><span class="kw">read_csv</span>(dir[[i]], <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">.default =</span> <span class="st">&quot;c&quot;</span>))</a>
-<a class="sourceLine" id="cb970-7" title="7">  }</a>
-<a class="sourceLine" id="cb970-8" title="8">  out &lt;-<span class="st">  </span><span class="kw">bind_rows</span>(out) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb970-9" title="9"><span class="st">    </span><span class="kw">type_convert</span>()</a>
-<a class="sourceLine" id="cb970-10" title="10">  out</a>
-<a class="sourceLine" id="cb970-11" title="11">}</a>
-<a class="sourceLine" id="cb970-12" title="12"></a>
-<a class="sourceLine" id="cb970-13" title="13">dir_examp &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;ch21_csvs_example&quot;</span>, </a>
-<a class="sourceLine" id="cb970-14" title="14">    <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>,</a>
-<a class="sourceLine" id="cb970-15" title="15">    <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb970-16" title="16"></a>
-<a class="sourceLine" id="cb970-17" title="17">names_appended &lt;-<span class="st"> </span><span class="kw">append_csvs</span>(dir_examp)</a>
-<a class="sourceLine" id="cb970-18" title="18">names_appended</a></code></pre></div>
-<pre><code>## # A tibble: 3,514 x 6
-##     year sex   name      n   prop first_letter
-##    &lt;dbl&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;       
-##  1  1880 F     Anna   2604 0.0267 A           
-##  2  1881 F     Anna   2698 0.0273 A           
-##  3  1882 F     Anna   3143 0.0272 A           
-##  4  1883 F     Anna   3306 0.0275 A           
-##  5  1884 F     Anna   3860 0.0281 A           
-##  6  1885 F     Anna   3994 0.0281 A           
-##  7  1886 F     Anna   4283 0.0279 A           
-##  8  1887 F     Anna   4227 0.0272 A           
-##  9  1888 F     Anna   4982 0.0263 A           
-## 10  1889 F     Anna   5062 0.0268 A           
-## # ... with 3,504 more rows</code></pre>
-<ul>
-<li>See <a href="21-iteration.html#using-map">Using map</a> for example of how this could be accomplished using <code>map</code> and <code>map(safely(read_csv))</code>.</li>
 </ul></li>
 <li><p><em>What happens if you use <code>for (nm in names(x))</code> and <code>x</code> has no names?</em></p>
-<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb972-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb972-2" title="2"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
-<a class="sourceLine" id="cb972-3" title="3">  <span class="kw">print</span>(x[[nm]])</a>
-<a class="sourceLine" id="cb972-4" title="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb967"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb967-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb967-2" title="2"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb967-3" title="3">  <span class="kw">print</span>(x[[nm]])</a>
+<a class="sourceLine" id="cb967-4" title="4">}</a></code></pre></div>
 <ul>
 <li>each iteration produces an error, so nothing is written</li>
-</ul></li>
-</ol>
-<p><em>What if only some of the elements are named? </em></p>
-<pre><code>```r
-x &lt;- list(a = 1:10, 11:18, c = 19:25)
-for (nm in names(x)) {
-  print(x[[nm]])
-}
-```
-
-```
-##  [1]  1  2  3  4  5  6  7  8  9 10
+</ul>
+<p><em>What if only some of the elements are named?</em></p>
+<div class="sourceCode" id="cb968"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb968-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">c =</span> <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb968-2" title="2"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb968-3" title="3">  <span class="kw">print</span>(x[[nm]])</a>
+<a class="sourceLine" id="cb968-4" title="4">}</a></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10
 ## NULL
-## [1] 19 20 21 22 23 24 25
-```
-
-* you have output for those with names and NULL for those without</code></pre>
+## [1] 19 20 21 22 23 24 25</code></pre>
+<ul>
+<li>you have output for those with names and NULL for those without</li>
+</ul>
 <p><em>What if the names are not unique?</em></p>
-<pre><code>```r
-x &lt;- list(a = 1:10, a = 11:18, c = 19:25)
-for (nm in names(x)) {
-  print(x[[nm]])
-}
-```
-
-```
+<div class="sourceCode" id="cb970"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb970-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">a =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">c =</span> <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb970-2" title="2"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb970-3" title="3">  <span class="kw">print</span>(x[[nm]])</a>
+<a class="sourceLine" id="cb970-4" title="4">}</a></code></pre></div>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10
 ##  [1]  1  2  3  4  5  6  7  8  9 10
-##  [1]  1  2  3  4  5  6  7  8  9 10
-## [1] 19 20 21 22 23 24 25
-```
-
-* it prints the first position with the name</code></pre>
-<ol start="3" style="list-style-type: decimal">
+## [1] 19 20 21 22 23 24 25</code></pre>
+<ul>
+<li>it prints the first position with the name</li>
+</ul></li>
 <li><p>Write a function that prints the mean of each numeric column in a data frame, along with its name. For example, <code>show_mean(iris)</code> would print:</p>
-<div class="sourceCode" id="cb975"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb975-1" title="1"><span class="kw">show_mean</span>(iris)</a>
-<a class="sourceLine" id="cb975-2" title="2"><span class="co">#&gt; Sepal.Length: 5.84</span></a>
-<a class="sourceLine" id="cb975-3" title="3"><span class="co">#&gt; Sepal.Width:  3.06</span></a>
-<a class="sourceLine" id="cb975-4" title="4"><span class="co">#&gt; Petal.Length: 3.76</span></a>
-<a class="sourceLine" id="cb975-5" title="5"><span class="co">#&gt; Petal.Width:  1.20</span></a></code></pre></div></li>
-</ol>
+<div class="sourceCode" id="cb972"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb972-1" title="1"><span class="kw">show_mean</span>(iris)</a>
+<a class="sourceLine" id="cb972-2" title="2"><span class="co">#&gt; Sepal.Length: 5.84</span></a>
+<a class="sourceLine" id="cb972-3" title="3"><span class="co">#&gt; Sepal.Width:  3.06</span></a>
+<a class="sourceLine" id="cb972-4" title="4"><span class="co">#&gt; Petal.Length: 3.76</span></a>
+<a class="sourceLine" id="cb972-5" title="5"><span class="co">#&gt; Petal.Width:  1.20</span></a></code></pre></div>
 <p>(Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)</p>
-<pre><code>```r
-show_mean &lt;- function(df){
-  # select just cols that are numeric
-  out &lt;- vector(&quot;logical&quot;, length(df))
-  for (i in seq_along(df)) {
-    out[[i]] &lt;- is.numeric(df[[i]])
-  } 
-  df_select &lt;- df[out]
-  # keep/discard funs would have made this easy
-  
-  # make list of values w/ mean
-  means &lt;- vector(&quot;list&quot;, length(df_select))
-  names(means) &lt;- names(df_select)
-  for (i in seq_along(df_select)){
-    means[[i]] &lt;- mean(df_select[[i]], na.rm = TRUE) %&gt;%
-      round(digits = 2)
-  }
-  
-  # print out, use method to identify max chars for vars printed
-  means_names &lt;- names(means)
-  chars_max &lt;- (str_count(means_names) + str_count(as.character(means))) %&gt;% max()
-  chars_pad &lt;- chars_max - (str_count(means_names) + str_count(as.character(means)))
-  names(chars_pad) &lt;- means_names
-  
-
-str_c(means_names, &quot;: &quot;, str_dup(&quot; &quot;, chars_pad), means) %&gt;% 
-  writeLines()
-}
-
-show_mean(flights)
-```
-
-```
-## year:              2013
+<div class="sourceCode" id="cb973"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb973-1" title="1">show_mean &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb973-2" title="2">  <span class="co"># select just cols that are numeric</span></a>
+<a class="sourceLine" id="cb973-3" title="3">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="kw">length</span>(df))</a>
+<a class="sourceLine" id="cb973-4" title="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {</a>
+<a class="sourceLine" id="cb973-5" title="5">    out[[i]] &lt;-<span class="st"> </span><span class="kw">is.numeric</span>(df[[i]])</a>
+<a class="sourceLine" id="cb973-6" title="6">  } </a>
+<a class="sourceLine" id="cb973-7" title="7">  df_select &lt;-<span class="st"> </span>df[out]</a>
+<a class="sourceLine" id="cb973-8" title="8">  <span class="co"># keep/discard funs would have made this easy</span></a>
+<a class="sourceLine" id="cb973-9" title="9"></a>
+<a class="sourceLine" id="cb973-10" title="10">  <span class="co"># make list of values w/ mean</span></a>
+<a class="sourceLine" id="cb973-11" title="11">  means &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(df_select))</a>
+<a class="sourceLine" id="cb973-12" title="12">  <span class="kw">names</span>(means) &lt;-<span class="st"> </span><span class="kw">names</span>(df_select)</a>
+<a class="sourceLine" id="cb973-13" title="13">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df_select)){</a>
+<a class="sourceLine" id="cb973-14" title="14">    means[[i]] &lt;-<span class="st"> </span><span class="kw">mean</span>(df_select[[i]], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb973-15" title="15"><span class="st">      </span><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb973-16" title="16">  }</a>
+<a class="sourceLine" id="cb973-17" title="17"></a>
+<a class="sourceLine" id="cb973-18" title="18">  <span class="co"># print out, use method to identify max chars for vars printed</span></a>
+<a class="sourceLine" id="cb973-19" title="19">  means_names &lt;-<span class="st"> </span><span class="kw">names</span>(means)</a>
+<a class="sourceLine" id="cb973-20" title="20">  chars_max &lt;-<span class="st"> </span>(<span class="kw">str_count</span>(means_names) <span class="op">+</span><span class="st"> </span><span class="kw">str_count</span>(<span class="kw">as.character</span>(means))) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb973-21" title="21"><span class="st">    </span><span class="kw">max</span>()</a>
+<a class="sourceLine" id="cb973-22" title="22"></a>
+<a class="sourceLine" id="cb973-23" title="23">  chars_pad &lt;-<span class="st"> </span>chars_max <span class="op">-</span><span class="st"> </span>(<span class="kw">str_count</span>(means_names) <span class="op">+</span><span class="st"> </span><span class="kw">str_count</span>(<span class="kw">as.character</span>(means)))</a>
+<a class="sourceLine" id="cb973-24" title="24"></a>
+<a class="sourceLine" id="cb973-25" title="25">  <span class="kw">names</span>(chars_pad) &lt;-<span class="st"> </span>means_names</a>
+<a class="sourceLine" id="cb973-26" title="26"></a>
+<a class="sourceLine" id="cb973-27" title="27"><span class="kw">str_c</span>(means_names, <span class="st">&quot;: &quot;</span>, <span class="kw">str_dup</span>(<span class="st">&quot; &quot;</span>, chars_pad), means) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb973-28" title="28"><span class="st">  </span><span class="kw">writeLines</span>()</a>
+<a class="sourceLine" id="cb973-29" title="29">}</a>
+<a class="sourceLine" id="cb973-30" title="30"></a>
+<a class="sourceLine" id="cb973-31" title="31"><span class="kw">show_mean</span>(flights)</a></code></pre></div>
+<pre><code>## year:              2013
 ## month:             6.55
 ## day:              15.71
 ## dep_time:       1349.11
@@ -1005,20 +964,18 @@ show_mean(flights)
 ## air_time:        150.69
 ## distance:       1039.91
 ## hour:             13.18
-## minute:           26.23
-```</code></pre>
-<ol start="4" style="list-style-type: decimal">
+## minute:           26.23</code></pre></li>
 <li><p>What does this code do? How does it work?</p>
-<div class="sourceCode" id="cb977"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb977-1" title="1">trans &lt;-<span class="st"> </span><span class="kw">list</span>( </a>
-<a class="sourceLine" id="cb977-2" title="2">  <span class="dt">disp =</span> <span class="cf">function</span>(x) x <span class="op">*</span><span class="st"> </span><span class="fl">0.0163871</span>,</a>
-<a class="sourceLine" id="cb977-3" title="3">  <span class="dt">am =</span> <span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb977-4" title="4">    <span class="kw">factor</span>(x, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;auto&quot;</span>, <span class="st">&quot;manual&quot;</span>))</a>
-<a class="sourceLine" id="cb977-5" title="5">  }</a>
-<a class="sourceLine" id="cb977-6" title="6">)</a>
-<a class="sourceLine" id="cb977-7" title="7"><span class="cf">for</span> (var <span class="cf">in</span> <span class="kw">names</span>(trans)) {</a>
-<a class="sourceLine" id="cb977-8" title="8">  mtcars[[var]] &lt;-<span class="st"> </span>trans[[var]](mtcars[[var]])</a>
-<a class="sourceLine" id="cb977-9" title="9">}</a>
-<a class="sourceLine" id="cb977-10" title="10">mtcars</a></code></pre></div>
+<div class="sourceCode" id="cb975"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb975-1" title="1">trans &lt;-<span class="st"> </span><span class="kw">list</span>( </a>
+<a class="sourceLine" id="cb975-2" title="2">  <span class="dt">disp =</span> <span class="cf">function</span>(x) x <span class="op">*</span><span class="st"> </span><span class="fl">0.0163871</span>,</a>
+<a class="sourceLine" id="cb975-3" title="3">  <span class="dt">am =</span> <span class="cf">function</span>(x) {</a>
+<a class="sourceLine" id="cb975-4" title="4">    <span class="kw">factor</span>(x, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;auto&quot;</span>, <span class="st">&quot;manual&quot;</span>))</a>
+<a class="sourceLine" id="cb975-5" title="5">  }</a>
+<a class="sourceLine" id="cb975-6" title="6">)</a>
+<a class="sourceLine" id="cb975-7" title="7"><span class="cf">for</span> (var <span class="cf">in</span> <span class="kw">names</span>(trans)) {</a>
+<a class="sourceLine" id="cb975-8" title="8">  mtcars[[var]] &lt;-<span class="st"> </span>trans[[var]](mtcars[[var]])</a>
+<a class="sourceLine" id="cb975-9" title="9">}</a>
+<a class="sourceLine" id="cb975-10" title="10">mtcars</a></code></pre></div>
 <ul>
 <li>first part builds list of functions, 2nd applies those to a dataset</li>
 <li>are storing the data transformations as a function and then applying this to a dataframe<a href="#fn36" class="footnote-ref" id="fnref36"><sup>36</sup></a></li>
@@ -1036,26 +993,26 @@ show_mean(flights)
 <li>It allows you to input either 1 or 2 for the <code>MARGIN</code> argument, which corresponds with looping over either the rows or the columns.</li>
 </ul></li>
 <li><p>Adapt <code>col_summary()</code> so that it only applies to numeric columns You might want to start with an <code>is_numeric()</code> function that returns a logical vector that has a TRUE corresponding to each numeric column.</p>
-<div class="sourceCode" id="cb978"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb978-1" title="1">col_summary_gen &lt;-<span class="st"> </span><span class="cf">function</span>(df, fun, ...) {</a>
-<a class="sourceLine" id="cb978-2" title="2">  <span class="co">#find cols that are numeric</span></a>
-<a class="sourceLine" id="cb978-3" title="3">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="kw">length</span>(df))</a>
-<a class="sourceLine" id="cb978-4" title="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {</a>
-<a class="sourceLine" id="cb978-5" title="5">    out[[i]] &lt;-<span class="st"> </span><span class="kw">is.numeric</span>(df[[i]])</a>
-<a class="sourceLine" id="cb978-6" title="6">  }</a>
-<a class="sourceLine" id="cb978-7" title="7">  <span class="co">#make list of values w/ mean</span></a>
-<a class="sourceLine" id="cb978-8" title="8">  df_select &lt;-<span class="st"> </span>df[out]</a>
-<a class="sourceLine" id="cb978-9" title="9">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(df_select))</a>
-<a class="sourceLine" id="cb978-10" title="10">  <span class="kw">names</span>(output) &lt;-<span class="st"> </span><span class="kw">names</span>(df_select)</a>
-<a class="sourceLine" id="cb978-11" title="11">  <span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(output)) {</a>
-<a class="sourceLine" id="cb978-12" title="12">    output[[nm]] &lt;-<span class="st"> </span><span class="kw">fun</span>(df_select[[nm]], ...) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb978-13" title="13"><span class="st">      </span><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb978-14" title="14">  }</a>
-<a class="sourceLine" id="cb978-15" title="15"></a>
-<a class="sourceLine" id="cb978-16" title="16">  <span class="kw">as_tibble</span>(output)</a>
-<a class="sourceLine" id="cb978-17" title="17">}</a>
-<a class="sourceLine" id="cb978-18" title="18"></a>
-<a class="sourceLine" id="cb978-19" title="19"><span class="kw">col_summary_gen</span>(flights, <span class="dt">fun =</span> median, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb978-20" title="20"><span class="st">  </span><span class="kw">gather</span>() <span class="co"># trick to gather all easily</span></a></code></pre></div>
+<div class="sourceCode" id="cb976"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb976-1" title="1">col_summary_gen &lt;-<span class="st"> </span><span class="cf">function</span>(df, fun, ...) {</a>
+<a class="sourceLine" id="cb976-2" title="2">  <span class="co">#find cols that are numeric</span></a>
+<a class="sourceLine" id="cb976-3" title="3">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;logical&quot;</span>, <span class="kw">length</span>(df))</a>
+<a class="sourceLine" id="cb976-4" title="4">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(df)) {</a>
+<a class="sourceLine" id="cb976-5" title="5">    out[[i]] &lt;-<span class="st"> </span><span class="kw">is.numeric</span>(df[[i]])</a>
+<a class="sourceLine" id="cb976-6" title="6">  }</a>
+<a class="sourceLine" id="cb976-7" title="7">  <span class="co">#make list of values w/ mean</span></a>
+<a class="sourceLine" id="cb976-8" title="8">  df_select &lt;-<span class="st"> </span>df[out]</a>
+<a class="sourceLine" id="cb976-9" title="9">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(df_select))</a>
+<a class="sourceLine" id="cb976-10" title="10">  <span class="kw">names</span>(output) &lt;-<span class="st"> </span><span class="kw">names</span>(df_select)</a>
+<a class="sourceLine" id="cb976-11" title="11">  <span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(output)) {</a>
+<a class="sourceLine" id="cb976-12" title="12">    output[[nm]] &lt;-<span class="st"> </span><span class="kw">fun</span>(df_select[[nm]], ...) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb976-13" title="13"><span class="st">      </span><span class="kw">round</span>(<span class="dt">digits =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb976-14" title="14">  }</a>
+<a class="sourceLine" id="cb976-15" title="15"></a>
+<a class="sourceLine" id="cb976-16" title="16">  <span class="kw">as_tibble</span>(output)</a>
+<a class="sourceLine" id="cb976-17" title="17">}</a>
+<a class="sourceLine" id="cb976-18" title="18"></a>
+<a class="sourceLine" id="cb976-19" title="19"><span class="kw">col_summary_gen</span>(flights, <span class="dt">fun =</span> median, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb976-20" title="20"><span class="st">  </span><span class="kw">gather</span>() <span class="co"># trick to gather all easily</span></a></code></pre></div>
 <pre><code>## # A tibble: 14 x 2
 ##    key            value
 ##    &lt;chr&gt;          &lt;dbl&gt;
@@ -1086,13 +1043,13 @@ show_mean(flights)
 <ol style="list-style-type: decimal">
 <li><p>Write code that uses one of the map functions to:</p>
 <p><em>Compute the mean of every column in <code>mtcars</code>.</em></p>
-<div class="sourceCode" id="cb980"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb980-1" title="1">purrr<span class="op">::</span><span class="kw">map_dbl</span>(mtcars, mean)</a></code></pre></div>
+<div class="sourceCode" id="cb978"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb978-1" title="1">purrr<span class="op">::</span><span class="kw">map_dbl</span>(mtcars, mean)</a></code></pre></div>
 <pre><code>##        mpg        cyl       disp         hp       drat         wt 
 ##  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250 
 ##       qsec         vs         am       gear       carb 
 ##  17.848750   0.437500   0.406250   3.687500   2.812500</code></pre>
 <p><em>Determine the type of each column in <code>nycflights13::flights</code>.</em></p>
-<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb982-1" title="1">purrr<span class="op">::</span><span class="kw">map_chr</span>(flights, typeof)</a></code></pre></div>
+<div class="sourceCode" id="cb980"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb980-1" title="1">purrr<span class="op">::</span><span class="kw">map_chr</span>(flights, typeof)</a></code></pre></div>
 <pre><code>##           year          month            day       dep_time sched_dep_time 
 ##      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot; 
 ##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
@@ -1102,80 +1059,77 @@ show_mean(flights)
 ##       distance           hour         minute      time_hour 
 ##       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;</code></pre>
 <p><em>Compute the number of unique values in each column of <code>iris</code>.</em></p>
-<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb984-1" title="1">purrr<span class="op">::</span><span class="kw">map</span>(iris, unique) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb984-2" title="2"><span class="st">  </span><span class="kw">map_dbl</span>(length)</a></code></pre></div>
+<div class="sourceCode" id="cb982"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb982-1" title="1">purrr<span class="op">::</span><span class="kw">map</span>(iris, unique) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb982-2" title="2"><span class="st">  </span><span class="kw">map_dbl</span>(length)</a></code></pre></div>
 <pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
 ##           35           23           43           22            3</code></pre>
 <p><em>Generate 10 random normals for each of <span class="math inline">\(\mu = -10\)</span>, <span class="math inline">\(0\)</span>, <span class="math inline">\(10\)</span>, and <span class="math inline">\(100\)</span>.</em></p>
-<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb986-1" title="1">purrr<span class="op">::</span><span class="kw">map_dbl</span>(flights, <span class="op">~</span><span class="kw">mean</span>(<span class="kw">is.na</span>(.x)))</a></code></pre></div>
-<pre><code>##           year          month            day       dep_time sched_dep_time 
-##    0.000000000    0.000000000    0.000000000    0.024511842    0.000000000 
-##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
-##    0.024511842    0.025871796    0.000000000    0.028000808    0.000000000 
-##         flight        tailnum         origin           dest       air_time 
-##    0.000000000    0.007458964    0.000000000    0.000000000    0.028000808 
-##       distance           hour         minute      time_hour 
-##    0.000000000    0.000000000    0.000000000    0.000000000</code></pre></li>
-<li><p>How can you create a single vector that for each column in a data frame indicates whether or not it’s a factor?</p>
-<div class="sourceCode" id="cb988"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb988-1" title="1">purrr<span class="op">::</span><span class="kw">map_lgl</span>(iris, is.factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb988-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb988-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">column_names =</span> <span class="kw">row.names</span>(.))</a></code></pre></div>
-<pre><code>## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
-## This warning is displayed once per session.</code></pre>
-<pre><code>## # A tibble: 5 x 2
-##   value column_names
-##   &lt;lgl&gt; &lt;chr&gt;       
-## 1 FALSE 1           
-## 2 FALSE 2           
-## 3 FALSE 3           
-## 4 FALSE 4           
-## 5 TRUE  5</code></pre>
-<ul>
-<li>for this example, I added in a simple extra little trick to convert to a tibble and include original column names as a field</li>
-</ul></li>
-<li><p>What happens when you use the map functions on vectors that aren’t lists? What does <code>map(1:5, runif)</code> do? Why?</p>
-<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb991-1" title="1">purrr<span class="op">::</span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, rnorm)</a></code></pre></div>
+<div class="sourceCode" id="cb984"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb984-1" title="1">purrr<span class="op">::</span><span class="kw">map</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>), rnorm, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
 <pre><code>## [[1]]
-## [1] 0.9776621
+##  [1] -11.668016 -10.174630  -9.873417  -9.935144  -9.549267  -9.989001
+##  [7]  -9.991157  -9.490583  -9.020713 -11.215907
 ## 
 ## [[2]]
-## [1] -0.33246063 -0.08414805
+##  [1] -1.3330518  1.7970408 -0.7859694 -1.5184894  0.4544287  0.2134496
+##  [7] -1.0761067  0.1600194 -0.1258518 -0.6974829
 ## 
 ## [[3]]
-## [1]  0.4658980  0.2018112 -0.2532251
+##  [1] 10.334081  9.523160  9.730305 10.855434 10.899334 11.522520  9.532049
+##  [8]  9.778320 10.276128  9.939547
 ## 
 ## [[4]]
-## [1]  0.07361983 -0.91885392 -0.44735643  0.04915594
+##  [1]  98.63699 100.57597 100.23664  99.65274 100.66985  99.86635  99.79877
+##  [8]  98.84634 101.00019  99.09162</code></pre>
+<div class="sourceCode" id="cb986"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb986-1" title="1"><span class="co"># purrr::map_dbl(flights, ~mean(is.na(.x)))</span></a></code></pre></div></li>
+<li><p>How can you create a single vector that for each column in a data frame indicates whether or not it’s a factor?</p>
+<div class="sourceCode" id="cb987"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb987-1" title="1">purrr<span class="op">::</span><span class="kw">map_lgl</span>(iris, is.factor)</a></code></pre></div>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##        FALSE        FALSE        FALSE        FALSE         TRUE</code></pre></li>
+<li><p>What happens when you use the map functions on vectors that aren’t lists? What does <code>map(1:5, runif)</code> do? Why?</p>
+<div class="sourceCode" id="cb989"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb989-1" title="1">purrr<span class="op">::</span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, rnorm)</a></code></pre></div>
+<pre><code>## [[1]]
+## [1] 0.26078
+## 
+## [[2]]
+## [1] 0.39670324 0.03106982
+## 
+## [[3]]
+## [1]  1.0644632 -0.1632358 -1.0353975
+## 
+## [[4]]
+## [1] -0.3556528 -0.5027896  2.0659595 -0.1360896
 ## 
 ## [[5]]
-## [1]  0.9836768  0.1853731  1.6546643 -0.2262159 -1.0050666</code></pre>
+## [1]  0.50936851  0.16219258 -1.53746908 -0.04141543 -0.79950355</code></pre>
 <ul>
-<li>it runs on each item in the vector. In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of <code>rnorm</code>, hence pattern above.</li>
+<li>It runs on each item in the vector.</li>
+<li><code>map()</code> runs on each element item within the input, i.e .x[[1]], .x[[2]], .x[[n]]. The elements of a numeric vector are scalars (or technically length 1 numeric vectors)</li>
+<li>In this case then it is passing the values 1, 2, 3, 4, 5 into the first argument of <code>rnorm</code> for each run, hence pattern above.</li>
 </ul></li>
 <li><p>What does <code>map(-2:2, rnorm, n = 5)</code> do? Why?</p>
-<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb993-1" title="1"><span class="kw">map</span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, rnorm, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb991"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb991-1" title="1"><span class="kw">map</span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, rnorm, <span class="dt">n =</span> <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>## [[1]]
-## [1] -2.649034 -3.358016 -3.175197 -2.295753 -2.134657
+## [1] -1.829446 -3.357986 -3.582975 -2.039341 -2.087265
 ## 
 ## [[2]]
-## [1] -2.9999616 -0.9958054  0.3877819 -0.8219817 -1.7794775
+## [1] -0.6831658 -0.8729133 -0.3192894 -1.3425364  0.2383131
 ## 
 ## [[3]]
-## [1] -1.6486251  0.8349202 -0.8334311 -0.1258769 -1.0915130
+## [1]  0.43215278 -0.07629132 -0.14400722  1.85870258  0.13472292
 ## 
 ## [[4]]
-## [1]  1.62728540  1.91093048  2.21385852 -0.02791367 -0.09594475
+## [1] -0.22256104  2.00645188 -0.06027834  1.44273092  0.69404413
 ## 
 ## [[5]]
-## [1] 2.820463 1.305949 3.036895 2.907764 2.182459</code></pre>
+## [1] 1.642268 2.233247 2.021023 1.988244 2.798515</code></pre>
 <ul>
 <li>It makes 5 vectors each of length 5 with the values centered at the means of -2,-1, 0, 1, 2 respectively.</li>
 <li>The reason is that the default filling of the first argument is already named by the defined input of ‘n = 5’, therefore, the inputs are instead going to the 2nd argument, and hence become the mean of the different rnorm calls.</li>
 </ul></li>
-<li><p>Rewrite <code>map(x, function(df) lm(mpg ~ wt, data = df))</code> to eliminate the anonymous function.</p></li>
+<li><p>Rewrite <code>map(x, function(df) lm(mpg ~ wt, data = df))</code> to eliminate the anonymous function.</p>
+<div class="sourceCode" id="cb993"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb993-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb993-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> .))</a></code></pre></div></li>
 </ol>
-<div class="sourceCode" id="cb995"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb995-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb995-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>( <span class="op">~</span><span class="st"> </span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> .))</a></code></pre></div>
 </div>
 </div>
 <div id="other-patterns-of-for-loops" class="section level2">
@@ -1184,60 +1138,50 @@ show_mean(flights)
 <h3>21.9.3</h3>
 <ol style="list-style-type: decimal">
 <li><p>Implement your own version of <code>every()</code> using a for loop. Compare it with <code>purrr::every()</code>. What does purrr’s version do that your version doesn’t?</p>
-<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb996-1" title="1">every_loop &lt;-<span class="st"> </span><span class="cf">function</span>(x, fun, ...) {</a>
-<a class="sourceLine" id="cb996-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb996-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {</a>
-<a class="sourceLine" id="cb996-4" title="4">  output[[i]] &lt;-<span class="st"> </span><span class="kw">fun</span>(x[[i]])</a>
-<a class="sourceLine" id="cb996-5" title="5">  }</a>
-<a class="sourceLine" id="cb996-6" title="6">  total &lt;-<span class="st"> </span><span class="kw">flatten_lgl</span>(output)</a>
-<a class="sourceLine" id="cb996-7" title="7">  <span class="kw">sum</span>(total) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(x)</a>
-<a class="sourceLine" id="cb996-8" title="8">}</a>
-<a class="sourceLine" id="cb996-9" title="9"></a>
-<a class="sourceLine" id="cb996-10" title="10">x &lt;-<span class="st"> </span><span class="kw">list</span>(flights, mtcars, iris)</a>
-<a class="sourceLine" id="cb996-11" title="11"><span class="kw">every_loop</span>(x, is.data.frame)</a></code></pre></div>
+<div class="sourceCode" id="cb994"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb994-1" title="1">every_loop &lt;-<span class="st"> </span><span class="cf">function</span>(x, fun, ...) {</a>
+<a class="sourceLine" id="cb994-2" title="2">  output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb994-3" title="3">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {</a>
+<a class="sourceLine" id="cb994-4" title="4">  output[[i]] &lt;-<span class="st"> </span><span class="kw">fun</span>(x[[i]])</a>
+<a class="sourceLine" id="cb994-5" title="5">  }</a>
+<a class="sourceLine" id="cb994-6" title="6">  total &lt;-<span class="st"> </span><span class="kw">flatten_lgl</span>(output)</a>
+<a class="sourceLine" id="cb994-7" title="7">  <span class="kw">sum</span>(total) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(x)</a>
+<a class="sourceLine" id="cb994-8" title="8">}</a>
+<a class="sourceLine" id="cb994-9" title="9"></a>
+<a class="sourceLine" id="cb994-10" title="10">x &lt;-<span class="st"> </span><span class="kw">list</span>(flights, mtcars, iris)</a>
+<a class="sourceLine" id="cb994-11" title="11"><span class="kw">every_loop</span>(x, is.data.frame)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb998-1" title="1"><span class="kw">every</span>(x, is.data.frame)</a></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<ul>
-<li>mine can’t handle shortcut formulas or new functions</li>
-</ul>
-<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1000-1" title="1">z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb1000-2" title="2">z <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1000-3" title="3"><span class="st">  </span><span class="kw">every</span>( <span class="op">~</span><span class="st"> </span>. <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span>)</a></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1002-1" title="1"><span class="co"># e.g. below would fail</span></a>
-<a class="sourceLine" id="cb1002-2" title="2"><span class="co"># z %&gt;%</span></a>
-<a class="sourceLine" id="cb1002-3" title="3"><span class="co">#   every_loop( ~ . &lt; 11)</span></a></code></pre></div></li>
+<div class="sourceCode" id="cb996"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb996-1" title="1"><span class="kw">every</span>(x, is.data.frame)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre></li>
 <li><p>Create an enhanced <code>col_sum()</code> that applies a summary function to every numeric column in a data frame.</p>
-<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1003-1" title="1">col_summary_enh &lt;-<span class="st"> </span><span class="cf">function</span>(x,fun){</a>
-<a class="sourceLine" id="cb1003-2" title="2">  x <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1003-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1003-4" title="4"><span class="st">    </span>purrr<span class="op">::</span><span class="kw">map_dbl</span>(fun)</a>
-<a class="sourceLine" id="cb1003-5" title="5">}</a>
-<a class="sourceLine" id="cb1003-6" title="6"><span class="kw">col_summary_enh</span>(mtcars, median)</a></code></pre></div>
+<div class="sourceCode" id="cb998"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb998-1" title="1">col_summary_enh &lt;-<span class="st"> </span><span class="cf">function</span>(x,fun){</a>
+<a class="sourceLine" id="cb998-2" title="2">  x <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb998-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb998-4" title="4"><span class="st">    </span>purrr<span class="op">::</span><span class="kw">map_dbl</span>(fun)</a>
+<a class="sourceLine" id="cb998-5" title="5">}</a>
+<a class="sourceLine" id="cb998-6" title="6"><span class="kw">col_summary_enh</span>(mtcars, median)</a></code></pre></div>
 <pre><code>##     mpg     cyl    disp      hp    drat      wt    qsec      vs      am 
 ##  19.200   6.000 196.300 123.000   3.695   3.325  17.710   0.000   0.000 
 ##    gear    carb 
 ##   4.000   2.000</code></pre></li>
 <li><p>A possible base R equivalent of <code>col_sum()</code> is:</p>
-<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1005-1" title="1">col_sum3 &lt;-<span class="st"> </span><span class="cf">function</span>(df, f) {</a>
-<a class="sourceLine" id="cb1005-2" title="2">  is_num &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, is.numeric)</a>
-<a class="sourceLine" id="cb1005-3" title="3">  df_num &lt;-<span class="st"> </span>df[, is_num]</a>
-<a class="sourceLine" id="cb1005-4" title="4"></a>
-<a class="sourceLine" id="cb1005-5" title="5">  <span class="kw">sapply</span>(df_num, f)</a>
-<a class="sourceLine" id="cb1005-6" title="6">}</a></code></pre></div>
+<div class="sourceCode" id="cb1000"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1000-1" title="1">col_sum3 &lt;-<span class="st"> </span><span class="cf">function</span>(df, f) {</a>
+<a class="sourceLine" id="cb1000-2" title="2">  is_num &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, is.numeric)</a>
+<a class="sourceLine" id="cb1000-3" title="3">  df_num &lt;-<span class="st"> </span>df[, is_num]</a>
+<a class="sourceLine" id="cb1000-4" title="4"></a>
+<a class="sourceLine" id="cb1000-5" title="5">  <span class="kw">sapply</span>(df_num, f)</a>
+<a class="sourceLine" id="cb1000-6" title="6">}</a></code></pre></div>
 <p>But it has a number of bugs as illustrated with the following inputs:</p>
-<div class="sourceCode" id="cb1006"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1006-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb1006-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
-<a class="sourceLine" id="cb1006-3" title="3">  <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb1006-4" title="4">  <span class="dt">z =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
-<a class="sourceLine" id="cb1006-5" title="5">)</a>
-<a class="sourceLine" id="cb1006-6" title="6"><span class="co"># OK</span></a>
-<a class="sourceLine" id="cb1006-7" title="7"><span class="kw">col_sum3</span>(df, mean) </a>
-<a class="sourceLine" id="cb1006-8" title="8"><span class="co"># Has problems: don&#39;t always return numeric vector</span></a>
-<a class="sourceLine" id="cb1006-9" title="9"><span class="kw">col_sum3</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], mean) </a>
-<a class="sourceLine" id="cb1006-10" title="10"><span class="kw">col_sum3</span>(df[<span class="dv">1</span>], mean) </a>
-<a class="sourceLine" id="cb1006-11" title="11"><span class="kw">col_sum3</span>(df[<span class="dv">0</span>], mean)</a></code></pre></div>
+<div class="sourceCode" id="cb1001"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1001-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb1001-2" title="2">  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, </a>
+<a class="sourceLine" id="cb1001-3" title="3">  <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb1001-4" title="4">  <span class="dt">z =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)</a>
+<a class="sourceLine" id="cb1001-5" title="5">)</a>
+<a class="sourceLine" id="cb1001-6" title="6"><span class="co"># OK</span></a>
+<a class="sourceLine" id="cb1001-7" title="7"><span class="kw">col_sum3</span>(df, mean) </a>
+<a class="sourceLine" id="cb1001-8" title="8"><span class="co"># Has problems: don&#39;t always return numeric vector</span></a>
+<a class="sourceLine" id="cb1001-9" title="9"><span class="kw">col_sum3</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], mean) </a>
+<a class="sourceLine" id="cb1001-10" title="10"><span class="kw">col_sum3</span>(df[<span class="dv">1</span>], mean) </a>
+<a class="sourceLine" id="cb1001-11" title="11"><span class="kw">col_sum3</span>(df[<span class="dv">0</span>], mean)</a></code></pre></div>
 <p>What causes the bugs?</p>
 <ul>
 <li>The vector output is not always consistent in it’s output type. Also, returns error when inputting an empty list due to indexing issue.</li>
@@ -1251,55 +1195,65 @@ show_mean(flights)
 <h3>21.3.5.1</h3>
 <div id="using-map" class="section level4">
 <h4>Using map</h4>
-<div class="sourceCode" id="cb1007"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1007-1" title="1">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1007-2" title="2"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, read_csv))</a>
-<a class="sourceLine" id="cb1007-3" title="3">    </a>
-<a class="sourceLine" id="cb1007-4" title="4">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1007-5" title="5"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, <span class="kw">safely</span>(read_csv)))</a></code></pre></div>
+<div class="sourceCode" id="cb1002"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1002-1" title="1">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1002-2" title="2"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, read_csv))</a>
+<a class="sourceLine" id="cb1002-3" title="3">    </a>
+<a class="sourceLine" id="cb1002-4" title="4">    outputted_csv &lt;-<span class="st"> </span>files_example <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1002-5" title="5"><span class="st">      </span><span class="kw">mutate</span>(<span class="dt">csv_data =</span> <span class="kw">map</span>(file_paths, <span class="kw">safely</span>(read_csv)))</a></code></pre></div>
 </div>
 <div id="plot-of-names" class="section level4">
 <h4>Plot of names</h4>
 <ul>
 <li>Below is a plot of the proportion of individuals named the most popular letter in each year. This suggests that the top names by letter do not have as large of a proportion of the population ocmpared to historically.</li>
 </ul>
-<div class="sourceCode" id="cb1008"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1008-1" title="1">names_appended <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1008-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> prop, <span class="dt">colour =</span> first_letter))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1008-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
-<p><img src="21-iteration_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<div class="sourceCode" id="cb1003"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1003-1" title="1">names_appended <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1003-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> prop, <span class="dt">colour =</span> first_letter))<span class="op">+</span></a>
+<a class="sourceLine" id="cb1003-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<p><img src="21-iteration_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 </div>
 <div id="csv-other-example" class="section level4">
 <h4>csv other example</h4>
-<p>This is some code I used to read csvs from a shared drive. I added on the ‘file_path_pull’ and ‘files_example’ components to add in information on the file paths and other details that were relevant… you might also add this data into a new column on the output…</p>
-<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1009-1" title="1">files_path_pull &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;//companydomain.com/directory/&quot;</span>, </a>
-<a class="sourceLine" id="cb1009-2" title="2">                       <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>,</a>
-<a class="sourceLine" id="cb1009-3" title="3">                       <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1009-4" title="4"></a>
-<a class="sourceLine" id="cb1009-5" title="5">files_example &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">file_paths =</span> files_path_pull[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1009-6" title="6"><span class="st">  </span><span class="kw">extract</span>(file_paths, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;path&quot;</span>, <span class="st">&quot;name&quot;</span>), <span class="dt">regex =</span> <span class="st">&quot;(.*)([0-9]{4}-[0-9]{2}-[0-9]{2})&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1009-7" title="7"></a>
-<a class="sourceLine" id="cb1009-8" title="8">read_dir &lt;-<span class="st"> </span><span class="cf">function</span>(dir){</a>
-<a class="sourceLine" id="cb1009-9" title="9">  <span class="co">#input vector of file paths name and output appended file</span></a>
-<a class="sourceLine" id="cb1009-10" title="10">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(dir))</a>
-<a class="sourceLine" id="cb1009-11" title="11">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(out)){</a>
-<a class="sourceLine" id="cb1009-12" title="12">    out[[i]] &lt;-<span class="st"> </span><span class="kw">read_csv</span>(dir[[i]])</a>
-<a class="sourceLine" id="cb1009-13" title="13">  }</a>
-<a class="sourceLine" id="cb1009-14" title="14">  out &lt;-<span class="st">  </span><span class="kw">bind_rows</span>(out)</a>
-<a class="sourceLine" id="cb1009-15" title="15">  out</a>
-<a class="sourceLine" id="cb1009-16" title="16">}</a>
-<a class="sourceLine" id="cb1009-17" title="17"></a>
-<a class="sourceLine" id="cb1009-18" title="18"><span class="kw">read_dir</span>(files_example<span class="op">$</span>file_paths)</a></code></pre></div>
+<p>The code below might be used to read csvs from a shared drive. I added on the ‘file_path_pull’ and ‘files_example’ components to add in information on the file paths and other details that were relevant. You might also add this data into a new column on the output…</p>
+<div class="sourceCode" id="cb1004"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1004-1" title="1">files_path_pull &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;//companydomain.com/directory/&quot;</span>, </a>
+<a class="sourceLine" id="cb1004-2" title="2">                       <span class="dt">pattern =</span> <span class="st">&quot;csv$&quot;</span>,</a>
+<a class="sourceLine" id="cb1004-3" title="3">                       <span class="dt">full.names =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1004-4" title="4"></a>
+<a class="sourceLine" id="cb1004-5" title="5">files_example &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">file_paths =</span> files_path_pull[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1004-6" title="6"><span class="st">  </span><span class="kw">extract</span>(file_paths, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;path&quot;</span>, <span class="st">&quot;name&quot;</span>), <span class="dt">regex =</span> <span class="st">&quot;(.*)([0-9]{4}-[0-9]{2}-[0-9]{2})&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb1004-7" title="7"></a>
+<a class="sourceLine" id="cb1004-8" title="8">read_dir &lt;-<span class="st"> </span><span class="cf">function</span>(dir){</a>
+<a class="sourceLine" id="cb1004-9" title="9">  <span class="co">#input vector of file paths name and output appended file</span></a>
+<a class="sourceLine" id="cb1004-10" title="10">  out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(dir))</a>
+<a class="sourceLine" id="cb1004-11" title="11">  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(out)){</a>
+<a class="sourceLine" id="cb1004-12" title="12">    out[[i]] &lt;-<span class="st"> </span><span class="kw">read_csv</span>(dir[[i]])</a>
+<a class="sourceLine" id="cb1004-13" title="13">  }</a>
+<a class="sourceLine" id="cb1004-14" title="14">  out &lt;-<span class="st">  </span><span class="kw">bind_rows</span>(out)</a>
+<a class="sourceLine" id="cb1004-15" title="15">  out</a>
+<a class="sourceLine" id="cb1004-16" title="16">}</a>
+<a class="sourceLine" id="cb1004-17" title="17"></a>
+<a class="sourceLine" id="cb1004-18" title="18"><span class="kw">read_dir</span>(files_example<span class="op">$</span>file_paths)</a></code></pre></div>
 </div>
 </div>
 <div id="with-purrr" class="section level3">
 <h3>21.3.5.2 (with purrr)</h3>
+<div class="sourceCode" id="cb1005"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1005-1" title="1">purrr<span class="op">::</span><span class="kw">map_lgl</span>(iris, is.factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1005-2" title="2"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">enframe</span>()</a></code></pre></div>
+<pre><code>## # A tibble: 5 x 2
+##   name         value
+##   &lt;chr&gt;        &lt;lgl&gt;
+## 1 Sepal.Length FALSE
+## 2 Sepal.Width  FALSE
+## 3 Petal.Length FALSE
+## 4 Petal.Width  FALSE
+## 5 Species      TRUE</code></pre>
 <p>Slightly less attractive printing</p>
-<div class="sourceCode" id="cb1010"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1010-1" title="1">show_mean2 &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
-<a class="sourceLine" id="cb1010-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1010-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1010-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1010-5" title="5">}</a>
-<a class="sourceLine" id="cb1010-6" title="6"></a>
-<a class="sourceLine" id="cb1010-7" title="7"><span class="kw">show_mean2</span>(flights)</a></code></pre></div>
+<div class="sourceCode" id="cb1007"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1007-1" title="1">show_mean2 &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb1007-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1007-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1007-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb1007-5" title="5">}</a>
+<a class="sourceLine" id="cb1007-6" title="6"></a>
+<a class="sourceLine" id="cb1007-7" title="7"><span class="kw">show_mean2</span>(flights)</a></code></pre></div>
 <pre><code>##           year          month            day       dep_time sched_dep_time 
 ##    2013.000000       6.548510      15.710787    1349.109947    1344.254840 
 ##      dep_delay       arr_time sched_arr_time      arr_delay         flight 
@@ -1307,15 +1261,17 @@ show_mean(flights)
 ##       air_time       distance           hour         minute 
 ##     150.686460    1039.912604      13.180247      26.230100</code></pre>
 <p>Maybe slightly better printing and in df</p>
-<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1012-1" title="1">show_mean3 &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
-<a class="sourceLine" id="cb1012-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1012-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1012-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1012-5" title="5"><span class="st">    </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1012-6" title="6"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw">row.names</span>(.))</a>
-<a class="sourceLine" id="cb1012-7" title="7">}</a>
-<a class="sourceLine" id="cb1012-8" title="8"></a>
-<a class="sourceLine" id="cb1012-9" title="9"><span class="kw">show_mean3</span>(flights)</a></code></pre></div>
+<div class="sourceCode" id="cb1009"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1009-1" title="1">show_mean3 &lt;-<span class="st"> </span><span class="cf">function</span>(df){</a>
+<a class="sourceLine" id="cb1009-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1009-3" title="3"><span class="st">    </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1009-4" title="4"><span class="st">    </span><span class="kw">map_dbl</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1009-5" title="5"><span class="st">    </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1009-6" title="6"><span class="st">    </span><span class="kw">mutate</span>(<span class="dt">names =</span> <span class="kw">row.names</span>(.))</a>
+<a class="sourceLine" id="cb1009-7" title="7">}</a>
+<a class="sourceLine" id="cb1009-8" title="8"></a>
+<a class="sourceLine" id="cb1009-9" title="9"><span class="kw">show_mean3</span>(flights)</a></code></pre></div>
+<pre><code>## Warning: Calling `as_tibble()` on a vector is discouraged, because the behavior is likely to change in the future. Use `enframe(name = NULL)` instead.
+## This warning is displayed once per session.</code></pre>
 <pre><code>## # A tibble: 14 x 2
 ##      value names
 ##      &lt;dbl&gt; &lt;chr&gt;
@@ -1333,12 +1289,12 @@ show_mean(flights)
 ## 12 1040.   12   
 ## 13   13.2  13   
 ## 14   26.2  14</code></pre>
-<p>Other method is to take advantage of the gather function</p>
-<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1014-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1014-2" title="2"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1014-3" title="3"><span class="st">  </span><span class="kw">map</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1014-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1014-5" title="5"><span class="st">  </span><span class="kw">gather</span>()</a></code></pre></div>
+<p>Other method is to take advantage of the <code>gather()</code> function</p>
+<div class="sourceCode" id="cb1012"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1012-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1012-2" title="2"><span class="st">  </span><span class="kw">keep</span>(is.numeric) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1012-3" title="3"><span class="st">  </span><span class="kw">map</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1012-4" title="4"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1012-5" title="5"><span class="st">  </span><span class="kw">gather</span>()</a></code></pre></div>
 <pre><code>## # A tibble: 14 x 2
 ##    key              value
 ##    &lt;chr&gt;            &lt;dbl&gt;
@@ -1357,17 +1313,30 @@ show_mean(flights)
 ## 13 hour             13.2 
 ## 14 minute           26.2</code></pre>
 </div>
+<div id="section-83" class="section level3">
+<h3>21.9.3.1</h3>
+<ul>
+<li>mine can’t handle shortcut formulas or new functions</li>
+</ul>
+<div class="sourceCode" id="cb1014"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1014-1" title="1">z &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb1014-2" title="2">z <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1014-3" title="3"><span class="st">  </span><span class="kw">every</span>( <span class="op">~</span><span class="st"> </span>. <span class="op">&lt;</span><span class="st"> </span><span class="dv">11</span>)</a></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1016-1" title="1"><span class="co"># e.g. below would fail</span></a>
+<a class="sourceLine" id="cb1016-2" title="2"><span class="co"># z %&gt;%</span></a>
+<a class="sourceLine" id="cb1016-3" title="3"><span class="co">#   every_loop( ~ . &lt; 11)</span></a></code></pre></div>
+</div>
 <div id="mirroring-keep" class="section level3">
 <h3>21.9 mirroring <code>keep</code></h3>
 <ul>
 <li><p>below is one method for passing multiple, more complex arguments through keep, though you can also use function shortcuts (<code>~</code>) in <code>keep</code> and <code>discard</code></p>
-<div class="sourceCode" id="cb1016"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1016-1" title="1"><span class="co">##how to pass multiple functions through keep?</span></a>
-<a class="sourceLine" id="cb1016-2" title="2"><span class="co">#can use map to subset columns by multiple criteria and then subset at end</span></a>
-<a class="sourceLine" id="cb1016-3" title="3">flights <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1016-4" title="4"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(is.na) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1016-5" title="5"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_dbl</span>(sum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1016-6" title="6"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span>.<span class="op">&gt;</span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1016-7" title="7"><span class="st">  </span>flights[.]</a></code></pre></div>
+<div class="sourceCode" id="cb1017"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1017-1" title="1"><span class="co">##how to pass multiple functions through keep?</span></a>
+<a class="sourceLine" id="cb1017-2" title="2"><span class="co">#can use map to subset columns by multiple criteria and then subset at end</span></a>
+<a class="sourceLine" id="cb1017-3" title="3">flights <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1017-4" title="4"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(is.na) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1017-5" title="5"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_dbl</span>(sum) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1017-6" title="6"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map_lgl</span>(<span class="op">~</span>.<span class="op">&gt;</span><span class="dv">10</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1017-7" title="7"><span class="st">  </span>flights[.]</a></code></pre></div>
 <pre><code>## # A tibble: 336,776 x 6
 ##    dep_time dep_delay arr_time arr_delay tailnum air_time
 ##       &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt;
@@ -1387,35 +1356,35 @@ show_mean(flights)
 <div id="invoke-examples" class="section level3">
 <h3>invoke examples</h3>
 <p>Let’s change the example to be with quantile…</p>
-<div class="sourceCode" id="cb1018"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1018-1" title="1"><span class="kw">invoke</span>(runif, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
-<pre><code>##  [1] 0.6521087 0.1792651 0.3638088 0.6421232 0.5798101 0.8057947 0.5781534
-##  [8] 0.8617429 0.2869783 0.1032626</code></pre>
-<div class="sourceCode" id="cb1020"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1020-1" title="1"><span class="kw">list</span>(<span class="st">&quot;01a&quot;</span>, <span class="st">&quot;01b&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1020-2" title="2"><span class="st">  </span><span class="kw">invoke</span>(paste, ., <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1019"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1019-1" title="1"><span class="kw">invoke</span>(runif, <span class="dt">n =</span> <span class="dv">10</span>)</a></code></pre></div>
+<pre><code>##  [1] 0.775555937 0.328805817 0.920314980 0.176599637 0.210958651
+##  [6] 0.890200325 0.456075735 0.498955991 0.148438198 0.001021321</code></pre>
+<div class="sourceCode" id="cb1021"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1021-1" title="1"><span class="kw">list</span>(<span class="st">&quot;01a&quot;</span>, <span class="st">&quot;01b&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1021-2" title="2"><span class="st">  </span><span class="kw">invoke</span>(paste, ., <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
 <pre><code>## [1] &quot;01a-01b&quot;</code></pre>
-<div class="sourceCode" id="cb1022"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1022-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb1022-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">5</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb1023"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1023-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1023-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">5</span>)))</a></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673 0.0455565 0.5281055
 ##  [8] 0.8924190 0.5514350 0.4566147
 ## 
 ## [[2]]
 ## [1]  1.7150650  0.4609162 -1.2650612 -0.6868529 -0.4456620</code></pre>
-<div class="sourceCode" id="cb1024"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1024-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb1024-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dv">5</span>, <span class="dv">50</span>)))</a></code></pre></div>
+<div class="sourceCode" id="cb1025"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1025-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1025-2" title="2"><span class="kw">invoke_map</span>(<span class="kw">list</span>(runif, rnorm), <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dv">5</span>, <span class="dv">50</span>)))</a></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] 0.2875775 0.7883051 0.4089769 0.8830174 0.9404673 0.0455565 0.5281055
 ##  [8] 0.8924190 0.5514350 0.4566147
 ## 
 ## [[2]]
 ## [1] 51.71506 50.46092 48.73494 49.31315 49.55434</code></pre>
-<div class="sourceCode" id="cb1026"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1026-1" title="1"><span class="kw">list</span>(<span class="dt">m1 =</span> mean, <span class="dt">m2 =</span> median) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">invoke_map</span>(<span class="dt">x =</span> <span class="kw">rcauchy</span>(<span class="dv">100</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb1027"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1027-1" title="1"><span class="kw">list</span>(<span class="dt">m1 =</span> mean, <span class="dt">m2 =</span> median) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">invoke_map</span>(<span class="dt">x =</span> <span class="kw">rcauchy</span>(<span class="dv">100</span>))</a></code></pre></div>
 <pre><code>## $m1
 ## [1] 0.7316016
 ## 
 ## $m2
 ## [1] 0.1690467</code></pre>
-<div class="sourceCode" id="cb1028"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1028-1" title="1"><span class="kw">rcauchy</span>(<span class="dv">100</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1029"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1029-1" title="1"><span class="kw">rcauchy</span>(<span class="dv">100</span>)</a></code></pre></div>
 <pre><code>##   [1]   -1.99514216    1.57378677    1.44901985    0.82604308    2.30072052
 ##   [6]   -0.04961749    0.52626840    0.29408692    0.47790231   -1.47138470
 ##  [11]   -2.54305059   -0.35508248   -1.65511601   -1.08467708  -15.03813728
@@ -1437,10 +1406,10 @@ show_mean(flights)
 ##  [91]   17.70703023    1.01880490    0.80764382   -1.63905090    0.15086898
 ##  [96]   -1.36865319    1.99173761    3.39988162   -0.63043489   -0.26058630</code></pre>
 <p>Let’s store everything in a dataframe…</p>
-<div class="sourceCode" id="cb1030"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1030-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
-<a class="sourceLine" id="cb1030-2" title="2"><span class="kw">tibble</span>(<span class="dt">funs =</span> <span class="kw">list</span>(<span class="dt">rn =</span> <span class="st">&quot;rnorm&quot;</span>, <span class="dt">rp =</span> <span class="st">&quot;rpois&quot;</span>, <span class="dt">ru =</span> <span class="st">&quot;runif&quot;</span>),</a>
-<a class="sourceLine" id="cb1030-3" title="3">       <span class="dt">params =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">mean =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">lambda =</span> <span class="dv">3</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1030-4" title="4"><span class="st">  </span><span class="kw">with</span>(<span class="kw">invoke_map_df</span>(funs, params))</a></code></pre></div>
+<div class="sourceCode" id="cb1031"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1031-1" title="1"><span class="kw">set.seed</span>(<span class="dv">123</span>)</a>
+<a class="sourceLine" id="cb1031-2" title="2"><span class="kw">tibble</span>(<span class="dt">funs =</span> <span class="kw">list</span>(<span class="dt">rn =</span> <span class="st">&quot;rnorm&quot;</span>, <span class="dt">rp =</span> <span class="st">&quot;rpois&quot;</span>, <span class="dt">ru =</span> <span class="st">&quot;runif&quot;</span>),</a>
+<a class="sourceLine" id="cb1031-3" title="3">       <span class="dt">params =</span> <span class="kw">list</span>(<span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">mean =</span> <span class="dv">10</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">lambda =</span> <span class="dv">3</span>), <span class="kw">list</span>(<span class="dt">n =</span> <span class="dv">20</span>, <span class="dt">min =</span> <span class="dv">-1</span>, <span class="dt">max =</span> <span class="dv">1</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1031-4" title="4"><span class="st">  </span><span class="kw">with</span>(<span class="kw">invoke_map_df</span>(funs, params))</a></code></pre></div>
 <pre><code>## # A tibble: 20 x 3
 ##       rn    rp      ru
 ##    &lt;dbl&gt; &lt;int&gt;   &lt;dbl&gt;
@@ -1464,7 +1433,7 @@ show_mean(flights)
 ## 18  8.03     4  0.226 
 ## 19 10.7      5 -0.296 
 ## 20  9.53     2 -0.778</code></pre>
-<div class="sourceCode" id="cb1032"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1032-1" title="1"><span class="kw">map_df</span>(iris, <span class="op">~</span>.x<span class="op">*</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1033"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1033-1" title="1"><span class="kw">map_df</span>(iris, <span class="op">~</span>.x<span class="op">*</span><span class="dv">2</span>)</a></code></pre></div>
 <pre><code>## Warning in Ops.factor(.x, 2): &#39;*&#39; not meaningful for factors</code></pre>
 <pre><code>## # A tibble: 150 x 5
 ##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -1480,19 +1449,19 @@ show_mean(flights)
 ##  9          8.8         5.8          2.8         0.4 NA     
 ## 10          9.8         6.2          3           0.2 NA     
 ## # ... with 140 more rows</code></pre>
-<div class="sourceCode" id="cb1035"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1035-1" title="1"><span class="kw">select</span>(iris, <span class="op">-</span>Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1035-2" title="2"><span class="st">  </span><span class="kw">flatten_dbl</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1035-3" title="3"><span class="st">  </span><span class="kw">mean</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1036"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1036-1" title="1"><span class="kw">select</span>(iris, <span class="op">-</span>Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1036-2" title="2"><span class="st">  </span><span class="kw">flatten_dbl</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1036-3" title="3"><span class="st">  </span><span class="kw">mean</span>()</a></code></pre></div>
 <pre><code>## [1] 3.4645</code></pre>
-<div class="sourceCode" id="cb1037"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1037-1" title="1">mean.and.median &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb1037-2" title="2">  <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb1037-3" title="3">       <span class="dt">median =</span> <span class="kw">median</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb1037-4" title="4">}</a></code></pre></div>
+<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1038-1" title="1">mean.and.median &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb1038-2" title="2">  <span class="kw">list</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
+<a class="sourceLine" id="cb1038-3" title="3">       <span class="dt">median =</span> <span class="kw">median</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb1038-4" title="4">}</a></code></pre></div>
 <p>Difference between dfr and dfc, taken from here: <a href="https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html" class="uri">https://bio304-class.github.io/bio304-fall2017/control-flow-in-R.html</a></p>
-<div class="sourceCode" id="cb1038"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1038-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1038-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1038-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1038-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
+<div class="sourceCode" id="cb1039"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1039-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1039-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1039-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1039-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##    mean median names       
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       
@@ -1500,10 +1469,10 @@ show_mean(flights)
 ## 2  3.06   3    Sepal.Width 
 ## 3  3.76   4.35 Petal.Length
 ## 4  1.20   1.3  Petal.Width</code></pre>
-<div class="sourceCode" id="cb1040"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1040-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1040-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1040-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1040-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
+<div class="sourceCode" id="cb1041"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1041-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1041-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1041-3" title="3"><span class="st">  </span><span class="kw">map_dfr</span>(mean.and.median) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1041-4" title="4"><span class="st">  </span><span class="kw">bind_cols</span>(<span class="kw">tibble</span>(<span class="dt">names =</span> <span class="kw">names</span>(<span class="kw">select</span>(iris, <span class="op">-</span>Species))))</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 3
 ##    mean median names       
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;       
@@ -1511,9 +1480,9 @@ show_mean(flights)
 ## 2  3.06   3    Sepal.Width 
 ## 3  3.76   4.35 Petal.Length
 ## 4  1.20   1.3  Petal.Width</code></pre>
-<div class="sourceCode" id="cb1042"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1042-1" title="1">iris <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1042-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1042-3" title="3"><span class="st">  </span><span class="kw">map_dfc</span>(mean.and.median)</a></code></pre></div>
+<div class="sourceCode" id="cb1043"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1043-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1043-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>Species) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1043-3" title="3"><span class="st">  </span><span class="kw">map_dfc</span>(mean.and.median)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 8
 ##    mean median mean1 median1 mean2 median2 mean3 median3
 ##   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;
@@ -1522,12 +1491,12 @@ show_mean(flights)
 <div id="indexing-nms-caution" class="section level3">
 <h3>indexing nms caution</h3>
 <p>When creating your empty list, use indexes rather than names if you are creating values, otherwise you are creating new values on the list. E.g. in the example below I the output ends up being length 6 because you have the 3 <code>NULL</code> values plus the 3 newly created named positions.</p>
-<div class="sourceCode" id="cb1044"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1044-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">c =</span> <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
-<a class="sourceLine" id="cb1044-2" title="2">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb1044-3" title="3"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
-<a class="sourceLine" id="cb1044-4" title="4">  output[[nm]] &lt;-<span class="st"> </span>x[[nm]] <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb1044-5" title="5">}</a>
-<a class="sourceLine" id="cb1044-6" title="6">output</a></code></pre></div>
+<div class="sourceCode" id="cb1045"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1045-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">b =</span> <span class="dv">11</span><span class="op">:</span><span class="dv">18</span>, <span class="dt">c =</span> <span class="dv">19</span><span class="op">:</span><span class="dv">25</span>)</a>
+<a class="sourceLine" id="cb1045-2" title="2">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))</a>
+<a class="sourceLine" id="cb1045-3" title="3"><span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)) {</a>
+<a class="sourceLine" id="cb1045-4" title="4">  output[[nm]] &lt;-<span class="st"> </span>x[[nm]] <span class="op">*</span><span class="st"> </span><span class="dv">3</span></a>
+<a class="sourceLine" id="cb1045-5" title="5">}</a>
+<a class="sourceLine" id="cb1045-6" title="6">output</a></code></pre></div>
 <pre><code>## [[1]]
 ## NULL
 ## 
@@ -1549,13 +1518,13 @@ show_mean(flights)
 <div id="in-class-notes" class="section level3">
 <h3>in-class notes</h3>
 <p>the <code>map_*</code> functions are essentially like running a <code>flatten_*</code> after running <code>map</code>. E.g. the two things below are equivalent</p>
-<div class="sourceCode" id="cb1046"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1046-1" title="1"><span class="kw">map</span>(flights, typeof) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1046-2" title="2"><span class="st">  </span><span class="kw">flatten_chr</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1047"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1047-1" title="1"><span class="kw">map</span>(flights, typeof) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1047-2" title="2"><span class="st">  </span><span class="kw">flatten_chr</span>()</a></code></pre></div>
 <pre><code>##  [1] &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;   &quot;integer&quot;  
 ##  [6] &quot;double&quot;    &quot;integer&quot;   &quot;integer&quot;   &quot;double&quot;    &quot;character&quot;
 ## [11] &quot;integer&quot;   &quot;character&quot; &quot;character&quot; &quot;character&quot; &quot;double&quot;   
 ## [16] &quot;double&quot;    &quot;double&quot;    &quot;double&quot;    &quot;double&quot;</code></pre>
-<div class="sourceCode" id="cb1048"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1048-1" title="1"><span class="kw">map_chr</span>(flights, typeof)</a></code></pre></div>
+<div class="sourceCode" id="cb1049"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1049-1" title="1"><span class="kw">map_chr</span>(flights, typeof)</a></code></pre></div>
 <pre><code>##           year          month            day       dep_time sched_dep_time 
 ##      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot; 
 ##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
@@ -1565,15 +1534,15 @@ show_mean(flights)
 ##       distance           hour         minute      time_hour 
 ##       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;</code></pre>
 <p>Calculate the number of unique values for each level</p>
-<div class="sourceCode" id="cb1050"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1050-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1050-2" title="2"><span class="st">  </span><span class="kw">map</span>(unique) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1050-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(length)</a>
-<a class="sourceLine" id="cb1050-4" title="4"></a>
-<a class="sourceLine" id="cb1050-5" title="5"><span class="kw">map_int</span>(iris, <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x)))</a></code></pre></div>
+<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1051-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1051-2" title="2"><span class="st">  </span><span class="kw">map</span>(unique) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1051-3" title="3"><span class="st">  </span><span class="kw">map_dbl</span>(length)</a>
+<a class="sourceLine" id="cb1051-4" title="4"></a>
+<a class="sourceLine" id="cb1051-5" title="5"><span class="kw">map_int</span>(iris, <span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x)))</a></code></pre></div>
 <p>Iterate through different min and max values</p>
-<div class="sourceCode" id="cb1051"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1051-1" title="1">min_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-10</span>)</a>
-<a class="sourceLine" id="cb1051-2" title="2">max_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">11</span><span class="op">:</span><span class="dv">13</span>)</a>
-<a class="sourceLine" id="cb1051-3" title="3"><span class="kw">map2</span>(<span class="dt">.x =</span> min_params, <span class="dt">.y =</span> max_params, <span class="op">~</span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> .x, <span class="dt">max =</span> .y))</a></code></pre></div>
+<div class="sourceCode" id="cb1052"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1052-1" title="1">min_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">-10</span>)</a>
+<a class="sourceLine" id="cb1052-2" title="2">max_params &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">11</span><span class="op">:</span><span class="dv">13</span>)</a>
+<a class="sourceLine" id="cb1052-3" title="3"><span class="kw">map2</span>(<span class="dt">.x =</span> min_params, <span class="dt">.y =</span> max_params, <span class="op">~</span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">min =</span> .x, <span class="dt">max =</span> .y))</a></code></pre></div>
 <pre><code>## [[1]]
 ##  [1]  1.9234337  7.0166670  4.0117614  8.4583500  0.2343757  4.2187129
 ##  [7] 10.8194838  9.7166134  9.6376287  1.1006318
@@ -1586,11 +1555,11 @@ show_mean(flights)
 ##  [1]  3.7997461 -2.3450586  1.2380998 11.9528980  1.1067551 10.4780551
 ##  [7] 11.0320783  4.0009046 -0.5541351 -6.6168221</code></pre>
 <p>When using <code>pmap</code> it’s often best to keep the parameters in a dataframe</p>
-<div class="sourceCode" id="cb1053"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1053-1" title="1">min_df_params &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span> ), </a>
-<a class="sourceLine" id="cb1053-2" title="2">                        <span class="dt">min =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), </a>
-<a class="sourceLine" id="cb1053-3" title="3">                        <span class="dt">max =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
-<a class="sourceLine" id="cb1053-4" title="4"></a>
-<a class="sourceLine" id="cb1053-5" title="5"><span class="kw">pmap</span>(min_df_params, runif)</a></code></pre></div>
+<div class="sourceCode" id="cb1054"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1054-1" title="1">min_df_params &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">n =</span> <span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">15</span>, <span class="dv">20</span>, <span class="dv">50</span> ), </a>
+<a class="sourceLine" id="cb1054-2" title="2">                        <span class="dt">min =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>), </a>
+<a class="sourceLine" id="cb1054-3" title="3">                        <span class="dt">max =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb1054-4" title="4"></a>
+<a class="sourceLine" id="cb1054-5" title="5"><span class="kw">pmap</span>(min_df_params, runif)</a></code></pre></div>
 <pre><code>## [[1]]
 ##  [1] -0.06470020 -0.69877110 -0.93927943 -0.05227306 -0.27940373
 ##  [6] -0.85770570 -0.45071534 -0.04590876 -0.41451665 -0.59548972
@@ -1615,10 +1584,10 @@ show_mean(flights)
 ## [43] 2.659230 2.152347 2.572867 2.238726 2.962359 2.601366 2.515030
 ## [50] 2.402573</code></pre>
 <p>You can often use <code>map</code> a bunch of output that can then be stored in a tibble</p>
-<div class="sourceCode" id="cb1055"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1055-1" title="1"><span class="kw">tibble</span>(<span class="dt">type =</span> <span class="kw">map_chr</span>(mtcars, typeof),</a>
-<a class="sourceLine" id="cb1055-2" title="2">       <span class="dt">means =</span> <span class="kw">map_dbl</span>(mtcars, mean),</a>
-<a class="sourceLine" id="cb1055-3" title="3">       <span class="dt">median =</span> <span class="kw">map_dbl</span>(mtcars, median),</a>
-<a class="sourceLine" id="cb1055-4" title="4">       <span class="dt">names =</span> <span class="kw">names</span>(mtcars))</a></code></pre></div>
+<div class="sourceCode" id="cb1056"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1056-1" title="1"><span class="kw">tibble</span>(<span class="dt">type =</span> <span class="kw">map_chr</span>(mtcars, typeof),</a>
+<a class="sourceLine" id="cb1056-2" title="2">       <span class="dt">means =</span> <span class="kw">map_dbl</span>(mtcars, mean),</a>
+<a class="sourceLine" id="cb1056-3" title="3">       <span class="dt">median =</span> <span class="kw">map_dbl</span>(mtcars, median),</a>
+<a class="sourceLine" id="cb1056-4" title="4">       <span class="dt">names =</span> <span class="kw">names</span>(mtcars))</a></code></pre></div>
 <pre><code>## # A tibble: 11 x 4
 ##    type     means median names
 ##    &lt;chr&gt;    &lt;dbl&gt;  &lt;dbl&gt; &lt;chr&gt;
@@ -1634,16 +1603,16 @@ show_mean(flights)
 ## 10 double   3.69    4    gear 
 ## 11 double   2.81    2    carb</code></pre>
 <p><em>Provide the number of unique values for all columns excluding columns with numeric types or date types.</em></p>
-<div class="sourceCode" id="cb1057"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1057-1" title="1">num_unique &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
-<a class="sourceLine" id="cb1057-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1057-3" title="3"><span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="kw">is_character</span>(.x) <span class="op">|</span><span class="st"> </span><span class="kw">is.factor</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1057-4" title="4"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1057-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1057-6" title="6"><span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1057-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">field_name =</span> key, <span class="dt">num_unique =</span> value)</a>
-<a class="sourceLine" id="cb1057-8" title="8">}</a>
-<a class="sourceLine" id="cb1057-9" title="9"></a>
-<a class="sourceLine" id="cb1057-10" title="10"><span class="kw">num_unique</span>(flights)</a></code></pre></div>
+<div class="sourceCode" id="cb1058"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1058-1" title="1">num_unique &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
+<a class="sourceLine" id="cb1058-2" title="2">  df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1058-3" title="3"><span class="st">  </span><span class="kw">keep</span>(<span class="op">~</span><span class="kw">is_character</span>(.x) <span class="op">|</span><span class="st"> </span><span class="kw">is.factor</span>(.x)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1058-4" title="4"><span class="st">  </span><span class="kw">map</span>(<span class="op">~</span><span class="kw">length</span>(<span class="kw">unique</span>(.x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1058-5" title="5"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1058-6" title="6"><span class="st">  </span><span class="kw">gather</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1058-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">field_name =</span> key, <span class="dt">num_unique =</span> value)</a>
+<a class="sourceLine" id="cb1058-8" title="8">}</a>
+<a class="sourceLine" id="cb1058-9" title="9"></a>
+<a class="sourceLine" id="cb1058-10" title="10"><span class="kw">num_unique</span>(flights)</a></code></pre></div>
 <pre><code>## # A tibble: 4 x 2
 ##   field_name num_unique
 ##   &lt;chr&gt;           &lt;int&gt;
@@ -1651,12 +1620,12 @@ show_mean(flights)
 ## 2 tailnum          4044
 ## 3 origin              3
 ## 4 dest              105</code></pre>
-<div class="sourceCode" id="cb1059"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1059-1" title="1"><span class="kw">num_unique</span>(iris)</a></code></pre></div>
+<div class="sourceCode" id="cb1060"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1060-1" title="1"><span class="kw">num_unique</span>(iris)</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 2
 ##   field_name num_unique
 ##   &lt;chr&gt;           &lt;int&gt;
 ## 1 Species             3</code></pre>
-<div class="sourceCode" id="cb1061"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1061-1" title="1"><span class="kw">num_unique</span>(mpg)</a></code></pre></div>
+<div class="sourceCode" id="cb1062"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1062-1" title="1"><span class="kw">num_unique</span>(mpg)</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 2
 ##   field_name   num_unique
 ##   &lt;chr&gt;             &lt;int&gt;
@@ -1667,14 +1636,12 @@ show_mean(flights)
 ## 5 fl                    5
 ## 6 class                 7</code></pre>
 
-<p><em>Make sure the following packages are installed:</em></p>
 </div>
 </div>
 </div>
 <div class="footnotes">
 <hr />
-<ol start="35">
-<li id="fn35"><p>Below is the code that accomplished this. I used <code>walk2</code> and methods we learn later in the chapter.<a href="21-iteration.html#fnref35" class="footnote-back">↩</a></p></li>
+<ol start="36">
 <li id="fn36"><p>This is a very powerful practice because it allows you to save / keep track of your manipulations and apply them at other locations, while keeping the logic very well organized – go and use this for documenting your work / transformations<a href="21-iteration.html#fnref36" class="footnote-back">↩</a></p></li>
 </ol>
 </div>
@@ -1727,8 +1694,8 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": null,
-"text": null
+"link": "https\://github.com/brshallow/R4DS_Solutions/edit/master/21-iteration.Rmd",
+"text": "Edit, fork"
 },
 "download": null,
 "toc": {

@@ -4,6 +4,7 @@
 
 
 # Ch. 27: R Markdown
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * shortcut for inserting code chunk is cmd/ctrl+alt+i
 * shortcut for running entire code chunks: cmd/ctrl+shift+enter
@@ -138,7 +139,7 @@ summary(mpg)
     
 2.  Using the R Markdown quick reference, figure out how to:
 
-    1.  Add a footnote.
+1.  Add a footnote.
     
 Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line one^[Superb fourth footnote.]
 
@@ -152,7 +153,7 @@ Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line on
 [^3]: and the third
 
     
-    2.  Add a horizontal rule.
+2.  Add a horizontal rule.
     
 ---
 
@@ -160,23 +161,25 @@ A [linked phrase][id].
 
 [id]: http://example.com/ "Title"
 
+
 ---
 
 pagebreaks above and below (AKA horizontal rules)
 
 ***
 
-    3.  Add a block quote.
+
+3.  Add a block quote.
 
 >There is no spoon.  
--Matrix
+-The Matrix
     
 3.  Copy and paste the contents of `diamond-sizes.Rmd` from
     <https://github.com/hadley/r4ds/tree/master/rmarkdown> in to a local
     R markdown document. Check that you can run it, then add text after the 
     frequency polygon that describes its most striking features.
 
-    <img src="27-r-markdown_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+    <img src="27-r-markdown_files/figure-html/unnamed-chunk-6-1.png" width="672" />
 
 * It's interesting that the count of number of diamonds spikes at whole numbers...
 
@@ -203,45 +206,46 @@ pagebreaks above and below (AKA horizontal rules)
     diamonds %>% 
       filter(min_rank(-carat) <= 20) %>% 
       select(starts_with("c")) %>% 
+      arrange(desc(carat)) %>% 
       knitr::kable(caption = "The four C's of the 20 biggest diamonds")
     ```
     
     
     
-    Table: (\#tab:unnamed-chunk-6)The four C's of the 20 biggest diamonds
+    Table: (\#tab:unnamed-chunk-7)The four C's of the 20 biggest diamonds
     
      carat  cut         color   clarity 
     ------  ----------  ------  --------
-      3.01  Premium     I       I1      
-      3.11  Fair        J       I1      
-      3.01  Premium     F       I1      
-      3.05  Premium     E       I1      
-      3.02  Fair        I       I1      
-      3.01  Fair        H       I1      
-      3.65  Fair        H       I1      
-      3.24  Premium     H       I1      
-      3.22  Ideal       I       I1      
-      3.50  Ideal       H       I1      
-      3.01  Premium     G       SI2     
+      5.01  Fair        J       I1      
+      4.50  Fair        J       I1      
+      4.13  Fair        H       I1      
       4.01  Premium     I       I1      
       4.01  Premium     J       I1      
-      3.04  Very Good   I       SI2     
-      3.40  Fair        D       I1      
       4.00  Very Good   I       I1      
-      3.01  Ideal       J       SI2     
       3.67  Premium     I       I1      
+      3.65  Fair        H       I1      
+      3.51  Premium     J       VS2     
+      3.50  Ideal       H       I1      
+      3.40  Fair        D       I1      
+      3.24  Premium     H       I1      
+      3.22  Ideal       I       I1      
+      3.11  Fair        J       I1      
+      3.05  Premium     E       I1      
+      3.04  Very Good   I       SI2     
+      3.04  Premium     I       SI2     
+      3.02  Fair        I       I1      
+      3.01  Premium     I       I1      
+      3.01  Premium     F       I1      
+      3.01  Fair        H       I1      
+      3.01  Premium     G       SI2     
+      3.01  Ideal       J       SI2     
       3.01  Ideal       J       I1      
-      4.13  Fair        H       I1      
-      5.01  Fair        J       I1      
       3.01  Premium     I       SI2     
       3.01  Fair        I       SI2     
       3.01  Fair        I       SI2     
       3.01  Good        I       SI2     
       3.01  Good        I       SI2     
-      4.50  Fair        J       I1      
-      3.04  Premium     I       SI2     
       3.01  Good        H       SI2     
-      3.51  Premium     J       VS2     
       3.01  Premium     J       SI2     
       3.01  Premium     J       SI2     
     
@@ -267,39 +271,35 @@ pagebreaks above and below (AKA horizontal rules)
     both `b` and `c` depend on `a`. Have each chunk print `lubridate::now()`,
     set `cache = TRUE`, then verify your understanding of caching.
     
-
-```r
-lubridate::now()
-```
-
-```
-## [1] "2019-05-31 17:38:31 EDT"
-```
     
-
-```r
-lubridate::now()
-```
-
-```
-## [1] "2019-05-31 17:38:31 EDT"
-```
-
-
-```r
-lubridate::now()
-```
-
-```
-## [1] "2019-05-31 17:38:31 EDT"
-```
-
-
-```r
-lubridate::now()
-```
-
-```
-## [1] "2019-05-31 17:38:31 EDT"
-```
-
+    ```r
+    lubridate::now()
+    ```
+    
+    ```
+    ## [1] "2019-06-05 19:31:49 EDT"
+    ```
+    
+    ```r
+    lubridate::now()
+    ```
+    
+    ```
+    ## [1] "2019-06-05 19:31:49 EDT"
+    ```
+    
+    ```r
+    lubridate::now()
+    ```
+    
+    ```
+    ## [1] "2019-06-05 19:31:50 EDT"
+    ```
+    
+    ```r
+    lubridate::now()
+    ```
+    
+    ```
+    ## [1] "2019-06-05 19:31:50 EDT"
+    ```

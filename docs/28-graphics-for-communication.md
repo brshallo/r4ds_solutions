@@ -5,6 +5,7 @@
 
 
 # Ch. 28: Graphics for communication
+\BeginKnitrBlock{rmdtip}<div class="rmdtip">**Functions and notes:**</div>\EndKnitrBlock{rmdtip}
 
 * `labs()` to add labels
   * common args: `title`, `subtitle`, `caption`, `x`, `y`, `colour`, ...
@@ -55,7 +56,7 @@
            colour = "Car class")
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-1-1.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-2-1.png" width="672" />
     
 
 1.  The `geom_smooth()` is somewhat misleading because the `hwy` for
@@ -75,7 +76,7 @@
       geom_smooth()
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-2-1.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-3-1.png" width="672" />
     
     You could take into account the class of the car
     
@@ -88,118 +89,11 @@
            subtitle = "SUV and pickup classes` tend to be highest on disp",
            caption = "Data is for cars made in either 1999 or 2008",
            colour = "Car class")+
-      geom_smooth()
+      geom_smooth()+
+      facet_wrap(~class)
     ```
     
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : span too small. fewer data values than degrees of freedom.
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : pseudoinverse used at 22.985
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : neighborhood radius 2.015
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : reciprocal condition number 0
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : There are other near singularities as well. 1.0302
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : span too small.
-    ## fewer data values than degrees of freedom.
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used
-    ## at 22.985
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
-    ## 2.015
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : reciprocal
-    ## condition number 0
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : There are other
-    ## near singularities as well. 1.0302
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : pseudoinverse used at 24.035
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : neighborhood radius 2.035
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : reciprocal condition number 7.8765e-017
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : There are other near singularities as well. 1
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used
-    ## at 24.035
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
-    ## 2.035
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : reciprocal
-    ## condition number 7.8765e-017
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : There are other
-    ## near singularities as well. 1
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-3-1.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-4-1.png" width="672" />
 
 1.  Take an exploratory graphic that you've created in the last month, and add
     informative titles to make it easier for others to understand.
@@ -215,45 +109,13 @@
     
     
     ```r
-    data_label <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
-    
-    mpg %>% 
-      ggplot(aes(x = hwy, displ))+
-      geom_count(aes(colour = class))+
-      labs(title = "Larger displacement has lower gas mileage efficiency",
-           subtitle = "SUV and pickup classes` tend to be highest on disp",
-           caption = "Data is for cars made in either 1999 or 2008",
-           colour = "Car class")+
-      geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-4-1.png" width="672" />
-
-    You could technically create the lable w/o the tibble, though it will print multiple times for each row:
-    
-    ```r
-    mpg %>% 
-      ggplot(aes(x = hwy, displ))+
-      geom_count(aes(colour = class))+
-      labs(title = "Larger displacement has lower gas mileage efficiency",
-           subtitle = "SUV and pickup classes` tend to be highest on disp",
-           caption = "Data is for cars made in either 1999 or 2008",
-           colour = "Car class")+
-      geom_text(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-5-1.png" width="672" />
-    
-    Place label in each of four courners:
-
-```r
     data_label <- tibble(x = c(Inf, -Inf), 
            hjust = c("right", "left"), 
            y = c(Inf, -Inf),
            vjust = c("top", "bottom")) %>% 
       expand(nesting(x, hjust), nesting(y, vjust)) %>% 
       mutate(label = glue::glue("hjust: {hjust}; vjust: {vjust}"))
-
+    
     mpg %>% 
       ggplot(aes(x = hwy, displ))+
       geom_count(aes(colour = class))+
@@ -263,13 +125,16 @@
            colour = "Car class")+
       geom_text(aes(x = x, y = y, label = label, hjust = hjust, vjust = vjust),
                 data = data_label)
-```
-
-<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-6-1.png" width="672" />
+    ```
+    
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-5-1.png" width="672" />
+    
 
 1.  Read the documentation for `annotate()`. How can you use it to add a text
     label to a plot without having to create a tibble?
     
+    * function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
+
     
     ```r
     mpg %>% 
@@ -282,15 +147,13 @@
       annotate("text", x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))), vjust = "top", hjust = "right")
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-6-1.png" width="672" />
     
-    * function adds geoms, but not mapped from variables of a dataframe, so can pass in small items or single labels
-    * can specify the geom type with annotate
-
+    
 1.  How do labels with `geom_text()` interact with faceting? How can you
     add a label to a single facet? How can you put a different label in
     each facet? (Hint: think about the underlying data.)
-
+    
     
     ```r
     data_label_single <- tibble(x = Inf, y = Inf, label = paste0("Mean highway mpg: ", round(mean(mpg$hwy))))
@@ -313,116 +176,9 @@
       geom_text(aes(x = x, y = y, label = label), data = data_label, vjust = "top", hjust = "right")
     ```
     
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : span too small. fewer data values than degrees of freedom.
-    ```
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-7-1.png" width="672" />
     
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : pseudoinverse used at 22.985
-    ```
     
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : neighborhood radius 2.015
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : reciprocal condition number 0
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : There are other near singularities as well. 1.0302
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : span too small.
-    ## fewer data values than degrees of freedom.
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used
-    ## at 22.985
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
-    ## 2.015
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : reciprocal
-    ## condition number 0
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : There are other
-    ## near singularities as well. 1.0302
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : pseudoinverse used at 24.035
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : neighborhood radius 2.035
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : reciprocal condition number 7.8765e-017
-    ```
-    
-    ```
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric =
-    ## parametric, : There are other near singularities as well. 1
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : pseudoinverse used
-    ## at 24.035
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : neighborhood radius
-    ## 2.035
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : reciprocal
-    ## condition number 7.8765e-017
-    ```
-    
-    ```
-    ## Warning in predLoess(object$y, object$x, newx = if
-    ## (is.null(newdata)) object$x else if (is.data.frame(newdata))
-    ## as.matrix(model.frame(delete.response(terms(object)), : There are other
-    ## near singularities as well. 1
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-8-1.png" width="672" />
-
 1.  What arguments to `geom_label()` control the appearance of the background
     box?
     
@@ -439,19 +195,10 @@
       geom_label(aes(label = model), data = best_in_class, nudge_y = 2, alpha = 0.1, fill = "green")
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-9-1.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 
 1.  What are the four arguments to `arrow()`? How do they work? Create a series
     of plots that demonstrate the most important options.
-    
-    
-    ```r
-    ggplot(mpg, aes(displ, hwy)) +
-      geom_point(aes(colour = class)) +
-      geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-10-1.png" width="672" />
     
     
     ```r
@@ -459,26 +206,7 @@
       geom_point()
     
     df <- data.frame(x1 = 2.62, x2 = 3.57, y1 = 21.0, y2 = 15.0)
-    b +
-     geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "curve"), data = df) +
-     geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
-    ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-1.png" width="672" />
-    
-    ```r
-    b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-2.png" width="672" />
-    
-    ```r
-    b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
-    ```
-    
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-3.png" width="672" />
-    
-    ```r
     b + geom_curve(
       aes(x = x1, y = y1, xend = x2, yend = y2),
       data = df,
@@ -486,9 +214,10 @@
     )
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-4.png" width="672" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-9-1.png" width="672" />
     
     * `angle` (in degrees), `length` (use `unit()` function to specify with number and type, e.g. "inches"), `ends` ("last", "first", or "both" -- specifying which end), `type` ("open" or "closed")
+    * See [28.3.1.5] for more notes on line options (not specific to `arrow()`)
     
 ## 28.4: Scales
 
@@ -505,6 +234,8 @@
       scale_colour_gradient(low = "white", high = "red") +
       coord_fixed()
     ```
+    
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-10-1.png" width="672" />
 
     * `geom_hex` uses `fill`, not `colour`
 
@@ -518,12 +249,7 @@
       coord_fixed()
     ```
     
-    ```r
-    ggplot(df, aes(x, y)) +
-      geom_hex() +
-      # scale_fill_gradient(low = "white", high = "red") +
-      coord_fixed()
-    ```
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-11-1.png" width="672" />
 
 1.  What is the first argument to every scale? How does it compare to `labs()`?
 
@@ -537,22 +263,22 @@
     1. Adding informative plot labels.
     1. Placing breaks every 4 years (this is trickier than it seems!).
     
-
-```r
-presidential %>%
-  mutate(id = 33L + row_number()) %>%
-  ggplot(aes(start, id, colour = party)) +
-  geom_point() +
-  geom_segment(aes(xend = end, yend = id)) +
-  geom_text(aes(label = name), vjust = "bottom", nudge_y = 0.2)+
-  scale_colour_manual(values = c(Republican = "red", Democratic = "blue"))+
-  scale_x_date("Year in 20th and 21st century", date_breaks = "4 years", date_labels = "'%y")+
-  # scale_x_date(NULL, breaks = presidential$start, date_labels = "'%y")+
-  scale_y_continuous(breaks = c(36, 39, 42), labels = c("36th", "39th", "42nd"))+
-  labs(y = "President number", x = "Year")
-```
-
-<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+    
+    ```r
+    presidential %>%
+      mutate(id = 33L + row_number()) %>%
+      ggplot(aes(start, id, colour = party)) +
+      geom_point() +
+      geom_segment(aes(xend = end, yend = id)) +
+      geom_text(aes(label = name), vjust = "bottom", nudge_y = 0.2)+
+      scale_colour_manual(values = c(Republican = "red", Democratic = "blue"))+
+      scale_x_date("Year in 20th and 21st century", date_breaks = "4 years", date_labels = "'%y")+
+      # scale_x_date(NULL, breaks = presidential$start, date_labels = "'%y")+
+      scale_y_continuous(breaks = c(36, 39, 42), labels = c("36th", "39th", "42nd"))+
+      labs(y = "President number", x = "Year")
+    ```
+    
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-12-1.png" width="672" />
     
 1.  Use `override.aes` to make the legend on the following plot easier to see.
 
@@ -564,6 +290,44 @@ presidential %>%
       guides(colour = guide_legend(override.aes = list(alpha = 1)))
     ```
     
-    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-15-1.png" width="50%" />
+    <img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-13-1.png" width="672" />
     
+## Appendix
 
+### 28.3.1.5
+
+Not `arrow()` function specifically, but other line end options
+
+```r
+ggplot(mpg, aes(displ, hwy)) +
+  geom_point(aes(colour = class)) +
+  geom_segment(aes(xend = displ +5, yend = hwy + 5), data = best_in_class, lineend = "round")
+```
+
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-14-1.png" width="672" />
+
+
+```r
+b <- ggplot(mtcars, aes(wt, mpg)) +
+  geom_point()
+
+df <- data.frame(x1 = 2.62, x2 = 3.57, y1 = 21.0, y2 = 15.0)
+
+b +
+ geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "curve"), data = df) +
+ geom_segment(aes(x = x1, y = y1, xend = x2, yend = y2, colour = "segment"), data = df)
+```
+
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-15-1.png" width="672" />
+
+```r
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = -0.2)
+```
+
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-15-2.png" width="672" />
+
+```r
+b + geom_curve(aes(x = x1, y = y1, xend = x2, yend = y2), data = df, curvature = 1)
+```
+
+<img src="28-graphics-for-communication_files/figure-html/unnamed-chunk-15-3.png" width="672" />

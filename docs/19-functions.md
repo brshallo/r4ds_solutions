@@ -227,10 +227,10 @@ commas(letters[1:10])
     ## # A tibble: 4 x 3
     ##   dist_type    skewness variance
     ##   <chr>           <dbl>    <dbl>
-    ## 1 normal_dist   0.00723   0.997 
-    ## 2 t_7df_dist   -0.0176    1.37  
-    ## 3 uniform_dist  0.0247    0.0834
-    ## 4 poisson_dist  0.713     2.01
+    ## 1 normal_dist   0.0561    0.988 
+    ## 2 t_7df_dist   -0.0263    1.40  
+    ## 3 uniform_dist -0.00678   0.0833
+    ## 4 poisson_dist  0.680     1.98
     ```
     
     * excellent video explaining intuition behind skewness: https://www.youtube.com/watch?v=z3XaFUP1rAM  
@@ -292,7 +292,7 @@ commas(letters[1:10])
 * (though these cannot be made in markdown documents)
 
 
-### 19.3.1.
+### 19.3.1
 
 1.  Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.
     
@@ -415,7 +415,7 @@ has_name <- function(x) {
     ```
     
     ```
-    ## good evening, it is: 2019-05-31 17:36:04
+    ## good evening, it is: 2019-06-05 19:28:02
     ```
 
 1.  Implement a `fizzbuzz` function. It takes a single number as input. If the number is divisible by three, it returns "fizz". If it's divisible by five it returns "buzz". If it's divisible by three and five, it returns "fizzbuzz". Otherwise, it returns the number. Make sure you first write working code before you create the function.

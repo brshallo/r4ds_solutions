@@ -2,7 +2,7 @@
 *Make sure the following packages are installed:*  
 
 ```{r setup27, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE)
+knitr::opts_chunk$set(echo = TRUE, cache = TRUE, message = FALSE, warning = FALSE)
 
 library(ggplot2)
 library(dplyr)
@@ -14,6 +14,9 @@ library(lubridate)
 ```
 
 # Ch. 27: R Markdown
+```{block2, type='rmdtip'}
+**Functions and notes:**
+```
 
 * shortcut for inserting code chunk is cmd/ctrl+alt+i
 * shortcut for running entire code chunks: cmd/ctrl+shift+enter
@@ -163,7 +166,7 @@ WashU in STL, AB | _2012_
     
 2.  Using the R Markdown quick reference, figure out how to:
 
-    1.  Add a footnote.
+1.  Add a footnote.
     
 Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line one^[Superb fourth footnote.]
 
@@ -177,7 +180,7 @@ Here is a foonote reference[^1] and another [^2] and a 3rd[^3] and an in-line on
 [^3]: and the third
 
     
-    2.  Add a horizontal rule.
+2.  Add a horizontal rule.
     
 ---
 
@@ -185,16 +188,18 @@ A [linked phrase][id].
 
 [id]: http://example.com/ "Title"
 
+
 ---
 
 pagebreaks above and below (AKA horizontal rules)
 
 ***
 
-    3.  Add a block quote.
+
+3.  Add a block quote.
 
 >There is no spoon.  
--Matrix
+-The Matrix
     
 3.  Copy and paste the contents of `diamond-sizes.Rmd` from
     <https://github.com/hadley/r4ds/tree/master/rmarkdown> in to a local
@@ -234,6 +239,7 @@ pagebreaks above and below (AKA horizontal rules)
     diamonds %>% 
       filter(min_rank(-carat) <= 20) %>% 
       select(starts_with("c")) %>% 
+      arrange(desc(carat)) %>% 
       knitr::kable(caption = "The four C's of the 20 biggest diamonds")
     ```
     
@@ -252,19 +258,15 @@ pagebreaks above and below (AKA horizontal rules)
     both `b` and `c` depend on `a`. Have each chunk print `lubridate::now()`,
     set `cache = TRUE`, then verify your understanding of caching.
     
-```{r a, cache = TRUE}
-lubridate::now()
-```
-    
-```{r b, dependson = "a", cache = TRUE}
-lubridate::now()
-```
-
-```{r c, dependson = "a", cache = TRUE}
-lubridate::now()
-```
-
-```{r d, dependson = c("c", "b"), cache = TRUE}
-lubridate::now()
-```
-
+    ```{r a, cache = TRUE}
+    lubridate::now()
+    ```
+    ```{r b, dependson = "a", cache = TRUE}
+    lubridate::now()
+    ```
+    ```{r c, dependson = "a", cache = TRUE}
+    lubridate::now()
+    ```
+    ```{r d, dependson = c("c", "b"), cache = TRUE}
+    lubridate::now()
+    ```
