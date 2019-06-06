@@ -84,56 +84,56 @@ getS3method("as.Date", "default")
 * `unclass` returns copy with 'class' attribute removed
 
 [^tidyfuns]: For example:  
-        
-        ```r
-        select
-        ```
-        
-        ```
-        ## function (.data, ...) 
-        ## {
-        ##     UseMethod("select")
-        ## }
-        ## <bytecode: 0x0000000017acee90>
-        ## <environment: namespace:dplyr>
-        ```
-        
-        ```r
-        methods("select")
-        ```
-        
-        ```
-        ## [1] select.data.frame* select.default*    select.grouped_df*
-        ## [4] select.list        select.tbl_cube*  
-        ## see '?methods' for accessing help and source code
-        ```
-        
-        ```r
-        getS3method("select", "data.frame")
-        ```
-        
-        ```
-        ## function (.data, ...) 
-        ## {
-        ##     vars <- tidyselect::vars_select(sel_vars(.data), !!!quos(...))
-        ##     select_impl(.data, vars)
-        ## }
-        ## <bytecode: 0x000000001be146b0>
-        ## <environment: namespace:dplyr>
-        ```
-        
-        ```r
-        dplyr:::select_impl
-        ```
-        
-        ```
-        ## function (df, vars) 
-        ## {
-        ##     .Call(`_dplyr_select_impl`, df, vars)
-        ## }
-        ## <bytecode: 0x000000001bea3828>
-        ## <environment: namespace:dplyr>
-        ```
+    
+    ```r
+    select
+    ```
+    
+    ```
+    ## function (.data, ...) 
+    ## {
+    ##     UseMethod("select")
+    ## }
+    ## <bytecode: 0x0000000018398c28>
+    ## <environment: namespace:dplyr>
+    ```
+    
+    ```r
+    methods("select")
+    ```
+    
+    ```
+    ## [1] select.data.frame* select.default*    select.grouped_df*
+    ## [4] select.list        select.tbl_cube*  
+    ## see '?methods' for accessing help and source code
+    ```
+    
+    ```r
+    getS3method("select", "data.frame")
+    ```
+    
+    ```
+    ## function (.data, ...) 
+    ## {
+    ##     vars <- tidyselect::vars_select(sel_vars(.data), !!!quos(...))
+    ##     select_impl(.data, vars)
+    ## }
+    ## <bytecode: 0x000000001d5fc158>
+    ## <environment: namespace:dplyr>
+    ```
+    
+    ```r
+    dplyr:::select_impl
+    ```
+    
+    ```
+    ## function (df, vars) 
+    ## {
+    ##     .Call(`_dplyr_select_impl`, df, vars)
+    ## }
+    ## <bytecode: 0x000000001d6e1bd8>
+    ## <environment: namespace:dplyr>
+    ```
     * These details may not illuminate for you how `select()` works  
     * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
     

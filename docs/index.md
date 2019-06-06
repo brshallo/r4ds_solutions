@@ -1,10 +1,10 @@
 --- 
 title: "Yet another study guide to 'R for Data Science'"
 author: "Bryan Shalloway"
-date: "2019-06-06"
+date: "Last updated: 2019-06-06"
 site: bookdown::bookdown_site
 url: https\://brshallo.github.io/r4ds_solutions/
-github-repo: https\://github.com/brshallo/r4ds_solutions
+github-repo: https\://github.com/brshallo/r4ds_solutions/
 twitter-handle: brshallo
 documentclass: book
 bibliography: [book.bib]
@@ -38,17 +38,21 @@ output:
           <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 ---
 
-# Purpose of book
+# Purpose
 
 This book contains my solutions and notes to Garrett Grolemund and Hadley Wickham's excellent book, [R for Data Science](https://r4ds.had.co.nz/) [@WickhamGrolemund2017]. *R for Data Science* (R4DS) is my go-to recommendation for people getting started in R programming, "data science", or the "tidyverse".
 
-First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. To check your answers as you work through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold, [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide to 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
+First and foremost, this book was set-up as a resource and refresher for myself^[And as a chance to experiment with using [bookdown](https://bookdown.org/).]. If you are looking for a reliable solutions manual to check your answers as you work through R4DS, I would recommend using the solutions created and mantained by Jeffrey Arnold, [R for Data Science: Exercise Solutions](https://jrnold.github.io/r4ds-exercise-solutions/)^[Jeffrey Arnold has done an excellent job of getting concise solutions and community feedback. Learn more about his project [here](https://resources.rstudio.com/rstudio-conf-2019/solving-r-for-data-science).]. Though feel free to use *Yet another study guide to 'R for Data Science'* as another point of reference^[I worked through the problems independently, so for open-ended questions you'll likely see slightly different solutions from Jeffrey Arnold's.].
 
-## Organization and features of book
+## Origin
+
+I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master's in Analytics program. My second time going through R4DS came in early 2018 when myself and Stephen Kimel organized an internal "R for Data Science" study group with our colleagues at NetApp^[[Here](https://youtu.be/eeCELJNWEuw) is part of an internal talk I gave plugging "tidy" data science, and implicitly, our R4DS study group.]. In June of 2019 I published my solutions and notes into this book.
+
+## Organization and features
 
 *Most chapters contain the following:*
 
-\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">* A list of "Key exercises" I deemed good for discussion in a study group  </div>\EndKnitrBlock{rmdimportant}
+\BeginKnitrBlock{rmdimportant}<div class="rmdimportant">* A list of "Key exercises" deemed good for discussion in a study group  </div>\EndKnitrBlock{rmdimportant}
 \BeginKnitrBlock{rmdtip}<div class="rmdtip">* A list of functions (and sometimes notes) from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]  </div>\EndKnitrBlock{rmdtip}
 * Solutions to exercises 
   * Exercise subsections are arranged in the same chapter --> section --> subsection as the original book
@@ -68,11 +72,6 @@ First and foremost, this book was set-up as a resource and refresher for myself^
     * Formatting is not always consistent between chapters, e.g. the first 14 chapters italicize or bold questions, whereas later chapters do not.  
       * Notes containing functions are usually highlighted solely with backticks, e.g. `foo`, though occassionally also have parentheses, e.g. `foo()` -- there is no logic to these differences.  
       * More formatting differences can be seen if inspecting the specific .Rmd files for each chapter.  
-
-
-## Origin of book
-
-I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master's in Analytics program. My second time going through R4DS came in early 2018 when myself and a colleague, Stephen Kimel, organized an internal "R for Data Science" study group within NetApp^[[Here](https://youtu.be/eeCELJNWEuw) is part of an internal talk I gave plugging "tidy" data science, and implicitly, our R4DS study group.].  Just over a year later I got around to publishing these solutions and notes into this book.
 
 ## Acknowledgements
 
