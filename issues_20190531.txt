@@ -1,4 +1,4 @@
-Index fix "cautions" bullet
+
 How to embed code in footnote (fix in index and chapter 20)
 Google analytics
 Enable editing (hypothesis)

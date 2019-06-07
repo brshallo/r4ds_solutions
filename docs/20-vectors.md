@@ -26,13 +26,13 @@
 
 *Purrr versions for testing types:*
 
-<img src="test-type.jpg" width="50%" />
+![](test-type.jpg)<!-- -->
 
 * `set_names` lets you set names after the fact, e.g. `set_names(1:3, c("a", "b", "c"))`
 * For more details on subsetting: http://adv-r.had.co.nz/Subsetting.html#applications 
 * `str` checks structure (excellent for use with lists)
 * `attr` and `attributes` get and set attributes
-  + main types of attributes: **Names**, **Dimensions/dims**, **Class**. Class is important for object oriented programming which is covered in more detail here: http://adv-r.had.co.nz/OO-essentials.html#s3 
+    * main types of attributes: **Names**, **Dimensions/dims**, **Class**. Class is important for object oriented programming which is covered in more detail here: http://adv-r.had.co.nz/OO-essentials.html#s3 
 * Used together to investigate details of code for functions
     * `useMethod` in function syntax indicates it is a generic function
     * `methods` lists all methods within a generic
@@ -79,11 +79,12 @@ getS3method("as.Date", "default")
 
 * Some tidyverse functions are not always easy to unpack with just the above[^tidyfuns]
 * **Augmented vectors**: vectors with additional attributes, e.g. factors (levels, class = factors), dates and datetimes (tzone, class = (POSIXct, POSIXt)), POSIXlt (names, class = (POSIXLt, POSIXt)), tibbles (names, class = (tbl_df, tbl, data.frame), row.names) -- in the integer, double and double, list, list types.
-  * data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
+    * data frames only have class `data.frame`, whereas tibbles have `tbl_df`, and `tbl` as well
 * `class` get or set class attribute
-* `unclass` returns copy with 'class' attribute removed
+* `unclass` returns copy with 'class' attribute removed  
 
-[^tidyfuns]: For example:  
+[^tidyfuns]:
+    For example:
     
     ```r
     select
@@ -135,8 +136,8 @@ getS3method("as.Date", "default")
     ## <environment: namespace:dplyr>
     ```
     * These details may not illuminate for you how `select()` works  
-    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)  
-    
+    * Note that R has multiple systems for object oriented programming -- these topics are covered in [Advanced R Progamming](https://adv-r.hadley.nz/)
+
 
 ## 20.3: Important types of atomic vector
 
