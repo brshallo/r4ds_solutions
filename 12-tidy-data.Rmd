@@ -7,7 +7,7 @@ library(dplyr)
 library(tidyr)
 ```
 
-# ch. 12: Tidy data
+# Ch. 12: Tidy data
 
 ```{block2, type='rmdimportant'}
 **Key questions:**  
@@ -30,7 +30,6 @@ library(tidyr)
   
 
 ```{r}
-
 # example distinguishing separate, extract, unite
 tibble(x = c("a,b,c", "d,e,f", "h,i,j", "k,l,m")) %>% 
   tidyr::separate(x, c("one", "two", "three"), sep = ",", remove = FALSE) %>% 

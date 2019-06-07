@@ -1,7 +1,7 @@
 
 
 
-# ch. 12: Tidy data
+# Ch. 12: Tidy data
 
 \BeginKnitrBlock{rmdimportant}<div class="rmdimportant">**Key questions:**  
   

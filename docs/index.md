@@ -1,7 +1,7 @@
 --- 
 title: "Yet another study guide to 'R for Data Science'"
 author: "Bryan Shalloway"
-date: "Last updated: 2019-06-06"
+date: "Last updated: 2019-06-07"
 site: bookdown::bookdown_site
 url: https\://brshallo.github.io/r4ds_solutions/
 github-repo: https\://github.com/brshallo/r4ds_solutions/
@@ -46,7 +46,7 @@ First and foremost, this book was set-up as a resource and refresher for myself^
 
 ## Origin
 
-I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master's in Analytics program. My second time going through R4DS came in early 2018 when myself and Stephen Kimel organized an internal "R for Data Science" study group with our colleagues at NetApp^[[Here](https://youtu.be/eeCELJNWEuw) is part of an internal talk I gave plugging "tidy" data science, and implicitly, our R4DS study group.]. In June of 2019 I published my solutions and notes into this book.
+I first read and completed the exercises to R4DS in early 2017 on the tail-end of completing a Master's in Analytics program. My second time going through R4DS came in early 2018 when myself and Stephen Kimel organized an internal "R for Data Science" study group with our colleagues^[[Here](https://youtu.be/eeCELJNWEuw) is part of an internal talk I gave plugging "tidy" data science, and implicitly, our R4DS study group.]. In June of 2019 I published my solutions and notes into this book.
 
 ## Organization and features
 
@@ -54,6 +54,7 @@ I first read and completed the exercises to R4DS in early 2017 on the tail-end o
 
 \BeginKnitrBlock{rmdimportant}<div class="rmdimportant">* A list of "Key exercises" deemed good for discussion in a study group  </div>\EndKnitrBlock{rmdimportant}
 \BeginKnitrBlock{rmdtip}<div class="rmdtip">* A list of functions (and sometimes notes) from the chapter^[When functions show up in multiple locations I typically only note them the first time they appear.]  </div>\EndKnitrBlock{rmdtip}
+
 * Solutions to exercises 
   * Exercise subsections are arranged in the same chapter --> section --> subsection as the original book
   * Chapters, sections, and subsections without exercises are usually not included
@@ -61,7 +62,6 @@ I first read and completed the exercises to R4DS in early 2017 on the tail-end o
 * The "Appendix" sections in chapters typically contain alternative solutions to problems or additional notes/thoughts pertaining to the chapter or a related topic
   * I use the numbering scheme {chapter}.{section}.{subsection}.{problem number} to refer to exercise solutions in "Appendix" sections
 * There are a few cautions with using this book[^Caution]
-
 
 [^Caution]: *Cautions with book:*  
     * Beyond basic formatting clean-up, I did not substantially update the solutions from my first time going through the book. Therefore, some of the solutions and syntax may be different from how I would approach a problem now (with a couple more years coding experience). 
@@ -80,7 +80,7 @@ I first read and completed the exercises to R4DS in early 2017 on the tail-end o
 * [Garrett Grolemund](https://twitter.com/StatGarrett) and [Hadley Wickham](https://twitter.com/hadleywickham) for writing a phenomenal book!
 * The various [tidyverse](https://www.tidyverse.org/) and [RStudio](https://www.rstudio.com/) developers for producing outstanding packages, products, as well as resources for learning
 * [R for Data Science Online Learning Community](https://www.rfordatasci.com/) and [#rstats](https://twitter.com/hashtag/rstats?src=hash&lang=en) communities for creating inspiring, safe places to post ideas, ask questions, and grow your R skills
-* Stephen Kimel, who has co-organized a "data science" study group with me at NetApp. Stephen also provided feedback on many of my solutions and in many cases I changed my solutions to mirror his approach.
+* Stephen Kimel, who has co-organized a "data science" study group with me and also provided feedback on my R4DS solutions. In many cases I changed my solution to an exercise to a method that mirrored his approach.
 
 ## License
 
