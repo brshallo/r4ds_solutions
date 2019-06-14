@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 19: Functions | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 19: Functions | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 19: Functions | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="18-pipes.html">
 <link rel="next" href="20-vectors.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -513,19 +513,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>dplyr::near</code> for more lenient comparison and typically better than <code>identical</code> as unaffected by floating point numbers and fine with different types</li>
 <li><code>switch</code> evaluate selected code based on position or name (good for replacing long chain of <code>if</code> statements). e.g. </li>
 </ul>
-<div class="sourceCode" id="cb793"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb793-1" title="1">Operation_Times2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){</a>
-<a class="sourceLine" id="cb793-2" title="2">   first_op &lt;-<span class="st"> </span><span class="cf">switch</span>(op,</a>
-<a class="sourceLine" id="cb793-3" title="3">     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb793-4" title="4">     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb793-5" title="5">     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb793-6" title="6">     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb793-7" title="7">     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)</a>
-<a class="sourceLine" id="cb793-8" title="8">   )</a>
-<a class="sourceLine" id="cb793-9" title="9">   </a>
-<a class="sourceLine" id="cb793-10" title="10">   first_op <span class="op">*</span><span class="st"> </span><span class="dv">2</span></a>
-<a class="sourceLine" id="cb793-11" title="11">  }</a>
-<a class="sourceLine" id="cb793-12" title="12"></a>
-<a class="sourceLine" id="cb793-13" title="13"><span class="kw">Operation_Times2</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&quot;plus&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Operation_Times2 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){
+   first_op &lt;-<span class="st"> </span><span class="cf">switch</span>(op,
+     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,
+     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,
+     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,
+     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,
+     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)
+   )
+   
+   first_op <span class="op">*</span><span class="st"> </span><span class="dv">2</span>
+  }
+
+<span class="kw">Operation_Times2</span>(<span class="dv">5</span>, <span class="dv">7</span>, <span class="st">&quot;plus&quot;</span>)</code></pre>
 <pre><code>## [1] 24</code></pre>
 <ul>
 <li><code>stop</code> stops expression and executes error action, note that <code>.call</code> default is <code>FALSE</code></li>
@@ -533,8 +533,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>stopifnot</code> test multiple args and will produce error message if any are not true – compromise that prevents you from tedious work of putting multiple <code>if(){} else stop()</code> statements</li>
 <li><code>...</code> useful catch-all if your function primarily wraps another function (note that misspelled arguments will not raise an error), e.g. </li>
 </ul>
-<div class="sourceCode" id="cb795"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb795-1" title="1">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a>
-<a class="sourceLine" id="cb795-2" title="2"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)
+<span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre>
 <pre><code>## [1] &quot;a, b, c, d, e, f, g, h, i, j&quot;</code></pre>
 <ul>
 <li><code>cut</code> can be used to discretize continuous variables (also saves long <code>if</code> statements)</li>
@@ -553,90 +553,90 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The output would be <code>NA</code></li>
 </ul></li>
 <li><p>In the second variant of <code>rescale01()</code>, infinite values are left unchanged. Rewrite <code>rescale01()</code> so that <code>-Inf</code> is mapped to 0, and <code>Inf</code> is mapped to 1.</p>
-<div class="sourceCode" id="cb797"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb797-1" title="1">rescale01_inf &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb797-2" title="2"></a>
-<a class="sourceLine" id="cb797-3" title="3">  rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">finite =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb797-4" title="4">  x_scaled &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])</a>
-<a class="sourceLine" id="cb797-5" title="5">  is_inf &lt;-<span class="st"> </span><span class="kw">is.infinite</span>(x)</a>
-<a class="sourceLine" id="cb797-6" title="6">  is_less0 &lt;-<span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb797-7" title="7">  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>is_less0] &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb797-8" title="8">  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>is_less0)] &lt;-<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb797-9" title="9">  x_scaled</a>
-<a class="sourceLine" id="cb797-10" title="10">}</a>
-<a class="sourceLine" id="cb797-11" title="11"></a>
-<a class="sourceLine" id="cb797-12" title="12">x &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">-5</span>)</a>
-<a class="sourceLine" id="cb797-13" title="13"><span class="kw">rescale01_inf</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rescale01_inf &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+
+  rng &lt;-<span class="st"> </span><span class="kw">range</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>, <span class="dt">finite =</span> <span class="ot">TRUE</span>)
+  x_scaled &lt;-<span class="st"> </span>(x <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>]) <span class="op">/</span><span class="st"> </span>(rng[<span class="dv">2</span>] <span class="op">-</span><span class="st"> </span>rng[<span class="dv">1</span>])
+  is_inf &lt;-<span class="st"> </span><span class="kw">is.infinite</span>(x)
+  is_less0 &lt;-<span class="st"> </span>x <span class="op">&lt;</span><span class="st"> </span><span class="dv">0</span>
+  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>is_less0] &lt;-<span class="st"> </span><span class="dv">0</span>
+  x_scaled[is_inf <span class="op">&amp;</span><span class="st"> </span>(<span class="op">!</span>is_less0)] &lt;-<span class="st"> </span><span class="dv">1</span>
+  x_scaled
+}
+
+x &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="ot">Inf</span>, <span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">3</span>, <span class="dv">-5</span>)
+<span class="kw">rescale01_inf</span>(x)</code></pre>
 <pre><code>## [1] 1.000 0.000 0.625 1.000 0.000</code></pre></li>
 <li><p>Practice turning the following code snippets into functions. Think about what each function does. What would you call it? How many arguments does it need? Can you rewrite it to be more expressive or less duplicative?</p>
-<div class="sourceCode" id="cb799"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb799-1" title="1"><span class="kw">mean</span>(<span class="kw">is.na</span>(x))</a>
-<a class="sourceLine" id="cb799-2" title="2"></a>
-<a class="sourceLine" id="cb799-3" title="3">x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb799-4" title="4"></a>
-<a class="sourceLine" id="cb799-5" title="5"><span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">is.na</span>(x))
+
+x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+
+<span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</code></pre>
 <ul>
 <li>See solutions below:</li>
 </ul>
-<div class="sourceCode" id="cb800"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb800-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="ot">NA</span>, <span class="dv">3</span>, <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb800-2" title="2"></a>
-<a class="sourceLine" id="cb800-3" title="3"><span class="co">#mean(is.na(x))</span></a>
-<a class="sourceLine" id="cb800-4" title="4">perc_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb800-5" title="5">  <span class="kw">is.na</span>(x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>()</a>
-<a class="sourceLine" id="cb800-6" title="6">}</a>
-<a class="sourceLine" id="cb800-7" title="7"></a>
-<a class="sourceLine" id="cb800-8" title="8"><span class="kw">perc_na</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="ot">NA</span>, <span class="dv">3</span>, <span class="ot">NA</span>)
+
+<span class="co">#mean(is.na(x))</span>
+perc_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">is.na</span>(x) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mean</span>()
+}
+
+<span class="kw">perc_na</span>(x)</code></pre>
 <pre><code>## [1] 0.2857143</code></pre>
-<div class="sourceCode" id="cb802"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb802-1" title="1"><span class="co">#x / sum(x, na.rm = TRUE)</span></a>
-<a class="sourceLine" id="cb802-2" title="2">prop_weighted &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb802-3" title="3">  x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb802-4" title="4">}</a>
-<a class="sourceLine" id="cb802-5" title="5"><span class="kw">prop_weighted</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#x / sum(x, na.rm = TRUE)</span>
+prop_weighted &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  x <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+}
+<span class="kw">prop_weighted</span>(x)</code></pre>
 <pre><code>## [1] 0.1 0.4 0.2 0.0  NA 0.3  NA</code></pre>
-<div class="sourceCode" id="cb804"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb804-1" title="1"><span class="co">#sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)</span></a>
-<a class="sourceLine" id="cb804-2" title="2">CoefficientOfVariation &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb804-3" title="3">  <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb804-4" title="4">}</a>
-<a class="sourceLine" id="cb804-5" title="5"></a>
-<a class="sourceLine" id="cb804-6" title="6"><span class="kw">CoefficientOfVariation</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#sd(x, na.rm = TRUE) / mean(x, na.rm = TRUE)</span>
+CoefficientOfVariation &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">mean</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)
+}
+
+<span class="kw">CoefficientOfVariation</span>(x)</code></pre>
 <pre><code>## [1] 0.7905694</code></pre></li>
 <li><p>Follow <a href="http://nicercode.github.io/intro/writing-functions.html" class="uri">http://nicercode.github.io/intro/writing-functions.html</a> to write your own functions to compute the variance and skew of a numeric vector.</p>
 <ul>
 <li>Re-do below to write measures for skew and variance (e.g. kurtosis, etc.)</li>
 </ul>
-<div class="sourceCode" id="cb806"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb806-1" title="1">var_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb806-2" title="2">  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb806-3" title="3">}</a>
-<a class="sourceLine" id="cb806-4" title="4"></a>
-<a class="sourceLine" id="cb806-5" title="5">skewness_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb806-6" title="6">  <span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">/</span><span class="st"> </span><span class="kw">var_bry</span>(x) <span class="op">^</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb806-7" title="7">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">var_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+}
+
+skewness_bry &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">mean</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">3</span>) <span class="op">/</span><span class="st"> </span><span class="kw">var_bry</span>(x) <span class="op">^</span><span class="st"> </span>(<span class="dv">3</span> <span class="op">/</span><span class="st"> </span><span class="dv">2</span>)
+}</code></pre>
 <p>Let’s create some samples of distributions – normal, t (with 7 degrees of freedom), unifrom, poisson (with lambda of 2).</p>
 <p>Note that an example with a cauchy distribution and looking at difference in kurtosis between that and a normal distribution has been moved to the <a href="28-graphics-for-communication.html#appendix-13">Appendix</a> section <a href="19-functions.html#section-71">19.2.1.4</a>.</p>
-<div class="sourceCode" id="cb807"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb807-1" title="1">nd &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb807-2" title="2">td_df7 &lt;-<span class="st"> </span><span class="kw">rt</span>(<span class="dv">10000</span>, <span class="dt">df =</span> <span class="dv">7</span>)</a>
-<a class="sourceLine" id="cb807-3" title="3">ud &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb807-4" title="4">pd_l2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">10000</span>, <span class="dv">2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">nd &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)
+td_df7 &lt;-<span class="st"> </span><span class="kw">rt</span>(<span class="dv">10000</span>, <span class="dt">df =</span> <span class="dv">7</span>)
+ud &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">10000</span>)
+pd_l2 &lt;-<span class="st"> </span><span class="kw">rpois</span>(<span class="dv">10000</span>, <span class="dv">2</span>)</code></pre>
 <p>Verify that these functions match with established functions</p>
-<div class="sourceCode" id="cb808"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb808-1" title="1">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">skewness_bry</span>(pd_l2), e1071<span class="op">::</span><span class="kw">skewness</span>(pd_l2, <span class="dt">type =</span> <span class="dv">3</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">skewness_bry</span>(pd_l2), e1071<span class="op">::</span><span class="kw">skewness</span>(pd_l2, <span class="dt">type =</span> <span class="dv">3</span>))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb810"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb810-1" title="1">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">var_bry</span>(pd_l2), <span class="kw">var</span>(pd_l2))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">dplyr<span class="op">::</span><span class="kw">near</span>(<span class="kw">var_bry</span>(pd_l2), <span class="kw">var</span>(pd_l2))</code></pre>
 <pre><code>## [1] TRUE</code></pre>
 <p>Let’s look at the distributions as well as their variance an skewness</p>
-<div class="sourceCode" id="cb812"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb812-1" title="1">distributions_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">normal_dist =</span> nd,</a>
-<a class="sourceLine" id="cb812-2" title="2">       <span class="dt">t_7df_dist =</span> td_df7,</a>
-<a class="sourceLine" id="cb812-3" title="3">       <span class="dt">uniform_dist =</span> ud,</a>
-<a class="sourceLine" id="cb812-4" title="4">       <span class="dt">poisson_dist =</span> pd_l2)</a>
-<a class="sourceLine" id="cb812-5" title="5"></a>
-<a class="sourceLine" id="cb812-6" title="6">distributions_df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb812-7" title="7"><span class="st">  </span><span class="kw">gather</span>(normal_dist<span class="op">:</span>poisson_dist, <span class="dt">value =</span> <span class="st">&quot;sample&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;dist_type&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb812-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dist_type =</span> <span class="kw">factor</span>(forcats<span class="op">::</span><span class="kw">fct_inorder</span>(dist_type))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb812-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sample))<span class="op">+</span></a>
-<a class="sourceLine" id="cb812-10" title="10"><span class="st">  </span><span class="kw">geom_histogram</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb812-11" title="11"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>dist_type, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">distributions_df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">normal_dist =</span> nd,
+       <span class="dt">t_7df_dist =</span> td_df7,
+       <span class="dt">uniform_dist =</span> ud,
+       <span class="dt">poisson_dist =</span> pd_l2)
+
+distributions_df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(normal_dist<span class="op">:</span>poisson_dist, <span class="dt">value =</span> <span class="st">&quot;sample&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;dist_type&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dist_type =</span> <span class="kw">factor</span>(forcats<span class="op">::</span><span class="kw">fct_inorder</span>(dist_type))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> sample))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>dist_type, <span class="dt">scales =</span> <span class="st">&quot;free&quot;</span>)</code></pre>
 <pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
 <p><img src="19-functions_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb814"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb814-1" title="1"><span class="kw">tibble</span>(<span class="dt">dist_type =</span> <span class="kw">names</span>(distributions_df),</a>
-<a class="sourceLine" id="cb814-2" title="2"><span class="dt">skewness =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, skewness_bry), </a>
-<a class="sourceLine" id="cb814-3" title="3"><span class="dt">variance =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, var_bry))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">dist_type =</span> <span class="kw">names</span>(distributions_df),
+<span class="dt">skewness =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, skewness_bry), 
+<span class="dt">variance =</span> purrr<span class="op">::</span><span class="kw">map_dbl</span>(distributions_df, var_bry))</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ##   dist_type    skewness variance
 ##   &lt;chr&gt;           &lt;dbl&gt;    &lt;dbl&gt;
@@ -648,24 +648,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>excellent video explaining intuition behind skewness: <a href="https://www.youtube.com/watch?v=z3XaFUP1rAM" class="uri">https://www.youtube.com/watch?v=z3XaFUP1rAM</a></li>
 </ul></li>
 <li><p>Write <code>both_na()</code>, a function that takes two vectors of the same length and returns the number of positions that have an <code>NA</code> in both vectors.</p>
-<div class="sourceCode" id="cb816"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb816-1" title="1">both_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb816-2" title="2">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(y)) {</a>
-<a class="sourceLine" id="cb816-3" title="3">  <span class="kw">sum</span>(<span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(y))</a>
-<a class="sourceLine" id="cb816-4" title="4">  } <span class="cf">else</span></a>
-<a class="sourceLine" id="cb816-5" title="5">  <span class="kw">stop</span>(<span class="st">&quot;Vectors are not equal length&quot;</span>)</a>
-<a class="sourceLine" id="cb816-6" title="6">}</a>
-<a class="sourceLine" id="cb816-7" title="7"></a>
-<a class="sourceLine" id="cb816-8" title="8">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="ot">NA</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb816-9" title="9">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb816-10" title="10">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb816-11" title="11"></a>
-<a class="sourceLine" id="cb816-12" title="12"><span class="kw">both_na</span>(x, y)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">both_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(y)) {
+  <span class="kw">sum</span>(<span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(y))
+  } <span class="cf">else</span>
+  <span class="kw">stop</span>(<span class="st">&quot;Vectors are not equal length&quot;</span>)
+}
+
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="ot">NA</span>, <span class="dv">3</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">0</span>)
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">4</span>)
+
+<span class="kw">both_na</span>(x, y)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb818"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb818-1" title="1"><span class="kw">both_na</span>(x, z)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">both_na</span>(x, z)</code></pre>
 <pre><code>## Error in both_na(x, z): Vectors are not equal length</code></pre></li>
 <li><p>What do the following functions do? Why are they useful even though they are so short?</p>
-<div class="sourceCode" id="cb820"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb820-1" title="1">is_directory &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.info</span>(x)<span class="op">$</span>isdir</a>
-<a class="sourceLine" id="cb820-2" title="2">is_readable &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.access</span>(x, <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">is_directory &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.info</span>(x)<span class="op">$</span>isdir
+is_readable &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">file.access</span>(x, <span class="dv">4</span>) <span class="op">==</span><span class="st"> </span><span class="dv">0</span></code></pre>
 <ul>
 <li>first checks if what is being referred to is actually a directory</li>
 <li>second checks if a specific file is readable</li>
@@ -690,16 +690,16 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <h3>19.3.1</h3>
 <ol style="list-style-type: decimal">
 <li><p>Read the source code for each of the following three functions, puzzle out what they do, and then brainstorm better names.</p>
-<div class="sourceCode" id="cb821"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb821-1" title="1">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(string, prefix) {</a>
-<a class="sourceLine" id="cb821-2" title="2">  <span class="kw">substr</span>(string, <span class="dv">1</span>, <span class="kw">nchar</span>(prefix)) <span class="op">==</span><span class="st"> </span>prefix</a>
-<a class="sourceLine" id="cb821-3" title="3">}</a>
-<a class="sourceLine" id="cb821-4" title="4">f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb821-5" title="5">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="kw">return</span>(<span class="ot">NULL</span>)</a>
-<a class="sourceLine" id="cb821-6" title="6">  x[<span class="op">-</span><span class="kw">length</span>(x)]</a>
-<a class="sourceLine" id="cb821-7" title="7">}</a>
-<a class="sourceLine" id="cb821-8" title="8">f3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb821-9" title="9">  <span class="kw">rep</span>(y, <span class="dt">length.out =</span> <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb821-10" title="10">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">f1 &lt;-<span class="st"> </span><span class="cf">function</span>(string, prefix) {
+  <span class="kw">substr</span>(string, <span class="dv">1</span>, <span class="kw">nchar</span>(prefix)) <span class="op">==</span><span class="st"> </span>prefix
+}
+f2 &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>) <span class="kw">return</span>(<span class="ot">NULL</span>)
+  x[<span class="op">-</span><span class="kw">length</span>(x)]
+}
+f3 &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  <span class="kw">rep</span>(y, <span class="dt">length.out =</span> <span class="kw">length</span>(x))
+}</code></pre>
 <ul>
 <li><code>f1</code>: <code>check_prefix</code></li>
 <li><code>f2</code>: <code>return_not_last</code></li>
@@ -725,14 +725,14 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <div id="conditional-execution" class="section level2">
 <h2>19.4: Conditional execution</h2>
 <p>Function example that uses <code>if</code> statement:</p>
-<div class="sourceCode" id="cb822"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb822-1" title="1">has_name &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb822-2" title="2">  nms &lt;-<span class="st"> </span><span class="kw">names</span>(x) </a>
-<a class="sourceLine" id="cb822-3" title="3">  <span class="cf">if</span> (<span class="kw">is.null</span>(nms)) { </a>
-<a class="sourceLine" id="cb822-4" title="4">    <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="kw">length</span>(x))</a>
-<a class="sourceLine" id="cb822-5" title="5">  } <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb822-6" title="6">    <span class="op">!</span><span class="kw">is.na</span>(nms) <span class="op">&amp;</span><span class="st"> </span>nms <span class="op">!=</span><span class="st"> &quot;&quot;</span></a>
-<a class="sourceLine" id="cb822-7" title="7">  }</a>
-<a class="sourceLine" id="cb822-8" title="8">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">has_name &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  nms &lt;-<span class="st"> </span><span class="kw">names</span>(x) 
+  <span class="cf">if</span> (<span class="kw">is.null</span>(nms)) { 
+    <span class="kw">rep</span>(<span class="ot">FALSE</span>, <span class="kw">length</span>(x))
+  } <span class="cf">else</span> {
+    <span class="op">!</span><span class="kw">is.na</span>(nms) <span class="op">&amp;</span><span class="st"> </span>nms <span class="op">!=</span><span class="st"> &quot;&quot;</span>
+  }
+}</code></pre>
 <ul>
 <li>note that if all names are blank, it returns the one-unit vector value <code>NULL</code>, hence the need for the <code>if</code> statement here…<a href="#fn33" class="footnote-ref" id="fnref33"><sup>33</sup></a></li>
 </ul>
@@ -748,84 +748,84 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 </ul></li>
 <li>If you supply <code>if</code> with a vector of length &gt; 1, it will use the first value</li>
 </ul>
-<div class="sourceCode" id="cb823"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb823-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>)</a>
-<a class="sourceLine" id="cb823-2" title="2">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;5&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;9&quot;</span>)</a>
-<a class="sourceLine" id="cb823-3" title="3"></a>
-<a class="sourceLine" id="cb823-4" title="4"><span class="co"># Use `ifelse` simple transformations of values</span></a>
-<a class="sourceLine" id="cb823-5" title="5"><span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">0</span>, x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">6</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;5&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;9&quot;</span>)
+
+<span class="co"># Use `ifelse` simple transformations of values</span>
+<span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">0</span>, x)</code></pre>
 <pre><code>## [1] 0 0 6</code></pre>
-<div class="sourceCode" id="cb825"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb825-1" title="1"><span class="co"># Use `if` for single condition tests</span></a>
-<a class="sourceLine" id="cb825-2" title="2">cutoff_make0 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">cutoff =</span> <span class="dv">0</span>){</a>
-<a class="sourceLine" id="cb825-3" title="3">  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x)){</a>
-<a class="sourceLine" id="cb825-4" title="4">    <span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>cutoff, <span class="dv">0</span>, x)</a>
-<a class="sourceLine" id="cb825-5" title="5">  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;The input provided is not a numeric vector&quot;</span>)</a>
-<a class="sourceLine" id="cb825-6" title="6">}</a>
-<a class="sourceLine" id="cb825-7" title="7"></a>
-<a class="sourceLine" id="cb825-8" title="8"><span class="kw">cutoff_make0</span>(x, <span class="dt">cutoff =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use `if` for single condition tests</span>
+cutoff_make0 &lt;-<span class="st"> </span><span class="cf">function</span>(x, <span class="dt">cutoff =</span> <span class="dv">0</span>){
+  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x)){
+    <span class="kw">ifelse</span>(x <span class="op">&lt;</span><span class="st"> </span>cutoff, <span class="dv">0</span>, x)
+  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;The input provided is not a numeric vector&quot;</span>)
+}
+
+<span class="kw">cutoff_make0</span>(x, <span class="dt">cutoff =</span> <span class="dv">4</span>)</code></pre>
 <pre><code>## [1] 0 4 6</code></pre>
-<div class="sourceCode" id="cb827"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb827-1" title="1"><span class="kw">cutoff_make0</span>(y, <span class="dt">cutoff =</span> <span class="dv">4</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cutoff_make0</span>(y, <span class="dt">cutoff =</span> <span class="dv">4</span>)</code></pre>
 <pre><code>## Error in cutoff_make0(y, cutoff = 4): The input provided is not a numeric vector</code></pre></li>
 <li><p>Write a greeting function that says “good morning”, “good afternoon”, or “good evening”, depending on the time of day. (Hint: use a time argument that defaults to <code>lubridate::now()</code>. That will make it easier to test your function.)</p>
-<div class="sourceCode" id="cb829"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb829-1" title="1">greeting &lt;-<span class="st"> </span><span class="cf">function</span>(when) {</a>
-<a class="sourceLine" id="cb829-2" title="2"></a>
-<a class="sourceLine" id="cb829-3" title="3">  time &lt;-<span class="st"> </span><span class="kw">hour</span>(when)</a>
-<a class="sourceLine" id="cb829-4" title="4"></a>
-<a class="sourceLine" id="cb829-5" title="5">  <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>) {</a>
-<a class="sourceLine" id="cb829-6" title="6">    greating &lt;-<span class="st"> &quot;good morning&quot;</span></a>
-<a class="sourceLine" id="cb829-7" title="7">  } <span class="cf">else</span> <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">17</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;=</span><span class="st"> </span><span class="dv">12</span>) {</a>
-<a class="sourceLine" id="cb829-8" title="8">    greeting &lt;-<span class="st"> &quot;good afternoon&quot;</span></a>
-<a class="sourceLine" id="cb829-9" title="9">  } <span class="cf">else</span> greeting &lt;-<span class="st"> &quot;good evening&quot;</span></a>
-<a class="sourceLine" id="cb829-10" title="10"></a>
-<a class="sourceLine" id="cb829-11" title="11">  when_char &lt;-<span class="st"> </span><span class="kw">as.character</span>(when)</a>
-<a class="sourceLine" id="cb829-12" title="12">  mid &lt;-<span class="st"> &quot;, it is: &quot;</span></a>
-<a class="sourceLine" id="cb829-13" title="13">  <span class="kw">cat</span>(greeting, mid, when_char, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb829-14" title="14">}</a>
-<a class="sourceLine" id="cb829-15" title="15"></a>
-<a class="sourceLine" id="cb829-16" title="16"><span class="kw">greeting</span>(<span class="kw">now</span>())</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">greeting &lt;-<span class="st"> </span><span class="cf">function</span>(when) {
+
+  time &lt;-<span class="st"> </span><span class="kw">hour</span>(when)
+
+  <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">12</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;</span><span class="st"> </span><span class="dv">4</span>) {
+    greating &lt;-<span class="st"> &quot;good morning&quot;</span>
+  } <span class="cf">else</span> <span class="cf">if</span> (time <span class="op">&lt;</span><span class="st"> </span><span class="dv">17</span> <span class="op">&amp;&amp;</span><span class="st"> </span>time <span class="op">&gt;=</span><span class="st"> </span><span class="dv">12</span>) {
+    greeting &lt;-<span class="st"> &quot;good afternoon&quot;</span>
+  } <span class="cf">else</span> greeting &lt;-<span class="st"> &quot;good evening&quot;</span>
+
+  when_char &lt;-<span class="st"> </span><span class="kw">as.character</span>(when)
+  mid &lt;-<span class="st"> &quot;, it is: &quot;</span>
+  <span class="kw">cat</span>(greeting, mid, when_char, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}
+
+<span class="kw">greeting</span>(<span class="kw">now</span>())</code></pre>
 <pre><code>## good evening, it is: 2019-06-05 19:28:02</code></pre></li>
 <li><p>Implement a <code>fizzbuzz</code> function. It takes a single number as input. If the number is divisible by three, it returns “fizz”. If it’s divisible by five it returns “buzz”. If it’s divisible by three and five, it returns “fizzbuzz”. Otherwise, it returns the number. Make sure you first write working code before you create the function.</p>
-<div class="sourceCode" id="cb831"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb831-1" title="1">fizzbuzz &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb831-2" title="2">  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){</a>
-<a class="sourceLine" id="cb831-3" title="3">    y &lt;-<span class="st"> &quot;&quot;</span></a>
-<a class="sourceLine" id="cb831-4" title="4">    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;fizz&quot;</span>)</a>
-<a class="sourceLine" id="cb831-5" title="5">    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;buzz&quot;</span>)</a>
-<a class="sourceLine" id="cb831-6" title="6">    <span class="cf">if</span> (<span class="kw">str_length</span>(y) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb831-7" title="7">      <span class="kw">print</span>(x)</a>
-<a class="sourceLine" id="cb831-8" title="8">    } <span class="cf">else</span> <span class="kw">print</span>(y)</a>
-<a class="sourceLine" id="cb831-9" title="9">  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;Input is not a numeric vector with length 1&quot;</span>)</a>
-<a class="sourceLine" id="cb831-10" title="10">}</a>
-<a class="sourceLine" id="cb831-11" title="11"></a>
-<a class="sourceLine" id="cb831-12" title="12"><span class="kw">fizzbuzz</span>(<span class="dv">4</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fizzbuzz &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="cf">if</span>(<span class="kw">is.numeric</span>(x) <span class="op">&amp;&amp;</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+    y &lt;-<span class="st"> &quot;&quot;</span>
+    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">5</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;fizz&quot;</span>)
+    <span class="cf">if</span> (x <span class="op">%%</span><span class="st"> </span><span class="dv">3</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) y &lt;-<span class="st"> </span><span class="kw">str_c</span>(y, <span class="st">&quot;buzz&quot;</span>)
+    <span class="cf">if</span> (<span class="kw">str_length</span>(y) <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) {
+      <span class="kw">print</span>(x)
+    } <span class="cf">else</span> <span class="kw">print</span>(y)
+  } <span class="cf">else</span> <span class="kw">stop</span>(<span class="st">&quot;Input is not a numeric vector with length 1&quot;</span>)
+}
+
+<span class="kw">fizzbuzz</span>(<span class="dv">4</span>)</code></pre>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode" id="cb833"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb833-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">10</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fizzbuzz</span>(<span class="dv">10</span>)</code></pre>
 <pre><code>## [1] &quot;fizz&quot;</code></pre>
-<div class="sourceCode" id="cb835"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb835-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">6</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fizzbuzz</span>(<span class="dv">6</span>)</code></pre>
 <pre><code>## [1] &quot;buzz&quot;</code></pre>
-<div class="sourceCode" id="cb837"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb837-1" title="1"><span class="kw">fizzbuzz</span>(<span class="dv">30</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fizzbuzz</span>(<span class="dv">30</span>)</code></pre>
 <pre><code>## [1] &quot;fizzbuzz&quot;</code></pre>
-<div class="sourceCode" id="cb839"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb839-1" title="1"><span class="kw">fizzbuzz</span>(<span class="kw">c</span>(<span class="dv">34</span>, <span class="dv">21</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">fizzbuzz</span>(<span class="kw">c</span>(<span class="dv">34</span>, <span class="dv">21</span>))</code></pre>
 <pre><code>## Error in fizzbuzz(c(34, 21)): Input is not a numeric vector with length 1</code></pre></li>
 <li><p>How could you use <code>cut()</code> to simplify this set of nested if-else statements?</p>
-<div class="sourceCode" id="cb841"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb841-1" title="1"><span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) {</a>
-<a class="sourceLine" id="cb841-2" title="2">  <span class="st">&quot;freezing&quot;</span></a>
-<a class="sourceLine" id="cb841-3" title="3">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) {</a>
-<a class="sourceLine" id="cb841-4" title="4">  <span class="st">&quot;cold&quot;</span></a>
-<a class="sourceLine" id="cb841-5" title="5">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) {</a>
-<a class="sourceLine" id="cb841-6" title="6">  <span class="st">&quot;cool&quot;</span></a>
-<a class="sourceLine" id="cb841-7" title="7">} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>) {</a>
-<a class="sourceLine" id="cb841-8" title="8">  <span class="st">&quot;warm&quot;</span></a>
-<a class="sourceLine" id="cb841-9" title="9">} <span class="cf">else</span> {</a>
-<a class="sourceLine" id="cb841-10" title="10">  <span class="st">&quot;hot&quot;</span></a>
-<a class="sourceLine" id="cb841-11" title="11">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>) {
+  <span class="st">&quot;freezing&quot;</span>
+} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">10</span>) {
+  <span class="st">&quot;cold&quot;</span>
+} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) {
+  <span class="st">&quot;cool&quot;</span>
+} <span class="cf">else</span> <span class="cf">if</span> (temp <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>) {
+  <span class="st">&quot;warm&quot;</span>
+} <span class="cf">else</span> {
+  <span class="st">&quot;hot&quot;</span>
+}</code></pre>
 <ul>
 <li>Below is example of fix</li>
 </ul>
-<div class="sourceCode" id="cb842"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb842-1" title="1">temp &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb842-2" title="2"><span class="kw">cut</span>(temp, </a>
-<a class="sourceLine" id="cb842-3" title="3">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span></a>
-<a class="sourceLine" id="cb842-4" title="4">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),</a>
-<a class="sourceLine" id="cb842-5" title="5">    <span class="dt">right =</span> <span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb842-6" title="6">    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">temp &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">50</span>, <span class="dv">5</span>)
+<span class="kw">cut</span>(temp, 
+    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span>
+    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),
+    <span class="dt">right =</span> <span class="ot">TRUE</span>,
+    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>##  [1] freezing freezing freezing cold     cold     cool     cool    
 ##  [8] warm     warm     hot      hot      hot      hot     
 ## Levels: freezing cold cool warm hot</code></pre>
@@ -833,11 +833,11 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <ul>
 <li>See below change to <code>right</code> argument</li>
 </ul>
-<div class="sourceCode" id="cb844"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb844-1" title="1"><span class="kw">cut</span>(temp, </a>
-<a class="sourceLine" id="cb844-2" title="2">    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span></a>
-<a class="sourceLine" id="cb844-3" title="3">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),</a>
-<a class="sourceLine" id="cb844-4" title="4">    <span class="dt">right =</span> <span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb844-5" title="5">    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cut</span>(temp, 
+    <span class="dt">breaks =</span> <span class="kw">c</span>(<span class="op">-</span><span class="ot">Inf</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">20</span>, <span class="dv">30</span>, <span class="ot">Inf</span>),  <span class="co">#need to include negative and positive infiniity</span>
+    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;freezing&quot;</span>, <span class="st">&quot;cold&quot;</span>, <span class="st">&quot;cool&quot;</span>, <span class="st">&quot;warm&quot;</span>, <span class="st">&quot;hot&quot;</span>),
+    <span class="dt">right =</span> <span class="ot">FALSE</span>,
+    <span class="dt">oredered_result =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>##  [1] freezing freezing cold     cold     cool     cool     warm    
 ##  [8] warm     hot      hot      hot      hot      hot     
 ## Levels: freezing cold cool warm hot</code></pre></li>
@@ -848,27 +848,27 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <li>In example below, I input ‘3’ into <code>switch</code> value so it does the <code>times</code> argument</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb846"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb846-1" title="1">math_operation &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){</a>
-<a class="sourceLine" id="cb846-2" title="2">   <span class="cf">switch</span>(op,</a>
-<a class="sourceLine" id="cb846-3" title="3">     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb846-4" title="4">     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb846-5" title="5">     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb846-6" title="6">     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,</a>
-<a class="sourceLine" id="cb846-7" title="7">     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)</a>
-<a class="sourceLine" id="cb846-8" title="8">   )</a>
-<a class="sourceLine" id="cb846-9" title="9">  }</a>
-<a class="sourceLine" id="cb846-10" title="10"></a>
-<a class="sourceLine" id="cb846-11" title="11"><span class="kw">math_operation</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">math_operation &lt;-<span class="st"> </span><span class="cf">function</span>(x, y, op){
+   <span class="cf">switch</span>(op,
+     <span class="dt">plus =</span> x <span class="op">+</span><span class="st"> </span>y,
+     <span class="dt">minus =</span> x <span class="op">-</span><span class="st"> </span>y,
+     <span class="dt">times =</span> x <span class="op">*</span><span class="st"> </span>y,
+     <span class="dt">divide =</span> x <span class="op">/</span><span class="st"> </span>y,
+     <span class="kw">stop</span>(<span class="st">&quot;Unknown op!&quot;</span>)
+   )
+  }
+
+<span class="kw">math_operation</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>)</code></pre>
 <pre><code>## [1] 20</code></pre></li>
 <li><p>What does this <code>switch()</code> call do? What happens if <code>x</code> is “e”?</p>
-<div class="sourceCode" id="cb848"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb848-1" title="1">x &lt;-<span class="st"> &quot;e&quot;</span></a>
-<a class="sourceLine" id="cb848-2" title="2"></a>
-<a class="sourceLine" id="cb848-3" title="3"><span class="cf">switch</span>(x, </a>
-<a class="sourceLine" id="cb848-4" title="4">  <span class="dt">a =</span> ,</a>
-<a class="sourceLine" id="cb848-5" title="5">  <span class="dt">b =</span> <span class="st">&quot;ab&quot;</span>,</a>
-<a class="sourceLine" id="cb848-6" title="6">  <span class="dt">c =</span> ,</a>
-<a class="sourceLine" id="cb848-7" title="7">  <span class="dt">d =</span> <span class="st">&quot;cd&quot;</span></a>
-<a class="sourceLine" id="cb848-8" title="8">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;e&quot;</span>
+
+<span class="cf">switch</span>(x, 
+  <span class="dt">a =</span> ,
+  <span class="dt">b =</span> <span class="st">&quot;ab&quot;</span>,
+  <span class="dt">c =</span> ,
+  <span class="dt">d =</span> <span class="st">&quot;cd&quot;</span>
+)</code></pre>
 <p>Experiment, then carefully read the documentation.</p>
 <ul>
 <li>If <code>x</code> is ‘e’ nothing will be outputted. If <code>x</code> is ‘c’ or ‘d’ then ‘cd’ is outputted. If ‘a’ or ‘b’ then ‘ab’ is outputeed. If blank it will continue down list until reaching an argument to output.</li>
@@ -894,11 +894,11 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <ul>
 <li><code>commas</code> function is below</li>
 </ul>
-<div class="sourceCode" id="cb849"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb849-1" title="1">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a>
-<a class="sourceLine" id="cb849-2" title="2"></a>
-<a class="sourceLine" id="cb849-3" title="3"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">commas &lt;-<span class="st"> </span><span class="cf">function</span>(...) stringr<span class="op">::</span><span class="kw">str_c</span>(..., <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)
+
+<span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</code></pre>
 <pre><code>## [1] &quot;a, b, c, d, e, f, g, h, i, j&quot;</code></pre>
-<div class="sourceCode" id="cb851"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb851-1" title="1"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">collapse =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">commas</span>(letters[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>], <span class="dt">collapse =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## Error in stringr::str_c(..., collapse = &quot;, &quot;): formal argument &quot;collapse&quot; matched by multiple actual arguments</code></pre>
 <ul>
 <li>The above fails because are essentially specifying two different values for the <code>collapse</code> argument</li>
@@ -909,38 +909,38 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <ul>
 <li>current <code>rule</code> function is below</li>
 </ul>
-<div class="sourceCode" id="cb853"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb853-1" title="1">rule &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {</a>
-<a class="sourceLine" id="cb853-2" title="2">  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)</a>
-<a class="sourceLine" id="cb853-3" title="3">  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb853-4" title="4">  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb853-5" title="5">}</a>
-<a class="sourceLine" id="cb853-6" title="6"></a>
-<a class="sourceLine" id="cb853-7" title="7"><span class="co"># Note that `cat` is used instead of `paste` because paste would output it as a character vector, whereas `cat` is focused on just ouptut, could also have used `print`, though print does more conversion than cat does (apparently)</span></a>
-<a class="sourceLine" id="cb853-8" title="8"></a>
-<a class="sourceLine" id="cb853-9" title="9"><span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rule &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {
+  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)
+  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>
+  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}
+
+<span class="co"># Note that `cat` is used instead of `paste` because paste would output it as a character vector, whereas `cat` is focused on just ouptut, could also have used `print`, though print does more conversion than cat does (apparently)</span>
+
+<span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>)</code></pre>
 <pre><code>## Tis the season to be jolly --------------------------------------------</code></pre>
 <ul>
 <li>doesn’t work because pad ends-up being too many characters in this situation</li>
 </ul>
-<div class="sourceCode" id="cb855"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb855-1" title="1"><span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rule</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</code></pre>
 <pre><code>## Tis the season to be jolly +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-</code></pre>
 <ul>
 <li>instead would need to make the number of times <code>pad</code> is duplicated dependent on its length, see below for fix</li>
 </ul>
-<div class="sourceCode" id="cb857"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb857-1" title="1">rule_pad_fix &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {</a>
-<a class="sourceLine" id="cb857-2" title="2">  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)</a>
-<a class="sourceLine" id="cb857-3" title="3">  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb857-4" title="4">  width_fix &lt;-<span class="st"> </span>width <span class="op">%/%</span><span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_length</span>(pad)</a>
-<a class="sourceLine" id="cb857-5" title="5">  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width_fix), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb857-6" title="6">}</a>
-<a class="sourceLine" id="cb857-7" title="7"></a>
-<a class="sourceLine" id="cb857-8" title="8"><span class="kw">rule_pad_fix</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rule_pad_fix &lt;-<span class="st"> </span><span class="cf">function</span>(..., <span class="dt">pad =</span> <span class="st">&quot;-&quot;</span>) {
+  title &lt;-<span class="st"> </span><span class="kw">paste0</span>(...)
+  width &lt;-<span class="st"> </span><span class="kw">getOption</span>(<span class="st">&quot;width&quot;</span>) <span class="op">-</span><span class="st"> </span><span class="kw">nchar</span>(title) <span class="op">-</span><span class="st"> </span><span class="dv">5</span>
+  width_fix &lt;-<span class="st"> </span>width <span class="op">%/%</span><span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_length</span>(pad)
+  <span class="kw">cat</span>(title, <span class="st">&quot; &quot;</span>, stringr<span class="op">::</span><span class="kw">str_dup</span>(pad, width_fix), <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+}
+
+<span class="kw">rule_pad_fix</span>(<span class="st">&quot;Tis the season&quot;</span>,<span class="st">&quot; to be jolly&quot;</span>, <span class="dt">pad=</span><span class="st">&quot;+-&quot;</span>)</code></pre>
 <pre><code>## Tis the season to be jolly +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-</code></pre></li>
 <li><p>What does the <code>trim</code> argument to <code>mean()</code> do? When might you use it?</p>
 <ul>
 <li><code>trim</code> specifies proportion of data to take off from both ends, good with outliers</li>
 </ul>
-<div class="sourceCode" id="cb859"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb859-1" title="1"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100000</span>), <span class="dt">trim =</span> <span class="fl">.025</span>) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">100000</span>), <span class="dt">trim =</span> <span class="fl">.025</span>) </code></pre>
 <pre><code>## [1] 50.5</code></pre></li>
 <li><p>The default value for the <code>method</code> argument to <code>cor()</code> is
 <code>c("pearson", "kendall", "spearman")</code>. What does that mean? What value is used by default?</p>
@@ -952,15 +952,15 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 </div>
 <div id="return-values" class="section level2">
 <h2>19.6: Return values</h2>
-<div class="sourceCode" id="cb861"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb861-1" title="1">show_missings &lt;-<span class="st"> </span><span class="cf">function</span>(df) {</a>
-<a class="sourceLine" id="cb861-2" title="2">  n &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(df))</a>
-<a class="sourceLine" id="cb861-3" title="3">  <span class="kw">cat</span>(<span class="st">&quot;Missing values: &quot;</span>, n, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb861-4" title="4">  <span class="kw">invisible</span>(df)</a>
-<a class="sourceLine" id="cb861-5" title="5">}</a>
-<a class="sourceLine" id="cb861-6" title="6"></a>
-<a class="sourceLine" id="cb861-7" title="7">x &lt;-<span class="st"> </span><span class="kw">show_missings</span>(mtcars)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">show_missings &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  n &lt;-<span class="st"> </span><span class="kw">sum</span>(<span class="kw">is.na</span>(df))
+  <span class="kw">cat</span>(<span class="st">&quot;Missing values: &quot;</span>, n, <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+  <span class="kw">invisible</span>(df)
+}
+
+x &lt;-<span class="st"> </span><span class="kw">show_missings</span>(mtcars)</code></pre>
 <pre><code>## Missing values: 0</code></pre>
-<div class="sourceCode" id="cb863"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb863-1" title="1"><span class="kw">str</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(x)</code></pre>
 <pre><code>## &#39;data.frame&#39;:    32 obs. of  11 variables:
 ##  $ mpg : num  21 21 22.8 21.4 18.7 18.1 14.3 24.4 22.8 19.2 ...
 ##  $ cyl : num  6 6 4 6 8 6 8 4 4 6 ...
@@ -976,10 +976,10 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <ul>
 <li>can still use in pipes</li>
 </ul>
-<div class="sourceCode" id="cb865"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb865-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb865-2" title="2"><span class="st">  </span><span class="kw">show_missings</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb865-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mpg =</span> <span class="kw">ifelse</span>(mpg <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, mpg)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb865-4" title="4"><span class="st">  </span><span class="kw">show_missings</span>() </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">show_missings</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mpg =</span> <span class="kw">ifelse</span>(mpg <span class="op">&lt;</span><span class="st"> </span><span class="dv">20</span>, <span class="ot">NA</span>, mpg)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">show_missings</span>() </code></pre>
 <pre><code>## Missing values: 0
 ## Missing values: 18</code></pre>
 </div>
@@ -988,50 +988,50 @@ to “Little Bunny Foo Foo”. There’s a lot of duplication in this song. Exte
 <div id="section-71" class="section level3">
 <h3>19.2.1.4</h3>
 <p><em>Function for Standard Error:</em></p>
-<div class="sourceCode" id="cb867"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb867-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">-2</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">9</span>)</a>
-<a class="sourceLine" id="cb867-2" title="2"><span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x)))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">-2</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">9</span>)
+<span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x)))</code></pre>
 <pre><code>## [1] 1.933908</code></pre>
-<div class="sourceCode" id="cb869"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb869-1" title="1">sample_se &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb869-2" title="2">  <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb869-3" title="3">}    </a>
-<a class="sourceLine" id="cb869-4" title="4"><span class="co">#sqrt(var(x)/sum(!is.na(x)))</span></a>
-<a class="sourceLine" id="cb869-5" title="5"></a>
-<a class="sourceLine" id="cb869-6" title="6"><span class="kw">sample_se</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">sample_se &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+  <span class="kw">sd</span>(x, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">/</span><span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(x)) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>)
+}    
+<span class="co">#sqrt(var(x)/sum(!is.na(x)))</span>
+
+<span class="kw">sample_se</span>(x)</code></pre>
 <pre><code>## [1] 2.162175</code></pre>
 <p><em>Function for kurtosis:</em></p>
-<div class="sourceCode" id="cb871"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb871-1" title="1">kurtosis_type3 &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb871-2" title="2">  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">4</span>) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x) <span class="op">^</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span></a>
-<a class="sourceLine" id="cb871-3" title="3">}</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">kurtosis_type3 &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">sum</span>((x <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">4</span>) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(x) <span class="op">/</span><span class="st"> </span><span class="kw">sd</span>(x) <span class="op">^</span><span class="st"> </span><span class="dv">4</span> <span class="op">-</span><span class="st"> </span><span class="dv">3</span>
+}</code></pre>
 <p>Notice differences between cauchy and normal distribution</p>
-<div class="sourceCode" id="cb872"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb872-1" title="1"><span class="kw">set.seed</span>(<span class="dv">1235</span>)</a>
-<a class="sourceLine" id="cb872-2" title="2">norm_exp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)</a>
-<a class="sourceLine" id="cb872-3" title="3"></a>
-<a class="sourceLine" id="cb872-4" title="4"><span class="kw">set.seed</span>(<span class="dv">1235</span>)</a>
-<a class="sourceLine" id="cb872-5" title="5">cauchy_exp &lt;-<span class="st"> </span><span class="kw">rcauchy</span>(<span class="dv">10000</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb873"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb873-1" title="1"><span class="kw">hist</span>(norm_exp)</a>
-<a class="sourceLine" id="cb873-2" title="2"><span class="kw">hist</span>(cauchy_exp)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set.seed</span>(<span class="dv">1235</span>)
+norm_exp &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dv">10000</span>)
+
+<span class="kw">set.seed</span>(<span class="dv">1235</span>)
+cauchy_exp &lt;-<span class="st"> </span><span class="kw">rcauchy</span>(<span class="dv">10000</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(norm_exp)
+<span class="kw">hist</span>(cauchy_exp)</code></pre>
 <p><img src="19-functions_files/figure-html/unnamed-chunk-34-1.png" width="50%" /><img src="19-functions_files/figure-html/unnamed-chunk-34-2.png" width="50%" /></p>
 <p>kurtosis</p>
-<div class="sourceCode" id="cb874"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb874-1" title="1"><span class="kw">kurtosis_type3</span>(norm_exp)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosis_type3</span>(norm_exp)</code></pre>
 <pre><code>## [1] 0.06382172</code></pre>
-<div class="sourceCode" id="cb876"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb876-1" title="1"><span class="kw">kurtosis_type3</span>(cauchy_exp)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">kurtosis_type3</span>(cauchy_exp)</code></pre>
 <pre><code>## [1] 1197.052</code></pre>
 </div>
 <div id="section-72" class="section level3">
 <h3>19.2.3.5</h3>
-<div class="sourceCode" id="cb878"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb878-1" title="1">position_both_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {</a>
-<a class="sourceLine" id="cb878-2" title="2">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(y)) {</a>
-<a class="sourceLine" id="cb878-3" title="3">  (<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)))[(<span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(y))]</a>
-<a class="sourceLine" id="cb878-4" title="4">  } <span class="cf">else</span></a>
-<a class="sourceLine" id="cb878-5" title="5">  <span class="kw">stop</span>(<span class="st">&quot;Vectors are not equal length&quot;</span>)</a>
-<a class="sourceLine" id="cb878-6" title="6">}</a>
-<a class="sourceLine" id="cb878-7" title="7"></a>
-<a class="sourceLine" id="cb878-8" title="8">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="ot">NA</span>, <span class="dv">3</span>)</a>
-<a class="sourceLine" id="cb878-9" title="9">y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb878-10" title="10">z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">4</span>)</a>
-<a class="sourceLine" id="cb878-11" title="11"><span class="kw">both_na</span>(x, y)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">position_both_na &lt;-<span class="st"> </span><span class="cf">function</span>(x, y) {
+  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">==</span><span class="st"> </span><span class="kw">length</span>(y)) {
+  (<span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)))[(<span class="kw">is.na</span>(x) <span class="op">&amp;</span><span class="st"> </span><span class="kw">is.na</span>(y))]
+  } <span class="cf">else</span>
+  <span class="kw">stop</span>(<span class="st">&quot;Vectors are not equal length&quot;</span>)
+}
+
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">4</span>, <span class="ot">NA</span>, <span class="dv">7</span>, <span class="ot">NA</span>, <span class="dv">3</span>)
+y &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="ot">NA</span>, <span class="dv">5</span>, <span class="ot">NA</span>, <span class="dv">0</span>)
+z &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="ot">NA</span>, <span class="dv">4</span>)
+<span class="kw">both_na</span>(x, y)</code></pre>
 <pre><code>## [1] 2</code></pre>
-<div class="sourceCode" id="cb880"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb880-1" title="1"><span class="kw">both_na</span>(x, z)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">both_na</span>(x, z)</code></pre>
 <pre><code>## Error in both_na(x, z): Vectors are not equal length</code></pre>
 <ul>
 <li>specifies position where both are <code>NA</code></li>
@@ -1085,10 +1085,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1098,6 +1097,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/19-functions.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -1113,7 +1116,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 10: Tibbles | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 10: Tibbles | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 10: Tibbles | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="07-exploratory-data-analysis.html">
 <link rel="next" href="11-data-import.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -506,8 +506,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>tribble</code>: transposed tibble - set-up for data entry into a tibble in code</li>
 <li><code>print</code>: can use print to set how the tibble will print</li>
 </ul>
-<div class="sourceCode" id="cb381"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb381-1" title="1">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb381-2" title="2"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="dv">2</span>, <span class="dt">width =</span> <span class="ot">Inf</span>)</code></pre>
 <pre><code>## # A tibble: 336,776 x 19
 ##    year month   day dep_time sched_dep_time dep_delay arr_time
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;          &lt;int&gt;     &lt;dbl&gt;    &lt;int&gt;
@@ -544,15 +544,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p><em>3. If you have the name of a variable stored in an object, e.g. var &lt;- “mpg”, how can you extract the reference variable from a tibble?</em></p>
-<div class="sourceCode" id="cb384"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb384-1" title="1">var &lt;-<span class="st"> &quot;var_name&quot;</span></a>
-<a class="sourceLine" id="cb384-2" title="2"></a>
-<a class="sourceLine" id="cb384-3" title="3"><span class="co"># Will extract the column as an atomic vector</span></a>
-<a class="sourceLine" id="cb384-4" title="4">df[[var]]</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">var &lt;-<span class="st"> &quot;var_name&quot;</span>
+
+<span class="co"># Will extract the column as an atomic vector</span>
+df[[var]]</code></pre>
 <p><em>4. Practice referring to non-syntactic names in the following data frame by:</em></p>
-<div class="sourceCode" id="cb385"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb385-1" title="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> </span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="st">`</span><span class="dt">1</span><span class="st">`</span> =<span class="st"> </span><span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="st">`</span><span class="dt">2</span><span class="st">`</span> =<span class="st"> </span><span class="dv">11</span><span class="op">:</span><span class="dv">20</span>)</code></pre>
 <p><em>a. Extracting the variable called 1.</em></p>
-<div class="sourceCode" id="cb386"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb386-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb386-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 10 x 1
 ##      `1`
 ##    &lt;int&gt;
@@ -567,13 +567,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9     9
 ## 10    10</code></pre>
 <p><em>b. Plotting a scatterplot of 1 vs 2.</em></p>
-<div class="sourceCode" id="cb388"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb388-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb388-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb388-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>, <span class="dt">y =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
 <p><img src="10-tibbles_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p><em>c. Creating a new column called 3 which is 2 divided by 1.</em></p>
-<div class="sourceCode" id="cb389"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb389-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb389-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">/</span><span class="st"> `</span><span class="dt">2</span><span class="st">`</span>) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">/</span><span class="st"> `</span><span class="dt">2</span><span class="st">`</span>) </code></pre>
 <pre><code>## # A tibble: 10 x 3
 ##      `1`   `2`    `3`
 ##    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
@@ -588,11 +588,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9     9    19 0.474 
 ## 10    10    20 0.5</code></pre>
 <p><em>d. Renaming the columns to one, two and three.</em></p>
-<div class="sourceCode" id="cb391"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb391-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb391-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">/</span><span class="st"> `</span><span class="dt">2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb391-3" title="3"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">one =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb391-4" title="4">         <span class="dt">two =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>,</a>
-<a class="sourceLine" id="cb391-5" title="5">         <span class="dt">three =</span> <span class="st">`</span><span class="dt">3</span><span class="st">`</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="st">`</span><span class="dt">3</span><span class="st">`</span> =<span class="st"> `</span><span class="dt">1</span><span class="st">`</span> <span class="op">/</span><span class="st"> `</span><span class="dt">2</span><span class="st">`</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">one =</span> <span class="st">`</span><span class="dt">1</span><span class="st">`</span>,
+         <span class="dt">two =</span> <span class="st">`</span><span class="dt">2</span><span class="st">`</span>,
+         <span class="dt">three =</span> <span class="st">`</span><span class="dt">3</span><span class="st">`</span>)</code></pre>
 <pre><code>## # A tibble: 10 x 3
 ##      one   two  three
 ##    &lt;int&gt; &lt;int&gt;  &lt;dbl&gt;
@@ -608,13 +608,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 10    10    20 0.5</code></pre>
 <p><em>5. What does <code>tibble::enframe()</code> do? When might you use it?</em></p>
 <p>Let’s you encode “name” and “value” as a tibble from a named vector</p>
-<div class="sourceCode" id="cb393"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb393-1" title="1">tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">8</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span>, <span class="dt">b =</span> <span class="dv">8</span>))</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   name  value
 ##   &lt;chr&gt; &lt;dbl&gt;
 ## 1 a         5
 ## 2 b         8</code></pre>
-<div class="sourceCode" id="cb395"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb395-1" title="1">tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span><span class="op">:</span><span class="dv">10</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="kw">c</span>(<span class="dt">a =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">8</span>, <span class="dt">b =</span> <span class="dv">7</span><span class="op">:</span><span class="dv">10</span>))</code></pre>
 <pre><code>## # A tibble: 8 x 2
 ##   name  value
 ##   &lt;chr&gt; &lt;int&gt;
@@ -630,9 +630,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>argument <code>tibble.width</code></li>
 </ul>
-<div class="sourceCode" id="cb397"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb397-1" title="1"><span class="kw">options</span>(<span class="dt">tibble.print_max =</span> n, <span class="dt">tibble.print_min =</span> m)</a>
-<a class="sourceLine" id="cb397-2" title="2"><span class="kw">options</span>(<span class="dt">tibble.width =</span> <span class="ot">Inf</span>)</a>
-<a class="sourceLine" id="cb397-3" title="3"><span class="kw">options</span>(<span class="dt">dplyr.print_min =</span> <span class="ot">Inf</span>) <span class="co">#to always show all rows</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">options</span>(<span class="dt">tibble.print_max =</span> n, <span class="dt">tibble.print_min =</span> m)
+<span class="kw">options</span>(<span class="dt">tibble.width =</span> <span class="ot">Inf</span>)
+<span class="kw">options</span>(<span class="dt">dplyr.print_min =</span> <span class="ot">Inf</span>) <span class="co">#to always show all rows</span></code></pre>
 
 </div>
 </div>
@@ -680,10 +680,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -693,6 +692,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/10-tibbles.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -708,7 +711,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 24: Model building | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 24: Model building | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 24: Model building | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="23-model-basics.html">
 <link rel="next" href="25-many-models.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -507,48 +507,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <div id="why-are-low-quality-diamonds-more-expensive" class="section level2">
 <h2>24.2: Why are low quality diamonds more expensive?</h2>
-<div class="sourceCode" id="cb1137"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1137-1" title="1"><span class="co"># model for only small diamonds</span></a>
-<a class="sourceLine" id="cb1137-2" title="2">diamonds2 &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1137-3" title="3"><span class="st">  </span><span class="kw">filter</span>(carat <span class="op">&lt;=</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1137-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lprice =</span> <span class="kw">log2</span>(price), </a>
-<a class="sourceLine" id="cb1137-5" title="5">         <span class="dt">lcarat =</span> <span class="kw">log2</span>(carat))</a>
-<a class="sourceLine" id="cb1137-6" title="6"></a>
-<a class="sourceLine" id="cb1137-7" title="7">mod_diamond &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat, <span class="dt">data =</span> diamonds2)</a>
-<a class="sourceLine" id="cb1137-8" title="8"></a>
-<a class="sourceLine" id="cb1137-9" title="9">mod_diamond2 &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>cut <span class="op">+</span><span class="st"> </span>clarity, <span class="dt">data =</span> diamonds2)</a>
-<a class="sourceLine" id="cb1137-10" title="10"></a>
-<a class="sourceLine" id="cb1137-11" title="11">diamonds2 &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1137-12" title="12"><span class="st">  </span><span class="kw">add_residuals</span>(mod_diamond2, <span class="st">&quot;resid_lg&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># model for only small diamonds</span>
+diamonds2 &lt;-<span class="st"> </span>diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(carat <span class="op">&lt;=</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">lprice =</span> <span class="kw">log2</span>(price), 
+         <span class="dt">lcarat =</span> <span class="kw">log2</span>(carat))
+
+mod_diamond &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat, <span class="dt">data =</span> diamonds2)
+
+mod_diamond2 &lt;-<span class="st"> </span><span class="kw">lm</span>(lprice <span class="op">~</span><span class="st"> </span>lcarat <span class="op">+</span><span class="st"> </span>color <span class="op">+</span><span class="st"> </span>cut <span class="op">+</span><span class="st"> </span>clarity, <span class="dt">data =</span> diamonds2)
+
+diamonds2 &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_residuals</span>(mod_diamond2, <span class="st">&quot;resid_lg&quot;</span>)</code></pre>
 <div id="section-90" class="section level3">
 <h3>24.2.3</h3>
 <ol style="list-style-type: decimal">
 <li><p>In the plot of <code>lcarat</code> vs. <code>lprice</code>, there are some bright vertical strips. What do they represent?</p>
-<div class="sourceCode" id="cb1138"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1138-1" title="1">plot_lc_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1138-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, lprice))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1138-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1138-4" title="4"></a>
-<a class="sourceLine" id="cb1138-5" title="5">plot_lp_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1138-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, lcarat))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1138-7" title="7"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb1138-8" title="8"></a>
-<a class="sourceLine" id="cb1138-9" title="9">plot_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1138-10" title="10"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1138-11" title="11"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.1</span>)</a>
-<a class="sourceLine" id="cb1138-12" title="12"></a>
-<a class="sourceLine" id="cb1138-13" title="13">plot_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1138-14" title="14"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1138-15" title="15"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)</a>
-<a class="sourceLine" id="cb1138-16" title="16"></a>
-<a class="sourceLine" id="cb1138-17" title="17">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lc_lp, plot_lc, plot_lp <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">plot_lc_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, lprice))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)
+
+plot_lp_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice, lcarat))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)
+
+plot_lp &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lprice))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">.1</span>)
+
+plot_lc &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.1</span>)
+
+gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lc_lp, plot_lc, plot_lp <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <ul>
 <li>The vertical bands correspond with clumps of <code>carat_lg</code> values falling across a range of <code>price_lg</code> values</li>
 </ul>
 <p><em>Histogram of <code>carat</code> values:</em></p>
-<div class="sourceCode" id="cb1139"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1139-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1139-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1139-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1139-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">2</span>, <span class="fl">0.1</span>))</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <ul>
 <li>The chart above shows spikes in carat values at 0.3, 0.4, 0.41, 0.5, 0.7, 0.9, 1.0, 1.01, 1.2, 1.5, 1.7 and 2.0, each distribution spikes at that value and then decreases until hitting the next spike</li>
@@ -562,32 +562,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>if you had used a log base 2 it has a different interpretation that can be thought of in terms of relationship of doubling</li>
 </ul></li>
 <li><p>Extract the diamonds that have very high and very low residuals. Is there anything unusual about these diamonds? Are they particularly bad or good, or do you think these are pricing errors?</p>
-<div class="sourceCode" id="cb1140"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1140-1" title="1">extreme_vals &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-3" title="3"><span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-4" title="4"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred_lg&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>(pred_lg))</a>
-<a class="sourceLine" id="cb1140-6" title="6"></a>
-<a class="sourceLine" id="cb1140-7" title="7"><span class="co">#graph extreme points as well as line of pred</span></a>
-<a class="sourceLine" id="cb1140-8" title="8">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-9" title="9"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1140-10" title="10"><span class="st">  </span><span class="co"># mutate(extreme_value = (abs(resid_lg) &gt; 1)) %&gt;% </span></a>
-<a class="sourceLine" id="cb1140-11" title="11"><span class="st">  </span><span class="co"># filter(!extreme_value) %&gt;% </span></a>
-<a class="sourceLine" id="cb1140-12" title="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1140-13" title="13"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">50</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1140-14" title="14"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price), <span class="dt">data =</span> extreme_vals, <span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">extreme_vals &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred_lg&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>(pred_lg))
+
+<span class="co">#graph extreme points as well as line of pred</span>
+diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># mutate(extreme_value = (abs(resid_lg) &gt; 1)) %&gt;% </span>
+<span class="st">  </span><span class="co"># filter(!extreme_value) %&gt;% </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">bins =</span> <span class="dv">50</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price), <span class="dt">data =</span> extreme_vals, <span class="dt">color =</span> <span class="st">&quot;orange&quot;</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ul>
 <li>It’s possible some of these these were mislabeled or errors, e.g. an error in typing e.g. 200 miswritten as 2000, though given the wide range in pricing this does not seem like that extreme of a variation.</li>
 </ul>
-<div class="sourceCode" id="cb1141"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1141-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1141-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1141-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),</a>
-<a class="sourceLine" id="cb1141-4" title="4">         <span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>pred) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1141-5" title="5"><span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1141-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">multiple =</span> price <span class="op">/</span><span class="st"> </span>price_pred) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1141-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(multiple)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1141-8" title="8"><span class="st">  </span><span class="kw">select</span>(price, price_pred, multiple)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">extreme_value =</span> (<span class="kw">abs</span>(resid_lg) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>),
+         <span class="dt">price_pred =</span> <span class="dv">2</span><span class="op">^</span>pred) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(extreme_value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">multiple =</span> price <span class="op">/</span><span class="st"> </span>price_pred) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(multiple)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(price, price_pred, multiple)</code></pre>
 <pre><code>## # A tibble: 16 x 3
 ##    price price_pred multiple
 ##    &lt;int&gt;      &lt;dbl&gt;    &lt;dbl&gt;
@@ -611,17 +611,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If the mislabeling were an issue of e.g. 200 to 2000, you would expect that some of the actual values were ~1/10th or 10x the value of the predicted value. Though none of them appear to have this issue, except for maybe the item that was priced at 2160 but has a price of 314, which is the closest error where the actual value was ~1/10th the value of the prediction</li>
 </ul></li>
 <li><p>Does the final model, <code>mod_diamonds2</code>, do a good job of predicting diamond prices? Would you trust it to tell you how much to spend if you were buying a diamond?</p>
-<div class="sourceCode" id="cb1143"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1143-1" title="1">perc_unexplained &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1143-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1143-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pred_2 =</span> <span class="dv">2</span><span class="op">^</span>pred,</a>
-<a class="sourceLine" id="cb1143-4" title="4">         <span class="dt">mean_price =</span> <span class="kw">mean</span>(price),</a>
-<a class="sourceLine" id="cb1143-5" title="5">         <span class="dt">error_deviation =</span> (price <span class="op">-</span><span class="st"> </span>pred_<span class="dv">2</span>)<span class="op">^</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb1143-6" title="6">         <span class="dt">reg_deviation =</span> (pred_<span class="dv">2</span> <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb1143-7" title="7">         <span class="dt">tot_deviation =</span> (price <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1143-8" title="8"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">R_squared =</span> <span class="kw">sum</span>(error_deviation) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot_deviation)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1143-9" title="9"><span class="st">  </span><span class="kw">flatten_dbl</span>()</a>
-<a class="sourceLine" id="cb1143-10" title="10"></a>
-<a class="sourceLine" id="cb1143-11" title="11"><span class="dv">1</span> <span class="op">-</span><span class="st"> </span>perc_unexplained</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">perc_unexplained &lt;-<span class="st"> </span>diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2, <span class="st">&quot;pred&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">pred_2 =</span> <span class="dv">2</span><span class="op">^</span>pred,
+         <span class="dt">mean_price =</span> <span class="kw">mean</span>(price),
+         <span class="dt">error_deviation =</span> (price <span class="op">-</span><span class="st"> </span>pred_<span class="dv">2</span>)<span class="op">^</span><span class="dv">2</span>,
+         <span class="dt">reg_deviation =</span> (pred_<span class="dv">2</span> <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>,
+         <span class="dt">tot_deviation =</span> (price <span class="op">-</span><span class="st"> </span>mean_price)<span class="op">^</span><span class="dv">2</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">R_squared =</span> <span class="kw">sum</span>(error_deviation) <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(tot_deviation)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">flatten_dbl</span>()
+
+<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>perc_unexplained</code></pre>
 <pre><code>## [1] 0.9653255</code></pre>
 <ul>
 <li>~96.5% of variance is explained by model which seems pretty solid, though is relative to each situation</li>
@@ -633,33 +633,33 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="what-affects-the-number-of-daily-flights" class="section level2">
 <h2>24.3 What affects the number of daily flights?</h2>
 <p>Some useful notes copied from this section:</p>
-<div class="sourceCode" id="cb1145"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1145-1" title="1">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-3" title="3"><span class="st">  </span><span class="kw">count</span>(date)</a>
-<a class="sourceLine" id="cb1145-4" title="4"></a>
-<a class="sourceLine" id="cb1145-5" title="5">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb1145-7" title="7"></a>
-<a class="sourceLine" id="cb1145-8" title="8">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb1145-10" title="10"></a>
-<a class="sourceLine" id="cb1145-11" title="11"></a>
-<a class="sourceLine" id="cb1145-12" title="12">term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {</a>
-<a class="sourceLine" id="cb1145-13" title="13">  <span class="kw">cut</span>(date, </a>
-<a class="sourceLine" id="cb1145-14" title="14">    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),</a>
-<a class="sourceLine" id="cb1145-15" title="15">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) </a>
-<a class="sourceLine" id="cb1145-16" title="16">  )</a>
-<a class="sourceLine" id="cb1145-17" title="17">}</a>
-<a class="sourceLine" id="cb1145-18" title="18"></a>
-<a class="sourceLine" id="cb1145-19" title="19">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-20" title="20"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))</a>
-<a class="sourceLine" id="cb1145-21" title="21"></a>
-<a class="sourceLine" id="cb1145-22" title="22">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-23" title="23"><span class="st">  </span><span class="kw">filter</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1145-24" title="24"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, n, <span class="dt">colour =</span> term))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1145-25" title="25"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1145-26" title="26"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1145-27" title="27"><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="ot">NULL</span>, <span class="dt">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(date)
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))
+
+
+term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {
+  <span class="kw">cut</span>(date, 
+    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),
+    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) 
+  )
+}
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))
+
+daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, n, <span class="dt">colour =</span> term))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">.3</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="ot">NULL</span>, <span class="dt">date_breaks =</span> <span class="st">&quot;1 month&quot;</span>, <span class="dt">date_labels =</span> <span class="st">&quot;%b&quot;</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <div id="section-91" class="section level3">
 <h3>24.3.5</h3>
@@ -672,19 +672,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Based on the above, it seems a variable representing “holiday” or “holiday weekend” may be valuable.</p></li>
 <li><p>What do the three days with high positive residuals represent? How would these days generalise to another year?</p>
-<div class="sourceCode" id="cb1146"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1146-1" title="1">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1146-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1146-3" title="3"><span class="st">  </span><span class="kw">count</span>(date)</a>
-<a class="sourceLine" id="cb1146-4" title="4"></a>
-<a class="sourceLine" id="cb1146-5" title="5">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1146-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</a></code></pre></div>
-<div class="sourceCode" id="cb1147"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1147-1" title="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> daily)</a>
-<a class="sourceLine" id="cb1147-2" title="2"></a>
-<a class="sourceLine" id="cb1147-3" title="3">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1147-4" title="4"><span class="st">  </span><span class="kw">add_residuals</span>(mod)</a>
-<a class="sourceLine" id="cb1147-5" title="5"></a>
-<a class="sourceLine" id="cb1147-6" title="6">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1147-7" title="7"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, resid)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">make_date</span>(year, month, day)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(date)
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>))</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> daily)
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_residuals</span>(mod)
+
+daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, resid)</code></pre>
 <pre><code>## # A tibble: 3 x 4
 ##   date           n wday  resid
 ##   &lt;date&gt;     &lt;int&gt; &lt;ord&gt; &lt;dbl&gt;
@@ -699,8 +699,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p><em>Check the absolute values</em></p>
-<div class="sourceCode" id="cb1149"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1149-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1149-2" title="2"><span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, <span class="kw">abs</span>(resid))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">top_n</span>(<span class="dv">3</span>, <span class="kw">abs</span>(resid))</code></pre>
 <pre><code>## # A tibble: 3 x 4
 ##   date           n wday  resid
 ##   &lt;date&gt;     &lt;int&gt; &lt;ord&gt; &lt;dbl&gt;
@@ -711,42 +711,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The days with the greatest magnitude for residuals were on Christmast Day, Thanksgiving Day, and the day after Thanksgiving</li>
 </ul></li>
 <li><p>Create a new variable that splits the <code>wday</code> variable into terms, but only for Saturdays, i.e. it should have <code>Thurs</code>, <code>Fri</code>, but <code>Sat-summer</code>, <code>Sat-spring</code>, <code>Sat-fall</code>. How does this model compare with the model with every combination of <code>wday</code> and <code>term</code>?</p>
-<div class="sourceCode" id="cb1151"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1151-1" title="1">term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {</a>
-<a class="sourceLine" id="cb1151-2" title="2">  <span class="kw">cut</span>(date, </a>
-<a class="sourceLine" id="cb1151-3" title="3">    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),</a>
-<a class="sourceLine" id="cb1151-4" title="4">    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) </a>
-<a class="sourceLine" id="cb1151-5" title="5">  )</a>
-<a class="sourceLine" id="cb1151-6" title="6">}</a>
-<a class="sourceLine" id="cb1151-7" title="7"></a>
-<a class="sourceLine" id="cb1151-8" title="8">daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))</a>
-<a class="sourceLine" id="cb1151-10" title="10"></a>
-<a class="sourceLine" id="cb1151-11" title="11"><span class="co"># example with wday_mod</span></a>
-<a class="sourceLine" id="cb1151-12" title="12">Example_term_with_sat &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1151-14" title="14"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod, <span class="dt">data =</span> .)</a>
-<a class="sourceLine" id="cb1151-15" title="15"></a>
-<a class="sourceLine" id="cb1151-16" title="16"><span class="co"># just wday</span></a>
-<a class="sourceLine" id="cb1151-17" title="17">wkday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-18" title="18"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> .)</a>
-<a class="sourceLine" id="cb1151-19" title="19"></a>
-<a class="sourceLine" id="cb1151-20" title="20"><span class="co"># wday and term, no interaction...</span></a>
-<a class="sourceLine" id="cb1151-21" title="21">wkday_term &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-22" title="22"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1151-23" title="23"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>term, <span class="dt">data =</span> .)</a>
-<a class="sourceLine" id="cb1151-24" title="24"></a>
-<a class="sourceLine" id="cb1151-25" title="25"><span class="co"># wday and term, interaction</span></a>
-<a class="sourceLine" id="cb1151-26" title="26">wkday_term_interaction &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-27" title="27"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1151-28" title="28"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday<span class="op">*</span>term, <span class="dt">data =</span> .)</a>
-<a class="sourceLine" id="cb1151-29" title="29"></a>
-<a class="sourceLine" id="cb1151-30" title="30">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-31" title="31"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1151-32" title="32"><span class="st">  </span><span class="kw">gather_predictions</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1151-33" title="33"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1151-34" title="34"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1151-35" title="35"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1151-36" title="36"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">term &lt;-<span class="st"> </span><span class="cf">function</span>(date) {
+  <span class="kw">cut</span>(date, 
+    <span class="dt">breaks =</span> <span class="kw">ymd</span>(<span class="dv">20130101</span>, <span class="dv">20130605</span>, <span class="dv">20130825</span>, <span class="dv">20140101</span>),
+    <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;spring&quot;</span>, <span class="st">&quot;summer&quot;</span>, <span class="st">&quot;fall&quot;</span>) 
+  )
+}
+
+daily &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">term =</span> <span class="kw">term</span>(date))
+
+<span class="co"># example with wday_mod</span>
+Example_term_with_sat &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod, <span class="dt">data =</span> .)
+
+<span class="co"># just wday</span>
+wkday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday, <span class="dt">data =</span> .)
+
+<span class="co"># wday and term, no interaction...</span>
+wkday_term &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>term, <span class="dt">data =</span> .)
+
+<span class="co"># wday and term, interaction</span>
+wkday_term_interaction &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday<span class="op">*</span>term, <span class="dt">data =</span> .)
+
+daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather_predictions</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <ul>
 <li>In the example, saturday has different predicted number of flights in the summer
@@ -757,13 +757,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul>
 <p><em>Residuals of these models</em></p>
-<div class="sourceCode" id="cb1152"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1152-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1152-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1152-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1152-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1152-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1152-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1152-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat, wkday, wkday_term, wkday_term_interaction) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <ul>
 <li>The graphs with saturday term and interaction across terms do not show gross changes in residuals varying by season the way the models that included just weekday or weekday and term without an interaction do.</li>
@@ -774,38 +774,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>Create a new <code>wday</code> variable that combines the day of week, term (for Saturdays), and public holidays. What do the residuals of that model look like?</p>
 <p><em>Create dataset of federal holidays</em></p>
-<div class="sourceCode" id="cb1153"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1153-1" title="1"><span class="co"># holiday&#39;s that could have been added: Easter, black friday</span></a>
-<a class="sourceLine" id="cb1153-2" title="2"><span class="co"># consider adding a filter to remove Columbus day and perhaps Veteran&#39;s day</span></a>
-<a class="sourceLine" id="cb1153-3" title="3">holidays &lt;-<span class="st"> </span><span class="kw">tribble</span>(</a>
-<a class="sourceLine" id="cb1153-4" title="4">  <span class="op">~</span>HolidayName, <span class="op">~</span>HolidayDate,</a>
-<a class="sourceLine" id="cb1153-5" title="5">  <span class="st">&quot;New Year&#39;s&quot;</span>, <span class="st">&quot;2013-01-01&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-6" title="6">  <span class="st">&quot;MLK&quot;</span>, <span class="st">&quot;2013-01-21&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-7" title="7">  <span class="st">&quot;President&#39;s Day&quot;</span>, <span class="st">&quot;2013-02-18&quot;</span>, </a>
-<a class="sourceLine" id="cb1153-8" title="8">  <span class="st">&quot;Memorial Day&quot;</span>, <span class="st">&quot;2013-05-27&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-9" title="9">  <span class="st">&quot;Independene Day&quot;</span>, <span class="st">&quot;2013-07-04&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-10" title="10">  <span class="st">&quot;Labor Day&quot;</span>, <span class="st">&quot;2013-09-02&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-11" title="11">  <span class="st">&quot;Columbus Day&quot;</span>, <span class="st">&quot;2013-10-14&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-12" title="12">  <span class="st">&quot;Veteran&#39;s Day&quot;</span>, <span class="st">&quot;2013-11-11&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-13" title="13">  <span class="st">&quot;Thanksgiving&quot;</span>, <span class="st">&quot;2013-11-28&quot;</span>,</a>
-<a class="sourceLine" id="cb1153-14" title="14">  <span class="st">&quot;Christmas Day&quot;</span>, <span class="st">&quot;2013-12-25&quot;</span></a>
-<a class="sourceLine" id="cb1153-15" title="15">) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1153-16" title="16"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayDate =</span> <span class="kw">ymd</span>(HolidayDate))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># holiday&#39;s that could have been added: Easter, black friday</span>
+<span class="co"># consider adding a filter to remove Columbus day and perhaps Veteran&#39;s day</span>
+holidays &lt;-<span class="st"> </span><span class="kw">tribble</span>(
+  <span class="op">~</span>HolidayName, <span class="op">~</span>HolidayDate,
+  <span class="st">&quot;New Year&#39;s&quot;</span>, <span class="st">&quot;2013-01-01&quot;</span>,
+  <span class="st">&quot;MLK&quot;</span>, <span class="st">&quot;2013-01-21&quot;</span>,
+  <span class="st">&quot;President&#39;s Day&quot;</span>, <span class="st">&quot;2013-02-18&quot;</span>, 
+  <span class="st">&quot;Memorial Day&quot;</span>, <span class="st">&quot;2013-05-27&quot;</span>,
+  <span class="st">&quot;Independene Day&quot;</span>, <span class="st">&quot;2013-07-04&quot;</span>,
+  <span class="st">&quot;Labor Day&quot;</span>, <span class="st">&quot;2013-09-02&quot;</span>,
+  <span class="st">&quot;Columbus Day&quot;</span>, <span class="st">&quot;2013-10-14&quot;</span>,
+  <span class="st">&quot;Veteran&#39;s Day&quot;</span>, <span class="st">&quot;2013-11-11&quot;</span>,
+  <span class="st">&quot;Thanksgiving&quot;</span>, <span class="st">&quot;2013-11-28&quot;</span>,
+  <span class="st">&quot;Christmas Day&quot;</span>, <span class="st">&quot;2013-12-25&quot;</span>
+) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayDate =</span> <span class="kw">ymd</span>(HolidayDate))</code></pre>
 <p>Create model with Holiday variable</p>
-<div class="sourceCode" id="cb1154"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1154-1" title="1">Example_term_with_sat_holiday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1154-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1154-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1154-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1154-5" title="5"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod <span class="op">+</span><span class="st"> </span>Holiday, <span class="dt">data =</span> .)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Example_term_with_sat_holiday &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday_mod <span class="op">+</span><span class="st"> </span>Holiday, <span class="dt">data =</span> .)</code></pre>
 <p>Look at residuals of model</p>
-<div class="sourceCode" id="cb1155"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1155-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1155-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1155-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1155-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1155-5" title="5"><span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat_holiday, Example_term_with_sat) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1155-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1155-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1155-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1155-9" title="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(holidays, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;date&quot;</span> =<span class="st"> &quot;HolidayDate&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday =</span> <span class="op">!</span><span class="kw">is.na</span>(HolidayName)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather_residuals</span>(Example_term_with_sat_holiday, Example_term_with_sat) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <ul>
 <li>Notice the residuals for day’s like July 4th and Christas are closer to 0 now, though residuals for smaller holidays like MLK, President’s, Columbus, and Veteran’s Day are now positive when before they did not have such noticable abberations</li>
@@ -816,18 +816,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>What happens if you fit a day of week effect that varies by month (i.e. <code>n ~ wday * month</code>)? Why is this not very helpful?</p>
 <p><em>Create model</em></p>
-<div class="sourceCode" id="cb1156"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1156-1" title="1">week_month &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1156-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1156-3" title="3"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>month, <span class="dt">data =</span> .)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">week_month &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>month, <span class="dt">data =</span> .)</code></pre>
 <p><em>Graph predictions</em>
 (with <code>n ~ wday * term</code> as the comparison)</p>
-<div class="sourceCode" id="cb1157"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1157-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1157-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1157-3" title="3"><span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1157-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1157-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1157-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1157-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <ul>
 <li>This model has the most flexibility / inputs, though this makes the pattern harder to follow / interpret</li>
@@ -835,13 +835,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p><em>Graph residuals</em>
 (with <code>n ~ wday * term</code> as the comparison)</p>
-<div class="sourceCode" id="cb1158"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1158-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1158-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1158-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1158-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1158-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1158-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1158-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">month</span>(date) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_interaction, week_month) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>The residuals seem to partially explain some of these inexplicable ups / downs:</p>
 <ul>
@@ -852,60 +852,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>What would you expect the model <code>n ~ wday + ns(date, 5)</code> to look like? Knowing what you know about the data, why would you expect it to be not particularly effective?</p>
 <p>I would expect to see a similar overall pattern, but with more smoothed affects. Let’s check what these actually look like below.</p>
-<div class="sourceCode" id="cb1159"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1159-1" title="1">wkday_term_ns &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1159-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1159-3" title="3"><span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> .)</a>
-<a class="sourceLine" id="cb1159-4" title="4"></a>
-<a class="sourceLine" id="cb1159-5" title="5">wkday_term_interaction_ns &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> daily)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">wkday_term_ns &lt;-<span class="st"> </span>daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">+</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> .)
+
+wkday_term_interaction_ns &lt;-<span class="st"> </span><span class="kw">lm</span>(n <span class="op">~</span><span class="st"> </span>wday <span class="op">*</span><span class="st"> </span>splines<span class="op">::</span><span class="kw">ns</span>(date, <span class="dv">5</span>), <span class="dt">data =</span> daily)</code></pre>
 <p>Look at predictions
 (light grey are actuals)</p>
-<div class="sourceCode" id="cb1160"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1160-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1160-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1160-3" title="3"><span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1160-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1160-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1160-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1160-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1160-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather_predictions</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, pred, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Look at residuals
 (in light grey are actuals)</p>
-<div class="sourceCode" id="cb1161"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1161-1" title="1">daily <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1161-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1161-3" title="3"><span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1161-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1161-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1161-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1161-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb1161-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">daily <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">wday_mod =</span> <span class="kw">ifelse</span>(wday <span class="op">==</span><span class="st"> &quot;Sat&quot;</span>, <span class="kw">paste</span>(wday, <span class="st">&quot;_&quot;</span>, term), wday)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather_residuals</span>(wkday_term_ns, wkday_term_interaction_ns) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(date, resid, <span class="dt">colour =</span> wday))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">x =</span> date, <span class="dt">y =</span> n, <span class="dt">group =</span> wday), <span class="dt">colour =</span> <span class="st">&quot;grey&quot;</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>model, <span class="dt">ncol =</span> <span class="dv">1</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p></li>
 <li><p>We hypothesised that people leaving on Sundays are more likely to be business travellers who need to be somewhere on Monday. Explore that hypothesis by seeing how it breaks down based on distance and time: if it’s true, you’d expect to see more Sunday evening flights to places that are far away.</p>
-<div class="sourceCode" id="cb1162"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1162-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1162-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),</a>
-<a class="sourceLine" id="cb1162-3" title="3">         <span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1162-4" title="4"><span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1162-5" title="5"><span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1162-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1162-7" title="7"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),
+         <span class="dt">wday =</span> <span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <ul>
 <li>25th and 75th percentiles aren’t visibly different, but median is a little higher</li>
 <li>the same is the case for Saturday travel which does not seem to fit into this hypothesis as neatly. The effect seems more general to the weekend than just Saturday, and there seem like there may be other potential explanations than “business travel”</li>
 </ul></li>
 <li><p>It’s a little frustrating that Sunday and Saturday are on separate ends of the plot. Write a small function to set the levels of the factor so that the week starts on Monday.</p>
-<div class="sourceCode" id="cb1163"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1163-1" title="1">wday_modified &lt;-<span class="st"> </span><span class="cf">function</span>(date){</a>
-<a class="sourceLine" id="cb1163-2" title="2">  date_order &lt;-<span class="st"> </span>(<span class="kw">wday</span>(date) <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span></a>
-<a class="sourceLine" id="cb1163-3" title="3">  date &lt;-<span class="st"> </span><span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_reorder</span>(date_order)</a>
-<a class="sourceLine" id="cb1163-4" title="4">  date</a>
-<a class="sourceLine" id="cb1163-5" title="5">}</a>
-<a class="sourceLine" id="cb1163-6" title="6"></a>
-<a class="sourceLine" id="cb1163-7" title="7">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1163-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),</a>
-<a class="sourceLine" id="cb1163-9" title="9">         <span class="dt">wday =</span> <span class="kw">wday_modified</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1163-10" title="10"><span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1163-11" title="11"><span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1163-12" title="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1163-13" title="13"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">wday_modified &lt;-<span class="st"> </span><span class="cf">function</span>(date){
+  date_order &lt;-<span class="st"> </span>(<span class="kw">wday</span>(date) <span class="op">+</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%%</span><span class="st"> </span><span class="dv">7</span>
+  date &lt;-<span class="st"> </span><span class="kw">wday</span>(date, <span class="dt">label =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fct_reorder</span>(date_order)
+  date
+}
+
+flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">make_date</span>(year, month, day),
+         <span class="dt">wday =</span> <span class="kw">wday_modified</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(date, wday, distance) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(distance <span class="op">&lt;</span><span class="st"> </span><span class="dv">3000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(wday, distance))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p></li>
 </ol>
 </div>
@@ -916,73 +916,73 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>24.2.3.3</h3>
 <p>Plots of extreme values against a sample and colored by some of the key attributes</p>
 <p><em>Plots of extreme values against carat, price, clarity</em></p>
-<div class="sourceCode" id="cb1164"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1164-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1164-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1164-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1164-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1164-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1164-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> clarity), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p><em>Plots of extreme values against carat, price, cut</em></p>
-<div class="sourceCode" id="cb1165"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1165-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1165-2" title="2"><span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1165-3" title="3"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1165-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1165-5" title="5"><span class="st">  </span><span class="co"># geom_hex(bins = 50)+</span></a>
-<a class="sourceLine" id="cb1165-6" title="6"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb1165-7" title="7"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">add_predictions</span>(mod_diamond2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">5000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, price))<span class="op">+</span>
+<span class="st">  </span><span class="co"># geom_hex(bins = 50)+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">alpha =</span> <span class="fl">0.5</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(carat, price, <span class="dt">colour =</span> cut), <span class="dt">data =</span> extreme_vals, <span class="dt">size =</span> <span class="dv">3</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 </div>
 <div id="section-93" class="section level3">
 <h3>24.2.3.1</h3>
 <p>Visualization with horizontal stripes and <code>lprice</code> as the focus</p>
-<div class="sourceCode" id="cb1166"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1166-1" title="1"><span class="co"># horizontal stripes</span></a>
-<a class="sourceLine" id="cb1166-2" title="2">gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lp_lc, plot_lp, plot_lc <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># horizontal stripes</span>
+gridExtra<span class="op">::</span><span class="kw">grid.arrange</span>(plot_lp_lc, plot_lp, plot_lc <span class="op">+</span><span class="st"> </span><span class="kw">coord_flip</span>()) </code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <ul>
 <li>same thing, just change orientation and highlight <code>lprice</code> with a histogram</li>
 </ul>
 <p><em>A few other graphs from this problem</em></p>
-<div class="sourceCode" id="cb1167"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1167-1" title="1">diamonds2 <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1167-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1167-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(price))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="dv">50</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
-<div class="sourceCode" id="cb1168"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1168-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1168-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1168-3" title="3"><span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">binwidth =</span> <span class="fl">0.01</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-29-2.png" width="672" /></p>
 <p>Taking the log of price seems to have a bigger impact on the shape of the geom_hex graph</p>
-<div class="sourceCode" id="cb1169"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1169-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1169-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, lprice))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1169-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(carat, lprice))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<div class="sourceCode" id="cb1170"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1170-1" title="1">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1170-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, price))<span class="op">+</span></a>
-<a class="sourceLine" id="cb1170-3" title="3"><span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds2 <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lcarat, price))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_hex</span>(<span class="dt">show.legend =</span> <span class="ot">FALSE</span>)</code></pre>
 <p><img src="24-model-building_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
 </div>
 <div id="section-94" class="section level3">
 <h3>24.3.5.4</h3>
 <p>In this section I create a marker for days that are “near a holiday”</p>
-<div class="sourceCode" id="cb1171"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1171-1" title="1">near_holidays &lt;-<span class="st"> </span>holidays <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-2" title="2"><span class="st">  </span><span class="co"># This creates a series of helper variables to create the variable &#39;Holiday_IntervalDay&#39; that represents an interval that encloses the period between the holiday and the beginning or end of the most recent weekend</span></a>
-<a class="sourceLine" id="cb1171-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayWday =</span> <span class="kw">wday</span>(HolidayDate, <span class="dt">label =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb1171-4" title="4">         <span class="dt">HolidayWknd =</span> lubridate<span class="op">::</span><span class="kw">round_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
-<a class="sourceLine" id="cb1171-5" title="5">         <span class="dt">HolidayFloor =</span> lubridate<span class="op">::</span><span class="kw">floor_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
-<a class="sourceLine" id="cb1171-6" title="6">         <span class="dt">HolidayCeiling =</span> lubridate<span class="op">::</span><span class="kw">ceiling_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),</a>
-<a class="sourceLine" id="cb1171-7" title="7">         <span class="dt">Holiday_IntervalDay =</span> <span class="kw">case_when</span>(HolidayWknd <span class="op">==</span><span class="st"> </span>HolidayFloor <span class="op">~</span><span class="st"> </span>(HolidayFloor <span class="op">-</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">2</span>)),</a>
-<a class="sourceLine" id="cb1171-8" title="8">                                         <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>HolidayCeiling)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday_Period =</span> <span class="kw">interval</span>(<span class="kw">pmin</span>(HolidayDate, Holiday_IntervalDay), <span class="kw">pmax</span>(HolidayDate, Holiday_IntervalDay)))</a>
-<a class="sourceLine" id="cb1171-10" title="10"></a>
-<a class="sourceLine" id="cb1171-11" title="11"><span class="co"># This returns each day and whether it occurred near a holiday</span></a>
-<a class="sourceLine" id="cb1171-12" title="12">near_holiday &lt;-<span class="st"> </span><span class="kw">map</span>(near_holidays<span class="op">$</span>Holiday_Period, <span class="op">~</span>(<span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>) <span class="op">%within%</span><span class="st"> </span>.x)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-13" title="13"><span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-14" title="14"><span class="st">  </span><span class="kw">map_lgl</span>(any) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-15" title="15"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-16" title="16"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">NearHoliday =</span> value) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1171-17" title="17"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>))</a>
-<a class="sourceLine" id="cb1171-18" title="18"></a>
-<a class="sourceLine" id="cb1171-19" title="19">near_holiday</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">near_holidays &lt;-<span class="st"> </span>holidays <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co"># This creates a series of helper variables to create the variable &#39;Holiday_IntervalDay&#39; that represents an interval that encloses the period between the holiday and the beginning or end of the most recent weekend</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">HolidayWday =</span> <span class="kw">wday</span>(HolidayDate, <span class="dt">label =</span> <span class="ot">TRUE</span>),
+         <span class="dt">HolidayWknd =</span> lubridate<span class="op">::</span><span class="kw">round_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),
+         <span class="dt">HolidayFloor =</span> lubridate<span class="op">::</span><span class="kw">floor_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),
+         <span class="dt">HolidayCeiling =</span> lubridate<span class="op">::</span><span class="kw">ceiling_date</span>(HolidayDate, <span class="dt">unit =</span> <span class="st">&quot;week&quot;</span>),
+         <span class="dt">Holiday_IntervalDay =</span> <span class="kw">case_when</span>(HolidayWknd <span class="op">==</span><span class="st"> </span>HolidayFloor <span class="op">~</span><span class="st"> </span>(HolidayFloor <span class="op">-</span><span class="st"> </span><span class="kw">ddays</span>(<span class="dv">2</span>)),
+                                         <span class="ot">TRUE</span> <span class="op">~</span><span class="st"> </span>HolidayCeiling)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Holiday_Period =</span> <span class="kw">interval</span>(<span class="kw">pmin</span>(HolidayDate, Holiday_IntervalDay), <span class="kw">pmax</span>(HolidayDate, Holiday_IntervalDay)))
+
+<span class="co"># This returns each day and whether it occurred near a holiday</span>
+near_holiday &lt;-<span class="st"> </span><span class="kw">map</span>(near_holidays<span class="op">$</span>Holiday_Period, <span class="op">~</span>(<span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>) <span class="op">%within%</span><span class="st"> </span>.x)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">transpose</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">map_lgl</span>(any) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename</span>(<span class="dt">NearHoliday =</span> value) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">seq.Date</span>(<span class="kw">ymd</span>(<span class="st">&quot;2013-01-01&quot;</span>), <span class="kw">ymd</span>(<span class="st">&quot;2013-12-31&quot;</span>), <span class="dt">by =</span> <span class="st">&quot;day&quot;</span>))
+
+near_holiday</code></pre>
 <pre><code>## # A tibble: 365 x 2
 ##    NearHoliday date      
 ##    &lt;lgl&gt;       &lt;date&gt;    
@@ -1052,10 +1052,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1065,6 +1064,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/24-model-building.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -1080,7 +1083,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

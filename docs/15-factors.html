@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 15: Factors | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 15: Factors | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 15: Factors | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="14-strings.html">
 <link rel="next" href="16-dates-and-times.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -513,10 +513,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <p>Create factors by order they come-in:</p>
 <p>Avoiding dropping levels with <code>drop = FALSE</code></p>
-<div class="sourceCode" id="cb710"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb710-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb710-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(race))<span class="op">+</span></a>
-<a class="sourceLine" id="cb710-3" title="3"><span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb710-4" title="4"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(race))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>)</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <div id="general-social-survey" class="section level2">
 <h2>15.4: General Social Survey</h2>
@@ -532,21 +532,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Solution is probably unnecessarily complicated…</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb711"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb711-1" title="1">bar_prep &lt;-<span class="st"> </span>gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb711-2" title="2"><span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> rincome, <span class="dt">into =</span><span class="kw">c</span>(<span class="st">&quot;dollars1&quot;</span>, <span class="st">&quot;dollars2&quot;</span>), <span class="st">&quot;([0-9]+)[^0-9]*([0-9]*)&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb711-3" title="3"><span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;dollars1&quot;</span>, <span class="st">&quot;dollars2&quot;</span>), <span class="op">~</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(.) <span class="op">|</span><span class="st"> </span>. <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dv">0</span>, <span class="kw">as.numeric</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb711-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(dollars1, dollars2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb711-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rincome =</span> <span class="kw">fct_inorder</span>(rincome))</a>
-<a class="sourceLine" id="cb711-6" title="6"></a>
-<a class="sourceLine" id="cb711-7" title="7">bar_prep <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb711-8" title="8"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rincome)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb711-9" title="9"><span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb711-10" title="10"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb711-11" title="11"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">bar_prep &lt;-<span class="st"> </span>gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tidyr<span class="op">::</span><span class="kw">extract</span>(<span class="dt">col =</span> rincome, <span class="dt">into =</span><span class="kw">c</span>(<span class="st">&quot;dollars1&quot;</span>, <span class="st">&quot;dollars2&quot;</span>), <span class="st">&quot;([0-9]+)[^0-9]*([0-9]*)&quot;</span>, <span class="dt">remove =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_at</span>(<span class="kw">c</span>(<span class="st">&quot;dollars1&quot;</span>, <span class="st">&quot;dollars2&quot;</span>), <span class="op">~</span><span class="kw">ifelse</span>(<span class="kw">is.na</span>(.) <span class="op">|</span><span class="st"> </span>. <span class="op">==</span><span class="st"> &quot;&quot;</span>, <span class="dv">0</span>, <span class="kw">as.numeric</span>(.))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(dollars1, dollars2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">rincome =</span> <span class="kw">fct_inorder</span>(rincome))
+
+bar_prep <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> rincome)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">drop =</span> <span class="ot">FALSE</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p></li>
 <li><p>What is the most common <code>relig</code> in this survey? What’s the most common <code>partyid</code>?</p>
-<div class="sourceCode" id="cb712"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb712-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb712-2" title="2"><span class="st">  </span><span class="kw">count</span>(relig, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(relig, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## # A tibble: 15 x 2
 ##    relig                       n
 ##    &lt;fct&gt;                   &lt;int&gt;
@@ -565,8 +565,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 13 Other eastern              32
 ## 14 Native american            23
 ## 15 Don&#39;t know                 15</code></pre>
-<div class="sourceCode" id="cb714"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb714-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb714-2" title="2"><span class="st">  </span><span class="kw">count</span>(partyid, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(partyid, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## # A tibble: 10 x 2
 ##    partyid                n
 ##    &lt;fct&gt;              &lt;int&gt;
@@ -586,18 +586,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><p>Which <code>relig</code> does <code>denom</code> (denomination) apply to? How can you find out with a table? How can you find out with a visualisation?</p>
 <p><em>With visualization:</em></p>
-<div class="sourceCode" id="cb716"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb716-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb716-2" title="2"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>relig, <span class="dt">fill=</span>denom))<span class="op">+</span></a>
-<a class="sourceLine" id="cb716-3" title="3"><span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb716-4" title="4"><span class="st">  </span><span class="kw">coord_flip</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x=</span>relig, <span class="dt">fill=</span>denom))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_flip</span>()</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <ul>
 <li>Notice which have the widest variety of colours – are protestant, and Christian slightly</li>
 </ul>
 <p><em>With table:</em></p>
-<div class="sourceCode" id="cb717"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb717-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb717-2" title="2"><span class="st">  </span><span class="kw">count</span>(relig, denom) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb717-3" title="3"><span class="st">  </span><span class="kw">count</span>(relig, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(relig, denom) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(relig, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## # A tibble: 15 x 2
 ##    relig                       n
 ##    &lt;fct&gt;                   &lt;int&gt;
@@ -625,19 +625,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>15.4.1</h3>
 <ol style="list-style-type: decimal">
 <li><p>There are some suspiciously high numbers in <code>tvhours</code>. Is the mean a good summary?</p>
-<div class="sourceCode" id="cb719"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb719-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb719-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvhours_fct =</span> <span class="kw">factor</span>(tvhours)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb719-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tvhours_fct)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb719-4" title="4"><span class="st">  </span><span class="kw">geom_bar</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tvhours_fct =</span> <span class="kw">factor</span>(tvhours)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> tvhours_fct)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>()</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <ul>
 <li>Distribution is reasonably skewed with some values showing-up as 24 hours which seems impossible, in addition to this we have a lot of <code>NA</code> values, this may skew results</li>
 <li>Given high number of missing values, <code>tvhours</code> may also just not be reliable, do <code>NA</code>s associate with other variables? – Perhaps could try and impute these <code>NA</code>s</li>
 </ul></li>
 <li><p>For each factor in <code>gss_cat</code> identify whether the order of the levels is arbitrary or principled.</p>
-<div class="sourceCode" id="cb720"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb720-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb720-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">keep</span>(is.factor) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb720-3" title="3"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(levels)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">keep</span>(is.factor) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(levels)</code></pre>
 <pre><code>## $marital
 ## [1] &quot;No answer&quot;     &quot;Never married&quot; &quot;Separated&quot;     &quot;Divorced&quot;     
 ## [5] &quot;Widowed&quot;       &quot;Married&quot;      
@@ -691,16 +691,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="modifying-factor-levels" class="section level2">
 <h2>15.5: Modifying factor levels</h2>
 <p>Example with <code>fct_recode</code></p>
-<div class="sourceCode" id="cb722"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb722-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb722-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_recode</span>(partyid,</a>
-<a class="sourceLine" id="cb722-3" title="3">    <span class="st">&quot;Republican, strong&quot;</span>    =<span class="st"> &quot;Strong republican&quot;</span>,</a>
-<a class="sourceLine" id="cb722-4" title="4">    <span class="st">&quot;Republican, weak&quot;</span>      =<span class="st"> &quot;Not str republican&quot;</span>,</a>
-<a class="sourceLine" id="cb722-5" title="5">    <span class="st">&quot;Independent, near rep&quot;</span> =<span class="st"> &quot;Ind,near rep&quot;</span>,</a>
-<a class="sourceLine" id="cb722-6" title="6">    <span class="st">&quot;Independent, near dem&quot;</span> =<span class="st"> &quot;Ind,near dem&quot;</span>,</a>
-<a class="sourceLine" id="cb722-7" title="7">    <span class="st">&quot;Democrat, weak&quot;</span>        =<span class="st"> &quot;Not str democrat&quot;</span>,</a>
-<a class="sourceLine" id="cb722-8" title="8">    <span class="st">&quot;Democrat, strong&quot;</span>      =<span class="st"> &quot;Strong democrat&quot;</span></a>
-<a class="sourceLine" id="cb722-9" title="9">  )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb722-10" title="10"><span class="st">  </span><span class="kw">count</span>(partyid)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_recode</span>(partyid,
+    <span class="st">&quot;Republican, strong&quot;</span>    =<span class="st"> &quot;Strong republican&quot;</span>,
+    <span class="st">&quot;Republican, weak&quot;</span>      =<span class="st"> &quot;Not str republican&quot;</span>,
+    <span class="st">&quot;Independent, near rep&quot;</span> =<span class="st"> &quot;Ind,near rep&quot;</span>,
+    <span class="st">&quot;Independent, near dem&quot;</span> =<span class="st"> &quot;Ind,near dem&quot;</span>,
+    <span class="st">&quot;Democrat, weak&quot;</span>        =<span class="st"> &quot;Not str democrat&quot;</span>,
+    <span class="st">&quot;Democrat, strong&quot;</span>      =<span class="st"> &quot;Strong democrat&quot;</span>
+  )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(partyid)</code></pre>
 <pre><code>## # A tibble: 10 x 2
 ##    partyid                   n
 ##    &lt;fct&gt;                 &lt;int&gt;
@@ -719,65 +719,65 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ol style="list-style-type: decimal">
 <li><p>How have the proportions of people identifying as Democrat, Republican, and Independent changed over time?</p>
 <p><em>As a line plot: </em></p>
-<div class="sourceCode" id="cb724"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb724-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb724-3" title="3">    partyid,</a>
-<a class="sourceLine" id="cb724-4" title="4">    <span class="dt">other =</span> <span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>),</a>
-<a class="sourceLine" id="cb724-5" title="5">    <span class="dt">rep =</span> <span class="kw">c</span>(<span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>),</a>
-<a class="sourceLine" id="cb724-6" title="6">    <span class="dt">ind =</span> <span class="kw">c</span>(<span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>),</a>
-<a class="sourceLine" id="cb724-7" title="7">    <span class="dt">dem =</span> <span class="kw">c</span>(<span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>)</a>
-<a class="sourceLine" id="cb724-8" title="8">  )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-9" title="9"><span class="st">  </span><span class="kw">count</span>(year, partyid) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-12" title="12"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb724-13" title="13"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(</a>
-<a class="sourceLine" id="cb724-14" title="14">    <span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb724-15" title="15">    <span class="dt">y =</span> prop,</a>
-<a class="sourceLine" id="cb724-16" title="16">    <span class="dt">colour =</span> <span class="kw">fct_reorder2</span>(partyid, year, prop)</a>
-<a class="sourceLine" id="cb724-17" title="17">  )) <span class="op">+</span></a>
-<a class="sourceLine" id="cb724-18" title="18"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb724-19" title="19"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;partyid&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_collapse</span>(
+    partyid,
+    <span class="dt">other =</span> <span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>),
+    <span class="dt">rep =</span> <span class="kw">c</span>(<span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>),
+    <span class="dt">ind =</span> <span class="kw">c</span>(<span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>),
+    <span class="dt">dem =</span> <span class="kw">c</span>(<span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>)
+  )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(year, partyid) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> year,
+    <span class="dt">y =</span> prop,
+    <span class="dt">colour =</span> <span class="kw">fct_reorder2</span>(partyid, year, prop)
+  )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;partyid&quot;</span>)</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><em>As a bar plot: </em></p>
-<div class="sourceCode" id="cb725"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb725-1" title="1">gss_cat <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb725-3" title="3">    partyid,</a>
-<a class="sourceLine" id="cb725-4" title="4">    <span class="dt">other =</span> <span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>),</a>
-<a class="sourceLine" id="cb725-5" title="5">    <span class="dt">rep =</span> <span class="kw">c</span>(<span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>),</a>
-<a class="sourceLine" id="cb725-6" title="6">    <span class="dt">ind =</span> <span class="kw">c</span>(<span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>),</a>
-<a class="sourceLine" id="cb725-7" title="7">    <span class="dt">dem =</span> <span class="kw">c</span>(<span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>)</a>
-<a class="sourceLine" id="cb725-8" title="8">  )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-9" title="9"><span class="st">  </span><span class="kw">count</span>(year, partyid) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-12" title="12"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb725-13" title="13"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(</a>
-<a class="sourceLine" id="cb725-14" title="14">    <span class="dt">x =</span> year,</a>
-<a class="sourceLine" id="cb725-15" title="15">    <span class="dt">y =</span> prop,</a>
-<a class="sourceLine" id="cb725-16" title="16">    <span class="dt">fill =</span> <span class="kw">fct_reorder2</span>(partyid, year, prop)</a>
-<a class="sourceLine" id="cb725-17" title="17">  )) <span class="op">+</span></a>
-<a class="sourceLine" id="cb725-18" title="18"><span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb725-19" title="19"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;partyid&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">partyid =</span> <span class="kw">fct_collapse</span>(
+    partyid,
+    <span class="dt">other =</span> <span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Other party&quot;</span>),
+    <span class="dt">rep =</span> <span class="kw">c</span>(<span class="st">&quot;Strong republican&quot;</span>, <span class="st">&quot;Not str republican&quot;</span>),
+    <span class="dt">ind =</span> <span class="kw">c</span>(<span class="st">&quot;Ind,near rep&quot;</span>, <span class="st">&quot;Independent&quot;</span>, <span class="st">&quot;Ind,near dem&quot;</span>),
+    <span class="dt">dem =</span> <span class="kw">c</span>(<span class="st">&quot;Not str democrat&quot;</span>, <span class="st">&quot;Strong democrat&quot;</span>)
+  )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(year, partyid) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(
+    <span class="dt">x =</span> year,
+    <span class="dt">y =</span> prop,
+    <span class="dt">fill =</span> <span class="kw">fct_reorder2</span>(partyid, year, prop)
+  )) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;partyid&quot;</span>)</code></pre>
 <p><img src="15-factors_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <ul>
 <li>Suggests proportion of republicans has gone down with independents and other going up.</li>
 </ul></li>
 <li><p>How could you collapse <code>rincome</code> into a small set of categories?</p>
-<div class="sourceCode" id="cb726"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb726-1" title="1">other =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refused&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>)</a>
-<a class="sourceLine" id="cb726-2" title="2">high =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$25000 or more&quot;</span>, <span class="st">&quot;$20000 - 24999&quot;</span>, <span class="st">&quot;$15000 - 19999&quot;</span>, <span class="st">&quot;$10000 - 14999&quot;</span>)</a>
-<a class="sourceLine" id="cb726-3" title="3">med =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$8000 to 9999&quot;</span>, <span class="st">&quot;$7000 to 7999&quot;</span>, <span class="st">&quot;$6000 to 6999&quot;</span>, <span class="st">&quot;$5000 to 5999&quot;</span>)</a>
-<a class="sourceLine" id="cb726-4" title="4">low =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$4000 to 4999&quot;</span>, <span class="st">&quot;$3000 to 3999&quot;</span>, <span class="st">&quot;$1000 to 2999&quot;</span>, <span class="st">&quot;Lt $1000&quot;</span>)</a>
-<a class="sourceLine" id="cb726-5" title="5"></a>
-<a class="sourceLine" id="cb726-6" title="6"><span class="kw">mutate</span>(gss_cat,</a>
-<a class="sourceLine" id="cb726-7" title="7">       <span class="dt">rincome =</span> <span class="kw">fct_collapse</span>(</a>
-<a class="sourceLine" id="cb726-8" title="8">         rincome,</a>
-<a class="sourceLine" id="cb726-9" title="9">         <span class="dt">other =</span> other,</a>
-<a class="sourceLine" id="cb726-10" title="10">         <span class="dt">high =</span> high,</a>
-<a class="sourceLine" id="cb726-11" title="11">         <span class="dt">med =</span> med,</a>
-<a class="sourceLine" id="cb726-12" title="12">         <span class="dt">low =</span> low</a>
-<a class="sourceLine" id="cb726-13" title="13">       )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb726-14" title="14"><span class="st">  </span><span class="kw">count</span>(rincome)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">other =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;No answer&quot;</span>, <span class="st">&quot;Don&#39;t know&quot;</span>, <span class="st">&quot;Refused&quot;</span>, <span class="st">&quot;Not applicable&quot;</span>)
+high =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$25000 or more&quot;</span>, <span class="st">&quot;$20000 - 24999&quot;</span>, <span class="st">&quot;$15000 - 19999&quot;</span>, <span class="st">&quot;$10000 - 14999&quot;</span>)
+med =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$8000 to 9999&quot;</span>, <span class="st">&quot;$7000 to 7999&quot;</span>, <span class="st">&quot;$6000 to 6999&quot;</span>, <span class="st">&quot;$5000 to 5999&quot;</span>)
+low =<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;$4000 to 4999&quot;</span>, <span class="st">&quot;$3000 to 3999&quot;</span>, <span class="st">&quot;$1000 to 2999&quot;</span>, <span class="st">&quot;Lt $1000&quot;</span>)
+
+<span class="kw">mutate</span>(gss_cat,
+       <span class="dt">rincome =</span> <span class="kw">fct_collapse</span>(
+         rincome,
+         <span class="dt">other =</span> other,
+         <span class="dt">high =</span> high,
+         <span class="dt">med =</span> med,
+         <span class="dt">low =</span> low
+       )) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(rincome)</code></pre>
 <pre><code>## # A tibble: 4 x 2
 ##   rincome     n
 ##   &lt;fct&gt;   &lt;int&gt;
@@ -793,32 +793,32 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="viewing-all-levels" class="section level3">
 <h3>Viewing all levels</h3>
 <p>A few ways to get an initial look at the levels or counts across a dataset</p>
-<div class="sourceCode" id="cb728"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb728-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(unique)</a>
-<a class="sourceLine" id="cb728-3" title="3"></a>
-<a class="sourceLine" id="cb728-4" title="4">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-5" title="5"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(table)</a>
-<a class="sourceLine" id="cb728-6" title="6"></a>
-<a class="sourceLine" id="cb728-7" title="7">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-8" title="8"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(table) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-9" title="9"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(plot)</a>
-<a class="sourceLine" id="cb728-10" title="10"></a>
-<a class="sourceLine" id="cb728-11" title="11">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-12" title="12"><span class="st">  </span><span class="kw">mutate_if</span>(is.factor, <span class="op">~</span><span class="kw">fct_lump</span>(., <span class="dv">14</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-13" title="13"><span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb728-14" title="14"><span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(unique)
+
+gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(table)
+
+gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(table) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(plot)
+
+gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate_if</span>(is.factor, <span class="op">~</span><span class="kw">fct_lump</span>(., <span class="dv">14</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">sample_n</span>(<span class="dv">1000</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>GGally<span class="op">::</span><span class="kw">ggpairs</span>()</code></pre>
 <p><em>Percentage NA each level</em>:</p>
-<div class="sourceCode" id="cb729"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb729-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb729-2" title="2"><span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.x)) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(.x))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb729-3" title="3"><span class="st">  </span><span class="kw">as_tibble</span>()</a>
-<a class="sourceLine" id="cb729-4" title="4"></a>
-<a class="sourceLine" id="cb729-5" title="5"><span class="co"># essentially equivalent...</span></a>
-<a class="sourceLine" id="cb729-6" title="6">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb729-7" title="7"><span class="st">  </span><span class="kw">summarise_all</span>(<span class="op">~</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.)) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(.)))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">~</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.x)) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(.x))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">as_tibble</span>()
+
+<span class="co"># essentially equivalent...</span>
+gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(<span class="op">~</span>(<span class="kw">sum</span>(<span class="kw">is.na</span>(.)) <span class="op">/</span><span class="st"> </span><span class="kw">length</span>(.)))</code></pre>
 <p><em>Print all levels of tibble</em>:</p>
-<div class="sourceCode" id="cb730"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb730-1" title="1">gss_cat <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb730-2" title="2"><span class="st">  </span><span class="kw">count</span>(age) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb730-3" title="3"><span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">gss_cat <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(age) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">print</span>(<span class="dt">n =</span> <span class="ot">Inf</span>)</code></pre>
 
 </div>
 </div>
@@ -861,10 +861,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -874,6 +873,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/15-factors.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -889,7 +892,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

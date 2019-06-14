@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 27: R Markdown | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 27: R Markdown | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 27: R Markdown | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="25-many-models.html">
 <link rel="next" href="28-graphics-for-communication.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -512,7 +512,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>cache.extra</code> if output from function changes, will re-render – useful for if you only want to update if for example a file changes, e.g.</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb1240"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1240-1" title="1">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">rawdata &lt;-<span class="st"> </span>readr<span class="op">::</span><span class="kw">read_csv</span>(<span class="st">&quot;a_very_large_file.csv&quot;</span>)</code></pre>
 <ul>
 <li>good idea to name code chunks after main object created</li>
 <li><code>knitr::clean_cache</code> clear out your caches</li>
@@ -520,17 +520,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1241"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1241-1" title="1"><span class="co"># when writing books and tutorials</span></a>
-<a class="sourceLine" id="cb1241-2" title="2">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1241-3" title="3">  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,</a>
-<a class="sourceLine" id="cb1241-4" title="4">  <span class="dt">collapse =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb1241-5" title="5">)</a>
-<a class="sourceLine" id="cb1241-6" title="6"></a>
-<a class="sourceLine" id="cb1241-7" title="7"><span class="co"># hiding code for report</span></a>
-<a class="sourceLine" id="cb1241-8" title="8">knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(</a>
-<a class="sourceLine" id="cb1241-9" title="9">  <span class="dt">echo =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb1241-10" title="10">)</a>
-<a class="sourceLine" id="cb1241-11" title="11"><span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></a></code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># when writing books and tutorials</span>
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(
+  <span class="dt">comment =</span> <span class="st">&quot;#&gt;&quot;</span>,
+  <span class="dt">collapse =</span> <span class="ot">TRUE</span>
+)
+
+<span class="co"># hiding code for report</span>
+knitr<span class="op">::</span>opts_chunk<span class="op">$</span><span class="kw">set</span>(
+  <span class="dt">echo =</span> <span class="ot">FALSE</span>
+)
+<span class="co"># may also set `message = FALSE` and `warning = FALSE`</span></code></pre></li>
 <li><code>rmarkdown::render</code> programmatically knit documents
 <ul>
 <li>e.g. <code>rmarkdown::render("27-r-markdown.Rmd", output_format = "all")</code> to render all formats in YAML header</li>
@@ -541,10 +541,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li><code>format</code> helpful when inserting numbers into texts, e.g.</li>
 </ul>
-<div class="sourceCode" id="cb1242"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1242-1" title="1">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb1242-2" title="2"><span class="kw">comma</span>(<span class="dv">3452345</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">comma &lt;-<span class="st"> </span><span class="cf">function</span>(x) <span class="kw">format</span>(x, <span class="dt">digits =</span> <span class="dv">2</span>, <span class="dt">big.mark =</span> <span class="st">&quot;,&quot;</span>)
+<span class="kw">comma</span>(<span class="dv">3452345</span>)</code></pre>
 <pre><code>## [1] &quot;3,452,345&quot;</code></pre>
-<div class="sourceCode" id="cb1244"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1244-1" title="1"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">comma</span>(.<span class="dv">12358124331</span>)</code></pre>
 <pre><code>## [1] &quot;0.12&quot;</code></pre>
 <ul>
 <li>Use <code>params:</code> in YAML header to add in specific values or create parameterized reports, e.g.</li>
@@ -592,7 +592,7 @@ prompt you if this is necessary.)</p>
 <div id="text-formatting-with-markdown" class="section level2">
 <h2>27.3: Text formatting with Markdown</h2>
 <p><em>Print file from Hadley’s github page with commmon formatting:</em></p>
-<div class="sourceCode" id="cb1247"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1247-1" title="1"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cat</span>(readr<span class="op">::</span><span class="kw">read_file</span>(<span class="st">&quot;https://raw.githubusercontent.com/hadley/r4ds/master/rmarkdown/markdown.Rmd&quot;</span>))</code></pre>
 <p><em>Other notes</em>
 The following will actually run in the console when knitted (and not in the knitted document):</p>
 <pre><code>summary(mpg)</code></pre>
@@ -654,11 +654,11 @@ option.</p>
 <a href="https://github.com/hadley/r4ds/tree/master/rmarkdown" class="uri">https://github.com/hadley/r4ds/tree/master/rmarkdown</a>. Add a section
 that describes the largest 20 diamonds, including a table that displays
 their most important attributes.</p>
-<div class="sourceCode" id="cb1250"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1250-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-4" title="4"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(carat)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1250-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="kw">min_rank</span>(<span class="op">-</span>carat) <span class="op">&lt;=</span><span class="st"> </span><span class="dv">20</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="kw">starts_with</span>(<span class="st">&quot;c&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(carat)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="dt">caption =</span> <span class="st">&quot;The four C&#39;s of the 20 biggest diamonds&quot;</span>)</code></pre>
 <table>
 <caption><span id="tab:unnamed-chunk-7">Table 1: </span>The four C’s of the 20 biggest diamonds</caption>
 <thead>
@@ -867,10 +867,10 @@ their most important attributes.</p>
 <li><p>Modify <code>diamonds-sizes.Rmd</code> to use <code>comma()</code> to produce nicely
 formatted output. Also include the percentage of diamonds that are
 larger than 2.5 carats.</p>
-<div class="sourceCode" id="cb1251"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1251-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-3" title="3"><span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1251-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="st">`</span><span class="dt">proportion big</span><span class="st">`</span> =<span class="st"> </span>(<span class="kw">sum</span>(carat <span class="op">&gt;</span><span class="st"> </span><span class="fl">2.5</span>) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">              </span><span class="kw">comma</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -886,13 +886,13 @@ larger than 2.5 carats.</p>
 <li><p>Set up a network of chunks where <code>d</code> depends on <code>c</code> and <code>b</code>, and
 both <code>b</code> and <code>c</code> depend on <code>a</code>. Have each chunk print <code>lubridate::now()</code>,
 set <code>cache = TRUE</code>, then verify your understanding of caching.</p>
-<div class="sourceCode" id="cb1252"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1252-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">now</span>()</code></pre>
 <pre><code>## [1] &quot;2019-06-05 19:31:49 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1254"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1254-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">now</span>()</code></pre>
 <pre><code>## [1] &quot;2019-06-05 19:31:49 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1256"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1256-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">now</span>()</code></pre>
 <pre><code>## [1] &quot;2019-06-05 19:31:50 EDT&quot;</code></pre>
-<div class="sourceCode" id="cb1258"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1258-1" title="1">lubridate<span class="op">::</span><span class="kw">now</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">lubridate<span class="op">::</span><span class="kw">now</span>()</code></pre>
 <pre><code>## [1] &quot;2019-06-05 19:31:50 EDT&quot;</code></pre></li>
 </ol>
 
@@ -950,10 +950,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -963,6 +962,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/27-r-markdown.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -978,7 +981,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

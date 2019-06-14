@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch 3: Data visualization | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch 3: Data visualization | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch 3: Data visualization | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="index.html">
 <link rel="next" href="05-data-transformations.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -540,23 +540,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="section" class="section level3">
 <h3>3.2.4</h3>
 <p><strong>1. Run <code>ggplot(data = mpg)</code>. What do you see?</strong></p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>A blank grey space.</p>
 <p><strong>2. How many rows are in <code>mpg</code>? How many columns?</strong></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">nrow</span>(mtcars)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(mtcars)</code></pre>
 <pre><code>## [1] 32</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">ncol</span>(mtcars)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(mtcars)</code></pre>
 <pre><code>## [1] 11</code></pre>
 <p><strong>3. What does the <code>drv</code> variable describe? Read the help for <code>?mpg</code> to find out.</strong></p>
 <p>Front wheel, rear wheel or 4 wheel drive.</p>
 <p><strong>4. Make a scatterplot of <code>hwy</code> vs <code>cyl</code>.</strong></p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hwy, <span class="dt">y =</span> cyl))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> hwy, <span class="dt">y =</span> cyl))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p><strong>5. What happens if you make a scatterplot of <code>class</code> vs <code>drv</code>? Why is the plot not useful?</strong></p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
-<a class="sourceLine" id="cb8-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> class, <span class="dt">y =</span> drv))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">x =</span> class, <span class="dt">y =</span> drv))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/3.2.4.5-1.png" width="672" /></p>
 <p>The points stack-up on top of one another so you don’t get a sense of how many are on each point.</p>
 <p><em>Any ideas for what methods could you use to improve the view of this data?</em></p>
@@ -568,12 +568,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="section-1" class="section level3">
 <h3>3.3.1.</h3>
 <p><strong>1. What’s gone wrong with this code? Why are the points not blue?</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> <span class="st">&quot;blue&quot;</span>))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>The <code>color</code> field is in the <code>aes</code> function so it is expecting a character or factor variable. By inputting “blue” here, ggplot reads this as a character field with the value “blue” that it then supplies it’s default color schemes to (1st: salmon, 2nd: teal)</p>
 <p><strong>2. Which variables in <code>mpg</code> are categorical? Which variables are continuous? (Hint: type <code>?mpg</code> to read the documentation for the dataset). How can you see this information when you run mpg?</strong></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">mpg</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mpg</code></pre>
 <pre><code>## # A tibble: 234 x 11
 ##    manufacturer model displ  year   cyl trans drv     cty   hwy fl    class
 ##    &lt;chr&gt;        &lt;chr&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt;
@@ -590,29 +590,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## # ... with 224 more rows</code></pre>
 <p>The data is in tibble form already so just printing it shows the type, but could also use the <code>glimpse</code> and <code>str</code> functions.</p>
 <p><strong>3. Map a continuous variable to <code>color</code>, <code>size</code>, and <code>shape.</code> How do these aesthetics behave differently for categorical vs. continuous variables?</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> cyl, <span class="dt">size =</span> displ, <span class="dt">shape =</span> fl))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> cyl, <span class="dt">size =</span> displ, <span class="dt">shape =</span> fl))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p><code>color</code>: For continuous applies a gradient, for categorical it applies distinct colors based on the number of categories.<br />
 <code>size</code>: For continuous, applies in order, for categorical will apply in an order that may be arbitrary if there is not an order provided.<br />
 <code>shape</code>: Will not allow you to input a continuous variable.</p>
 <p><strong>4. What happens if you map the same variable to multiple aesthetics?</strong><br />
 Will map onto both fields. Can be redundant in some cases, in others it can be valuable for clarity.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)<span class="op">+</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> fl, <span class="dt">shape =</span> fl))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">color =</span> fl, <span class="dt">shape =</span> fl))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p><strong>5. What does the <code>stroke</code> aesthetic do? What shapes does it work with? (Hint: use <code>?geom_point</code>)</strong></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">?geom_point</a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">5</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?geom_point</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">5</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">3</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">shape =</span> <span class="dv">21</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="dt">fill =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">5</span>, <span class="dt">stroke =</span> <span class="dv">3</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-11-2.png" width="672" /></p>
 <p>For shapes that have a border (like <code>shape = 21</code>), you can colour the inside and outside separately. Use the stroke aesthetic to modify the width of the border (can get similar effects by layering small point on bigger point).</p>
 <p><strong>6. What happens if you map an aesthetic to something other than a variable name, like <code>aes(colour = displ &lt; 5)</code>?</strong></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> displ <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> displ <span class="op">&lt;</span><span class="st"> </span><span class="dv">5</span>)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>The field becomes a logical operator in this case.</p>
 </div>
@@ -622,35 +622,35 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <div id="section-2" class="section level3">
 <h3>3.5.1.</h3>
 <p><strong>1. What happens if you facet on a continuous variable?</strong></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>cyl)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>It will facet along all of the unique values.</p>
 <p><strong>2. What do the empty cells in plot with <code>facet_grid(drv ~ cyl)</code> mean?</strong></p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb19-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>cyl)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>cyl)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p><strong>How do they relate to this plot?</strong></p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> cyl))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> cyl))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>They represent the locations where there is no point on the above graph (could be made more clear by giving consistent order to axes).</p>
 <p><strong>3. What plots does the following code make? What does <code>.</code> do?</strong></p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb21-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>.)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(drv <span class="op">~</span><span class="st"> </span>.)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>cyl)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(. <span class="op">~</span><span class="st"> </span>cyl)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
 <p>Can use to specify if to facet by rows or columns.</p>
 <p><strong>4. Take the first faceted plot in this section:</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>class, <span class="dt">nrow =</span> <span class="dv">2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>class, <span class="dt">nrow =</span> <span class="dv">2</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><strong>What are the advantages to using faceting instead of the colour aesthetic? What are the disadvantages? How might the balance change if you had a larger dataset?</strong></p>
 <p>Faceting prevents overlapping points in the data. A disadvantage is that you have to move your eye to look at different graphs. Some groups you don’t have much data on as well so those don’t present much information. If there is more data, you may be more comfortable using facetting as each group should have points that you can view.</p>
@@ -658,15 +658,15 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <p><code>nrow</code> and <code>ncol</code> specify the number of columns or rows to facet by, <code>facet_grid</code> does not have this option because the splits are defined by the number of unique values in each variable. Other important options are <code>scales</code> which let you define if the scales are able to change between each plot.</p>
 <p><strong>6. When using <code>facet_grid()</code> you should usually put the variable with more unique levels in the columns. Why?</strong></p>
 <p>I’m not sure why exactly, if I compare these, it’s not completely unclear.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co">#more unique levels on columns</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="st">  </span><span class="kw">facet_grid</span>(year <span class="op">~</span><span class="st"> </span>class)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#more unique levels on columns</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(year <span class="op">~</span><span class="st"> </span>class)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co">#more unique levels on rows</span></a>
-<a class="sourceLine" id="cb25-2" title="2"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="st">  </span><span class="kw">facet_grid</span>(class <span class="op">~</span><span class="st"> </span>year)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#more unique levels on rows</span>
+<span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_grid</span>(class <span class="op">~</span><span class="st"> </span>year)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
 <p>My guess though would be that it’s because our computer screens are generally wider than they are tall. Hence there will be more space for viewing a higher number of attributes going across columns than by rows.</p>
 </div>
@@ -682,80 +682,80 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 * <code>geom_area</code>
 + Notice that <code>geom_area</code> is just a special case of <code>geom_ribbon</code></p>
 <p><em>Example of <code>geom_area</code>:</em></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">huron &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">year =</span> <span class="dv">1875</span><span class="op">:</span><span class="dv">1972</span>, <span class="dt">level =</span> <span class="kw">as.vector</span>(LakeHuron) <span class="op">-</span><span class="st"> </span><span class="dv">575</span>)</a>
-<a class="sourceLine" id="cb26-2" title="2">h &lt;-<span class="st"> </span><span class="kw">ggplot</span>(huron, <span class="kw">aes</span>(year))</a>
-<a class="sourceLine" id="cb26-3" title="3"></a>
-<a class="sourceLine" id="cb26-4" title="4">h <span class="op">+</span><span class="st"> </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> level))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">huron &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">year =</span> <span class="dv">1875</span><span class="op">:</span><span class="dv">1972</span>, <span class="dt">level =</span> <span class="kw">as.vector</span>(LakeHuron) <span class="op">-</span><span class="st"> </span><span class="dv">575</span>)
+h &lt;-<span class="st"> </span><span class="kw">ggplot</span>(huron, <span class="kw">aes</span>(year))
+
+h <span class="op">+</span><span class="st"> </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> <span class="dv">0</span>, <span class="dt">ymax =</span> level))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1">h <span class="op">+</span><span class="st"> </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">h <span class="op">+</span><span class="st"> </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Add aesthetic mappings</span></a>
-<a class="sourceLine" id="cb28-2" title="2">h <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> level <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">ymax =</span> level <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add aesthetic mappings</span>
+h <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> level <span class="op">-</span><span class="st"> </span><span class="dv">1</span>, <span class="dt">ymax =</span> level <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1">h <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">h <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_area</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level), <span class="dt">fill =</span> <span class="st">&quot;grey70&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> level))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-19-4.png" width="672" /></p>
 <p><strong>2. Run this code in your head and predict what the output will look like. Then, run the code in R and check your predictions.</strong></p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb30-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p><strong>3. What does <code>show.legend = FALSE</code> do? What happens if you remove it? Why do you think I used it earlier in the chapter?</strong></p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span></a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="st">  </span><span class="kw">geom_smooth</span>(</a>
-<a class="sourceLine" id="cb32-3" title="3">    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv),</a>
-<a class="sourceLine" id="cb32-4" title="4">    <span class="dt">show.legend =</span> <span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb32-5" title="5">  )</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(
+    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy, <span class="dt">color =</span> drv),
+    <span class="dt">show.legend =</span> <span class="ot">FALSE</span>
+  )</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>It get’s rid of the legend that would be assogiated with this geom. You removed it previously to keep it consistent with your other graphs that did not include them to specify the <code>drv</code>.</p>
 <p><strong>4. What does the <code>se</code> argument to <code>geom_smooth()</code> do?</strong><br />
 <code>se</code> here stands for standard error, so if we specify it as <code>FALSE</code> we are saying we do not want to show the standard errors for the plot.</p>
 <p><strong>5. Will these two graphs look different? Why/why not?</strong></p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> displ, <span class="dt">y =</span> hwy))</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
 <p>No, because local mappings for each geom are the same as the global mappings in the other.</p>
 <p><strong>6. Recreate the R code necessary to generate the following graphs.</strong></p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb38-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb38-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">group =</span> drv))<span class="op">+</span></a>
-<a class="sourceLine" id="cb40-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb40-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">group =</span> drv))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">colour =</span> drv))<span class="op">+</span></a>
-<a class="sourceLine" id="cb42-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb42-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy, <span class="dt">colour =</span> drv))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb46-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> drv)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb46-3" title="3"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> drv), <span class="dt">se =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">color =</span> drv)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="kw">aes</span>(<span class="dt">linetype =</span> drv), <span class="dt">se =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb48-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb48-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(displ, hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&quot;white&quot;</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> drv))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 </div>
@@ -765,125 +765,125 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <h3>3.7.1.</h3>
 <p><strong>1. What is the default <code>geom</code> associated with <code>stat_summary()</code>? How could you rewrite the previous plot to use that geom function instead of the stat function?</strong></p>
 <p>The default is <code>geom_pointrange</code>, the point being the mean, and the lines being the standard error on the y value (i.e. the deviation of the mean of the value).</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
-<a class="sourceLine" id="cb49-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty))</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 <p><em>Rewritten with geom<a href="#fn7" class="footnote-ref" id="fnref7"><sup>7</sup></a>:</em></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="kw">ggplot</span>(mpg)<span class="op">+</span></a>
-<a class="sourceLine" id="cb51-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty), <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty), <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>The specific example though is actually not the default:</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb53-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(</a>
-<a class="sourceLine" id="cb53-3" title="3">    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth),</a>
-<a class="sourceLine" id="cb53-4" title="4">    <span class="dt">fun.ymin =</span> min,</a>
-<a class="sourceLine" id="cb53-5" title="5">    <span class="dt">fun.ymax =</span> max,</a>
-<a class="sourceLine" id="cb53-6" title="6">    <span class="dt">fun.y =</span> median</a>
-<a class="sourceLine" id="cb53-7" title="7">  )</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">stat_summary</span>(
+    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth),
+    <span class="dt">fun.ymin =</span> min,
+    <span class="dt">fun.ymax =</span> max,
+    <span class="dt">fun.y =</span> median
+  )</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p><em>Rewritten with geom:</em></p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds)<span class="op">+</span></a>
-<a class="sourceLine" id="cb54-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth), </a>
-<a class="sourceLine" id="cb54-3" title="3">                  <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, </a>
-<a class="sourceLine" id="cb54-4" title="4">                  <span class="dt">fun.ymin =</span> <span class="st">&quot;min&quot;</span>,</a>
-<a class="sourceLine" id="cb54-5" title="5">                  <span class="dt">fun.ymax =</span> <span class="st">&quot;max&quot;</span>, </a>
-<a class="sourceLine" id="cb54-6" title="6">                  <span class="dt">fun.y =</span> <span class="st">&quot;median&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds)<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> depth), 
+                  <span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>, 
+                  <span class="dt">fun.ymin =</span> <span class="st">&quot;min&quot;</span>,
+                  <span class="dt">fun.ymax =</span> <span class="st">&quot;max&quot;</span>, 
+                  <span class="dt">fun.y =</span> <span class="st">&quot;median&quot;</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p><strong>2. What does <code>geom_col()</code> do? How is it different to <code>geom_bar()</code>?</strong><br />
 <code>geom_col</code> has <code>"identity"</code> as the default <code>stat</code>, so it expects to receive a variable that already has the value aggregated<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a></p>
 <p><strong>3.Most geoms and stats come in pairs that are almost always used in concert. Read through the documentation and make a list of all the pairs. What do they have in common?</strong></p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1">?ggplot2</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?ggplot2</code></pre>
 <p><strong>4.What variables does <code>stat_smooth()</code> compute? What parameters control its behaviour?</strong></p>
 <ul>
 <li>See here: <a href="http://ggplot2.tidyverse.org/reference/#section-layer-stats" class="uri">http://ggplot2.tidyverse.org/reference/#section-layer-stats</a> for a helpful resource.</li>
 <li>Also, someone who aggregated some online: <a href="http://sape.inf.usi.ch/quick-reference/ggplot2/geom" class="uri">http://sape.inf.usi.ch/quick-reference/ggplot2/geom</a><a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a></li>
 </ul>
 <p><strong>5. In our proportion bar chart, we need to set <code>group = 1</code>. Why? In other words what is the problem with these two graphs?</strong></p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb56-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop..))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop..))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb57-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color, <span class="dt">y =</span> ..prop..))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color, <span class="dt">y =</span> ..prop..))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p><strong>Fixed graphs:</strong></p>
 <ol style="list-style-type: decimal">
 <li></li>
 </ol>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb58-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> ..prop.., <span class="dt">group =</span> <span class="dv">1</span>))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <ol start="2" style="list-style-type: decimal">
 <li>For this second graph though, I would think you would want something more like the following:</li>
 </ol>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb59-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color), <span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb59-3" title="3"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;prop&quot;</span>) <span class="co"># ylab would say &quot;count&quot; w/o this</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> color), <span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;prop&quot;</span>) <span class="co"># ylab would say &quot;count&quot; w/o this</span></code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>(Which could be generated by this code as well, using <code>geom_count()</code>)</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb60-2" title="2"><span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb60-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb60-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> prop, <span class="dt">fill =</span> color))<span class="op">+</span></a>
-<a class="sourceLine" id="cb60-6" title="6"><span class="st">  </span><span class="kw">geom_col</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cut) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">prop =</span> n <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(n)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> prop, <span class="dt">fill =</span> color))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()</code></pre>
 </div>
 </div>
 <div id="position-adjustment" class="section level2">
 <h2>3.8: Position Adjustment</h2>
 <p><em>Some “dodge”" examples:</em></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb61-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> diamonds) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">fill =</span> clarity), <span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb62-2" title="2"><span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb62-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> n, <span class="dt">fill =</span> color))<span class="op">+</span></a>
-<a class="sourceLine" id="cb62-4" title="4"><span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(cut, color) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cut, <span class="dt">y =</span> n, <span class="dt">fill =</span> color))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-39-2.png" width="672" /></p>
 <ul>
 <li>the <code>interaction()</code> function can also sometimes be helpful for these types of charts</li>
 </ul>
 <p>Looking of <code>geom_jitter</code> and only changing width.</p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb63-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">width =</span> <span class="fl">.2</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> drv, <span class="dt">y =</span> hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">height =</span> <span class="dv">0</span>, <span class="dt">width =</span> <span class="fl">.2</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <div id="section-5" class="section level3">
 <h3>3.8.1.</h3>
 <p><strong>1.What is the problem with this plot? How could you improve it?</strong></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb64-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>The points overlap, could use <code>geom_jitter</code> instead</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb65-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <p><strong>2. What parameters to <code>geom_jitter()</code> control the amount of jittering?</strong><br />
 <code>height</code> and <code>width</code></p>
 <p><strong>3. Compare and contrast <code>geom_jitter()</code> with <code>geom_count()</code>.</strong></p>
 <p>Take the above chart and instead use <code>geom_count</code>.</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_count</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
 <p>Can also use <code>geom_count</code> with <code>color</code>, and can use “jitter” in <code>position</code> arg.</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_count</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb68-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;jitter&quot;</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-44-2.png" width="672" /></p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb69-2" title="2"><span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_jitter</span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">alpha =</span> <span class="fl">0.3</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-44-3.png" width="672" /></p>
 <p>One problem with <code>geom_count</code> is that the shapes can still block-out other shapes at that same point of different colors. You can flip the orderof the stacking order of the colors with <code>position</code> = “dodge”. Still this seems limited.</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy, <span class="dt">colour =</span> drv)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_count</span>(<span class="dt">position =</span> <span class="st">&quot;dodge&quot;</span>)</code></pre>
 <pre><code>## Warning: Width not defined. Set with `position_dodge(width = ?)`</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
 <p><strong>4. What’s the default position adjustment for <code>geom_boxplot()</code>? Create a visualisation of the mpg dataset that demonstrates it.</strong></p>
 <p><code>dodge</code> (but seems like changing to <code>identity</code> is the same)</p>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb72-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data=</span>mpg, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>class, <span class="dt">y=</span>hwy))<span class="op">+</span></a>
-<a class="sourceLine" id="cb72-2" title="2"><span class="st">  </span><span class="kw">geom_boxplot</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>mpg, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>class, <span class="dt">y=</span>hwy))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-46-1.png" width="672" /></p>
 </div>
 </div>
@@ -903,30 +903,30 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <p><strong>1.Turn a stacked bar chart into a pie chart using <code>coord_polar()</code>.</strong></p>
 <p>These are more illustrative than anything, here is a note from the documetantion:<br />
 <em>NOTE: Use these plots with caution - polar coordinates has major perceptual problems. The main point of these examples is to demonstrate how these common plots can be described in the grammar. Use with EXTREME caution.</em></p>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb73-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">fill =</span> class))<span class="op">+</span></a>
-<a class="sourceLine" id="cb73-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb73-3" title="3"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb73-4" title="4"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="dv">1</span>, <span class="dt">fill =</span> class))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">labels =</span> <span class="ot">NULL</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-47-1.png" width="672" /></p>
 <p>If I want to make multiple levels:</p>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb74-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(cyl), <span class="dt">fill =</span> class))<span class="op">+</span></a>
-<a class="sourceLine" id="cb74-2" title="2"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb74-3" title="3"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">as.factor</span>(cyl), <span class="dt">fill =</span> class))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">position =</span> <span class="st">&quot;fill&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta =</span> <span class="st">&quot;y&quot;</span>)</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
 <p><strong>2. What does <code>labs()</code> do? Read the documentation.</strong></p>
 <p>Used for giving labels.</p>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb75-1" title="1">?labs</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?labs</code></pre>
 <p><strong>3. What’s the difference between <code>coord_quickmap()</code> and <code>coord_map()</code>?</strong></p>
 <p>The first is an approximation, useful for smaller regions to be proected. For this example, do not see substantial differences.</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb76-1" title="1">nz &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;nz&quot;</span>)</a>
-<a class="sourceLine" id="cb76-2" title="2"></a>
-<a class="sourceLine" id="cb76-3" title="3"><span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span></a>
-<a class="sourceLine" id="cb76-4" title="4"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb76-5" title="5"><span class="st">  </span><span class="kw">coord_quickmap</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">nz &lt;-<span class="st"> </span><span class="kw">map_data</span>(<span class="st">&quot;nz&quot;</span>)
+
+<span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_quickmap</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb77-1" title="1"><span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span></a>
-<a class="sourceLine" id="cb77-2" title="2"><span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb77-3" title="3"><span class="st">  </span><span class="kw">coord_map</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(nz,<span class="kw">aes</span>(long,lat,<span class="dt">group=</span>group))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_polygon</span>(<span class="dt">fill=</span><span class="st">&quot;red&quot;</span>,<span class="dt">colour=</span><span class="st">&quot;black&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_map</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-50-2.png" width="672" /></p>
 <p><strong>4. What does the plot below tell you about the relationship between city and highway in <code>mpg</code>? Why is <code>coord_fixed()</code> important? What does <code>geom_abline()</code> do?</strong></p>
 <ul>
@@ -934,10 +934,10 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 </li>
 <li><code>coord_fixed()</code> ensures that the ratios between the x and y axis stay at a specified relationship (default: 1). This is important for easily seeing the magnitude of the relationship between variables.</li>
 </ul>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb78-1" title="1"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb78-2" title="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb78-3" title="3"><span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb78-4" title="4"><span class="st">  </span><span class="kw">coord_fixed</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data =</span> mpg, <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> cty, <span class="dt">y =</span> hwy)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_abline</span>() <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_fixed</span>()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 </div>
 </div>
@@ -945,36 +945,36 @@ Will map onto both fields. Can be redundant in some cases, in others it can be v
 <h2>Appendix</h2>
 <div id="extension" class="section level3">
 <h3>3.7.1.1 extension</h3>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb79-1" title="1"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty, <span class="dt">group =</span> cyl))<span class="op">+</span></a>
-<a class="sourceLine" id="cb79-2" title="2"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg, <span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> cty, <span class="dt">group =</span> cyl))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="dt">stat =</span> <span class="st">&quot;summary&quot;</span>)</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
 <p>This seems to be the same as what you would get by doing the following with dplyr:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb81-1" title="1">mpg <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb81-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb81-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(cty),</a>
-<a class="sourceLine" id="cb81-4" title="4">            <span class="dt">sd =</span> (<span class="kw">sum</span>((cty <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cty))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">n</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))<span class="op">^</span><span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb81-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb81-6" title="6">            <span class="dt">se =</span> sd <span class="op">/</span><span class="st"> </span>n<span class="op">^</span><span class="fl">0.5</span>,</a>
-<a class="sourceLine" id="cb81-7" title="7">            <span class="dt">lower =</span> mean <span class="op">-</span><span class="st"> </span>se,</a>
-<a class="sourceLine" id="cb81-8" title="8">            <span class="dt">upper =</span> mean <span class="op">+</span><span class="st"> </span>se) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb81-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> mean, <span class="dt">group =</span> cyl))<span class="op">+</span></a>
-<a class="sourceLine" id="cb81-10" title="10"><span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mpg <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(cyl) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>dplyr<span class="op">::</span><span class="kw">summarise</span>(<span class="dt">mean =</span> <span class="kw">mean</span>(cty),
+            <span class="dt">sd =</span> (<span class="kw">sum</span>((cty <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(cty))<span class="op">^</span><span class="dv">2</span>) <span class="op">/</span><span class="st"> </span>(<span class="kw">n</span>() <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))<span class="op">^</span><span class="fl">0.5</span>,
+            <span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">se =</span> sd <span class="op">/</span><span class="st"> </span>n<span class="op">^</span><span class="fl">0.5</span>,
+            <span class="dt">lower =</span> mean <span class="op">-</span><span class="st"> </span>se,
+            <span class="dt">upper =</span> mean <span class="op">+</span><span class="st"> </span>se) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> cyl, <span class="dt">y =</span> mean, <span class="dt">group =</span> cyl))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_pointrange</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lower, <span class="dt">ymax =</span> upper))</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
 <p>Other geoms you could have set stat_summary to:</p>
 <p><code>crossbar</code>:</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb82-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
-<a class="sourceLine" id="cb82-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;crossbar&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;crossbar&quot;</span>)</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p><code>errorbar</code>:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
-<a class="sourceLine" id="cb84-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;errorbar&quot;</span>)</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
 <p><code>linerange</code>:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">ggplot</span>(mpg) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;linerange&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(mpg) <span class="op">+</span>
+<span class="st">  </span><span class="kw">stat_summary</span>(<span class="kw">aes</span>(cyl, cty), <span class="dt">geom =</span> <span class="st">&quot;linerange&quot;</span>)</code></pre>
 <pre><code>## No summary function supplied, defaulting to `mean_se()</code></pre>
 <p><img src="03-data-visualization_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
 
@@ -1027,10 +1027,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1040,6 +1039,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/03-data-visualization.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -1055,7 +1058,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

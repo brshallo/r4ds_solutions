@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 11: Data import | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 11: Data import | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 11: Data import | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="10-tibbles.html">
 <link rel="next" href="12-tidy-data.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -512,7 +512,7 @@ are separated by white space.</li>
 <a href="https://github.com/Ironholds/webreadr">webreadr</a> which is built on top
 of <code>read_log()</code> and provides many more helpful tools.)</li>
 </ul>
-<div class="sourceCode" id="cb398"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb398-1" title="1"><span class="kw">read_log</span>(<span class="kw">readr_example</span>(<span class="st">&quot;example.log&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_log</span>(<span class="kw">readr_example</span>(<span class="st">&quot;example.log&quot;</span>))</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   X1 = col_character(),
@@ -528,8 +528,8 @@ of <code>read_log()</code> and provides many more helpful tools.)</li>
 ##   &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;       &lt;chr&gt;        &lt;chr&gt;                 &lt;int&gt; &lt;int&gt;
 ## 1 172.21.~ &lt;NA&gt;  &quot;Microsoft~ 08/Apr/2001~ GET /scripts/iisadmi~   200  3401
 ## 2 127.0.0~ &lt;NA&gt;  frank       10/Oct/2000~ GET /apache_pb.gif H~   200  2326</code></pre>
-<div class="sourceCode" id="cb401"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb401-1" title="1"><span class="co"># readr_example finds the correct path associated with the package by doing the following:</span></a>
-<a class="sourceLine" id="cb401-2" title="2"><span class="co">## system.file(&quot;extdata&quot;, path, package = &quot;readr&quot;, mustWork = TRUE)</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># readr_example finds the correct path associated with the package by doing the following:</span>
+<span class="co">## system.file(&quot;extdata&quot;, path, package = &quot;readr&quot;, mustWork = TRUE)</span></code></pre>
 <ul>
 <li><code>parse_*()</code>: take character vector and return more specialized vector
 <ul>
@@ -546,8 +546,8 @@ of <code>read_log()</code> and provides many more helpful tools.)</li>
 <li><code>charToRaw</code> will show underlying representation of a character<a href="#fn25" class="footnote-ref" id="fnref25"><sup>25</sup></a></li>
 <li><code>guess_encoding</code>: can guess encoding – generally would use this with <code>charToRaw</code> and helps avoid figuring out encoding by hand</li>
 </ul>
-<div class="sourceCode" id="cb402"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb402-1" title="1">x1 &lt;-<span class="st"> &quot;El Ni</span><span class="ch">\xf1</span><span class="st">o was particularly bad this year&quot;</span></a>
-<a class="sourceLine" id="cb402-2" title="2"><span class="kw">guess_encoding</span>(<span class="kw">charToRaw</span>(x1))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x1 &lt;-<span class="st"> &quot;El Ni</span><span class="ch">\xf1</span><span class="st">o was particularly bad this year&quot;</span>
+<span class="kw">guess_encoding</span>(<span class="kw">charToRaw</span>(x1))</code></pre>
 <pre><code>## # A tibble: 2 x 2
 ##   encoding   confidence
 ##   &lt;chr&gt;           &lt;dbl&gt;
@@ -625,7 +625,7 @@ come back to this [time zones].
 <h3>11.2.2.</h3>
 <p><em>1. What function would you use to read a file where fields were separated with “|”?</em><br />
 <code>read_delim</code> for example:</p>
-<div class="sourceCode" id="cb404"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb404-1" title="1"><span class="kw">read_delim</span>(<span class="st">&quot;a|b|c</span><span class="ch">\n</span><span class="st">1|2|3&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_delim</span>(<span class="st">&quot;a|b|c</span><span class="ch">\n</span><span class="st">1|2|3&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;|&quot;</span>)</code></pre>
 <pre><code>## # A tibble: 1 x 3
 ##       a     b     c
 ##   &lt;int&gt; &lt;int&gt; &lt;int&gt;
@@ -635,9 +635,9 @@ come back to this [time zones].
 <p><em>3. What are the most important arguments to <code>read_fwf()</code>?</em></p>
 <p><code>widths</code></p>
 <p><em>4. Sometimes strings in a CSV file contain commas. To prevent them from causing problems they need to be surrounded by a quoting character, like " or ’.</em> By convention, <code>read_csv()</code> assumes that the quoting character will be ", and if you want to change it you’ll need to use <code>read_delim()</code> instead. <em>What arguments do you need to specify to read the following text into a data frame?</em></p>
-<div class="sourceCode" id="cb406"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb406-1" title="1"><span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span></code></pre>
 <pre><code>## [1] &quot;x,y\n1,&#39;a,b&#39;&quot;</code></pre>
-<div class="sourceCode" id="cb408"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb408-1" title="1"><span class="kw">read_delim</span>(<span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;&#39;&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">read_delim</span>(<span class="st">&quot;x,y</span><span class="ch">\n</span><span class="st">1,&#39;a,b&#39;&quot;</span>, <span class="dt">delim =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">quote =</span> <span class="st">&quot;&#39;&quot;</span>)</code></pre>
 <pre><code>## # A tibble: 1 x 2
 ##       x y    
 ##   &lt;int&gt; &lt;chr&gt;
@@ -682,37 +682,37 @@ come back to this [time zones].
 </ul></li>
 <li>Below are a few examples for double and number</li>
 </ul>
-<div class="sourceCode" id="cb410"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb410-1" title="1"><span class="kw">parse_double</span>(<span class="st">&quot;1.23&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_double</span>(<span class="st">&quot;1.23&quot;</span>)</code></pre>
 <pre><code>## [1] 1.23</code></pre>
-<div class="sourceCode" id="cb412"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb412-1" title="1"><span class="kw">parse_double</span>(<span class="st">&quot;1,23&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">decimal_mark=</span><span class="st">&quot;,&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_double</span>(<span class="st">&quot;1,23&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">decimal_mark=</span><span class="st">&quot;,&quot;</span>))</code></pre>
 <pre><code>## [1] 1.23</code></pre>
-<div class="sourceCode" id="cb414"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb414-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;the cost is $125.34, it&#39;s a good deal&quot;</span>) <span class="co">#Slightly different than book, captures decimal</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;the cost is $125.34, it&#39;s a good deal&quot;</span>) <span class="co">#Slightly different than book, captures decimal</span></code></pre>
 <pre><code>## [1] 125.34</code></pre>
-<div class="sourceCode" id="cb416"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb416-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$123,456,789&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$123,456,789&quot;</span>)</code></pre>
 <pre><code>## [1] 123456789</code></pre>
-<div class="sourceCode" id="cb418"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb418-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$123.456.789&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$123.456.789&quot;</span>)</code></pre>
 <pre><code>## [1] 123.456</code></pre>
-<div class="sourceCode" id="cb420"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb420-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$123.456.789&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>))<span class="co">#used in europe</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$123.456.789&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>))<span class="co">#used in europe</span></code></pre>
 <pre><code>## [1] 123456789</code></pre>
-<div class="sourceCode" id="cb422"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb422-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$123&#39;456&#39;789&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;&#39;&quot;</span>))<span class="co">#used in Switzerland</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$123&#39;456&#39;789&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;&#39;&quot;</span>))<span class="co">#used in Switzerland</span></code></pre>
 <pre><code>## [1] 123456789</code></pre>
 <p><em>2. What happens if you try and set <code>decimal_mark</code> and <code>grouping_mark</code> to the same character? What happens to the default value of <code>grouping_mark</code> when you set <code>decimal_mark</code> to “,”? What happens to the default value of decimal_mark when you set the grouping_mark to “.”?</em></p>
 <ul>
 <li>can’t set both to be same–if you change one, other automatically changes</li>
 </ul>
-<div class="sourceCode" id="cb424"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb424-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$135.435,45&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">decimal_mark =</span> <span class="st">&quot;,&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$135.435,45&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>, <span class="dt">decimal_mark =</span> <span class="st">&quot;,&quot;</span>))</code></pre>
 <pre><code>## [1] 135435.4</code></pre>
-<div class="sourceCode" id="cb426"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb426-1" title="1"><span class="kw">parse_number</span>(<span class="st">&quot;$135.435,45&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_number</span>(<span class="st">&quot;$135.435,45&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">grouping_mark =</span> <span class="st">&quot;.&quot;</span>))</code></pre>
 <pre><code>## [1] 135435.4</code></pre>
 <p><em>3. I didn’t discuss the <code>date_format</code> and <code>time_format</code> options to <code>locale()</code>. What do they do? Construct an example that shows when they might be useful.</em></p>
 <ul>
 <li><code>date_format</code> and <code>time_format</code> in <code>locale()</code> let you set the default date and time formats</li>
 </ul>
-<div class="sourceCode" id="cb428"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb428-1" title="1"><span class="kw">parse_date</span>(<span class="st">&quot;31 january 2015&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%d %B %Y&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(<span class="st">&quot;31 january 2015&quot;</span>, <span class="dt">format =</span> <span class="st">&quot;%d %B %Y&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2015-01-31&quot;</code></pre>
-<div class="sourceCode" id="cb430"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb430-1" title="1"><span class="kw">parse_date</span>(<span class="st">&quot;31 january 2015&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">date_format =</span> <span class="st">&quot;%d %B %Y&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(<span class="st">&quot;31 january 2015&quot;</span>, <span class="dt">locale =</span> <span class="kw">locale</span>(<span class="dt">date_format =</span> <span class="st">&quot;%d %B %Y&quot;</span>))</code></pre>
 <pre><code>## [1] &quot;2015-01-31&quot;</code></pre>
-<div class="sourceCode" id="cb432"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb432-1" title="1"><span class="co">#let&#39;s you change it in locale()</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#let&#39;s you change it in locale()</span></code></pre>
 <p><em>4. If you live outside the US, create a new locale object that encapsulates the settings for the types of file you read most commonly.</em></p>
 <ul>
 <li>I live in the US.</li>
@@ -725,32 +725,32 @@ come back to this [time zones].
 <li>Asia tends to use “%d.%m.%Y”</li>
 </ul>
 <p><em>7. Generate the correct format string to parse each of the following dates and times:</em></p>
-<div class="sourceCode" id="cb433"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb433-1" title="1">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span></a>
-<a class="sourceLine" id="cb433-2" title="2">d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span></a>
-<a class="sourceLine" id="cb433-3" title="3">d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span></a>
-<a class="sourceLine" id="cb433-4" title="4">d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)</a>
-<a class="sourceLine" id="cb433-5" title="5">d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span></a>
-<a class="sourceLine" id="cb433-6" title="6">t1 &lt;-<span class="st"> &quot;1705&quot;</span></a>
-<a class="sourceLine" id="cb433-7" title="7">t2 &lt;-<span class="st"> &quot;11:15:10.12 PM&quot;</span></a>
-<a class="sourceLine" id="cb433-8" title="8">t3 &lt;-<span class="st"> &quot;11:::15:10.12 PM&quot;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">d1 &lt;-<span class="st"> &quot;January 1, 2010&quot;</span>
+d2 &lt;-<span class="st"> &quot;2015-Mar-07&quot;</span>
+d3 &lt;-<span class="st"> &quot;06-Jun-2017&quot;</span>
+d4 &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;August 19 (2015)&quot;</span>, <span class="st">&quot;July 1 (2015)&quot;</span>)
+d5 &lt;-<span class="st"> &quot;12/30/14&quot;</span> <span class="co"># Dec 30, 2014</span>
+t1 &lt;-<span class="st"> &quot;1705&quot;</span>
+t2 &lt;-<span class="st"> &quot;11:15:10.12 PM&quot;</span>
+t3 &lt;-<span class="st"> &quot;11:::15:10.12 PM&quot;</span></code></pre>
 <p><em>Solutions:</em></p>
-<div class="sourceCode" id="cb434"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb434-1" title="1"><span class="kw">parse_date</span>(d1, <span class="st">&quot;%B %d, %Y&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d1, <span class="st">&quot;%B %d, %Y&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2010-01-01&quot;</code></pre>
-<div class="sourceCode" id="cb436"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb436-1" title="1"><span class="kw">parse_date</span>(d2, <span class="st">&quot;%Y-%b-%d&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d2, <span class="st">&quot;%Y-%b-%d&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2015-03-07&quot;</code></pre>
-<div class="sourceCode" id="cb438"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb438-1" title="1"><span class="kw">parse_date</span>(d3, <span class="st">&quot;%d-%b-%Y&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d3, <span class="st">&quot;%d-%b-%Y&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2017-06-06&quot;</code></pre>
-<div class="sourceCode" id="cb440"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb440-1" title="1"><span class="kw">parse_date</span>(d3, <span class="st">&quot;%d%.%b-%Y&quot;</span>) <span class="co">#could use this alternatively</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d3, <span class="st">&quot;%d%.%b-%Y&quot;</span>) <span class="co">#could use this alternatively</span></code></pre>
 <pre><code>## [1] &quot;2017-06-06&quot;</code></pre>
-<div class="sourceCode" id="cb442"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb442-1" title="1"><span class="kw">parse_date</span>(d4, <span class="st">&quot;%B %d (%Y)&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d4, <span class="st">&quot;%B %d (%Y)&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2015-08-19&quot; &quot;2015-07-01&quot;</code></pre>
-<div class="sourceCode" id="cb444"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb444-1" title="1"><span class="kw">parse_date</span>(d5, <span class="st">&quot;%m/%d/%y&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_date</span>(d5, <span class="st">&quot;%m/%d/%y&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;2014-12-30&quot;</code></pre>
-<div class="sourceCode" id="cb446"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb446-1" title="1"><span class="kw">parse_time</span>(t1, <span class="st">&quot;%H%M&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_time</span>(t1, <span class="st">&quot;%H%M&quot;</span>)</code></pre>
 <pre><code>## 17:05:00</code></pre>
-<div class="sourceCode" id="cb448"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb448-1" title="1"><span class="kw">parse_time</span>(t2, <span class="st">&quot;%I:%M:%OS %p&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_time</span>(t2, <span class="st">&quot;%I:%M:%OS %p&quot;</span>)</code></pre>
 <pre><code>## 23:15:10.12</code></pre>
-<div class="sourceCode" id="cb450"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb450-1" title="1"><span class="kw">parse_time</span>(t3, <span class="st">&quot;%I%*%M:%OS %p&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">parse_time</span>(t3, <span class="st">&quot;%I%*%M:%OS %p&quot;</span>)</code></pre>
 <pre><code>## 23:15:10.12</code></pre>
 
 </div>
@@ -805,10 +805,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -818,6 +817,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/11-data-import.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -833,7 +836,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

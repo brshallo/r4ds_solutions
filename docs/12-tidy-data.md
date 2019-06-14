@@ -17,7 +17,6 @@
     + default uses non-alphanumeric character as `sep`, can also use number to separate by width
 * `extract` similar to separate but specify what to pull-out rather than what to split by
 * `unite` inverse of separate  
-  
 
 
 ```r

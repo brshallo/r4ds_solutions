@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 18: Pipes (notes only) | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 18: Pipes (notes only) | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 18: Pipes (notes only) | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="16-dates-and-times.html">
 <link rel="next" href="19-functions.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -493,23 +493,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>If you want to use <code>assign</code> with the pipe, you must be explicit about the environment</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb784"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb784-1" title="1">env &lt;-<span class="st"> </span><span class="kw">environment</span>()</a>
-<a class="sourceLine" id="cb784-2" title="2"><span class="kw">assign</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">100</span>, <span class="dt">envir =</span> env)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">env &lt;-<span class="st"> </span><span class="kw">environment</span>()
+<span class="kw">assign</span>(<span class="st">&quot;x&quot;</span>, <span class="dv">100</span>, <span class="dt">envir =</span> env)</code></pre>
 <ul>
 <li><code>try</code>, <code>tryCatch</code>, <code>suppressMessages</code>, and <code>suppressWarnings</code> from base R all also do not work well</li>
 </ul>
 <p>Other pipes = ‘T pipe’, <code>%T&gt;%</code> that returns left-hand side rather than right. Will let the plot output, but then continues. Notice that this doesn’t work quite the same way for ggplot as ggplot does output something</p>
-<div class="sourceCode" id="cb785"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb785-1" title="1"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb785-2" title="2"><span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span></a>
-<a class="sourceLine" id="cb785-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb785-4" title="4"><span class="st">  </span><span class="kw">str</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rnorm</span>(<span class="dv">100</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">matrix</span>(<span class="dt">ncol =</span> <span class="dv">2</span>) <span class="op">%T&gt;%</span>
+<span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str</span>()</code></pre>
 <p><img src="18-pipes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <pre><code>##  num [1:50, 1:2] -0.25 -0.924 0.894 0.298 0.347 ...</code></pre>
-<div class="sourceCode" id="cb787"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb787-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb787-2" title="2"><span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb787-3" title="3"><span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb787-4" title="4"><span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb787-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Sepal.Length, Sepal.Width) <span class="op">%T&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">plot</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Sepal.Length) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>)</code></pre>
 <p><img src="18-pipes_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
 <pre><code>##    Sepal.Length
 ## 1           5.1
@@ -528,11 +528,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>The two examples below are equivalent</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb789"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb789-1" title="1">mtcars <span class="op">%$%</span></a>
-<a class="sourceLine" id="cb789-2" title="2"><span class="st">  </span><span class="kw">cor</span>(disp, mpg)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%$%</span>
+<span class="st">  </span><span class="kw">cor</span>(disp, mpg)</code></pre>
 <pre><code>## [1] -0.8475514</code></pre>
-<div class="sourceCode" id="cb791"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb791-1" title="1">mtcars <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb791-2" title="2"><span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">mtcars <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">with</span>(<span class="kw">cor</span>(disp, mpg))</code></pre>
 <pre><code>## [1] -0.8475514</code></pre>
 
 </div>
@@ -574,10 +574,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -587,6 +586,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/18-pipes.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -602,7 +605,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

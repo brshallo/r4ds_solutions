@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 20: Vectors | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 20: Vectors | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 20: Vectors | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="19-functions.html">
 <link rel="next" href="21-iteration.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -530,16 +530,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>getS3method</code> to show specific implementation of a method</li>
 </ul></li>
 </ul>
-<div class="sourceCode" id="cb882"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb882-1" title="1">as.Date</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">as.Date</code></pre>
 <pre><code>## function (x, ...) 
 ## UseMethod(&quot;as.Date&quot;)
 ## &lt;bytecode: 0x000000001d6f1aa0&gt;
 ## &lt;environment: namespace:base&gt;</code></pre>
-<div class="sourceCode" id="cb884"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb884-1" title="1"><span class="kw">methods</span>(<span class="st">&quot;as.Date&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">methods</span>(<span class="st">&quot;as.Date&quot;</span>)</code></pre>
 <pre><code>## [1] as.Date.character as.Date.default   as.Date.factor    as.Date.numeric  
 ## [5] as.Date.POSIXct   as.Date.POSIXlt  
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
-<div class="sourceCode" id="cb886"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb886-1" title="1"><span class="kw">getS3method</span>(<span class="st">&quot;as.Date&quot;</span>, <span class="st">&quot;default&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">getS3method</span>(<span class="st">&quot;as.Date&quot;</span>, <span class="st">&quot;default&quot;</span>)</code></pre>
 <pre><code>## function (x, ...) 
 ## {
 ##     if (inherits(x, &quot;Date&quot;)) 
@@ -569,9 +569,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><code>is.finite</code> and <code>is.infinite</code> return <code>FALSE</code> for <code>NA</code> or <code>NaN</code> values, therefore these values become <code>TRUE</code> when negated as in the latter case, e.g.:</li>
 </ul>
-<div class="sourceCode" id="cb896"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb896-1" title="1"><span class="kw">is.finite</span>(<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">11</span>,<span class="op">-</span><span class="ot">Inf</span>, <span class="ot">NA</span>, <span class="ot">NaN</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.finite</span>(<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">11</span>,<span class="op">-</span><span class="ot">Inf</span>, <span class="ot">NA</span>, <span class="ot">NaN</span>))</code></pre>
 <pre><code>## [1]  TRUE  TRUE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode" id="cb898"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb898-1" title="1"><span class="op">!</span><span class="kw">is.infinite</span>(<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">11</span>,<span class="op">-</span><span class="ot">Inf</span>, <span class="ot">NA</span>, <span class="ot">NaN</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">is.infinite</span>(<span class="kw">c</span>(<span class="dv">6</span>,<span class="dv">11</span>,<span class="op">-</span><span class="ot">Inf</span>, <span class="ot">NA</span>, <span class="ot">NaN</span>))</code></pre>
 <pre><code>## [1]  TRUE  TRUE FALSE  TRUE  TRUE</code></pre></li>
 <li><p>Read the source code for <code>dplyr::near()</code> (Hint: to see the source code, drop the <code>()</code>). How does it work?</p>
 <ul>
@@ -615,47 +615,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>both assign names after fact</li>
 <li><code>purrr::set_names</code> is stricter and returns an error in situations like the following where as <code>setNames</code> does not:</li>
 </ul>
-<div class="sourceCode" id="cb900"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb900-1" title="1"><span class="kw">setNames</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">setNames</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>))</code></pre>
 <pre><code>##    a &lt;NA&gt; &lt;NA&gt; &lt;NA&gt; 
 ##    1    2    3    4</code></pre>
-<div class="sourceCode" id="cb902"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb902-1" title="1"><span class="kw">set_names</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>)) </a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">set_names</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>)) </code></pre>
 <pre><code>## Error: `nm` must be `NULL` or a character vector the same length as `x`</code></pre></li>
 <li><p>Create functions that take a vector as input and returns:</p>
-<div class="sourceCode" id="cb904"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb904-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span><span class="op">:</span><span class="dv">14</span>, <span class="ot">NA</span>, <span class="ot">Inf</span>, <span class="ot">NaN</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">3</span><span class="op">:</span><span class="dv">14</span>, <span class="ot">NA</span>, <span class="ot">Inf</span>, <span class="ot">NaN</span>)</code></pre>
 <ol style="list-style-type: decimal">
 <li>The last value. Should you use <code>[</code> or <code>[[</code>?</li>
 </ol>
-<div class="sourceCode" id="cb905"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb905-1" title="1">return_last &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[[<span class="kw">length</span>(x)]]</a>
-<a class="sourceLine" id="cb905-2" title="2"></a>
-<a class="sourceLine" id="cb905-3" title="3"><span class="kw">return_last</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">return_last &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[[<span class="kw">length</span>(x)]]
+
+<span class="kw">return_last</span>(x)</code></pre>
 <pre><code>## [1] NaN</code></pre>
 <ol style="list-style-type: decimal">
 <li>The elements at even numbered positions.</li>
 </ol>
-<div class="sourceCode" id="cb907"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb907-1" title="1">return_even &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[((<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)]</a>
-<a class="sourceLine" id="cb907-2" title="2"></a>
-<a class="sourceLine" id="cb907-3" title="3"><span class="kw">return_even</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">return_even &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[((<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)]
+
+<span class="kw">return_even</span>(x)</code></pre>
 <pre><code>##  [1]  -2   0   2   4   6   8  10  12  14 Inf</code></pre>
 <ol style="list-style-type: decimal">
 <li>Every element except the last value.</li>
 </ol>
-<div class="sourceCode" id="cb909"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb909-1" title="1">return_not_last &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[<span class="op">-</span><span class="kw">length</span>(x)]</a>
-<a class="sourceLine" id="cb909-2" title="2"></a>
-<a class="sourceLine" id="cb909-3" title="3"><span class="kw">return_not_last</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">return_not_last &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[<span class="op">-</span><span class="kw">length</span>(x)]
+
+<span class="kw">return_not_last</span>(x)</code></pre>
 <pre><code>##  [1]  -3  -2  -1   0   1   2   3   4   5   6   7   8   9  10  11  12  13
 ## [18]  14  NA Inf</code></pre>
 <ol style="list-style-type: decimal">
 <li>Only even numbers (and no missing values).</li>
 </ol>
-<div class="sourceCode" id="cb911"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb911-1" title="1"><span class="co">#only even and not na</span></a>
-<a class="sourceLine" id="cb911-2" title="2">return_even_no_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[((<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(x)]</a>
-<a class="sourceLine" id="cb911-3" title="3"></a>
-<a class="sourceLine" id="cb911-4" title="4"><span class="kw">return_even_no_na</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#only even and not na</span>
+return_even_no_na &lt;-<span class="st"> </span><span class="cf">function</span>(x) x[((<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(x)) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>) <span class="op">&amp;</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(x)]
+
+<span class="kw">return_even_no_na</span>(x)</code></pre>
 <pre><code>##  [1]  -2   0   2   4   6   8  10  12  14 Inf</code></pre></li>
 <li><p>Why is <code>x[-which(x &gt; 0)]</code> not the same as <code>x[x &lt;= 0]</code>?</p>
-<div class="sourceCode" id="cb913"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb913-1" title="1">x[<span class="op">-</span><span class="kw">which</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)]  <span class="co">#which only reports the indices of the matches, so specifies all to be removed</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x[<span class="op">-</span><span class="kw">which</span>(x <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>)]  <span class="co">#which only reports the indices of the matches, so specifies all to be removed</span></code></pre>
 <pre><code>## [1]  -3  -2  -1   0  NA NaN</code></pre>
-<div class="sourceCode" id="cb915"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb915-1" title="1">x[x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>]  <span class="co">#This method reports T/F&#39;sNaN is converted into NA</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x[x <span class="op">&lt;=</span><span class="st"> </span><span class="dv">0</span>]  <span class="co">#This method reports T/F&#39;sNaN is converted into NA</span></code></pre>
 <pre><code>## [1] -3 -2 -1  0 NA NA</code></pre>
 <ul>
 <li>in the 2nd instance, <code>NaN</code>s will get converted to <code>NA</code></li>
@@ -670,19 +670,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="recursive-vectors-lists" class="section level2">
 <h2>20.5: Recursive vectors (lists)</h2>
 <p>Example of subsetting items from a list:</p>
-<div class="sourceCode" id="cb917"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb917-1" title="1">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="st">&quot;a string&quot;</span>, <span class="dt">c =</span> pi, <span class="dt">d =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>), <span class="dv">-5</span>))</a>
-<a class="sourceLine" id="cb917-2" title="2"></a>
-<a class="sourceLine" id="cb917-3" title="3">a[[<span class="dv">4</span>]][[<span class="dv">1</span>]]</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="st">&quot;a string&quot;</span>, <span class="dt">c =</span> pi, <span class="dt">d =</span> <span class="kw">list</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>,<span class="op">-</span><span class="dv">2</span>), <span class="dv">-5</span>))
+
+a[[<span class="dv">4</span>]][[<span class="dv">1</span>]]</code></pre>
 <pre><code>## [1] -1 -2</code></pre>
-<div class="sourceCode" id="cb919"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb919-1" title="1"><span class="co"># equivalent alternatives:</span></a>
-<a class="sourceLine" id="cb919-2" title="2"><span class="co"># a$d[[1]]</span></a>
-<a class="sourceLine" id="cb919-3" title="3"><span class="co"># a[4][[1]][[1]]</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co"># equivalent alternatives:</span>
+<span class="co"># a$d[[1]]</span>
+<span class="co"># a[4][[1]][[1]]</span></code></pre>
 <ul>
 <li>3 ways of subsetting <code>[]</code>, <code>[[]]</code>, <code>$</code></li>
 </ul>
 <div id="section-75" class="section level3">
 <h3>20.5.4.</h3>
-<div class="sourceCode" id="cb920"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb920-1" title="1">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="st">&quot;a string&quot;</span>, <span class="dt">c =</span> pi, <span class="dt">d =</span> <span class="kw">list</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-5</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dt">a =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, <span class="dt">b =</span> <span class="st">&quot;a string&quot;</span>, <span class="dt">c =</span> pi, <span class="dt">d =</span> <span class="kw">list</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">-5</span>))</code></pre>
 <ol style="list-style-type: decimal">
 <li><p>Draw the following lists as nested sets:</p>
 <ol style="list-style-type: decimal">
@@ -710,15 +710,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3>20.7.4</h3>
 <ol style="list-style-type: decimal">
 <li><p>What does <code>hms::hms(3600)</code> return?</p>
-<div class="sourceCode" id="cb921"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb921-1" title="1">x &lt;-<span class="st"> </span>hms<span class="op">::</span><span class="kw">hms</span>(<span class="dv">3600</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span>hms<span class="op">::</span><span class="kw">hms</span>(<span class="dv">3600</span>)</code></pre>
 <p>How does it print?</p>
-<div class="sourceCode" id="cb922"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb922-1" title="1"><span class="kw">print</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(x)</code></pre>
 <pre><code>## 01:00:00</code></pre>
 <p>What primitive type is the augmented vector built on top of?</p>
-<div class="sourceCode" id="cb924"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb924-1" title="1"><span class="kw">typeof</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">typeof</span>(x)</code></pre>
 <pre><code>## [1] &quot;double&quot;</code></pre>
 <p>What attributes does it use?</p>
-<div class="sourceCode" id="cb926"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb926-1" title="1"><span class="kw">attributes</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">attributes</span>(x)</code></pre>
 <pre><code>## $class
 ## [1] &quot;hms&quot;      &quot;difftime&quot;
 ## 
@@ -728,11 +728,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>if the column is length one it will repeat for the length of the other column(s), otherwise if it is not the same length it will return an error</li>
 </ul>
-<div class="sourceCode" id="cb928"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb928-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">6</span>)  <span class="co">#error</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">y =</span> <span class="dv">5</span><span class="op">:</span><span class="dv">6</span>)  <span class="co">#error</span></code></pre>
 <pre><code>## Error: Tibble columns must have consistent lengths, only values of length one are recycled:
 ## * Length 2: Column `y`
 ## * Length 4: Column `x`</code></pre>
-<div class="sourceCode" id="cb930"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb930-1" title="1"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">6</span>)  <span class="co">#can have length 1 that repeats</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">tibble</span>(<span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dt">y =</span> <span class="dv">6</span>)  <span class="co">#can have length 1 that repeats</span></code></pre>
 <pre><code>## # A tibble: 5 x 2
 ##       x     y
 ##   &lt;int&gt; &lt;dbl&gt;
@@ -753,8 +753,8 @@ column of a tibble?</p>
 <h2>Appendix</h2>
 <div id="subsetting-nested-lists" class="section level3">
 <h3>Subsetting nested lists</h3>
-<div class="sourceCode" id="cb932"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb932-1" title="1">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">list</span>(<span class="kw">list</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>), <span class="st">&quot;e2&quot;</span>), <span class="kw">list</span>(<span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>))</a>
-<a class="sourceLine" id="cb932-2" title="2">x</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="st">&quot;a&quot;</span>, <span class="kw">list</span>(<span class="kw">list</span>(<span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>), <span class="st">&quot;e2&quot;</span>), <span class="kw">list</span>(<span class="st">&quot;e&quot;</span>, <span class="st">&quot;f&quot;</span>))
+x</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;a&quot;
 ## 
@@ -783,6 +783,12 @@ column of a tibble?</p>
 
 </div>
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="34">
+<li id="fn34"><p>For example try typing in <code>?select</code>, <code>methods("select")</code>, <code>getS3method("select", "data.frame")</code>, or <code>dplyr:::select_impl</code> into the console and the output may not immediately illuminate for you how <code>select()</code> works. If interested in more advanced topics, see <a href="https://adv-r.hadley.nz/">Advanced R Progamming</a>.<a href="20-vectors.html#fnref34" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
 <div id="disqus_thread"></div>
 <script>
@@ -822,10 +828,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -835,6 +840,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/20-vectors.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -850,7 +859,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

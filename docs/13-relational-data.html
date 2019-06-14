@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 13: Relational data | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 13: Relational data | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 13: Relational data | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="12-tidy-data.html">
 <link rel="next" href="14-strings.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -581,11 +581,11 @@ whether or not they match an observation in the other table.
 </table>
 <div id="nycflights13" class="section level2">
 <h2>13.2 nycflights13</h2>
-<div class="sourceCode" id="cb509"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb509-1" title="1">flights</a>
-<a class="sourceLine" id="cb509-2" title="2">airlines</a>
-<a class="sourceLine" id="cb509-3" title="3">airports</a>
-<a class="sourceLine" id="cb509-4" title="4">planes</a>
-<a class="sourceLine" id="cb509-5" title="5">weather</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights
+airlines
+airports
+planes
+weather</code></pre>
 <div id="section-39" class="section level3">
 <h3>13.2.1</h3>
 <ol style="list-style-type: decimal">
@@ -614,9 +614,9 @@ whether or not they match an observation in the other table.
 <h3>13.3.1</h3>
 <ol style="list-style-type: decimal">
 <li><p><em>Add a surrogate key to <code>flights</code>.</em></p>
-<div class="sourceCode" id="cb510"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb510-1" title="1">flights <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb510-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">surrogate_key =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb510-3" title="3"><span class="st">  </span><span class="kw">glimpse</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">surrogate_key =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">glimpse</span>()</code></pre>
 <pre><code>## Observations: 336,776
 ## Variables: 20
 ## $ year           &lt;int&gt; 2013, 2013, 2013, 2013, 2013, 2013, 2013, 2013,...
@@ -643,42 +643,42 @@ whether or not they match an observation in the other table.
 <ol style="list-style-type: decimal">
 <li><code>Lahman::Batting</code>: player, year, stint</li>
 </ol>
-<div class="sourceCode" id="cb512"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb512-1" title="1">Lahman<span class="op">::</span>Batting <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb512-2" title="2"><span class="st">  </span><span class="kw">count</span>(playerID, yearID, stint) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb512-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">Lahman<span class="op">::</span>Batting <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(playerID, yearID, stint) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 0 x 4
 ## # ... with 4 variables: playerID &lt;chr&gt;, yearID &lt;int&gt;, stint &lt;int&gt;, n &lt;int&gt;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><code>babynames::babynames</code>: name, sex, year</li>
 </ol>
-<div class="sourceCode" id="cb514"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb514-1" title="1">babynames<span class="op">::</span>babynames <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb514-2" title="2"><span class="st">  </span><span class="kw">count</span>(name, sex, year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb514-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">babynames<span class="op">::</span>babynames <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(name, sex, year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 0 x 4
 ## # ... with 4 variables: name &lt;chr&gt;, sex &lt;chr&gt;, year &lt;dbl&gt;, n &lt;int&gt;</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><code>nasaweather::atmos</code>: lat, long, year, month</li>
 </ol>
-<div class="sourceCode" id="cb516"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb516-1" title="1">nasaweather<span class="op">::</span>atmos <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb516-2" title="2"><span class="st">  </span><span class="kw">count</span>(lat, long, year, month) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb516-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">nasaweather<span class="op">::</span>atmos <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(lat, long, year, month) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 0 x 5
 ## # ... with 5 variables: lat &lt;dbl&gt;, long &lt;dbl&gt;, year &lt;int&gt;, month &lt;int&gt;,
 ## #   n &lt;int&gt;</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><code>fueleconomy::vehicles</code>: id</li>
 </ol>
-<div class="sourceCode" id="cb518"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb518-1" title="1">fueleconomy<span class="op">::</span>vehicles <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb518-2" title="2"><span class="st">  </span><span class="kw">count</span>(id) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb518-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fueleconomy<span class="op">::</span>vehicles <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(id) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 0 x 2
 ## # ... with 2 variables: id &lt;int&gt;, n &lt;int&gt;</code></pre>
 <ol start="5" style="list-style-type: decimal">
 <li><code>ggplot2::diamonds</code>: needs surrogate</li>
 </ol>
-<div class="sourceCode" id="cb520"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb520-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb520-2" title="2"><span class="st">  </span><span class="kw">count</span>(x, y, z, depth, table, carat, cut, color, price, clarity ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb520-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(x, y, z, depth, table, carat, cut, color, price, clarity ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 143 x 11
 ##        x     y     z depth table carat cut       color price clarity     n
 ##    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;int&gt; &lt;ord&gt;   &lt;int&gt;
@@ -693,8 +693,8 @@ whether or not they match an observation in the other table.
 ##  9  4.31  4.29  2.71  63      55  0.3  Ideal     G       675 VS2         2
 ## 10  4.31  4.29  2.73  63.5    56  0.31 Very Good D       732 SI1         2
 ## # ... with 133 more rows</code></pre>
-<div class="sourceCode" id="cb522"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb522-1" title="1">diamonds <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb522-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">surrogate_id =</span> <span class="kw">row_number</span>())</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diamonds <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">surrogate_id =</span> <span class="kw">row_number</span>())</code></pre>
 <pre><code>## # A tibble: 53,940 x 11
 ##    carat cut   color clarity depth table price     x     y     z
 ##    &lt;dbl&gt; &lt;ord&gt; &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
@@ -735,24 +735,24 @@ whether or not they match an observation in the other table.
 <li><p><em>Compute the average delay by destination, then join on the <code>airports</code></em>
 <em>data frame so you can show the spatial distribution of delays. Here’s an</em>
 <em>easy way to draw a map of the United States:</em></p>
-<div class="sourceCode" id="cb524"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb524-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb524-2" title="2"><span class="st">  </span><span class="kw">semi_join</span>(airports, <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span> =<span class="st"> &quot;faa&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb524-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb524-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb524-5" title="5"><span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span>=<span class="st">&quot;faa&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb524-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lon, lat)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb524-7" title="7"><span class="st">  </span><span class="kw">borders</span>(<span class="st">&quot;state&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb524-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> delay)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb524-9" title="9"><span class="st">  </span><span class="kw">coord_quickmap</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb524-10" title="10"><span class="st">  </span><span class="co"># see chapter 28 for information on scales</span></a>
-<a class="sourceLine" id="cb524-11" title="11"><span class="st">  </span><span class="kw">scale_color_gradient2</span>(<span class="dt">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">semi_join</span>(airports, <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span> =<span class="st"> &quot;faa&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(dest) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span>=<span class="st">&quot;faa&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(lon, lat)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">borders</span>(<span class="st">&quot;state&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="kw">aes</span>(<span class="dt">colour =</span> delay)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">coord_quickmap</span>()<span class="op">+</span>
+<span class="st">  </span><span class="co"># see chapter 28 for information on scales</span>
+<span class="st">  </span><span class="kw">scale_color_gradient2</span>(<span class="dt">low =</span> <span class="st">&quot;blue&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p></li>
 <li><p><em>Add the location of the origin <em>and</em> destination (i.e. the <code>lat</code> and <code>lon</code>)</em>
 <em>to <code>flights</code>.</em></p>
-<div class="sourceCode" id="cb525"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb525-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb525-2" title="2"><span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span> =<span class="st"> &quot;faa&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb525-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;origin&quot;</span> =<span class="st"> &quot;faa&quot;</span>), <span class="dt">suffix =</span> <span class="kw">c</span>(<span class="st">&quot;_dest&quot;</span>, <span class="st">&quot;_origin&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb525-4" title="4"><span class="st">  </span><span class="kw">select</span>(flight, carrier, dest, lat_dest, lon_dest, origin, lat_origin, lon_origin)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;dest&quot;</span> =<span class="st"> &quot;faa&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(airports, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;origin&quot;</span> =<span class="st"> &quot;faa&quot;</span>), <span class="dt">suffix =</span> <span class="kw">c</span>(<span class="st">&quot;_dest&quot;</span>, <span class="st">&quot;_origin&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(flight, carrier, dest, lat_dest, lon_dest, origin, lat_origin, lon_origin)</code></pre>
 <pre><code>## # A tibble: 336,776 x 8
 ##    flight carrier dest  lat_dest lon_dest origin lat_origin lon_origin
 ##     &lt;int&gt; &lt;chr&gt;   &lt;chr&gt;    &lt;dbl&gt;    &lt;dbl&gt; &lt;chr&gt;       &lt;dbl&gt;      &lt;dbl&gt;
@@ -769,38 +769,38 @@ whether or not they match an observation in the other table.
 ## # ... with 336,766 more rows</code></pre>
 <p>Note that the suffix allows you to tag names onto first and second table, hence why vector is length 2</p></li>
 <li><p><em>Is there a relationship between the age of a plane and its delays?</em></p>
-<div class="sourceCode" id="cb527"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb527-1" title="1"><span class="kw">group_by</span>(flights, tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb527-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb527-3" title="3">            <span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb527-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb527-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb527-6" title="6"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, age <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb527-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> avg_delay))<span class="op">+</span></a>
-<a class="sourceLine" id="cb527-8" title="8"><span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_quasirandom</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb527-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(flights, tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+            <span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, age <span class="op">&lt;</span><span class="st"> </span><span class="dv">30</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> age, <span class="dt">y =</span> avg_delay))<span class="op">+</span>
+<span class="st">  </span>ggbeeswarm<span class="op">::</span><span class="kw">geom_quasirandom</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Looks as though planes that are roughly 5 to 10 years old have higher delays… Let’s look at same thing using boxplots.</p>
-<div class="sourceCode" id="cb529"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb529-1" title="1"><span class="kw">group_by</span>(flights, tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb529-2" title="2"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb529-3" title="3">            <span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb529-4" title="4"><span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb529-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb529-6" title="6"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb529-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb529-8" title="8"><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">cut_width</span>(age, <span class="dv">2</span>, <span class="dt">boundary =</span> <span class="dv">0</span>), <span class="dt">y =</span> avg_delay))<span class="op">+</span></a>
-<a class="sourceLine" id="cb529-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">group_by</span>(flights, tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">avg_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm=</span><span class="ot">TRUE</span>), 
+            <span class="dt">n =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">50</span>, age <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>, age <span class="op">&gt;=</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> <span class="kw">cut_width</span>(age, <span class="dv">2</span>, <span class="dt">boundary =</span> <span class="dv">0</span>), <span class="dt">y =</span> avg_delay))<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Perhaps there is not an overall trend association between age and delays, though it seems that the particular group of planes in that time range seem to have delays than either newer or older planes. On the other hand, there does almost look to be a seasonality pattern – though this may just be me seeing things… perhaps worth exploring more…</p>
 <p>A simple way to test for a non-linear relationship would be to discretize age and then pass it through an anova…</p>
-<div class="sourceCode" id="cb530"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb530-1" title="1">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-2" title="2"><span class="st">  </span><span class="kw">select</span>(arr_delay, tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-3" title="3"><span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-4" title="4"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(arr_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year,</a>
-<a class="sourceLine" id="cb530-6" title="6">         <span class="dt">age_round_5 =</span> (<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>age <span class="op">%/%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-7" title="7"><span class="st">  </span><span class="kw">with</span>(<span class="kw">aov</span>(arr_delay <span class="op">~</span><span class="st"> </span>age_round_<span class="dv">5</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb530-8" title="8"><span class="st">  </span><span class="kw">summary</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">nycflights13<span class="op">::</span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(arr_delay, tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">left_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(arr_delay)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">age =</span> <span class="dv">2013</span> <span class="op">-</span><span class="st"> </span>year,
+         <span class="dt">age_round_5 =</span> (<span class="dv">5</span> <span class="op">*</span><span class="st"> </span>age <span class="op">%/%</span><span class="st"> </span><span class="dv">5</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">with</span>(<span class="kw">aov</span>(arr_delay <span class="op">~</span><span class="st"> </span>age_round_<span class="dv">5</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre>
 <pre><code>##                 Df    Sum Sq Mean Sq F value Pr(&gt;F)    
 ## age_round_5     11   1062080   96553   47.92 &lt;2e-16 ***
 ## Residuals   273841 551756442    2015                   
@@ -813,34 +813,34 @@ whether or not they match an observation in the other table.
 </ul></li>
 <li><p><em>What weather conditions make it more likely to see a delay?</em></p>
 <p>There are a lot of ways you could have approached this problem. Below, I look at the average weather value for each of the groups <code>FALSE</code>, <code>TRUE</code> and <code>Canceled</code> – <code>FALSE</code> corresponding with non-delayed flights, <code>TRUE</code> with delayed flights and <code>Canceled</code> with flights that were canceled. If I were feeling fancy, I would have also added the standard errors on these…</p>
-<div class="sourceCode" id="cb532"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb532-1" title="1">flights_weath &lt;-<span class="st"> </span><span class="kw">mutate</span>(flights, <span class="dt">delay_TF =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb532-2" title="2"><span class="st">  </span><span class="kw">separate</span>(sched_dep_time, </a>
-<a class="sourceLine" id="cb532-3" title="3">           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;hour_sched&quot;</span>, <span class="st">&quot;min_sched&quot;</span>), </a>
-<a class="sourceLine" id="cb532-4" title="4">           <span class="dt">sep =</span> <span class="dv">-3</span>,</a>
-<a class="sourceLine" id="cb532-5" title="5">           <span class="dt">remove =</span> <span class="ot">FALSE</span>, </a>
-<a class="sourceLine" id="cb532-6" title="6">           <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb532-7" title="7"><span class="st">  </span><span class="kw">left_join</span>(weather, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;origin&quot;</span>, <span class="st">&quot;year&quot;</span>,<span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour_sched&quot;</span>=<span class="st">&quot;hour&quot;</span>))</a>
-<a class="sourceLine" id="cb532-8" title="8"></a>
-<a class="sourceLine" id="cb532-9" title="9">flights_weath_gath &lt;-<span class="st"> </span>flights_weath <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-10" title="10"><span class="st">  </span><span class="kw">select</span>(sched_dep_time, delay_TF, sched_dep_time, temp<span class="op">:</span>visib) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-12" title="12"><span class="st">  </span><span class="kw">gather</span>(temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, </a>
-<a class="sourceLine" id="cb532-13" title="13">       <span class="dt">key=</span><span class="st">&quot;weather&quot;</span>, <span class="dt">value=</span><span class="st">&quot;values&quot;</span>) </a>
-<a class="sourceLine" id="cb532-14" title="14"></a>
-<a class="sourceLine" id="cb532-15" title="15">flights_summarized &lt;-<span class="st"> </span>flights_weath_gath <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-16" title="16"><span class="st">  </span><span class="kw">group_by</span>(weather, delay_TF) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-17" title="17"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">median_weath =</span> <span class="kw">median</span>(values, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb532-18" title="18">            <span class="dt">mean_weath =</span> <span class="kw">mean</span>(values, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), </a>
-<a class="sourceLine" id="cb532-19" title="19">            <span class="dt">sum_n =</span> <span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(values))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-20" title="20"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb532-21" title="21"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">delay_TF =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(delay_TF), <span class="st">&quot;Canceled&quot;</span>, delay_TF),</a>
-<a class="sourceLine" id="cb532-22" title="22">         <span class="dt">delay_TF =</span> forcats<span class="op">::</span><span class="kw">as_factor</span>(delay_TF, <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="st">&quot;Canceled&quot;</span>)))</a>
-<a class="sourceLine" id="cb532-23" title="23"></a>
-<a class="sourceLine" id="cb532-24" title="24">flights_summarized <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb532-25" title="25"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> delay_TF, <span class="dt">y =</span> mean_weath, <span class="dt">fill =</span> delay_TF))<span class="op">+</span></a>
-<a class="sourceLine" id="cb532-26" title="26"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb532-27" title="27"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb532-28" title="28"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights_weath &lt;-<span class="st"> </span><span class="kw">mutate</span>(flights, <span class="dt">delay_TF =</span> dep_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">separate</span>(sched_dep_time, 
+           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;hour_sched&quot;</span>, <span class="st">&quot;min_sched&quot;</span>), 
+           <span class="dt">sep =</span> <span class="dv">-3</span>,
+           <span class="dt">remove =</span> <span class="ot">FALSE</span>, 
+           <span class="dt">convert =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">left_join</span>(weather, <span class="dt">by =</span> <span class="kw">c</span>(<span class="st">&quot;origin&quot;</span>, <span class="st">&quot;year&quot;</span>,<span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour_sched&quot;</span>=<span class="st">&quot;hour&quot;</span>))
+
+flights_weath_gath &lt;-<span class="st"> </span>flights_weath <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(sched_dep_time, delay_TF, sched_dep_time, temp<span class="op">:</span>visib) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">key =</span> <span class="kw">row_number</span>()) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp, dewp, humid, wind_dir, wind_speed, wind_gust, precip, pressure, visib, 
+       <span class="dt">key=</span><span class="st">&quot;weather&quot;</span>, <span class="dt">value=</span><span class="st">&quot;values&quot;</span>) 
+
+flights_summarized &lt;-<span class="st"> </span>flights_weath_gath <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(weather, delay_TF) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">median_weath =</span> <span class="kw">median</span>(values, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            <span class="dt">mean_weath =</span> <span class="kw">mean</span>(values, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>), 
+            <span class="dt">sum_n =</span> <span class="kw">sum</span>(<span class="op">!</span><span class="kw">is.na</span>(values))) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">delay_TF =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(delay_TF), <span class="st">&quot;Canceled&quot;</span>, delay_TF),
+         <span class="dt">delay_TF =</span> forcats<span class="op">::</span><span class="kw">as_factor</span>(delay_TF, <span class="kw">c</span>(<span class="ot">FALSE</span>, <span class="ot">TRUE</span>, <span class="st">&quot;Canceled&quot;</span>)))
+
+flights_summarized <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> delay_TF, <span class="dt">y =</span> mean_weath, <span class="dt">fill =</span> delay_TF))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.text.x =</span> <span class="kw">element_text</span>(<span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">hjust =</span> <span class="dv">1</span>))</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <p>While precipitation is the largest difference, my guess is that the standard error on this would be much greater day to day because as you can see the values are very low, so it could be that a few cases with a lot of rain may tick it up, but it may be tough to actually use this as a predictor…</p></li>
 <li><p><em>What happened on June 13 2013? Display the spatial pattern of delays,</em>
@@ -856,8 +856,8 @@ whether or not they match an observation in the other table.
 <ol style="list-style-type: decimal">
 <li><p><em>What does it mean for a flight to have a missing <code>tailnum</code>?</em></p>
 <p>All flights with a missing tailnum in the <code>flights</code> table were cancelled as you can see below.</p>
-<div class="sourceCode" id="cb533"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb533-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb533-2" title="2"><span class="st">  </span><span class="kw">count</span>(<span class="kw">is.na</span>(tailnum), <span class="kw">is.na</span>(arr_delay))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(<span class="kw">is.na</span>(tailnum), <span class="kw">is.na</span>(arr_delay))</code></pre>
 <pre><code>## # A tibble: 3 x 3
 ##   `is.na(tailnum)` `is.na(arr_delay)`      n
 ##   &lt;lgl&gt;            &lt;lgl&gt;               &lt;int&gt;
@@ -866,9 +866,9 @@ whether or not they match an observation in the other table.
 ## 3 TRUE             TRUE                 2512</code></pre>
 <p><em>What do the tail numbers that don’t have a matching record in <code>planes</code> have in common?</em>
 <em>(Hint: one variable explains ~90% of the problems.)</em></p>
-<div class="sourceCode" id="cb535"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb535-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb535-2" title="2"><span class="st">  </span><span class="kw">anti_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb535-3" title="3"><span class="st">  </span><span class="kw">count</span>(carrier, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">anti_join</span>(planes, <span class="dt">by=</span><span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(carrier, <span class="dt">sort =</span> <span class="ot">TRUE</span>)</code></pre>
 <pre><code>## # A tibble: 10 x 2
 ##    carrier     n
 ##    &lt;chr&gt;   &lt;int&gt;
@@ -882,13 +882,13 @@ whether or not they match an observation in the other table.
 ##  8 DL        110
 ##  9 F9         50
 ## 10 WN         38</code></pre>
-<div class="sourceCode" id="cb537"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb537-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb537-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">in_planes =</span> tailnum <span class="op">%in%</span><span class="st"> </span>planes<span class="op">$</span>tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb537-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(carrier) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb537-4" title="4"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">flights_inPlanes =</span> <span class="kw">sum</span>(in_planes),</a>
-<a class="sourceLine" id="cb537-5" title="5">            <span class="dt">n =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb537-6" title="6">            <span class="dt">perc_inPlanes =</span> flights_inPlanes <span class="op">/</span><span class="st"> </span>n) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb537-7" title="7"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">in_planes =</span> tailnum <span class="op">%in%</span><span class="st"> </span>planes<span class="op">$</span>tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(carrier) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">flights_inPlanes =</span> <span class="kw">sum</span>(in_planes),
+            <span class="dt">n =</span> <span class="kw">n</span>(),
+            <span class="dt">perc_inPlanes =</span> flights_inPlanes <span class="op">/</span><span class="st"> </span>n) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
 <pre><code>## # A tibble: 16 x 4
 ##    carrier flights_inPlanes     n perc_inPlanes
 ##    &lt;chr&gt;              &lt;int&gt; &lt;int&gt;         &lt;dbl&gt;
@@ -910,11 +910,11 @@ whether or not they match an observation in the other table.
 ## 16 YV                   601   601        1</code></pre>
 <p>Some carriers do not have many of their tailnums data in the <code>planes</code> table. (Come back.)</p></li>
 <li><p><em>Filter flights to only show flights with planes that have flown at least 100 flights.</em></p>
-<div class="sourceCode" id="cb539"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb539-1" title="1">planes_many &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb539-2" title="2"><span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb539-3" title="3"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)</a>
-<a class="sourceLine" id="cb539-4" title="4"></a>
-<a class="sourceLine" id="cb539-5" title="5"><span class="kw">semi_join</span>(flights, planes_many)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">planes_many &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort=</span><span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">100</span>)
+
+<span class="kw">semi_join</span>(flights, planes_many)</code></pre>
 <pre><code>## Joining, by = &quot;tailnum&quot;</code></pre>
 <pre><code>## # A tibble: 229,202 x 19
 ##     year month   day dep_time sched_dep_time dep_delay arr_time
@@ -937,8 +937,8 @@ whether or not they match an observation in the other table.
 <li><code>add_count()</code> is another helpful function that could have been used here</li>
 </ul></li>
 <li><p><em>Combine <code>fueleconomy::vehicles</code> and <code>fueleconomy::common</code> to find only the records for the most common models.</em></p>
-<div class="sourceCode" id="cb542"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb542-1" title="1">fueleconomy<span class="op">::</span>vehicles <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb542-2" title="2"><span class="st">  </span><span class="kw">semi_join</span>(fueleconomy<span class="op">::</span>common, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;make&quot;</span>, <span class="st">&quot;model&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">fueleconomy<span class="op">::</span>vehicles <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">semi_join</span>(fueleconomy<span class="op">::</span>common, <span class="dt">by=</span><span class="kw">c</span>(<span class="st">&quot;make&quot;</span>, <span class="st">&quot;model&quot;</span>))</code></pre>
 <pre><code>## # A tibble: 14,531 x 12
 ##       id make  model   year class trans drive   cyl displ fuel    hwy   cty
 ##    &lt;int&gt; &lt;chr&gt; &lt;chr&gt;  &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;int&gt; &lt;dbl&gt; &lt;chr&gt; &lt;int&gt; &lt;int&gt;
@@ -957,56 +957,56 @@ whether or not they match an observation in the other table.
 <p>First: Create two variables that together capture all 48 hour time windows across the year, at the day window of granularity (e.g. the time of day the flight takes off does not matter in establishing time windows for this example, only the day).
 Second: Gather these time windows into a single dataframe (note that this will increase the length of your data by ~364/365 * 100 %)
 Third: Group by <code>window_start_date</code> and calculate average <code>arr_delay</code> and related metrics.</p>
-<div class="sourceCode" id="cb544"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb544-1" title="1">delays_windows &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-2" title="2"><span class="st">  </span><span class="co">#First</span></a>
-<a class="sourceLine" id="cb544-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">startdate_window1 =</span> <span class="kw">cut.Date</span>(date_flight, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight2 =</span> <span class="kw">ifelse</span>(<span class="op">!</span>(date_flight <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(date_flight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), date_flight, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb544-6" title="6">         <span class="dt">date_flight2 =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(date_flight2),</a>
-<a class="sourceLine" id="cb544-7" title="7">         <span class="dt">startdate_window2 =</span> <span class="kw">cut.Date</span>(date_flight2, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-8" title="8"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>date_flight, <span class="op">-</span>date_flight2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-9" title="9"><span class="st">  </span><span class="co">#Second</span></a>
-<a class="sourceLine" id="cb544-10" title="10"><span class="st">  </span><span class="kw">gather</span>(startdate_window1, startdate_window2, <span class="dt">key =</span> <span class="st">&quot;start_window&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-11" title="11"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-12" title="12"><span class="st">  </span><span class="co">#Third</span></a>
-<a class="sourceLine" id="cb544-13" title="13"><span class="st">  </span><span class="kw">group_by</span>(window_start_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-14" title="14"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num =</span> <span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb544-15" title="15">            <span class="dt">perc_cancelled =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(arr_delay)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),</a>
-<a class="sourceLine" id="cb544-16" title="16">            <span class="dt">mean_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb544-17" title="17">            <span class="dt">perc_delay =</span> <span class="kw">mean</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),</a>
-<a class="sourceLine" id="cb544-18" title="18">            <span class="dt">total_delay_mins =</span> <span class="kw">sum</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb544-19" title="19"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">delays_windows &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#First</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">startdate_window1 =</span> <span class="kw">cut.Date</span>(date_flight, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight2 =</span> <span class="kw">ifelse</span>(<span class="op">!</span>(date_flight <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(date_flight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), date_flight, <span class="ot">NA</span>),
+         <span class="dt">date_flight2 =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(date_flight2),
+         <span class="dt">startdate_window2 =</span> <span class="kw">cut.Date</span>(date_flight2, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>date_flight, <span class="op">-</span>date_flight2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#Second</span>
+<span class="st">  </span><span class="kw">gather</span>(startdate_window1, startdate_window2, <span class="dt">key =</span> <span class="st">&quot;start_window&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#Third</span>
+<span class="st">  </span><span class="kw">group_by</span>(window_start_date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">num =</span> <span class="kw">n</span>(),
+            <span class="dt">perc_cancelled =</span> <span class="kw">sum</span>(<span class="kw">is.na</span>(arr_delay)) <span class="op">/</span><span class="st"> </span><span class="kw">n</span>(),
+            <span class="dt">mean_delay =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            <span class="dt">perc_delay =</span> <span class="kw">mean</span>(arr_delay <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>),
+            <span class="dt">total_delay_mins =</span> <span class="kw">sum</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables;
 ## they will be dropped</code></pre>
-<div class="sourceCode" id="cb546"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb546-1" title="1"><span class="co">#don&#39;t worry about warning of &#39;attributes are not identical...&#39;, that is</span></a>
-<a class="sourceLine" id="cb546-2" title="2"><span class="co">#because the cut function assigns attributes to the value, it&#39;s fine if</span></a>
-<a class="sourceLine" id="cb546-3" title="3"><span class="co">#these are dropped here.</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#don&#39;t worry about warning of &#39;attributes are not identical...&#39;, that is</span>
+<span class="co">#because the cut function assigns attributes to the value, it&#39;s fine if</span>
+<span class="co">#these are dropped here.</span></code></pre>
 <p>Create tibble of worst 2-day period for mean <code>arr_delay</code></p>
-<div class="sourceCode" id="cb547"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb547-1" title="1">WorstWindow &lt;-<span class="st"> </span>delays_windows <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb547-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_delay_rank =</span> dplyr<span class="op">::</span><span class="kw">min_rank</span>(<span class="op">-</span>mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb547-3" title="3"><span class="st">  </span><span class="kw">filter</span>(mean_delay_rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb547-4" title="4"></a>
-<a class="sourceLine" id="cb547-5" title="5">WorstDates &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dates =</span> <span class="kw">c</span>(lubridate<span class="op">::</span><span class="kw">as_date</span>(WorstWindow<span class="op">$</span>window_start_date), lubridate<span class="op">::</span><span class="kw">as_date</span>(WorstWindow<span class="op">$</span>window_start_date) <span class="op">+</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">duration</span>(<span class="dv">1</span>, <span class="st">&quot;days&quot;</span>)))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">WorstWindow &lt;-<span class="st"> </span>delays_windows <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_delay_rank =</span> dplyr<span class="op">::</span><span class="kw">min_rank</span>(<span class="op">-</span>mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(mean_delay_rank <span class="op">&lt;=</span><span class="st"> </span><span class="dv">1</span>)
+
+WorstDates &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">dates =</span> <span class="kw">c</span>(lubridate<span class="op">::</span><span class="kw">as_date</span>(WorstWindow<span class="op">$</span>window_start_date), lubridate<span class="op">::</span><span class="kw">as_date</span>(WorstWindow<span class="op">$</span>window_start_date) <span class="op">+</span><span class="st"> </span>lubridate<span class="op">::</span><span class="kw">duration</span>(<span class="dv">1</span>, <span class="st">&quot;days&quot;</span>)))</code></pre>
 <p>Ammend weather data so that weather is an average across three NY locations rather than seperate for each<a href="#fn30" class="footnote-ref" id="fnref30"><sup>30</sup></a></p>
-<div class="sourceCode" id="cb548"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb548-1" title="1">weather_ammended &lt;-<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb548-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time_hour =</span> lubridate<span class="op">::</span><span class="kw">make_datetime</span>(year, month, day, hour)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb548-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">one_of</span>(<span class="st">&quot;origin&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb548-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(time_hour) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb548-5" title="5"><span class="st">  </span><span class="kw">summarise_all</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb548-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_ammended &lt;-<span class="st"> </span>weather <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">time_hour =</span> lubridate<span class="op">::</span><span class="kw">make_datetime</span>(year, month, day, hour)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span><span class="kw">one_of</span>(<span class="st">&quot;origin&quot;</span>, <span class="st">&quot;year&quot;</span>, <span class="st">&quot;month&quot;</span>, <span class="st">&quot;day&quot;</span>, <span class="st">&quot;hour&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(time_hour) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_all</span>(mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>()</code></pre>
 <p>Filtering join to just times weather for worst 2 days</p>
-<div class="sourceCode" id="cb549"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb549-1" title="1">weather_worst &lt;-<span class="st"> </span>weather_ammended <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb549-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dates =</span> <span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb549-3" title="3"><span class="st">  </span><span class="kw">semi_join</span>(WorstDates)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_worst &lt;-<span class="st"> </span>weather_ammended <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dates =</span> <span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">semi_join</span>(WorstDates)</code></pre>
 <pre><code>## Joining, by = &quot;dates&quot;</code></pre>
 <p>Plot of hourly weather values across 48 hour time windows.</p>
-<div class="sourceCode" id="cb551"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb551-1" title="1">weather_worst <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb551-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>dates) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb551-3" title="3"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> <span class="st">&quot;weather_type&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;weather_value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb551-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time_hour, <span class="dt">y =</span> weather_value))<span class="op">+</span></a>
-<a class="sourceLine" id="cb551-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb551-6" title="6"><span class="st">  </span><span class="kw">facet_grid</span>(weather_type <span class="op">~</span><span class="st"> </span>., <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb551-7" title="7"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Hourly weather values across worst 48 hours of delays&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_worst <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>dates) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> <span class="st">&quot;weather_type&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;weather_value&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time_hour, <span class="dt">y =</span> weather_value))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(weather_type <span class="op">~</span><span class="st"> </span>., <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Hourly weather values across worst 48 hours of delays&#39;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 <p>Patterns:</p>
 <ul>
@@ -1014,43 +1014,43 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 <li>See high level of colinearity in spikes and changes, e.g. increase in <code>precip</code> corresponds with decrease in <code>visib</code> and perhaps uptick in <code>wind_spee</code></li>
 </ul>
 <p>Perhaps, we want to view how the average hourly weather values compare on the worst days to average weather days. Create summary of average hourly weather values for worst 48 hour period, for average period, and then append these and plot.</p>
-<div class="sourceCode" id="cb552"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb552-1" title="1"><span class="kw">bind_rows</span>(  </a>
-<a class="sourceLine" id="cb552-2" title="2">weather_worst <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-3" title="3"><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;weather on worst 48&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-5" title="5"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val)</a>
-<a class="sourceLine" id="cb552-6" title="6">,</a>
-<a class="sourceLine" id="cb552-7" title="7">weather_ammended <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-8" title="8"><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;weather on average&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-10" title="10"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val)</a>
-<a class="sourceLine" id="cb552-11" title="11">) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb552-12" title="12"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> category, <span class="dt">y =</span> weather_val, <span class="dt">fill =</span> category))<span class="op">+</span></a>
-<a class="sourceLine" id="cb552-13" title="13"><span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb552-14" title="14"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb552-15" title="15"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year&quot;</span>, </a>
-<a class="sourceLine" id="cb552-16" title="16">       <span class="dt">caption =</span> <span class="st">&quot;Note that delays are based on mean(arr_delay, na.rm = TRUE)&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">bind_rows</span>(  
+weather_worst <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;weather on worst 48&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val)
+,
+weather_ammended <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">category =</span> <span class="st">&quot;weather on average&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val)
+) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> category, <span class="dt">y =</span> weather_val, <span class="dt">fill =</span> category))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_col</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Hourly average weather values on worst 48 hour window of delays vs. hourly average weather across year&quot;</span>, 
+       <span class="dt">caption =</span> <span class="st">&quot;Note that delays are based on mean(arr_delay, na.rm = TRUE)&quot;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 <p>For this to be the worst 48 hour period, the weather doesn’t actually seem to be as extreme as I would have guessed.</p>
 <p>Let’s add-in average <code>arr_delay</code> by planned departure time to this to see how the delay times throughout the day varied, to see if there was a surge or change in weather that led to the huge change in delays.</p>
-<div class="sourceCode" id="cb553"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb553-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dates =</span> <span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-3" title="3"><span class="st">  </span><span class="kw">semi_join</span>(WorstDates) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(time_hour) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">value =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_type =</span> <span class="st">&quot;Mean_ArrDelay&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-8" title="8"><span class="st">  </span><span class="kw">bind_rows</span>(</a>
-<a class="sourceLine" id="cb553-9" title="9">  weather_worst <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-10" title="10"><span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>dates) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-11" title="11"><span class="st">    </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> <span class="st">&quot;value_type&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)</a>
-<a class="sourceLine" id="cb553-12" title="12">  ) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-13" title="13"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_attr =</span> <span class="op">!</span>(value_type <span class="op">==</span><span class="st"> &quot;Mean_ArrDelay&quot;</span>),</a>
-<a class="sourceLine" id="cb553-14" title="14">         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;Mean_ArrDelay&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb553-15" title="15"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time_hour, value, <span class="dt">colour =</span> weather_attr))<span class="op">+</span></a>
-<a class="sourceLine" id="cb553-16" title="16"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb553-17" title="17"><span class="st">  </span><span class="kw">facet_grid</span>(value_type <span class="op">~</span><span class="st"> </span>., <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb553-18" title="18"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Hourly weather and delay values across worst 48 hours of delays&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">dates =</span> <span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">semi_join</span>(WorstDates) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(time_hour) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">value =</span> <span class="kw">mean</span>(arr_delay, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_type =</span> <span class="st">&quot;Mean_ArrDelay&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">bind_rows</span>(
+  weather_worst <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">select</span>(<span class="op">-</span>dates) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> <span class="st">&quot;value_type&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;value&quot;</span>)
+  ) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_attr =</span> <span class="op">!</span>(value_type <span class="op">==</span><span class="st"> &quot;Mean_ArrDelay&quot;</span>),
+         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;Mean_ArrDelay&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> time_hour, value, <span class="dt">colour =</span> weather_attr))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_grid</span>(value_type <span class="op">~</span><span class="st"> </span>., <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Hourly weather and delay values across worst 48 hours of delays&#39;</span>)</code></pre>
 <pre><code>## Joining, by = &quot;dates&quot;</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Maybe that first uptick in precipitation corresponded with the increase in delay… but still, looks extreme like an incident caused this. I cheched the news and it looks like a plane was crash landed onto the tarmac at one of the airports on this day <a href="https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4" class="uri">https://en.wikipedia.org/wiki/Southwest_Airlines_Flight_345#cite_note-DMN_Aircraft_Totaled_20160808-4</a> , I checked the incident time and it occurred at 17:45 Jul 22, looks like it overlaps with the time we see the uptick in delays.</p>
@@ -1061,13 +1061,13 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 <li><code>anti_join(airports, flights, by = c("faa" = "dest"))</code> – tells me the airports with no flights coming to them</li>
 </ul></li>
 <li><p><em>You might expect that there’s an implicit relationship between plane and airline, because each plane is flown by a single airline. Confirm or reject this hypothesis using the tools you’ve learned above.</em></p>
-<div class="sourceCode" id="cb555"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb555-1" title="1">tail_carr &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb555-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tailnum)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb555-3" title="3"><span class="st">  </span><span class="kw">distinct</span>(carrier, tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb555-4" title="4"><span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort=</span><span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb555-5" title="5"></a>
-<a class="sourceLine" id="cb555-6" title="6">tail_carr <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb555-7" title="7"><span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">tail_carr &lt;-<span class="st"> </span>flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tailnum)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(carrier, tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort=</span><span class="ot">TRUE</span>)
+
+tail_carr <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## # A tibble: 17 x 2
 ##    tailnum     n
 ##    &lt;chr&gt;   &lt;int&gt;
@@ -1090,14 +1090,14 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 ## 17 N994AT      2</code></pre>
 <p>You should reject that hypothesis, you can see that 17 <code>tailnum</code>s are duplicated on multiple carriers.</p>
 <p>Below is code to show those 17 tailnums</p>
-<div class="sourceCode" id="cb557"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb557-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-2" title="2"><span class="st">  </span><span class="kw">distinct</span>(carrier, tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-3" title="3"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tailnum)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(tailnum) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_tail =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb557-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-7" title="7"><span class="st">  </span><span class="kw">filter</span>(n_tail <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb557-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n_tail), tailnum)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">flights <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">distinct</span>(carrier, tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(tailnum)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(tailnum) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">n_tail =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(n_tail <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n_tail), tailnum)</code></pre>
 <pre><code>## # A tibble: 34 x 3
 ##    carrier tailnum n_tail
 ##    &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;
@@ -1120,81 +1120,81 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 <div id="section-43" class="section level3">
 <h3>13.5.1.4</h3>
 <p>Graph all of these metrics at once using roughly the same method as used on 13.4.6 #4.</p>
-<div class="sourceCode" id="cb559"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb559-1" title="1">delays_windows <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb559-2" title="2"><span class="st">  </span><span class="kw">gather</span>(perc_cancelled, mean_delay, perc_delay, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb559-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb559-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(window_start_date, val))<span class="op">+</span></a>
-<a class="sourceLine" id="cb559-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb559-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb559-7" title="7"><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%b %d&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb559-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Measures of delay across 48 hour time windows&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">delays_windows <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(perc_cancelled, mean_delay, perc_delay, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(window_start_date, val))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%b %d&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Measures of delay across 48 hour time windows&#39;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p>Create 48 hour windows for weather data. Follow exact same steps as above.</p>
-<div class="sourceCode" id="cb560"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb560-1" title="1">weather_windows &lt;-<span class="st"> </span>weather_ammended <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">startdate_window1 =</span> <span class="kw">cut.Date</span>(date_flight, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight2 =</span> <span class="kw">ifelse</span>(<span class="op">!</span>(date_flight <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(date_flight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), date_flight, <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb560-5" title="5">         <span class="dt">date_flight2 =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(date_flight2),</a>
-<a class="sourceLine" id="cb560-6" title="6">         <span class="dt">startdate_window2 =</span> <span class="kw">cut.Date</span>(date_flight2, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-7" title="7"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>date_flight, <span class="op">-</span>date_flight2) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-8" title="8"><span class="st">    </span><span class="co">#Second</span></a>
-<a class="sourceLine" id="cb560-9" title="9"><span class="st">  </span><span class="kw">gather</span>(startdate_window1, startdate_window2, <span class="dt">key =</span> <span class="st">&quot;start_window&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-10" title="10"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-11" title="11"><span class="st">  </span><span class="co">#Third</span></a>
-<a class="sourceLine" id="cb560-12" title="12"><span class="st">  </span><span class="kw">group_by</span>(window_start_date) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb560-13" title="13"><span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-14" title="14"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb560-15" title="15"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind_gust)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_windows &lt;-<span class="st"> </span>weather_ammended <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(time_hour)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">startdate_window1 =</span> <span class="kw">cut.Date</span>(date_flight, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date_flight2 =</span> <span class="kw">ifelse</span>(<span class="op">!</span>(date_flight <span class="op">==</span><span class="st"> </span><span class="kw">min</span>(date_flight, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)), date_flight, <span class="ot">NA</span>),
+         <span class="dt">date_flight2 =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(date_flight2),
+         <span class="dt">startdate_window2 =</span> <span class="kw">cut.Date</span>(date_flight2, <span class="st">&quot;2 day&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>date_flight, <span class="op">-</span>date_flight2) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">    </span><span class="co">#Second</span>
+<span class="st">  </span><span class="kw">gather</span>(startdate_window1, startdate_window2, <span class="dt">key =</span> <span class="st">&quot;start_window&quot;</span>, <span class="dt">value =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#Third</span>
+<span class="st">  </span><span class="kw">group_by</span>(window_start_date) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise_at</span>(<span class="kw">vars</span>(temp<span class="op">:</span>visib), mean, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>wind_gust)</code></pre>
 <pre><code>## Warning: attributes are not identical across measure variables;
 ## they will be dropped</code></pre>
 <p>Graph using same method as above…</p>
-<div class="sourceCode" id="cb562"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb562-1" title="1">weather_windows <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb562-2" title="2"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb562-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb562-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> val))<span class="op">+</span></a>
-<a class="sourceLine" id="cb562-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb562-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb562-7" title="7"><span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%b %d&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb562-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Measures of weather across 48 hour time windows&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_windows <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> val))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">scale_x_date</span>(<span class="dt">date_labels =</span> <span class="st">&quot;%b %d&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&#39;Measures of weather across 48 hour time windows&#39;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
 <p>Connect delays and weather data</p>
-<div class="sourceCode" id="cb563"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb563-1" title="1">weather_delay_joined &lt;-<span class="st"> </span><span class="kw">left_join</span>(delays_windows, weather_windows, <span class="dt">by =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb563-2" title="2"><span class="st">  </span><span class="kw">select</span>(mean_delay, temp<span class="op">:</span>visib, window_start_date) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb563-3" title="3"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>dewp) <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#is almost completely correlated with temp so removed one of them...</span></a>
-<a class="sourceLine" id="cb563-4" title="4"><span class="st">  </span><span class="kw">na.omit</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined &lt;-<span class="st"> </span><span class="kw">left_join</span>(delays_windows, weather_windows, <span class="dt">by =</span> <span class="st">&quot;window_start_date&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(mean_delay, temp<span class="op">:</span>visib, window_start_date) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>dewp) <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#is almost completely correlated with temp so removed one of them...</span>
+<span class="st">  </span><span class="kw">na.omit</span>()</code></pre>
 <p>Plot of 48 hour window of weather scores against mean delay keeping intact order of observations</p>
-<div class="sourceCode" id="cb564"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb564-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb564-2" title="2"><span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb564-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date),</a>
-<a class="sourceLine" id="cb564-4" title="4">         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;mean_delay&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb564-5" title="5"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> val, <span class="dt">colour =</span> <span class="op">!</span><span class="st"> </span>value_type <span class="op">==</span><span class="st"> &quot;mean_delay&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb564-6" title="6"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb564-7" title="7"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb564-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;Weather value&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Mean delay and weather value in 2-day rolling window&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date),
+         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;mean_delay&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> val, <span class="dt">colour =</span> <span class="op">!</span><span class="st"> </span>value_type <span class="op">==</span><span class="st"> &quot;mean_delay&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;Weather value&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Mean delay and weather value in 2-day rolling window&quot;</span>)</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
 <p>Plot of mean_delay against weather type, each point representing a different ‘window’</p>
-<div class="sourceCode" id="cb565"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb565-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb565-2" title="2"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb565-3" title="3"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weather_val, <span class="dt">y =</span> mean_delay))<span class="op">+</span></a>
-<a class="sourceLine" id="cb565-4" title="4"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb565-5" title="5"><span class="st">  </span><span class="kw">geom_smooth</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb565-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> weather_val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weather_val, <span class="dt">y =</span> mean_delay))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
 <p>In a sense, these plots are not really valid as they obscure the fact that each point is not an independent observation (because there is a high level of association with w/e the value was on a single day with what it was in the previous day). E.g. mean_delay has a correlation of ~ 0.68 with prior days value as shown below… This is often ignored and we can also ignore it for now as it gets into time series and things we don’t need to worry about for now… but somthing to be aware…</p>
-<div class="sourceCode" id="cb567"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb567-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb567-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_delay_lag =</span> <span class="kw">lag</span>(mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb567-3" title="3"><span class="st">  </span><span class="kw">select</span>(mean_delay, mean_delay_lag) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb567-4" title="4"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb567-5" title="5"><span class="st">  </span><span class="kw">cor</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">mean_delay_lag =</span> <span class="kw">lag</span>(mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(mean_delay, mean_delay_lag) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cor</span>()</code></pre>
 <pre><code>##                mean_delay mean_delay_lag
 ## mean_delay      1.0000000      0.6795631
 ## mean_delay_lag  0.6795631      1.0000000</code></pre>
 <p>Data is not Independent (as mentioned above) and many problems associated with this… but let’s ignore this for now and just look at a few statisitics…</p>
 <p>Can see below that raw correlation of <code>mean_delay</code> is highest with humid.</p>
-<div class="sourceCode" id="cb569"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb569-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb569-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb569-3" title="3"><span class="st">  </span><span class="kw">cor</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st">  </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cor</span>()</code></pre>
 <pre><code>##             mean_delay        temp      humid    wind_dir  wind_speed
 ## mean_delay  1.00000000  0.08515338  0.4549140 -0.05371522  0.16262585
 ## temp        0.08515338  1.00000000  0.3036520 -0.25906906 -0.40160692
@@ -1214,10 +1214,10 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 ## pressure   -0.22656357  1.0000000  0.12032520
 ## visib      -0.44400337  0.1203252  1.00000000</code></pre>
 <p>When accounting for other variables, see relationship with windspeed seems to emerge as important…</p>
-<div class="sourceCode" id="cb571"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb571-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb571-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb571-3" title="3"><span class="st">  </span><span class="kw">lm</span>(mean_delay <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb571-4" title="4"><span class="st">  </span><span class="kw">summary</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(mean_delay <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = mean_delay ~ ., data = .)
@@ -1246,47 +1246,47 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 <p><em>(average value on 2013-02-07 to 2013-02-08) - (average value on 2013-02-08 to 2013-02-09)</em></p>
 <p>Note that the time windows are not distinct but overlap by 24 hours.</p>
 <p>If doing a thorough account of time-series you would do a lot more than I show below…</p>
-<div class="sourceCode" id="cb573"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb573-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb573-2" title="2"><span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb573-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date),</a>
-<a class="sourceLine" id="cb573-4" title="4">         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;mean_delay&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb573-5" title="5"><span class="st">  </span><span class="kw">group_by</span>(value_type) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb573-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb573-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> value_diff, <span class="dt">colour =</span> <span class="op">!</span>value_type <span class="op">==</span><span class="st"> &quot;mean_delay&quot;</span>))<span class="op">+</span></a>
-<a class="sourceLine" id="cb573-8" title="8"><span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb573-9" title="9"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb573-10" title="10"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;Weather value&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Plot of diffs in value&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">window_start_date =</span> lubridate<span class="op">::</span><span class="kw">as_date</span>(window_start_date),
+         <span class="dt">value_type =</span> forcats<span class="op">::</span><span class="kw">fct_relevel</span>(value_type, <span class="st">&quot;mean_delay&quot;</span>)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(value_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value_diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> window_start_date, <span class="dt">y =</span> value_diff, <span class="dt">colour =</span> <span class="op">!</span>value_type <span class="op">==</span><span class="st"> &quot;mean_delay&quot;</span>))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_line</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>value_type, <span class="dt">scales =</span> <span class="st">&quot;free_y&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">colour =</span> <span class="st">&quot;Weather value&quot;</span>, <span class="dt">title =</span> <span class="st">&quot;Plot of diffs in value&quot;</span>)</code></pre>
 <pre><code>## Warning: Removed 2 rows containing missing values (geom_path).</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
 <p>Let’s plot these diffs as a scatter plot now (no longer looking at the order in which the observations emerged)</p>
-<div class="sourceCode" id="cb575"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb575-1" title="1">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb575-2" title="2"><span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb575-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(weather_type) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb575-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val),</a>
-<a class="sourceLine" id="cb575-5" title="5">         <span class="dt">delay_diff =</span> mean_delay <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb575-6" title="6"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb575-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weather_diff, <span class="dt">y =</span> delay_diff))<span class="op">+</span></a>
-<a class="sourceLine" id="cb575-8" title="8"><span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb575-9" title="9"><span class="st">  </span><span class="kw">geom_smooth</span>()<span class="op">+</span></a>
-<a class="sourceLine" id="cb575-10" title="10"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)<span class="op">+</span></a>
-<a class="sourceLine" id="cb575-11" title="11"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;scatter plot of diffs in value&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(temp<span class="op">:</span>visib, <span class="dt">key =</span> weather_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(weather_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">weather_diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val),
+         <span class="dt">delay_diff =</span> mean_delay <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(mean_delay)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(<span class="dt">x =</span> weather_diff, <span class="dt">y =</span> delay_diff))<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>()<span class="op">+</span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>weather_type, <span class="dt">scales =</span> <span class="st">&quot;free_x&quot;</span>)<span class="op">+</span>
+<span class="st">  </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;scatter plot of diffs in value&quot;</span>)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;loess&#39; and formula &#39;y ~ x&#39;</code></pre>
 <pre><code>## Warning: Removed 7 rows containing non-finite values (stat_smooth).</code></pre>
 <pre><code>## Warning: Removed 7 rows containing missing values (geom_point).</code></pre>
 <p><img src="13-relational-data_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
 <p>Let’s look at the correlatioin and regression against these diffs</p>
-<div class="sourceCode" id="cb579"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb579-1" title="1">diff_data &lt;-<span class="st"> </span>weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-2" title="2"><span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(value_type) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-5" title="5"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-6" title="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>val) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-7" title="7"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> value_type, <span class="dt">value =</span> diff)</a>
-<a class="sourceLine" id="cb579-8" title="8"></a>
-<a class="sourceLine" id="cb579-9" title="9">diff_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb579-10" title="10"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-11" title="11"><span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb579-12" title="12"><span class="st">  </span><span class="kw">cor</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diff_data &lt;-<span class="st"> </span>weather_delay_joined <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">gather</span>(mean_delay, temp<span class="op">:</span>visib, <span class="dt">key =</span> value_type, <span class="dt">value =</span> val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(value_type) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">diff =</span> val <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(val)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>val) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> value_type, <span class="dt">value =</span> diff)
+
+diff_data <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">na.omit</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">cor</span>()</code></pre>
 <pre><code>##                 humid  mean_delay      precip   pressure         temp
 ## humid       1.0000000  0.54331654  0.48014091 -0.3427556  0.318534448
 ## mean_delay  0.5433165  1.00000000  0.51510649 -0.3247584  0.150601446
@@ -1305,10 +1305,10 @@ Third: Group by <code>window_start_date</code> and calculate average <code>arr_d
 ## visib       1.00000000  0.378625695  0.06152223
 ## wind_dir    0.37862569  1.000000000  0.43970745
 ## wind_speed  0.06152223  0.439707451  1.00000000</code></pre>
-<div class="sourceCode" id="cb581"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb581-1" title="1">diff_data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb581-2" title="2"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb581-3" title="3"><span class="st">  </span><span class="kw">lm</span>(mean_delay <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb581-4" title="4"><span class="st">  </span><span class="kw">summary</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">diff_data <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>window_start_date) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">lm</span>(mean_delay <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> .) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">summary</span>()</code></pre>
 <pre><code>## 
 ## Call:
 ## lm(formula = mean_delay ~ ., data = .)
@@ -1383,10 +1383,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1396,6 +1395,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/13-relational-data.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -1411,7 +1414,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;

@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html >
-
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Yet another study guide to ‘R for Data Science’</title>
-  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’">
-  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Ch. 14: Strings | Yet another study guide to ‘R for Data Science’</title>
+  <meta name="description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
+  <meta name="generator" content="bookdown 0.11 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta property="og:title" content="Ch. 14: Strings | Yet another study guide to ‘R for Data Science’" />
   <meta property="og:type" content="book" />
   <meta property="og:url" content="https://brshallo.github.io/r4ds_solutions/" />
   
@@ -17,24 +16,25 @@
   <meta name="github-repo" content="https://github.com/brshallo/r4ds_solutions/" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Yet another study guide to ‘R for Data Science’" />
+  <meta name="twitter:title" content="Ch. 14: Strings | Yet another study guide to ‘R for Data Science’" />
   <meta name="twitter:site" content="@brshallo" />
   <meta name="twitter:description" content="Notes and solutions to Garrett Grolemund and Hadley Wickham’s ‘R for Data Science’" />
   
 
-<meta name="author" content="Bryan Shalloway">
+<meta name="author" content="Bryan Shalloway" />
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
 <link rel="prev" href="13-relational-data.html">
 <link rel="next" href="15-factors.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -557,35 +557,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="string-basics" class="section level2">
 <h2>14.2: String basics</h2>
 <p>Use <code>wrteLines</code> to show what string ‘This string has a \n new line’ looks like printed.</p>
-<div class="sourceCode" id="cb583"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb583-1" title="1">string_exp &lt;-<span class="st"> &#39;This string has a </span><span class="ch">\n</span><span class="st"> new line&#39;</span></a>
-<a class="sourceLine" id="cb583-2" title="2"><span class="kw">print</span>(string_exp)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">string_exp &lt;-<span class="st"> &#39;This string has a </span><span class="ch">\n</span><span class="st"> new line&#39;</span>
+<span class="kw">print</span>(string_exp)</code></pre>
 <pre><code>## [1] &quot;This string has a \n new line&quot;</code></pre>
-<div class="sourceCode" id="cb585"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb585-1" title="1"><span class="kw">writeLines</span>(string_exp)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">writeLines</span>(string_exp)</code></pre>
 <pre><code>## This string has a 
 ##  new line</code></pre>
 <p>To see full list of specifal characters:</p>
-<div class="sourceCode" id="cb587"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb587-1" title="1">?<span class="st">&#39;&quot;&#39;</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">?<span class="st">&#39;&quot;&#39;</span></code></pre>
 <p>Objects of length 0 are silently dropped. This is particularly useful in conjunction with <code>if</code>:</p>
-<div class="sourceCode" id="cb588"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb588-1" title="1">name &lt;-<span class="st"> &quot;Bryan&quot;</span></a>
-<a class="sourceLine" id="cb588-2" title="2">time_of_day &lt;-<span class="st"> &quot;morning&quot;</span></a>
-<a class="sourceLine" id="cb588-3" title="3">birthday &lt;-<span class="st"> </span><span class="ot">FALSE</span></a>
-<a class="sourceLine" id="cb588-4" title="4"></a>
-<a class="sourceLine" id="cb588-5" title="5"><span class="kw">str_c</span>(</a>
-<a class="sourceLine" id="cb588-6" title="6">  <span class="st">&quot;Good &quot;</span>, time_of_day, <span class="st">&quot; &quot;</span>, name,</a>
-<a class="sourceLine" id="cb588-7" title="7">  <span class="cf">if</span> (birthday) <span class="st">&quot; and HAPPY BIRTHDAY&quot;</span>,</a>
-<a class="sourceLine" id="cb588-8" title="8">  <span class="st">&quot;.&quot;</span></a>
-<a class="sourceLine" id="cb588-9" title="9">)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">name &lt;-<span class="st"> &quot;Bryan&quot;</span>
+time_of_day &lt;-<span class="st"> &quot;morning&quot;</span>
+birthday &lt;-<span class="st"> </span><span class="ot">FALSE</span>
+
+<span class="kw">str_c</span>(
+  <span class="st">&quot;Good &quot;</span>, time_of_day, <span class="st">&quot; &quot;</span>, name,
+  <span class="cf">if</span> (birthday) <span class="st">&quot; and HAPPY BIRTHDAY&quot;</span>,
+  <span class="st">&quot;.&quot;</span>
+)</code></pre>
 <pre><code>## [1] &quot;Good morning Bryan.&quot;</code></pre>
 <p>Collapse vectors into single string</p>
-<div class="sourceCode" id="cb590"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb590-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>), <span class="dt">collapse =</span> <span class="st">&quot;, &quot;</span>)</code></pre>
 <pre><code>## [1] &quot;xa, yb, zc&quot;</code></pre>
 <p>Can use assignment form of <code>str_sub()</code></p>
-<div class="sourceCode" id="cb592"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb592-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>)</a>
-<a class="sourceLine" id="cb592-2" title="2"><span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>) &lt;-<span class="st"> </span><span class="kw">str_to_lower</span>(<span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb592-3" title="3">x</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Apple&quot;</span>, <span class="st">&quot;Banana&quot;</span>, <span class="st">&quot;Pear&quot;</span>)
+<span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>) &lt;-<span class="st"> </span><span class="kw">str_to_lower</span>(<span class="kw">str_sub</span>(x, <span class="dv">1</span>, <span class="dv">1</span>))
+x</code></pre>
 <pre><code>## [1] &quot;apple&quot;  &quot;banana&quot; &quot;pear&quot;</code></pre>
 <p><code>str_pad</code> looks interesting</p>
-<div class="sourceCode" id="cb594"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb594-1" title="1"><span class="kw">str_pad</span>(<span class="st">&quot;the dogs come for you.&quot;</span>, <span class="dt">width =</span> <span class="dv">40</span>, <span class="dt">pad =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">side =</span> <span class="st">&quot;both&quot;</span>) <span class="co">#must specify width =, side = default is left</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_pad</span>(<span class="st">&quot;the dogs come for you.&quot;</span>, <span class="dt">width =</span> <span class="dv">40</span>, <span class="dt">pad =</span> <span class="st">&quot;,&quot;</span>, <span class="dt">side =</span> <span class="st">&quot;both&quot;</span>) <span class="co">#must specify width =, side = default is left</span></code></pre>
 <pre><code>## [1] &quot;,,,,,,,,,the dogs come for you.,,,,,,,,,&quot;</code></pre>
 <div id="section-44" class="section level3">
 <h3>14.2.5</h3>
@@ -595,38 +595,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><code>paste0()</code> has no <code>sep</code> argument and just appends any value provided like another string vector.</li>
 <li>They differ from <code>str_c()</code> in that they automatically convert <code>NA</code> values to character.</li>
 </ul>
-<div class="sourceCode" id="cb596"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb596-1" title="1"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;a-b-c-x&quot; &quot;a-b-c-y&quot;</code></pre>
-<div class="sourceCode" id="cb598"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb598-1" title="1"><span class="kw">paste0</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste0</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;abcx-&quot; &quot;abcy-&quot;</code></pre>
 <p><em>What <code>stringr</code> function are they equivalent to?</em></p>
 <p><code>paste()</code> and <code>paste0()</code> are similar to <code>str_c()</code> though are different in how they handle NAs (see below). They also will return a warning when recycling vectors whose legth do not have a common factor.</p>
-<div class="sourceCode" id="cb600"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb600-1" title="1"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;a-x&quot; &quot;b-y&quot; &quot;x-x&quot;</code></pre>
-<div class="sourceCode" id="cb602"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb602-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;x&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## Warning in stri_c(..., sep = sep, collapse = collapse, ignore_null = TRUE):
 ## longer object length is not a multiple of shorter object length</code></pre>
 <pre><code>## [1] &quot;a-x&quot; &quot;b-y&quot; &quot;x-x&quot;</code></pre>
 <p><em>How do the functions differ in their handling of <code>NA</code>?</em></p>
-<div class="sourceCode" id="cb605"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb605-1" title="1"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;a-NA&quot; &quot;b-y&quot;</code></pre>
-<div class="sourceCode" id="cb607"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb607-1" title="1"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_c</span>(<span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>), <span class="kw">c</span>(<span class="ot">NA</span>, <span class="st">&quot;y&quot;</span>), <span class="dt">sep =</span> <span class="st">&quot;-&quot;</span>)</code></pre>
 <pre><code>## [1] NA    &quot;b-y&quot;</code></pre></li>
 <li><p><em>In your own words, describe the difference between the <code>sep</code> and <code>collapse</code> arguments to <code>str_c()</code>.</em></p>
 <p><code>sep</code> puts characters between items within a vector, collapse puts a character between vectors being collapsed</p></li>
 <li><p><em>Use <code>str_length()</code> and <code>str_sub()</code> to extract the middle character from a string.</em></p>
-<div class="sourceCode" id="cb609"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb609-1" title="1">x &lt;-<span class="st"> &quot;world&quot;</span></a>
-<a class="sourceLine" id="cb609-2" title="2"><span class="kw">str_sub</span>(x, <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">end =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;world&quot;</span>
+<span class="kw">str_sub</span>(x, <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="dt">end =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>))</code></pre>
 <pre><code>## [1] &quot;r&quot;</code></pre>
 <p><em>What will you do if the string has an even number of characters?</em></p>
 <p>In this circumstance the above solution would take the anterior middle value, below is a solution that would return both middle values.</p>
-<div class="sourceCode" id="cb611"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb611-1" title="1">x &lt;-<span class="st"> &quot;worlds&quot;</span></a>
-<a class="sourceLine" id="cb611-2" title="2"></a>
-<a class="sourceLine" id="cb611-3" title="3"><span class="kw">str_sub</span>(x, <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;worlds&quot;</span>
+
+<span class="kw">str_sub</span>(x, <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="dt">start =</span> <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>))</code></pre>
 <pre><code>## [1] &quot;l&quot;</code></pre>
-<div class="sourceCode" id="cb613"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb613-1" title="1"><span class="kw">str_sub</span>(x,</a>
-<a class="sourceLine" id="cb613-2" title="2">        <span class="dt">start =</span> <span class="kw">ifelse</span>(<span class="kw">str_length</span>(x) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> )), </a>
-<a class="sourceLine" id="cb613-3" title="3">        <span class="dt">end =</span> <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_sub</span>(x,
+        <span class="dt">start =</span> <span class="kw">ifelse</span>(<span class="kw">str_length</span>(x) <span class="op">%%</span><span class="st"> </span><span class="dv">2</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>, <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>), <span class="kw">ceiling</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span> )), 
+        <span class="dt">end =</span> <span class="kw">floor</span>(<span class="kw">str_length</span>(x) <span class="op">/</span><span class="st"> </span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span><span class="dv">1</span>)</code></pre>
 <pre><code>## [1] &quot;rl&quot;</code></pre></li>
 <li><p><em>What does <code>str_wrap()</code> do? When might you want to use it?</em></p>
 <ul>
@@ -634,52 +634,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
 <li>could use <code>str_wrap()</code> for editing of documents etc., setting <code>width = 1</code> will give each word its own line</li>
 </ul>
-<div class="sourceCode" id="cb615"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb615-1" title="1"><span class="kw">str_wrap</span>(<span class="st">&quot;Tonight, we dine in Hell.&quot;</span>, <span class="dt">width =</span> <span class="dv">10</span>, <span class="dt">indent =</span> <span class="dv">0</span>, <span class="dt">exdent =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb615-2" title="2"><span class="st">  </span><span class="kw">writeLines</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_wrap</span>(<span class="st">&quot;Tonight, we dine in Hell.&quot;</span>, <span class="dt">width =</span> <span class="dv">10</span>, <span class="dt">indent =</span> <span class="dv">0</span>, <span class="dt">exdent =</span> <span class="dv">3</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">writeLines</span>()</code></pre>
 <pre><code>## Tonight,
 ##    we dine in
 ##    Hell.</code></pre></li>
 <li><p><em>What does <code>str_trim()</code> do? What’s the opposite of <code>str_trim()</code>?</em>
 Removes whitespace from beginning and end of character, <code>side</code> argument specifies which side</p>
-<div class="sourceCode" id="cb617"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb617-1" title="1"><span class="kw">str_trim</span>(<span class="st">&quot;   so much white space   &quot;</span>, <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>) <span class="co"># (default is &#39;both&#39;)</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_trim</span>(<span class="st">&quot;   so much white space   &quot;</span>, <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>) <span class="co"># (default is &#39;both&#39;)</span></code></pre>
 <pre><code>## [1] &quot;   so much white space&quot;</code></pre></li>
 <li><p><em>Write a function that turns (e.g.) a vector <code>c("a", "b", "c")</code> into the string <code>a, b, and c</code>. Think carefully about what it should do if given a vector of length 0, 1, or 2.</em></p>
-<div class="sourceCode" id="cb619"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb619-1" title="1">vec_to_string &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</a>
-<a class="sourceLine" id="cb619-2" title="2"></a>
-<a class="sourceLine" id="cb619-3" title="3">  <span class="co">#If 1 or 0 length vector</span></a>
-<a class="sourceLine" id="cb619-4" title="4">  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb619-5" title="5">  <span class="kw">return</span>(x)</a>
-<a class="sourceLine" id="cb619-6" title="6">  comma &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;, &quot;</span>, <span class="st">&quot; &quot;</span>)</a>
-<a class="sourceLine" id="cb619-7" title="7">  b &lt;-<span class="st"> </span><span class="kw">str_c</span>(x, <span class="dt">collapse =</span> comma)</a>
-<a class="sourceLine" id="cb619-8" title="8"></a>
-<a class="sourceLine" id="cb619-9" title="9">  <span class="co">#replace &#39;,&#39; with &#39;and&#39; in last</span></a>
-<a class="sourceLine" id="cb619-10" title="10">  <span class="kw">str_sub</span>(b,<span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span></a>
-<a class="sourceLine" id="cb619-11" title="11"><span class="st">  </span><span class="dv">1</span>)) &lt;-<span class="st"> &quot; and &quot;</span></a>
-<a class="sourceLine" id="cb619-12" title="12">  <span class="kw">return</span>(b)</a>
-<a class="sourceLine" id="cb619-13" title="13">}</a>
-<a class="sourceLine" id="cb619-14" title="14">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)</a>
-<a class="sourceLine" id="cb619-15" title="15"><span class="kw">vec_to_string</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vec_to_string &lt;-<span class="st"> </span><span class="cf">function</span>(x) {
+
+  <span class="co">#If 1 or 0 length vector</span>
+  <span class="cf">if</span> (<span class="kw">length</span>(x) <span class="op">&lt;</span><span class="st"> </span><span class="dv">2</span>)
+  <span class="kw">return</span>(x)
+  comma &lt;-<span class="st"> </span><span class="kw">ifelse</span>(<span class="kw">length</span>(x) <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>, <span class="st">&quot;, &quot;</span>, <span class="st">&quot; &quot;</span>)
+  b &lt;-<span class="st"> </span><span class="kw">str_c</span>(x, <span class="dt">collapse =</span> comma)
+
+  <span class="co">#replace &#39;,&#39; with &#39;and&#39; in last</span>
+  <span class="kw">str_sub</span>(b,<span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span><span class="st"> </span><span class="dv">1</span>), <span class="op">-</span>(<span class="kw">str_length</span>(x)[<span class="kw">length</span>(x)] <span class="op">+</span>
+<span class="st">  </span><span class="dv">1</span>)) &lt;-<span class="st"> &quot; and &quot;</span>
+  <span class="kw">return</span>(b)
+}
+x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>)
+<span class="kw">vec_to_string</span>(x)</code></pre>
 <pre><code>## [1] &quot;a, b, c, and d&quot;</code></pre></li>
 </ol>
 </div>
 </div>
 <div id="matching-patterns-w-regex" class="section level2">
 <h2>14.3: Matching patterns w/ regex</h2>
-<div class="sourceCode" id="cb621"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb621-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>)</a>
-<a class="sourceLine" id="cb621-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;an&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;pear&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="st">&quot;an&quot;</span>)</code></pre>
 <div id="htmlwidget-01c5e0afea8ae15f593d" style="width:960px;height:100%;" class="str_view html-widget"></div>
 <script type="application/json" data-for="htmlwidget-01c5e0afea8ae15f593d">{"x":{"html":"<ul>\n  <li>apple<\/li>\n  <li>b<span class='match'>an<\/span>ana<\/li>\n  <li>pear<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>To match a literal <code>\</code> need <code>\\\\</code> because both string and regex will escape it.</p>
-<div class="sourceCode" id="cb622"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb622-1" title="1">x &lt;-<span class="st"> &quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span></a>
-<a class="sourceLine" id="cb622-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;a</span><span class="ch">\\</span><span class="st">b&quot;</span>
+<span class="kw">writeLines</span>(x)</code></pre>
 <pre><code>## a\b</code></pre>
-<div class="sourceCode" id="cb624"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb624-1" title="1"><span class="kw">str_view</span>(x,<span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(x,<span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</code></pre>
 <div id="htmlwidget-e54bc9d833239793979d" style="width:960px;height:100%;" class="str_view html-widget"></div>
 <script type="application/json" data-for="htmlwidget-e54bc9d833239793979d">{"x":{"html":"<ul>\n  <li>a<span class='match'>\\<\/span>b<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>Using <code>\b</code> to set boundary between words (not used often)</p>
-<div class="sourceCode" id="cb625"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb625-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">bsum</span><span class="ch">\\</span><span class="st">b&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apropos</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">bsum</span><span class="ch">\\</span><span class="st">b&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;contr.sum&quot; &quot;sum&quot;</code></pre>
-<div class="sourceCode" id="cb627"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb627-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(sum)$&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apropos</span>(<span class="st">&quot;^(sum)$&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;sum&quot;</code></pre>
 <p>Other special characters:</p>
 <ul>
@@ -699,11 +699,11 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <li><code>{n,m}</code>: between n and m</li>
 </ul>
 <p>By default these matches are “greedy”: they will match the longest string possible. You can make them “lazy”, matching the shortest string possible by putting a <code>?</code> after them. This is an advanced feature of regular expressions, but it’s useful to know that it exists:</p>
-<div class="sourceCode" id="cb629"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb629-1" title="1">x &lt;-<span class="st"> &quot;1888 is the longest year in Roman numerals: MDCCCLXXXVIII&quot;</span></a>
-<a class="sourceLine" id="cb629-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;1888 is the longest year in Roman numerals: MDCCCLXXXVIII&quot;</span>
+<span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}&#39;</span>)</code></pre>
 <div id="htmlwidget-54ab3965c6614abf7df3" style="width:960px;height:100%;" class="str_view html-widget"></div>
 <script type="application/json" data-for="htmlwidget-54ab3965c6614abf7df3">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CCC<\/span>LXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb630"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb630-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}?&#39;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(x, <span class="st">&#39;C{2,3}?&#39;</span>)</code></pre>
 <div id="htmlwidget-2fff63fa4c6dc5628c01" style="width:960px;height:100%;" class="str_view html-widget"></div>
 <script type="application/json" data-for="htmlwidget-2fff63fa4c6dc5628c01">{"x":{"html":"<ul>\n  <li>1888 is the longest year in Roman numerals: MD<span class='match'>CC<\/span>CLXXXVIII<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <div id="section-45" class="section level3">
@@ -714,21 +714,21 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <code>"\\"</code>, -&gt; escapes second <code>\</code> so left with blank
 <code>"\\\"</code> -&gt; third <code>\</code> escapes quote so left with open quote as well</p></li>
 <li><p><em>How would you match the sequence <code>"'\</code>?</em></p>
-<div class="sourceCode" id="cb631"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb631-1" title="1">x &lt;-<span class="st"> &quot;alfred</span><span class="ch">\&quot;</span><span class="st">&#39;</span><span class="ch">\\</span><span class="st">goes&quot;</span></a>
-<a class="sourceLine" id="cb631-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;alfred</span><span class="ch">\&quot;</span><span class="st">&#39;</span><span class="ch">\\</span><span class="st">goes&quot;</span>
+<span class="kw">writeLines</span>(x)</code></pre>
 <pre><code>## alfred&quot;&#39;\goes</code></pre>
-<div class="sourceCode" id="cb633"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb633-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\&quot;</span><span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\&quot;</span><span class="st">&#39;</span><span class="ch">\\\\</span><span class="st">&quot;</span>)</code></pre>
 <div id="htmlwidget-840ef7d4492b483e7b8c" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-840ef7d4492b483e7b8c">{"x":{"html":"<ul>\n  <li>alfred<span class='match'>\"'\\<\/span>goes<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>What patterns will the regular expression <code>\..\..\..</code> match?</em></p>
 <p>Would match 6 character string of following form “(dot)(anychar)(dot)(anychar)(dot)(anychar)”</p>
-<div class="sourceCode" id="cb634"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb634-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alf.r.e.dd.ss..lsdf.d.kj&quot;</span>)</a>
-<a class="sourceLine" id="cb634-2" title="2"><span class="kw">str_view</span>(x, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alf.r.e.dd.ss..lsdf.d.kj&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span>)</code></pre>
 <div id="htmlwidget-731cdb890c1a2c0ff57c" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-731cdb890c1a2c0ff57c">{"x":{"html":"<ul>\n  <li>alf<span class='match'>.r.e.d<\/span>d.ss..lsdf.d.kj<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p><em>How would you represent it as a string?</em></p>
-<div class="sourceCode" id="cb635"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb635-1" title="1">x_pattern &lt;-<span class="st"> &quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span></a>
-<a class="sourceLine" id="cb635-2" title="2"><span class="kw">writeLines</span>(x_pattern)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x_pattern &lt;-<span class="st"> &quot;</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..</span><span class="ch">\\</span><span class="st">..&quot;</span>
+<span class="kw">writeLines</span>(x_pattern)</code></pre>
 <pre><code>## \..\..\..</code></pre></li>
 </ol>
 </div>
@@ -736,31 +736,31 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <h3>14.3.2.1</h3>
 <ol style="list-style-type: decimal">
 <li><p><em>How would you match the literal string <code>"$^$"</code>?</em></p>
-<div class="sourceCode" id="cb637"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb637-1" title="1">x &lt;-<span class="st"> &quot;so it goes $^$ here&quot;</span></a>
-<a class="sourceLine" id="cb637-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">$</span><span class="ch">\\</span><span class="st">^</span><span class="ch">\\</span><span class="st">$&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;so it goes $^$ here&quot;</span>
+<span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">$</span><span class="ch">\\</span><span class="st">^</span><span class="ch">\\</span><span class="st">$&quot;</span>)</code></pre>
 <div id="htmlwidget-68c2cfd4511bb312fb5d" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-68c2cfd4511bb312fb5d">{"x":{"html":"<ul>\n  <li>so it goes <span class='match'>$^$<\/span> here<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Given the corpus of common words in <code>stringr::words</code>, create regular expressions that find all words that:</em></p>
 <ol style="list-style-type: decimal">
 <li><em>Start with “y”.</em></li>
 </ol>
-<div class="sourceCode" id="cb638"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb638-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^y&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^y&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-3d1c6f287b92289a4f09" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-3d1c6f287b92289a4f09">{"x":{"html":"<ul>\n  <li><span class='match'>y<\/span>ear<\/li>\n  <li><span class='match'>y<\/span>es<\/li>\n  <li><span class='match'>y<\/span>esterday<\/li>\n  <li><span class='match'>y<\/span>et<\/li>\n  <li><span class='match'>y<\/span>ou<\/li>\n  <li><span class='match'>y<\/span>oung<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="2" style="list-style-type: decimal">
 <li><em>End with “x”</em></li>
 </ol>
-<div class="sourceCode" id="cb639"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb639-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;x$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;x$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-f4e561a181b5cfa4ff4c" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-f4e561a181b5cfa4ff4c">{"x":{"html":"<ul>\n  <li>bo<span class='match'>x<\/span><\/li>\n  <li>se<span class='match'>x<\/span><\/li>\n  <li>si<span class='match'>x<\/span><\/li>\n  <li>ta<span class='match'>x<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="3" style="list-style-type: decimal">
 <li><em>Are exactly three letters long. (Don’t cheat by using <code>str_length()</code>!)</em></li>
 </ol>
-<div class="sourceCode" id="cb640"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb640-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^...$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^...$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <ol start="4" style="list-style-type: decimal">
 <li><em>Have seven letters or more.</em></li>
 </ol>
-<div class="sourceCode" id="cb641"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb641-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;.......&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;.......&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <p>Since this list is long, you might want to use the <code>match</code> argument to <code>str_view()</code> to show only the matching or non-matching words.</p></li>
 </ol>
 </div>
@@ -771,41 +771,41 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol style="list-style-type: decimal">
 <li><em>Start with a vowel.</em></li>
 </ol>
-<div class="sourceCode" id="cb642"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb642-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[aeiou]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[aeiou]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><em>That only contain consonants. (Hint: thinking about matching “not”-vowels.)</em></li>
 </ol>
-<div class="sourceCode" id="cb643"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb643-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeiou]*[^aeiouy]$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeiou]*[^aeiouy]$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-71c351401cf77305bc72" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-71c351401cf77305bc72">{"x":{"html":"<ul>\n  <li><span class='match'>mrs<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="3" style="list-style-type: decimal">
 <li><em>End with <code>ed</code>, but not with <code>eed</code>.</em></li>
 </ol>
-<div class="sourceCode" id="cb644"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb644-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[^e]ed$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[^e]ed$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-718da376eb423f0c83cb" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-718da376eb423f0c83cb">{"x":{"html":"<ul>\n  <li><span class='match'>bed<\/span><\/li>\n  <li>hund<span class='match'>red<\/span><\/li>\n  <li><span class='match'>red<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="4" style="list-style-type: decimal">
 <li><em>End with <code>ing</code> or <code>ise</code>.</em></li>
 </ol>
-<div class="sourceCode" id="cb645"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb645-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(ing|ise)$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(ing|ise)$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-7ca2c564312bcc893882" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-7ca2c564312bcc893882">{"x":{"html":"<ul>\n  <li>advert<span class='match'>ise<\/span><\/li>\n  <li>br<span class='match'>ing<\/span><\/li>\n  <li>dur<span class='match'>ing<\/span><\/li>\n  <li>even<span class='match'>ing<\/span><\/li>\n  <li>exerc<span class='match'>ise<\/span><\/li>\n  <li>k<span class='match'>ing<\/span><\/li>\n  <li>mean<span class='match'>ing<\/span><\/li>\n  <li>morn<span class='match'>ing<\/span><\/li>\n  <li>otherw<span class='match'>ise<\/span><\/li>\n  <li>pract<span class='match'>ise<\/span><\/li>\n  <li>ra<span class='match'>ise<\/span><\/li>\n  <li>real<span class='match'>ise<\/span><\/li>\n  <li>r<span class='match'>ing<\/span><\/li>\n  <li>r<span class='match'>ise<\/span><\/li>\n  <li>s<span class='match'>ing<\/span><\/li>\n  <li>surpr<span class='match'>ise<\/span><\/li>\n  <li>th<span class='match'>ing<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Empirically verify the rule “i before e except after c”.</em></p>
-<div class="sourceCode" id="cb646"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb646-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(^(ei))|cie|[^c]ei&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(^(ei))|cie|[^c]ei&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-d56f1d1377afb821213b" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-d56f1d1377afb821213b">{"x":{"html":"<ul>\n  <li><span class='match'>ei<\/span>ght<\/li>\n  <li><span class='match'>ei<\/span>ther<\/li>\n  <li>s<span class='match'>cie<\/span>nce<\/li>\n  <li>so<span class='match'>cie<\/span>ty<\/li>\n  <li><span class='match'>wei<\/span>gh<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Is “q” always followed by a “u”?</em></p>
-<div class="sourceCode" id="cb647"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb647-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;q[^u]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;q[^u]&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-f3ca49dca8cf47dde7e0" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-f3ca49dca8cf47dde7e0">{"x":{"html":"<ul>\n  <li><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>of the words in list, yes.</p></li>
 <li><p><em>Write a regular expression that matches a word if it’s probably written in British English, not American English.</em></p>
-<div class="sourceCode" id="cb648"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb648-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(l|b)our|parat&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(l|b)our|parat&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-d32b7bb75c054cd178bc" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-d32b7bb75c054cd178bc">{"x":{"html":"<ul>\n  <li>co<span class='match'>lour<\/span><\/li>\n  <li>la<span class='match'>bour<\/span><\/li>\n  <li>se<span class='match'>parat<\/span>e<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Create a regular expression that will match telephone numbers as commonly written in your country.</em></p>
-<div class="sourceCode" id="cb649"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb649-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dkl kls. klk. _&quot;</span>, <span class="st">&quot;(425) 591-6020&quot;</span>, <span class="st">&quot;her number is (581) 434-3242&quot;</span>, <span class="st">&quot;442&quot;</span>, <span class="st">&quot;  dsi&quot;</span>)</a>
-<a class="sourceLine" id="cb649-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d-</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;dkl kls. klk. _&quot;</span>, <span class="st">&quot;(425) 591-6020&quot;</span>, <span class="st">&quot;her number is (581) 434-3242&quot;</span>, <span class="st">&quot;442&quot;</span>, <span class="st">&quot;  dsi&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">(</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">)</span><span class="ch">\\</span><span class="st">s</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d-</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d</span><span class="ch">\\</span><span class="st">d&quot;</span>)</code></pre>
 <div id="htmlwidget-b177b6c95c429eb9c9a8" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-b177b6c95c429eb9c9a8">{"x":{"html":"<ul>\n  <li>dkl kls. klk. _<\/li>\n  <li><span class='match'>(425) 591-6020<\/span><\/li>\n  <li>her number is <span class='match'>(581) 434-3242<\/span><\/li>\n  <li>442<\/li>\n  <li>  dsi<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>Aboves not a good way to solve this, will see better methods in next section.</p></li>
@@ -822,44 +822,44 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol style="list-style-type: decimal">
 <li><code>^.*$</code> : starts with anything, and ends with anything–matches whole thing</li>
 </ol>
-<div class="sourceCode" id="cb650"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb650-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;^.*$&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(x, <span class="st">&quot;^.*$&quot;</span>)</code></pre>
 <div id="htmlwidget-6a9f4cf77c703ae8a211" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-6a9f4cf77c703ae8a211">{"x":{"html":"<ul>\n  <li><span class='match'>dkl kls. klk. _<\/span><\/li>\n  <li><span class='match'>(425) 591-6020<\/span><\/li>\n  <li><span class='match'>her number is (581) 434-3242<\/span><\/li>\n  <li><span class='match'>442<\/span><\/li>\n  <li><span class='match'>  dsi<\/span><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="2" style="list-style-type: decimal">
 <li><code>"\\{.+\\}"</code> : match text in brackets greater than nothing</li>
 </ol>
-<div class="sourceCode" id="cb651"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb651-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;some in {brackets}&quot;</span>, <span class="st">&quot;just {} no match&quot;</span>)</a>
-<a class="sourceLine" id="cb651-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">{.+</span><span class="ch">\\</span><span class="st">}&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;test&quot;</span>, <span class="st">&quot;some in {brackets}&quot;</span>, <span class="st">&quot;just {} no match&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">{.+</span><span class="ch">\\</span><span class="st">}&quot;</span>)</code></pre>
 <div id="htmlwidget-8329b3d43f5def4ca080" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-8329b3d43f5def4ca080">{"x":{"html":"<ul>\n  <li>test<\/li>\n  <li>some in <span class='match'>{brackets}<\/span><\/li>\n  <li>just {} no match<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="3" style="list-style-type: decimal">
 <li><code>\d{4}-\d{2}-\d{2}</code>: 4 numbers - 2 numbers - 2 numbers</li>
 </ol>
-<div class="sourceCode" id="cb652"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb652-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;4444-22-22&quot;</span>, <span class="st">&quot;test&quot;</span>, <span class="st">&quot;333-4444-22&quot;</span>)</a>
-<a class="sourceLine" id="cb652-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;4444-22-22&quot;</span>, <span class="st">&quot;test&quot;</span>, <span class="st">&quot;333-4444-22&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">d{4}-</span><span class="ch">\\</span><span class="st">d{2}-</span><span class="ch">\\</span><span class="st">d{2}&quot;</span>)</code></pre>
 <div id="htmlwidget-9fa755d77492b7cfb4d5" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-9fa755d77492b7cfb4d5">{"x":{"html":"<ul>\n  <li><span class='match'>4444-22-22<\/span><\/li>\n  <li>test<\/li>\n  <li>333-4444-22<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ol start="4" style="list-style-type: decimal">
 <li><code>"\\\\{4}"</code>: 4 brackets</li>
 </ol>
-<div class="sourceCode" id="cb653"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb653-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb653-2" title="2"><span class="kw">writeLines</span>(x)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)
+<span class="kw">writeLines</span>(x)</code></pre>
 <pre><code>## \\\\
 ## \\\
 ## \\
 ## \</code></pre>
-<div class="sourceCode" id="cb655"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb655-1" title="1"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">{4}&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">{4}&quot;</span>)</code></pre>
 <div id="htmlwidget-42d318bafe6ac37008d3" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-42d318bafe6ac37008d3">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\\\\\<\/span><\/li>\n  <li>\\\\\\<\/li>\n  <li>\\\\<\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb656"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb656-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)</a>
-<a class="sourceLine" id="cb656-2" title="2"><span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>)
+<span class="kw">str_view</span>(x, <span class="st">&quot;</span><span class="ch">\\\\\\\\</span><span class="st">&quot;</span>)</code></pre>
 <div id="htmlwidget-cb5f127a62a7a0ed12c8" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-cb5f127a62a7a0ed12c8">{"x":{"html":"<ul>\n  <li><span class='match'>\\\\<\/span>\\\\<\/li>\n  <li><span class='match'>\\\\<\/span>\\<\/li>\n  <li><span class='match'>\\\\<\/span><\/li>\n  <li>\\<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Create regular expressions to find all words that:</em></p>
 <ol style="list-style-type: decimal">
 <li>find all words that start with three consonants</li>
 </ol>
-<div class="sourceCode" id="cb657"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb657-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeoiouy]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^[^aeoiouy]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-685244c4b3faf4cf80c3" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-685244c4b3faf4cf80c3">{"x":{"html":"<ul>\n  <li><span class='match'>Chr<\/span>ist<\/li>\n  <li><span class='match'>Chr<\/span>istmas<\/li>\n  <li><span class='match'>mrs<\/span><\/li>\n  <li><span class='match'>sch<\/span>eme<\/li>\n  <li><span class='match'>sch<\/span>ool<\/li>\n  <li><span class='match'>str<\/span>aight<\/li>\n  <li><span class='match'>str<\/span>ategy<\/li>\n  <li><span class='match'>str<\/span>eet<\/li>\n  <li><span class='match'>str<\/span>ike<\/li>\n  <li><span class='match'>str<\/span>ong<\/li>\n  <li><span class='match'>str<\/span>ucture<\/li>\n  <li><span class='match'>thr<\/span>ee<\/li>\n  <li><span class='match'>thr<\/span>ough<\/li>\n  <li><span class='match'>thr<\/span>ow<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <ul>
@@ -868,14 +868,14 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol start="2" style="list-style-type: decimal">
 <li>have three or more vowels in a row</li>
 </ol>
-<div class="sourceCode" id="cb658"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb658-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[aeiou]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;[aeiou]{3}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <div id="htmlwidget-7e3131aa2dbf1537d6ff" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-7e3131aa2dbf1537d6ff">{"x":{"html":"<ul>\n  <li>b<span class='match'>eau<\/span>ty<\/li>\n  <li>obv<span class='match'>iou<\/span>s<\/li>\n  <li>prev<span class='match'>iou<\/span>s<\/li>\n  <li>q<span class='match'>uie<\/span>t<\/li>\n  <li>ser<span class='match'>iou<\/span>s<\/li>\n  <li>var<span class='match'>iou<\/span>s<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 <p>In this case, do not include the <code>y</code>.</p>
 <ol start="3" style="list-style-type: decimal">
 <li>have 2 or more vowel-consonant pairs in a row</li>
 </ol>
-<div class="sourceCode" id="cb659"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb659-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;([aeiou][^aeiou]){2,}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;([aeiou][^aeiou]){2,}&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre></li>
 <li><p><em>Solve the beginner regexp crosswords at</em>
 <em><a href="https://regexcrossword.com/challenges/beginner" class="uri">https://regexcrossword.com/challenges/beginner</a>.</em></p></li>
 </ol>
@@ -894,59 +894,59 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <li><code>"(.).\\1.\\1"</code> : chars shows-up 3 times with one character between each</li>
 <li><code>"(.)(.)(.).*\\3\\2\\1"</code> : 3 chars in one order with * chars between, then 3 chars with 3 letters in the reverse order of what it started</li>
 </ol>
-<div class="sourceCode" id="cb660"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb660-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;steefddff&quot;</span>, <span class="st">&quot;ssdfsdfffsdasdlkd&quot;</span>, <span class="st">&quot;DLKKJIOWdkl&quot;</span>, <span class="st">&quot;klnlsd&quot;</span>, <span class="st">&quot;t11&quot;</span>, <span class="st">&quot;(.)\1\1&quot;</span>)</a>
-<a class="sourceLine" id="cb660-2" title="2"></a>
-<a class="sourceLine" id="cb660-3" title="3"><span class="kw">str_view_all</span>(x, <span class="st">&quot;(.)</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxx</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;steefddff&quot;</span>, <span class="st">&quot;ssdfsdfffsdasdlkd&quot;</span>, <span class="st">&quot;DLKKJIOWdkl&quot;</span>, <span class="st">&quot;klnlsd&quot;</span>, <span class="st">&quot;t11&quot;</span>, <span class="st">&quot;(.)\1\1&quot;</span>)
+
+<span class="kw">str_view_all</span>(x, <span class="st">&quot;(.)</span><span class="ch">\\</span><span class="st">1</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxx</span></code></pre>
 <div id="htmlwidget-e2694262fd6f8223808c" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-e2694262fd6f8223808c">{"x":{"html":"<ul>\n  <li>ssdfsd<span class='match'>fff<\/span>sdasdlkd<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb661"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb661-1" title="1"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(.)(.)</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyyx</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(.)(.)</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyyx</span></code></pre>
 <div id="htmlwidget-5ef23ee4331317c66513" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-5ef23ee4331317c66513">{"x":{"html":"<ul>\n  <li>bell p<span class='match'>eppe<\/span>r<\/li>\n  <li>chili p<span class='match'>eppe<\/span>r<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb662"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb662-1" title="1"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(..)</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxyy</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view_all</span>(fruit, <span class="st">&quot;(..)</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xxyy</span></code></pre>
 <div id="htmlwidget-413159c1a57cba56d43a" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-413159c1a57cba56d43a">{"x":{"html":"<ul>\n  <li>b<span class='match'>anan<\/span>a<\/li>\n  <li><span class='match'>coco<\/span>nut<\/li>\n  <li><span class='match'>cucu<\/span>mber<\/li>\n  <li><span class='match'>juju<\/span>be<\/li>\n  <li><span class='match'>papa<\/span>ya<\/li>\n  <li>s<span class='match'>alal<\/span> berry<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb663"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb663-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).</span><span class="ch">\\</span><span class="st">1.</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#x.x.x</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).</span><span class="ch">\\</span><span class="st">1.</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#x.x.x</span></code></pre>
 <div id="htmlwidget-9672b3da7b9319a6e8bc" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-9672b3da7b9319a6e8bc">{"x":{"html":"<ul>\n  <li><span class='match'>eleve<\/span>n<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb664"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb664-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.)(.)(.).*</span><span class="ch">\\</span><span class="st">3</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyz.*zyx</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.)(.)(.).*</span><span class="ch">\\</span><span class="st">3</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>) <span class="co">#xyz.*zyx</span></code></pre>
 <div id="htmlwidget-c9e78af2c106feb9d6d2" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-c9e78af2c106feb9d6d2">{"x":{"html":"<ul>\n  <li><span class='match'>paragrap<\/span>h<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>Construct regular expressions to match words that:</em></p>
 <ol style="list-style-type: decimal">
 <li><em>Start and end with the same character.</em></li>
 </ol>
-<div class="sourceCode" id="cb665"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb665-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^(.).*</span><span class="ch">\\</span><span class="st">1$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;^(.).*</span><span class="ch">\\</span><span class="st">1$&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><em>Contain a repeated pair of letters</em>
 (e.g. “church” contains “ch” repeated twice.)</li>
 </ol>
-<div class="sourceCode" id="cb666"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb666-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(..).*</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(..).*</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><em>Contain one letter repeated in at least three places</em>
 (e.g. “eleven” contains three “e”s.)</li>
 </ol>
-<div class="sourceCode" id="cb667"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb667-1" title="1"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).+</span><span class="ch">\\</span><span class="st">1.+</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</a></code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view</span>(stringr<span class="op">::</span>words, <span class="st">&quot;(.).+</span><span class="ch">\\</span><span class="st">1.+</span><span class="ch">\\</span><span class="st">1&quot;</span>, <span class="dt">match =</span> <span class="ot">TRUE</span>)</code></pre></li>
 </ol>
 </div>
 </div>
 <div id="tools" class="section level2">
 <h2>14.4 Tools</h2>
-<div class="sourceCode" id="cb668"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb668-1" title="1">noun &lt;-<span class="st"> &quot;(a|the) ([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span></a>
-<a class="sourceLine" id="cb668-2" title="2"></a>
-<a class="sourceLine" id="cb668-3" title="3">has_noun &lt;-<span class="st"> </span>sentences <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb668-4" title="4"><span class="st">  </span><span class="kw">str_subset</span>(noun) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb668-5" title="5"><span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>) </a>
-<a class="sourceLine" id="cb668-6" title="6"></a>
-<a class="sourceLine" id="cb668-7" title="7">has_noun <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb668-8" title="8"><span class="st">  </span><span class="kw">str_extract_all</span>(noun, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb668-9" title="9"></a>
-<a class="sourceLine" id="cb668-10" title="10"><span class="co">#creates split into seperate pieces</span></a>
-<a class="sourceLine" id="cb668-11" title="11">has_noun <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb668-12" title="12"><span class="st">  </span><span class="kw">str_match_all</span>(noun)</a>
-<a class="sourceLine" id="cb668-13" title="13"></a>
-<a class="sourceLine" id="cb668-14" title="14"><span class="co">#Can make dataframe with, but need to name all</span></a>
-<a class="sourceLine" id="cb668-15" title="15"><span class="kw">tibble</span>(<span class="dt">has_noun =</span> has_noun) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb668-16" title="16"><span class="st">  </span><span class="kw">extract</span>(has_noun, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;article&quot;</span>, <span class="st">&quot;noun&quot;</span>), <span class="dt">regex =</span> noun)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">noun &lt;-<span class="st"> &quot;(a|the) ([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span>
+
+has_noun &lt;-<span class="st"> </span>sentences <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">str_subset</span>(noun) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">10</span>) 
+
+has_noun <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_extract_all</span>(noun, <span class="dt">simplify =</span> <span class="ot">TRUE</span>)
+
+<span class="co">#creates split into seperate pieces</span>
+has_noun <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_match_all</span>(noun)
+
+<span class="co">#Can make dataframe with, but need to name all</span>
+<span class="kw">tibble</span>(<span class="dt">has_noun =</span> has_noun) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">extract</span>(has_noun, <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;article&quot;</span>, <span class="st">&quot;noun&quot;</span>), <span class="dt">regex =</span> noun)</code></pre>
 <ul>
 <li>When using <code>boundary()</code> with <code>str_split</code> can set to “character”, “line”, “sentence”, and “word” and gives alternative to splitting by pattern.</li>
 </ul>
@@ -958,12 +958,12 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol style="list-style-type: decimal">
 <li><em>Find all words that start or end with <code>x</code>.</em></li>
 </ol>
-<div class="sourceCode" id="cb669"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb669-1" title="1"><span class="kw">str_subset</span>(words, <span class="st">&quot;^x|x$&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_subset</span>(words, <span class="st">&quot;^x|x$&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;box&quot; &quot;sex&quot; &quot;six&quot; &quot;tax&quot;</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><em>Find all words that start with a vowel and end with a consonant.</em></li>
 </ol>
-<div class="sourceCode" id="cb671"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb671-1" title="1"><span class="kw">str_subset</span>(words, <span class="st">&quot;^[aeiou].*[^aeiouy]$&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_subset</span>(words, <span class="st">&quot;^[aeiou].*[^aeiouy]$&quot;</span>)</code></pre>
 <pre><code>##   [1] &quot;about&quot;       &quot;accept&quot;      &quot;account&quot;     &quot;across&quot;      &quot;act&quot;        
 ##   [6] &quot;actual&quot;      &quot;add&quot;         &quot;address&quot;     &quot;admit&quot;       &quot;affect&quot;     
 ##  [11] &quot;afford&quot;      &quot;after&quot;       &quot;afternoon&quot;   &quot;again&quot;       &quot;against&quot;    
@@ -989,23 +989,23 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol start="3" style="list-style-type: decimal">
 <li><em>Are there any words that contain at least one of each different vowel?</em></li>
 </ol>
-<div class="sourceCode" id="cb673"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb673-1" title="1">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)</a>
-<a class="sourceLine" id="cb673-2" title="2">words[<span class="kw">str_detect</span>(words, <span class="st">&quot;a&quot;</span>) <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb673-3" title="3"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;e&quot;</span>) <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb673-4" title="4"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;i&quot;</span>) <span class="op">&amp;</span></a>
-<a class="sourceLine" id="cb673-5" title="5"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;o&quot;</span>) <span class="op">&amp;</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb673-6" title="6"><span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;u&quot;</span>)]</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)
+words[<span class="kw">str_detect</span>(words, <span class="st">&quot;a&quot;</span>) <span class="op">&amp;</span>
+<span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;e&quot;</span>) <span class="op">&amp;</span>
+<span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;i&quot;</span>) <span class="op">&amp;</span>
+<span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;o&quot;</span>) <span class="op">&amp;</span><span class="st"> </span>
+<span class="st">        </span><span class="kw">str_detect</span>(words, <span class="st">&quot;u&quot;</span>)]</code></pre>
 <pre><code>## character(0)</code></pre>
 <p>No. </p></li>
 <li><p><em>What word has the highest number of vowels? What word has the highest</em>
 <em>proportion of vowels? (Hint: what is the denominator?)</em></p>
-<div class="sourceCode" id="cb675"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb675-1" title="1">vowel_counts &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">words =</span> words, </a>
-<a class="sourceLine" id="cb675-2" title="2">                       <span class="dt">n_string =</span> <span class="kw">str_length</span>(words),</a>
-<a class="sourceLine" id="cb675-3" title="3">                       <span class="dt">n_vowel =</span> <span class="kw">str_count</span>(words, vowels),</a>
-<a class="sourceLine" id="cb675-4" title="4">                       <span class="dt">prop_vowel =</span> n_vowel <span class="op">/</span><span class="st"> </span>n_string)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vowel_counts &lt;-<span class="st"> </span><span class="kw">tibble</span>(<span class="dt">words =</span> words, 
+                       <span class="dt">n_string =</span> <span class="kw">str_length</span>(words),
+                       <span class="dt">n_vowel =</span> <span class="kw">str_count</span>(words, vowels),
+                       <span class="dt">prop_vowel =</span> n_vowel <span class="op">/</span><span class="st"> </span>n_string)</code></pre>
 <p>‘Experience’ has the most vowels</p>
-<div class="sourceCode" id="cb676"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb676-1" title="1">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb676-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n_vowel))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(n_vowel))</code></pre>
 <pre><code>## # A tibble: 980 x 4
 ##    words      n_string n_vowel prop_vowel
 ##    &lt;chr&gt;         &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;
@@ -1021,8 +1021,8 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 ## 10 choose            6       2      0.333
 ## # ... with 970 more rows</code></pre>
 <p>‘a’ has the highest proportion</p>
-<div class="sourceCode" id="cb678"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb678-1" title="1">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb678-2" title="2"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(prop_vowel))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vowel_counts <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(prop_vowel))</code></pre>
 <pre><code>## # A tibble: 980 x 4
 ##    words n_string n_vowel prop_vowel
 ##    &lt;chr&gt;    &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;
@@ -1046,34 +1046,34 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <em>expression matched “flickered”, which is not a colour. Modify the </em>
 <em>regex to fix the problem.</em></p>
 <p>Add space in front of colors:</p>
-<div class="sourceCode" id="cb680"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb680-1" title="1">colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb680-2" title="2"><span class="st">  </span><span class="kw">paste0</span>(<span class="st">&quot; &quot;</span>, .)</a>
-<a class="sourceLine" id="cb680-3" title="3"></a>
-<a class="sourceLine" id="cb680-4" title="4">colour_match &lt;-<span class="st"> </span><span class="kw">str_c</span>(colours, <span class="dt">collapse =</span> <span class="st">&quot;|&quot;</span>)</a>
-<a class="sourceLine" id="cb680-5" title="5"></a>
-<a class="sourceLine" id="cb680-6" title="6">more &lt;-<span class="st"> </span>sentences[<span class="kw">str_count</span>(sentences, colour_match) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb680-7" title="7"><span class="kw">str_view_all</span>(more, colour_match)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;orange&quot;</span>, <span class="st">&quot;yellow&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>, <span class="st">&quot;purple&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">paste0</span>(<span class="st">&quot; &quot;</span>, .)
+
+colour_match &lt;-<span class="st"> </span><span class="kw">str_c</span>(colours, <span class="dt">collapse =</span> <span class="st">&quot;|&quot;</span>)
+
+more &lt;-<span class="st"> </span>sentences[<span class="kw">str_count</span>(sentences, colour_match) <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>]
+<span class="kw">str_view_all</span>(more, colour_match)</code></pre>
 <div id="htmlwidget-1b17c9a675525b801798" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-1b17c9a675525b801798">{"x":{"html":"<ul>\n  <li>It is hard to erase<span class='match'> blue<\/span> or<span class='match'> red<\/span> ink.<\/li>\n  <li>The sky in the west is tinged with<span class='match'> orange<\/span><span class='match'> red<\/span>.<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>From the Harvard sentences data, extract:</em></p>
 <ol style="list-style-type: decimal">
 <li><em>The first word from each sentence.</em></li>
 </ol>
-<div class="sourceCode" id="cb681"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb681-1" title="1"><span class="kw">str_extract</span>(sentences, <span class="st">&quot;[A-z]*&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_extract</span>(sentences, <span class="st">&quot;[A-z]*&quot;</span>)</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li><em>All words ending in <code>ing</code>.</em></li>
 </ol>
-<div class="sourceCode" id="cb682"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb682-1" title="1"><span class="co">#ends in &quot;ing&quot; or &quot;ing.&quot;</span></a>
-<a class="sourceLine" id="cb682-2" title="2">sent_ing &lt;-<span class="st"> </span><span class="kw">str_subset</span>(sentences, <span class="st">&quot;.*ing(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>)  </a>
-<a class="sourceLine" id="cb682-3" title="3"><span class="kw">str_extract_all</span>(sent_ing, <span class="st">&quot;[A-z]+ing&quot;</span>, <span class="dt">simplify=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#ends in &quot;ing&quot; or &quot;ing.&quot;</span>
+sent_ing &lt;-<span class="st"> </span><span class="kw">str_subset</span>(sentences, <span class="st">&quot;.*ing(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>)  
+<span class="kw">str_extract_all</span>(sent_ing, <span class="st">&quot;[A-z]+ing&quot;</span>, <span class="dt">simplify=</span><span class="ot">TRUE</span>)</code></pre>
 <ol start="3" style="list-style-type: decimal">
 <li><em>All plurals.</em></li>
 </ol>
-<div class="sourceCode" id="cb683"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb683-1" title="1"><span class="kw">str_subset</span>(sentences, <span class="st">&quot;[A-z]*s(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#take all sentences that have a word ending in s</span></a>
-<a class="sourceLine" id="cb683-2" title="2"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="st">&quot;[A-z]*s</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb683-3" title="3"><span class="st">  </span>.[<span class="kw">str_length</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>] <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#get rid of the short words</span></a>
-<a class="sourceLine" id="cb683-4" title="4"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^s]s$&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#get rid of words ending in &#39;ss&#39;</span></a>
-<a class="sourceLine" id="cb683-5" title="5"><span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^i]s$&quot;</span>)  <span class="co">#get rid of &#39;this&#39;</span></a></code></pre></div></li>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_subset</span>(sentences, <span class="st">&quot;[A-z]*s(</span><span class="ch">\\</span><span class="st">.|</span><span class="ch">\\</span><span class="st">s)&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="co">#take all sentences that have a word ending in s</span>
+<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="st">&quot;[A-z]*s</span><span class="ch">\\</span><span class="st">b&quot;</span>, <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span>.[<span class="kw">str_length</span>(.) <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>] <span class="op">%&gt;%</span><span class="st">  </span><span class="co">#get rid of the short words</span>
+<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^s]s$&quot;</span>) <span class="op">%&gt;%</span><span class="st">   </span><span class="co">#get rid of words ending in &#39;ss&#39;</span>
+<span class="st">  </span><span class="kw">str_subset</span>(<span class="st">&quot;.*[^i]s$&quot;</span>)  <span class="co">#get rid of &#39;this&#39;</span></code></pre></li>
 </ol>
 </div>
 <div id="section-52" class="section level3">
@@ -1081,23 +1081,23 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol style="list-style-type: decimal">
 <li><p><em>Find all words that come after a “number” like “one”, “two”, “three” etc.</em>
 <em>Pull out both the number and the word.</em></p>
-<div class="sourceCode" id="cb684"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb684-1" title="1"><span class="co">#Create regex expression</span></a>
-<a class="sourceLine" id="cb684-2" title="2">nums &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;nine&quot;</span>)</a>
-<a class="sourceLine" id="cb684-3" title="3"></a>
-<a class="sourceLine" id="cb684-4" title="4">nums_c &lt;-<span class="st"> </span><span class="kw">str_c</span>(nums, <span class="dt">collapse =</span> <span class="st">&quot;|&quot;</span>)</a>
-<a class="sourceLine" id="cb684-5" title="5"></a>
-<a class="sourceLine" id="cb684-6" title="6"><span class="co"># see stringr cheatsheet: &quot;(?&lt;![:alpha:])&quot; means not preceded by</span></a>
-<a class="sourceLine" id="cb684-7" title="7">re &lt;-<span class="st"> </span><span class="kw">str_c</span>(<span class="st">&quot;(&quot;</span>, <span class="st">&quot;(?&lt;![:alpha:])&quot;</span>, <span class="st">&quot;(&quot;</span>, nums_c, <span class="st">&quot;))&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span>, </a>
-<a class="sourceLine" id="cb684-8" title="8">            <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)</a>
-<a class="sourceLine" id="cb684-9" title="9"></a>
-<a class="sourceLine" id="cb684-10" title="10">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb684-11" title="11"><span class="st">  </span><span class="kw">str_subset</span>(<span class="kw">regex</span>(re, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb684-12" title="12"><span class="st">  </span><span class="kw">str_extract_all</span>(<span class="kw">regex</span>(re, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb684-13" title="13"><span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb684-14" title="14"><span class="st">  </span>tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="dt">name =</span> <span class="ot">NULL</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb684-15" title="15"><span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> <span class="st">&quot;value&quot;</span>, </a>
-<a class="sourceLine" id="cb684-16" title="16">           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;num&quot;</span>, <span class="st">&quot;following&quot;</span>),</a>
-<a class="sourceLine" id="cb684-17" title="17">           <span class="dt">remove =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#Create regex expression</span>
+nums &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;one&quot;</span>, <span class="st">&quot;two&quot;</span>, <span class="st">&quot;three&quot;</span>, <span class="st">&quot;four&quot;</span>, <span class="st">&quot;five&quot;</span>, <span class="st">&quot;six&quot;</span>, <span class="st">&quot;seven&quot;</span>, <span class="st">&quot;eight&quot;</span>, <span class="st">&quot;nine&quot;</span>)
+
+nums_c &lt;-<span class="st"> </span><span class="kw">str_c</span>(nums, <span class="dt">collapse =</span> <span class="st">&quot;|&quot;</span>)
+
+<span class="co"># see stringr cheatsheet: &quot;(?&lt;![:alpha:])&quot; means not preceded by</span>
+re &lt;-<span class="st"> </span><span class="kw">str_c</span>(<span class="st">&quot;(&quot;</span>, <span class="st">&quot;(?&lt;![:alpha:])&quot;</span>, <span class="st">&quot;(&quot;</span>, nums_c, <span class="st">&quot;))&quot;</span>, <span class="st">&quot; &quot;</span>, <span class="st">&quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&quot;</span>, 
+            <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>)
+
+sentences <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_subset</span>(<span class="kw">regex</span>(re, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_extract_all</span>(<span class="kw">regex</span>(re, <span class="dt">ignore_case =</span> <span class="ot">TRUE</span>)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unlist</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span>tibble<span class="op">::</span><span class="kw">enframe</span>(<span class="dt">name =</span> <span class="ot">NULL</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">separate</span>(<span class="dt">col =</span> <span class="st">&quot;value&quot;</span>, 
+           <span class="dt">into =</span> <span class="kw">c</span>(<span class="st">&quot;num&quot;</span>, <span class="st">&quot;following&quot;</span>),
+           <span class="dt">remove =</span> <span class="ot">FALSE</span>)</code></pre>
 <pre><code>## # A tibble: 30 x 3
 ##    value       num   following
 ##    &lt;chr&gt;       &lt;chr&gt; &lt;chr&gt;    
@@ -1117,12 +1117,12 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 </ul></li>
 <li><p><em>Find all contractions. Separate out the pieces before and after the </em>
 <em>apostrophe.</em></p>
-<div class="sourceCode" id="cb686"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb686-1" title="1"><span class="co">#note the () facilitate the split with functions</span></a>
-<a class="sourceLine" id="cb686-2" title="2">contr &lt;-<span class="st"> &quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&#39;([^ </span><span class="ch">\\</span><span class="st">.]*)&quot;</span></a>
-<a class="sourceLine" id="cb686-3" title="3">sentences <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb686-4" title="4"><span class="st">  </span><span class="co">#note the improvement this word definition is to the above [^ ]+ </span></a>
-<a class="sourceLine" id="cb686-5" title="5"><span class="st">  </span><span class="kw">str_subset</span>(contr) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb686-6" title="6"><span class="st">  </span><span class="kw">str_match_all</span>(contr)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#note the () facilitate the split with functions</span>
+contr &lt;-<span class="st"> &quot;([^ </span><span class="ch">\\</span><span class="st">.]+)&#39;([^ </span><span class="ch">\\</span><span class="st">.]*)&quot;</span>
+sentences <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#note the improvement this word definition is to the above [^ ]+ </span>
+<span class="st">  </span><span class="kw">str_subset</span>(contr) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">str_match_all</span>(contr)</code></pre>
 <pre><code>## [[1]]
 ##      [,1]   [,2] [,3]
 ## [1,] &quot;It&#39;s&quot; &quot;It&quot; &quot;s&quot; 
@@ -1188,17 +1188,17 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <h3>14.4.5.1</h3>
 <ol style="list-style-type: decimal">
 <li><p><em>Replace all forward slashes in a string with backslashes.</em></p>
-<div class="sourceCode" id="cb688"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb688-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;test/dklsk/&quot;</span>)</a>
-<a class="sourceLine" id="cb688-2" title="2"><span class="kw">str_replace_all</span>(x, <span class="st">&quot;/&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb688-3" title="3"><span class="st">  </span><span class="kw">writeLines</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;test/dklsk/&quot;</span>)
+<span class="kw">str_replace_all</span>(x, <span class="st">&quot;/&quot;</span>, <span class="st">&quot;</span><span class="ch">\\\\</span><span class="st">&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">writeLines</span>()</code></pre>
 <pre><code>## test\dklsk\</code></pre></li>
 <li><p><em>Implement a simple version of <code>str_to_lower()</code> using <code>replace_all()</code>.</em></p>
-<div class="sourceCode" id="cb690"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb690-1" title="1">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;BIdklsKOS&quot;</span>)</a>
-<a class="sourceLine" id="cb690-2" title="2"><span class="kw">str_replace_all</span>(x, <span class="st">&quot;([A-Z])&quot;</span>, tolower)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;BIdklsKOS&quot;</span>)
+<span class="kw">str_replace_all</span>(x, <span class="st">&quot;([A-Z])&quot;</span>, tolower)</code></pre>
 <pre><code>## [1] &quot;bidklskos&quot;</code></pre></li>
 <li><p><em>Switch the first and last letters in <code>words</code>. Which of those strings</em>
 <em>are still words?</em></p>
-<div class="sourceCode" id="cb692"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb692-1" title="1"><span class="kw">str_replace</span>(words, <span class="st">&quot;(^.)(.*)(.$)&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">3</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_replace</span>(words, <span class="st">&quot;(^.)(.*)(.$)&quot;</span>, <span class="st">&quot;</span><span class="ch">\\</span><span class="st">3</span><span class="ch">\\</span><span class="st">2</span><span class="ch">\\</span><span class="st">1&quot;</span>)</code></pre>
 <p>Any words that start and end with the same letter, e.g. ‘treat’, as well as a few other examples like, war –&gt; raw .</p></li>
 </ol>
 </div>
@@ -1207,19 +1207,19 @@ Removes whitespace from beginning and end of character, <code>side</code> argume
 <ol style="list-style-type: decimal">
 <li><p><em>Split up a string like <code>"apples, pears, and bananas"</code> into individual</em>
 <em>components.</em></p>
-<div class="sourceCode" id="cb693"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb693-1" title="1">x &lt;-<span class="st"> &quot;apples, pears, and bananas&quot;</span></a>
-<a class="sourceLine" id="cb693-2" title="2"><span class="kw">str_split</span>(x, <span class="st">&quot;,* &quot;</span>)  <span class="co">#note that regular expression works to handle commas as well</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;apples, pears, and bananas&quot;</span>
+<span class="kw">str_split</span>(x, <span class="st">&quot;,* &quot;</span>)  <span class="co">#note that regular expression works to handle commas as well</span></code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;apples&quot;  &quot;pears&quot;   &quot;and&quot;     &quot;bananas&quot;</code></pre></li>
 <li><p><em>Why is it better to split up by <code>boundary("word")</code> than <code>" "</code>?</em></p>
 <p>Handles commas and punctuation<a href="#fn32" class="footnote-ref" id="fnref32"><sup>32</sup></a>.</p>
-<div class="sourceCode" id="cb695"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb695-1" title="1"><span class="kw">str_split</span>(x, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_split</span>(x, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>))</code></pre>
 <pre><code>## [[1]]
 ## [1] &quot;apples&quot;  &quot;pears&quot;   &quot;and&quot;     &quot;bananas&quot;</code></pre></li>
 <li><p><em>What does splitting with an empty string (<code>""</code>) do? Experiment, and</em>
 <em>then read the documentation.</em>
 Splitting by an empty string splits up each character.</p>
-<div class="sourceCode" id="cb697"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb697-1" title="1"><span class="kw">str_split</span>(x,<span class="st">&quot;&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_split</span>(x,<span class="st">&quot;&quot;</span>)</code></pre>
 <pre><code>## [[1]]
 ##  [1] &quot;a&quot; &quot;p&quot; &quot;p&quot; &quot;l&quot; &quot;e&quot; &quot;s&quot; &quot;,&quot; &quot; &quot; &quot;p&quot; &quot;e&quot; &quot;a&quot; &quot;r&quot; &quot;s&quot; &quot;,&quot; &quot; &quot; &quot;a&quot; &quot;n&quot;
 ## [18] &quot;d&quot; &quot; &quot; &quot;b&quot; &quot;a&quot; &quot;n&quot; &quot;a&quot; &quot;n&quot; &quot;a&quot; &quot;s&quot;</code></pre>
@@ -1258,17 +1258,17 @@ characters.</p>
 <li><p><em>How would you find all strings containing <code>\</code> with <code>regex()</code> vs.</em>
 <em>with <code>fixed()</code>?</em>
 would be <code>\\</code> instead of <code>\\\\</code></p>
-<div class="sourceCode" id="cb699"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb699-1" title="1"><span class="kw">str_view_all</span>(<span class="st">&quot;so </span><span class="ch">\\</span><span class="st"> the party is on</span><span class="ch">\\</span><span class="st"> right?&quot;</span>, <span class="kw">fixed</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_view_all</span>(<span class="st">&quot;so </span><span class="ch">\\</span><span class="st"> the party is on</span><span class="ch">\\</span><span class="st"> right?&quot;</span>, <span class="kw">fixed</span>(<span class="st">&quot;</span><span class="ch">\\</span><span class="st">&quot;</span>))</code></pre>
 <div id="htmlwidget-01f5faf4a8b97574797f" style="width:960px;height:100%;" class="str_view html-widget"></div>
     <script type="application/json" data-for="htmlwidget-01f5faf4a8b97574797f">{"x":{"html":"<ul>\n  <li>so <span class='match'>\\<\/span> the party is on<span class='match'>\\<\/span> right?<\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script></li>
 <li><p><em>What are the five most common words in <code>sentences</code>?</em></p>
-<div class="sourceCode" id="cb700"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb700-1" title="1"><span class="kw">str_extract_all</span>(sentences, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>), <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-2" title="2"><span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-3" title="3"><span class="st">  </span><span class="kw">gather</span>(V1<span class="op">:</span>V12, <span class="dt">value =</span> <span class="st">&quot;words&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;order&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">words =</span> <span class="kw">str_to_lower</span>(words)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>words <span class="op">==</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-6" title="6"><span class="st">  </span><span class="kw">count</span>(words, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb700-7" title="7"><span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str_extract_all</span>(sentences, <span class="kw">boundary</span>(<span class="st">&quot;word&quot;</span>), <span class="dt">simplify =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">as_tibble</span>() <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">gather</span>(V1<span class="op">:</span>V12, <span class="dt">value =</span> <span class="st">&quot;words&quot;</span>, <span class="dt">key =</span> <span class="st">&quot;order&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">words =</span> <span class="kw">str_to_lower</span>(words)) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span>words <span class="op">==</span><span class="st"> &quot;&quot;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">count</span>(words, <span class="dt">sort =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">head</span>(<span class="dv">5</span>)</code></pre>
 <pre><code>## Warning: `as_tibble.matrix()` requires a matrix with column names or a `.name_repair` argument. Using compatibility `.name_repair`.
 ## This warning is displayed once per session.</code></pre>
 <pre><code>## # A tibble: 5 x 2
@@ -1289,10 +1289,10 @@ would be <code>\\</code> instead of <code>\\\\</code></p>
 <li><code>apropos</code> searches all objects available from the global environment–useful if you can’t remember fun name.</li>
 </ul>
 <p>Check those that start with <code>replace</code>:</p>
-<div class="sourceCode" id="cb703"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb703-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(replace)&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apropos</span>(<span class="st">&quot;^(replace)&quot;</span>)</code></pre>
 <pre><code>## [1] &quot;replace&quot;    &quot;replace_na&quot;</code></pre>
 <p>Check those that start with <code>str</code>, but not <code>stri</code></p>
-<div class="sourceCode" id="cb705"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb705-1" title="1"><span class="kw">apropos</span>(<span class="st">&quot;^(str)[^i]&quot;</span>)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">apropos</span>(<span class="st">&quot;^(str)[^i]&quot;</span>)</code></pre>
 <pre><code>##  [1] &quot;str_c&quot;           &quot;str_conv&quot;        &quot;str_count&quot;      
 ##  [4] &quot;str_detect&quot;      &quot;str_dup&quot;         &quot;str_extract&quot;    
 ##  [7] &quot;str_extract_all&quot; &quot;str_flatten&quot;     &quot;str_glue&quot;       
@@ -1330,14 +1330,14 @@ would be <code>\\</code> instead of <code>\\\\</code></p>
 <div id="section-57" class="section level3">
 <h3>14.4.2.3</h3>
 <p>One way of doing this using iteration methods:</p>
-<div class="sourceCode" id="cb707"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb707-1" title="1">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)</a>
-<a class="sourceLine" id="cb707-2" title="2"></a>
-<a class="sourceLine" id="cb707-3" title="3"><span class="kw">tibble</span>(<span class="dt">vowels =</span> vowels, <span class="dt">words =</span> <span class="kw">list</span>(words)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb707-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">detect_vowels =</span> purrr<span class="op">::</span><span class="kw">map2</span>(words, vowels, str_detect)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb707-5" title="5"><span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> vowels, <span class="dt">value =</span> detect_vowels) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb707-6" title="6"><span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb707-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">unique_vowels =</span> <span class="kw">rowSums</span>(.[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb707-8" title="8"><span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(unique_vowels))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">vowels &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;e&quot;</span>,<span class="st">&quot;i&quot;</span>,<span class="st">&quot;o&quot;</span>,<span class="st">&quot;u&quot;</span>)
+
+<span class="kw">tibble</span>(<span class="dt">vowels =</span> vowels, <span class="dt">words =</span> <span class="kw">list</span>(words)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">detect_vowels =</span> purrr<span class="op">::</span><span class="kw">map2</span>(words, vowels, str_detect)) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">spread</span>(<span class="dt">key =</span> vowels, <span class="dt">value =</span> detect_vowels) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">unnest</span>() <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">unique_vowels =</span> <span class="kw">rowSums</span>(.[<span class="dv">2</span><span class="op">:</span><span class="dv">6</span>])) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">arrange</span>(<span class="kw">desc</span>(unique_vowels))</code></pre>
 <pre><code>## # A tibble: 980 x 7
 ##    words       a     e     i     o     u     unique_vowels
 ##    &lt;chr&gt;       &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt; &lt;lgl&gt;         &lt;dbl&gt;
@@ -1352,7 +1352,7 @@ would be <code>\\</code> instead of <code>\\\\</code></p>
 ##  9 organize    TRUE  TRUE  TRUE  TRUE  FALSE             4
 ## 10 previous    FALSE TRUE  TRUE  TRUE  TRUE              4
 ## # ... with 970 more rows</code></pre>
-<div class="sourceCode" id="cb709"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb709-1" title="1"><span class="co">#seems that nothing gets over 4</span></a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="co">#seems that nothing gets over 4</span></code></pre>
 
 </div>
 </div>
@@ -1401,10 +1401,9 @@ gitbook.start({
 "google": false,
 "linkedin": true,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"],
-"instapaper": false
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -1414,6 +1413,10 @@ gitbook.start({
 "edit": {
 "link": "https\://github.com/brshallow/r4ds_solutions/edit/master/14-strings.Rmd",
 "text": "Edit, fork"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": null,
 "toc": {
@@ -1429,7 +1432,7 @@ gitbook.start({
     var script = document.createElement("script");
     script.type = "text/javascript";
     var src = "true";
-    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
     if (location.protocol !== "file:" && /^https?:/.test(src))
       src = src.replace(/^https?:/, '');
     script.src = src;
