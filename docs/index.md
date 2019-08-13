@@ -1,7 +1,7 @@
 --- 
 title: "Yet another 'R for Data Science' study guide"
 author: "Bryan Shalloway"
-date: "Last updated: 2019-06-25"
+date: "Last updated: 2019-08-13"
 site: bookdown::bookdown_site
 url: https\://brshallo.github.io/r4ds_solutions/
 github-repo: "brshallo/r4ds_solutions"

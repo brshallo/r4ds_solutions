@@ -501,54 +501,54 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 
 <ul>
-<li><code>writeLines</code>: see raw contents of a string (prints each string in a vector on a new line)</li>
-<li><code>str_length</code>: number of characters in a string</li>
-<li><code>str_c</code>: combine two or more strings
+<li><p><code>writeLines</code>: see raw contents of a string (prints each string in a vector on a new line)</p></li>
+<li><p><code>str_length</code>: number of characters in a string</p></li>
+<li><p><code>str_c</code>: combine two or more strings</p>
 <ul>
 <li>use <code>collapse</code> arg to make vector of strings to single string</li>
 </ul></li>
-<li><code>str_replace_na</code>: print <code>NA</code> as “NA”</li>
-<li><code>str_sub</code>: <code>start</code> and <code>end</code> args to specify position to remove (or replace), can use negative numbers as well to represent from back</li>
-<li><code>str_to_lower</code>, <code>str_to_upper</code>, <code>str_to_upper</code>: for changing string case
+<li><p><code>str_replace_na</code>: print <code>NA</code> as “NA”</p></li>
+<li><p><code>str_sub</code>: <code>start</code> and <code>end</code> args to specify position to remove (or replace), can use negative numbers as well to represent from back</p></li>
+<li><p><code>str_to_lower</code>, <code>str_to_upper</code>, <code>str_to_upper</code>: for changing string case</p>
 <ul>
 <li><code>locale</code> arg (to handle slight differences in characters)</li>
 </ul></li>
-<li><code>str_order</code>, <code>str_sort</code>: more robust version of <code>order</code> and <code>sort</code> which take allow a <code>locale</code> argument</li>
+<li><p><code>str_order</code>, <code>str_sort</code>: more robust version of <code>order</code> and <code>sort</code> which take allow a <code>locale</code> argument</p></li>
 <li><p><code>str_view</code>, <code>str_view_all</code>: shows how character and regular expression match</p></li>
-<li><code>\d</code>: matches any digit.</li>
-<li><code>\s</code>: matches any whitespace (e.g. space, tab, newline).</li>
-<li><code>[abc]</code>: matches a, b, or c.</li>
+<li><p><code>\d</code>: matches any digit.</p></li>
+<li><p><code>\s</code>: matches any whitespace (e.g. space, tab, newline).</p></li>
+<li><p><code>[abc]</code>: matches a, b, or c.</p></li>
 <li><p><code>[^abc]</code>: matches anything except a, b, or c.</p></li>
-<li><code>{n}</code>: exactly n</li>
-<li><code>{n,}</code>: n or more</li>
-<li><code>{,m}</code>: at most m</li>
+<li><p><code>{n}</code>: exactly n</p></li>
+<li><p><code>{n,}</code>: n or more</p></li>
+<li><p><code>{,m}</code>: at most m</p></li>
 <li><p><code>{n,m}</code>: between n and m</p></li>
-<li><code>str_detect</code>: returns logical vector of <code>TRUE</code>/<code>FALSE</code> values</li>
-<li><code>str_subset</code>: subset of <code>TRUE</code> values from <code>str_detect</code></li>
-<li><code>str_count</code>: number of matches in a string</li>
-<li><code>str_extract</code>: extract actual text of a match</li>
-<li><code>str_extract_all</code>: returns list with all matches
+<li><p><code>str_detect</code>: returns logical vector of <code>TRUE</code>/<code>FALSE</code> values</p></li>
+<li><p><code>str_subset</code>: subset of <code>TRUE</code> values from <code>str_detect</code></p></li>
+<li><p><code>str_count</code>: number of matches in a string</p></li>
+<li><p><code>str_extract</code>: extract actual text of a match</p></li>
+<li><p><code>str_extract_all</code>: returns list with all matches</p>
 <ul>
 <li><code>simplify = TRUE</code> returns a matrix</li>
 </ul></li>
-<li><code>str_match</code>: similar to <code>str_extract</code> but gives each individual component of match in a matrix, rather than a character vector (also have a <code>str_match_all</code>)</li>
-<li><code>tidyr::extract</code>: like <code>str_match</code> but name columns with matches which are moved into new columns</li>
-<li><code>str_replace</code>, <code>str_replace_all</code>: replace matches with new strings</li>
-<li><code>str_split</code> split a string into pieces – default is individual words (returns list)
+<li><p><code>str_match</code>: similar to <code>str_extract</code> but gives each individual component of match in a matrix, rather than a character vector (also have a <code>str_match_all</code>)</p></li>
+<li><p><code>tidyr::extract</code>: like <code>str_match</code> but name columns with matches which are moved into new columns</p></li>
+<li><p><code>str_replace</code>, <code>str_replace_all</code>: replace matches with new strings</p></li>
+<li><p><code>str_split</code> split a string into pieces – default is individual words (returns list)</p>
 <ul>
 <li><code>simplify = TRUE</code> again will return a matrix</li>
 </ul></li>
-<li><code>boundary</code> use to specify level of split, e.g. <code>str_view_all(x, boundary("word"))</code></li>
-<li><code>str_locate</code>, <code>str_locate_all</code>: gives starting an dending positions of each match</li>
-<li><code>regex</code> use in match to specify more options, e.g. <code>str_view(bananas, regex("banana", ignore_case = TRUE))</code>
+<li><p><code>boundary</code> use to specify level of split, e.g. <code>str_view_all(x, boundary("word"))</code></p></li>
+<li><p><code>str_locate</code>, <code>str_locate_all</code>: gives starting an dending positions of each match</p></li>
+<li><p><code>regex</code> use in match to specify more options, e.g. <code>str_view(bananas, regex("banana", ignore_case = TRUE))</code></p>
 <ul>
 <li><code>multiline = TRUE</code> allows <code>^</code> and <code>$</code> to match start and end of each line (rather than of string)</li>
 <li><code>comments = TRUE</code> allows you to add comments on a complex regular expression</li>
 <li><code>dotall = TRUE</code> allows <code>.</code> to match more than just letters e.g. <code>\\n</code></li>
 </ul></li>
-<li><code>fixed</code>, <code>coll</code> related alternatives to <code>regex</code></li>
-<li><code>apropos</code> searches all objects available from global environment (e.g. say you can’t remember function name)</li>
-<li><code>dir</code>: lists all files in a directory
+<li><p><code>fixed</code>, <code>coll</code> related alternatives to <code>regex</code></p></li>
+<li><p><code>apropos</code> searches all objects available from global environment (e.g. say you can’t remember function name)</p></li>
+<li><p><code>dir</code>: lists all files in a directory</p>
 <ul>
 <li><code>pattern</code> arg takes a regex</li>
 </ul></li>
@@ -1314,7 +1314,7 @@ would be <code>\\</code> instead of <code>\\\\</code></p>
 <div id="section-56" class="section level3">
 <h3>14.7.1</h3>
 <ol style="list-style-type: decimal">
-<li><em>Find the stringi functions that:</em>
+<li><p><em>Find the stringi functions that:</em></p>
 <ol style="list-style-type: decimal">
 <li><em>Count the number of words.</em> – <code>stri_count</code></li>
 <li><em>Find duplicated strings.</em> – <code>stri_duplicated</code></li>
